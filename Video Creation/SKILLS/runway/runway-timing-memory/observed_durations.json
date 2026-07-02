@@ -1,0 +1,9 @@
+{
+  "nano-banana-pro_2K": {"samples": [], "rolling_mean": null, "rolling_stddev": null, "last_updated": null},
+  "gen-4.5_5s_standard": {"samples": [], "rolling_mean": null, "rolling_stddev": null, "last_updated": null},
+  "gen-4.5_10s_standard": {"samples": [], "rolling_mean": null, "rolling_stddev": null, "last_updated": null},
+  "text-to-sfx_5s": {"samples": [], "rolling_mean": null, "rolling_stddev": null, "last_updated": null},
+  "elevenlabs-tts_30s": {"samples": [], "rolling_mean": null, "rolling_stddev": null, "last_updated": null},
+  "stitch_6clips": {"samples": [], "rolling_mean": null, "rolling_stddev": null, "last_updated": null},
+  "add-audio_master": {"samples": [], "rolling_mean": null, "rolling_stddev": null, "last_updated": null}
+}

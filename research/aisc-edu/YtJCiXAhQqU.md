@@ -1,0 +1,26 @@
+## Modern Methods of Structural Analysis Pt.II
+URL: https://www.youtube.com/watch?v=YtJCiXAhQqU | Duration: 1:33:10 | Upload: NA | Tier: 2 | Watched: 2026-06-24
+### Core Concept
+This is AISC Night School session 2, taught by Dr. Ronald Ziemann of Bucknell University, on material and geometric (second-order) nonlinear structural analysis methods [00:31][02:37]. The core idea is that a computer can only capture nonlinear behavior by modifying member stiffness: yielding is modeled by zeroing or reducing the elastic stiffness, and second-order effects are modeled by adding a geometric stiffness term [05:10][50:07]. The lecture builds from the elastic-perfectly-plastic material model and concentrated plastic-hinge concept up through full second-order inelastic analysis and eigenvalue buckling [06:43][60:20]. This is theory and software methodology for structural engineers, not a fabrication or erection topic.
+
+### Spec References
+The speaker references the 2005 AISC Specification as the first time the word "analysis" entered the body of the spec [03:07], and notes that the 2016 commentary was to add language permitting a tension diagonal to brace a compression diagonal in X-bracing [65:59]. He cites AISC compactness requirements generally as the limit governing whether a true plastic hinge can form, but states no section, table, or Design Guide number [32:36][33:07]. No specific AISC 360 chapter or section, AISC 341 seismic section, AWS D1.1 clause, or RCSC provision is quoted in this lecture; the content is analysis-method principles, no section cited.
+
+### Technical Details
+The material model is elastic-perfectly-plastic: below yield the member uses full E, and once yielded the modulus drops to zero [07:45][08:17]. A plastic hinge forms when an axial member reaches P/Py = 1, a flexural member reaches M/Mp = 1, and a beam-column reaches its yield surface, the interaction curve of axial force versus bending [11:26][24:48]. Axial compression reduces effective lateral and flexural stiffness, so beam-columns hinge at lower load than pure flexural members; the speaker illustrates a W12x50 example where the first hinge moves from 83 percent to 65 percent of load when 400 kips of axial is added [18:40][27:54]. Second-order stiffness equals first-order stiffness reduced by a geometric stiffness term proportional to axial force (P over L in the simple case), and second-order moments ran about 10 percent higher than first-order for his example, with one column case jumping from roughly 14 in-kip to 1831 in-kip [50:38][59:18][84:28]. Eigenvalue buckling analysis finds the load factor at which the structure determinant goes to zero; his single-element example gave 10EI/L squared versus the exact pi-squared EI/L squared, within about 1.3 percent [76:46][77:17]. The MASTAN2 educational software, the McGuire/Gallagher/Ziemann matrix-structural-analysis textbook, plastic-zone (distributed plasticity) and full shell finite-element approaches (ABAQUS, ADINA, ANSYS named generically) are discussed [17:36][18:07].
+
+### Fabrication Notes
+No fabrication content. This webinar covers analysis software methodology and contains no shop process, fit-up, tolerance, or QC material.
+
+### Erection Notes
+No erection content. The lecture has no field procedure, sequencing, bracing-install, or rigging material; the only "bracing" discussion is the analytical effect of a tension X-brace diagonal stiffening a compression diagonal [64:56].
+
+### Common Errors / Inspection Failures
+No inspection or rejection content. The closest engineering caution is that a plastic-hinge analysis is only valid if the section is compact enough to fully yield and rotate without local buckling, so applying it to a non-compact or slender section is a modeling error [32:36][33:07]. The speaker also warns that element count must be checked by convergence (refine until the answer stops changing), since too few elements misrepresents a tight buckled shape [67:32][88:35].
+
+### Bid / Cost Implications
+No direct estimating, bid, or schedule content. The indirect takeaway is engineering cost: rigorous second-order inelastic or buckling analysis is computationally heavy and requires trained judgment, and second-order effects can raise design moments by roughly 10 percent or far more in flexible frames, which the engineer must capture rather than assume away [59:49][84:28].
+
+### Your Company Application
+This is reference material for the in-house PE stamp, not for Ivan takeoff, Mario shop, Paul safety, Tekla detailing, anchor rods, joists, field bolting, or ACP controls. It supports the stamping engineer's understanding of why second-order (P-Delta) effects and the direct analysis method matter and why a frame analysis can show meaningfully higher column moments than a first-order run, which is useful background when reviewing a delegated connection-design package or a structural model behind a bid. It also confirms the analytical basis for using a tension diagonal to brace a compression diagonal in X-braced bays, relevant when our PE reviews lateral systems. Doctrine flag: NONE; the entry quotes no fabricated section numbers and the content sits inside engineering analysis, with no PEMB language and no supplier or rate claims.
+---

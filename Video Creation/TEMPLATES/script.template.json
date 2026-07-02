@@ -1,0 +1,116 @@
+{
+  "_schema_version": "1.0",
+  "_schema_notes": [
+    "Canonical storyboard for a single video build. Generated at pipeline Step 2.5 (see CLAUDE.md).",
+    "Single source of truth: Runway prompts (Step 5) and HyperFrames composition (HYBRID Step 4) both pull from this file.",
+    "All timecodes in seconds. All durations in seconds. Voiceover word counts must respect CLAUDE.md SCRIPT TIMING RULES.",
+    "Fields prefixed with underscore are documentation only and may be stripped at runtime.",
+    "Drop the underscore-prefixed fields when generating a real script.json for a project."
+  ],
+
+  "project": {
+    "name": "ExampleProject_30s_Sample",
+    "client": "Your Company",
+    "brand_style": "Style 02 — Luxury / Premium",
+    "duration_seconds": 30,
+    "aspect_ratio": "9:16",
+    "platform": "LinkedIn vertical",
+    "engine": "HYBRID",
+    "approval_required": "The Owner",
+    "created": "2026-05-25",
+    "_field_help": {
+      "engine": "Must be one of: HYBRID | HYPERFRAMES_LOCAL | RUNWAY_CHROME. Match orchestrate.js routing.recommendedEngine.",
+      "brand_style": "Style 01 — Corporate Cinematic (Your Company) | Style 02 — Luxury / Premium (luxury / premium) | Style 03-05 per CLAUDE.md.",
+      "approval_required": "Name of the executive approver. Block external release until they sign off."
+    }
+  },
+
+  "style_token": "shot on ARRI Alexa Mini LF, 50mm Master Prime, warm tungsten key light left side, deep navy ambient fill, premium cinematic grade with soft gold accent highlights, fine 35mm grain structure",
+
+  "scenes": [
+    {
+      "scene_id": "scene_01",
+      "timecode": { "start": 0, "end": 5 },
+      "visual_hook": "Single-line plain-English summary of what the viewer sees in this beat.",
+      "runway_prompt": "Full Gen-4.5 prompt for this clip, ready to paste into a Runway Text node. Must satisfy all 16 Anti-AI Laws and end with the style_token verbatim.",
+      "reference_image_id": "ref_A",
+      "hyperframes_layers": [
+        { "z": 1, "type": "video", "src": "src/shared_assets/runway_scene_01.mp4" },
+        { "z": 2, "type": "gradient", "from": "rgba(10,31,61,0)", "to": "rgba(10,31,61,0.4)" },
+        { "z": 3, "type": "text", "content": "On-screen text for this scene", "font": "Helvetica Neue", "weight": 300, "animation": "fade_in_300ms" }
+      ],
+      "voiceover": {
+        "text": "Plain-text VO line for this scene. Word count must respect CLAUDE.md SCRIPT TIMING RULES.",
+        "file": "src/shared_assets/vo_scene_01.wav",
+        "engine": "piper",
+        "voice": "en_US-lessac-high"
+      },
+      "music_note": "Soft low strings under, building. -22 LUFS bed.",
+      "sfx_prompt": "Subtle ambient room tone, leather creak as portfolio closes at second 4.",
+      "_field_help": {
+        "reference_image_id": "References an entry in references[] below. One NBP image per distinct visual subject per CLAUDE.md REFERENCE-PER-SUBJECT RULE.",
+        "hyperframes_layers": "Z-ordered layers for the HyperFrames composition. z:1 is the Runway video bg. See CLAUDE.md HYPERFRAMES QUICK RULES.",
+        "voiceover.engine": "piper (CPU, fast) | bark (GPU, expressive). Default piper.",
+        "sfx_prompt": "Used by Runway Text-to-SFX node in the Claude Video Workflow template, or by the editor in HYBRID mode."
+      }
+    },
+    {
+      "scene_id": "scene_02",
+      "timecode": { "start": 5, "end": 10 },
+      "visual_hook": "Second beat — the development of the story.",
+      "runway_prompt": "Full Gen-4.5 prompt for scene 2. Satisfy all 16 laws.",
+      "reference_image_id": "ref_B",
+      "hyperframes_layers": [
+        { "z": 1, "type": "video", "src": "src/shared_assets/runway_scene_02.mp4" }
+      ],
+      "voiceover": {
+        "text": "Scene 2 VO line.",
+        "file": "src/shared_assets/vo_scene_02.wav",
+        "engine": "piper",
+        "voice": "en_US-lessac-high"
+      },
+      "music_note": "Strings lift slightly.",
+      "sfx_prompt": "Pen tip touches paper at second 7."
+    }
+  ],
+
+  "references": [
+    {
+      "id": "ref_A",
+      "subject": "Walnut desk with closed leather portfolio and fountain pen.",
+      "nbp_prompt": "Full Nano Banana Pro prompt for the reference image. Must establish the visible subject the Gen-4.5 clip will inherit.",
+      "resolution": "2K",
+      "_field_help": {
+        "id": "Referenced by scenes[].reference_image_id. One per distinct visual subject.",
+        "resolution": "2K is default for video pipelines. 4K only when downstream upscale is needed."
+      }
+    },
+    {
+      "id": "ref_B",
+      "subject": "Face-down quarterly report on the desk, brass paperweight at corner.",
+      "nbp_prompt": "Full NBP prompt for the second reference subject.",
+      "resolution": "2K"
+    }
+  ],
+
+  "post_production": {
+    "captions": "Burn in per scenes[].voiceover.text, kerning per brand_colors.md.",
+    "lower_thirds": "Composite The Owner | CEO, Your Company at scene_05 0:25-0:30 (Law 15 — never ask Runway to render).",
+    "end_card": "Your Company wordmark + yourcompany.example.com at 0:28-0:30.",
+    "three_crop_export": ["16:9", "9:16", "1:1"],
+    "audio_mix": "-16 LUFS integrated, -1 dB true peak"
+  },
+
+  "credit_estimate": {
+    "nbp_images": 6,
+    "gen45_clips_5s": 6,
+    "text_to_sfx": 6,
+    "tts": 1,
+    "stitch": 1,
+    "add_audio": 1,
+    "total_credits_estimate": 75,
+    "_field_help": {
+      "total_credits_estimate": "Rough — final number depends on whether ∞ toggle is enabled on eligible nodes (premium plan unlimited)."
+    }
+  }
+}

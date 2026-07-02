@@ -1,0 +1,55 @@
+{
+  "schema": "ASSEMBLY_DEF_V2",
+  "assembly_id": "beam_lf",
+  "description": "Beam stick material assembly. Measured beam length (LINEAR LF) drives ordered stick LF with cut allowance, shop fabrication hours, field erection hours, and crane minutes (P29). Material weight derives on the BOM from lb_per_ft filled per Hard Rule 5.",
+  "provenance": "SEED 2026-06-12. Hours per LF are a coarse seed; per-ton calibration arrives with PC7 actuals and Owner review. Changes are file diffs proposed to Owner, never chat-session overrides.",
+  "applies_to": {
+    "item_class": "BEAM",
+    "mode": "LINEAR",
+    "designation_includes": [],
+    "designation_excludes": []
+  },
+  "openings": null,
+  "streams": {
+    "materials": [
+      {
+        "component_id": "stick_material",
+        "description": "beam stick material, ordered LF after cut allowance",
+        "designation": null,
+        "designation_from_driver": true,
+        "unit": "LF",
+        "qty_per_unit": 1.0,
+        "waste_factor": 0.05,
+        "round": {"direction": "up", "increment": 5.0},
+        "cross_check_class": null,
+        "length_lf": null,
+        "aisc": true
+      }
+    ],
+    "labor_hours": [
+      {
+        "component_id": "fab_labor",
+        "description": "shop fabrication, hours per measured LF",
+        "hours_per_unit": 0.1,
+        "round": {"direction": "up", "increment": 0.25}
+      },
+      {
+        "component_id": "erection_labor",
+        "description": "field erection, hours per measured LF",
+        "hours_per_unit": 0.05,
+        "round": {"direction": "up", "increment": 0.25}
+      }
+    ],
+    "equipment_time": [
+      {
+        "component_id": "crane_erect",
+        "description": "crane minutes per measured LF erected",
+        "unit": "MIN",
+        "time_per_unit": 0.4,
+        "round": {"direction": "up", "increment": 5.0}
+      }
+    ],
+    "subcontract": null
+  },
+  "notes": "Scoped per schema section 3.3: when the LINEAR row carries a GROUP: token, apply_assemblies.py emits ONLY the materials stream from this definition; the COUNT anchor row's assembly drives per-piece labor and equipment. Never both."
+}

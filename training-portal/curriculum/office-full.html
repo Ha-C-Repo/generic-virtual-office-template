@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Office Apps Full | Your Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:#000;color:#e4e4e7;
+  font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(circle at 80% 10%,rgba(24,90,189,0.10),transparent 40%),
+    radial-gradient(circle at 20% 90%,rgba(16,124,65,0.07),transparent 40%);
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;padding:0;}
+input,textarea,select{font-family:inherit;}
+p{margin:0;}h1,h2,h3,h4{margin:0;font-weight:normal;}
+.container{max-width:960px;margin:0 auto;padding:0 20px;}
+
+header.site{border-bottom:2px solid #27272a;background:rgba(0,0,0,.85);
+  position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);}
+.header-row{max-width:960px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;}
+.logo-tile{width:40px;height:40px;background:#185abd;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.header-meta .small{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#52525b;}
+.header-meta .big{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin-top:2px;}
+footer.site{max-width:960px;margin:0 auto;padding:28px 20px;border-top:1px solid #27272a;text-align:center;}
+footer.site p{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#3f3f46;}
+
+/* Hero */
+.lab-hero{position:relative;border:2px solid #3f3f46;background:#18181b;overflow:hidden;margin-bottom:28px;}
+.hero-grid{position:absolute;inset:0;opacity:.1;
+  background-image:linear-gradient(rgba(24,90,189,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(24,90,189,.3) 1px,transparent 1px);
+  background-size:24px 24px;}
+.hero-glow{position:absolute;top:-40px;right:-40px;width:220px;height:220px;
+  background:#185abd;border-radius:50%;filter:blur(80px);opacity:.22;}
+.lab-hero-inner{position:relative;padding:28px 24px;}
+.lab-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#60a5fa;margin-bottom:8px;}
+.lab-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,9vw,68px);color:#fff;line-height:.9;margin-bottom:14px;}
+.lab-h1 .accent{color:#60a5fa;}
+.lab-blurb{color:#a1a1aa;max-width:540px;font-size:14px;line-height:1.7;margin-bottom:22px;}
+.lab-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:460px;}
+.lab-stat{border:1px solid #3f3f46;background:rgba(0,0,0,.4);padding:8px 10px;}
+.lab-stat-num{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#60a5fa;margin:0;}
+.lab-stat-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#52525b;margin:0;}
+
+/* Category cards */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.cat-card{text-align:left;background:#18181b;border:2px solid #3f3f46;padding:0;overflow:hidden;width:100%;}
+.cat-card.is-done{border-color:#10b981;}
+.cat-stripe{height:6px;}
+.cat-inner{padding:18px;}
+.cat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.cat-icon-tile{width:44px;height:44px;color:#fff;display:flex;align-items:center;justify-content:center;}
+.cat-card h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin:0 0 6px;line-height:1.05;}
+.cat-card-blurb{font-size:12px;color:#a1a1aa;margin:0 0 14px;line-height:1.5;}
+.cat-card-foot{display:flex;justify-content:space-between;align-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:9px;color:#71717a;text-transform:uppercase;letter-spacing:.2em;}
+.cat-progress-track{height:4px;background:#27272a;flex:1;margin-left:12px;max-width:80px;}
+.cat-progress-fill{height:100%;background:#10b981;}
+
+/* Category view */
+.cat-back-btn{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;
+  color:#71717a;display:flex;align-items:center;gap:6px;margin-bottom:20px;}
+.cat-header{background:#18181b;border:2px solid #3f3f46;padding:20px;margin-bottom:16px;}
+.cat-header-inner{display:flex;gap:16px;align-items:flex-start;}
+.cat-header-icon{width:56px;height:56px;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cat-header-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;margin:0;}
+.cat-header-title{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;margin:4px 0;line-height:1;}
+.cat-header-blurb{color:#a1a1aa;font-size:13px;margin:0;line-height:1.5;}
+
+.lesson-list{display:flex;flex-direction:column;gap:8px;}
+.lesson-row{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#18181b;
+  border:2px solid #3f3f46;width:100%;text-align:left;}
+.lesson-row.is-done{border-color:#10b981;}
+.lesson-row.is-locked{opacity:.45;cursor:not-allowed;}
+.lesson-row:not(.is-locked){cursor:pointer;}
+.lesson-num-tile{width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:16px;}
+.lesson-num-tile.done   {background:#10b981;color:#000;}
+.lesson-num-tile.current{background:#60a5fa;color:#000;}
+.lesson-num-tile.pending{background:#27272a;color:#71717a;}
+.lesson-row-meta{flex:1;min-width:0;}
+.lesson-row-title{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin:0;line-height:1.1;}
+.lesson-row-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;margin:4px 0 0;}
+
+/* Reading card */
+.lesson-card{border:2px solid #3f3f46;background:#18181b;}
+.lesson-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.lesson-icon-tile{width:52px;height:52px;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.lesson-card-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;font-weight:700;opacity:.8;margin:0;}
+.lesson-card-title{font-family:'Bebas Neue',sans-serif;font-size:32px;margin:4px 0 0;line-height:1;color:#fff;}
+.lesson-card-body{padding:24px 22px;}
+.lesson-section{margin-bottom:22px;}
+.lesson-section h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#60a5fa;margin:0 0 8px;}
+.lesson-section p{color:#a1a1aa;line-height:1.65;margin:0;font-size:14px;}
+.tip-box{background:rgba(24,90,189,.08);border-left:4px solid #185abd;padding:12px 16px;margin-top:20px;}
+.tip-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#60a5fa;margin:0 0 6px;font-weight:700;}
+.tip-body{color:#bfdbfe;font-size:13px;margin:0;line-height:1.55;font-style:italic;}
+.complete-btn{width:100%;margin-top:24px;padding:14px 0;
+  font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.2em;
+  background:#185abd;color:#fff;border:2px solid #185abd;
+  display:flex;align-items:center;justify-content:center;gap:10px;}
+
+/* Interactive card */
+.int-card{border:2px solid #3f3f46;background:#18181b;}
+.int-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.int-card-body{padding:24px 22px;}
+
+/* Letter Builder */
+.lb-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+.lb-field{display:flex;flex-direction:column;}
+.lb-field.full{grid-column:1/-1;}
+.lb-field label{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#71717a;margin-bottom:5px;}
+.lb-field input,.lb-field textarea,.lb-field select{
+  background:#09090b;border:1px solid #3f3f46;color:#e4e4e7;
+  padding:8px 10px;font-size:13px;outline:none;}
+.lb-field input:focus,.lb-field textarea:focus,.lb-field select:focus{border-color:#185abd;}
+.lb-preview-label{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#60a5fa;margin:0 0 8px;}
+.lb-letter{background:#f8f5f0;color:#1a1a1a;padding:36px 44px;
+  font-family:'EB Garamond',Georgia,serif;font-size:14px;line-height:1.7;
+  min-height:480px;border:1px solid #3f3f46;}
+.lb-letter .lb-date{text-align:right;font-size:13px;margin-bottom:36px;}
+.lb-letter .lb-recipient{margin-bottom:28px;}
+.lb-letter .lb-recipient div{font-size:13px;}
+.lb-letter .lb-salute{margin-bottom:18px;}
+.lb-letter .lb-body{margin-bottom:22px;white-space:pre-wrap;}
+.lb-letter .lb-close{margin-bottom:6px;}
+.lb-letter .lb-sig{margin-top:42px;}
+.lb-letter .lb-sig-line{border-bottom:1px solid #888;width:240px;margin-bottom:6px;}
+.lb-letter .lb-blank{color:#a1a1aa;font-style:italic;}
+.lb-feedback{margin-top:16px;padding:12px 14px;font-size:12px;line-height:1.55;}
+.lb-feedback.ok   {background:rgba(16,185,129,.1);border:1px solid #10b981;color:#a7f3d0;}
+.lb-feedback.warn {background:rgba(251,191,36,.08);border:1px solid #fbbf24;color:#fde68a;}
+.lb-check-btn{padding:10px 20px;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.2em;
+  background:#185abd;color:#fff;border:2px solid #185abd;margin-top:14px;}
+
+/* Excel Grid */
+.xl-stage{background:#fff;border:1px solid #3f3f46;overflow:hidden;}
+.xl-bar{background:#107c41;padding:8px 14px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#fff;}
+.xl-bar-title{font-weight:600;}
+.xl-tabs{background:#f4f4f4;padding:0;display:flex;border-bottom:1px solid #ddd;font-size:11px;}
+.xl-tab{padding:6px 14px;color:#444;background:#f9f9f9;border-right:1px solid #ddd;}
+.xl-tab.active{background:#fff;font-weight:600;color:#107c41;border-bottom:2px solid #107c41;}
+.xl-grid{display:grid;grid-template-columns:30px repeat(6,1fr);background:#fff;color:#000;font-size:12px;}
+.xl-cell{padding:6px 8px;border-right:1px solid #d4d4d8;border-bottom:1px solid #d4d4d8;min-height:28px;overflow:hidden;}
+.xl-cell.header-cell{background:#f4f4f4;font-weight:600;color:#444;text-align:center;font-size:10px;}
+.xl-cell.row-num{background:#f4f4f4;font-weight:600;color:#444;text-align:center;font-size:10px;}
+.xl-cell.col-header{background:#107c41;color:#fff;font-weight:600;text-align:center;}
+.xl-cell.filled{background:#fff;}
+.xl-cell.empty{background:#fefefe;}
+.xl-cell.target{background:#fff3cd;outline:2px solid #f59e0b;outline-offset:-2px;}
+.xl-cell input{width:100%;border:none;outline:none;background:transparent;font-size:12px;padding:0;color:#000;font-family:inherit;}
+.xl-prompt{background:rgba(16,124,65,.1);border:1px solid #10b981;padding:12px 14px;margin-top:16px;}
+.xl-prompt-label{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#10b981;margin-bottom:6px;}
+.xl-prompt-text{font-size:13px;color:#a7f3d0;}
+.xl-formula-options{display:grid;grid-template-columns:1fr;gap:8px;margin-top:12px;}
+.xl-formula-opt{padding:10px 14px;background:#09090b;border:1px solid #3f3f46;font-family:'JetBrains Mono',monospace;font-size:12px;text-align:left;color:#e4e4e7;}
+.xl-formula-opt:hover{border-color:#10b981;}
+.xl-formula-opt.correct{border-color:#10b981;background:rgba(16,185,129,.1);}
+.xl-formula-opt.wrong{border-color:#ef4444;background:rgba(239,68,68,.08);}
+
+/* Formula Match */
+.fm-grid{display:flex;flex-direction:column;gap:12px;}
+.fm-row{background:#0c0c0c;border:1px solid #3f3f46;padding:14px;}
+.fm-scenario{font-size:13px;color:#e4e4e7;margin-bottom:8px;line-height:1.5;}
+.fm-scenario-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#60a5fa;margin-bottom:4px;}
+.fm-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px;}
+.fm-opt{padding:8px 10px;background:#09090b;border:1px solid #3f3f46;
+  font-family:'JetBrains Mono',monospace;font-size:11px;text-align:center;color:#a1a1aa;}
+.fm-opt:hover{border-color:#60a5fa;}
+.fm-opt.picked{background:rgba(24,90,189,.15);border-color:#60a5fa;color:#bfdbfe;}
+.fm-opt.correct{background:rgba(16,185,129,.15);border-color:#10b981;color:#a7f3d0;}
+.fm-opt.wrong  {background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.fm-why{font-size:11px;color:#71717a;margin-top:8px;font-style:italic;}
+.fm-score{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.15em;
+  color:#a1a1aa;margin-top:16px;padding-top:14px;border-top:1px solid #27272a;}
+
+/* Spot the Mistake */
+.spm-stage{background:#0c0c0c;border:1px solid #3f3f46;padding:18px;margin-bottom:14px;}
+.spm-scenario-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#60a5fa;margin-bottom:8px;}
+.spm-mock{background:#f8f5f0;color:#1a1a1a;padding:18px 22px;font-family:'EB Garamond',Georgia,serif;font-size:13px;line-height:1.7;}
+.spm-mock.excel-mock{background:#fff;font-family:'IBM Plex Sans',sans-serif;padding:0;}
+.spm-mock.ppt-mock{background:#1a1a2e;color:#fff;font-family:'IBM Plex Sans',sans-serif;padding:30px;text-align:center;}
+.spm-options{display:flex;flex-direction:column;gap:6px;margin-top:14px;}
+.spm-opt{padding:10px 14px;background:#09090b;border:1px solid #3f3f46;text-align:left;font-size:12px;color:#a1a1aa;line-height:1.45;}
+.spm-opt:hover{border-color:#60a5fa;}
+.spm-opt.correct{background:rgba(16,185,129,.12);border-color:#10b981;color:#a7f3d0;}
+.spm-opt.wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.spm-feedback{margin-top:12px;padding:10px 12px;font-size:12px;line-height:1.5;}
+.spm-feedback.ok   {background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+.spm-feedback.bad  {background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+.spm-nav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;}
+.spm-progress{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:#71717a;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-row">
+    <div class="logo-tile" id="logo-slot"></div>
+    <div class="header-meta">
+      <p class="small">Your Company &middot; Module 6</p>
+      <p class="big">Office Apps Full</p>
+    </div>
+  </div>
+</header>
+
+<main class="container" style="padding:28px 20px 40px;">
+  <div id="app"></div>
+</main>
+
+<footer class="site">
+  <p>Built by Joseph &middot; Your Company Virtual Office &middot; Internal Use Only</p>
+</footer>
+
+<script>
+"use strict";
+
+// ============================================================================
+// ICONS
+// ============================================================================
+const ICONS={
+  'arrow-right':'<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  'arrow-left': '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  'check':      '<path d="M20 6 9 17l-5-5"/>',
+  'lock':       '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  'file-text':  '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>',
+  'table-2':    '<path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>',
+  'presentation':'<path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/>',
+  'calculator': '<rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/>',
+  'pencil':     '<path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/>',
+  'eye':        '<path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/>',
+  'triangle-alert':'<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/>'
+};
+function icon(name,size,color){
+  size=size||16;color=color||'currentColor';
+  var p=ICONS[name]||'';
+  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">'+p+'</svg>';
+}
+
+// ============================================================================
+// DATA
+// ============================================================================
+const CATEGORIES=[
+  { id:'word', iconKey:'file-text', color:'#185abd',
+    title:'Word: Business Documents',
+    blurb:'Letters, memos, signed documents. The Your Company voice on paper.',
+    lessons:[
+      { id:'wd-1', title:'Document Fundamentals',     type:'reading',     minutes:3 },
+      { id:'wd-2', title:'Anatomy of a Business Letter', type:'reading',  minutes:4 },
+      { id:'wd-3', title:'Templates & Styles',        type:'reading',     minutes:3 },
+      { id:'wd-4', title:'Build a Business Letter',   type:'interactive', minutes:7, intKey:'letterBuilder' }
+    ] },
+  { id:'excel', iconKey:'table-2', color:'#107c41',
+    title:'Excel: Tracking & Logs',
+    blurb:'The visitor log, the bid tracker, the timesheet. Where Your Company\'s daily numbers live.',
+    lessons:[
+      { id:'xl-1', title:'Cells, Rows, Columns',      type:'reading',     minutes:3 },
+      { id:'xl-2', title:'Essential Formulas',        type:'reading',     minutes:4 },
+      { id:'xl-3', title:'Build the Visitor Log',     type:'interactive', minutes:6, intKey:'visitorLog' },
+      { id:'xl-4', title:'Match the Formula',         type:'interactive', minutes:5, intKey:'formulaMatch' }
+    ] },
+  { id:'ppt', iconKey:'presentation', color:'#c43e1c',
+    title:'PowerPoint: When You Need It',
+    blurb:'Rarely used here. When it is, do it right.',
+    lessons:[
+      { id:'pp-1', title:'Deck Basics for Your Company', type:'reading',     minutes:3 },
+      { id:'pp-2', title:'One-Pager Design Rules',    type:'reading',     minutes:3 },
+      { id:'pp-3', title:'Spot the Formatting Mistake', type:'interactive', minutes:6, intKey:'spotMistake' }
+    ] }
+];
+
+const LESSON_CONTENT={
+  'wd-1':{ sections:[
+    { h:'A Word document is a container, not a page', b:'When you open Word, you are looking at a 1-page view of what is actually an unlimited canvas. Word will add pages as you type. You set page size, margins, and orientation once at the start — typically 8.5x11 portrait for letters, with 1-inch margins all around.' },
+    { h:'Save formats matter', b:'Save as .docx for live documents you will edit again. Save as .pdf when you are sending the final version to a client, vendor, or government agency. PDF locks the formatting so it looks identical on every screen. Word documents can shift when opened on different machines.' },
+    { h:'Use Save As, not Save, when finishing a document', b:'When you finish a draft and want to send it, use File → Save As, change the filename, and pick PDF. This preserves your editable .docx and creates a separate locked PDF for sending. Never email someone the .docx version of a final letter — they can edit it.' },
+    { h:'Where Your Company documents live', b:'Every business letter, memo, or contract draft saves to OneDrive in the appropriate project folder. Naming convention: `ICD_Letter_Bid-Acceptance_2026-05-14.docx`. Type of doc, who it is for, what it is about, date. Never `Letter1.docx` or `Untitled.docx`.' }
+  ], tip:'When Owner asks you to "draft a letter," your first move is to open the right template in OneDrive (Templates folder), File → Save As to the project folder with proper naming, then edit. Never start from blank if a template exists.' },
+  'wd-2':{ sections:[
+    { h:'The date goes top right', b:'Format: May 14, 2026 — written out long. Not 5/14/26. Not 05-14-2026. A business letter uses the full month name. This is a small detail that signals you know what you are doing.' },
+    { h:'Recipient block comes next', b:'Two lines below the date, flush left: recipient name, title on the next line, company on the next line, full address on the next 1-2 lines. Then a blank line, then the salutation.' },
+    { h:'Salutation: Dear [Title] [Last Name],', b:'Always with a comma. "Dear Mr. Hayes," not "Hi John" and not "Dear John." Use Mr./Ms. unless you know the person prefers something else. If you do not know gender, use the full first and last name: "Dear Jordan Hayes,"' },
+    { h:'Body: three paragraphs maximum for most letters', b:'Paragraph 1: state the purpose in one sentence. Paragraph 2: the details, evidence, or context. Paragraph 3: what you want to happen next or how to reach you. A business letter that runs 5 paragraphs has lost focus.' },
+    { h:'Closing and signature', b:'"Sincerely," or "Respectfully," followed by a comma, four blank lines for the handwritten signature, then the printed name, then title on the next line, then company on the next line. Four blank lines because you need physical space for the pen.' }
+  ], tip:'Business letters from Your Company always close with: Sincerely, [signature space], The Owner, CEO, Your Company LLC. Unless Amber drafted it as legal — then her name and title.' },
+  'wd-3':{ sections:[
+    { h:'Templates save you from reinventing every time', b:'Your Company has letterhead templates already built in OneDrive under Templates → Letterhead. They include the logo, company address, phone number, and the standard footer. You open the template, save as a new file with the right naming, and start typing.' },
+    { h:'Styles control how text looks across the document', b:'In Word, the Styles panel (Home tab) lets you apply Heading 1, Heading 2, Body, etc. Instead of manually changing font size and bold for every section title, you apply Heading 1 once and it formats consistently. Change the style once and every heading in the document updates.' },
+    { h:'Do not type formatting manually', b:'If you find yourself bolding section titles by hand, you are doing it wrong. Apply Heading 2 from the Styles panel. The document stays consistent and you can change all headings at once later if needed.' }
+  ], tip:'When you create a new Word doc that does not have a template yet, ask Joseph to build one. If you are formatting the same kind of document twice, it should be a template — not your manual work each time.' },
+  'xl-1':{ sections:[
+    { h:'A spreadsheet is a grid of cells', b:'Each cell has an address made of a column letter and a row number: A1, B7, F23. The column letter is on top, the row number is on the left side. When you click a cell, the address shows in the Name Box (top-left corner of the screen).' },
+    { h:'Rows go across, columns go down', b:'Row 1 is across the top. Column A is down the left. A row in a visitor log typically holds one complete record (one visitor). A column holds one type of data across all records (all the dates, or all the names, or all the times).' },
+    { h:'Headers go in row 1', b:'For the Your Company visitor log, row 1 holds the column labels: Date, Time In, Visitor Name, Company, Reason, Time Out. Bold them. Freeze row 1 (View → Freeze Panes → Freeze Top Row) so the headers stay visible when you scroll down.' },
+    { h:'Cell formatting matters', b:'A cell can be formatted as text, number, date, time, currency, percent, etc. If you type "5/14/26" into a cell formatted as Text, Excel stores it as the literal string "5/14/26". If formatted as Date, Excel stores it as May 14, 2026 and you can do date math on it. Right-click a cell, choose Format Cells, set the category.' }
+  ], tip:'When you set up a new tracking spreadsheet, format the date column as Date and the time columns as Time before you start entering data. Otherwise you will have to clean up every entry later.' },
+  'xl-2':{ sections:[
+    { h:'Formulas start with an equals sign', b:'Type =A1+B1 in a cell and Excel adds the values from A1 and B1. The equals sign is what tells Excel "this is a formula, not text." Without the equals sign, Excel just stores what you typed as a string.' },
+    { h:'SUM adds a range', b:'=SUM(A2:A20) adds every number from A2 to A20. Use this for total monthly invoices, total visitor count, total hours logged. The colon means "everything in between, inclusive."' },
+    { h:'COUNTIF counts based on a condition', b:'=COUNTIF(A:A,TODAY()) counts how many cells in column A match today\'s date. =COUNTIF(D:D,"Texas Mutual") counts how many visitors from Texas Mutual appear in column D. The condition can be a value, a cell reference, or text in quotes.' },
+    { h:'TODAY() and NOW() give you the current date and time', b:'=TODAY() returns today\'s date. =NOW() returns today\'s date and time. These update automatically every time the file opens. Use them for "as of today" reports or to auto-stamp new entries.' },
+    { h:'Cell references vs. absolute references', b:'=A1 is a relative reference — if you copy this formula to the next row, it becomes =A2. =$A$1 with dollar signs is an absolute reference — it always points to A1 no matter where you copy it. Use absolute references when a formula needs to keep referring to one specific cell (like a tax rate cell).' }
+  ], tip:'You do not need to memorize every formula. You need to know SUM, COUNTIF, TODAY, and VLOOKUP. Beyond that, Google the formula when you need it. Even experienced Excel users do this.' },
+  'pp-1':{ sections:[
+    { h:'PowerPoint is for one specific job: visual support during a meeting', b:'A deck supports a presentation. It is not a document. It is not a report. If someone could read it instead of you presenting it, you should have written a memo instead. Your Company uses PowerPoint mostly for: client kickoff meetings, board updates, occasional safety briefings.' },
+    { h:'One idea per slide', b:'If a slide has three bullet points covering three different ideas, split it into three slides. The audience can only hold one thought at a time while listening to you talk.' },
+    { h:'Big text. No small text.', b:'Body text on a slide should be at least 24 point. Titles at least 32 point. If you need 12-point text to fit your content, you have too much content on the slide. Cut it or split it.' },
+    { h:'Speaker notes hold the detail', b:'Underneath the slide editor is the Notes section. This is where the full detail lives — what you will actually say. The slide itself is the headline. The notes are the script. Print speaker notes only for yourself.' }
+  ], tip:'At Your Company, Owner presents to clients. Your job is to build the deck Owner presents from. Ask him for the 3-5 bullet points, then build clean slides with one idea each. Send the .pptx for his review before any client sees it.' },
+  'pp-2':{ sections:[
+    { h:'A one-pager is a single slide that stands alone', b:'No transitions, no animations, no second slide. It is meant to be sent as a PDF and read without you in the room. Common Your Company one-pagers: capabilities overview, safety statement summary, project bid summary.' },
+    { h:'Use the grid: thirds and halves', b:'Mentally divide the slide into thirds horizontally and vertically. Place your title in the top third, your main content in the middle third, your call to action or contact info in the bottom third. Or split halves: image left, text right.' },
+    { h:'Three fonts maximum', b:'One font for headings. One font for body text. One accent font (optional) for callouts. Mixing five fonts looks amateur. The Your Company template uses Bebas Neue for headings, IBM Plex Sans for body. Use those.' },
+    { h:'Stay on-brand', b:'Your Company color scheme: black background, hard-hat yellow #fbbf24 for accents, white for body text. If you start adding gradients, drop shadows, or stock photo placeholders, stop and ask Joseph for the template.' }
+  ], tip:'When you finish a one-pager, save as .pdf and view it on your phone. If you cannot read the body text on a phone screen, the body text is too small.' }
+};
+
+// Letter Builder defaults
+const LB_CLOSINGS=['Sincerely','Respectfully','Best regards'];
+
+// Visitor Log data — pre-filled rows
+const VL_PREFILL=[
+  { date:'5/14/2026', timeIn:'8:30 AM',  name:'Jordan Hayes',     company:'Texas Mutual',    reason:'Annual safety review', timeOut:'9:45 AM' },
+  { date:'5/14/2026', timeIn:'10:15 AM', name:'Carlos Mendez',    company:'Marathon Petro',  reason:'Pre-job walkthrough',  timeOut:'11:30 AM' }
+];
+const VL_PROMPT_NAME='John Patterson';
+const VL_PROMPT_COMPANY='ICD General Contractors';
+const VL_PROMPT_REASON='Bid review meeting';
+const VL_PROMPT_TIME_IN='1:00 PM';
+
+// Formula Match scenarios
+const FM_SCENARIOS=[
+  { id:'fm1', tag:'Daily count',
+    scenario:'You want to count how many visitors signed in today on the visitor log.',
+    correct:'=COUNTIF(A:A,TODAY())',
+    options:['=SUM(A:A)','=COUNTIF(A:A,TODAY())','=COUNT(A:A)','=AVERAGE(A:A)'],
+    why:'COUNTIF counts cells that match a condition. The condition here is TODAY() — only today\'s date.' },
+  { id:'fm2', tag:'Total bid amounts',
+    scenario:'The bid tracker has all bid amounts in column E. You want the total of all bids submitted.',
+    correct:'=SUM(E:E)',
+    options:['=SUM(E:E)','=COUNT(E:E)','=AVERAGE(E:E)','=MAX(E:E)'],
+    why:'SUM adds every number in the column. E:E means the entire column E.' },
+  { id:'fm3', tag:'Vendor lookup',
+    scenario:'You need to find Mario\'s phone number from a contact list where names are in column A and phones in column C.',
+    correct:'=VLOOKUP("Mario",A:C,3,FALSE)',
+    options:['=SUM(A:C)','=VLOOKUP("Mario",A:C,3,FALSE)','=COUNTIF(A:A,"Mario")','=TODAY()'],
+    why:'VLOOKUP searches a column for a value and returns a value from another column in the same row. The 3 means "return the 3rd column."' },
+  { id:'fm4', tag:'Simple math',
+    scenario:'You want to calculate the total cost where the price per ton is in B2 and the tonnage is in C2.',
+    correct:'=B2*C2',
+    options:['=SUM(B2,C2)','=B2*C2','=B2/C2','=COUNTIF(B2:C2,">0")'],
+    why:'A simple multiplication. Excel formulas do basic math just like a calculator: + - * /. No SUM needed for two cells.' },
+  { id:'fm5', tag:'Average hours',
+    scenario:'The crew timesheet shows weekly hours in column D. You want the team\'s average hours per week.',
+    correct:'=AVERAGE(D:D)',
+    options:['=SUM(D:D)','=COUNT(D:D)','=AVERAGE(D:D)','=MAX(D:D)'],
+    why:'AVERAGE calculates the mean of all numbers in a range. The shop crew average is a classic AVERAGE use case.' },
+  { id:'fm6', tag:'Conditional total',
+    scenario:'You want the sum of bid amounts (column E) only for jobs in Houston (column F).',
+    correct:'=SUMIF(F:F,"Houston",E:E)',
+    options:['=SUM(E:E)','=SUMIF(F:F,"Houston",E:E)','=COUNTIF(F:F,"Houston")','=VLOOKUP("Houston",E:F,2)'],
+    why:'SUMIF adds numbers only when a condition is met. Check column F for "Houston" and sum the matching values in column E.' }
+];
+
+// Spot the Mistake scenarios
+const SPM_SCENARIOS=[
+  { id:'spm1', tag:'Business letter date',
+    type:'word',
+    mockTitle:'Business letter header',
+    mockHtml:'<div style="text-align:right;font-size:13px;">5/14/26</div><div style="margin-top:32px;font-size:13px;">Jordan Hayes<br>Risk Manager<br>Texas Mutual Insurance<br>6210 East Highway 290<br>Austin, TX 78723</div><div style="margin-top:20px;">Dear Mr. Hayes,</div>',
+    options:[
+      'The recipient address is missing the ZIP code',
+      'The date should be written out: May 14, 2026',
+      'There is no comma after the salutation',
+      'Texas Mutual should be all caps'
+    ],
+    correctIdx:1,
+    why:'Business letters use the full month name. "5/14/26" is acceptable for a memo or internal note but not a business letter to an external party. Write it out: May 14, 2026.' },
+  { id:'spm2', tag:'Email signature',
+    type:'word',
+    mockTitle:'Email signature block',
+    mockHtml:'<div style="font-size:13px;line-height:1.6;">Thanks!<br>[Your Name]<br><span style="color:#888;">Sent from my iPhone</span></div>',
+    options:[
+      'Missing the company name and contact info',
+      '"Thanks!" is too casual',
+      'Should use a different sign-off',
+      '"Sent from my iPhone" should be capitalized'
+    ],
+    correctIdx:0,
+    why:'A business signature must include your full name, title, company, phone number, and email. A first name alone gives the recipient nothing to reference or reply to professionally.' },
+  { id:'spm3', tag:'Excel header row',
+    type:'excel',
+    mockTitle:'Spreadsheet header',
+    mockHtml:'<table style="border-collapse:collapse;width:100%;font-size:12px;"><tr style="background:#f4f4f4;"><td style="padding:6px 10px;border:1px solid #d4d4d8;">date</td><td style="padding:6px 10px;border:1px solid #d4d4d8;">in</td><td style="padding:6px 10px;border:1px solid #d4d4d8;">name</td><td style="padding:6px 10px;border:1px solid #d4d4d8;">co</td><td style="padding:6px 10px;border:1px solid #d4d4d8;">why</td><td style="padding:6px 10px;border:1px solid #d4d4d8;">out</td></tr></table>',
+    options:[
+      'Headers should be all lowercase',
+      'Headers should be clear, full words and properly capitalized: Date, Time In, Visitor Name, Company, Reason, Time Out',
+      'The header row should be highlighted in red',
+      'The header row should have more columns'
+    ],
+    correctIdx:1,
+    why:'Abbreviated lowercase headers ("in", "co", "why") confuse anyone else who opens the file. Use full words with title case: Date, Time In, Visitor Name, Company, Reason, Time Out. The file should be readable by anyone, not just you.' },
+  { id:'spm4', tag:'PowerPoint slide',
+    type:'ppt',
+    mockTitle:'A "capabilities" slide',
+    mockHtml:'<div style="text-align:left;font-size:11px;line-height:1.4;"><strong style="font-size:14px;">Your Company — Capabilities</strong><br><br>We are a structural steel fabrication company located in Houston Texas serving the greater Houston metro area and beyond with a full range of services including miscellaneous steel and structural steel fabrication for commercial industrial and institutional projects. Our team has decades of combined experience and we work with general contractors developers and end clients to deliver projects on time and under budget. Our certifications include AWS D1.1 AISC and we maintain compliance with OSHA standards as well as ISNetworld for Marathon Petroleum and other major industrial clients. We have a strong safety record managed by our certified safety officer and our shop is located near the Beltway 8 and US-290 interchange with easy access to major Houston jobsites.</div>',
+    options:[
+      'Too much text — a slide should be a headline, not a paragraph',
+      'Should use bullet points instead of paragraphs',
+      'The font is too small',
+      'All of the above'
+    ],
+    correctIdx:3,
+    why:'This is a wall of text, not a slide. A slide presents one idea — usually a 3-7 word headline with 3-5 short bullet points if needed. The full company description belongs in speaker notes or a separate one-pager document.' },
+  { id:'spm5', tag:'File naming',
+    type:'word',
+    mockTitle:'Filename in OneDrive',
+    mockHtml:'<div style="font-family:\'JetBrains Mono\',monospace;font-size:13px;color:#1a1a1a;">letter to client final FINAL v2 (updated).docx</div>',
+    options:[
+      'Should be in all caps',
+      'Should follow naming convention: Project_DocType_Description_Date.docx',
+      'Should be shorter',
+      'Should be in a different folder'
+    ],
+    correctIdx:1,
+    why:'"final FINAL v2 (updated)" is the universal signal that a document was renamed multiple times because no one trusts the original filename. Use: `ICD_Letter_Bid-Acceptance_2026-05-14.docx`. Clear, sortable, and you can find it 6 months later.' },
+  { id:'spm6', tag:'Letter closing',
+    type:'word',
+    mockTitle:'Letter closing block',
+    mockHtml:'<div style="font-size:13px;line-height:1.7;">Thanks,<br><br>Matt</div>',
+    options:[
+      '"Matt" should be the full name',
+      'Closing should be "Sincerely," not "Thanks,"',
+      'There is not enough space for a signature',
+      'All of the above'
+    ],
+    correctIdx:3,
+    why:'A business letter needs a formal closing ("Sincerely," or "Respectfully,"), four blank lines for the handwritten signature, then the printed full name (The Owner), then title (CEO), then company (Your Company LLC). "Thanks, Matt" is fine for an email between colleagues, not a business letter.' }
+];
+
+// ============================================================================
+// STATE
+// ============================================================================
+var state={
+  view:'home', completed:{},
+  // Letter Builder
+  lbDate:'May 14, 2026', lbRecipName:'', lbRecipTitle:'', lbRecipCompany:'', lbRecipAddress:'',
+  lbSalute:'Mr.', lbLastName:'', lbBody:'', lbClosing:'Sincerely', lbSigName:'The Owner', lbSigTitle:'CEO',
+  lbChecked:false, lbFeedback:null,
+  // Visitor Log
+  vlEntries:[{date:'',timeIn:'',name:'',company:'',reason:'',timeOut:''}],
+  vlStage:'fill', // 'fill' | 'formula' | 'done'
+  vlFormulaPicked:null,
+  // Formula Match
+  fmPicked:{}, fmRevealed:{},
+  // Spot Mistake
+  spmIdx:0, spmPicked:{}, spmRevealed:{}
+};
+
+// ============================================================================
+// HELPERS
+// ============================================================================
+function esc(s){ if(s==null)return''; return String(s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];}); }
+function getCat(id){ for(var i=0;i<CATEGORIES.length;i++) if(CATEGORIES[i].id===id) return CATEGORIES[i]; return null; }
+function getLesson(id){
+  for(var i=0;i<CATEGORIES.length;i++){
+    var c=CATEGORIES[i];
+    for(var j=0;j<c.lessons.length;j++) if(c.lessons[j].id===id) return{lesson:c.lessons[j],cat:c,idx:j};
+  }return null;
+}
+function totalLessons(){ return CATEGORIES.reduce(function(a,c){return a+c.lessons.length;},0); }
+function completedCount(){ return Object.keys(state.completed).length; }
+
+// ============================================================================
+// RENDER: HOME
+// ============================================================================
+function renderHome(){
+  var done=completedCount();
+  var html='';
+  html+='<div class="lab-hero"><div class="hero-grid"></div><div class="hero-glow"></div>';
+  html+='<div class="lab-hero-inner">';
+  html+='<p class="lab-eyebrow">Your Company &middot; Module 6</p>';
+  html+='<h1 class="lab-h1">Office Apps <span class="accent">Full</span></h1>';
+  html+='<p class="lab-blurb">Word for letters, Excel for tracking, PowerPoint for the rare client deck. Hands-on with the documents you will actually build at the front desk. Three categories, eleven lessons, four interactives where you build it yourself.</p>';
+  html+='<div class="lab-stats">';
+  [['3','Categories'],[String(totalLessons()),'Lessons'],['4','Interactives'],[String(done),'Done']].forEach(function(s){
+    html+='<div class="lab-stat"><p class="lab-stat-num">'+s[0]+'</p><p class="lab-stat-lbl">'+s[1]+'</p></div>';
+  });
+  html+='</div></div></div>';
+
+  html+='<div class="cat-grid">';
+  CATEGORIES.forEach(function(cat){
+    var doneN=cat.lessons.filter(function(l){return state.completed[l.id];}).length;
+    var tot=cat.lessons.length;
+    var allDone=doneN===tot;
+    var pct=tot?(doneN/tot)*100:0;
+    html+='<button class="cat-card'+(allDone?' is-done':'')+'" data-action="open-cat" data-cat-id="'+cat.id+'">';
+    html+='<div class="cat-stripe" style="background:'+cat.color+';"></div>';
+    html+='<div class="cat-inner">';
+    html+='<div class="cat-top"><div class="cat-icon-tile" style="background:'+cat.color+';">'+icon(cat.iconKey,22,'#fff')+'</div>';
+    if(allDone) html+=icon('check',18,'#10b981');
+    html+='</div>';
+    html+='<h3>'+esc(cat.title)+'</h3>';
+    html+='<p class="cat-card-blurb">'+esc(cat.blurb)+'</p>';
+    html+='<div class="cat-card-foot"><span>'+doneN+'/'+tot+' lessons</span>';
+    html+='<div class="cat-progress-track"><div class="cat-progress-fill" style="width:'+pct+'%;"></div></div>';
+    html+='</div></div></button>';
+  });
+  html+='</div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: CATEGORY
+// ============================================================================
+function renderCategory(cat){
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-home">'+icon('arrow-left',13)+' Back to module home</button>';
+  html+='<div class="cat-header"><div class="cat-header-inner">';
+  html+='<div class="cat-header-icon" style="background:'+cat.color+';">'+icon(cat.iconKey,28,'#fff')+'</div>';
+  html+='<div><p class="cat-header-eyebrow" style="color:'+cat.color+';">Category</p>';
+  html+='<h2 class="cat-header-title">'+esc(cat.title)+'</h2>';
+  html+='<p class="cat-header-blurb">'+esc(cat.blurb)+'</p>';
+  html+='</div></div></div>';
+  html+='<div class="lesson-list">';
+  cat.lessons.forEach(function(l,i){
+    var isDone=!!state.completed[l.id];
+    var prevDone=i===0||!!state.completed[cat.lessons[i-1].id];
+    var locked=!isDone&&!prevDone;
+    var current=!isDone&&prevDone;
+    var tileCls=isDone?'done':current?'current':'pending';
+    var typeLabel=l.type==='reading'?'Reading':'Interactive';
+    var typeColor=l.type==='reading'?'#71717a':'#60a5fa';
+    html+='<button class="lesson-row'+(isDone?' is-done':'')+(locked?' is-locked':'')+'"';
+    html+=locked?' disabled':' data-action="open-lesson" data-lesson-id="'+l.id+'"';
+    html+='>';
+    html+='<div class="lesson-num-tile '+tileCls+'">'+(locked?icon('lock',14):isDone?icon('check',18):String(i+1))+'</div>';
+    html+='<div class="lesson-row-meta"><p class="lesson-row-title">'+esc(l.title)+'</p>';
+    html+='<p class="lesson-row-tag" style="color:'+typeColor+';">'+typeLabel+' &middot; ~'+l.minutes+' min</p></div>';
+    if(!locked) html+=icon('arrow-right',16,'#71717a');
+    html+='</button>';
+  });
+  html+='</div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: READING LESSON
+// ============================================================================
+function renderReading(lesson,cat){
+  var c=LESSON_CONTENT[lesson.id]||{sections:[],tip:''};
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="lesson-card">';
+  html+='<div class="lesson-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="lesson-card-body">';
+  c.sections.forEach(function(s){
+    html+='<div class="lesson-section"><h3>'+esc(s.h)+'</h3><p>'+esc(s.b)+'</p></div>';
+  });
+  if(c.tip){
+    html+='<div class="tip-box"><p class="tip-eyebrow">Joseph\'s tip</p><p class="tip-body">'+esc(c.tip)+'</p></div>';
+  }
+  html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// INTERACTIVE 1: LETTER BUILDER (wd-4)
+// ============================================================================
+function renderLetterBuilder(lesson,cat){
+  var blank=function(v,fb){ return v?esc(v):'<span class="lb-blank">'+fb+'</span>'; };
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:20px;">Fill in the fields below to compose a business letter. The preview updates as you type. When ready, hit Check it for feedback on what could be sharpened.</p>';
+
+  html+='<div class="lb-fields">';
+  html+='<div class="lb-field"><label>Date</label><input type="text" id="lb-date" value="'+esc(state.lbDate)+'" placeholder="May 14, 2026" /></div>';
+  html+='<div class="lb-field"><label>Salutation Title</label><select id="lb-salute"><option'+(state.lbSalute==='Mr.'?' selected':'')+'>Mr.</option><option'+(state.lbSalute==='Ms.'?' selected':'')+'>Ms.</option><option'+(state.lbSalute==='Dr.'?' selected':'')+'>Dr.</option></select></div>';
+  html+='<div class="lb-field"><label>Recipient Name</label><input type="text" id="lb-rname" value="'+esc(state.lbRecipName)+'" placeholder="Jordan Hayes" /></div>';
+  html+='<div class="lb-field"><label>Recipient Last Name (for salutation)</label><input type="text" id="lb-lname" value="'+esc(state.lbLastName)+'" placeholder="Hayes" /></div>';
+  html+='<div class="lb-field"><label>Recipient Title</label><input type="text" id="lb-rtitle" value="'+esc(state.lbRecipTitle)+'" placeholder="Risk Manager" /></div>';
+  html+='<div class="lb-field"><label>Recipient Company</label><input type="text" id="lb-rco" value="'+esc(state.lbRecipCompany)+'" placeholder="Texas Mutual" /></div>';
+  html+='<div class="lb-field full"><label>Recipient Address</label><input type="text" id="lb-raddr" value="'+esc(state.lbRecipAddress)+'" placeholder="6210 East Highway 290, Austin, TX 78723" /></div>';
+  html+='<div class="lb-field full"><label>Body (state purpose, then context, then next step)</label><textarea id="lb-body" rows="6" placeholder="Thank you for your continued partnership with Your Company...">'+esc(state.lbBody)+'</textarea></div>';
+  html+='<div class="lb-field"><label>Closing</label><select id="lb-closing">';
+  LB_CLOSINGS.forEach(function(c){ html+='<option'+(state.lbClosing===c?' selected':'')+'>'+esc(c)+'</option>'; });
+  html+='</select></div>';
+  html+='<div class="lb-field"><label>Signature Name</label><input type="text" id="lb-sig" value="'+esc(state.lbSigName)+'" /></div>';
+  html+='</div>';
+
+  // Preview
+  html+='<p class="lb-preview-label">Live preview</p>';
+  html+='<div class="lb-letter">';
+  html+='<div class="lb-date">'+blank(state.lbDate,'[Date]')+'</div>';
+  html+='<div class="lb-recipient">';
+  html+='<div>'+blank(state.lbRecipName,'[Recipient Name]')+'</div>';
+  html+='<div>'+blank(state.lbRecipTitle,'[Title]')+'</div>';
+  html+='<div>'+blank(state.lbRecipCompany,'[Company]')+'</div>';
+  html+='<div>'+blank(state.lbRecipAddress,'[Address]')+'</div>';
+  html+='</div>';
+  var saluteLast=state.lbLastName||'[Last Name]';
+  html+='<div class="lb-salute">Dear '+esc(state.lbSalute)+' '+esc(saluteLast)+',</div>';
+  html+='<div class="lb-body">'+blank(state.lbBody,'[Letter body — three paragraphs maximum: purpose, details, next step]')+'</div>';
+  html+='<div class="lb-close">'+esc(state.lbClosing)+',</div>';
+  html+='<div class="lb-sig"><div class="lb-sig-line"></div>'+blank(state.lbSigName,'[Signature Name]')+'<br>'+esc(state.lbSigTitle)+'<br>Your Company LLC</div>';
+  html+='</div>';
+
+  if(state.lbFeedback){
+    html+='<div class="lb-feedback '+state.lbFeedback.type+'">'+esc(state.lbFeedback.msg)+'</div>';
+  }
+
+  html+='<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;">';
+  if(!state.lbChecked||!state.lbFeedback||state.lbFeedback.type!=='ok'){
+    html+='<button class="lb-check-btn" data-action="lb-check">Check it</button>';
+  }
+  if(state.lbChecked&&state.lbFeedback&&state.lbFeedback.type==='ok'){
+    html+='<button class="complete-btn" style="width:auto;margin-top:0;padding:10px 22px;" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div>';
+  html+='</div></div>';
+  return html;
+}
+
+function checkLetterBuilder(){
+  var issues=[];
+  if(!state.lbDate.trim()) issues.push('Date is empty. Use the long form: May 14, 2026.');
+  else if(/^\d+\/\d+\/\d+$/.test(state.lbDate.trim())) issues.push('Date format: business letters use the full month name. Write "May 14, 2026" instead of "5/14/26".');
+  if(!state.lbRecipName.trim()) issues.push('Recipient name is empty. Fill in who the letter is going to.');
+  if(!state.lbRecipCompany.trim()) issues.push('Recipient company is empty.');
+  if(!state.lbRecipAddress.trim()) issues.push('Recipient address is empty. A business letter needs the full mailing address.');
+  if(!state.lbLastName.trim()) issues.push('Last name for the salutation is empty.');
+  if(!state.lbBody.trim()) issues.push('Body is empty. Write at least one paragraph stating the purpose of the letter.');
+  else if(state.lbBody.trim().length<50) issues.push('Body is too short. A business letter typically needs purpose + context + next step.');
+  if(!state.lbSigName.trim()) issues.push('Signature name is empty.');
+
+  if(issues.length>0){
+    state.lbFeedback={type:'warn',msg:issues[0]};
+  } else {
+    state.lbFeedback={type:'ok',msg:'Letter is well-formed. Date is properly formatted, recipient block is complete, salutation is correct, body has substance, and the signature block follows Your Company convention.'};
+  }
+  state.lbChecked=true;
+  render();
+}
+
+// ============================================================================
+// INTERACTIVE 2: VISITOR LOG (xl-3)
+// ============================================================================
+function renderVisitorLog(lesson,cat){
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+
+  var entry=state.vlEntries[0]||{};
+  var allFilled=entry.date&&entry.timeIn&&entry.name&&entry.company&&entry.reason&&entry.timeOut;
+
+  if(state.vlStage==='fill'){
+    html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:18px;">Two visitors already signed in today. A third just walked in. Fill row 4 with: <strong style="color:#10b981;">'+VL_PROMPT_NAME+'</strong> from <strong style="color:#10b981;">'+VL_PROMPT_COMPANY+'</strong>, here for a <strong style="color:#10b981;">'+VL_PROMPT_REASON+'</strong>, arrived at <strong style="color:#10b981;">'+VL_PROMPT_TIME_IN+'</strong>. They left at <strong style="color:#10b981;">2:30 PM</strong>.</p>';
+  } else if(state.vlStage==='formula'){
+    html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:18px;">Row 4 is filled. Now Owner asks: "How many visitors have we had today?" You need a formula in cell H1 that counts only today\'s visitors.</p>';
+  } else {
+    html+='<p style="font-size:13px;color:#10b981;margin-bottom:18px;">'+icon('check',14,'#10b981')+' Visitor log is complete with the count formula. This is exactly how the real Your Company visitor log works.</p>';
+  }
+
+  // Excel mock
+  html+='<div class="xl-stage">';
+  html+='<div class="xl-bar"><span class="xl-bar-title">Excel &mdash; Visitor-Log_2026-05.xlsx</span><span style="font-size:11px;">May</span></div>';
+  html+='<div class="xl-tabs"><div class="xl-tab active">May 2026</div><div class="xl-tab">April 2026</div></div>';
+  html+='<div class="xl-grid">';
+  // Column headers row
+  html+='<div class="xl-cell row-num"></div>';
+  ['A','B','C','D','E','F'].forEach(function(c){ html+='<div class="xl-cell header-cell">'+c+'</div>'; });
+  // Row 1: headers
+  html+='<div class="xl-cell row-num">1</div>';
+  ['Date','Time In','Visitor Name','Company','Reason','Time Out'].forEach(function(h){
+    html+='<div class="xl-cell col-header">'+h+'</div>';
+  });
+  // Row 2 and 3: pre-filled
+  VL_PREFILL.forEach(function(r,i){
+    html+='<div class="xl-cell row-num">'+(i+2)+'</div>';
+    html+='<div class="xl-cell filled">'+esc(r.date)+'</div>';
+    html+='<div class="xl-cell filled">'+esc(r.timeIn)+'</div>';
+    html+='<div class="xl-cell filled">'+esc(r.name)+'</div>';
+    html+='<div class="xl-cell filled">'+esc(r.company)+'</div>';
+    html+='<div class="xl-cell filled">'+esc(r.reason)+'</div>';
+    html+='<div class="xl-cell filled">'+esc(r.timeOut)+'</div>';
+  });
+  // Row 4: input or filled
+  html+='<div class="xl-cell row-num">4</div>';
+  if(state.vlStage==='fill'){
+    html+='<div class="xl-cell target"><input data-vl-field="date" type="text" placeholder="5/14/2026" value="'+esc(entry.date)+'" /></div>';
+    html+='<div class="xl-cell target"><input data-vl-field="timeIn" type="text" placeholder="1:00 PM" value="'+esc(entry.timeIn)+'" /></div>';
+    html+='<div class="xl-cell target"><input data-vl-field="name" type="text" placeholder="Name" value="'+esc(entry.name)+'" /></div>';
+    html+='<div class="xl-cell target"><input data-vl-field="company" type="text" placeholder="Company" value="'+esc(entry.company)+'" /></div>';
+    html+='<div class="xl-cell target"><input data-vl-field="reason" type="text" placeholder="Reason" value="'+esc(entry.reason)+'" /></div>';
+    html+='<div class="xl-cell target"><input data-vl-field="timeOut" type="text" placeholder="2:30 PM" value="'+esc(entry.timeOut)+'" /></div>';
+  } else {
+    html+='<div class="xl-cell filled">'+esc(entry.date)+'</div>';
+    html+='<div class="xl-cell filled">'+esc(entry.timeIn)+'</div>';
+    html+='<div class="xl-cell filled">'+esc(entry.name)+'</div>';
+    html+='<div class="xl-cell filled">'+esc(entry.company)+'</div>';
+    html+='<div class="xl-cell filled">'+esc(entry.reason)+'</div>';
+    html+='<div class="xl-cell filled">'+esc(entry.timeOut)+'</div>';
+  }
+  html+='</div></div>';
+
+  if(state.vlStage==='fill'){
+    html+='<div style="margin-top:16px;display:flex;gap:10px;align-items:center;">';
+    var disabled=!allFilled;
+    html+='<button class="lb-check-btn"'+(disabled?' disabled style="opacity:.4;"':'')+' data-action="vl-confirm">Save row 4 '+icon('arrow-right',14,'#fff')+'</button>';
+    if(disabled) html+='<span style="font-family:\'JetBrains Mono\',monospace;font-size:10px;color:#71717a;text-transform:uppercase;letter-spacing:.15em;">Fill every cell</span>';
+    html+='</div>';
+  } else if(state.vlStage==='formula'){
+    html+='<div class="xl-prompt">';
+    html+='<p class="xl-prompt-label">Cell H1 needs a formula</p>';
+    html+='<p class="xl-prompt-text">Which formula counts only today\'s visitors from column A?</p>';
+    html+='</div>';
+    var opts=[
+      {f:'=COUNTIF(A:A,TODAY())', correct:true},
+      {f:'=SUM(A:A)', correct:false},
+      {f:'=COUNT(A:A)', correct:false},
+      {f:'=AVERAGE(A:A)', correct:false}
+    ];
+    html+='<div class="xl-formula-options">';
+    opts.forEach(function(o,i){
+      var cls='xl-formula-opt';
+      if(state.vlFormulaPicked!=null){
+        if(o.correct) cls+=' correct';
+        else if(i===state.vlFormulaPicked) cls+=' wrong';
+      }
+      html+='<button class="'+cls+'" data-action="vl-formula" data-idx="'+i+'">'+esc(o.f)+'</button>';
+    });
+    html+='</div>';
+    if(state.vlFormulaPicked!=null){
+      var pickedCorrect=opts[state.vlFormulaPicked].correct;
+      html+='<div class="lb-feedback '+(pickedCorrect?'ok':'warn')+'" style="margin-top:14px;">'+(pickedCorrect?'Correct. COUNTIF counts cells matching a condition. The condition is TODAY() — only today\'s date counts.':'Not quite. SUM adds, COUNT just counts numbers, AVERAGE means. You need COUNTIF with a condition (today\'s date) to count only today\'s rows.')+'</div>';
+      html+='<button class="complete-btn" style="width:auto;margin-top:14px;padding:10px 22px;" data-action="vl-done">Continue '+icon('arrow-right',16,'#fff')+'</button>';
+    }
+  } else {
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// INTERACTIVE 3: FORMULA MATCH (xl-4)
+// ============================================================================
+function renderFormulaMatch(lesson,cat){
+  var allDone=FM_SCENARIOS.every(function(s){return state.fmRevealed[s.id];});
+  var correctCount=FM_SCENARIOS.filter(function(s){return state.fmPicked[s.id]===s.correct;}).length;
+
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:20px;">Pick the right formula for each Your Company scenario. Six common situations you will hit at the front desk.</p>';
+
+  html+='<div class="fm-grid">';
+  FM_SCENARIOS.forEach(function(s){
+    var picked=state.fmPicked[s.id];
+    var revealed=state.fmRevealed[s.id];
+    html+='<div class="fm-row">';
+    html+='<p class="fm-scenario-tag">'+esc(s.tag)+'</p>';
+    html+='<p class="fm-scenario">'+esc(s.scenario)+'</p>';
+    html+='<div class="fm-options">';
+    s.options.forEach(function(opt){
+      var cls='fm-opt';
+      if(revealed){
+        if(opt===s.correct) cls+=' correct';
+        else if(opt===picked) cls+=' wrong';
+      } else if(opt===picked){
+        cls+=' picked';
+      }
+      html+='<button class="'+cls+'" data-action="fm-pick" data-scen-id="'+s.id+'" data-opt="'+esc(opt)+'">'+esc(opt)+'</button>';
+    });
+    html+='</div>';
+    if(revealed){
+      html+='<p class="fm-why">'+esc(s.why)+'</p>';
+    }
+    html+='</div>';
+  });
+  html+='</div>';
+
+  if(allDone){
+    html+='<div class="fm-score">'+icon('check',13,'#60a5fa')+' Score: '+correctCount+'/'+FM_SCENARIOS.length+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  } else {
+    var pickedCount=Object.keys(state.fmPicked).length;
+    html+='<div class="fm-score">'+pickedCount+'/'+FM_SCENARIOS.length+' answered &middot; pick all to see results</div>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// INTERACTIVE 4: SPOT THE MISTAKE (pp-3)
+// ============================================================================
+function renderSpotMistake(lesson,cat){
+  var idx=state.spmIdx;
+  var s=SPM_SCENARIOS[idx];
+  var picked=state.spmPicked[s.id];
+  var revealed=state.spmRevealed[s.id];
+  var total=SPM_SCENARIOS.length;
+  var allDone=SPM_SCENARIOS.every(function(sc){return state.spmRevealed[sc.id];});
+  var correctCount=SPM_SCENARIOS.filter(function(sc){return state.spmPicked[sc.id]===sc.correctIdx;}).length;
+
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Each scenario has one clear formatting or convention mistake. Spot it. Six total, mix of Word, Excel, PowerPoint.</p>';
+
+  html+='<div class="spm-stage">';
+  html+='<p class="spm-scenario-tag">'+esc(s.tag)+' &middot; '+esc(s.mockTitle)+'</p>';
+  var mockCls='spm-mock '+(s.type==='excel'?'excel-mock':s.type==='ppt'?'ppt-mock':'');
+  html+='<div class="'+mockCls+'">'+s.mockHtml+'</div>';
+  html+='<div class="spm-options">';
+  s.options.forEach(function(opt,i){
+    var cls='spm-opt';
+    if(revealed){
+      if(i===s.correctIdx) cls+=' correct';
+      else if(i===picked) cls+=' wrong';
+    }
+    html+='<button class="'+cls+'" data-action="spm-pick" data-opt-idx="'+i+'">'+esc(opt)+'</button>';
+  });
+  html+='</div>';
+  if(revealed){
+    var ok=picked===s.correctIdx;
+    html+='<div class="spm-feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Not quite. ')+esc(s.why)+'</div>';
+  }
+  html+='<div class="spm-nav">';
+  html+='<span class="spm-progress">Scenario '+(idx+1)+' of '+total+'</span>';
+  if(revealed&&idx<total-1){
+    html+='<button class="lb-check-btn" style="margin-top:0;" data-action="spm-next">Next '+icon('arrow-right',14,'#fff')+'</button>';
+  }
+  html+='</div>';
+  html+='</div>';
+
+  if(allDone){
+    html+='<div class="fm-score">'+icon('check',13,'#60a5fa')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// LESSON DISPATCHER
+// ============================================================================
+function renderLesson(lesson,cat){
+  if(lesson.type==='reading') return renderReading(lesson,cat);
+  if(lesson.intKey==='letterBuilder') return renderLetterBuilder(lesson,cat);
+  if(lesson.intKey==='visitorLog')    return renderVisitorLog(lesson,cat);
+  if(lesson.intKey==='formulaMatch')  return renderFormulaMatch(lesson,cat);
+  if(lesson.intKey==='spotMistake')   return renderSpotMistake(lesson,cat);
+  return renderReading(lesson,cat);
+}
+
+// ============================================================================
+// RENDER DISPATCH
+// ============================================================================
+function render(){
+  var app=document.getElementById('app');
+  var html='';
+  if(state.view==='home'){
+    html=renderHome();
+  } else if(state.view.indexOf('category:')===0){
+    var cat=getCat(state.view.slice(9));
+    html=cat?renderCategory(cat):renderHome();
+  } else if(state.view.indexOf('lesson:')===0){
+    var info=getLesson(state.view.slice(7));
+    html=info?renderLesson(info.lesson,info.cat):renderHome();
+  }
+  app.innerHTML=html;
+
+  // Wire live inputs
+  if(state.view.indexOf('lesson:')===0){
+    var info2=getLesson(state.view.slice(7));
+    if(info2&&info2.lesson.intKey==='letterBuilder'){
+      setTimeout(function(){
+        var hooks=[
+          ['lb-date','lbDate'],['lb-salute','lbSalute'],
+          ['lb-rname','lbRecipName'],['lb-lname','lbLastName'],
+          ['lb-rtitle','lbRecipTitle'],['lb-rco','lbRecipCompany'],
+          ['lb-raddr','lbRecipAddress'],['lb-body','lbBody'],
+          ['lb-closing','lbClosing'],['lb-sig','lbSigName']
+        ];
+        hooks.forEach(function(h){
+          var el=document.getElementById(h[0]);
+          if(!el) return;
+          var ev=el.tagName==='SELECT'?'change':'input';
+          el.addEventListener(ev,function(e){
+            state[h[1]]=e.target.value;
+            state.lbChecked=false; state.lbFeedback=null;
+            clearTimeout(window._lbTimer);
+            window._lbTimer=setTimeout(function(){ render(); },350);
+          });
+        });
+      },50);
+    }
+    if(info2&&info2.lesson.intKey==='visitorLog'){
+      setTimeout(function(){
+        document.querySelectorAll('[data-vl-field]').forEach(function(inp){
+          inp.addEventListener('input',function(e){
+            var f=e.target.getAttribute('data-vl-field');
+            state.vlEntries[0][f]=e.target.value;
+          });
+        });
+      },50);
+    }
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ============================================================================
+// EVENT DELEGATION
+// ============================================================================
+document.body.addEventListener('click',function(ev){
+  var t=ev.target.closest('[data-action]');
+  if(!t) return;
+  var action=t.getAttribute('data-action');
+
+  if(action==='open-cat'){ state.view='category:'+t.getAttribute('data-cat-id'); render(); }
+  else if(action==='back-home'){ state.view='home'; render(); }
+  else if(action==='back-cat'){ state.view='category:'+t.getAttribute('data-cat-id'); render(); }
+  else if(action==='open-lesson'){
+    var lid=t.getAttribute('data-lesson-id');
+    var info=getLesson(lid);
+    if(info){
+      if(info.lesson.intKey==='letterBuilder'){
+        state.lbDate='May 14, 2026'; state.lbRecipName=''; state.lbRecipTitle=''; state.lbRecipCompany=''; state.lbRecipAddress='';
+        state.lbSalute='Mr.'; state.lbLastName=''; state.lbBody=''; state.lbClosing='Sincerely';
+        state.lbSigName='The Owner'; state.lbSigTitle='CEO';
+        state.lbChecked=false; state.lbFeedback=null;
+      }
+      if(info.lesson.intKey==='visitorLog'){
+        state.vlEntries=[{date:'',timeIn:'',name:'',company:'',reason:'',timeOut:''}];
+        state.vlStage='fill'; state.vlFormulaPicked=null;
+      }
+      if(info.lesson.intKey==='formulaMatch'){
+        state.fmPicked={}; state.fmRevealed={};
+      }
+      if(info.lesson.intKey==='spotMistake'){
+        state.spmIdx=0; state.spmPicked={}; state.spmRevealed={};
+      }
+    }
+    state.view='lesson:'+lid; render();
+  }
+  else if(action==='complete-lesson'){
+    var lid2=t.getAttribute('data-lesson-id');
+    state.completed[lid2]=true;
+    var info2=getLesson(lid2);
+    if(info2){
+      var next=null;
+      for(var i=0;i<info2.cat.lessons.length;i++){
+        if(info2.cat.lessons[i].id===lid2&&i+1<info2.cat.lessons.length){ next=info2.cat.lessons[i+1]; break; }
+      }
+      state.view=next?'lesson:'+next.id:'category:'+info2.cat.id;
+      render();
+    }
+  }
+  // Letter Builder
+  else if(action==='lb-check'){ checkLetterBuilder(); }
+  // Visitor Log
+  else if(action==='vl-confirm'){ state.vlStage='formula'; render(); }
+  else if(action==='vl-formula'){
+    state.vlFormulaPicked=parseInt(t.getAttribute('data-idx'),10);
+    render();
+  }
+  else if(action==='vl-done'){ state.vlStage='done'; render(); }
+  // Formula Match
+  else if(action==='fm-pick'){
+    var sid=t.getAttribute('data-scen-id');
+    var opt=t.getAttribute('data-opt');
+    if(state.fmRevealed[sid]) return; // locked once revealed
+    state.fmPicked[sid]=opt;
+    state.fmRevealed[sid]=true;
+    render();
+  }
+  // Spot Mistake
+  else if(action==='spm-pick'){
+    var sc=SPM_SCENARIOS[state.spmIdx];
+    if(state.spmRevealed[sc.id]) return;
+    var idx=parseInt(t.getAttribute('data-opt-idx'),10);
+    state.spmPicked[sc.id]=idx;
+    state.spmRevealed[sc.id]=true;
+    render();
+  }
+  else if(action==='spm-next'){
+    if(state.spmIdx<SPM_SCENARIOS.length-1){ state.spmIdx++; render(); }
+  }
+});
+
+// ============================================================================
+// INIT
+// ============================================================================
+document.getElementById('logo-slot').innerHTML=icon('file-text',22,'#fff');
+render();
+</script>
+</body>
+</html>

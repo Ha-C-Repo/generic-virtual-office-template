@@ -1,0 +1,25 @@
+## Steel Design After College - Part 6
+URL: https://www.youtube.com/watch?v=K0G-6EdO0ho | Duration: 26:33 | Upload: NA | Tier: 2 | Watched: 2026-06-24
+### Core Concept
+This lecture covers lateral analysis of steel buildings for wind, focused on the practical modeling and limit-state decisions a structural engineer makes when designing the vertical lateral load resisting system (abbreviated VLR throughout) [00:31]. The speaker frames the work around three numbered analyses: analysis one serviceability, analysis two strength, and analysis three stability under sustained gravity load [07:42]. The recurring theme is that all-steel moment frames are almost always controlled by wind drift or seismic drift rather than strength, so the engineer designs for stiffness and gets strength for free, while brace frames are the reverse and end up lighter [05:08][06:10].
+
+### Spec References
+ASCE 7 chapter 6 commentary is cited for a table that converts a 50-year mean recurrence wind event to a 10-year, 25-year, or other return period, and chapter 6 is cited again for the four required wind load cases shown in figure 6-9 [15:17][16:19]. ACI 318 chapter 10 is cited as the concrete code that also uses the symbol Q for the stability index [09:43]. Strength load combinations are stated as 1.6 times nominal wind, and the stability analysis mass uses 1.2 dead plus 1.6 live [08:12][26:01]. No AISC 360, AISC 341, AWS D1.1, RCSC, or Design Guide section was cited in this segment.
+
+### Technical Details
+The interstory stability index Q is defined as P times Delta divided by V times H, where P is the sum of gravity load on the story, Delta is the story drift relative to the story below, V is the story shear, and H is the story height [10:13]. The leaning-column P-Delta effect can weaken a frame by 10 to 15 percent, so a moment-frame-only model must carry a dummy column holding the tributary gravity load to capture it [03:35]. The four ASCE 7 wind cases run from full load on the projected area in each orthogonal direction, to a 25 percent base-shear reduction paired with a 15 percent eccentricity for torsion, to a quartering diagonal wind at three quarters value, to the combined diagonal-plus-eccentric case [16:50][17:50]. Torsional behavior is checked through mode shapes, wanting the first two modes translational and the third torsional, and the speaker recommends counting on real foundation rotational stiffness rather than assuming a pinned base, which over-stiffens the tall first story [22:26][12:14].
+
+### Fabrication Notes
+This is a structural design lecture with no fabrication, fit-up, shop-process, or shop-QC content.
+
+### Erection Notes
+No erection, field sequencing, bracing, or rigging content appears in this segment. The only field-adjacent note is a reminder to check foundation load for net uplift under brace frames [06:10].
+
+### Common Errors / Inspection Failures
+The speaker names design modeling errors rather than fabrication or weld inspection failures. The main ones are running straight to the computer model without sanity-checking whether the frame deflects logically under wind, a garbage-in garbage-out risk [04:37]; omitting leaning-column gravity load and underestimating drift and member sizes by 10 to 15 percent [03:35]; assuming a pinned foundation base and oversizing first-story members [12:14]; and concentrating all lateral resistance at the building core, which produces torsional instability that has caused real earthquake damage [21:26].
+
+### Bid / Cost Implications
+The cost lever in this lecture is steel weight. Brace frames are designed for strength and pick up drift control for free, so they yield a lighter steel building than moment frames, which are designed for drift and pick up strength for free [06:10]. Architects resist brace frames because they occupy space, so the engineer negotiates placement early, and a combined brace-plus-moment-frame system is offered as efficient [06:40][07:11]. Assuming a pinned base instead of crediting real foundation stiffness pushes extra steel into the first-story beams and columns, a direct weight and cost penalty [12:14].
+
+### Your Company Application
+This content sits with the design engineer and the in-house PE stamp, not with the shop or field crews, so Mario and Paul gain nothing here and Tekla detailing is downstream of these decisions. For Ivan and takeoff, the usable signal is that frame type drives tonnage: a brace-frame solution generally tonnages lighter than an equivalent moment frame, which is a sanity check on a competitor or design assumption when estimating, though our member takeoff still runs through aisc_validator.py and never substitutes a rule of thumb for a measured count. On the Asian City Plaza project controls, the wind-case and torsional-distribution discussion is a reminder that a low-rise multi-wing job should confirm the EOR's lateral system before we price secondary and bracing steel. No conflict with Your Company doctrine: this is structural-design methodology and the no-PEMB positioning is untouched. NONE.

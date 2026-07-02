@@ -1,0 +1,49 @@
+{
+  "schema": "ASSEMBLY_DEF_V2",
+  "assembly_id": "joist_each",
+  "description": "Open web steel joist assembly. One counted joist (COUNT EA) drives one joist order line carrying the driver designation, erection labor hours, and crane minutes (P29).",
+  "provenance": "SEED 2026-06-12. Hour factors seeded pending PC7 shop actuals and Owner review. Changes are file diffs proposed to Owner, never chat-session overrides.",
+  "applies_to": {
+    "item_class": "JST",
+    "mode": "COUNT",
+    "designation_includes": [],
+    "designation_excludes": []
+  },
+  "openings": null,
+  "streams": {
+    "materials": [
+      {
+        "component_id": "joists",
+        "description": "open web steel joists, one per counted joist",
+        "designation": null,
+        "designation_from_driver": true,
+        "unit": "EA",
+        "qty_per_unit": 1.0,
+        "waste_factor": 0.0,
+        "round": {"direction": "up", "increment": 1.0},
+        "cross_check_class": null,
+        "length_lf": null,
+        "aisc": false
+      }
+    ],
+    "labor_hours": [
+      {
+        "component_id": "erection_labor",
+        "description": "joist setting and bolting, hours per joist",
+        "hours_per_unit": 0.9,
+        "round": {"direction": "up", "increment": 0.25}
+      }
+    ],
+    "equipment_time": [
+      {
+        "component_id": "crane_set",
+        "description": "crane minutes per joist set",
+        "unit": "MIN",
+        "time_per_unit": 12.0,
+        "round": {"direction": "up", "increment": 5.0}
+      }
+    ],
+    "subcontract": null
+  },
+  "notes": "Joist bridging is span-dependent and never derivable from a count alone; bridging enters the takeoff as manual LINEAR rows. Joist weight derives downstream from the SJI load table named in formula_ref, never from AISC and never from model memory."
+}

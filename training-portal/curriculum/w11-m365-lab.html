@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Win 11 + M365 Lab | Your Company</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #000; color: #e4e4e7;
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.5; min-height: 100vh;
+    background-image:
+      radial-gradient(circle at 90% 10%, rgba(0,103,192,0.08), transparent 40%),
+      radial-gradient(circle at 10% 90%, rgba(0,120,212,0.05), transparent 40%);
+  }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; padding: 0; }
+  input { font-family: inherit; }
+  p { margin: 0; }
+  h1, h2, h3, h4 { margin: 0; font-weight: normal; }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+  .bebas { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; }
+  .mono  { font-family: 'JetBrains Mono', 'Cascadia Code', Consolas, monospace; }
+  .segoe { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'IBM Plex Sans', sans-serif; }
+
+  /* Header */
+  header.site {
+    border-bottom: 2px solid #27272a;
+    background: rgba(0,0,0,0.85);
+    position: sticky; top: 0; z-index: 10;
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  }
+  .header-row { max-width: 960px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; gap: 12px; }
+  .logo-tile { width: 40px; height: 40px; background: #0067c0; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .header-meta { flex: 1; min-width: 0; }
+  .header-meta .small { font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; color: #52525b; }
+  .header-meta .big { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: #fff; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  footer.site { max-width: 960px; margin: 0 auto; padding: 28px 20px; border-top: 1px solid #27272a; text-align: center; }
+  footer.site p { font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; color: #3f3f46; }
+
+  /* Lab home (hero + categories) */
+  .lab-hero {
+    position: relative; border: 2px solid #3f3f46; background: #18181b;
+    overflow: hidden; margin-bottom: 28px;
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.15;
+    background-image: linear-gradient(rgba(77,208,225,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(77,208,225,0.2) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .hero-glow {
+    position: absolute; top: -40px; right: -40px; width: 200px; height: 200px;
+    background: #0078d4; border-radius: 50%; filter: blur(80px); opacity: 0.3;
+  }
+  .lab-hero-inner { position: relative; padding: 28px 24px; }
+  .lab-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.3em; color: #fbbf24; margin-bottom: 8px; }
+  .lab-h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px, 9vw, 72px); color: #fff; line-height: 0.9; margin-bottom: 14px; }
+  .lab-h1 .accent { color: #fbbf24; }
+  .lab-blurb { color: #a1a1aa; max-width: 540px; font-size: 14px; line-height: 1.7; margin-bottom: 22px; }
+  .lab-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 460px; }
+  .lab-stat { border: 1px solid #3f3f46; background: rgba(0,0,0,0.4); padding: 8px 10px; }
+  .lab-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: #fbbf24; margin: 0; }
+  .lab-stat-lbl { font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; color: #52525b; margin: 0; }
+
+  /* Category cards */
+  .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .cat-card { text-align: left; background: #18181b; border: 2px solid #3f3f46; padding: 0; position: relative; overflow: hidden; width: 100%; }
+  .cat-card.is-done { border-color: #10b981; }
+  .cat-stripe { height: 6px; }
+  .cat-inner { padding: 18px; }
+  .cat-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+  .cat-icon-tile { width: 44px; height: 44px; color: #fff; display: flex; align-items: center; justify-content: center; }
+  .cat-preview-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #71717a; text-transform: uppercase; letter-spacing: 0.2em; border: 1px solid #3f3f46; padding: 3px 6px; }
+  .cat-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #fff; margin: 0 0 6px; line-height: 1.05; }
+  .cat-card-blurb { font-size: 12px; color: #a1a1aa; margin: 0 0 14px; line-height: 1.5; }
+  .cat-card-foot { display: flex; justify-content: space-between; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #71717a; text-transform: uppercase; letter-spacing: 0.2em; }
+  .cat-progress-track { height: 4px; background: #27272a; flex: 1; margin-left: 12px; max-width: 80px; }
+  .cat-progress-fill { height: 100%; background: #10b981; transition: width 0.3s ease; }
+
+  /* Category view (lesson list) */
+  .cat-back-btn { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: #71717a; display: flex; align-items: center; gap: 6px; margin-bottom: 20px; }
+  .cat-header { background: #18181b; border: 2px solid #3f3f46; padding: 20px; margin-bottom: 16px; }
+  .cat-header-inner { display: flex; gap: 16px; align-items: flex-start; }
+  .cat-header-icon { width: 56px; height: 56px; color: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .cat-header-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.3em; margin: 0; }
+  .cat-header-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: #fff; margin: 4px 0; line-height: 1; }
+  .cat-header-blurb { color: #a1a1aa; font-size: 13px; margin: 0; line-height: 1.5; }
+
+  .lesson-list { display: flex; flex-direction: column; gap: 8px; }
+  .lesson-row { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: #18181b; border: 2px solid #3f3f46; cursor: pointer; width: 100%; text-align: left; }
+  .lesson-row.is-done { border-color: #10b981; }
+  .lesson-row.is-locked { opacity: 0.45; cursor: not-allowed; }
+  .lesson-num-tile { width: 30px; height: 30px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 16px; }
+  .lesson-num-tile.is-done    { background: #10b981; color: #000; }
+  .lesson-num-tile.is-current { background: #fbbf24; color: #000; }
+  .lesson-num-tile.is-pending { background: #27272a; color: #71717a; }
+  .lesson-row-meta { flex: 1; min-width: 0; }
+  .lesson-row-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: #fff; margin: 0; line-height: 1.1; }
+  .lesson-row-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; margin: 4px 0 0; }
+
+  /* Lesson reading view */
+  .lesson-card { border: 2px solid #3f3f46; background: #18181b; }
+  .lesson-card-header { background: #0067c0; color: #fff; padding: 16px 20px; display: flex; align-items: center; gap: 16px; border-bottom: 2px solid #3f3f46; }
+  .lesson-card-header.outlook { background: #0078d4; }
+  .lesson-card-header.onedrive { background: #0078d4; }
+  .lesson-card-header.teams { background: #5b5fc7; }
+  .lesson-card-header.office { background: #185abd; }
+  .lesson-card-header.security { background: #107c10; }
+  .lesson-icon-tile { width: 52px; height: 52px; background: rgba(0,0,0,0.25); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .lesson-card-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 700; opacity: 0.8; margin: 0; }
+  .lesson-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; margin: 4px 0 0; line-height: 1; color: #fff; }
+  .lesson-card-body { padding: 24px 22px; }
+  .lesson-section { margin-bottom: 22px; }
+  .lesson-section h3 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #fbbf24; margin: 0 0 8px; letter-spacing: 0.04em; }
+  .lesson-section p { color: #a1a1aa; line-height: 1.65; margin: 0; font-size: 14px; }
+  .tip-box { background: rgba(0,103,192,0.08); border-left: 4px solid #0067c0; padding: 12px 16px; margin-top: 20px; }
+  .tip-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.25em; color: #60a5fa; margin: 0 0 6px; font-weight: 700; }
+  .tip-body { color: #cbd5e1; font-size: 13px; margin: 0; line-height: 1.55; font-style: italic; }
+
+  .complete-btn {
+    width: 100%; margin-top: 24px; padding: 14px 0;
+    font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.2em;
+    background: #fbbf24; color: #000; border: 2px solid #fbbf24;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+
+  /* SimChrome */
+  .sim-bar { background: #18181b; border: 2px solid #3f3f46; padding: 12px 16px; margin-bottom: 16px; }
+  .sim-bar-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .sim-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; color: #fbbf24; margin: 0; }
+  .sim-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #fff; margin: 2px 0 0; }
+  .sim-reset-btn { padding: 6px 10px; background: #27272a; border: 1px solid #3f3f46; color: #a1a1aa; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; display: flex; align-items: center; gap: 4px; }
+  .sim-goal { background: #09090b; border: 1px solid #fbbf24; padding: 10px 14px; margin-top: 10px; display: flex; gap: 10px; align-items: center; }
+  .sim-goal-text { color: #fde68a; font-size: 13px; font-weight: 500; }
+  .sim-feedback { margin-top: 8px; padding: 8px 12px; font-size: 12px; display: flex; align-items: center; gap: 8px; }
+  .sim-feedback.ok    { background: rgba(16,185,129,0.15); border: 1px solid #10b981; color: #6ee7b7; }
+  .sim-feedback.error { background: rgba(239,68,68,0.15); border: 1px solid #ef4444; color: #fca5a5; }
+  .sim-viewport { background: #27272a; padding: 24px; border: 2px solid #3f3f46; min-height: 380px; }
+  .sim-done-banner { background: rgba(16,185,129,0.1); border: 2px solid #10b981; padding: 18px; margin-top: 16px; }
+  .sim-done-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .sim-done-h { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #6ee7b7; margin: 0; }
+  .sim-done-msg { color: #d4d4d8; font-size: 13px; margin: 0 0 14px; line-height: 1.6; }
+  .sim-done-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .sim-mark-complete-btn {
+    font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 0.2em;
+    background: #fbbf24; color: #000; padding: 10px 22px; border: 2px solid #fbbf24;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .sim-run-again-btn {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    background: #27272a; color: #a1a1aa; padding: 10px 16px; border: 2px solid #3f3f46;
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  /* File Explorer Sim */
+  .fx-window { background: #fff; box-shadow: 0 12px 32px rgba(0,0,0,0.4); width: 100%; max-width: 760px; margin: 0 auto; border-radius: 8px; overflow: hidden; border: 1px solid #d1d5db; font-family: 'Segoe UI', sans-serif; }
+  .fx-titlebar { background: #f3f3f3; padding: 6px 12px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e5e7eb; font-size: 13px; color: #000; }
+  .fx-toolbar { background: #fafafa; padding: 6px 12px; display: flex; gap: 16px; font-size: 12px; color: #333; border-bottom: 1px solid #eee; }
+  .fx-addressbar { background: #fff; padding: 8px 12px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #f0f0f0; }
+  .fx-addr-text { font-size: 12px; color: #000; background: #f3f3f3; padding: 4px 10px; flex: 1; border-radius: 3px; }
+  .fx-body-row { display: flex; min-height: 280px; }
+  .fx-sidebar { width: 160px; background: #fafafa; padding: 12px 6px; border-right: 1px solid #eee; font-size: 12px; }
+  .fx-sidebar-head { padding: 4px 8px; color: #666; font-weight: 600; font-size: 10px; margin-bottom: 4px; }
+  .fx-sidebar-item { padding: 5px 10px; display: flex; gap: 8px; align-items: center; color: #000; border-radius: 3px; margin-bottom: 2px; }
+  .fx-sidebar-item.active { background: #e5f1fb; }
+  .fx-main { flex: 1; padding: 16px; position: relative; background: #fff; min-height: 280px; }
+  .fx-files { display: flex; flex-wrap: wrap; gap: 18px; }
+  .fx-file { width: 78px; text-align: center; padding: 6px; border-radius: 4px; cursor: pointer; }
+  .fx-file-emoji { font-size: 36px; line-height: 1; }
+  .fx-file-name { font-size: 11px; color: #000; margin-top: 4px; word-break: break-word; }
+  .fx-hint {
+    position: absolute; bottom: 16px; right: 16px;
+    background: #000; color: #fbbf24; font-size: 10px;
+    padding: 4px 10px; font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.15em; text-transform: uppercase;
+  }
+  .fx-context-menu {
+    position: absolute; top: 60px; left: 60px; background: #fff;
+    border: 1px solid #ccc; box-shadow: 4px 4px 16px rgba(0,0,0,0.2);
+    min-width: 180px; padding: 4px 0; font-size: 12px; z-index: 5;
+  }
+  .fx-ctx-item { padding: 6px 14px; color: #000; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .fx-ctx-item.disabled { color: #bbb; cursor: default; }
+  .fx-ctx-item:hover:not(.disabled) { background: #f3f4f6; }
+  .fx-ctx-item.pulse { background: #fef3c7 !important; animation: pulse-yellow 1.4s ease-in-out infinite; }
+  .fx-ctx-divider { border-top: 1px solid #eee; margin: 4px 0; }
+  .fx-submenu {
+    position: absolute; left: 100%; top: 80px; background: #fff;
+    border: 1px solid #ccc; box-shadow: 4px 4px 16px rgba(0,0,0,0.2);
+    min-width: 180px; padding: 4px 0; font-size: 12px;
+  }
+  .fx-folder-name-input {
+    width: 100%; font-size: 11px; margin-top: 4px; padding: 2px 4px;
+    border: 1px solid #0067c0; outline: none; text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  @keyframes pulse-yellow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); }
+    50%      { box-shadow: 0 0 0 6px rgba(251, 191, 36, 0); }
+  }
+  @keyframes shake-x {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-6px); }
+    40% { transform: translateX(6px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(3px); }
+  }
+  .shake { animation: shake-x 0.35s ease-in-out; }
+
+  /* Phishing sim */
+  .phish-window { font-family: 'Segoe UI', sans-serif; background: #fff; max-width: 760px; margin: 0 auto; border: 1px solid #d1d5db; border-radius: 6px; overflow: hidden; }
+  .phish-header { background: #0078d4; color: #fff; padding: 8px 14px; display: flex; justify-content: space-between; font-size: 13px; }
+  .phish-row { display: flex; min-height: 380px; }
+  .phish-list { width: 45%; border-right: 1px solid #eee; overflow-y: auto; max-height: 380px; }
+  .phish-list-item { padding: 10px 12px; border-bottom: 1px solid #f3f4f6; cursor: pointer; border-left: 3px solid transparent; }
+  .phish-list-item.is-open { background: #e5f1fb; }
+  .phish-list-item.is-marked { background: #fef2f2; border-left-color: #ef4444; }
+  .phish-from-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+  .phish-from { font-size: 12px; font-weight: 600; color: #000; }
+  .phish-subject { font-size: 12px; color: #000; margin-bottom: 2px; font-weight: 500; }
+  .phish-preview { font-size: 11px; color: #666; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .phish-body { flex: 1; padding: 16px; font-size: 13px; color: #000; overflow-y: auto; max-height: 380px; }
+  .phish-empty { color: #999; text-align: center; margin-top: 80px; font-size: 12px; }
+  .phish-subj { font-size: 16px; font-weight: 600; color: #000; margin-bottom: 8px; }
+  .phish-sender-row { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+  .phish-avatar { width: 32px; height: 32px; background: #0078d4; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
+  .phish-sender-name { font-size: 13px; font-weight: 600; color: #000; }
+  .phish-reveal { font-size: 11px; color: #0078d4; cursor: help; text-decoration: underline dotted; }
+  .phish-reveal.is-shown { color: #dc2626; font-weight: 600; text-decoration: none; }
+  .phish-mark-btn {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em;
+    padding: 6px 12px; border: 2px solid #999; background: #fff; color: #000;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .phish-mark-btn.is-marked { border-color: #ef4444; background: #fee2e2; color: #991b1b; }
+  .phish-content { border-top: 1px solid #eee; margin: 12px 0; padding-top: 12px; color: #000; white-space: pre-wrap; font-size: 13px; line-height: 1.6; }
+  .phish-explain { margin-top: 16px; padding: 12px; font-size: 12px; color: #000; }
+  .phish-explain.is-phish { background: #fee2e2; border: 1px solid #ef4444; }
+  .phish-explain.is-legit { background: #dcfce7; border: 1px solid #10b981; }
+  .phish-submit-bar { background: #f9fafb; padding: 12px; border-top: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .phish-submit-bar-left { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.15em; }
+  .phish-submit-btn { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.15em; background: #fbbf24; color: #000; padding: 8px 18px; border: 2px solid #fbbf24; }
+  .phish-try-btn { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; background: #27272a; color: #fff; padding: 8px 14px; border: 2px solid #3f3f46; display: flex; align-items: center; gap: 6px; }
+  .phish-tip { font-size: 12px; color: #a1a1aa; text-align: center; margin-top: 16px; font-style: italic; }
+
+  /* Taskbar Tour */
+  .taskbar-stage {
+    background: linear-gradient(180deg, #4a90e2, #2c5aa0); padding: 40px 20px 20px;
+    border-radius: 8px; position: relative; min-height: 200px;
+  }
+  .taskbar-help-text {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #fff;
+    text-align: center; text-transform: uppercase; letter-spacing: 0.25em;
+    opacity: 0.7; margin-bottom: 20px;
+  }
+  .taskbar-bar {
+    background: rgba(0,0,0,0.4); padding: 6px 12px; border-radius: 8px;
+    display: flex; gap: 8px; justify-content: center; max-width: 480px; margin: 0 auto;
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  }
+  .taskbar-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 4px; cursor: pointer; font-size: 22px; transition: background 0.15s; }
+  .taskbar-icon:hover, .taskbar-icon.is-hovered { background: rgba(255,255,255,0.25); }
+  .taskbar-tooltip-area { min-height: 60px; margin-top: 20px; text-align: center; }
+  .taskbar-tooltip { background: #000; display: inline-block; padding: 10px 18px; border: 1px solid #fbbf24; }
+  .taskbar-tooltip-label { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: #fbbf24; margin: 0; }
+  .taskbar-tooltip-desc { font-size: 12px; color: #fff; margin: 2px 0 0; }
+  .taskbar-tooltip-empty {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #fff;
+    opacity: 0.6; text-transform: uppercase; letter-spacing: 0.2em;
+  }
+
+  /* Inbox Anatomy */
+  .inbox-shell { font-family: 'Segoe UI', sans-serif; background: #fff; border: 2px solid #3f3f46; border-radius: 6px; overflow: hidden; }
+  .inbox-help-text {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #fbbf24;
+    text-align: center; text-transform: uppercase; letter-spacing: 0.25em;
+    padding: 8px; background: #18181b; margin: 0;
+  }
+  .inbox-content { display: flex; min-height: 280px; }
+  .inbox-folders { width: 130px; padding: 10px; font-size: 11px; cursor: pointer; border-right: 1px solid #e5e7eb; color: #000; }
+  .inbox-folders.hot { background: #fef3c7; }
+  .inbox-folders:not(.hot) { background: #f3f4f6; }
+  .inbox-folders-head { font-weight: 600; margin-bottom: 6px; }
+  .inbox-folder-row { padding: 3px 0; display: flex; gap: 6px; }
+  .inbox-list-pane { width: 40%; padding: 10px; cursor: pointer; border-right: 1px solid #e5e7eb; }
+  .inbox-list-pane.hot { background: #fef3c7; }
+  .inbox-list-pane:not(.hot) { background: #fff; }
+  .inbox-search { padding: 4px 8px; font-size: 11px; color: #666; margin-bottom: 6px; border-radius: 3px; cursor: pointer; }
+  .inbox-search.hot { background: #fef3c7; }
+  .inbox-search:not(.hot) { background: #f3f4f6; }
+  .inbox-message-row { padding: 6px 0; border-bottom: 1px solid #f3f4f6; }
+  .inbox-msg-head { display: flex; justify-content: space-between; font-size: 11px; color: #000; }
+  .inbox-msg-actions { display: flex; gap: 4px; cursor: pointer; }
+  .inbox-msg-subject { font-size: 11px; color: #000; }
+  .inbox-msg-preview { font-size: 10px; color: #666; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .inbox-reading { flex: 1; padding: 14px; cursor: pointer; font-size: 12px; color: #000; }
+  .inbox-reading.hot { background: #fef3c7; }
+  .inbox-reading:not(.hot) { background: #fff; }
+  .inbox-reading-h { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  .inbox-reading-meta { font-size: 11px; color: #666; margin-bottom: 10px; }
+  .inbox-reading-body { line-height: 1.6; }
+  .inbox-tooltip-bar { background: #18181b; padding: 14px; min-height: 60px; }
+  .inbox-tooltip-label { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: #fbbf24; margin: 0; }
+  .inbox-tooltip-desc { font-size: 12px; color: #d4d4d8; margin: 4px 0 0; }
+  .inbox-tooltip-empty { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #71717a; text-align: center; text-transform: uppercase; letter-spacing: 0.2em; margin: 0; }
+
+  /* Share Walkthrough */
+  .share-progress-row { margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
+  .share-progress-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #fbbf24; text-transform: uppercase; letter-spacing: 0.25em; }
+  .share-progress-count { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #71717a; }
+  .share-stage { border: 2px solid #3f3f46; background: #fff; }
+  .share-shot { font-family: 'Segoe UI', sans-serif; background: #fff; padding: 14px; font-size: 12px; color: #000; position: relative; }
+  .share-shot-banner { background: #0078d4; color: #fff; padding: 6px 10px; margin-bottom: 10px; }
+  .share-shot-row { padding: 6px 10px; border-bottom: 1px solid #f3f4f6; display: flex; gap: 8px; align-items: center; }
+  .share-shot-row.highlight { background: #fef3c7; }
+  .share-shot-ctxmenu { position: absolute; top: 70px; left: 200px; background: #fff; border: 1px solid #ccc; box-shadow: 4px 4px 12px rgba(0,0,0,0.15); min-width: 160px; }
+  .share-shot-ctxmenu-row { padding: 6px 12px; font-size: 12px; color: #000; }
+  .share-shot-ctxmenu-row.active { background: #e5f1fb; }
+  .share-shot-permission { background: #f3f4f6; padding: 8px 12px; margin-bottom: 10px; font-size: 12px; color: #000; border-radius: 4px; display: flex; justify-content: space-between; }
+  .share-shot-warning { background: #fef3c7; padding: 8px 12px; margin-bottom: 10px; font-size: 11px; color: #92400e; }
+  .share-shot-input { border: 1px solid #ddd; padding: 8px 12px; margin-bottom: 10px; }
+  .share-shot-input.placeholder { color: #999; }
+  .share-shot-send-btn { background: #0078d4; color: #fff; padding: 6px 18px; border: none; }
+  .share-success { font-family: 'Segoe UI', sans-serif; padding: 18px; text-align: center; font-size: 12px; color: #000; }
+  .share-success-h { font-size: 14px; font-weight: 600; margin: 10px 0 6px; }
+  .share-success-meta { font-size: 12px; color: #666; }
+  .share-done-banner { background: rgba(16,185,129,0.1); border: 2px solid #10b981; padding: 18px; text-align: center; }
+  .share-done-msg { color: #d4d4d8; font-size: 13px; margin: 8px 0 0; }
+  .share-actions { display: flex; gap: 10px; margin-top: 14px; justify-content: flex-end; flex-wrap: wrap; }
+  .share-back-btn { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; background: #27272a; color: #a1a1aa; padding: 8px 14px; border: 1px solid #3f3f46; }
+  .share-next-btn { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.2em; background: #fbbf24; color: #000; padding: 8px 18px; border: 2px solid #fbbf24; display: flex; align-items: center; gap: 6px; }
+
+  /* Generic interactive wrapper */
+  .interactive-wrap { padding: 4px 0; }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-row">
+    <div class="logo-tile" id="logo-slot"></div>
+    <div class="header-meta">
+      <p class="small">Your Company &middot; Computer Lab</p>
+      <p class="big">Win 11 + Microsoft 365</p>
+    </div>
+  </div>
+</header>
+
+<main class="container" style="padding: 28px 20px 40px;">
+  <div id="app"></div>
+</main>
+
+<footer class="site">
+  <p>Built by Joseph &middot; Your Company Virtual Office &middot; Internal Use Only</p>
+</footer>
+
+<script>
+"use strict";
+
+// ============================================================================
+// ICON LIBRARY
+// ============================================================================
+const ICONS = {
+  'arrow-right':    '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  'arrow-left':     '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  'check':          '<path d="M20 6 9 17l-5-5"/>',
+  'x':              '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+  'lock':           '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  'rotate-ccw':     '<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>',
+  'monitor':        '<rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/>',
+  'mail':           '<path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/>',
+  'cloud':          '<path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>',
+  'messages-square':'<path d="M16 10a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 14.286V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/><path d="M20 9a2 2 0 0 1 2 2v10.286a.71.71 0 0 1-1.212.502l-2.202-2.202A2 2 0 0 0 17.172 19H10a2 2 0 0 1-2-2v-1"/>',
+  'file-text':      '<path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>',
+  'shield-check':   '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
+  'sparkles':       '<path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4"/><path d="M22 4h-4"/><circle cx="4" cy="20" r="2"/>',
+  'folder':         '<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>',
+  'folder-plus':    '<path d="M12 10v6"/><path d="M9 13h6"/><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>',
+  'file':           '<path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/>',
+  'inbox':          '<polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>',
+  'mail-warning':   '<path d="M22 10.5V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12.5"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/><path d="M20 14v4"/><path d="M20 22v.01"/>',
+  'search':         '<path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/>',
+  'chevron-right':  '<path d="m9 18 6-6-6-6"/>',
+  'triangle-alert': '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/>',
+  'award':          '<path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/>'
+};
+function icon(name, size, color) {
+  size = size || 16; color = color || 'currentColor';
+  var path = ICONS[name] || '';
+  return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="' + color + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">' + path + '</svg>';
+}
+
+// ============================================================================
+// CATEGORIES
+// ============================================================================
+const CATEGORIES = [
+  { id:'win11', iconKey:'monitor', color:'#0067c0',
+    title:'Windows 11 Foundations',
+    blurb:'Sign in, taskbar, File Explorer, search. The desktop you live on.',
+    lessons:[
+      { id:'w-1', title:'The Lock Screen + Sign-In',    type:'reading',     minutes:3 },
+      { id:'w-2', title:'Taskbar & Start Menu Tour',    type:'interactive', minutes:4, simKey:'taskbar' },
+      { id:'w-3', title:'File Explorer: Make a Folder', type:'sim',         minutes:6, simKey:'fileExplorer' },
+      { id:'w-4', title:'Search Like a Pro',            type:'reading',     minutes:3 }
+    ] },
+  { id:'outlook', iconKey:'mail', color:'#0078d4',
+    title:'Outlook (Microsoft 365)',
+    blurb:'Inbox, compose, calendar, and the most important skill: spotting phish.',
+    lessons:[
+      { id:'o-1', title:'Inbox Anatomy',                 type:'interactive', minutes:3, simKey:'inbox' },
+      { id:'o-2', title:'Compose, Reply, and Reply-All', type:'reading',     minutes:4 },
+      { id:'o-3', title:'Phishing Detection Lab',        type:'sim',         minutes:8, simKey:'phishing' },
+      { id:'o-4', title:'Calendar Basics',               type:'reading',     minutes:3 }
+    ] },
+  { id:'onedrive', iconKey:'cloud', color:'#0078d4',
+    title:'OneDrive & SharePoint',
+    blurb:'Where company files live. How to share without leaking.',
+    lessons:[
+      { id:'d-1', title:'OneDrive vs. Desktop',      type:'reading',     minutes:3 },
+      { id:'d-2', title:'Sharing a File Safely',     type:'interactive', minutes:5, simKey:'share' },
+      { id:'d-3', title:'Version History Saved You', type:'reading',     minutes:2 }
+    ] },
+  { id:'teams', iconKey:'messages-square', color:'#5b5fc7',
+    title:'Microsoft Teams',
+    blurb:'Status, chat vs. channel, joining meetings without panic.',
+    preview:true,
+    lessons:[
+      { id:'t-1', title:'Reading Status Dots',             type:'reading', minutes:2 },
+      { id:'t-2', title:'Chat vs. Channel',                type:'reading', minutes:3 },
+      { id:'t-3', title:'Join a Meeting (Step-by-Step)',   type:'reading', minutes:4 }
+    ] },
+  { id:'office', iconKey:'file-text', color:'#185abd',
+    title:'Office Web Apps',
+    blurb:'Word, Excel, PowerPoint in the browser. When to use desktop instead.',
+    preview:true,
+    lessons:[
+      { id:'f-1', title:'Open from OneDrive',     type:'reading', minutes:2 },
+      { id:'f-2', title:'Co-Authoring Etiquette', type:'reading', minutes:3 },
+      { id:'f-3', title:'Web vs. Desktop App',    type:'reading', minutes:2 }
+    ] },
+  { id:'security', iconKey:'shield-check', color:'#107c10',
+    title:'Security & MFA',
+    blurb:'Authenticator app, phishing report button, password manager.',
+    preview:true,
+    lessons:[
+      { id:'s-1', title:'Microsoft Authenticator', type:'reading', minutes:3 },
+      { id:'s-2', title:'The Report Button',       type:'reading', minutes:2 },
+      { id:'s-3', title:'Password Hygiene',        type:'reading', minutes:3 }
+    ] }
+];
+
+// ============================================================================
+// LESSON CONTENT (reading lessons)
+// ============================================================================
+const LESSON_CONTENT = {
+  'w-1': { sections:[
+    { h:'The Lock Screen', b:'Press any key or click the screen to wake it. Type your password (or PIN). If you see a Microsoft Authenticator prompt on your phone, approve it.' },
+    { h:'If MFA fires unexpectedly', b:'If you get an Authenticator notification but you DID NOT just sign in, tap DENY. Then tell Joseph immediately. Someone has your password.' },
+    { h:'Lock when you walk away', b:'Press Windows key + L every time you leave the desk. Even for the bathroom. Especially with visitors in the lobby.' }
+  ], tip:'Win key + L is the most important keyboard shortcut you will use this year.' },
+  'w-4': { sections:[
+    { h:'The taskbar search box', b:'Click the magnifying glass on the taskbar (or press Win key, then start typing). Search finds apps, settings, and files in one box.' },
+    { h:'Three search tricks', b:'(1) Type the app name and press Enter to launch. (2) Type a setting name like "printer" to jump to it. (3) Type a filename to find a document on this PC or in OneDrive.' },
+    { h:'When search fails', b:'If a file does not appear in search, it may not be indexed yet. Open File Explorer and search from inside the folder where you expect it.' }
+  ], tip:'Win key alone opens Start. Win key + S opens search directly. Same result either way.' },
+  'o-2': { sections:[
+    { h:'Reply vs. Reply All', b:'Reply sends your message to the sender only. Reply All sends it to the sender plus everyone on the To and Cc lines. Reply All is how careers end. Read the recipient list before clicking.' },
+    { h:'BCC exists for a reason', b:'When introducing two parties, put the person you are stepping back from in BCC. They get the email, but later replies do not loop them in. Useful for moving introductions forward.' },
+    { h:'Attachments belong in OneDrive', b:'For company files, share a OneDrive link instead of attaching the file. The link always points to the latest version. The attachment goes stale the second you click send.' },
+    { h:'Subject lines do work', b:'Good: "Action needed: ICD Church BOL signature by Friday." Bad: "Hey question." The first one tells Owner if he can wait. The second forces him to open it.' }
+  ], tip:"Before clicking Reply All, count the recipients. If it's more than 4, ask yourself who actually needs this." },
+  'o-4': { sections:[
+    { h:'Booking a meeting', b:'New Event &rarr; enter title, attendees, time. The Scheduling Assistant tab shows everyone\'s availability as colored bars. Pick a slot where every bar is white.' },
+    { h:'Teams Meeting toggle', b:'When the meeting needs a video link, flip "Teams Meeting" on. Outlook adds the join link automatically. Do not paste old Zoom links from elsewhere.' },
+    { h:'Categories color-code your day', b:'Right-click an event &rarr; Categorize &rarr; assign a color. Yellow for visitors. Red for client deadlines. Green for shop walks. Glance and you know your day.' }
+  ], tip:'Block your lunch on the calendar. Otherwise people will book you over it.' },
+  'd-1': { sections:[
+    { h:'OneDrive is the company\'s desk', b:'Anything you save in your OneDrive folder is automatically backed up and accessible from any device. Anything you save to "Desktop" or "Downloads" exists only on this one computer. If the computer dies, those files die with it.' },
+    { h:'The rule', b:'Company business &rarr; OneDrive. Personal stuff &rarr; not on this computer at all.' },
+    { h:'Look for the cloud icon', b:'In File Explorer, OneDrive folders have a small cloud icon. A green check means the file is downloaded locally and synced. A blue cloud means it is in the cloud only (downloads when you open it).' }
+  ], tip:'If a coworker asks for a file and you cannot send a OneDrive link to it, you saved it in the wrong place.' },
+  'd-3': { sections:[
+    { h:'You overwrote the bid. Do not panic.', b:'In OneDrive web, right-click the file &rarr; "Version history". You will see every save going back days or weeks. Click any version &rarr; "Restore". Done.' },
+    { h:'This works for Word, Excel, PowerPoint too', b:'Open the file in Office web &rarr; File &rarr; Info &rarr; Version History. Same outcome. Good for "I deleted that paragraph two hours ago and I want it back."' }
+  ], tip:'You cannot break a OneDrive file. The system keeps every version. Stop being scared of Save.' },
+  't-1': { sections:[
+    { h:'Status dots in Teams', b:'Green = available. Yellow = away. Red = busy or in a meeting (do not interrupt). Red with a white bar = Do Not Disturb (urgent only). Purple = out of office.' },
+    { h:'Set your own status', b:'Click your profile picture top right &rarr; set status. Use "Do Not Disturb" when you are on the phone with a client. Use "Be right back" for a quick errand.' }
+  ], tip:'A red Mario means he is welding. Do not call him. Walk over.' },
+  't-2': { sections:[
+    { h:'Chat = private', b:'Direct messages between you and one or a few people. Like texting. Conversations are private to those people.' },
+    { h:'Channel = team', b:'Posts in a channel are visible to everyone on that team. Use channels for project discussion (the ICD Church channel, the Marathon prep channel). Use chat for one-off questions.' },
+    { h:'Wrong choice = leaks or noise', b:"Putting a confidential pricing question in a channel means everyone sees it. Putting a project update in a chat means the project team can't find it later. Pick the right one." }
+  ], tip:'When in doubt, ask yourself: would I want this in tomorrow\'s search results?' },
+  't-3': { sections:[
+    { h:'Five minutes before', b:'Click the meeting in your calendar &rarr; Join. Camera off, mic muted to start.' },
+    { h:'Pick your audio', b:'Computer audio (use the laptop mic and speakers) or Phone audio (Teams calls your number). Computer audio is fine in the office. Use phone audio if Wi-Fi is shaky.' },
+    { h:'Unmute to speak. Mute when you are not speaking', b:'Even a quiet room creates background noise on a call. Default state is muted. Unmute, speak, mute again. Spacebar held down = push-to-talk.' }
+  ], tip:'If your camera is on, check what\'s behind you. The shop door open with sparks flying is not the look.' },
+  'f-1': { sections:[
+    { h:'Open from OneDrive web', b:'Go to onedrive.live.com (or click the OneDrive cloud icon in the taskbar). Click any Word, Excel, or PowerPoint file. It opens in the browser.' },
+    { h:'Edit in browser or app', b:'The browser version has 90% of the features. For complex Excel formulas or formatting-heavy Word docs, click "Editing" &rarr; "Open in Desktop App".' }
+  ], tip:'The browser version saves automatically every few seconds. There is no Save button. Stop looking for one.' },
+  'f-2': { sections:[
+    { h:'Multiple people, same file', b:'When two people have the same Office file open, you both see colored cursors showing where the other person is typing. Edits sync within seconds.' },
+    { h:'Do not fight the cursor', b:'If you see Owner\'s cursor in a paragraph, do not edit that paragraph. Work elsewhere in the document. When his cursor moves, the paragraph is yours.' },
+    { h:'Comments are conversations', b:'Right-click &rarr; New comment to leave a note for the next person. They can reply. Useful for "Owner, please confirm pricing in section 3."' }
+  ], tip:'Track Changes is for legal docs. Comments are for everything else.' },
+  'f-3': { sections:[
+    { h:'Use the web app for', b:'Quick edits. Documents you opened from email or Teams. Reading reference material. Anything where you do not need pivot tables, mail merge, or macros.' },
+    { h:'Use the desktop app for', b:'Heavy spreadsheets (Solopreneur Suite tools live in OneDrive but open in desktop Excel for full functionality). Long Word docs with custom styles. Presentations going to a client.' }
+  ], tip:'Both apps save to the same OneDrive file. You can switch between them.' },
+  's-1': { sections:[
+    { h:'Microsoft Authenticator on your phone', b:'When you sign in to anything Microsoft (M365, Outlook, OneDrive), the Authenticator app on your phone gets a notification. You tap "Approve" to confirm it is really you.' },
+    { h:'If you DID NOT just sign in', b:'Tap DENY immediately. Tell Joseph. Someone has your password and they are trying to get past MFA. Joseph will reset your password and check sign-in logs.' },
+    { h:'Number matching', b:'Sometimes the prompt shows a number you have to type. The number is on the screen where you are signing in. If the numbers do not match, deny it.' }
+  ], tip:'Authenticator pings are a heartbeat. Pay attention to every one.' },
+  's-2': { sections:[
+    { h:'The Report button is built into Outlook', b:'When a phishing email lands in your inbox, do not just delete it. Click "Report" in the toolbar (or right-click the email &rarr; Report). Choose "Report Phishing".' },
+    { h:'What that does', b:'It tells Microsoft so they can train their filters and block the sender for everyone. It also tells Joseph so we know what attacks are aimed at us.' },
+    { h:'When in doubt, report', b:'If you are unsure whether something is phishing, report it. False positives are fine. Missed phishing is not.' }
+  ], tip:'Reporting takes one click. Recovering from a clicked phishing link takes one weekend.' },
+  's-3': { sections:[
+    { h:'One password per service', b:'Never reuse passwords across sites. If one site gets breached, attackers try those credentials everywhere else.' },
+    { h:'Use a password manager', b:'Edge has one built in. Save passwords there, sync them across devices (signed in to your work account). Long randomized passwords are safer than memorable ones.' },
+    { h:'Phrases beat words', b:'A passphrase like "BlueSteelHoustonCoffee2026!" is easier to remember and harder to crack than "Texas123!".' }
+  ], tip:'If you can remember your password without trying, it is too short.' }
+};
+
+// ============================================================================
+// PHISH EMAIL DATA
+// ============================================================================
+const PHISH_EMAILS = [
+  { id:'p1', from:'Maria Hernandez', fromAddr:'maria.hernandez@yourcompany.example.com',
+    subject:'Lunch order Friday',
+    preview:'Hey! Putting in the Friday lunch order. Want the usual?',
+    body:'Hey!\n\nPutting in the Friday lunch order. Want the usual? Let me know by Thursday.\n\nMaria',
+    isPhish:false,
+    why:'Internal sender, real domain, normal business chatter, no links, no urgency.' },
+  { id:'p2', from:'Microsoft Account Team', fromAddr:'no-reply@microsft-securty.com',
+    subject:'URGENT: Your Microsoft 365 password expires in 24 hours',
+    preview:'Click here to verify your account or your password will expire and you will lose access.',
+    body:'Dear User,\n\nYour Microsoft 365 password will expire in 24 hours. Click below to verify your account immediately.\n\nVERIFY NOW: http://microsft-securty.com/login\n\nFailure to act will result in permanent account loss.\n\n— Microsoft Account Team',
+    isPhish:true,
+    why:'Look at the sender domain: "microsft-securty.com" (missing letters). Real Microsoft never uses urgency to force a click. Real Microsoft never sends external login links to verify accounts.' },
+  { id:'p3', from:'Joseph Hasse', fromAddr:'joseph@yourcompany.example.com',
+    subject:'Re: Texas Mutual EMR',
+    preview:'Got the letter today. Forwarded to Owner. Will update Marathon submission tonight.',
+    body:'Got the letter today. Forwarded to Owner. Will update Marathon submission tonight.\n\nJ',
+    isPhish:false,
+    why:'Internal sender. Topic matches a real ongoing thread. No links, no attachments, no panic.' },
+  { id:'p4', from:'The Owner', fromAddr:'owner.owner@nan0cubeusa.com',
+    subject:'Need a quick favor — wire transfer',
+    preview:'I am stuck in a meeting. Can you wire $4,750 to a vendor? I will explain later.',
+    body:'I\'m stuck in a meeting and cannot talk. Need you to wire $4,750 to a new vendor for me — urgent. I\'ll send wire details in a moment. Do not call my cell, just confirm by reply.\n\n— Matt',
+    isPhish:true,
+    why:'CEO impersonation scam. Domain is "nan0cubeusa" (zero, not letter o). Pressure to act, urgency, no-phone instruction, money request. Classic Business Email Compromise. If a real wire request EVER comes by email, walk to the CEO\'s office to confirm. No exceptions.' }
+];
+
+// ============================================================================
+// TASKBAR ITEMS (for w-2)
+// ============================================================================
+const TASKBAR_ITEMS = [
+  { id:'start',   icon:'⊞', label:'Start',         desc:'Opens the Start menu. Or press the Windows key.' },
+  { id:'search',  icon:'🔍', label:'Search',        desc:'Search for apps, settings, or files. Win+S.' },
+  { id:'task',    icon:'🪟', label:'Task View',     desc:'See all open windows. Win+Tab.' },
+  { id:'edge',    icon:'🌐', label:'Edge',          desc:'Browser. Default for office.com and OneDrive.' },
+  { id:'fileexp', icon:'📁', label:'File Explorer', desc:'Browse files on this PC and OneDrive.' },
+  { id:'outlook', icon:'📧', label:'Outlook',       desc:'Email and calendar.' },
+  { id:'teams',   icon:'👥', label:'Teams',         desc:'Chat, calls, meetings.' }
+];
+
+// ============================================================================
+// INBOX HOTSPOTS (for o-1)
+// ============================================================================
+const INBOX_HOTSPOTS = {
+  folders: { label:'Folder list',        desc:'Inbox, Sent Items, Drafts, Junk, plus any custom folders. "Bids to sort" lives here.' },
+  list:    { label:'Message list',       desc:'Subject, sender, preview, and time. Bold means unread.' },
+  reading: { label:'Reading pane',       desc:'The selected email is shown here. Faster than double-clicking to open.' },
+  flag:    { label:'Flag for follow-up', desc:'Click the flag to mark an email for follow-up. They appear in Tasks/To-Do.' },
+  pin:     { label:'Pin to top',         desc:'Pin keeps an email at the top of the list. Use for active threads.' },
+  search:  { label:'Search bar',         desc:'Search across folders. "from:owner" only shows mail from Owner.' }
+};
+
+// ============================================================================
+// STATE
+// ============================================================================
+var state = {
+  view: 'home',          // 'home' | 'category:<id>' | 'lesson:<lessonId>'
+  completed: {},         // lessonId -> true
+
+  // File Explorer Sim
+  fxStep: 0, fxCtxOpen: false, fxSubOpen: false, fxFolderCreated: false,
+  fxFolderName: '', fxEditing: false, fxFeedback: null, fxShake: false,
+
+  // Phishing Sim
+  phishOpenId: null, phishShowSender: {}, phishMarked: {}, phishSubmitted: false,
+
+  // Taskbar Tour
+  taskbarHovered: null,
+
+  // Inbox Anatomy
+  inboxHot: null,
+
+  // Share Walkthrough
+  shareStep: 0
+};
+
+// ============================================================================
+// HELPERS
+// ============================================================================
+function escapeHtml(str) {
+  if (str == null) return '';
+  return String(str).replace(/[&<>"']/g, function(c) {
+    return ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[c];
+  });
+}
+function passHtml(str) { return str || ''; } // for content pre-encoded with &rarr; etc.
+function getCategory(id) { for (var i=0;i<CATEGORIES.length;i++) if (CATEGORIES[i].id===id) return CATEGORIES[i]; return null; }
+function getLesson(id) {
+  for (var i=0;i<CATEGORIES.length;i++) {
+    var c = CATEGORIES[i];
+    for (var j=0;j<c.lessons.length;j++) if (c.lessons[j].id===id) return { lesson:c.lessons[j], cat:c, idx:j };
+  }
+  return null;
+}
+function totalLessons() { return CATEGORIES.reduce(function(a,c){ return a + c.lessons.length; }, 0); }
+function completedCount() { return Object.keys(state.completed).length; }
+
+// ============================================================================
+// RENDER: LAB HOME
+// ============================================================================
+function renderLabHome() {
+  var done = completedCount();
+  var html = '';
+
+  // Hero
+  html += '<div class="lab-hero">';
+  html += '<div class="hero-grid"></div><div class="hero-glow"></div>';
+  html += '<div class="lab-hero-inner">';
+  html += '<p class="lab-eyebrow">Your Company &middot; Computer Lab</p>';
+  html += '<h1 class="lab-h1">Windows 11 + <span class="accent">Microsoft 365</span></h1>';
+  html += '<p class="lab-blurb">Six categories, hands-on simulations, real click paths. The same approach TestOut uses for IT certification labs, scaled to what you actually do at the front desk.</p>';
+  html += '<div class="lab-stats">';
+  var stats = [
+    ['6', 'Categories'],
+    [String(totalLessons()), 'Lessons'],
+    ['2', 'Sims'],
+    [String(done), 'Done']
+  ];
+  for (var i=0;i<stats.length;i++) {
+    html += '<div class="lab-stat"><p class="lab-stat-num">' + stats[i][0] + '</p><p class="lab-stat-lbl">' + stats[i][1] + '</p></div>';
+  }
+  html += '</div></div></div>';
+
+  // Categories grid
+  html += '<div class="cat-grid">';
+  for (var c=0;c<CATEGORIES.length;c++) {
+    var cat = CATEGORIES[c];
+    var doneInCat = 0;
+    for (var l=0;l<cat.lessons.length;l++) if (state.completed[cat.lessons[l].id]) doneInCat++;
+    var totalInCat = cat.lessons.length;
+    var allDone = doneInCat === totalInCat;
+    var pct = totalInCat ? (doneInCat / totalInCat) * 100 : 0;
+
+    html += '<button class="cat-card' + (allDone ? ' is-done' : '') + '" data-action="open-cat" data-cat-id="' + cat.id + '">';
+    html += '<div class="cat-stripe" style="background:' + cat.color + ';"></div>';
+    html += '<div class="cat-inner">';
+    html += '<div class="cat-top">';
+    html += '<div class="cat-icon-tile" style="background:' + cat.color + ';">' + icon(cat.iconKey, 22, '#fff') + '</div>';
+    if (cat.preview) html += '<span class="cat-preview-tag">Preview</span>';
+    else if (allDone) html += icon('check', 18, '#10b981');
+    html += '</div>';
+    html += '<h3>' + escapeHtml(cat.title) + '</h3>';
+    html += '<p class="cat-card-blurb">' + escapeHtml(cat.blurb) + '</p>';
+    html += '<div class="cat-card-foot">';
+    html += '<span>' + doneInCat + '/' + totalInCat + ' lessons</span>';
+    html += '<div class="cat-progress-track"><div class="cat-progress-fill" style="width:' + pct + '%;"></div></div>';
+    html += '</div>';
+    html += '</div></button>';
+  }
+  html += '</div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: CATEGORY VIEW
+// ============================================================================
+function renderCategory(cat) {
+  var html = '';
+  html += '<button class="cat-back-btn" data-action="back-home">' + icon('arrow-left', 13) + ' Back to lab home</button>';
+
+  html += '<div class="cat-header">';
+  html += '<div class="cat-header-inner">';
+  html += '<div class="cat-header-icon" style="background:' + cat.color + ';">' + icon(cat.iconKey, 28, '#fff') + '</div>';
+  html += '<div>';
+  html += '<p class="cat-header-eyebrow" style="color:' + cat.color + ';">Category</p>';
+  html += '<h2 class="cat-header-title">' + escapeHtml(cat.title) + '</h2>';
+  html += '<p class="cat-header-blurb">' + escapeHtml(cat.blurb) + '</p>';
+  html += '</div></div></div>';
+
+  // Lesson list
+  html += '<div class="lesson-list">';
+  for (var i=0;i<cat.lessons.length;i++) {
+    var l = cat.lessons[i];
+    var isDone = !!state.completed[l.id];
+    var prevDone = i === 0 || !!state.completed[cat.lessons[i-1].id];
+    var locked = !isDone && !prevDone;
+    var current = !isDone && prevDone;
+
+    var rowCls = 'lesson-row';
+    if (isDone) rowCls += ' is-done';
+    if (locked) rowCls += ' is-locked';
+
+    var tileCls = 'lesson-num-tile';
+    if (isDone) tileCls += ' is-done';
+    else if (current) tileCls += ' is-current';
+    else tileCls += ' is-pending';
+
+    var typeLabel, typeColor;
+    if (l.type === 'reading')      { typeLabel = 'Reading';     typeColor = '#71717a'; }
+    else if (l.type === 'sim')     { typeLabel = 'Simulation';  typeColor = '#fbbf24'; }
+    else /* interactive */         { typeLabel = 'Interactive'; typeColor = '#22d3ee'; }
+
+    html += '<button class="' + rowCls + '"';
+    if (!locked) html += ' data-action="open-lesson" data-lesson-id="' + l.id + '"';
+    if (locked) html += ' disabled';
+    html += '>';
+    html += '<div class="' + tileCls + '">';
+    if (locked)      html += icon('lock', 14);
+    else if (isDone) html += icon('check', 18);
+    else             html += String(i + 1);
+    html += '</div>';
+    html += '<div class="lesson-row-meta">';
+    html += '<p class="lesson-row-title">' + escapeHtml(l.title) + '</p>';
+    html += '<p class="lesson-row-tag" style="color:' + typeColor + ';">' + typeLabel + ' &middot; ~' + l.minutes + ' min</p>';
+    html += '</div>';
+    if (!locked) html += icon('arrow-right', 16, '#71717a');
+    html += '</button>';
+  }
+  html += '</div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: LESSON (reading / interactive / sim dispatcher)
+// ============================================================================
+function renderLesson(lesson, cat, idx) {
+  // Sim or interactive — delegate
+  if (lesson.type === 'sim') {
+    if (lesson.simKey === 'fileExplorer') return renderFileExplorerSim(lesson, cat);
+    if (lesson.simKey === 'phishing')     return renderPhishingSim(lesson, cat);
+  }
+  if (lesson.type === 'interactive') {
+    if (lesson.simKey === 'taskbar') return renderTaskbarLesson(lesson, cat);
+    if (lesson.simKey === 'inbox')   return renderInboxLesson(lesson, cat);
+    if (lesson.simKey === 'share')   return renderShareLesson(lesson, cat);
+  }
+  // Default: reading lesson
+  return renderReadingLesson(lesson, cat);
+}
+
+function renderReadingLesson(lesson, cat) {
+  var content = LESSON_CONTENT[lesson.id] || { sections:[], tip:'' };
+  var html = '';
+  html += '<button class="cat-back-btn" data-action="back-cat" data-cat-id="' + cat.id + '">' + icon('arrow-left', 13) + ' Back to ' + escapeHtml(cat.title) + '</button>';
+
+  html += '<div class="lesson-card">';
+  html += '<div class="lesson-card-header ' + cat.id + '">';
+  html += '<div class="lesson-icon-tile">' + icon(cat.iconKey, 26, '#fff') + '</div>';
+  html += '<div><p class="lesson-card-eyebrow">' + escapeHtml(cat.title) + ' &middot; ~' + lesson.minutes + ' min</p>';
+  html += '<h2 class="lesson-card-title">' + escapeHtml(lesson.title) + '</h2></div>';
+  html += '</div>';
+  html += '<div class="lesson-card-body">';
+  for (var i=0;i<content.sections.length;i++) {
+    var s = content.sections[i];
+    html += '<div class="lesson-section">';
+    html += '<h3>' + escapeHtml(s.h) + '</h3>';
+    html += '<p>' + passHtml(s.b) + '</p>';
+    html += '</div>';
+  }
+  if (content.tip) {
+    html += '<div class="tip-box">';
+    html += '<p class="tip-eyebrow">Joseph\'s tip</p>';
+    html += '<p class="tip-body">' + passHtml(content.tip) + '</p>';
+    html += '</div>';
+  }
+  html += '<button class="complete-btn" data-action="complete-lesson" data-lesson-id="' + lesson.id + '">';
+  html += 'Mark complete ' + icon('arrow-right', 16, '#000');
+  html += '</button>';
+  html += '</div></div>';
+  return html;
+}
+
+// ============================================================================
+// SIM CHROME WRAPPER
+// ============================================================================
+function renderSimChrome(opts) {
+  // opts: { cat, lesson, title, step, totalSteps, stepsLabel, goal, feedback, body, isDone, doneMessage }
+  var html = '';
+  html += '<button class="cat-back-btn" data-action="back-cat" data-cat-id="' + opts.cat.id + '">' + icon('arrow-left', 13) + ' Back to ' + escapeHtml(opts.cat.title) + '</button>';
+
+  html += '<div class="sim-bar">';
+  html += '<div class="sim-bar-row">';
+  html += '<div><p class="sim-eyebrow">Simulation &middot; ' + (opts.stepsLabel || 'Step') + ' ' + opts.step + '/' + opts.totalSteps + '</p>';
+  html += '<h3 class="sim-title">' + escapeHtml(opts.title) + '</h3></div>';
+  html += '<button class="sim-reset-btn" data-action="sim-reset" data-sim-key="' + opts.simKey + '">' + icon('rotate-ccw', 11) + ' Reset</button>';
+  html += '</div>';
+
+  html += '<div class="sim-goal">' + icon('sparkles', 14, '#fbbf24');
+  html += '<span class="sim-goal-text">' + escapeHtml(opts.goal) + '</span></div>';
+
+  if (opts.feedback) {
+    var fbCls = opts.feedback.type === 'ok' ? 'sim-feedback ok' : 'sim-feedback error';
+    html += '<div class="' + fbCls + '">';
+    html += opts.feedback.type === 'ok' ? icon('check', 14) : icon('triangle-alert', 14);
+    html += '<span>' + escapeHtml(opts.feedback.msg) + '</span></div>';
+  }
+  html += '</div>';
+
+  html += '<div class="sim-viewport">' + opts.body + '</div>';
+
+  if (opts.isDone) {
+    html += '<div class="sim-done-banner">';
+    html += '<div class="sim-done-row">' + icon('award', 20, '#34d399');
+    html += '<h4 class="sim-done-h">Lab complete</h4></div>';
+    html += '<p class="sim-done-msg">' + escapeHtml(opts.doneMessage) + '</p>';
+    html += '<div class="sim-done-actions">';
+    html += '<button class="sim-mark-complete-btn" data-action="complete-lesson" data-lesson-id="' + opts.lesson.id + '">Mark Complete ' + icon('arrow-right', 16, '#000') + '</button>';
+    html += '<button class="sim-run-again-btn" data-action="sim-reset" data-sim-key="' + opts.simKey + '">' + icon('rotate-ccw', 11) + ' Run again</button>';
+    html += '</div></div>';
+  }
+  return html;
+}
+
+// ============================================================================
+// SIM 1: FILE EXPLORER (w-3)
+// ============================================================================
+function renderFileExplorerSim(lesson, cat) {
+  var STEPS = [
+    'Right-click on the empty white space inside Documents.',
+    'Click "New" in the menu that appeared.',
+    'Click "Folder" in the submenu.',
+    'Type "Visitors" (exact spelling) and press Enter.'
+  ];
+  var isDone = state.fxStep >= STEPS.length;
+  var goal = isDone ? 'Complete!' : STEPS[state.fxStep];
+
+  var body = '';
+  body += '<div class="fx-window' + (state.fxShake ? ' shake' : '') + '">';
+  body += '<div class="fx-titlebar">';
+  body += '<div style="display:flex;align-items:center;gap:8px;">' + icon('folder', 14, '#fbbf24') + '<span>Documents</span></div>';
+  body += '<div style="display:flex;gap:12px;color:#666;font-size:12px;"><span>—</span><span>□</span><span>×</span></div>';
+  body += '</div>';
+  body += '<div class="fx-toolbar"><span>+ New</span><span>⤴ Cut</span><span>⧉ Copy</span><span>↻ Rename</span></div>';
+  body += '<div class="fx-addressbar">';
+  body += icon('arrow-left', 14, '#666') + icon('arrow-right', 14, '#ccc');
+  body += '<span class="fx-addr-text">This PC › Documents</span>';
+  body += icon('search', 14, '#666');
+  body += '</div>';
+  body += '<div class="fx-body-row">';
+
+  body += '<div class="fx-sidebar"><div class="fx-sidebar-head">QUICK ACCESS</div>';
+  var sidebar = [['Desktop', false],['Documents', true],['Downloads', false],['Pictures', false],['OneDrive – Your Company', false]];
+  for (var i=0;i<sidebar.length;i++) {
+    body += '<div class="fx-sidebar-item' + (sidebar[i][1] ? ' active' : '') + '">';
+    body += icon('folder', 12, sidebar[i][1] ? '#0067c0' : '#fbbf24');
+    body += '<span>' + escapeHtml(sidebar[i][0]) + '</span></div>';
+  }
+  body += '</div>';
+
+  body += '<div class="fx-main" data-action="fx-empty-area">';
+  body += '<div class="fx-files">';
+  var files = [
+    { n:'Bid_ICD_Church.pdf', e:'📄' },
+    { n:'Marathon_RAVS.docx', e:'📝' },
+    { n:'Photos',             e:'📁' }
+  ];
+  for (var f=0;f<files.length;f++) {
+    body += '<div class="fx-file" data-action="fx-file-click" data-file-name="' + escapeHtml(files[f].n) + '">';
+    body += '<div class="fx-file-emoji">' + files[f].e + '</div>';
+    body += '<div class="fx-file-name">' + escapeHtml(files[f].n) + '</div>';
+    body += '</div>';
+  }
+  if (state.fxFolderCreated) {
+    body += '<div style="width:78px;text-align:center;padding:6px;">';
+    body += '<div style="margin:0 auto;">' + icon('folder', 42, '#fbbf24') + '</div>';
+    if (state.fxEditing) {
+      body += '<input type="text" class="fx-folder-name-input" id="fx-name-input" value="' + escapeHtml(state.fxFolderName) + '" placeholder="New folder" />';
+    } else {
+      body += '<div style="font-size:11px;color:#000;margin-top:4px;font-weight:600;">' + escapeHtml(state.fxFolderName) + '</div>';
+    }
+    body += '</div>';
+  }
+  body += '</div>';
+
+  if (state.fxStep === 0 && !state.fxCtxOpen) {
+    body += '<div class="fx-hint">Right-click the white area</div>';
+  }
+
+  if (state.fxCtxOpen) {
+    body += '<div class="fx-context-menu">';
+    body += '<div class="fx-ctx-item disabled">View</div>';
+    body += '<div class="fx-ctx-item disabled">Sort by</div>';
+    body += '<div class="fx-ctx-item disabled">Refresh</div>';
+    body += '<div class="fx-ctx-divider"></div>';
+    var newCls = 'fx-ctx-item' + (state.fxStep === 1 ? ' pulse' : '');
+    body += '<div class="' + newCls + '" data-action="fx-new-click">';
+    body += '<span>New</span>' + icon('chevron-right', 12, '#000');
+    body += '</div>';
+    body += '<div class="fx-ctx-item disabled">Properties</div>';
+
+    if (state.fxSubOpen) {
+      body += '<div class="fx-submenu">';
+      var folderCls = 'fx-ctx-item' + (state.fxStep === 2 ? ' pulse' : '');
+      body += '<div class="' + folderCls + '" data-action="fx-folder-click">';
+      body += icon('folder-plus', 12, '#fbbf24') + '<span>Folder</span>';
+      body += '</div>';
+      var subItems = ['Shortcut', 'Word Document', 'Excel Workbook', 'Text Document'];
+      for (var s=0;s<subItems.length;s++) body += '<div class="fx-ctx-item disabled">' + subItems[s] + '</div>';
+      body += '</div>';
+    }
+    body += '</div>';
+  }
+  body += '</div></div></div>';
+
+  return renderSimChrome({
+    cat: cat,
+    lesson: lesson,
+    simKey: 'fileExplorer',
+    title: 'Lab: Create the Visitors folder',
+    step: isDone ? STEPS.length : state.fxStep + 1,
+    totalSteps: STEPS.length,
+    goal: goal,
+    feedback: state.fxFeedback,
+    body: body,
+    isDone: isDone,
+    doneMessage: 'You created and named a folder using right-click. This is the foundation. Same exact pattern works on the Desktop and inside any other folder.'
+  });
+}
+
+// ============================================================================
+// SIM 2: PHISHING (o-3)
+// ============================================================================
+function renderPhishingSim(lesson, cat) {
+  var openEmail = null;
+  for (var i=0;i<PHISH_EMAILS.length;i++) if (PHISH_EMAILS[i].id === state.phishOpenId) openEmail = PHISH_EMAILS[i];
+  var markedCount = 0;
+  for (var k in state.phishMarked) if (state.phishMarked[k]) markedCount++;
+  var unmarkedCount = PHISH_EMAILS.length - markedCount;
+
+  var correctPhish = true, noFalsePositive = true;
+  for (var p=0;p<PHISH_EMAILS.length;p++) {
+    var em = PHISH_EMAILS[p];
+    if (em.isPhish && !state.phishMarked[em.id]) correctPhish = false;
+    if (!em.isPhish && state.phishMarked[em.id]) noFalsePositive = false;
+  }
+  var allRight = state.phishSubmitted && correctPhish && noFalsePositive;
+
+  var body = '';
+  body += '<div class="phish-window">';
+  body += '<div class="phish-header"><span style="font-weight:600;">Outlook — Inbox</span><span>assistant@yourcompany.example.com</span></div>';
+  body += '<div class="phish-row">';
+
+  body += '<div class="phish-list">';
+  for (var e=0;e<PHISH_EMAILS.length;e++) {
+    var em = PHISH_EMAILS[e];
+    var isOpen = state.phishOpenId === em.id;
+    var isMarked = !!state.phishMarked[em.id];
+    var liCls = 'phish-list-item';
+    if (isOpen)   liCls += ' is-open';
+    if (isMarked) liCls += ' is-marked';
+    body += '<div class="' + liCls + '" data-action="phish-open" data-email-id="' + em.id + '">';
+    body += '<div class="phish-from-row">';
+    body += '<span class="phish-from">' + escapeHtml(em.from) + '</span>';
+    if (state.phishSubmitted) {
+      if (em.isPhish === isMarked) body += icon('check', 13, '#10b981');
+      else                          body += icon('x', 13, '#ef4444');
+    }
+    body += '</div>';
+    body += '<div class="phish-subject">' + escapeHtml(em.subject) + '</div>';
+    body += '<div class="phish-preview">' + escapeHtml(em.preview) + '</div>';
+    body += '</div>';
+  }
+  body += '</div>';
+
+  body += '<div class="phish-body">';
+  if (!openEmail) {
+    body += '<div class="phish-empty">' + icon('inbox', 36, '#ccc') + '<div style="margin-top:12px;">Select an email to read.</div></div>';
+  } else {
+    body += '<div class="phish-subj">' + escapeHtml(openEmail.subject) + '</div>';
+    body += '<div class="phish-sender-row">';
+    body += '<div class="phish-avatar">' + escapeHtml(openEmail.from[0]) + '</div>';
+    body += '<div style="flex:1;"><div class="phish-sender-name">' + escapeHtml(openEmail.from) + '</div>';
+    var isShown = !!state.phishShowSender[openEmail.id];
+    var revealCls = 'phish-reveal' + (isShown ? ' is-shown' : '');
+    body += '<div class="' + revealCls + '" data-action="phish-reveal-toggle" data-email-id="' + openEmail.id + '">';
+    body += isShown ? '&lsaquo;' + escapeHtml(openEmail.fromAddr) + '&rsaquo;' : 'tap to reveal sender address';
+    body += '</div></div>';
+    var markCls = 'phish-mark-btn' + (state.phishMarked[openEmail.id] ? ' is-marked' : '');
+    body += '<button class="' + markCls + '" data-action="phish-mark" data-email-id="' + openEmail.id + '"' + (state.phishSubmitted ? ' disabled' : '') + '>';
+    body += icon('mail-warning', 12) + '<span>' + (state.phishMarked[openEmail.id] ? 'Marked Phish' : 'Mark as Phish') + '</span></button>';
+    body += '</div>';
+    body += '<div class="phish-content">' + escapeHtml(openEmail.body) + '</div>';
+    if (state.phishSubmitted) {
+      var explainCls = 'phish-explain ' + (openEmail.isPhish ? 'is-phish' : 'is-legit');
+      body += '<div class="' + explainCls + '">';
+      body += '<strong>' + (openEmail.isPhish ? 'PHISHING' : 'LEGIT') + ':</strong> ' + escapeHtml(openEmail.why);
+      body += '</div>';
+    }
+  }
+  body += '</div>';
+  body += '</div>';
+
+  body += '<div class="phish-submit-bar">';
+  body += '<span class="phish-submit-bar-left">Marked ' + markedCount + ' of 2 phish &middot; ' + unmarkedCount + ' unmarked</span>';
+  if (!state.phishSubmitted) {
+    body += '<button class="phish-submit-btn" data-action="phish-submit">Submit Answers</button>';
+  } else if (!allRight) {
+    body += '<button class="phish-try-btn" data-action="phish-reset">' + icon('rotate-ccw', 12) + ' Try again</button>';
+  } else {
+    body += '<span style="font-family:\'JetBrains Mono\',monospace;font-size:11px;color:#10b981;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;">All correct</span>';
+  }
+  body += '</div>';
+  body += '</div>';
+
+  if (!state.phishSubmitted) {
+    body += '<p class="phish-tip">Tip: tap the small "reveal sender" link to see the real From: address. That\'s where most phishing falls apart.</p>';
+  }
+
+  return renderSimChrome({
+    cat: cat,
+    lesson: lesson,
+    simKey: 'phishing',
+    title: 'Lab: Spot the phishing emails',
+    step: markedCount,
+    totalSteps: 2,
+    stepsLabel: 'Marked',
+    goal: 'Open each email. Tap the sender to see the real address. Mark the phishing emails. There are exactly TWO. Then submit.',
+    feedback: null,
+    body: body,
+    isDone: allRight,
+    doneMessage: 'You found both phish without flagging the safe emails. The two giveaways were the typo domain (microsft-securty) and the zero-for-o domain (nan0cubeusa). These are 90% of real-world phish.'
+  });
+}
+
+// ============================================================================
+// INTERACTIVE: TASKBAR TOUR (w-2)
+// ============================================================================
+function renderTaskbarLesson(lesson, cat) {
+  var html = '';
+  html += '<button class="cat-back-btn" data-action="back-cat" data-cat-id="' + cat.id + '">' + icon('arrow-left', 13) + ' Back to ' + escapeHtml(cat.title) + '</button>';
+
+  html += '<div class="lesson-card">';
+  html += '<div class="lesson-card-header ' + cat.id + '">';
+  html += '<div class="lesson-icon-tile">' + icon(cat.iconKey, 26, '#fff') + '</div>';
+  html += '<div><p class="lesson-card-eyebrow">' + escapeHtml(cat.title) + ' &middot; ~' + lesson.minutes + ' min</p>';
+  html += '<h2 class="lesson-card-title">' + escapeHtml(lesson.title) + '</h2></div>';
+  html += '</div>';
+  html += '<div class="lesson-card-body">';
+
+  html += '<div class="taskbar-stage">';
+  html += '<p class="taskbar-help-text">Tap any taskbar icon to learn it</p>';
+  html += '<div class="taskbar-bar">';
+  for (var i=0;i<TASKBAR_ITEMS.length;i++) {
+    var it = TASKBAR_ITEMS[i];
+    var iconCls = 'taskbar-icon' + (state.taskbarHovered === it.id ? ' is-hovered' : '');
+    html += '<div class="' + iconCls + '" data-action="taskbar-pick" data-tb-id="' + it.id + '">' + it.icon + '</div>';
+  }
+  html += '</div>';
+  html += '<div class="taskbar-tooltip-area">';
+  if (state.taskbarHovered) {
+    var hov = null;
+    for (var t=0;t<TASKBAR_ITEMS.length;t++) if (TASKBAR_ITEMS[t].id === state.taskbarHovered) hov = TASKBAR_ITEMS[t];
+    html += '<div class="taskbar-tooltip">';
+    html += '<p class="taskbar-tooltip-label">' + escapeHtml(hov.label) + '</p>';
+    html += '<p class="taskbar-tooltip-desc">' + escapeHtml(hov.desc) + '</p>';
+    html += '</div>';
+  } else {
+    html += '<p class="taskbar-tooltip-empty">Tap an icon</p>';
+  }
+  html += '</div>';
+  html += '</div>';
+
+  html += '<div class="tip-box" style="margin-top:24px;">';
+  html += '<p class="tip-eyebrow">Joseph\'s tip</p>';
+  html += '<p class="tip-body">The taskbar lives at the bottom. The icons there are your most-used apps. You can pin and unpin by right-clicking. Outlook and Edge stay pinned forever.</p>';
+  html += '</div>';
+
+  html += '<button class="complete-btn" data-action="complete-lesson" data-lesson-id="' + lesson.id + '">';
+  html += 'Mark complete ' + icon('arrow-right', 16, '#000');
+  html += '</button>';
+  html += '</div></div>';
+  return html;
+}
+
+// ============================================================================
+// INTERACTIVE: INBOX ANATOMY (o-1)
+// ============================================================================
+function renderInboxLesson(lesson, cat) {
+  var hot = state.inboxHot;
+  var html = '';
+  html += '<button class="cat-back-btn" data-action="back-cat" data-cat-id="' + cat.id + '">' + icon('arrow-left', 13) + ' Back to ' + escapeHtml(cat.title) + '</button>';
+
+  html += '<div class="lesson-card">';
+  html += '<div class="lesson-card-header ' + cat.id + '">';
+  html += '<div class="lesson-icon-tile">' + icon(cat.iconKey, 26, '#fff') + '</div>';
+  html += '<div><p class="lesson-card-eyebrow">' + escapeHtml(cat.title) + ' &middot; ~' + lesson.minutes + ' min</p>';
+  html += '<h2 class="lesson-card-title">' + escapeHtml(lesson.title) + '</h2></div>';
+  html += '</div>';
+  html += '<div class="lesson-card-body">';
+
+  html += '<div class="inbox-shell">';
+  html += '<p class="inbox-help-text">Tap any highlighted area to learn what it does</p>';
+  html += '<div class="inbox-content">';
+
+  var foldersCls = 'inbox-folders' + (hot === 'folders' ? ' hot' : '');
+  html += '<div class="' + foldersCls + '" data-action="inbox-pick" data-hot-id="folders">';
+  html += '<div class="inbox-folders-head">Folders</div>';
+  var folders = ['Inbox (12)', 'Sent', 'Drafts', 'Junk', 'Bids to sort', 'Bids to Send'];
+  for (var f=0;f<folders.length;f++) {
+    html += '<div class="inbox-folder-row"><span>📁</span>' + escapeHtml(folders[f]) + '</div>';
+  }
+  html += '</div>';
+
+  var listCls = 'inbox-list-pane' + (hot === 'list' ? ' hot' : '');
+  html += '<div class="' + listCls + '" data-action="inbox-pick" data-hot-id="list">';
+  var searchCls = 'inbox-search' + (hot === 'search' ? ' hot' : '');
+  html += '<div class="' + searchCls + '" data-action="inbox-pick" data-hot-id="search">🔍 Search mail</div>';
+  var msgs = [
+    { f:'The Owner', s:'Re: Marathon RAVS', p:'Got the doc. Reviewing tonight.', bold:false },
+    { f:'Texas Mutual', s:'Your EMR Letter is Ready', p:'Click here to download...', bold:true },
+    { f:'Joseph Hasse', s:'Calendar for Friday', p:'Three visitors, two deliveries.', bold:false }
+  ];
+  for (var m=0;m<msgs.length;m++) {
+    var msg = msgs[m];
+    html += '<div class="inbox-message-row">';
+    html += '<div class="inbox-msg-head"><span style="font-weight:' + (msg.bold ? '700' : '600') + ';">' + escapeHtml(msg.f) + '</span>';
+    html += '<span class="inbox-msg-actions">';
+    html += '<span data-action="inbox-pick" data-hot-id="pin">📌</span>';
+    html += '<span data-action="inbox-pick" data-hot-id="flag">🚩</span>';
+    html += '</span></div>';
+    html += '<div class="inbox-msg-subject" style="font-weight:' + (msg.bold ? '600' : '400') + ';">' + escapeHtml(msg.s) + '</div>';
+    html += '<div class="inbox-msg-preview">' + escapeHtml(msg.p) + '</div>';
+    html += '</div>';
+  }
+  html += '</div>';
+
+  var readCls = 'inbox-reading' + (hot === 'reading' ? ' hot' : '');
+  html += '<div class="' + readCls + '" data-action="inbox-pick" data-hot-id="reading">';
+  html += '<div class="inbox-reading-h">Re: Marathon RAVS</div>';
+  html += '<div class="inbox-reading-meta">The Owner &middot; 4:12 PM</div>';
+  html += '<div class="inbox-reading-body">Got the doc. Reviewing tonight. Will mark up sections 4 and 6. Send back tomorrow morning.</div>';
+  html += '</div>';
+
+  html += '</div>';
+
+  html += '<div class="inbox-tooltip-bar">';
+  if (hot && INBOX_HOTSPOTS[hot]) {
+    html += '<p class="inbox-tooltip-label">' + escapeHtml(INBOX_HOTSPOTS[hot].label) + '</p>';
+    html += '<p class="inbox-tooltip-desc">' + escapeHtml(INBOX_HOTSPOTS[hot].desc) + '</p>';
+  } else {
+    html += '<p class="inbox-tooltip-empty">Click an area in the inbox above to learn what it does</p>';
+  }
+  html += '</div></div>';
+
+  html += '<div class="tip-box" style="margin-top:24px;">';
+  html += '<p class="tip-eyebrow">Joseph\'s tip</p>';
+  html += '<p class="tip-body">Bold means unread. Pinned items stay at the top. Flagged items show up in your To-Do list. Use them.</p>';
+  html += '</div>';
+
+  html += '<button class="complete-btn" data-action="complete-lesson" data-lesson-id="' + lesson.id + '">';
+  html += 'Mark complete ' + icon('arrow-right', 16, '#000');
+  html += '</button>';
+  html += '</div></div>';
+  return html;
+}
+
+// ============================================================================
+// INTERACTIVE: SHARE WALKTHROUGH (d-2)
+// ============================================================================
+function renderShareLesson(lesson, cat) {
+  var STEPS = [
+    'Step 1: Right-click the file in OneDrive web',
+    'Step 2: Set permission to "Can view" — NOT "Can edit"',
+    'Step 3: Confirm the recipient. Send.'
+  ];
+  var step = state.shareStep;
+  var isDone = step >= STEPS.length;
+
+  var html = '';
+  html += '<button class="cat-back-btn" data-action="back-cat" data-cat-id="' + cat.id + '">' + icon('arrow-left', 13) + ' Back to ' + escapeHtml(cat.title) + '</button>';
+
+  html += '<div class="lesson-card">';
+  html += '<div class="lesson-card-header ' + cat.id + '">';
+  html += '<div class="lesson-icon-tile">' + icon(cat.iconKey, 26, '#fff') + '</div>';
+  html += '<div><p class="lesson-card-eyebrow">' + escapeHtml(cat.title) + ' &middot; ~' + lesson.minutes + ' min</p>';
+  html += '<h2 class="lesson-card-title">' + escapeHtml(lesson.title) + '</h2></div>';
+  html += '</div>';
+  html += '<div class="lesson-card-body">';
+
+  html += '<div class="share-progress-row">';
+  html += '<span class="share-progress-label">' + escapeHtml(isDone ? 'Walkthrough complete' : STEPS[step]) + '</span>';
+  html += '<span class="share-progress-count">' + Math.min(step, STEPS.length) + ' / ' + STEPS.length + '</span>';
+  html += '</div>';
+
+  if (!isDone) {
+    html += '<div class="share-stage">';
+    if (step === 0) {
+      html += '<div class="share-shot">';
+      html += '<div class="share-shot-banner">OneDrive — My files</div>';
+      var sFiles = ['Bid_ICD_Church.pdf', 'Marathon_RAVS.docx', 'Visitor_Log.xlsx'];
+      for (var sf=0;sf<sFiles.length;sf++) {
+        var hl = sf === 1 ? ' highlight' : '';
+        html += '<div class="share-shot-row' + hl + '">' + icon('file', 14, '#0078d4') + escapeHtml(sFiles[sf]) + '</div>';
+      }
+      html += '<div class="share-shot-ctxmenu">';
+      var ctxItems = ['Open', 'Preview', 'Share', 'Copy link', 'Download', 'Delete'];
+      for (var ci=0;ci<ctxItems.length;ci++) {
+        html += '<div class="share-shot-ctxmenu-row' + (ctxItems[ci]==='Share' ? ' active' : '') + '">' + escapeHtml(ctxItems[ci]) + '</div>';
+      }
+      html += '</div></div>';
+    } else if (step === 1) {
+      html += '<div class="share-shot" style="padding:18px;">';
+      html += '<div style="font-size:14px;font-weight:600;margin-bottom:14px;">Send link</div>';
+      html += '<div class="share-shot-permission">People you specify can view ▾ <span>⚙</span></div>';
+      html += '<div class="share-shot-warning">⚠ Default is "Anyone with the link can edit." Change it. Always.</div>';
+      html += '<div class="share-shot-input">To: vendor@example.com</div>';
+      html += '<div class="share-shot-input placeholder">Add a message (optional)</div>';
+      html += '<button class="share-shot-send-btn">Send</button>';
+      html += '</div>';
+    } else if (step === 2) {
+      html += '<div class="share-success">';
+      html += '<div style="margin:0 auto;">' + icon('check', 32, '#10b981') + '</div>';
+      html += '<div class="share-success-h">Link sent</div>';
+      html += '<div class="share-success-meta">Marathon_RAVS.docx &middot; view-only &middot; vendor@example.com</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+  } else {
+    html += '<div class="share-done-banner">';
+    html += '<div style="margin:0 auto;">' + icon('award', 24, '#34d399') + '</div>';
+    html += '<p class="share-done-msg">You shared a file view-only. The default is edit. The default is wrong. Change it every time.</p>';
+    html += '</div>';
+  }
+
+  html += '<div class="share-actions">';
+  if (step > 0 && !isDone) {
+    html += '<button class="share-back-btn" data-action="share-back">Back</button>';
+  }
+  if (!isDone) {
+    var nextLabel = step === STEPS.length - 1 ? 'Finish' : 'Next';
+    html += '<button class="share-next-btn" data-action="share-next">' + escapeHtml(nextLabel) + ' ' + icon('arrow-right', 14, '#000') + '</button>';
+  } else {
+    html += '<button class="sim-mark-complete-btn" data-action="complete-lesson" data-lesson-id="' + lesson.id + '">Mark Complete ' + icon('arrow-right', 16, '#000') + '</button>';
+  }
+  html += '</div>';
+
+  html += '</div></div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER DISPATCH
+// ============================================================================
+function render() {
+  var app = document.getElementById('app');
+  var html = '';
+  if (state.view === 'home') {
+    html = renderLabHome();
+  } else if (state.view.indexOf('category:') === 0) {
+    var cat = getCategory(state.view.slice(9));
+    if (cat) html = renderCategory(cat);
+    else html = renderLabHome();
+  } else if (state.view.indexOf('lesson:') === 0) {
+    var info = getLesson(state.view.slice(7));
+    if (info) html = renderLesson(info.lesson, info.cat, info.idx);
+    else html = renderLabHome();
+  }
+  app.innerHTML = html;
+
+  if (state.fxEditing) {
+    setTimeout(function() {
+      var inp = document.getElementById('fx-name-input');
+      if (inp) {
+        inp.focus();
+        inp.oninput = function(e) { state.fxFolderName = e.target.value; };
+        inp.onkeydown = function(e) { if (e.key === 'Enter') handleFxNameSubmit(); };
+      }
+    }, 50);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================================================================
+// FILE EXPLORER SIM HANDLERS
+// ============================================================================
+function fxWrong(msg) {
+  state.fxFeedback = { type: 'error', msg: msg };
+  state.fxShake = true;
+  render();
+  setTimeout(function() { state.fxShake = false; render(); }, 350);
+}
+function fxAdvance(msg) {
+  state.fxFeedback = { type: 'ok', msg: msg };
+  state.fxStep++;
+  render();
+  setTimeout(function() {
+    if (state.fxFeedback && state.fxFeedback.msg === msg) {
+      state.fxFeedback = null;
+      render();
+    }
+  }, 1200);
+}
+function handleFxNameSubmit() {
+  if (state.fxFolderName.trim().toLowerCase() !== 'visitors') {
+    fxWrong('The folder must be named exactly "Visitors". Backspace and try again.');
+    return;
+  }
+  state.fxEditing = false;
+  state.fxStep = 4;
+  state.fxFeedback = { type: 'ok', msg: 'Folder created. Job done.' };
+  render();
+}
+function resetFx() {
+  state.fxStep = 0; state.fxCtxOpen = false; state.fxSubOpen = false;
+  state.fxFolderCreated = false; state.fxFolderName = '';
+  state.fxEditing = false; state.fxFeedback = null; state.fxShake = false;
+  render();
+}
+function resetPhish() {
+  state.phishOpenId = null; state.phishShowSender = {};
+  state.phishMarked = {}; state.phishSubmitted = false;
+  render();
+}
+function resetShare() { state.shareStep = 0; render(); }
+
+// ============================================================================
+// EVENT DELEGATION
+// ============================================================================
+document.body.addEventListener('contextmenu', function(ev) {
+  var t = ev.target.closest('[data-action="fx-empty-area"]');
+  if (t) {
+    ev.preventDefault();
+    if (state.fxStep !== 0) {
+      fxWrong('You are past this step. Follow the goal at the top.');
+      return;
+    }
+    state.fxCtxOpen = true;
+    fxAdvance('Right click. Moving on.');
+  }
+});
+
+document.body.addEventListener('click', function(ev) {
+  var t = ev.target.closest('[data-action]');
+  if (!t) return;
+  var action = t.getAttribute('data-action');
+
+  // Lab navigation
+  if (action === 'open-cat') {
+    state.view = 'category:' + t.getAttribute('data-cat-id');
+    render();
+  } else if (action === 'back-home') {
+    state.view = 'home';
+    render();
+  } else if (action === 'open-lesson') {
+    var lessonId = t.getAttribute('data-lesson-id');
+    // Reset sim states when entering
+    var info = getLesson(lessonId);
+    if (info && info.lesson.simKey === 'fileExplorer') resetFx();
+    if (info && info.lesson.simKey === 'phishing') resetPhish();
+    if (info && info.lesson.simKey === 'share') resetShare();
+    if (info && info.lesson.simKey === 'taskbar') state.taskbarHovered = null;
+    if (info && info.lesson.simKey === 'inbox') state.inboxHot = null;
+    state.view = 'lesson:' + lessonId;
+    render();
+  } else if (action === 'back-cat') {
+    state.view = 'category:' + t.getAttribute('data-cat-id');
+    render();
+  } else if (action === 'complete-lesson') {
+    var lid = t.getAttribute('data-lesson-id');
+    state.completed[lid] = true;
+    // Auto-advance to next lesson in category, or back to category if last
+    var info2 = getLesson(lid);
+    if (info2) {
+      var nextLesson = null;
+      for (var i=0;i<info2.cat.lessons.length;i++) {
+        if (info2.cat.lessons[i].id === lid && i + 1 < info2.cat.lessons.length) {
+          nextLesson = info2.cat.lessons[i+1];
+          break;
+        }
+      }
+      if (nextLesson) {
+        // Reset sim states for next
+        if (nextLesson.simKey === 'fileExplorer') resetFx();
+        if (nextLesson.simKey === 'phishing') resetPhish();
+        if (nextLesson.simKey === 'share') resetShare();
+        if (nextLesson.simKey === 'taskbar') state.taskbarHovered = null;
+        if (nextLesson.simKey === 'inbox') state.inboxHot = null;
+        state.view = 'lesson:' + nextLesson.id;
+      } else {
+        state.view = 'category:' + info2.cat.id;
+      }
+      render();
+    }
+  }
+
+  // File Explorer Sim
+  else if (action === 'fx-empty-area') {
+    // Left-click on empty area (right-click handled via contextmenu listener above)
+    if (state.fxCtxOpen) {
+      state.fxCtxOpen = false;
+      state.fxSubOpen = false;
+      render();
+      return;
+    }
+    if (state.fxStep === 0) {
+      fxWrong('Right-click on the empty area, not left-click. Try again.');
+    }
+  } else if (action === 'fx-file-click') {
+    ev.stopPropagation();
+    if (state.fxStep === 0) {
+      fxWrong('That\'s a file, not the empty area. Right-click empty space.');
+    } else {
+      fxWrong('Stay on task. Read the goal at the top of the screen.');
+    }
+  } else if (action === 'fx-new-click') {
+    ev.stopPropagation();
+    if (state.fxStep !== 1) {
+      fxWrong('You need to be on the "click New" step.');
+      return;
+    }
+    state.fxSubOpen = true;
+    fxAdvance('New menu opened. Pick Folder.');
+  } else if (action === 'fx-folder-click') {
+    ev.stopPropagation();
+    if (state.fxStep !== 2) {
+      fxWrong('You need the "Folder" submenu step.');
+      return;
+    }
+    state.fxCtxOpen = false;
+    state.fxSubOpen = false;
+    state.fxFolderCreated = true;
+    state.fxEditing = true;
+    state.fxFolderName = '';
+    fxAdvance('Folder created. Type its name.');
+  } else if (action === 'sim-reset') {
+    var simKey = t.getAttribute('data-sim-key');
+    if (simKey === 'fileExplorer') resetFx();
+    else if (simKey === 'phishing') resetPhish();
+  }
+
+  // Phishing Sim
+  else if (action === 'phish-open') {
+    state.phishOpenId = t.getAttribute('data-email-id');
+    render();
+  } else if (action === 'phish-reveal-toggle') {
+    var eid = t.getAttribute('data-email-id');
+    state.phishShowSender[eid] = !state.phishShowSender[eid];
+    render();
+  } else if (action === 'phish-mark') {
+    if (state.phishSubmitted) return;
+    var eid2 = t.getAttribute('data-email-id');
+    state.phishMarked[eid2] = !state.phishMarked[eid2];
+    render();
+  } else if (action === 'phish-submit') {
+    state.phishSubmitted = true;
+    render();
+  } else if (action === 'phish-reset') {
+    resetPhish();
+  }
+
+  // Taskbar Tour
+  else if (action === 'taskbar-pick') {
+    state.taskbarHovered = t.getAttribute('data-tb-id');
+    render();
+  }
+
+  // Inbox Anatomy
+  else if (action === 'inbox-pick') {
+    ev.stopPropagation();
+    state.inboxHot = t.getAttribute('data-hot-id');
+    render();
+  }
+
+  // Share Walkthrough
+  else if (action === 'share-next') {
+    state.shareStep++;
+    render();
+  } else if (action === 'share-back') {
+    if (state.shareStep > 0) state.shareStep--;
+    render();
+  }
+});
+
+// ============================================================================
+// INIT
+// ============================================================================
+document.getElementById('logo-slot').innerHTML = icon('monitor', 22, '#fff');
+render();
+</script>
+</body>
+</html>

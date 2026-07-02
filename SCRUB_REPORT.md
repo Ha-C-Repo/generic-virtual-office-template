@@ -1,0 +1,456 @@
+# Scrub Report - Generic Virtual Office Clone
+
+Generated 2026-07-02. This bundle is a full clone of the source Virtual
+Office folder, stripped of the original company and owner references so
+it can be adapted to any industry. Procedures, skills, and markdown
+workflows are intact.
+
+## Placeholder conventions
+
+- Company name -> "Your Company" / YourCo / yourcompany (matching original casing style)
+- Owner name -> "Owner" / "The Owner"
+- Owner email -> owner@yourcompany.example.com
+- Company domain -> yourcompany.example.com
+- Windows username in paths -> YourUser
+- Address / phone / ISN ID / policy number -> [COMPANY ADDRESS], [COMPANY PHONE], [ISN ID], [POLICY NUMBER]
+- Locked bid rates -> $[FAB RATE]/T, $[ERECTION RATE]/T, $[JOIST RATE]/T, deck $[...]/SF, $[ANCHOR RATE]/EA in docs; zeroed with TODO comments in bridge/bid_rates.py (syntax-checked)
+- Bid document codes NCW- / NC-2026- -> PRJ- / PRJ-2026-
+- Division brand (sleep pods) -> YourDivision / your-division
+
+## Fully replaced files
+
+- data/core/owner-profile.md - the owner profile was replaced with a blank template (original content removed, per instruction)
+- bridge/bid_rates.py - all locked rate and margin values zeroed with TODO markers
+- brand/logos/ - emptied; README placeholder added
+
+## Kept, scrubbed in place
+
+- All procedures, skills, governance, and markdown docs (2,000+ text files scanned, ~1,600 modified)
+- The second operator's profile and files (virtual_joseph.py, deploy docs) kept, with company/owner references scrubbed
+- owner-rules.md, owner-directives-v4.md (renamed from the originals), CLAUDE.md, company-details.md, rates-and-pricing.md
+
+## Excluded or removed (could not be scrubbed)
+
+- .git history (excluded from clone)
+- API Keys/ - recreated as same-named placeholder files; no secret was ever copied
+- ~230 company-branded binaries removed: generated client proposal and GP report PDFs (191), branded bid-bundle zips, brochure/logo PDFs and images, internal report PDFs with embedded references. See removed-files list below.
+- Two large branded delivery zips (166 MB each)
+
+## Known residuals (flagged, left in place)
+
+- 47 SQLite .db files under data/ contain original operational records (bids, chat logs, audit trail). Binary databases cannot be text-scrubbed. Delete or reset these before reuse if that matters to you.
+- Client drawing-set PDFs from GCs are kept (they are third-party documents, not company-authored).
+- ShopQC training HTML contains base64 image data that coincidentally matches name patterns; verified false positive.
+- Project folder names and client project references (AutoZone, Tesla, etc.) are kept - they are client names, not company references.
+
+## Verification
+
+Final scan of every text file for all company/owner name variants
+(space, hyphen, underscore, case variants, domain, phone, IDs): zero matches.
+
+## Removed files (full list)
+
+- brochure_assets/website_zip/NanoCube CompleteShell WebPage.pdf
+- brochure_assets/website_zip/NanoCube SAR Partnership.pdf
+- brochure_assets/website_zip/NanoCube SopherSparn Partnership.pdf
+- brand/logos/nano cube usa.pdf
+- brand/logos/Nano Cube USA LLC.pdf
+- _handoff/email_bundles/2026-06-06/NanoCube_ROM_Estimates_and_Status_2026-06-06.zip
+- _handoff/email_bundles/2026-06-06/NanoCube_Finished_Bids_2026-06-06.zip
+- ShopQC/training/NanoCube_ShopQC_QuickReference.pdf
+- Bids To Estimate/01 Chastang Ford VE Comebacks (DUE 2026-06-10)/drawings/Chastang Pro-Elite - Structural Package - NANO CUBE USA.pdf
+- Bids To Estimate/01 Chastang Ford VE Comebacks (DUE 2026-06-10)/drawings/NANO CUBE USA - Structural Package -NC-2026-CHASFORD-001.pdf
+- NanoCube_ARA_Alexandria_Rehab_Brochure.pdf
+- MFH JOB DATA INFO SHEET - Genius Kids Soffit (Nano Cube) EDITABLE.pdf
+- NanoCube_Bid_Estimations_RERUN_2026-06-17.zip
+- brand/logos/nano cube usa.jpg
+- brand/logos/Nano Cube USA LLC.png
+- brand/logos/nano cube usa.pngziQ62yZQ (166M branded bid-delivery zip) removed
+- 
+- Bids To Estimate/01 Chastang Ford VE Comebacks (DUE 2026-06-10)/output/Chastang_Ford_VE_NANO_CUBE_USA_Bid_Package.zip
+- Bids To Estimate/50 St Joseph Fire Station No 10/output/StJoseph_FS10_NANO_CUBE_USA_Bid_Package.zip
+- Bids To Estimate/05 IHC Fruita Clinic/output/IHC_Fruita_NANO_CUBE_USA_Bid_Package.zip
+- Bids To Estimate/49 Sprouts and Retail Shell/output/Sprouts_Anna_NANO_CUBE_USA_Bid_Package.zip
+- Bids To Estimate/52 Tractor Supply Co/output/Tractor_Supply_Boiling_Springs_NANO_CUBE_USA_Bid_Package.zip
+- Bids To Estimate/13 All American Pet Resort Phoenix/output/AAPR_Phoenix_NANO_CUBE_USA_Bid_Package.zip
+- Bids To Estimate/35 Les Schwab Tire Center Rapid City SD (Rebid)/output/Les_Schwab_Rapid_City_NANO_CUBE_USA_Bid_Package.zip
+- Bids To Estimate/07 Northside Launchpad Barbara Jordan Career Center/output/Northside_Launchpad_NANO_CUBE_USA_Bid_Package.zip
+- Bids To Estimate/04 Dollar General 30623 Dolores CO/output/Dollar_General_30623_NANO_CUBE_USA_Bid_Package.zip
+- Bids To Estimate/02 Zeeco GTC Expansion (Rebid)/output/Zeeco_GTC_NANO_CUBE_USA_Bid_Package.zip
+- Bids To Estimate/26 Eglin AFB LRSO Training Facility/output/Eglin_LRSO_NANO_CUBE_USA_Bid_Package.zip
+- Bids To Estimate/47 SC Maintenance Facility West Columbia SC/output/WECO_Maintenance_NANO_CUBE_USA_Bid_Package.zip
+- Bids To Estimate/54 Victron Energy Travel Center and Restaurants Addition/output/Victron_Gateway_NANO_CUBE_USA_Bid_Package.zip
+- Bids To Estimate/55 VMTX Veterans Memorial Car Wash/output/VMTX_Car_Wash_NANO_CUBE_USA_Bid_Package.zip
+- Bids To Estimate/34 Kincaid Elementary School Annex/output/Kincaid_ES_Annex_NANO_CUBE_USA_Bid_Package.zip
+- Bids To Estimate/48 Shelby Twp Community Relations and Band Shell Building/output/Shelby_Twp_Community_NANO_CUBE_USA_Bid_Package.zip
+- Bids To Estimate/28 Fifth Third Maineville OH/output/Fifth_Third_Maineville_NANO_CUBE_USA_Bid_Package.zip
+- Bids To Estimate/06 South Park 183/output/South_Park_183_NANO_CUBE_USA_Bid_Package.zip./_handoff/bid-intel/_bundles/PRJ-2026-DGC-001_bundle.zip (branded bid bundle zip)
+- ./_handoff/bid-intel/_bundles/PRJ-2026-NSL-001_bundle.zip (branded bid bundle zip)
+- ./_handoff/bid-intel/_bundles/PRJ-2026-FRU-001_bundle.zip (branded bid bundle zip)
+- ./_handoff/bid-intel/PRJ-2026-ZGC-001/PRJ-2026-ZGC-001_bundle.zip (branded bid bundle zip)
+- ./_handoff/backups/2026-06-03T20-00-01Z/PRJ-2026-ZGC-001/PRJ-2026-ZGC-001_bundle.zip (branded bid bundle zip)
+- ./_handoff/bid-intel/PRJ-2026-ZGC-001/ziKKfPpc (branded delivery zip blob)
+- ./_handoff/backups/2026-06-03T20-00-01Z/PRJ-2026-ZGC-001/ziKKfPpc (branded delivery zip blob)
+- ./ROADMAP_v327_UPDATED_v2.pdf (internal PDF containing company/owner references, not text-scrubable)
+- ./.specify/specs/bid-estimating/three-bids-rerun-2026-05-23.pdf (internal PDF containing company/owner references, not text-scrubable)
+- ./.specify/specs/bid-estimating/last-3-bids-recon-report.pdf (internal PDF containing company/owner references, not text-scrubable)
+- ./_handoff/backups/2026-05-24T01-10-59Z/.specify.pre-patch01/specs/bid-estimating/three-bids-rerun-2026-05-23.pdf (internal PDF containing company/owner references, not text-scrubable)
+- ./_handoff/backups/2026-05-24T01-10-59Z/.specify.pre-patch01/specs/bid-estimating/last-3-bids-recon-report.pdf (internal PDF containing company/owner references, not text-scrubable)
+- ./66 Washington County Public Safety Facility/output/PRJ-2026-WPS-001_GP.pdf
+- ./66 Washington County Public Safety Facility/output/PRJ-2026-WPS-001_Client.pdf
+- ./68 Lovett Fusion 130 Bldg 6/output/PRJ-2026-LFB-001_GP.pdf
+- ./68 Lovett Fusion 130 Bldg 6/output/PRJ-2026-LFB-001_Client.pdf
+- ./61 TA Travel Center Stuart IA/output/PRJ-2026-TAS-001_GP.pdf
+- ./61 TA Travel Center Stuart IA/output/PRJ-2026-TAS-001_Client.pdf
+- ./69 Climate Controlled Storage Facility/output/PRJ-2026-CCS-001_GP.pdf
+- ./69 Climate Controlled Storage Facility/output/PRJ-2026-CCS-001_Client.pdf
+- ./73 Les Schwab Tire Center Rapid City North SD/output/PRJ-2026-LSN-001_GP.pdf
+- ./73 Les Schwab Tire Center Rapid City North SD/output/PRJ-2026-LSN-001_Client.pdf
+- ./65 Bertie County 911 Communications New Facility/output/PRJ-2026-BCC-001_GP.pdf
+- ./65 Bertie County 911 Communications New Facility/output/PRJ-2026-BCC-001_Client.pdf
+- ./70 Tesla Sales Service and Delivery Center Project Poker/output/PRJ-2026-TES-001_GP.pdf
+- ./70 Tesla Sales Service and Delivery Center Project Poker/output/PRJ-2026-TES-001_Client.pdf
+- ./64 New Castle PA AMSA VMS Maintenance Facility/output/PRJ-2026-NCM-001_GP.pdf
+- ./64 New Castle PA AMSA VMS Maintenance Facility/output/PRJ-2026-NCM-001_Client.pdf
+- ./output/NC_Proposal_The Capital Grille Meridian ID_2026-06-15.pdf
+- ./output/NC_Proposal_Washington County C Wayne Stevens Jr Pub_2026-06-15.pdf
+- ./output/NC_Proposal_Chastang Ford_2026-06-09.pdf
+- ./output/NC_Proposal_Bertie County 911 Communications Facilit_2026-06-15.pdf
+- ./output/NC_Proposal_Tractor Supply Company Corbin KY_2026-06-15.pdf
+- ./output/NC_Proposal_7 Brew Texas Heritage Parkway Katy TX_2026-06-15.pdf
+- ./output/NC_Proposal_Les Schwab Tire Center Rapid City North_2026-06-15.pdf
+- ./output/NC_Proposal_Climate Controlled Storage Facility_2026-06-15.pdf
+- ./output/NC_Proposal_Big Spring TX CLC Building_2026-06-15.pdf
+- ./output/NC_Proposal_10K Shell Building_2026-06-08.pdf
+- ./output/NC_Proposal_Tesla Sales Service and Delivery Center_2026-06-15.pdf
+- ./output/NC_Proposal_TA Travel Center C-Store Stuart IA_2026-06-15.pdf
+- ./output/NC_Proposal_New Castle PA AMSA VMS Maintenance Facil_2026-06-15.pdf
+- ./output/NC_Proposal_Martha Washington Building Addition and_2026-06-15.pdf
+- ./output/NC_Proposal_Anna ISD Clemons Creek MS Harlow ES Rosa_2026-06-15.pdf
+- ./output/NC_Proposal_AutoZone Store 11020 Norcross GA_2026-06-15.pdf
+- ./output/NC_Proposal_Lovett Fusion 130 Building 6_2026-06-15.pdf
+- ./output/NC_Proposal_Tractor Supply Company - Corbin KY_2026-06-15.pdf
+- ./62 Corbin KY Tractor Supply/output/PRJ-2026-CTS-001_Client.pdf
+- ./62 Corbin KY Tractor Supply/output/PRJ-2026-CTS-001_GP.pdf
+- ./60 Martha Washington Building Addition and Renovation/output/PRJ-2026-MWB-001_GP.pdf
+- ./60 Martha Washington Building Addition and Renovation/output/PRJ-2026-MWB-001_Client.pdf
+- ./59 AutoZone Norcross GA/output/PRJ-2026-AZN-001_Client.pdf
+- ./59 AutoZone Norcross GA/output/PRJ-2026-AZN-001_GP.pdf
+- ./67 Anna ISD Clemons Creek Harlow Rosamond-Sherley Add Reno/output/PRJ-2026-ANA-001_Client.pdf
+- ./67 Anna ISD Clemons Creek Harlow Rosamond-Sherley Add Reno/output/PRJ-2026-ANA-001_GP.pdf
+- ./_handoff/bid-intel/PRJ-2026-DGC-001/PRJ-2026-DGC-001_Client.pdf
+- ./_handoff/bid-intel/PRJ-2026-DGC-001/PRJ-2026-DGC-001_GP.pdf
+- ./_handoff/bid-intel/PRJ-2026-KEAT-001/PRJ-2026-KEAT-001_GP.pdf
+- ./_handoff/bid-intel/PRJ-2026-KEAT-001/PRJ-2026-KEAT-001_Client.pdf
+- ./_handoff/bid-intel/PRJ-2026-NSL-001/PRJ-2026-NSL-001_GP.pdf
+- ./_handoff/bid-intel/PRJ-2026-NSL-001/PRJ-2026-NSL-001_Client.pdf
+- ./_handoff/bid-intel/PRJ-2026-ZGC-001/PRJ-2026-ZGC-001_GP.pdf
+- ./_handoff/bid-intel/PRJ-2026-ZGC-001/PRJ-2026-ZGC-001_Client.pdf
+- ./_handoff/bid-intel/PRJ-2026-FRU-001/PRJ-2026-FRU-001_GP.pdf
+- ./_handoff/bid-intel/PRJ-2026-FRU-001/PRJ-2026-FRU-001_Client.pdf
+- ./_handoff/backups/2026-06-03T20-00-01Z/PRJ-2026-ZGC-001/PRJ-2026-ZGC-001_GP.pdf
+- ./_handoff/backups/2026-06-03T20-00-01Z/PRJ-2026-ZGC-001/PRJ-2026-ZGC-001_Client.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-7BK-001_GP.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-TAS-001_GP.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-7BK-001_Client.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-NCM-001_GP.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-CGM-001_GP.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-LFB-001_GP.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-BCC-001_GP.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-WPS-001_GP.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-TES-001_GP.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-NCM-001_Client.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-CTS-001_Client.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-WPS-001_Client.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-TES-001_Client.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-BHE-001_Client.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-BHE-001_GP.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-ANA-001_Client.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-BSC-001_Client.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-MWB-001_GP.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-BSC-001_GP.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-ANA-001_GP.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-MWB-001_Client.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-CCS-001_GP.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-AZN-001_Client.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-AZN-001_GP.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-TAS-001_Client.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-LSN-001_GP.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-BCC-001_Client.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-CGM-001_Client.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-LSN-001_Client.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-LFB-001_Client.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-CCS-001_Client.pdf
+- ./_handoff/backups/2026-06-17T06-38-09Z/FINAL_BIDS_pdf_originals/PRJ-2026-CTS-001_GP.pdf
+- ./71 7 Brew Texas Heritage Parkway Katy TX/output/PRJ-2026-7BK-001_GP.pdf
+- ./71 7 Brew Texas Heritage Parkway Katy TX/output/PRJ-2026-7BK-001_Client.pdf
+- ./72 The Capital Grille Meridian ID/output/PRJ-2026-CGM-001_GP.pdf
+- ./72 The Capital Grille Meridian ID/output/PRJ-2026-CGM-001_Client.pdf
+- ./Bids To Estimate/66 Washington County Public Safety Facility/output/PRJ-2026-WPS-001_GP.pdf
+- ./Bids To Estimate/66 Washington County Public Safety Facility/output/PRJ-2026-WPS-001_Client.pdf
+- ./Bids To Estimate/68 Lovett Fusion 130 Bldg 6/output/PRJ-2026-LFB-001_GP.pdf
+- ./Bids To Estimate/68 Lovett Fusion 130 Bldg 6/output/PRJ-2026-LFB-001_Client.pdf
+- ./Bids To Estimate/01 Chastang Ford VE Comebacks (DUE 2026-06-10)/output/PRJ-2026-CHASFORD-VE-001_GP.pdf
+- ./Bids To Estimate/01 Chastang Ford VE Comebacks (DUE 2026-06-10)/output/PRJ-2026-CHASFORD-VE-001_Client.pdf
+- ./Bids To Estimate/61 TA Travel Center Stuart IA/output/PRJ-2026-TAS-001_GP.pdf
+- ./Bids To Estimate/61 TA Travel Center Stuart IA/output/PRJ-2026-TAS-001_Client.pdf
+- ./Bids To Estimate/69 Climate Controlled Storage Facility/drawings/Extracted pages from Request_for_Proposal__Dwgs__26RA019__8May26.pdf
+- ./Bids To Estimate/69 Climate Controlled Storage Facility/output/PRJ-2026-CCS-001_GP.pdf
+- ./Bids To Estimate/69 Climate Controlled Storage Facility/output/PRJ-2026-CCS-001_Client.pdf
+- ./Bids To Estimate/50 St Joseph Fire Station No 10/output/PRJ-2026-SJF-001_Client.pdf
+- ./Bids To Estimate/50 St Joseph Fire Station No 10/output/PRJ-2026-SJF-001_GP.pdf
+- ./Bids To Estimate/73 Les Schwab Tire Center Rapid City North SD/output/PRJ-2026-LSN-001_GP.pdf
+- ./Bids To Estimate/73 Les Schwab Tire Center Rapid City North SD/output/PRJ-2026-LSN-001_Client.pdf
+- ./Bids To Estimate/05 IHC Fruita Clinic/output/PRJ-2026-FRU-001_GP.pdf
+- ./Bids To Estimate/05 IHC Fruita Clinic/output/PRJ-2026-FRU-001_Client.pdf
+- ./Bids To Estimate/49 Sprouts and Retail Shell/output/PRJ-2026-SPR-001_Client.pdf
+- ./Bids To Estimate/49 Sprouts and Retail Shell/output/PRJ-2026-SPR-001_GP.pdf
+- ./Bids To Estimate/65 Bertie County 911 Communications New Facility/output/PRJ-2026-BCC-001_GP.pdf
+- ./Bids To Estimate/65 Bertie County 911 Communications New Facility/output/PRJ-2026-BCC-001_Client.pdf
+- ./Bids To Estimate/70 Tesla Sales Service and Delivery Center Project Poker/output/PRJ-2026-TES-001_GP.pdf
+- ./Bids To Estimate/70 Tesla Sales Service and Delivery Center Project Poker/output/PRJ-2026-TES-001_Client.pdf
+- ./Bids To Estimate/52 Tractor Supply Co/output/PRJ-2026-TSC-001_Client.pdf
+- ./Bids To Estimate/52 Tractor Supply Co/output/PRJ-2026-TSC-001_GP.pdf
+- ./Bids To Estimate/64 New Castle PA AMSA VMS Maintenance Facility/output/PRJ-2026-NCM-001_GP.pdf
+- ./Bids To Estimate/64 New Castle PA AMSA VMS Maintenance Facility/output/PRJ-2026-NCM-001_Client.pdf
+- ./Bids To Estimate/13 All American Pet Resort Phoenix/output/PRJ-2026-AAPR-001_Client.pdf
+- ./Bids To Estimate/13 All American Pet Resort Phoenix/output/PRJ-2026-AAPR-001_GP.pdf
+- ./Bids To Estimate/62 Corbin KY Tractor Supply/output/PRJ-2026-CTS-001_Client.pdf
+- ./Bids To Estimate/62 Corbin KY Tractor Supply/output/PRJ-2026-CTS-001_GP.pdf
+- ./Bids To Estimate/35 Les Schwab Tire Center Rapid City SD (Rebid)/output/PRJ-2026-LSR-001_GP.pdf
+- ./Bids To Estimate/35 Les Schwab Tire Center Rapid City SD (Rebid)/output/PRJ-2026-LSR-001_Client.pdf
+- ./Bids To Estimate/60 Martha Washington Building Addition and Renovation/output/PRJ-2026-MWB-001_GP.pdf
+- ./Bids To Estimate/60 Martha Washington Building Addition and Renovation/output/PRJ-2026-MWB-001_Client.pdf
+- ./Bids To Estimate/07 Northside Launchpad Barbara Jordan Career Center/output/PRJ-2026-NSL-001_GP.pdf
+- ./Bids To Estimate/07 Northside Launchpad Barbara Jordan Career Center/output/PRJ-2026-NSL-001_Client.pdf
+- ./Bids To Estimate/04 Dollar General 30623 Dolores CO/output/PRJ-2026-DGC-001_Client.pdf
+- ./Bids To Estimate/04 Dollar General 30623 Dolores CO/output/PRJ-2026-DGC-001_GP.pdf
+- ./Bids To Estimate/02 Zeeco GTC Expansion (Rebid)/output/PRJ-2026-ZGC-001_GP.pdf
+- ./Bids To Estimate/02 Zeeco GTC Expansion (Rebid)/output/PRJ-2026-ZGC-001_Client.pdf
+- ./Bids To Estimate/26 Eglin AFB LRSO Training Facility/output/PRJ-2026-EGL-001_GP.pdf
+- ./Bids To Estimate/26 Eglin AFB LRSO Training Facility/output/PRJ-2026-EGL-001_Client.pdf
+- ./Bids To Estimate/47 SC Maintenance Facility West Columbia SC/output/PRJ-2026-WCM-001_GP.pdf
+- ./Bids To Estimate/47 SC Maintenance Facility West Columbia SC/output/PRJ-2026-WCM-001_Client.pdf
+- ./Bids To Estimate/54 Victron Energy Travel Center and Restaurants Addition/output/PRJ-2026-VIC-001_Client.pdf
+- ./Bids To Estimate/54 Victron Energy Travel Center and Restaurants Addition/output/PRJ-2026-VIC-001_GP.pdf
+- ./Bids To Estimate/55 VMTX Veterans Memorial Car Wash/output/PRJ-2026-VMX-001_Client.pdf
+- ./Bids To Estimate/55 VMTX Veterans Memorial Car Wash/output/PRJ-2026-VMX-001_GP.pdf
+- ./Bids To Estimate/59 AutoZone Norcross GA/output/PRJ-2026-AZN-001_Client.pdf
+- ./Bids To Estimate/59 AutoZone Norcross GA/output/PRJ-2026-AZN-001_GP.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/69 PRJ-2026-CCS-001/PRJ-2026-CCS-001_GP.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/69 PRJ-2026-CCS-001/PRJ-2026-CCS-001_Client.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/62 PRJ-2026-CTS-001/PRJ-2026-CTS-001_Client.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/62 PRJ-2026-CTS-001/PRJ-2026-CTS-001_GP.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/70 PRJ-2026-TES-001/PRJ-2026-TES-001_GP.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/70 PRJ-2026-TES-001/PRJ-2026-TES-001_Client.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/65 PRJ-2026-BCC-001/PRJ-2026-BCC-001_GP.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/65 PRJ-2026-BCC-001/PRJ-2026-BCC-001_Client.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/66 PRJ-2026-WPS-001/PRJ-2026-WPS-001_GP.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/66 PRJ-2026-WPS-001/PRJ-2026-WPS-001_Client.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/71 PRJ-2026-7BK-001/PRJ-2026-7BK-001_GP.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/71 PRJ-2026-7BK-001/PRJ-2026-7BK-001_Client.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/59 PRJ-2026-AZN-001/PRJ-2026-AZN-001_Client.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/59 PRJ-2026-AZN-001/PRJ-2026-AZN-001_GP.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/67 PRJ-2026-ANA-001/PRJ-2026-ANA-001_Client.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/67 PRJ-2026-ANA-001/PRJ-2026-ANA-001_GP.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/60 PRJ-2026-MWB-001/PRJ-2026-MWB-001_GP.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/60 PRJ-2026-MWB-001/PRJ-2026-MWB-001_Client.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/63 PRJ-2026-BSC-001/PRJ-2026-BSC-001_Client.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/63 PRJ-2026-BSC-001/PRJ-2026-BSC-001_GP.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/68 PRJ-2026-LFB-001/PRJ-2026-LFB-001_GP.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/68 PRJ-2026-LFB-001/PRJ-2026-LFB-001_Client.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/18 PRJ-2026-BHE-001/PRJ-2026-BHE-001_Client.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/18 PRJ-2026-BHE-001/PRJ-2026-BHE-001_GP.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/64 PRJ-2026-NCM-001/PRJ-2026-NCM-001_GP.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/64 PRJ-2026-NCM-001/PRJ-2026-NCM-001_Client.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/72 PRJ-2026-CGM-001/PRJ-2026-CGM-001_GP.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/72 PRJ-2026-CGM-001/PRJ-2026-CGM-001_Client.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/61 PRJ-2026-TAS-001/PRJ-2026-TAS-001_GP.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/61 PRJ-2026-TAS-001/PRJ-2026-TAS-001_Client.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/73 PRJ-2026-LSN-001/PRJ-2026-LSN-001_GP.pdf
+- ./Bids To Estimate/FINAL_BIDS_2026-06-15/73 PRJ-2026-LSN-001/PRJ-2026-LSN-001_Client.pdf
+- ./Bids To Estimate/67 Anna ISD Clemons Creek Harlow Rosamond-Sherley Add Reno/output/PRJ-2026-ANA-001_Client.pdf
+- ./Bids To Estimate/67 Anna ISD Clemons Creek Harlow Rosamond-Sherley Add Reno/output/PRJ-2026-ANA-001_GP.pdf
+- ./Bids To Estimate/71 7 Brew Texas Heritage Parkway Katy TX/output/PRJ-2026-7BK-001_GP.pdf
+- ./Bids To Estimate/71 7 Brew Texas Heritage Parkway Katy TX/output/PRJ-2026-7BK-001_Client.pdf
+- ./Bids To Estimate/34 Kincaid Elementary School Annex/output/PRJ-2026-KES-001_Client.pdf
+- ./Bids To Estimate/34 Kincaid Elementary School Annex/output/PRJ-2026-KES-001_GP.pdf
+- ./Bids To Estimate/72 The Capital Grille Meridian ID/output/PRJ-2026-CGM-001_GP.pdf
+- ./Bids To Estimate/72 The Capital Grille Meridian ID/output/PRJ-2026-CGM-001_Client.pdf
+- ./Bids To Estimate/48 Shelby Twp Community Relations and Band Shell Building/output/PRJ-2026-STC-001_Client.pdf
+- ./Bids To Estimate/48 Shelby Twp Community Relations and Band Shell Building/output/PRJ-2026-STC-001_GP.pdf
+- ./Bids To Estimate/28 Fifth Third Maineville OH/output/PRJ-2026-FTM-001_GP.pdf
+- ./Bids To Estimate/28 Fifth Third Maineville OH/output/PRJ-2026-FTM-001_Client.pdf
+- ./Bids To Estimate/63 Big Spring TX CLC Building/output/PRJ-2026-BSC-001_Client.pdf
+- ./Bids To Estimate/63 Big Spring TX CLC Building/output/PRJ-2026-BSC-001_GP.pdf
+- ./Bids To Estimate/06 South Park 183/output/PRJ-2026-KEAT-001_GP.pdf
+- ./Bids To Estimate/06 South Park 183/output/PRJ-2026-KEAT-001_Client.pdf
+- ./63 Big Spring TX CLC Building/output/PRJ-2026-BSC-001_Client.pdf
+- ./63 Big Spring TX CLC Building/output/PRJ-2026-BSC-001_GP.pdf
+
+---
+
+## Second pass - stray files and company work product excluded (2026-07-02)
+
+Per follow-up instruction, the template was further stripped of files that
+existed only as company work product or machine-specific artifacts:
+
+- All bid project folders (numbered 59-73, Bids To Estimate, bids/, output/, awarded project data - the _TEMPLATE skeleton was kept)
+- Operational history: _handoff/, handoff_backups/, 02_Wiki/, Epic Tools Pilot/, business/, _requests/, _blinkframes/
+- Company web/marketing: Website Rebuild/, brochure_assets/
+- Video studio company projects (ACTIVE_PROJECTS/OUTPUTS contents; studio structure, SKILLS, TEMPLATES kept)
+- Operational data: audit/interaction logs, correction lake, calibration values, compliance snapshots, project records, database fuse artifacts (reference data kept: AISC shapes CSVs, joist tables, schemas, templates)
+- Owner-machine fix scripts (display/appx/ASUS repairs, git bootstrap, env check reports)
+- Dated session handoffs and pilot reports (~50 root markdown files)
+- Division (sleep-pod) work product docs
+- library/production-rates.yaml reduced to a schema-header template (locked values removed)
+
+What remains is the reusable system: the app (main.py, bridge/, frontend/,
+mcp_server.py, vo_app/), skills/, governance (.claude, .specify), 0.ai-context/,
+docs/, research reference KBs, takeoff_pipeline/, ShopQC/, Site Diary/,
+training-portal/, web dashboard/pipeline tools, tests, and all procedure
+markdowns - scrubbed and genericized.
+
+### Excluded in second pass (full list)
+
+- DIR 02_Wiki
+- DIR Bids To Estimate
+- DIR bids
+- DIR output
+- DIR _handoff
+- DIR handoff_backups
+- DIR Epic Tools Pilot
+- DIR _blinkframes
+- DIR _requests
+- DIR Website Rebuild
+- DIR brochure_assets
+- DIR business
+- DIR 59 AutoZone Norcross GA
+- DIR 60 Martha Washington Building Addition and Renovation
+- DIR 61 TA Travel Center Stuart IA
+- DIR 62 Corbin KY Tractor Supply
+- DIR 63 Big Spring TX CLC Building
+- DIR 64 New Castle PA AMSA VMS Maintenance Facility
+- DIR 65 Bertie County 911 Communications New Facility
+- DIR 66 Washington County Public Safety Facility
+- DIR 67 Anna ISD Clemons Creek Harlow Rosamond-Sherley Add Reno
+- DIR 68 Lovett Fusion 130 Bldg 6
+- DIR 69 Climate Controlled Storage Facility
+- DIR 70 Tesla Sales Service and Delivery Center Project Poker
+- DIR 71 7 Brew Texas Heritage Parkway Katy TX
+- DIR 72 The Capital Grille Meridian ID
+- DIR 73 Les Schwab Tire Center Rapid City North SD
+- DIR Awarded Projects/PRJ-2026-ACP-001 Asian City Plaza
+- DIR Video Creation/ACTIVE_PROJECTS/YourCo_Web_Reel_30s
+- DIR Video Creation/ACTIVE_PROJECTS/.gitkeep
+- DIR Video Creation/ACTIVE_PROJECTS/YourCo_Brand_30s
+- DIR Video Creation/ACTIVE_PROJECTS/Steel_Render_Test_Set
+- DIR Video Creation/OUTPUTS/YourCo_Web_Reel_30s
+- DIR Video Creation/OUTPUTS/.gitkeep
+- DIR Site Diary/field_exports/{inbox,processed}
+- data/hash_chain.db
+- data/houston_market.db-wal
+- data/census.db
+- data/estimator_learning.db
+- data/gdrive_sync.db
+- data/fin_automation.db-wal
+- data/data_feeds.db
+- data/cost_engine.db-wal
+- data/ar_invoices.db
+- data/projects.db
+- data/bid_pipeline.db
+- data/aisc_audit.db
+- data/change_orders.db
+- data/shop_floor.db
+- data/learning_store.db
+- data/messages.db
+- data/idea_checks.db-wal
+- data/conversations.db
+- data/token_usage.db
+- data/houston_permits.db
+- data/cost_engine.db
+- data/idea_checks.db
+- data/bid_leads.db
+- data/audit.db
+- data/fin_automation.db
+- data/bid_pipeline_legacy.db
+- data/predictive.db-wal
+- data/predictive.db
+- data/contacts.db
+- data/ops_agents.db
+- data/outreach_log.db
+- data/houston_market.db
+- data/disa_employees.db
+- data/welding_qa.db
+- DIR data/vj_logs
+- DIR data/calibration
+- FILE ARA_Construction_Alexandria_Rehab_Marketing_Email.md
+- FILE CLAUDE_CODE_NEXT_PROMPT.md
+- FILE COWORK-CLAUDE-CODE-PROMPTS-2026-06-11.md
+- FILE COWORK-HANDOFF-DRAWING-ANALYZER-2026-07-02.md
+- FILE COWORK-HANDOFF-INTAKE-2026-06-11.md
+- FILE COWORK-HANDOFF-MASTER-2026-06-11.md
+- FILE COWORK-HANDOFF-VIDEO2-3-IMPROVEMENTS-2026-07-02.md
+- FILE COWORK-TAILORING-PLAN-INTAKE-V2-2026-06-11.md
+- FILE COWORK-TAILORING-PLAN-MASTER-2026-06-11.md
+- FILE COWORK_REMOTE_REQUESTS.md
+- FILE EPIC-TOOLS-PLAN-2026-07-01.md
+- FILE ENGINEERING-MODES-INTEGRATION-BRIEF.md
+- FILE UPLOADED-MATERIALS-INTEGRATION-PLAN-2026-06-16.md
+- FILE ENV_CHECK_REPORT.txt
+- FILE SYS_CHECK_REPORT.txt
+- FILE FIX_LOG.txt
+- FILE FAST_GIT_LOG.txt
+- FILE PGIT_LOG.txt
+- FILE HANDOFF.md
+- FILE PILOT_LOOP_FINAL_STATUS.md
+- FILE PILOT_LOOP_STATUS_20260520.md
+- FILE CLAUDE.local.md
+- FILE CHECK_ENV.bat
+- FILE CHECK_SYS.bat
+- FILE check_env.py
+- FILE check_sys.py
+- FILE GET_PORTABLE_GIT.bat
+- FILE GET_PORTABLE_GIT.ps1
+- FILE FIX_PATH_AND_GIT.bat
+- FILE FIX_appx_loop.ps1
+- FILE FIX_remove_broken_appx.ps1
+- FILE REPAIR_epic_launcher.bat
+- FILE REPAIR_pdf_handler.bat
+- FILE REVERT_asus_services.bat
+- FILE RUN_appx_fix_as_admin.bat
+- FILE RUN_finish_all_as_admin.bat
+- FILE RUN_remove_broken_appx_as_admin.bat
+- FILE RUN_repair_pdf_and_epic_as_admin.bat
+- FILE RUN_repair_pdf_dll_as_admin.bat
+- FILE repair_pdf_dll.ps1
+- FILE repair_pdf_dll_only.ps1
+- FILE finish_all.ps1
+- FILE _logo_fix_image9.jpeg
+- FILE __bash_newfile_test__.txt
+- FILE _tmp_verify_phasecorr.py
+- FILE _tmp_verify_spaces.py
+- FILE FIX_blinking_*.bat (7 machine-specific display fixes)
+- FILE HANDOFF_CLAUDE_CODE_*.md (19 dated session handoffs)
+- FILE OWNER_PILOT_REPORT/REPORT/FIX_UPDATE_*.md (22 pilot/session reports)
+- FILE library/production-rates.yaml (values removed, template header kept)
+- FILE HANDOFF_MCP_WIREUP.md
+- FILE HANDOFF_REPORT_20260521.md
+- FILE NSL-001_PDF_Diff_Analysis_2026-05-21.md
+- FILE NSL-001_PDF_Fix_2026-05-21.md
+- FILE data/.fuse_hidden* (filesystem artifacts of deleted databases)
+- FILE data/calc_audit.jsonl (operational/owner-calibrated data)
+- FILE data/ceo_interactions.jsonl (operational/owner-calibrated data)
+- FILE data/event_log.jsonl (operational/owner-calibrated data)
+- FILE data/time_saved.json (operational/owner-calibrated data)
+- FILE data/backtest_phase3_results.json (operational/owner-calibrated data)
+- FILE data/vision_cost_baseline.json (operational/owner-calibrated data)
+- FILE data/startup.log (operational/owner-calibrated data)
+- FILE data/vendor_poller_state.json (operational/owner-calibrated data)
+- FILE data/user_prefs.json (operational/owner-calibrated data)
+- FILE data/calibration_2026Q2.json (operational/owner-calibrated data)
+- DIR data/corrections (operational company data)
+- DIR data/projects (operational company data)
+- DIR data/compliance_snapshots (operational company data)
+- DIR data/session (operational company data)
+- DIR data/legacy (operational company data)

@@ -1,0 +1,38 @@
+{
+  "name": "your-company-video-studio",
+  "version": "1.0.0",
+  "description": "Your Company - Hybrid AI Video Production Studio. Routes generation between Runway (cloud) and HyperFrames (local GPU) based on machine capabilities.",
+  "main": "orchestrate.js",
+  "scripts": {
+    "detect": "node orchestrate.js",
+    "render": "npx hyperframes render",
+    "render:watch": "npx hyperframes render --watch",
+    "render:hq": "npx hyperframes render --quality high --fps 60",
+    "runway:status": "echo 'Open app.runwayml.com in Chrome \u2014 Claude in Chrome MCP handles automation'",
+    "clean:assets": "node -e \"require('fs').readdirSync('./src/shared_assets').forEach(f => require('fs').unlinkSync('./src/shared_assets/' + f)); console.log('Shared assets cleared.');\"",
+    "studio:init": "node -e \"['src/runway_chrome','src/hyperframes','src/shared_assets','ACTIVE_PROJECTS','OUTPUTS'].forEach(d => require('fs').mkdirSync(d, {recursive:true})); console.log('Studio folders initialized.');\""
+  },
+  "dependencies": {
+    "hyperframes": "latest"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "video-generation",
+    "runway",
+    "hyperframes",
+    "ai-video",
+    "claude-cowork"
+  ],
+  "author": "Your Company, LLC - Joseph Hasse",
+  "license": "UNLICENSED",
+  "private": true,
+  "notes": {
+    "iMac_2012": "Cowork not supported (no AVX2). Use claude.ai Projects + Runway via Chrome manually.",
+    "windows_gpu": "Full hybrid mode. HyperFrames renders locally. Runway generates cinematic B-roll via Chrome MCP.",
+    "windows_no_gpu": "HyperFrames CPU mode only. No Runway Chrome automation needed.",
+    "runway_credits": "Account: yourcompanyjoseph. Check balance before any generation run."
+  }
+}

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Dashboard | Staff Training | Your Company</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;}
+body{margin:0;background:#0c0c0e;color:#e4e4e7;font-family:'Inter',sans-serif;}
+.wrap{max-width:1100px;margin:0 auto;padding:28px 20px 60px;}
+h1{font-family:'Bebas Neue',sans-serif;font-size:34px;color:#fff;margin:8px 0 2px;}
+.sub{color:#a1a1aa;font-size:13px;margin:0 0 24px;}
+.stats{display:flex;gap:14px;margin:0 0 24px;flex-wrap:wrap;}
+.stat{background:#18181b;border:2px solid #3f3f46;border-left:4px solid #ea580c;padding:14px 20px;min-width:140px;}
+.stat .n{font-family:'Bebas Neue',sans-serif;font-size:30px;color:#ea580c;line-height:1;}
+.stat .l{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#a1a1aa;margin-top:4px;}
+table{width:100%;border-collapse:collapse;background:#18181b;border:2px solid #3f3f46;font-size:13px;}
+th{text-align:left;padding:10px 14px;background:#27272a;color:#a1a1aa;font-size:11px;letter-spacing:.1em;text-transform:uppercase;}
+td{padding:10px 14px;border-top:1px solid #27272a;vertical-align:top;}
+.bar{background:#27272a;height:8px;width:160px;position:relative;}
+.bar > div{position:absolute;left:0;top:0;bottom:0;background:#ea580c;}
+.cert{color:#22c55e;font-weight:700;}
+.pending{color:#a1a1aa;}
+details{cursor:pointer;}
+details summary{color:#ea580c;font-size:12px;}
+details div{color:#a1a1aa;font-size:12px;padding:6px 0 0;line-height:1.7;}
+#err{color:#f87171;font-size:14px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Training Admin Dashboard</h1>
+  <p class="sub">Enrollment, progress, and certification across the 30-module curriculum. Refresh the page for current data.</p>
+  <div class="stats" id="stats"></div>
+  <div id="err"></div>
+  <table id="tbl" style="display:none;">
+    <thead><tr><th>Trainee</th><th>Enrolled</th><th>Progress</th><th>Status</th><th>Last activity</th><th>Detail</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="quiz-meta.js"></script>
+<script src="portal.js"></script>
+<script>
+"use strict";
+(async function(){
+  var sb = window.ncSb;
+  var s = await sb.auth.getSession();
+  if(!s.data.session){ location.href='index.html?next=admin.html'; return; }
+  var r = await sb.rpc('admin_dashboard');
+  if(r.error){ document.getElementById('err').textContent = r.error.message==='Admins only' ? 'This page is for admins. Your account is not flagged as an admin.' : r.error.message; return; }
+  var data = r.data || [];
+  var total = data.length ? data[0].total : 30;
+  var certified = data.filter(function(x){return x.certified;}).length;
+  var stats = document.getElementById('stats');
+  [[data.length,'Enrolled'],[certified,'Certified'],[total,'Modules']].forEach(function(p){
+    var d=document.createElement('div'); d.className='stat';
+    d.innerHTML='<div class="n">'+p[0]+'</div><div class="l">'+p[1]+'</div>';
+    stats.appendChild(d);
+  });
+  var tb=document.getElementById('rows');
+  data.forEach(function(x){
+    var tr=document.createElement('tr');
+    var pct=Math.round(100*x.completed/x.total);
+    var mods=(x.modules||[]).map(function(m){return m.module_id+' ('+new Date(m.updated_at).toLocaleDateString()+')';}).join('<br>')||'None yet';
+    tr.innerHTML='<td><strong>'+(x.full_name||'')+'</strong><br><span style="color:#a1a1aa;">'+x.email+'</span></td>'+
+      '<td>'+new Date(x.enrolled_at).toLocaleDateString()+'</td>'+
+      '<td><div class="bar"><div style="width:'+pct+'%"></div></div>'+x.completed+' / '+x.total+'</td>'+
+      '<td>'+(x.certified?'<span class="cert">CERTIFIED</span>':'<span class="pending">In progress</span>')+'</td>'+
+      '<td>'+(x.last_activity?new Date(x.last_activity).toLocaleString():'-')+'</td>'+
+      '<td><details><summary>Modules</summary><div>'+mods+'</div></details></td>';
+    tb.appendChild(tr);
+  });
+  document.getElementById('tbl').style.display='table';
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Document Flow | Your Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:#000;color:#e4e4e7;
+  font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(circle at 85% 8%,rgba(217,119,6,0.10),transparent 40%),
+    radial-gradient(circle at 15% 92%,rgba(146,64,14,0.07),transparent 40%);
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;padding:0;}
+input,textarea,select{font-family:inherit;}
+p{margin:0;}h1,h2,h3,h4{margin:0;font-weight:normal;}
+.container{max-width:960px;margin:0 auto;padding:0 20px;}
+
+header.site{border-bottom:2px solid #27272a;background:rgba(0,0,0,.85);
+  position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);}
+.header-row{max-width:960px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;}
+.logo-tile{width:40px;height:40px;background:#d97706;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.header-meta .small{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#52525b;}
+.header-meta .big{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin-top:2px;}
+footer.site{max-width:960px;margin:0 auto;padding:28px 20px;border-top:1px solid #27272a;text-align:center;}
+footer.site p{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#3f3f46;}
+
+/* Hero */
+.lab-hero{position:relative;border:2px solid #3f3f46;background:#18181b;overflow:hidden;margin-bottom:28px;}
+.hero-grid{position:absolute;inset:0;opacity:.1;
+  background-image:linear-gradient(rgba(217,119,6,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(217,119,6,.3) 1px,transparent 1px);
+  background-size:24px 24px;}
+.hero-glow{position:absolute;top:-40px;right:-40px;width:220px;height:220px;
+  background:#d97706;border-radius:50%;filter:blur(80px);opacity:.22;}
+.lab-hero-inner{position:relative;padding:28px 24px;}
+.lab-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#fcd34d;margin-bottom:8px;}
+.lab-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,9vw,68px);color:#fff;line-height:.9;margin-bottom:14px;}
+.lab-h1 .accent{color:#fcd34d;}
+.lab-blurb{color:#a1a1aa;max-width:540px;font-size:14px;line-height:1.7;margin-bottom:22px;}
+.lab-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:460px;}
+.lab-stat{border:1px solid #3f3f46;background:rgba(0,0,0,.4);padding:8px 10px;}
+.lab-stat-num{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fcd34d;margin:0;}
+.lab-stat-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#52525b;margin:0;}
+
+/* Category cards */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.cat-card{text-align:left;background:#18181b;border:2px solid #3f3f46;padding:0;overflow:hidden;width:100%;}
+.cat-card.is-done{border-color:#10b981;}
+.cat-stripe{height:6px;}
+.cat-inner{padding:18px;}
+.cat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.cat-icon-tile{width:44px;height:44px;color:#fff;display:flex;align-items:center;justify-content:center;}
+.cat-card h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin:0 0 6px;line-height:1.05;}
+.cat-card-blurb{font-size:12px;color:#a1a1aa;margin:0 0 14px;line-height:1.5;}
+.cat-card-foot{display:flex;justify-content:space-between;align-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:9px;color:#71717a;text-transform:uppercase;letter-spacing:.2em;}
+.cat-progress-track{height:4px;background:#27272a;flex:1;margin-left:12px;max-width:80px;}
+.cat-progress-fill{height:100%;background:#10b981;}
+
+/* Category view */
+.cat-back-btn{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;
+  color:#71717a;display:flex;align-items:center;gap:6px;margin-bottom:20px;}
+.cat-header{background:#18181b;border:2px solid #3f3f46;padding:20px;margin-bottom:16px;}
+.cat-header-inner{display:flex;gap:16px;align-items:flex-start;}
+.cat-header-icon{width:56px;height:56px;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cat-header-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;margin:0;}
+.cat-header-title{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;margin:4px 0;line-height:1;}
+.cat-header-blurb{color:#a1a1aa;font-size:13px;margin:0;line-height:1.5;}
+
+.lesson-list{display:flex;flex-direction:column;gap:8px;}
+.lesson-row{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#18181b;
+  border:2px solid #3f3f46;width:100%;text-align:left;}
+.lesson-row.is-done{border-color:#10b981;}
+.lesson-row.is-locked{opacity:.45;cursor:not-allowed;}
+.lesson-row:not(.is-locked){cursor:pointer;}
+.lesson-num-tile{width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:16px;}
+.lesson-num-tile.done   {background:#10b981;color:#000;}
+.lesson-num-tile.current{background:#fcd34d;color:#000;}
+.lesson-num-tile.pending{background:#27272a;color:#71717a;}
+.lesson-row-meta{flex:1;min-width:0;}
+.lesson-row-title{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin:0;line-height:1.1;}
+.lesson-row-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;margin:4px 0 0;}
+
+/* Reading card */
+.lesson-card{border:2px solid #3f3f46;background:#18181b;}
+.lesson-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.lesson-icon-tile{width:52px;height:52px;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.lesson-card-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;font-weight:700;opacity:.8;margin:0;}
+.lesson-card-title{font-family:'Bebas Neue',sans-serif;font-size:32px;margin:4px 0 0;line-height:1;color:#fff;}
+.lesson-card-body{padding:24px 22px;}
+.lesson-section{margin-bottom:22px;}
+.lesson-section h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fcd34d;margin:0 0 8px;}
+.lesson-section p{color:#a1a1aa;line-height:1.65;margin:0;font-size:14px;}
+.tip-box{background:rgba(217,119,6,.08);border-left:4px solid #d97706;padding:12px 16px;margin-top:20px;}
+.tip-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#fcd34d;margin:0 0 6px;font-weight:700;}
+.tip-body{color:#fde68a;font-size:13px;margin:0;line-height:1.55;font-style:italic;}
+
+.complete-btn{width:100%;margin-top:24px;padding:14px 0;
+  font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.2em;
+  background:#d97706;color:#fff;border:2px solid #d97706;
+  display:flex;align-items:center;justify-content:center;gap:10px;}
+
+/* Doc code reference (inline) */
+.code-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:6px;margin-top:6px;}
+.code-chip{background:#0c0c0c;border:1px solid #3f3f46;padding:8px 10px;}
+.code-chip-code{font-family:'JetBrains Mono',monospace;font-size:11px;color:#fcd34d;font-weight:700;}
+.code-chip-name{font-size:11px;color:#a1a1aa;margin-top:2px;}
+
+/* Folder tree */
+.folder-tree{font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.7;background:#0c0c0c;border:1px solid #3f3f46;padding:14px 16px;margin-top:6px;color:#d4d4d8;}
+.folder-tree .ft-root{color:#fcd34d;}
+.folder-tree .ft-sub{color:#a1a1aa;}
+.folder-tree .ft-leaf{color:#71717a;}
+
+/* Interactive shared */
+.int-card{border:2px solid #3f3f46;background:#18181b;}
+.int-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.int-card-body{padding:24px 22px;}
+
+/* Name the File Quiz */
+.ntf-stage{background:#0c0c0c;border:1px solid #3f3f46;padding:18px;margin-bottom:14px;}
+.ntf-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#fcd34d;margin-bottom:8px;}
+.ntf-memo{background:#1c1917;border-left:3px solid #d97706;padding:12px 14px;margin-bottom:14px;font-size:13px;color:#e4e4e7;line-height:1.6;}
+.ntf-prompt{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#a1a1aa;margin-bottom:8px;}
+.ntf-options{display:grid;grid-template-columns:1fr;gap:6px;}
+.ntf-opt{padding:10px 14px;background:#09090b;border:1px solid #3f3f46;text-align:left;
+  font-family:'JetBrains Mono',monospace;font-size:12px;color:#a1a1aa;line-height:1.4;}
+.ntf-opt:hover{border-color:#fcd34d;}
+.ntf-opt.correct{background:rgba(16,185,129,.12);border-color:#10b981;color:#a7f3d0;}
+.ntf-opt.wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.ntf-feedback{margin-top:14px;padding:10px 14px;font-size:12px;line-height:1.55;}
+.ntf-feedback.ok{background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+.ntf-feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+
+/* Build ICD Folder - file list */
+.bif-intro{background:rgba(217,119,6,.08);border:1px solid #d97706;padding:14px;margin-bottom:18px;}
+.bif-intro p{font-size:13px;color:#fde68a;line-height:1.55;margin:0;}
+.bif-files{display:flex;flex-direction:column;gap:8px;}
+.bif-file{background:#0c0c0c;border:1px solid #3f3f46;padding:10px 14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.bif-file-icon{width:28px;height:28px;background:rgba(217,119,6,.15);border:1px solid #d97706;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.bif-file-name{flex:1;min-width:200px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#e4e4e7;}
+.bif-file-select{background:#09090b;border:1px solid #3f3f46;color:#e4e4e7;padding:6px 10px;font-size:11px;font-family:'JetBrains Mono',monospace;outline:none;min-width:200px;}
+.bif-file-select:focus{border-color:#d97706;}
+.bif-file-verdict{font-size:11px;font-style:italic;width:100%;margin-top:4px;}
+.bif-file-verdict.good{color:#a7f3d0;}
+.bif-file-verdict.bad{color:#fca5a5;}
+.bif-score{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;
+  color:#a1a1aa;margin-top:16px;padding-top:14px;border-top:1px solid #27272a;}
+
+/* Route the Document Quiz */
+.rd-stage{background:#0c0c0c;border:1px solid #3f3f46;padding:18px;margin-bottom:14px;}
+.rd-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#fca5a5;margin-bottom:8px;}
+.rd-doc{background:#1c1917;border-left:3px solid #dc2626;padding:12px 14px;margin-bottom:14px;}
+.rd-doc-title{font-family:'Bebas Neue',sans-serif;font-size:16px;color:#fca5a5;margin-bottom:6px;}
+.rd-doc-desc{font-size:13px;color:#d4d4d8;line-height:1.55;}
+.rd-buttons{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px;}
+.rd-btn{padding:10px 8px;background:#09090b;border:1px solid #3f3f46;
+  font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.05em;color:#a1a1aa;line-height:1.2;}
+.rd-btn:hover{border-color:#fcd34d;}
+.rd-btn.picked-correct{background:rgba(16,185,129,.15);border-color:#10b981;color:#a7f3d0;}
+.rd-btn.picked-wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.rd-btn.correct-shown{background:rgba(16,185,129,.08);border-color:#10b981;color:#a7f3d0;}
+.rd-feedback{margin-top:14px;padding:10px 14px;font-size:12px;line-height:1.55;}
+.rd-feedback.ok{background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+.rd-feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+
+.next-btn{padding:10px 18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.2em;
+  background:#d97706;color:#fff;border:2px solid #d97706;}
+.score-line{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;
+  color:#a1a1aa;margin-top:16px;padding-top:14px;border-top:1px solid #27272a;}
+.progress-line{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:#71717a;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-row">
+    <div class="logo-tile" id="logo-slot"></div>
+    <div class="header-meta">
+      <p class="small">Your Company &middot; Module 8</p>
+      <p class="big">Document Flow</p>
+    </div>
+  </div>
+</header>
+
+<main class="container" style="padding:28px 20px 40px;">
+  <div id="app"></div>
+</main>
+
+<footer class="site">
+  <p>Built by Joseph &middot; Your Company Virtual Office &middot; Internal Use Only</p>
+</footer>
+
+<script>
+"use strict";
+
+// ============================================================================
+// ICONS
+// ============================================================================
+const ICONS={
+  'arrow-right':'<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  'arrow-left': '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  'check':      '<path d="M20 6 9 17l-5-5"/>',
+  'lock':       '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  'file-text':  '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>',
+  'folder':     '<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>',
+  'folder-open':'<path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"/>',
+  'clipboard-list':'<rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/>',
+  'triangle-alert':'<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/>'
+};
+function icon(name,size,color){
+  size=size||16;color=color||'currentColor';
+  var p=ICONS[name]||'';
+  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">'+p+'</svg>';
+}
+
+// ============================================================================
+// DATA
+// ============================================================================
+const CATEGORIES=[
+  { id:'daily', iconKey:'file-text', color:'#d97706',
+    title:'The Daily Six',
+    blurb:'BOLs, COIs, POs, RFQs, invoices, delivery receipts. The documents you handle every week.',
+    lessons:[
+      { id:'ds-1', title:'BOLs & Delivery Receipts',     type:'reading',     minutes:4 },
+      { id:'ds-2', title:'Certificates of Insurance',    type:'reading',     minutes:4 },
+      { id:'ds-3', title:'POs, RFQs, and Invoices',      type:'reading',     minutes:4 },
+      { id:'ds-4', title:'Build the ICD Church Folder',  type:'interactive', minutes:6, intKey:'buildFolder' }
+    ] },
+  { id:'occasional', iconKey:'clipboard-list', color:'#92400e',
+    title:'The Occasional Four',
+    blurb:'Change orders, lien waivers, certified payroll, inspection reports. Rare but high-stakes.',
+    lessons:[
+      { id:'of-1', title:'Change Orders & Lien Waivers', type:'reading', minutes:5 },
+      { id:'of-2', title:'Certified Payroll & Inspection Reports', type:'reading', minutes:4 }
+    ] },
+  { id:'naming', iconKey:'folder', color:'#0e7490',
+    title:'Naming & Filing',
+    blurb:'The convention that makes documents findable six months later.',
+    lessons:[
+      { id:'nf-1', title:'The Naming Convention',        type:'reading',     minutes:4 },
+      { id:'nf-2', title:'The Folder Hierarchy',         type:'reading',     minutes:3 },
+      { id:'nf-3', title:'Name the File Drill',          type:'interactive', minutes:6, intKey:'nameFile' }
+    ] },
+  { id:'redflags', iconKey:'triangle-alert', color:'#dc2626',
+    title:'Red Flags & Routing',
+    blurb:'What never gets signed without review. Dollar thresholds. Government letters.',
+    lessons:[
+      { id:'rf-1', title:'Documents That Never Get Signed Alone', type:'reading', minutes:4 },
+      { id:'rf-2', title:'Dollar Thresholds & Government Letters', type:'reading', minutes:4 },
+      { id:'rf-3', title:'Route the Document',          type:'interactive', minutes:7, intKey:'routeDoc' }
+    ] }
+];
+
+const LESSON_CONTENT={
+  'ds-1':{ sections:[
+    { h:'BOL = Bill of Lading = proof a shipment moved', b:'Every time material arrives at Your Company, it comes with a BOL. The BOL lists: who sent it, who is receiving it, what is in the load, when it shipped. The driver gets one copy, you get one copy, the dock keeps one copy. Without a BOL signed and stamped, you do not have proof of receipt.' },
+    { h:'Five things to check before signing the driver\'s copy', b:'Match the BOL to: (1) company name on a current Your Company PO, (2) PO number listed on the BOL, (3) item count, (4) item description matching paperwork, (5) any visible damage to packaging or material. If anything is off, note it on the BOL with a brief description before signing. Take a photo of the damage with your phone.' },
+    { h:'Delivery Receipt is the outbound version', b:'When Your Company ships fab steel TO a jobsite or client, we generate a Delivery Receipt. The receiving party signs it. That signed receipt is your proof of delivery. File it in the project folder under 05_BOLs alongside the inbound BOLs for that project. Same paper trail, opposite direction.' },
+    { h:'Where they go', b:'Inbound BOL: scan and save as ICD_BOL_2026-05-14.pdf in the project\'s 05_BOLs folder. Outbound Delivery Receipt: same convention, same folder. The physical paper goes in the file cabinet drawer for the current quarter. If material was received against a specific project, the BOL gets tagged to that project.' }
+  ], tip:'When in doubt about whether material is for us, do not sign. Use Phone Script 04 (Delivery dispute) and verify the PO match before accepting anything. Signing a BOL for unknown material can commit Your Company to receiving inventory we did not order.' },
+  'ds-2':{ sections:[
+    { h:'COI = Certificate of Insurance = proof someone is covered', b:'A COI lists the policy types, dollar amounts of coverage, the insured party, and the expiration date. Every vendor working at Your Company\'s facility or on a Your Company jobsite must provide a current COI before they show up. Every client receiving Your Company\'s work also requires our COI before we mobilize.' },
+    { h:'The four numbers that matter', b:'On every COI, look at: (1) General Liability coverage limit, (2) Workers\' Comp coverage, (3) Auto Liability limit, (4) the expiration date. Marathon Petroleum and most major industrial GCs require minimums of $1M per occurrence / $2M aggregate on General Liability. Most expect Workers\' Comp at statutory limits. Below those minimums, the COI gets rejected.' },
+    { h:'Expiration tracking', b:'A COI is only valid until its expiration date. Once expired, the vendor or client has no proof of insurance. Track every COI expiration in the COI Tracker spreadsheet. Renewal reminders go out 30 days before expiration. If you let a vendor with an expired COI onsite, that is a Your Company liability problem.' },
+    { h:'Where they go', b:'Vendor COIs: save in OneDrive at Vendors/[Vendor Name]/COI_2026-05-14.pdf. Our COIs that we send to clients: save in the project folder under 04_Correspondence. Send a renewal reminder to Paul any time you receive a COI with less than 30 days until expiration.' }
+  ], tip:'Paul tracks all COIs for compliance with ISNetworld and Marathon Petroleum requirements. When in doubt about whether a COI meets requirements, send it to Paul first. He has the requirement sheets.' },
+  'ds-3':{ sections:[
+    { h:'RFQ = Request for Quote = someone wants our price', b:'An RFQ arrives when a GC or client wants Your Company to bid a job. It includes: project description, scope of work, drawings, deadline for response. Every RFQ is logged in the bid pipeline tracker. RFQs from new clients route to Owner within 30 minutes via Phone Script 02. RFQs from repeat clients route to Owner for pricing decision.' },
+    { h:'PO = Purchase Order = a binding order', b:'A PO is what we generate when we buy material or services. It includes: vendor, line items, quantities, unit prices, total, PO number, requested delivery date. A PO is a binding commitment of Your Company funds. Only Owner approves POs over $5,000. Below $5K, the shop manager can approve standard restocking.' },
+    { h:'Invoice = a bill we owe or are sending', b:'Incoming invoice: a vendor billing Your Company for material or work delivered. Outgoing invoice: Your Company billing a client for completed fab and erection. Every invoice gets a PO number reference, an invoice number, and an itemized breakdown. No PO reference on an incoming invoice means it does not pay until the PO is verified.' },
+    { h:'Where they go', b:'RFQs: project folder under 01_Bids. POs (outgoing): vendor folder + project folder under 01_Bids. Invoices (incoming): Vendors/[Vendor]/Invoices/INV_[number]_2026-05-14.pdf, and cc Amber. Invoices (outgoing): project folder under 06_Invoices.' }
+  ], tip:'Amber handles AP and AR. Every incoming invoice gets emailed to Amber within 24 hours of receipt with subject NEW INVOICE - [Vendor] - [Amount]. Every outgoing invoice gets cc\'d to Amber when sent.' },
+  'of-1':{ sections:[
+    { h:'Change Order = scope shifted, price shifted too', b:'A change order documents work added or removed from the original contract, with the matching dollar change. Standard form: AIA G701. Three signatures required: GC, Owner, Your Company (Owner). Once all three sign, it is binding. Until then, do not start the new work. Owner has fired vendors who started change-order work without a signed G701.' },
+    { h:'Where Change Orders fit in the paper trail', b:'Original contract + signed change orders = the current binding scope. File every signed G701 in the project folder under 07_Change-Orders. Number them sequentially: CO-001, CO-002. Every change order gets emailed to Amber the day it is signed for accounting reconciliation.' },
+    { h:'Lien Waiver = release of claim against the project', b:'When Your Company gets paid by a client, the client often requires a signed Lien Waiver. This is Your Company giving up the right to file a mechanic\'s lien against the property for the amount paid. There are conditional (only valid once payment clears) and unconditional (valid immediately) waivers.' },
+    { h:'Never sign a Lien Waiver without Amber\'s review', b:'Lien Waivers are legal documents. Signing the wrong one means giving up rights to money you may not have received yet. Every Lien Waiver request goes to Amber first. She reviews the type (partial vs final, conditional vs unconditional) and the amount, then either marks it for Owner\'s signature or sends it back to the client for revision.' }
+  ], tip:'Two documents Owner never signs without Amber first: Lien Waivers and any contract amendment. If a client or GC sends one, route it to Amber the same day. Subject line: LEGAL REVIEW - [type] - [project].' },
+  'of-2':{ sections:[
+    { h:'Certified Payroll = federal/state public works requirement', b:'On public projects (federal, state, school district), Your Company must submit Certified Payroll weekly. This documents that every worker on the project was paid prevailing wage. Form: WH-347 (federal) or state equivalent. Includes worker name, classification, hours, gross pay, deductions, fringe benefits. Submitted to the GC and to the awarding agency.' },
+    { h:'Who builds it and who reviews it', b:'Mario tracks shop floor hours. Paul reviews the wage classifications against the prevailing wage determination for the project. Owner signs the certification (Item 7 on WH-347). Then submitted via the appropriate portal. Late or missing certified payroll on a public job triggers withholding from the next progress payment.' },
+    { h:'Inspection Reports = third-party documentation of work done', b:'OSHA visits, fire marshal inspections, AISC quality audits, structural inspections by the EOR (Engineer of Record). Every inspection generates a written report. Sometimes hand-delivered, sometimes emailed, sometimes mailed weeks later. Every inspection report gets scanned and filed in the project folder under 04_Correspondence. Cc Paul on safety inspections. Cc Owner on AISC and EOR inspections.' },
+    { h:'What never to ignore', b:'An inspection report with a deficiency, defect, or corrective action required is not optional reading. Forward to Paul within one hour, regardless of which inspection. Paul will set up the corrective action plan. The inspection report and the response both get filed.' }
+  ], tip:'Inspection reports often arrive 1-4 weeks after the inspection itself. Mark your calendar to follow up if an expected report does not arrive on time. Missing a deficiency notice in your inbox can cost Your Company a client.' },
+  'nf-1':{ sections:[
+    { h:'The pattern: Project_Type_Description_Date.ext', b:'Every file Your Company creates or receives gets renamed before saving. Pattern: [Project]_[DocType]_[Description]_[YYYY-MM-DD].[ext]. Example: ICD_BOL_WholesaleSteel_2026-05-14.pdf. Project goes first because filenames sort alphabetically and we want all ICD documents to group together when browsing.' },
+    { h:'Why this pattern wins', b:'Sortable: alphabetical sort = grouped by project, then by doc type, then by date. Searchable: search "ICD_BOL" finds every BOL for the ICD project across all dates. Self-explanatory: a stranger opening the OneDrive folder six months from now reads the filename and knows what is inside without opening anything.' },
+    { h:'Date format: YYYY-MM-DD, never anything else', b:'Use 4-digit year, 2-digit month, 2-digit day, separated by hyphens. 2026-05-14. Not 5/14/26. Not May 14, 2026. Not 5-14-26. The reason: YYYY-MM-DD sorts correctly in alphabetical order. 5/14/26 would sort 5/1/26 before 5/14/26 before 5/2/26. Chaos.' }
+  ], tip:'Renaming a file once when you receive it takes 10 seconds. Searching for it 6 months later because it was saved as "document (3).pdf" takes 20 minutes. Always rename before saving.',
+    customHtml:'<div style="margin-top:8px;"><p style="font-family:\'JetBrains Mono\',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:#fcd34d;margin-bottom:8px;">Common doc type codes</p><div class="code-list">'+
+      '<div class="code-chip"><div class="code-chip-code">BOL</div><div class="code-chip-name">Bill of Lading</div></div>'+
+      '<div class="code-chip"><div class="code-chip-code">PO</div><div class="code-chip-name">Purchase Order</div></div>'+
+      '<div class="code-chip"><div class="code-chip-code">INV</div><div class="code-chip-name">Invoice</div></div>'+
+      '<div class="code-chip"><div class="code-chip-code">COI</div><div class="code-chip-name">Certificate of Insurance</div></div>'+
+      '<div class="code-chip"><div class="code-chip-code">RFQ</div><div class="code-chip-name">Request for Quote</div></div>'+
+      '<div class="code-chip"><div class="code-chip-code">DR</div><div class="code-chip-name">Delivery Receipt</div></div>'+
+      '<div class="code-chip"><div class="code-chip-code">CO</div><div class="code-chip-name">Change Order</div></div>'+
+      '<div class="code-chip"><div class="code-chip-code">LW</div><div class="code-chip-name">Lien Waiver</div></div>'+
+      '<div class="code-chip"><div class="code-chip-code">CP</div><div class="code-chip-name">Certified Payroll</div></div>'+
+      '<div class="code-chip"><div class="code-chip-code">IR</div><div class="code-chip-name">Inspection Report</div></div>'+
+    '</div></div>' },
+  'nf-2':{ sections:[
+    { h:'OneDrive root has three top-level folders', b:'01_Projects (active and completed work for clients), 02_Vendors (everything related to suppliers and subs), 03_Admin (insurance, taxes, HR, contracts, internal docs). Every file lives somewhere inside one of those three.' },
+    { h:'Inside 01_Projects: one folder per project', b:'Project folder name: [YYYY]_[ProjectCode]_[ClientName]. Example: 2026_ICD_ICDChurch. Inside each project folder, the standard subfolders are 01_Bids, 02_Drawings, 03_Submittals, 04_Correspondence, 05_BOLs, 06_Invoices, 07_Change-Orders, 08_Closeout. Numbered so they sort in workflow order.' },
+    { h:'Inside 02_Vendors: one folder per vendor', b:'Vendor folder name is just the vendor name. Inside each vendor folder: COI, Invoices, POs, Correspondence, W9. Anything from that vendor lives inside their folder regardless of which project it was for. Cross-reference by tagging the project folder.' },
+    { h:'Why hierarchy beats flat search', b:'OneDrive search works, but a clean hierarchy means you can navigate to anything in 3 clicks. Search is what you do when you cannot remember where you put something. The whole point of a naming convention plus a hierarchy is that you never have to search.' }
+  ], tip:'Joseph maintains the master folder template. When a new project comes in, Joseph creates the project folder with all 8 subfolders pre-built. Do not create new top-level folders. If something does not seem to fit, ask Joseph where to file it.',
+    customHtml:'<div style="margin-top:8px;"><p style="font-family:\'JetBrains Mono\',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:#fcd34d;margin-bottom:8px;">Project folder structure</p>'+
+      '<div class="folder-tree">'+
+        '<div class="ft-root">2026_ICD_ICDChurch/</div>'+
+        '<div class="ft-sub">&nbsp;&nbsp;01_Bids/</div>'+
+        '<div class="ft-sub">&nbsp;&nbsp;02_Drawings/</div>'+
+        '<div class="ft-sub">&nbsp;&nbsp;03_Submittals/</div>'+
+        '<div class="ft-sub">&nbsp;&nbsp;04_Correspondence/</div>'+
+        '<div class="ft-sub">&nbsp;&nbsp;05_BOLs/</div>'+
+        '<div class="ft-sub">&nbsp;&nbsp;06_Invoices/</div>'+
+        '<div class="ft-sub">&nbsp;&nbsp;07_Change-Orders/</div>'+
+        '<div class="ft-sub">&nbsp;&nbsp;08_Closeout/</div>'+
+      '</div></div>' },
+  'rf-1':{ sections:[
+    { h:'The four never-sign-without-review categories', b:'(1) Anything called a contract, agreement, or amendment. (2) Any Lien Waiver. (3) Any document with a dollar amount over $5,000 that commits Your Company to action. (4) Any document from a government agency (federal, state, county, city).' },
+    { h:'What "without review" means', b:'Owner does not sign these until Amber has reviewed them. Amber reads them, flags anything risky, and either green-lights Owner\'s signature or sends it back to the other party for revision. The review usually takes 24-48 hours for routine docs, longer if the document is complex.' },
+    { h:'What you do when one of these arrives', b:'Step 1: do not let it sit on Owner\'s desk for him to sign. Step 2: scan it and save to OneDrive under the project\'s 04_Correspondence folder. Step 3: email Amber the same day with subject LEGAL REVIEW - [doc type] - [project name]. Step 4: place the physical document in Amber\'s inbox. Done.' },
+    { h:'Verbal pressure to sign on the spot is itself a red flag', b:'If a vendor, client, or anyone says "we just need this signed today," the answer is "I will get it in front of Owner and Amber, and we will get back to you within 48 hours." Nobody legitimate insists on same-day signature on a substantive document. The pressure itself is a signal.' }
+  ], tip:'Owner\'s rule: "If Amber has not seen it, I do not sign it." This is non-negotiable. Treat the rule as protection for Owner and for Your Company, not as a delay tactic.' },
+  'rf-2':{ sections:[
+    { h:'The $5,000 threshold', b:'Anything that commits Your Company to spend or owe more than $5,000 needs Owner\'s explicit approval. Standard restocking orders below $5K can flow through normal vendor PO process. Above $5K requires Owner. Above $25K typically requires Amber review of the agreement terms first.' },
+    { h:'The $50,000 threshold', b:'Anything over $50K (change orders, supply contracts, lease commitments) gets full review: Owner + Amber, often with the EOR for technical accuracy. These are project-shaping decisions. They take time.' },
+    { h:'Government agency documents always escalate', b:'Federal: IRS, DOL (Wage & Hour), OSHA, EPA, DOT. State: Texas Workforce Commission, Texas Comptroller, TCEQ, TDLR. Local: Houston/Harris County permits, fire marshal, building inspector. Any document from any of these agencies routes to Paul and Owner the day it arrives. No exceptions, regardless of how routine it looks.' },
+    { h:'The "looks routine" trap', b:'An IRS letter about a routine W-2 correction looks identical to an IRS letter about a $40,000 tax dispute. A Texas Comptroller letter looks the same whether it is a courtesy reminder or a delinquency notice. Never assume government correspondence is routine. Open it, read it, route it. Same day.' }
+  ], tip:'Government letters that sit on Owner\'s desk for two weeks become problems. Every gov letter gets opened, scanned, and emailed to Paul + Owner + Amber within 24 hours of arrival. Subject: GOV [Agency] - [topic] - [date received].' }
+};
+
+// ============================================================================
+// BUILD ICD FOLDER DATA
+// ============================================================================
+const BIF_FOLDERS=[
+  '01_Bids','02_Drawings','03_Submittals','04_Correspondence',
+  '05_BOLs','06_Invoices','07_Change-Orders'
+];
+const BIF_FILES=[
+  { id:'bf1', name:'ICD_RFQ_2026-04-01.pdf',                correct:'01_Bids' },
+  { id:'bf2', name:'ICD_Bid_FinalSubmitted_2026-04-15.pdf', correct:'01_Bids' },
+  { id:'bf3', name:'ICD_Drawings_StructRevC_2026-04-20.dwg',correct:'02_Drawings' },
+  { id:'bf4', name:'ICD_WeldProc_A992_2026-04-22.pdf',      correct:'03_Submittals' },
+  { id:'bf5', name:'ICD_MillCert_A572_2026-04-25.pdf',      correct:'03_Submittals' },
+  { id:'bf6', name:'ICD_Email_TimelineUpdate_2026-05-01.pdf',correct:'04_Correspondence' },
+  { id:'bf7', name:'ICD_BOL_WholesaleSteel_2026-05-02.pdf', correct:'05_BOLs' },
+  { id:'bf8', name:'ICD_BOL_BoltSupplier_2026-05-08.pdf',   correct:'05_BOLs' },
+  { id:'bf9', name:'ICD_INV_001_2026-05-10.pdf',            correct:'06_Invoices' },
+  { id:'bf10',name:'ICD_CO-001_AddedColumns_2026-05-12.pdf',correct:'07_Change-Orders' }
+];
+
+// ============================================================================
+// NAME THE FILE DATA
+// ============================================================================
+const NTF_SCENARIOS=[
+  { id:'ntf1', tag:'BOL inbound',
+    memo:'A Bill of Lading arriving Wednesday May 14, 2026 for the ICD Church project. Material is from Wholesale Steel against PO 4471.',
+    options:[
+      'bol-wholesale-may14.pdf',
+      'ICD_BOL_2026-05-14.pdf',
+      'Wholesale Steel BOL May 14.pdf',
+      'BOL-ICD-051426.pdf'
+    ],
+    correctIdx:1,
+    why:'Project first (ICD), doc type code (BOL), date in YYYY-MM-DD. Sorts cleanly with other ICD BOLs. Other options either use the wrong date format, omit the project, or put the vendor first.' },
+  { id:'ntf2', tag:'Outgoing invoice',
+    memo:'Your Company\'s invoice number 1042 sent to Elite Crossing for $34,500 on March 7, 2026.',
+    options:[
+      'Elite_INV_1042_2026-03-07.pdf',
+      'elite crossing invoice march.pdf',
+      'INV1042.pdf',
+      'Invoice 1042 Elite Crossing 34500.pdf'
+    ],
+    correctIdx:0,
+    why:'Project (Elite), doc type (INV), invoice number, then date. The amount does not belong in the filename. Spaces and lowercase make filenames hard to search and sort.' },
+  { id:'ntf3', tag:'Vendor COI',
+    memo:'Certificate of Insurance from a new vendor Ace Welding Supply, effective May 1, 2026.',
+    options:[
+      'Ace_COI_2026-05-01.pdf',
+      'COI Ace Welding 2026.pdf',
+      'ace welding certificate.pdf',
+      'COI_Ace-Welding-Supply_effective-may-2026.pdf'
+    ],
+    correctIdx:0,
+    why:'Vendor name (short), doc code, effective date. The fourth option is descriptive but not sortable. Spaces and inconsistent date formatting break alphabetical sort.' },
+  { id:'ntf4', tag:'Incoming RFQ',
+    memo:'RFQ received May 10, 2026 from McKinley Construction for a new project codenamed "Lakefront Plaza."',
+    options:[
+      'Lakefront_RFQ_2026-05-10.pdf',
+      'mckinley rfq lakefront.pdf',
+      'RFQ from McKinley.pdf',
+      '2026-05-10 RFQ.pdf'
+    ],
+    correctIdx:0,
+    why:'New project codename goes in the project slot — that is how the file will be found later. The GC sending the RFQ is metadata, not the file identifier.' },
+  { id:'ntf5', tag:'Change order',
+    memo:'Change Order #2 signed May 8, 2026 for Topgolf New Braunfels project, adding $15,000 for additional column work.',
+    options:[
+      'Change Order 2 Topgolf.pdf',
+      'topgolf-change-15k.pdf',
+      'Topgolf_CO-002_2026-05-08.pdf',
+      'CO Topgolf NB 5-8-26.pdf'
+    ],
+    correctIdx:2,
+    why:'Project (Topgolf), doc code (CO) with sequential number (002), then date. The dollar amount does not belong in the filename. "CO-002" sorts before "CO-010" — use leading zeros.' },
+  { id:'ntf6', tag:'Lien Waiver',
+    memo:'Lien Waiver received from ICD General Contractors on May 5, 2026 for a $25,000 progress payment.',
+    options:[
+      'ICD_LW_2026-05-05.pdf',
+      'lien waiver 25k.pdf',
+      'ICD General Contractors Lien Waiver.pdf',
+      'LW-ICD-May-2026.pdf'
+    ],
+    correctIdx:0,
+    why:'Project (ICD), doc code (LW), date. This Lien Waiver will go straight to Amber for review — easy to find later when she has questions.' },
+  { id:'ntf7', tag:'Outgoing PO',
+    memo:'Purchase Order issued by Your Company to Industrial Bolt Co for the Elite Crossing project, dated April 22, 2026.',
+    options:[
+      'Elite_PO_IndustrialBolt_2026-04-22.pdf',
+      'PO Industrial Bolt.pdf',
+      'elite-crossing-bolts.pdf',
+      '2026-04-22 PO IBC.pdf'
+    ],
+    correctIdx:0,
+    why:'Project (Elite), doc code (PO), vendor short name, date. Filed in both Elite\'s 01_Bids folder and the Industrial Bolt vendor folder.' },
+  { id:'ntf8', tag:'Inspection report',
+    memo:'Inspection Report from the AISC quality audit of the Your Company shop on April 15, 2026.',
+    options:[
+      'AISC inspection.pdf',
+      'shop-audit-april.pdf',
+      'Shop_IR_AISC_2026-04-15.pdf',
+      'IR-2026-04-15-AISC.pdf'
+    ],
+    correctIdx:2,
+    why:'When the inspection is not tied to a client project, the "project" slot becomes the location (Shop). Doc code (IR), inspecting body (AISC), date. Filed under 03_Admin since this is internal compliance.' }
+];
+
+// ============================================================================
+// ROUTE THE DOCUMENT DATA
+// ============================================================================
+const RD_ACTIONS=['File only','Cc Amber','Cc Paul','Cc Owner','STOP escalate'];
+const RD_SCENARIOS=[
+  { id:'rd1', title:'Standard inbound BOL',
+    desc:'A Bill of Lading arrives with steel for the Elite Crossing project. Everything matches the open PO and the delivery is on schedule.',
+    correct:'File only',
+    why:'Routine BOL with matching paperwork. Sign it, scan it, file it in Elite_Crossing/05_BOLs. No escalation needed.' },
+  { id:'rd2', title:'New vendor COI',
+    desc:'A new vendor (Industrial Bolt Co) submits their Certificate of Insurance ahead of their first delivery. Valid for 12 months, meets coverage minimums.',
+    correct:'Cc Paul',
+    why:'Paul tracks all vendor COIs for ISNetworld and Marathon Petroleum compliance. New COIs get logged in his tracker. The COI itself is fine — Paul just needs awareness.' },
+  { id:'rd3', title:'New GC sends an RFQ',
+    desc:'A brand-new general contractor calls and emails an RFQ for a $200,000 structural steel package. Project starts in 8 weeks.',
+    correct:'Cc Owner',
+    why:'New client opportunity. Owner handles all pricing decisions and new client relationships. File in the bid pipeline tracker and email Owner with NEW CLIENT subject line.' },
+  { id:'rd4', title:'Signed change order, +$50K',
+    desc:'A signed AIA G701 change order arrives from the Topgolf GC. Scope change adds $50,000 for additional column work. All three signatures present (GC, Owner, Owner already signed last week).',
+    correct:'Cc Owner',
+    why:'Owner already signed but he tracks executed change orders for project margin. Also cc Amber for accounting reconciliation (Amber gets her own routing on financial change orders, but the primary alert is to Owner here since this is on a project he is actively managing).' },
+  { id:'rd5', title:'OSHA inspection report with deficiencies',
+    desc:'An OSHA inspection report arrives from last week\'s site visit. Three deficiencies noted, corrective action required within 30 days.',
+    correct:'STOP escalate',
+    why:'A safety deficiency notice with a 30-day clock is not routine. Forward to Paul AND Owner within one hour of receipt. Paul builds the corrective action plan. Owner approves and tracks. This goes in the project\'s 04_Correspondence with cc to both immediately.' },
+  { id:'rd6', title:'Lien Waiver request',
+    desc:'A client (ICD General Contractors) sends a Lien Waiver for Owner to sign in exchange for a $30,000 progress payment. They are asking for same-day turnaround.',
+    correct:'STOP escalate',
+    why:'Two red flags: it is a Lien Waiver (always Amber review), and they are pressuring for same-day signature (red flag in itself). Save it, email Amber the same day with LEGAL REVIEW subject. Tell the client we will get back to them within 48 hours.' },
+  { id:'rd7', title:'Routine vendor invoice',
+    desc:'A vendor invoice for $1,200 in monthly welding consumables. PO number matches, items match, no surprises.',
+    correct:'Cc Amber',
+    why:'Standard incoming invoice. Amber handles AP. Forward to her with NEW INVOICE - [Vendor] - $1,200 subject. File in vendor folder. The amount is well under the $5K threshold, so no Owner approval needed.' },
+  { id:'rd8', title:'Signed Delivery Receipt',
+    desc:'Mario sends back a signed Delivery Receipt from the Elite Crossing jobsite. All 4 tons of fabricated steel delivered and received by the GC.',
+    correct:'File only',
+    why:'Routine proof-of-delivery. File in Elite_Crossing/05_BOLs alongside the inbound BOLs. No one needs to be notified — this is just paper trail closure on the delivery.' },
+  { id:'rd9', title:'Outgoing invoice for $45K',
+    desc:'You are sending an invoice to Topgolf for $45,000 covering completed shop fabrication of the column package.',
+    correct:'Cc Amber',
+    why:'Outgoing invoices always get cc\'d to Amber (AR tracking). Owner already approved the work — he does not need to be cc\'d on the routine invoice. File in Topgolf/06_Invoices.' },
+  { id:'rd10', title:'IRS notice with $40K liability',
+    desc:'A letter from the IRS marked "Notice of Proposed Adjustment" lands in the mail. The letter references a $40,000 tax liability and requests a response within 30 days.',
+    correct:'STOP escalate',
+    why:'Government letter with a dollar amount and a clock. This is the highest priority of any document type. Scan it, email Paul + Owner + Amber within 24 hours with subject GOV IRS - Proposed Adjustment - 2026-05-14. Physical letter goes directly to Owner\'s desk with a sticky note.' }
+];
+
+// ============================================================================
+// STATE
+// ============================================================================
+var state={
+  view:'home', completed:{},
+  // Build Folder
+  bifPicked:{}, bifChecked:false,
+  // Name the File
+  ntfIdx:0, ntfPicked:{}, ntfRevealed:{},
+  // Route the Document
+  rdIdx:0, rdPicked:{}, rdRevealed:{}
+};
+
+// ============================================================================
+// HELPERS
+// ============================================================================
+function esc(s){ if(s==null)return''; return String(s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];}); }
+function getCat(id){ for(var i=0;i<CATEGORIES.length;i++) if(CATEGORIES[i].id===id) return CATEGORIES[i]; return null; }
+function getLesson(id){
+  for(var i=0;i<CATEGORIES.length;i++){
+    var c=CATEGORIES[i];
+    for(var j=0;j<c.lessons.length;j++) if(c.lessons[j].id===id) return{lesson:c.lessons[j],cat:c,idx:j};
+  }return null;
+}
+function totalLessons(){ return CATEGORIES.reduce(function(a,c){return a+c.lessons.length;},0); }
+function completedCount(){ return Object.keys(state.completed).length; }
+
+// ============================================================================
+// RENDER: HOME
+// ============================================================================
+function renderHome(){
+  var done=completedCount();
+  var html='';
+  html+='<div class="lab-hero"><div class="hero-grid"></div><div class="hero-glow"></div>';
+  html+='<div class="lab-hero-inner">';
+  html+='<p class="lab-eyebrow">Your Company &middot; Module 8</p>';
+  html+='<h1 class="lab-h1">Document <span class="accent">Flow</span></h1>';
+  html+='<p class="lab-blurb">Ten document types you handle. One naming convention. One folder hierarchy. Four red-flag categories that never get signed without review. By the end, a vendor invoice arrives and you know what to do with it before you finish reading the From line.</p>';
+  html+='<div class="lab-stats">';
+  [['4','Categories'],[String(totalLessons()),'Lessons'],['3','Drills'],[String(done),'Done']].forEach(function(s){
+    html+='<div class="lab-stat"><p class="lab-stat-num">'+s[0]+'</p><p class="lab-stat-lbl">'+s[1]+'</p></div>';
+  });
+  html+='</div></div></div>';
+
+  html+='<div class="cat-grid">';
+  CATEGORIES.forEach(function(cat){
+    var doneN=cat.lessons.filter(function(l){return state.completed[l.id];}).length;
+    var tot=cat.lessons.length;
+    var allDone=doneN===tot;
+    var pct=tot?(doneN/tot)*100:0;
+    html+='<button class="cat-card'+(allDone?' is-done':'')+'" data-action="open-cat" data-cat-id="'+cat.id+'">';
+    html+='<div class="cat-stripe" style="background:'+cat.color+';"></div>';
+    html+='<div class="cat-inner">';
+    html+='<div class="cat-top"><div class="cat-icon-tile" style="background:'+cat.color+';">'+icon(cat.iconKey,22,'#fff')+'</div>';
+    if(allDone) html+=icon('check',18,'#10b981');
+    html+='</div>';
+    html+='<h3>'+esc(cat.title)+'</h3>';
+    html+='<p class="cat-card-blurb">'+esc(cat.blurb)+'</p>';
+    html+='<div class="cat-card-foot"><span>'+doneN+'/'+tot+' lessons</span>';
+    html+='<div class="cat-progress-track"><div class="cat-progress-fill" style="width:'+pct+'%;"></div></div>';
+    html+='</div></div></button>';
+  });
+  html+='</div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: CATEGORY
+// ============================================================================
+function renderCategory(cat){
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-home">'+icon('arrow-left',13)+' Back to module home</button>';
+  html+='<div class="cat-header"><div class="cat-header-inner">';
+  html+='<div class="cat-header-icon" style="background:'+cat.color+';">'+icon(cat.iconKey,28,'#fff')+'</div>';
+  html+='<div><p class="cat-header-eyebrow" style="color:'+cat.color+';">Category</p>';
+  html+='<h2 class="cat-header-title">'+esc(cat.title)+'</h2>';
+  html+='<p class="cat-header-blurb">'+esc(cat.blurb)+'</p>';
+  html+='</div></div></div>';
+  html+='<div class="lesson-list">';
+  cat.lessons.forEach(function(l,i){
+    var isDone=!!state.completed[l.id];
+    var prevDone=i===0||!!state.completed[cat.lessons[i-1].id];
+    var locked=!isDone&&!prevDone;
+    var current=!isDone&&prevDone;
+    var tileCls=isDone?'done':current?'current':'pending';
+    var typeLabel=l.type==='reading'?'Reading':'Drill';
+    var typeColor=l.type==='reading'?'#71717a':'#fcd34d';
+    html+='<button class="lesson-row'+(isDone?' is-done':'')+(locked?' is-locked':'')+'"';
+    html+=locked?' disabled':' data-action="open-lesson" data-lesson-id="'+l.id+'"';
+    html+='>';
+    html+='<div class="lesson-num-tile '+tileCls+'">'+(locked?icon('lock',14):isDone?icon('check',18):String(i+1))+'</div>';
+    html+='<div class="lesson-row-meta"><p class="lesson-row-title">'+esc(l.title)+'</p>';
+    html+='<p class="lesson-row-tag" style="color:'+typeColor+';">'+typeLabel+' &middot; ~'+l.minutes+' min</p></div>';
+    if(!locked) html+=icon('arrow-right',16,'#71717a');
+    html+='</button>';
+  });
+  html+='</div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: READING LESSON
+// ============================================================================
+function renderReading(lesson,cat){
+  var c=LESSON_CONTENT[lesson.id]||{sections:[],tip:''};
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="lesson-card">';
+  html+='<div class="lesson-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="lesson-card-body">';
+  c.sections.forEach(function(s){
+    html+='<div class="lesson-section"><h3>'+esc(s.h)+'</h3><p>'+esc(s.b)+'</p></div>';
+  });
+  if(c.customHtml){
+    html+=c.customHtml;
+  }
+  if(c.tip){
+    html+='<div class="tip-box"><p class="tip-eyebrow">Joseph\'s tip</p><p class="tip-body">'+esc(c.tip)+'</p></div>';
+  }
+  html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// INTERACTIVE 1: BUILD ICD CHURCH FOLDER (ds-4)
+// ============================================================================
+function renderBuildFolder(lesson,cat){
+  var allPicked=BIF_FILES.every(function(f){return!!state.bifPicked[f.id];});
+  var correctCount=BIF_FILES.filter(function(f){return state.bifPicked[f.id]===f.correct;}).length;
+
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon('folder-open',26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+
+  html+='<div class="bif-intro"><p>Ten files for the ICD Church project landed in the OneDrive inbox. Sort each one into the correct subfolder. The folder hierarchy from the last lesson is your reference.</p></div>';
+
+  html+='<div class="bif-files">';
+  BIF_FILES.forEach(function(f){
+    var picked=state.bifPicked[f.id]||'';
+    var checked=state.bifChecked&&picked;
+    var verdict='';
+    if(checked){
+      verdict=picked===f.correct?'Correct.':'Should be '+f.correct+'.';
+    }
+    html+='<div class="bif-file">';
+    html+='<div class="bif-file-icon">'+icon('file-text',14,'#fcd34d')+'</div>';
+    html+='<div class="bif-file-name">'+esc(f.name)+'</div>';
+    html+='<select class="bif-file-select" data-action="bif-pick" data-file-id="'+f.id+'"'+(state.bifChecked?' disabled':'')+'>';
+    html+='<option value="">-- choose folder --</option>';
+    BIF_FOLDERS.forEach(function(fold){
+      html+='<option value="'+esc(fold)+'"'+(picked===fold?' selected':'')+'>'+esc(fold)+'</option>';
+    });
+    html+='</select>';
+    if(verdict){
+      var vCls=picked===f.correct?'good':'bad';
+      html+='<div class="bif-file-verdict '+vCls+'">'+esc(verdict)+'</div>';
+    }
+    html+='</div>';
+  });
+  html+='</div>';
+
+  if(state.bifChecked){
+    html+='<div class="bif-score">'+icon('check',13,'#fcd34d')+' Score: '+correctCount+'/'+BIF_FILES.length+'</div>';
+    html+='<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;">';
+    html+='<button class="complete-btn" style="width:auto;margin-top:0;padding:10px 22px;" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+    html+='<button style="font-family:\'JetBrains Mono\',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;padding:10px 16px;background:#27272a;color:#a1a1aa;border:1px solid #3f3f46;" data-action="bif-reset">Try again</button>';
+    html+='</div>';
+  } else {
+    html+='<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px;">';
+    var disabled=!allPicked;
+    html+='<button class="next-btn"'+(disabled?' disabled style="opacity:.4;"':'')+' data-action="bif-check">Check answers</button>';
+    if(disabled) html+='<span class="progress-line">Sort all 10 to unlock</span>';
+    html+='</div>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// INTERACTIVE 2: NAME THE FILE DRILL (nf-3)
+// ============================================================================
+function renderNameFile(lesson,cat){
+  var idx=state.ntfIdx;
+  var s=NTF_SCENARIOS[idx];
+  var picked=state.ntfPicked[s.id];
+  var revealed=state.ntfRevealed[s.id];
+  var total=NTF_SCENARIOS.length;
+  var allDone=NTF_SCENARIOS.every(function(sc){return state.ntfRevealed[sc.id];});
+  var correctCount=NTF_SCENARIOS.filter(function(sc){return state.ntfPicked[sc.id]===sc.correctIdx;}).length;
+
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Eight documents arrive. Pick the correctly-named version each time. The right name follows Project_Type_Description_YYYY-MM-DD.</p>';
+
+  html+='<div class="ntf-stage">';
+  html+='<p class="ntf-tag">'+esc(s.tag)+' &middot; Scenario '+(idx+1)+' of '+total+'</p>';
+  html+='<div class="ntf-memo">'+esc(s.memo)+'</div>';
+  html+='<p class="ntf-prompt">Pick the correctly-named file</p>';
+  html+='<div class="ntf-options">';
+  s.options.forEach(function(opt,i){
+    var cls='ntf-opt';
+    if(revealed){
+      if(i===s.correctIdx) cls+=' correct';
+      else if(i===picked) cls+=' wrong';
+    }
+    html+='<button class="'+cls+'" data-action="ntf-pick" data-opt-idx="'+i+'">'+esc(opt)+'</button>';
+  });
+  html+='</div>';
+  if(revealed){
+    var ok=picked===s.correctIdx;
+    html+='<div class="ntf-feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Not quite. ')+esc(s.why)+'</div>';
+    if(idx<total-1){
+      html+='<div style="text-align:right;margin-top:12px;"><button class="next-btn" data-action="ntf-next">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+    }
+  }
+  html+='</div>';
+
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#fcd34d')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// INTERACTIVE 3: ROUTE THE DOCUMENT (rf-3)
+// ============================================================================
+function renderRouteDoc(lesson,cat){
+  var idx=state.rdIdx;
+  var s=RD_SCENARIOS[idx];
+  var picked=state.rdPicked[s.id];
+  var revealed=state.rdRevealed[s.id];
+  var total=RD_SCENARIOS.length;
+  var allDone=RD_SCENARIOS.every(function(sc){return state.rdRevealed[sc.id];});
+  var correctCount=RD_SCENARIOS.filter(function(sc){return state.rdPicked[sc.id]===sc.correct;}).length;
+
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Ten incoming documents. Pick the right routing action for each. File only, cc a specific person, or STOP and escalate.</p>';
+
+  html+='<div class="rd-stage">';
+  html+='<p class="rd-tag">'+icon('triangle-alert',10,'#fca5a5')+' Scenario '+(idx+1)+' of '+total+'</p>';
+  html+='<div class="rd-doc"><div class="rd-doc-title">'+esc(s.title)+'</div><div class="rd-doc-desc">'+esc(s.desc)+'</div></div>';
+  html+='<div class="rd-buttons">';
+  RD_ACTIONS.forEach(function(a){
+    var cls='rd-btn';
+    if(revealed){
+      if(a===s.correct) cls+=picked===a?' picked-correct':' correct-shown';
+      else if(a===picked) cls+=' picked-wrong';
+    }
+    html+='<button class="'+cls+'" data-action="rd-pick" data-act="'+esc(a)+'">'+esc(a)+'</button>';
+  });
+  html+='</div>';
+  if(revealed){
+    var ok=picked===s.correct;
+    html+='<div class="rd-feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Should be '+esc(s.correct)+'. ')+esc(s.why)+'</div>';
+    if(idx<total-1){
+      html+='<div style="text-align:right;margin-top:12px;"><button class="next-btn" data-action="rd-next">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+    }
+  }
+  html+='</div>';
+
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#fcd34d')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// LESSON DISPATCHER
+// ============================================================================
+function renderLesson(lesson,cat){
+  if(lesson.type==='reading') return renderReading(lesson,cat);
+  if(lesson.intKey==='buildFolder') return renderBuildFolder(lesson,cat);
+  if(lesson.intKey==='nameFile')    return renderNameFile(lesson,cat);
+  if(lesson.intKey==='routeDoc')    return renderRouteDoc(lesson,cat);
+  return renderReading(lesson,cat);
+}
+
+// ============================================================================
+// RENDER DISPATCH
+// ============================================================================
+function render(){
+  var app=document.getElementById('app');
+  var html='';
+  if(state.view==='home'){
+    html=renderHome();
+  } else if(state.view.indexOf('category:')===0){
+    var cat=getCat(state.view.slice(9));
+    html=cat?renderCategory(cat):renderHome();
+  } else if(state.view.indexOf('lesson:')===0){
+    var info=getLesson(state.view.slice(7));
+    html=info?renderLesson(info.lesson,info.cat):renderHome();
+  }
+  app.innerHTML=html;
+
+  // Wire dropdowns for Build Folder
+  if(state.view.indexOf('lesson:')===0){
+    var info2=getLesson(state.view.slice(7));
+    if(info2&&info2.lesson.intKey==='buildFolder'){
+      setTimeout(function(){
+        document.querySelectorAll('.bif-file-select').forEach(function(sel){
+          sel.addEventListener('change',function(e){
+            var fid=e.target.getAttribute('data-file-id');
+            state.bifPicked[fid]=e.target.value;
+            render();
+          });
+        });
+      },50);
+    }
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ============================================================================
+// EVENT DELEGATION
+// ============================================================================
+document.body.addEventListener('click',function(ev){
+  var t=ev.target.closest('[data-action]');
+  if(!t) return;
+  var action=t.getAttribute('data-action');
+
+  if(action==='open-cat'){ state.view='category:'+t.getAttribute('data-cat-id'); render(); }
+  else if(action==='back-home'){ state.view='home'; render(); }
+  else if(action==='back-cat'){ state.view='category:'+t.getAttribute('data-cat-id'); render(); }
+  else if(action==='open-lesson'){
+    var lid=t.getAttribute('data-lesson-id');
+    var info=getLesson(lid);
+    if(info){
+      if(info.lesson.intKey==='buildFolder'){ state.bifPicked={}; state.bifChecked=false; }
+      if(info.lesson.intKey==='nameFile'){    state.ntfIdx=0; state.ntfPicked={}; state.ntfRevealed={}; }
+      if(info.lesson.intKey==='routeDoc'){    state.rdIdx=0; state.rdPicked={}; state.rdRevealed={}; }
+    }
+    state.view='lesson:'+lid; render();
+  }
+  else if(action==='complete-lesson'){
+    var lid2=t.getAttribute('data-lesson-id');
+    state.completed[lid2]=true;
+    var info2=getLesson(lid2);
+    if(info2){
+      var next=null;
+      for(var i=0;i<info2.cat.lessons.length;i++){
+        if(info2.cat.lessons[i].id===lid2&&i+1<info2.cat.lessons.length){ next=info2.cat.lessons[i+1]; break; }
+      }
+      state.view=next?'lesson:'+next.id:'category:'+info2.cat.id;
+      render();
+    }
+  }
+  // Build Folder
+  else if(action==='bif-check'){ state.bifChecked=true; render(); }
+  else if(action==='bif-reset'){ state.bifPicked={}; state.bifChecked=false; render(); }
+  // Name the File
+  else if(action==='ntf-pick'){
+    var sc=NTF_SCENARIOS[state.ntfIdx];
+    if(state.ntfRevealed[sc.id]) return;
+    var idx=parseInt(t.getAttribute('data-opt-idx'),10);
+    state.ntfPicked[sc.id]=idx;
+    state.ntfRevealed[sc.id]=true;
+    render();
+  }
+  else if(action==='ntf-next'){
+    if(state.ntfIdx<NTF_SCENARIOS.length-1){ state.ntfIdx++; render(); }
+  }
+  // Route the Document
+  else if(action==='rd-pick'){
+    var rds=RD_SCENARIOS[state.rdIdx];
+    if(state.rdRevealed[rds.id]) return;
+    var act=t.getAttribute('data-act');
+    state.rdPicked[rds.id]=act;
+    state.rdRevealed[rds.id]=true;
+    render();
+  }
+  else if(action==='rd-next'){
+    if(state.rdIdx<RD_SCENARIOS.length-1){ state.rdIdx++; render(); }
+  }
+});
+
+// ============================================================================
+// INIT
+// ============================================================================
+document.getElementById('logo-slot').innerHTML=icon('file-text',22,'#fff');
+render();
+</script>
+</body>
+</html>

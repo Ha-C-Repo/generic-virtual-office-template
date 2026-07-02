@@ -1,0 +1,113 @@
+#!/bin/sh
+# Canonical pre-commit hook
+# Defends against AI chunked-write truncation per CLAUDE.md.
+# Source: ported from C:\Tools\virtualoffice .githooks/pre-commit on 2026-05-27,
+# adapted for canonical layout. Run from repo root.
+
+set -e
+
+echo "[pre-commit] Python syntax gate on bridge/, mcp_server.py, main.py..."
+python -m py_compile bridge/*.py 2>&1 || {
+    echo ""
+    echo "ERROR: bridge/*.py has syntax errors - aborting commit"
+    python -m compileall bridge/ 2>&1 | head -20
+    exit 1
+}
+
+if [ -f mcp_server.py ]; then
+    python -m py_compile mcp_server.py || {
+        echo "ERROR: mcp_server.py has syntax errors - aborting commit"
+        exit 1
+    }
+fi
+
+if [ -f main.py ]; then
+    python -m py_compile main.py || {
+        echo "ERROR: main.py has syntax errors - aborting commit"
+        exit 1
+    }
+fi
+
+echo "[pre-commit] Truncation sentinel: any staged file ending mid-token or under 64 bytes?"
+# A defensive check for the silent ~4 KB truncation problem documented in CLAUDE.md.
+# Any staged source file with size < 64 bytes that is not __init__.py or an empty placeholder is suspicious.
+staged_short=$(git diff --cached --name-only --diff-filter=AM | while read f; do
+    [ -f "$f" ] || continue
+    case "$f" in
+        *__init__.py|*.gitignore|*.gitkeep|*.md.template) continue;;
+    esac
+    size=$(wc -c < "$f" 2>/dev/null || echo 0)
+    if [ "$size" -lt 64 ] && [ "$size" -gt 0 ]; then
+        echo "$f ($size bytes)"
+    fi
+done)
+
+if [ -n "$staged_short" ]; then
+    echo ""
+    echo "WARNING: staged files under 64 bytes detected. Possible AI-write truncation."
+    echo "$staged_short"
+    echo ""
+    echo "If these are legitimate (deliberately small), commit with --no-verify to override."
+    exit 1
+fi
+
+echo "[pre-commit] CLAUDE.md completeness gate..."
+# Catches the 16 KB-scale truncation the 64-byte sentinel above cannot see.
+# 2026-06-15 incident: a chunked write added one section but dropped the file's
+# tail (the Video module), leaving CLAUDE.md complete-looking but missing whole
+# sections. This gate validates the STAGED blob, not the working copy.
+#
+# REQUIRED_SECTIONS: edit this list when a top-level section is added or removed
+# on purpose. A deliberate change updates the list; an accidental drop trips it.
+REQUIRED_SECTIONS="## Identity
+## Hard Rules
+## Operating Rules
+## Output Format Rules
+## Senior Engineering Operating Modes
+## Bid Document Rules
+## AI Model Routing
+## Governance Tiers
+## Key Interfaces
+## Working in This Codebase
+## Video / Advertisement Module"
+CLAUDE_MIN_BYTES=10000
+
+if git diff --cached --name-only --diff-filter=AM | grep -qx "CLAUDE.md"; then
+    tmp=$(mktemp)
+    git show :CLAUDE.md > "$tmp"
+    claude_fail=0
+
+    bytes=$(wc -c < "$tmp")
+    if [ "$bytes" -lt "$CLAUDE_MIN_BYTES" ]; then
+        echo "ERROR: staged CLAUDE.md is $bytes bytes (floor $CLAUDE_MIN_BYTES). Possible truncation."
+        claude_fail=1
+    fi
+
+    if [ "$(tail -c1 "$tmp" | wc -l)" -eq 0 ]; then
+        echo "ERROR: staged CLAUDE.md does not end with a newline. Possible mid-write truncation."
+        claude_fail=1
+    fi
+
+    OLDIFS=$IFS
+    IFS='
+'
+    for sec in $REQUIRED_SECTIONS; do
+        if ! grep -qF "$sec" "$tmp"; then
+            echo "ERROR: staged CLAUDE.md missing required section: $sec"
+            claude_fail=1
+        fi
+    done
+    IFS=$OLDIFS
+
+    rm -f "$tmp"
+    if [ "$claude_fail" -ne 0 ]; then
+        echo ""
+        echo "CLAUDE.md failed the completeness gate. If a section changed on purpose,"
+        echo "update REQUIRED_SECTIONS in .githooks/pre-commit. To override once, commit"
+        echo "with --no-verify (not recommended for CLAUDE.md)."
+        exit 1
+    fi
+fi
+
+echo "[pre-commit] OK"
+exit 0

@@ -1,0 +1,132 @@
+{
+  "generated": "2026-05-23T20:48:00Z",
+  "process": "bid-estimating v1.0.0 + Ivan-rules A-F + BOQ resolver",
+  "bids": [
+    {
+      "id": "PRJ-2026-IHC-010",
+      "name": "IHC Fruita Clinic",
+      "gc": "Stout - Bountiful",
+      "tonnage_priced": 33.14,
+      "value_priced": 241040,
+      "verdict": "REVIEW_AND_ADJUST",
+      "critical": 3,
+      "high": 3,
+      "medium": 0,
+      "low": 0,
+      "boq_origin": "synthetic",
+      "boq_chosen": "synthetic",
+      "ivan_verified": true,
+      "issues": [
+        {
+          "priority": "Critical",
+          "code": "BOQ_SYNTHETIC",
+          "detail": "No PlanSwift export found. Pipeline used pattern-derived placeholders. Ivan-rule F: do not ship until PlanSwift takeoff replaces the synthetic BOQ."
+        },
+        {
+          "priority": "Critical",
+          "code": "ANCHOR_COUNT_UNREALISTIC",
+          "detail": "Estimate priced 6 anchors. Ivan verified actual ~148 (37 columns x 4 min). Off by ~142 anchors at $[ANCHOR RATE]/EA = ~$10,650."
+        },
+        {
+          "priority": "Critical",
+          "code": "JOIST_NO_SOURCE",
+          "detail": "Joists priced at 5.50 T but drawings show NO joist callouts (only W-shape and HSS). Ivan-rule B: drop joist line to zero."
+        },
+        {
+          "priority": "High",
+          "code": "ANCHOR_DIAM_DEFAULT",
+          "detail": "Proposal template uses 1\"x20\" F1554 default. Drawing shows 3/4\". Update anchor schedule reference per project."
+        },
+        {
+          "priority": "High",
+          "code": "CONNECTION_TIER_MISMATCH",
+          "detail": "Project has moment-frame content per Ivan. 10% connection allowance applied; bump to 15%."
+        },
+        {
+          "priority": "High",
+          "code": "BUILDING_SF_DEFAULTED",
+          "detail": "Building SF priced at 15,000; drawing actual 14,251 (5.3% off). lbs/SF gate depends on this."
+        }
+      ]
+    },
+    {
+      "id": "PRJ-2026-SOU-011",
+      "name": "South Park 183 Bldg 1",
+      "gc": "Burton Construction - Austin",
+      "tonnage_priced": 60.5,
+      "value_priced": 449565,
+      "verdict": "REVIEW_AND_ADJUST",
+      "critical": 2,
+      "high": 2,
+      "medium": 1,
+      "low": 0,
+      "boq_origin": "synthetic",
+      "boq_chosen": "synthetic",
+      "ivan_verified": false,
+      "issues": [
+        {
+          "priority": "Critical",
+          "code": "BOQ_SYNTHETIC",
+          "detail": "No PlanSwift export found. Pipeline used pattern-derived placeholders. Ivan-rule F: do not ship until PlanSwift takeoff replaces the synthetic BOQ."
+        },
+        {
+          "priority": "Critical",
+          "code": "ANCHOR_COUNT_UNREALISTIC",
+          "detail": "Estimate priced 6 anchors but drawings contain 8 anchor mentions. Compute as sum(bolts_per_col); 4 min for simple base, up to 8 for braced frame."
+        },
+        {
+          "priority": "High",
+          "code": "ANCHOR_DIAM_DEFAULT",
+          "detail": "Proposal template uses 1\"x20\" F1554 default. Drawing shows 3/4, 5/8. Update anchor schedule reference per project."
+        },
+        {
+          "priority": "High",
+          "code": "DRAWING_STAGE_MISMATCH",
+          "detail": "Priced as IFC but drawing set is 'Issue for Pricing'. Stage adder needs to bump per Joseph's Q8."
+        },
+        {
+          "priority": "Medium",
+          "code": "CAMBER_PRESENT",
+          "detail": "Drawings mention camber 2 times. Estimate did not carry camber line. Confirm long-span beams (per Joseph Q9)."
+        }
+      ]
+    },
+    {
+      "id": "PRJ-2026-DOL-011",
+      "name": "Dolores PEMB",
+      "gc": "Stout - Bountiful",
+      "tonnage_priced": 2.31,
+      "value_priced": 49189,
+      "verdict": "REVIEW_AND_ADJUST",
+      "critical": 2,
+      "high": 1,
+      "medium": 0,
+      "low": 1,
+      "boq_origin": "synthetic",
+      "boq_chosen": "synthetic",
+      "ivan_verified": false,
+      "issues": [
+        {
+          "priority": "Critical",
+          "code": "BOQ_SYNTHETIC",
+          "detail": "No PlanSwift export found. Pipeline used pattern-derived placeholders. Ivan-rule F: do not ship until PlanSwift takeoff replaces the synthetic BOQ."
+        },
+        {
+          "priority": "Critical",
+          "code": "ANCHOR_COUNT_UNREALISTIC",
+          "detail": "Estimate priced 6 anchors but drawings contain 6 anchor mentions. Compute as sum(bolts_per_col); 4 min for simple base, up to 8 for braced frame."
+        },
+        {
+          "priority": "High",
+          "code": "DRAWING_STAGE_MISMATCH",
+          "detail": "Priced as IFC but drawing set is 'Issued for Permit'. Stage adder needs to bump per Joseph's Q8."
+        },
+        {
+          "priority": "Low",
+          "code": "PEMB_SCOPE_CONFIRMED",
+          "detail": "Drawings confirm PEMB. Bid scoped as misc steel only - matches pemb_misc_only benchmark."
+        }
+      ]
+    }
+  ]
+}

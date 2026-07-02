@@ -1,0 +1,65 @@
+# Your Company Virtual Office v3.2.7 -- Maximum Accuracy Build
+# "90 seconds of accurate > 5 seconds of AI slop" -- Joseph Hasse
+# Install: pip install -r requirements.txt
+
+# -- Core UI --
+pywebview>=5.0.0,<6.0.0           # WebView2 desktop window
+
+# -- Multi-Model AI --
+anthropic>=0.50.0,<1.0.0          # Claude Sonnet (rules, voice, compliance, bids)
+openai>=1.30.0,<2.0.0             # GPT-4o (structured output, Monte Carlo, PDF gen)
+google-genai>=1.0.0               # Gemini 2.5. bridge/gemini_compat.py falls back to google-generativeai
+
+# -- PDF Pipeline (Gemini report: accuracy-first) --
+pymupdf4llm>=1.27.0               # Layout-aware PDF to Markdown/JSON. No GPU. F1=0.864.
+                                   # Auto-installs PyMuPDF. Smart OCR built in.
+                                   # 10-250x cheaper than vision-based extraction.
+pdfplumber>=0.11.0                 # Backup: table extraction, text density analysis
+reportlab>=4.0                     # PDF generation (bid proposals, change orders)
+
+# -- Engineering / Math Firewall --
+numpy>=1.26.0                      # Geometry calculations, AISC weight math
+pandas>=2.2.0                      # Dataframe ops: AISC CSV, takeoff analysis,
+                                   # bid history analytics, revision diffing
+trimesh>=4.0.0                     # 3D wireframe for takeoff validation.
+                                   # Floating beam = takeoff error flag.
+openpyxl>=3.1.0                    # xlsx read/write: PC1 baseline budget
+                                   # (bridge/project_controls.py), registers,
+                                   # calc pack exports
+
+# -- CAD / Drawing Output --
+numpy-stl>=3.1.0                   # STL 3D model generation
+ezdxf>=1.3.0                       # DXF file generation (AutoCAD, CNC)
+
+# -- Image Processing (optional, lazy-imported) --
+opencv-python>=4.8.0               # Preprocessing: grayscale, threshold, bilateral, CLAHE
+                                   # Used by drawing_intel/preprocessor.py and visual_diff.py
+
+# -- Infrastructure --
+httpx>=0.27.0                      # HTTP client (HTTP/1.1 for anthropic SDK)
+flask>=3.0.0                       # Webhook HTTP server
+psutil>=5.9                        # System info
+truststore>=0.9.0                  # Windows TLS fix
+
+# -- Data Feeds --
+fredapi>=0.5.0                     # FRED API for steel PPI data
+
+# -- Communications --
+twilio>=8.0.0                      # SMS command channel
+
+# -- Platform-Specific --
+pywin32>=306; sys_platform=="win32"  # Outlook COM (bid scanner)
+
+# -- BUILD ONLY --
+# pyinstaller>=6.0.0
+# yfinance>=0.2.36
+
+# -- NOT INCLUDED (requires GPU) --
+# easyocr>=1.7.0                   # Pulls PyTorch. Use pymupdf4llm OCR instead.
+# torch / tensorflow               # GPU-dependent. Gemini handles vision.
+
+# -- SYSTEM DEPENDENCY (not pip) --
+# Tesseract OCR for pymupdf4llm:
+#   Windows: github.com/UB-Mannheim/tesseract/wiki
+#   macOS:   brew install tesseract
+#   Ubuntu:  sudo apt install tesseract-ocr

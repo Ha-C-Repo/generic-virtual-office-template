@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Training Suite | Your Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:#000;color:#e4e4e7;font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(circle at 85% 8%,rgba(251,191,36,0.10),transparent 40%),radial-gradient(circle at 15% 92%,rgba(120,53,15,0.08),transparent 40%);}
+a{color:inherit;text-decoration:none;}
+p{margin:0;}h1,h2,h3,h4{margin:0;font-weight:normal;}
+.container{max-width:1100px;margin:0 auto;padding:0 20px;}
+
+header.site{border-bottom:2px solid #27272a;background:rgba(0,0,0,.85);position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);}
+.header-row{max-width:1100px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;}
+.logo-tile{width:40px;height:40px;background:#fbbf24;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.header-meta .small{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#52525b;}
+.header-meta .big{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin-top:2px;letter-spacing:.02em;}
+footer.site{max-width:1100px;margin:0 auto;padding:28px 20px;border-top:1px solid #27272a;text-align:center;}
+footer.site p{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#3f3f46;}
+
+.hero{position:relative;border:2px solid #3f3f46;background:#18181b;overflow:hidden;margin-bottom:32px;}
+.hero-grid{position:absolute;inset:0;opacity:.1;
+  background-image:linear-gradient(rgba(251,191,36,.25) 1px,transparent 1px),linear-gradient(90deg,rgba(251,191,36,.25) 1px,transparent 1px);
+  background-size:24px 24px;}
+.hero-glow{position:absolute;top:-60px;right:-60px;width:280px;height:280px;background:#fbbf24;border-radius:50%;filter:blur(100px);opacity:.18;}
+.hero-inner{position:relative;padding:36px 28px;}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#fbbf24;margin-bottom:10px;}
+.hero-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,10vw,84px);color:#fff;line-height:.88;margin-bottom:14px;letter-spacing:.01em;}
+.hero-h1 .accent{color:#fbbf24;}
+.hero-blurb{color:#a1a1aa;max-width:620px;font-size:14px;line-height:1.7;margin-bottom:24px;}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:520px;}
+.hero-stat{border:1px solid #3f3f46;background:rgba(0,0,0,.4);padding:10px 12px;}
+.hero-stat-num{font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fbbf24;margin:0;line-height:1;}
+.hero-stat-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#52525b;margin:4px 0 0;}
+
+.phase{margin-bottom:36px;}
+.phase-header{display:flex;align-items:baseline;gap:14px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid #27272a;}
+.phase-num{font-family:'Bebas Neue',sans-serif;font-size:48px;color:#fbbf24;line-height:1;}
+.phase-meta-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#71717a;margin:0;}
+.phase-meta-title{font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;line-height:1;margin:4px 0 0;}
+.phase-blurb{color:#71717a;font-size:12px;margin-left:auto;max-width:300px;text-align:right;font-style:italic;line-height:1.4;}
+
+.mod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;}
+.mod-card{display:block;background:#18181b;border:2px solid #3f3f46;overflow:hidden;transition:transform .15s ease,border-color .15s ease;}
+.mod-card:hover{transform:translateY(-2px);border-color:#fbbf24;}
+.mod-stripe{height:6px;}
+.mod-inner{padding:16px 18px;}
+.mod-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.mod-num{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.05em;}
+.mod-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#52525b;}
+.mod-title{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;line-height:1.05;margin:0 0 8px;}
+.mod-blurb{font-size:12px;color:#a1a1aa;line-height:1.55;margin:0 0 12px;}
+.mod-foot{display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:9px;color:#71717a;text-transform:uppercase;letter-spacing:.2em;padding-top:10px;border-top:1px solid #27272a;}
+.mod-foot .arrow{color:#fbbf24;}
+
+.legend{background:#0c0c0c;border:1px solid #27272a;padding:14px 18px;margin-bottom:28px;display:flex;flex-wrap:wrap;align-items:center;gap:16px;}
+.legend-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.25em;color:#fbbf24;flex-shrink:0;}
+.legend-text{font-size:12px;color:#a1a1aa;line-height:1.5;flex:1;min-width:200px;}
+.legend-text strong{color:#e4e4e7;font-weight:600;}
+
+.bottom-note{margin-top:32px;padding:20px;background:linear-gradient(135deg,rgba(251,191,36,.08),rgba(120,53,15,.05));border:2px solid #3f3f46;border-left:4px solid #fbbf24;}
+.bottom-note h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin:0 0 8px;line-height:1.1;}
+.bottom-note p{color:#a1a1aa;font-size:13px;line-height:1.6;margin:0 0 6px;}
+.bottom-note p:last-child{margin:0;}
+.bottom-note strong{color:#fbbf24;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-row">
+    <div class="logo-tile">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1z"/><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M4 15v-3a6 6 0 0 1 6-6"/><path d="M14 6a6 6 0 0 1 6 6v3"/></svg>
+    </div>
+    <div class="header-meta">
+      <p class="small">Your Company &middot; Training Suite</p>
+      <p class="big">31-Module Curriculum</p>
+    </div>
+  </div>
+</header>
+
+<main class="container" style="padding:32px 20px 40px;">
+
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Built by Joseph &middot; Internal Use Only</p>
+      <h1 class="hero-h1">Staff <span class="accent">Training Suite</span></h1>
+      <p class="hero-blurb">The full operations curriculum, learning from the front desk up. It runs from foundation and daily tools through operational discipline and business domain, into compliance and projects, then into the executive-assistant and office-manager work that keeps all three companies running. Every module is interactive and self-paced, built around how Your Company actually operates.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><p class="hero-stat-num">31</p><p class="hero-stat-lbl">Modules</p></div>
+        <div class="hero-stat"><p class="hero-stat-num">7</p><p class="hero-stat-lbl">Phases</p></div>
+        <div class="hero-stat"><p class="hero-stat-num">~290</p><p class="hero-stat-lbl">Lessons</p></div>
+        <div class="hero-stat"><p class="hero-stat-num">~38h</p><p class="hero-stat-lbl">Total time</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="legend">
+    <span class="legend-tag">How to use</span>
+    <p class="legend-text">Click any module to open it. <strong>Lessons unlock sequentially within each module</strong> (Lesson 2 requires Lesson 1 complete, etc.), but the suite itself is unlocked. Take them in order for the build-up; jump around if you need a specific topic. Lesson progress inside a module is per session; module completion is tracked on your account via each module's final knowledge check.</p>
+  </div>
+
+  <section class="phase">
+    <div class="phase-header">
+      <div class="phase-num">01</div>
+      <div>
+        <p class="phase-meta-eyebrow">Phase One</p>
+        <h2 class="phase-meta-title">Foundation</h2>
+      </div>
+      <p class="phase-blurb">Workplace setup, the tools on your screen, and the language of steel.</p>
+    </div>
+    <div class="mod-grid">
+
+      <a class="mod-card" href="front-desk.html">
+        <div class="mod-stripe" style="background:#fbbf24;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#fbbf24;">M01</span><span class="mod-tag">Procedural</span></div>
+          <h3 class="mod-title">Front Desk Procedural</h3>
+          <p class="mod-blurb">Reception flow, phone handling, deliveries, visitors, after-hours protocol. The first surface anyone hits when they reach Your Company.</p>
+          <div class="mod-foot"><span>Reading + drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="w11-m365-lab.html">
+        <div class="mod-stripe" style="background:#2563eb;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#2563eb;">M02</span><span class="mod-tag">Lab</span></div>
+          <h3 class="mod-title">Windows 11 & M365 Lab</h3>
+          <p class="mod-blurb">OS basics, Microsoft 365 login flow, file and folder hygiene, password and 2FA discipline. The platform everything else sits on top of.</p>
+          <div class="mod-foot"><span>Lab + walkthroughs</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="ai-productivity.html">
+        <div class="mod-stripe" style="background:#a855f7;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#a855f7;">M03</span><span class="mod-tag">AI</span></div>
+          <h3 class="mod-title">AI Productivity</h3>
+          <p class="mod-blurb">Claude as a tool, prompting fundamentals, when AI saves time, when it adds risk. How Your Company uses AI without losing judgment.</p>
+          <div class="mod-foot"><span>Reading + practice</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="steel-101.html">
+        <div class="mod-stripe" style="background:#ea580c;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#ea580c;">M04</span><span class="mod-tag">Domain</span></div>
+          <h3 class="mod-title">Steel 101</h3>
+          <p class="mod-blurb">Shapes (W, HSS, angles, plates), grades (A992, A36, A500), the AISC vocabulary, and how 11 hours per ton at $145/hr produces a quote.</p>
+          <div class="mod-foot"><span>Reading + calculator</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="phase">
+    <div class="phase-header">
+      <div class="phase-num">02</div>
+      <div>
+        <p class="phase-meta-eyebrow">Phase Two</p>
+        <h2 class="phase-meta-title">Communication Tools</h2>
+      </div>
+      <p class="phase-blurb">Teams, Office, and how a professional sounds in writing and on the phone.</p>
+    </div>
+    <div class="mod-grid">
+
+      <a class="mod-card" href="teams-full.html">
+        <div class="mod-stripe" style="background:#5b5fc7;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#5b5fc7;">M05</span><span class="mod-tag">Teams</span></div>
+          <h3 class="mod-title">Microsoft Teams</h3>
+          <p class="mod-blurb">Channels, chats, meetings, shared files, the Your Company channel-naming convention. The daily nerve center for everyone on the team.</p>
+          <div class="mod-foot"><span>Reading + drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="office-full.html">
+        <div class="mod-stripe" style="background:#185abd;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#185abd;">M06</span><span class="mod-tag">Office</span></div>
+          <h3 class="mod-title">Office Apps</h3>
+          <p class="mod-blurb">Word, Excel, PowerPoint, Outlook. Real workflow patterns Your Company uses every day: trackers, proposals, mail rules, quote sheets.</p>
+          <div class="mod-foot"><span>Reading + practice</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="comms.html">
+        <div class="mod-stripe" style="background:#0d9488;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#0d9488;">M07</span><span class="mod-tag">Comms</span></div>
+          <h3 class="mod-title">Business Communication</h3>
+          <p class="mod-blurb">Email tone, phone manners, escalation paths, how to write to a GC vs. a vendor vs. a colleague. The voice of Your Company on every outbound message.</p>
+          <div class="mod-foot"><span>Reading + drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="phase">
+    <div class="phase-header">
+      <div class="phase-num">03</div>
+      <div>
+        <p class="phase-meta-eyebrow">Phase Three</p>
+        <h2 class="phase-meta-title">Operational Discipline</h2>
+      </div>
+      <p class="phase-blurb">Where documents live and when work happens. The rhythms that keep the shop running.</p>
+    </div>
+    <div class="mod-grid">
+
+      <a class="mod-card" href="doc-flow.html">
+        <div class="mod-stripe" style="background:#d97706;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#d97706;">M08</span><span class="mod-tag">Documents</span></div>
+          <h3 class="mod-title">Document Flow</h3>
+          <p class="mod-blurb">Folder hierarchy (01_Projects, 02_Vendors, 03_Admin), filename conventions, version control, archive discipline. Where everything goes and how to find it later.</p>
+          <div class="mod-foot"><span>Reading + drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="scheduling.html">
+        <div class="mod-stripe" style="background:#9333ea;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#9333ea;">M09</span><span class="mod-tag">Calendar</span></div>
+          <h3 class="mod-title">Scheduling & Calendar</h3>
+          <p class="mod-blurb">the Owner's weekly rhythm, the 5 priority rules, when to interrupt vs. when to queue. The discipline of protecting deep work and surfacing urgent items.</p>
+          <div class="mod-foot"><span>Reading + drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="phase">
+    <div class="phase-header">
+      <div class="phase-num">04</div>
+      <div>
+        <p class="phase-meta-eyebrow">Phase Four</p>
+        <h2 class="phase-meta-title">Business Domain</h2>
+      </div>
+      <p class="phase-blurb">Compliance, project lifecycle, and the human side of vendors and clients.</p>
+    </div>
+    <div class="mod-grid">
+
+      <a class="mod-card" href="isn-compliance.html">
+        <div class="mod-stripe" style="background:#475569;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#475569;">M10</span><span class="mod-tag">Compliance</span></div>
+          <h3 class="mod-title">ISN & Compliance</h3>
+          <p class="mod-blurb">ISNetworld, the 18 safety programs, RAVS questionnaires, the Marathon Petroleum approval pathway, and the Monday-morning expiration tracker.</p>
+          <div class="mod-foot"><span>Reading + 3 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="job-lifecycle.html">
+        <div class="mod-stripe" style="background:#0891b2;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#0891b2;">M11</span><span class="mod-tag">Projects</span></div>
+          <h3 class="mod-title">Job Lifecycle</h3>
+          <p class="mod-blurb">Quote to closeout, the 8 stages, the two-PDF rule with the -GP suffix, deck supply-and-install scope, and the GP report that never goes to the client.</p>
+          <div class="mod-foot"><span>Reading + 3 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="vendor-client.html">
+        <div class="mod-stripe" style="background:#e11d48;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#e11d48;">M12</span><span class="mod-tag">Relationships</span></div>
+          <h3 class="mod-title">Vendor & Client Mgmt</h3>
+          <p class="mod-blurb">COI tracking, the Wednesday-PM vendor protocol, the walk-to-Owner list, GC tone vs. vendor tone, and the dispatcher mindset.</p>
+          <div class="mod-foot"><span>Reading + 3 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="phase">
+    <div class="phase-header">
+      <div class="phase-num">05</div>
+      <div>
+        <p class="phase-meta-eyebrow">Phase Five</p>
+        <h2 class="phase-meta-title">Applied Operations</h2>
+      </div>
+      <p class="phase-blurb">The specific tools and recurring tasks of the front office: the portals, the documents, the money, the phone, and the safety paperwork.</p>
+    </div>
+    <div class="mod-grid">
+
+      <a class="mod-card" href="outlook-depth.html">
+        <div class="mod-stripe" style="background:#15803d;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#15803d;">M13</span><span class="mod-tag">Email</span></div>
+          <h3 class="mod-title">Outlook in Depth</h3>
+          <p class="mod-blurb">The interface, multiple accounts and delegate access, folder and auto-routing rules, and calendar management across the assistant, info, and owner mailboxes.</p>
+          <div class="mod-foot"><span>Reading + 3 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="pdf-pdfgear.html">
+        <div class="mod-stripe" style="background:#c026d3;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#c026d3;">M14</span><span class="mod-tag">Tool</span></div>
+          <h3 class="mod-title">PDF & PDFGear</h3>
+          <p class="mod-blurb">Free PDF editing: merge, split, compress, convert, OCR, sign and fill. Never altering a signed document, and never sending the GP report to a client.</p>
+          <div class="mod-foot"><span>Reading + 3 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="buildingconnected.html">
+        <div class="mod-stripe" style="background:#f4511e;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#f4511e;">M15</span><span class="mod-tag">Bids</span></div>
+          <h3 class="mod-title">BuildingConnected</h3>
+          <p class="mod-blurb">The free Bid Board, reading an ITB from a GC, where drawings and addenda live, and the deadlines that decide whether we even get to bid.</p>
+          <div class="mod-foot"><span>Reading + 3 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="isn-portal.html">
+        <div class="mod-stripe" style="background:#334155;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#334155;">M16</span><span class="mod-tag">Compliance</span></div>
+          <h3 class="mod-title">ISNetworld Portal</h3>
+          <p class="mod-blurb">The portal mechanics behind M10: subscriber vs hiring client, RAVS uploads, the MSQ, one document per requirement, and the EMR-letter blocker.</p>
+          <div class="mod-foot"><span>Reading + 3 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="ap-ar.html">
+        <div class="mod-stripe" style="background:#059669;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#059669;">M17</span><span class="mod-tag">Money</span></div>
+          <h3 class="mod-title">AP &amp; AR</h3>
+          <p class="mod-blurb">Money out and money in. Logging, filing, and routing invoices and receipts, the 5K and 50K thresholds, pay apps, retainage, and polite reminders.</p>
+          <div class="mod-foot"><span>Reading + 3 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="phone-scripts.html">
+        <div class="mod-stripe" style="background:#52525b;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#52525b;">M18</span><span class="mod-tag">Phone</span></div>
+          <h3 class="mod-title">Phone Scripts</h3>
+          <p class="mod-blurb">The greeting and the four questions, facts vs commitments, protecting the Owner's time, the five-part message, and the safe fallback when unsure.</p>
+          <div class="mod-foot"><span>Reading + 3 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="change-orders.html">
+        <div class="mod-stripe" style="background:#dc2626;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#dc2626;">M19</span><span class="mod-tag">Projects</span></div>
+          <h3 class="mod-title">Change Orders</h3>
+          <p class="mod-blurb">Recognizing scope vs change, capturing it exactly, routing it to Owner fast, AIA G701, the 5K and 50K thresholds, and deck always in scope.</p>
+          <div class="mod-foot"><span>Reading + 3 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="safety-fundamentals.html">
+        <div class="mod-stripe" style="background:#1d4ed8;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#1d4ed8;">M20</span><span class="mod-tag">Safety</span></div>
+          <h3 class="mod-title">Safety Fundamentals</h3>
+          <p class="mod-blurb">The front-desk side of safety: recognize and file the documents, track expirations, route incidents to Paul and Owner, and guard the shop door.</p>
+          <div class="mod-foot"><span>Reading + 3 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="phase">
+    <div class="phase-header">
+      <div class="phase-num">06</div>
+      <div>
+        <p class="phase-meta-eyebrow">Phase Six</p>
+        <h2 class="phase-meta-title">Executive Assistant to the CEO</h2>
+      </div>
+      <p class="phase-blurb">Working directly for Owner. Holding the CEO inbox, drafting in his voice, prepping meetings and travel, and keeping every confidence.</p>
+    </div>
+    <div class="mod-grid">
+
+      <a class="mod-card" href="ceo-inbox.html">
+        <div class="mod-stripe" style="background:#1e3a8a;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#1e3a8a;">M21</span><span class="mod-tag">EA</span></div>
+          <h3 class="mod-title">Managing the CEO Inbox</h3>
+          <p class="mod-blurb">Triaging the Owner mailbox as delegate, draft-for-approval vs route-onward, the all-accounts work PC, self-notes, and never sending as Owner without approval.</p>
+          <div class="mod-foot"><span>Reading + 3 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="ceo-drafting.html">
+        <div class="mod-stripe" style="background:#6d28d9;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#6d28d9;">M22</span><span class="mod-tag">EA</span></div>
+          <h3 class="mod-title">Drafting for the CEO</h3>
+          <p class="mod-blurb">Writing in the Owner voice, GC tone vs vendor tone, signing as Owner Steel, the $5K and $50K lines, and the draft-and-hold gate. Nothing sends without approval.</p>
+          <div class="mod-foot"><span>Reading + 3 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="meetings.html">
+        <div class="mod-stripe" style="background:#0e7490;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#0e7490;">M23</span><span class="mod-tag">EA</span></div>
+          <h3 class="mod-title">Meetings</h3>
+          <p class="mod-blurb">Scheduling on the right calendar, the prep packet and one-page brief, minutes that capture decisions and action items with owners and dates, and follow-up until every item is closed.</p>
+          <div class="mod-foot"><span>Reading + 3 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="travel.html">
+        <div class="mod-stripe" style="background:#b45309;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#b45309;">M24</span><span class="mod-tag">EA</span></div>
+          <h3 class="mod-title">Travel</h3>
+          <p class="mod-blurb">Booking flights and hotels with real buffers, the one-page itinerary in local time, calendar and reachability, receipts to AP, company-card confidentiality, and on-the-road support when plans change.</p>
+          <div class="mod-foot"><span>Reading + 3 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="discretion.html">
+        <div class="mod-stripe" style="background:#881337;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#881337;">M25</span><span class="mod-tag">EA</span></div>
+          <h3 class="mod-title">Discretion and Confidentiality</h3>
+          <p class="mod-blurb">What is confidential, the -GP report that never leaves the building, pricing kept private, no cross-entity leakage, and the safe default when pressed: when in doubt, do not.</p>
+          <div class="mod-foot"><span>Reading + 3 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="phase">
+    <div class="phase-header">
+      <div class="phase-num">07</div>
+      <div>
+        <p class="phase-meta-eyebrow">Phase Seven</p>
+        <h2 class="phase-meta-title">Office Manager</h2>
+      </div>
+      <p class="phase-blurb">Running the office across three companies that share one suite. The entities, the building, the budget, onboarding, and keeping the work moving.</p>
+    </div>
+    <div class="mod-grid">
+
+      <a class="mod-card" href="three-companies.html">
+        <div class="mod-stripe" style="background:#4d7c0f;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#4d7c0f;">M26</span><span class="mod-tag">Cross-Entity</span></div>
+          <h3 class="mod-title">The Three Companies</h3>
+          <p class="mod-blurb">Your Company, Pinnacle, and D.O.V.A.: same building, three brands. Telling them apart, routing by domain and phone, the separate DOVA tenant, and never letting data cross the wall.</p>
+          <div class="mod-foot"><span>Reading + 3 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="office-ops.html">
+        <div class="mod-stripe" style="background:#7c2d12;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#7c2d12;">M27</span><span class="mod-tag">OM</span></div>
+          <h3 class="mod-title">Office Ops</h3>
+          <p class="mod-blurb">Running the office day to day for three brands: open and close, the front desk, facilities and equipment, mail by company, office vendors vs job vendors, spend approvals, and the weekly rhythm.</p>
+          <div class="mod-foot"><span>Reading + 3 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="purchasing.html">
+        <div class="mod-stripe" style="background:#115e59;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#115e59;">M28</span><span class="mod-tag">OM</span></div>
+          <h3 class="mod-title">Purchasing</h3>
+          <p class="mod-blurb">The purchasing workflow end to end: quotes and comparison, approval before the order, clean POs, receiving and verifying, the three-way match to AP, and buying smart within budget.</p>
+          <div class="mod-foot"><span>Reading + 3 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="onboarding.html">
+        <div class="mod-stripe" style="background:#4338ca;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#4338ca;">M29</span><span class="mod-tag">OM</span></div>
+          <h3 class="mod-title">Onboarding</h3>
+          <p class="mod-blurb">Bringing a new hire onboard: the first-day packet and workspace ready before day one, the mandatory safety orientation with Paul, accounts and access routed through Joseph in the right tenant, and what a new hire gets day one versus what waits for approval.</p>
+          <div class="mod-foot"><span>Reading + 3 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="supervising.html">
+        <div class="mod-stripe" style="background:#a16207;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#a16207;">M30</span><span class="mod-tag">OM</span></div>
+          <h3 class="mod-title">Supervising</h3>
+          <p class="mod-blurb">The front-office supervisor layer: owning the outcome, delegating clearly, holding standards, following up, covering the desk, feedback that lands, fixing mistakes, and the line where a problem goes to Owner and Amber.</p>
+          <div class="mod-foot"><span>Reading + 3 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+      <a class="mod-card" href="shopqc-quality.html">
+        <div class="mod-stripe" style="background:#475569;"></div>
+        <div class="mod-inner">
+          <div class="mod-top"><span class="mod-num" style="color:#475569;">M31</span><span class="mod-tag">Quality</span></div>
+          <h3 class="mod-title">Shop QC Software</h3>
+          <p class="mod-blurb">The shop quality system end to end: the five tabs and three sign-off gates in order, the locked floor-step sequence at Fabrication, the field 8 CWI gate, the CEO co-sign that must read exactly The Owner, and closing an NCR on the NCR Log.</p>
+          <div class="mod-foot"><span>Reading + 5 drills</span><span class="arrow">Open &rarr;</span></div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <div class="bottom-note">
+    <h3>About this suite</h3>
+    <p>Built specifically for Your Company's front-office training. Every example, name, vendor reference, and dollar figure comes from how the company actually operates. No fictionalized scenarios.</p>
+    <p>Source of truth for compliance facts (ISN ID, Texas Mutual policy, Marathon pathway steps): the active operational documents and Paul's, Amber's, and the Owner's direct input.</p>
+    <p><strong>If something

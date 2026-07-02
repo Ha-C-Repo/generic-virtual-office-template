@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>M26 &middot; Three Companies | Your Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:#000;color:#e4e4e7;
+  font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(circle at 85% 8%,rgba(3,105,161,0.16),transparent 40%),
+    radial-gradient(circle at 15% 92%,rgba(3,105,161,0.10),transparent 40%);
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;padding:0;}
+input,textarea,select{font-family:inherit;}
+p{margin:0;}h1,h2,h3,h4{margin:0;font-weight:normal;}
+.container{max-width:960px;margin:0 auto;padding:0 20px;}
+
+header.site{border-bottom:2px solid #27272a;background:rgba(0,0,0,.85);
+  position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);}
+.header-row{max-width:960px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;}
+.logo-tile{width:40px;height:40px;background:#0369a1;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.header-meta .small{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#52525b;}
+.header-meta .big{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin-top:2px;}
+footer.site{max-width:960px;margin:0 auto;padding:28px 20px;border-top:1px solid #27272a;text-align:center;}
+footer.site p{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#3f3f46;}
+
+.lab-hero{position:relative;border:2px solid #3f3f46;background:#18181b;overflow:hidden;margin-bottom:28px;}
+.hero-grid{position:absolute;inset:0;opacity:.1;
+  background-image:linear-gradient(rgba(3,105,161,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(3,105,161,.3) 1px,transparent 1px);
+  background-size:24px 24px;}
+.hero-glow{position:absolute;top:-40px;right:-40px;width:220px;height:220px;
+  background:#0369a1;border-radius:50%;filter:blur(80px);opacity:.30;}
+.lab-hero-inner{position:relative;padding:28px 24px;}
+.lab-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#7dd3fc;margin-bottom:8px;}
+.lab-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,9vw,68px);color:#fff;line-height:.9;margin-bottom:14px;}
+.lab-h1 .accent{color:#7dd3fc;}
+.lab-blurb{color:#a1a1aa;max-width:560px;font-size:14px;line-height:1.7;margin-bottom:22px;}
+.lab-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:460px;}
+.lab-stat{border:1px solid #3f3f46;background:rgba(0,0,0,.4);padding:8px 10px;}
+.lab-stat-num{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#7dd3fc;margin:0;}
+.lab-stat-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#52525b;margin:0;}
+
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.cat-card{text-align:left;background:#18181b;border:2px solid #3f3f46;padding:0;overflow:hidden;width:100%;}
+.cat-card.is-done{border-color:#10b981;}
+.cat-stripe{height:6px;}
+.cat-inner{padding:18px;}
+.cat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.cat-icon-tile{width:44px;height:44px;color:#fff;display:flex;align-items:center;justify-content:center;}
+.cat-card h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin:0 0 6px;line-height:1.05;}
+.cat-card-blurb{font-size:12px;color:#a1a1aa;margin:0 0 14px;line-height:1.5;}
+.cat-card-foot{display:flex;justify-content:space-between;align-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:9px;color:#71717a;text-transform:uppercase;letter-spacing:.2em;}
+.cat-progress-track{height:4px;background:#27272a;flex:1;margin-left:12px;max-width:80px;}
+.cat-progress-fill{height:100%;background:#10b981;}
+
+.cat-back-btn{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;
+  color:#71717a;display:flex;align-items:center;gap:6px;margin-bottom:20px;}
+.cat-header{background:#18181b;border:2px solid #3f3f46;padding:20px;margin-bottom:16px;}
+.cat-header-inner{display:flex;gap:16px;align-items:flex-start;}
+.cat-header-icon{width:56px;height:56px;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cat-header-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;margin:0;}
+.cat-header-title{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;margin:4px 0;line-height:1;}
+.cat-header-blurb{color:#a1a1aa;font-size:13px;margin:0;line-height:1.5;}
+
+.lesson-list{display:flex;flex-direction:column;gap:8px;}
+.lesson-row{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#18181b;
+  border:2px solid #3f3f46;width:100%;text-align:left;}
+.lesson-row.is-done{border-color:#10b981;}
+.lesson-row.is-locked{opacity:.45;cursor:not-allowed;}
+.lesson-row:not(.is-locked){cursor:pointer;}
+.lesson-num-tile{width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:16px;}
+.lesson-num-tile.done   {background:#10b981;color:#000;}
+.lesson-num-tile.current{background:#7dd3fc;color:#000;}
+.lesson-num-tile.pending{background:#27272a;color:#71717a;}
+.lesson-row-meta{flex:1;min-width:0;}
+.lesson-row-title{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin:0;line-height:1.1;}
+.lesson-row-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;margin:4px 0 0;}
+
+.lesson-card{border:2px solid #3f3f46;background:#18181b;}
+.lesson-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.lesson-icon-tile{width:52px;height:52px;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.lesson-card-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;font-weight:700;opacity:.85;margin:0;}
+.lesson-card-title{font-family:'Bebas Neue',sans-serif;font-size:32px;margin:4px 0 0;line-height:1;color:#fff;}
+.lesson-card-body{padding:24px 22px;}
+.lesson-section{margin-bottom:22px;}
+.lesson-section h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#7dd3fc;margin:0 0 8px;}
+.lesson-section p{color:#a1a1aa;line-height:1.65;margin:0;font-size:14px;}
+.tip-box{background:rgba(3,105,161,.14);border-left:4px solid #0369a1;padding:12px 16px;margin-top:20px;}
+.tip-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#7dd3fc;margin:0 0 6px;font-weight:700;}
+.tip-body{color:#bfdbfe;font-size:13px;margin:0;line-height:1.55;font-style:italic;}
+
+.complete-btn{width:100%;margin-top:24px;padding:14px 0;
+  font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.2em;
+  background:#0369a1;color:#fff;border:2px solid #0369a1;
+  display:flex;align-items:center;justify-content:center;gap:10px;}
+
+.pile-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px;}
+@media (max-width:600px){ .pile-grid{grid-template-columns:1fr 1fr;} }
+.pile-tile{background:#0c0c0c;border:1px solid #3f3f46;border-top:3px solid #0369a1;padding:10px 10px;}
+.pile-name{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#7dd3fc;margin:0 0 4px;line-height:1;}
+.pile-body{font-size:11px;color:#a1a1aa;line-height:1.45;margin:0;}
+
+.int-card{border:2px solid #3f3f46;background:#18181b;}
+.int-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.int-card-body{padding:24px 22px;}
+
+.mib-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media (max-width:720px){ .mib-grid{grid-template-columns:1fr;} }
+.mib-col h4{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#7dd3fc;margin:0 0 12px;}
+.mib-field{margin-bottom:12px;}
+.mib-label{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#71717a;margin-bottom:4px;display:block;}
+.mib-input,.mib-textarea,.mib-select{
+  width:100%;background:#0c0c0c;border:1px solid #3f3f46;color:#e4e4e7;
+  padding:8px 10px;font-size:13px;outline:none;font-family:inherit;
+}
+.mib-input:focus,.mib-textarea:focus,.mib-select:focus{border-color:#0369a1;}
+.mib-textarea{resize:vertical;min-height:60px;line-height:1.5;font-size:12px;}
+
+.invite-preview{background:#0c0c0c;border:1px solid #3f3f46;padding:0;overflow:hidden;}
+.invite-preview-head{background:#0369a1;color:#fff;padding:10px 14px;}
+.invite-preview-head h5{font-family:'Bebas Neue',sans-serif;font-size:20px;margin:0;line-height:1.1;}
+.invite-preview-head p{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;opacity:.85;margin:2px 0 0;}
+.invite-preview-body{padding:12px 14px;}
+.invite-row{display:flex;gap:10px;font-size:12px;color:#a1a1aa;padding:5px 0;border-bottom:1px dashed #27272a;}
+.invite-row:last-child{border-bottom:none;}
+.invite-row-key{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.15em;color:#71717a;width:80px;flex-shrink:0;padding-top:1px;}
+.invite-row-val{flex:1;color:#e4e4e7;line-height:1.5;white-space:pre-line;}
+.invite-empty{color:#52525b;font-style:italic;}
+
+.mib-check-btn{margin-top:16px;padding:10px 18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.2em;
+  background:#0369a1;color:#fff;border:2px solid #0369a1;}
+.mib-feedback{margin-top:14px;padding:12px 14px;font-size:12px;line-height:1.6;}
+.mib-feedback.ok{background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+.mib-feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+.mib-feedback.warn{background:rgba(250,204,21,.08);border:1px solid #fbbf24;color:#fde68a;}
+.mib-feedback ul{margin:6px 0 0;padding-left:18px;}
+.mib-feedback li{margin-bottom:3px;}
+
+.drill-stage{background:#0c0c0c;border:1px solid #3f3f46;padding:18px;margin-bottom:14px;}
+.drill-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#7dd3fc;margin-bottom:8px;}
+.drill-scenario{background:#1c1917;border-left:3px solid #0369a1;padding:12px 14px;margin-bottom:14px;}
+.drill-from{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:#7dd3fc;margin-bottom:4px;}
+.drill-subject{font-size:13px;color:#e4e4e7;font-weight:600;margin-bottom:4px;}
+.drill-body{font-size:12px;color:#a1a1aa;line-height:1.5;}
+.drill-btns{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;}
+.drill-btn{padding:12px 8px;background:#09090b;border:1px solid #3f3f46;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.05em;color:#a1a1aa;line-height:1.2;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.drill-btn:hover{border-color:#7dd3fc;}
+.drill-btn small{font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.15em;color:#52525b;}
+.drill-btn.picked-correct{background:rgba(16,185,129,.15);border-color:#10b981;color:#a7f3d0;}
+.drill-btn.picked-correct small{color:#6ee7b7;}
+.drill-btn.picked-wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.drill-btn.correct-shown{background:rgba(16,185,129,.08);border-color:#10b981;color:#a7f3d0;}
+.drill-btn.correct-shown small{color:#6ee7b7;}
+.feedback{margin-top:14px;padding:10px 14px;font-size:12px;line-height:1.55;}
+.feedback.ok{background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+.feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+
+.sim-buttons{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;}
+.sim-btn{padding:12px 8px;background:#09090b;border:1px solid #3f3f46;
+  font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.05em;color:#a1a1aa;line-height:1.2;}
+.sim-btn:hover{border-color:#7dd3fc;}
+.sim-btn.picked-correct{background:rgba(16,185,129,.15);border-color:#10b981;color:#a7f3d0;}
+.sim-btn.picked-wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.sim-btn.correct-shown{background:rgba(16,185,129,.08);border-color:#10b981;color:#a7f3d0;}
+
+.next-btn{padding:10px 18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.2em;
+  background:#0369a1;color:#fff;border:2px solid #0369a1;}
+.score-line{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;
+  color:#a1a1aa;margin-top:16px;padding-top:14px;border-top:1px solid #27272a;}
+
+.compose{background:#0c0c0c;border:1px solid #3f3f46;overflow:hidden;}
+.compose-bar{background:#0369a1;color:#fff;padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;}
+.compose-row{display:flex;gap:8px;padding:7px 12px;border-bottom:1px solid #27272a;font-size:12px;}
+.compose-key{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.15em;color:#71717a;width:54px;flex-shrink:0;padding-top:2px;}
+.compose-val{flex:1;color:#e4e4e7;line-height:1.4;}
+.compose-body{padding:12px;font-size:12px;color:#e4e4e7;line-height:1.6;white-space:pre-line;min-height:84px;}
+.compose-sig{padding:10px 12px 12px;border-top:1px dashed #27272a;font-size:11px;color:#a1a1aa;line-height:1.5;}
+.compose-empty{color:#52525b;font-style:italic;}
+.sigcard{background:#0c0c0c;border:1px solid #3f3f46;border-left:3px solid #0369a1;padding:12px 14px;margin-top:6px;font-size:12px;color:#e4e4e7;line-height:1.6;}
+.sigcard b{color:#7dd3fc;}
+.annot{background:#0c0c0c;border:1px solid #3f3f46;padding:0;margin-top:6px;overflow:hidden;}
+.annot-row{display:flex;gap:10px;padding:9px 12px;border-bottom:1px solid #27272a;}
+.annot-row:last-child{border-bottom:none;}
+.annot-tag{font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.15em;color:#7dd3fc;width:64px;flex-shrink:0;padding-top:2px;}
+.annot-txt{flex:1;font-size:12px;color:#e4e4e7;line-height:1.5;}
+.mini-tbl{width:100%;border-collapse:collapse;margin-top:6px;font-size:11px;}
+.mini-tbl th{font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:#7dd3fc;text-align:left;padding:6px 8px;border-bottom:1px solid #3f3f46;background:#0c0c0c;}
+.mini-tbl td{padding:6px 8px;border-bottom:1px solid #27272a;color:#e4e4e7;}
+.split2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px;}
+@media(max-width:600px){.split2{grid-template-columns:1fr;}}
+.split2 .col{background:#0c0c0c;border:1px solid #3f3f46;padding:10px 12px;}
+.split2 .col h5{font-family:'Bebas Neue',sans-serif;font-size:16px;margin:0 0 6px;color:#7dd3fc;}
+.split2 .col p{font-size:11px;color:#a1a1aa;line-height:1.5;margin:0;}
+.week-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:6px;}
+@media(max-width:600px){.week-grid{grid-template-columns:1fr 1fr;}}
+.week-day{background:#0c0c0c;border:1px solid #3f3f46;padding:10px 8px;}
+.week-day-name{font-family:'Bebas Neue',sans-serif;font-size:16px;color:#7dd3fc;margin:0 0 6px;}
+.week-day-tag{font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.15em;color:#71717a;margin:0 0 6px;}
+.week-day-body{font-size:11px;color:#a1a1aa;line-height:1.4;margin:0;}
+</style>
+</head>
+<body>
+
+<header class="site"><div class="header-row"><div class="logo-tile" id="logo-slot"></div><div class="header-meta"><p class="small">Your Company &middot; Module 26</p><p class="big">Three Companies</p></div></div></header>
+
+<main class="container" style="padding:28px 20px 40px;"><div id="app"></div></main>
+
+<footer class="site"><p>Built by Joseph &middot; Your Company Virtual Office &middot; Internal Use Only</p></footer>
+
+<script>
+"use strict";
+const ICONS={
+  'arrow-right':'<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  'arrow-left': '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  'check':      '<path d="M20 6 9 17l-5-5"/>',
+  'lock':       '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  'inbox':      '<path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>',
+  'filter':     '<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>',
+  'mail':       '<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
+  'shield':     '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>',
+  'flag':       '<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/>',
+  'building-2':'<path d="M10 12h4"/><path d="M10 8h4"/><path d="M14 21v-3a2 2 0 0 0-4 0v3"/><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/>',
+  'phone':'<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>'
+};
+function icon(name,size,color){
+  size=size||16;color=color||'currentColor';
+  var p=ICONS[name]||'';
+  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">'+p+'</svg>';
+}
+
+
+
+const CATEGORIES=[
+  { id:'map', iconKey:'building-2', color:'#0c4a6e', title:'The Three Companies',
+    blurb:'Same office, three businesses, what each one does, and why they never cross.',
+    lessons:[
+      { id:'mp-1', title:'Same Office, Three Businesses', type:'reading', minutes:4 },
+      { id:'mp-2', title:'Steel, Consulting, Access',     type:'reading', minutes:4 },
+      { id:'mp-3', title:'Never Cross The Streams',       type:'reading', minutes:4 }
+    ] },
+  { id:'compose', iconKey:'mail', color:'#0369a1', title:'Writing As The Right Brand',
+    blurb:'Domain, signature, and phone per brand, how Owner signs for steel, and a brand composer.',
+    lessons:[
+      { id:'co-1', title:'Domain, Signature, Phone',     type:'reading',     minutes:4 },
+      { id:'co-2', title:'Owner Signs Steel',          type:'reading',     minutes:4 },
+      { id:'co-3', title:'Brand Composer',               type:'interactive', minutes:8, intKey:'brandComposer' }
+    ] },
+  { id:'route', iconKey:'phone', color:'#0284c7', title:'Routing By Company',
+    blurb:'Telling which brand a contact is for, handing it to the right place, and a routing sim.',
+    lessons:[
+      { id:'ro-1', title:'Which Brand Is This For',      type:'reading',     minutes:4 },
+      { id:'ro-2', title:'Hand It To The Right Place',   type:'reading',     minutes:4 },
+      { id:'ro-3', title:'Routing Sim',                  type:'interactive', minutes:7, intKey:'routeByCompany' }
+    ] },
+  { id:'tenant', iconKey:'shield', color:'#0891b2', title:'Mailboxes And Tenants',
+    blurb:'Which mailbox and tenant each brand uses, access through Joseph, and a tenant drill.',
+    lessons:[
+      { id:'te-1', title:'Which Mailbox, Which Tenant',  type:'reading',     minutes:4 },
+      { id:'te-2', title:'Access Goes Through Joseph',   type:'reading',     minutes:4 },
+      { id:'te-3', title:'Tenant Drill',                 type:'interactive', minutes:7, intKey:'tenantDrill' }
+    ] }
+];
+
+
+const LESSON_CONTENT={
+  'mp-1':{ sections:[
+    { h:'One desk, three companies', b:'You support three separate businesses from one desk. Your Company, Pinnacle Strategic Advisory, and DOVA. Each has its own name, work, domain, and phone. Knowing which is which is the whole job here.' },
+    { h:'Keep the reference close', b:'When something comes in, the first question is always which company. The table below is your quick reference. Match the topic and the contact to the right brand before you do anything else.' }
+  ],
+  customHtml:'<table class="mini-tbl"><tr><th>Company</th><th>What</th><th>Domain</th><th>Phone</th></tr>'+
+    '<tr><td>Your Company, LLC</td><td>Structural steel</td><td>yourcompany.example.com</td><td>[COMPANY PHONE]</td></tr>'+
+    '<tr><td>Pinnacle Strategic Advisory, LLC</td><td>SMB consulting</td><td>pinnaclestrat.com</td><td>713-277-5004</td></tr>'+
+    '<tr><td>D.O.V.A. LLC</td><td>Remote vehicle access</td><td>dovausa.com</td><td>713-300-1865</td></tr></table>',
+  tip:'Memorize the three domains. yourcompany.example.com for steel, pinnaclestrat.com for consulting, dovausa.com for vehicle access. The domain tells you the brand at a glance.' },
+
+  'mp-2':{ sections:[
+    { h:'Your Company is steel', b:'Your Company fabricates and erects structural steel. Bids, drawings, shop work, field crews. If it is about steel on a building, it is Your Company.' },
+    { h:'Pinnacle is consulting', b:'Pinnacle Strategic Advisory is small-business consulting. Advisory work, strategy, retainers. Different clients, different work, different domain than the steel side.' },
+    { h:'DOVA is vehicle access', b:'DOVA provides remote vehicle access. Its own customers and its own support questions. It runs on dovausa.com. Do not use any other domain for DOVA.' }
+  ], tip:'Match the topic to the brand. Steel goes to Your Company. A consulting retainer goes to Pinnacle. Vehicle access goes to DOVA on dovausa.com.' },
+
+  'mp-3':{ sections:[
+    { h:'Three walls, no crossing', b:'The three companies do not share files, clients, or mail. A Your Company client list is not a Pinnacle asset. A DOVA support log is not a steel record. Each stays in its own lane.' },
+    { h:'Right brand on everything', b:'Mail goes out on the matching domain with the matching signature and phone. A steel proposal never goes out on the consulting domain. The brand on the message matches the work.' },
+    { h:'Crossing is an owner decision', b:'There is no routine reason to move anything between the three. If it ever comes up, it is the owner call, not a thing you do quietly. See M25 on what stays inside.' }
+  ], tip:'Treat each company like a separate client of yours. You would never mix two clients files. Same wall between the three companies.' },
+
+  'co-1':{ sections:[
+    { h:'Three things switch together', b:'When you write as a brand, three things switch as a set. The sending domain, the signature block, and the phone number. They always match the company the message is from.' },
+    { h:'Never mix the set', b:'A Your Company email with a Pinnacle phone is wrong. A DOVA message signed Your Company is wrong. The domain, the signature, and the phone are one set and they move together.' },
+    { h:'Pick the brand first', b:'Before you type, decide which company this is. That choice sets the domain, the signature, and the phone. Get the brand right and the rest follows.' }
+  ], tip:'One question before you compose. Which company is this. The answer sets the domain, the signature, and the phone all at once.' },
+
+  'co-2':{ sections:[
+    { h:'Owner Steel on Your Company', b:'On Your Company mail, Owner signs Owner Steel. The block carries Your Company, LLC and the steel office line, [COMPANY PHONE]. That is the steel brand. See M22 on his voice.' },
+    { h:'The block matches the brand', b:'On a different company, the signature is that company block, not the Your Company one. You match the signature to the domain the mail is sent from, every time.' },
+    { h:'You still hold for approval', b:'Drafting as Owner on any brand still holds for his approval. The brand changes the block. It does not change the rule. You never send as him unprompted.' }
+  ], tip:'Save a signature snippet for each brand. Then the block is identical every time and you are never guessing which phone number goes with which company.' },
+
+  'ro-1':{ sections:[
+    { h:'Read the topic', b:'Most contacts tell you the brand by the topic. Steel fabrication is Your Company. A consulting retainer is Pinnacle. A vehicle-access question is DOVA. The subject is your first clue.' },
+    { h:'Read the contact', b:'Who is reaching out also tells you. A known steel client is Your Company. A consulting client is Pinnacle. A DOVA customer is DOVA. Topic plus contact almost always names the brand.' },
+    { h:'When it is none of the three', b:'Some contacts are not for any of the companies. A wrong number, a cold sales pitch, spam. Those are not ours. You do not force them into a brand, you decline them.' }
+  ], tip:'Two questions name the brand. What is this about, and who is it from. If neither points to one of the three, it is probably not ours.' },
+
+  'ro-2':{ sections:[
+    { h:'Hand it to the brand owner', b:'Once you know the company, route it to the right place on that side. The steel work, the consulting work, and the DOVA support each have their own path. You connect the contact to the right one.' },
+    { h:'Do not answer for the wrong brand', b:'If a DOVA question lands and you handle steel, you route it, you do not improvise an answer. Wrong-brand answers create messes. Route it to the side that owns it.' }
+  ],
+  tip:'Routing is not the same as answering. Your job is to get it to the right company fast and clean, not to answer outside your lane.' },
+
+  'te-1':{ sections:[
+    { h:'Two tenants', b:'Your Company and Pinnacle share one Microsoft 365 tenant, the yourcompany side. DOVA sits on its own separate GoDaddy Microsoft 365 tenant. Two tenants, three brands.' },
+    { h:'Mailbox matches the brand', b:'Each brand sends from its own domain mailbox. yourcompany.example.com for steel, pinnaclestrat.com for consulting, dovausa.com for vehicle access. The mailbox you use is set by which brand you are.' }
+  ],
+  customHtml:'<table class="mini-tbl"><tr><th>Brand</th><th>Tenant</th><th>Mailbox domain</th></tr>'+
+    '<tr><td>Your Company</td><td>yourcompany M365</td><td>yourcompany.example.com</td></tr>'+
+    '<tr><td>Pinnacle</td><td>yourcompany M365</td><td>pinnaclestrat.com</td></tr>'+
+    '<tr><td>DOVA</td><td>Separate GoDaddy M365</td><td>dovausa.com</td></tr></table>',
+  tip:'Two tenants, three domains. Your Company and Pinnacle live together. DOVA stands alone on its own tenant and on dovausa.com.' },
+
+  'te-2':{ sections:[
+    { h:'Access goes through Joseph', b:'New mailboxes, new accounts, and access changes go through Joseph, who runs IT. You do not create or grant access yourself. You route the request to him. See M29 on onboarding.' },
+    { h:'Right tenant, least privilege', b:'When a request does land, it has to land in the right tenant with only the access the person needs. A DOVA account belongs on the DOVA tenant, not the steel one. Joseph sets that correctly.' },
+    { h:'You never grant access', b:'The assistant does not grant access. Not to a mailbox, not to a file share, not to a tenant. You collect the request and route it to Joseph. He owns access.' }
+  ], tip:'Any access question has one answer from your seat. Route it to Joseph. You never create the mailbox or grant the access yourself.' }
+};
+
+
+var WIDGETS={
+  brandComposer:{
+    family:'builder', icon:'mail', prefix:'bc',
+    formTitle:'Compose as a brand', checkLabel:'Check this message',
+    intro:'Pick the company, then write the message. The From domain, the signature, and the phone switch to match the brand you chose. Keep the body about that brand only. The window updates as you type.',
+    fields:[
+      { key:'Company', label:'Company', kind:'select', opts:['Your Company','Pinnacle','DOVA'], def:'Your Company' },
+      { key:'To', label:'To', kind:'input', ph:'e.g., client contact', def:'' },
+      { key:'Subject', label:'Subject (specific)', kind:'input', ph:'e.g., Elite Crossing steel proposal', def:'' },
+      { key:'Body', label:'Body (stay on this brand only)', kind:'textarea', ph:'Write the message for the company you chose. Do not mention another company domain.', def:'' }
+    ],
+    preview:'compose',
+    brand:function(c){
+      if(c==='Pinnacle')return{from:'Pinnacle Strategic Advisory <hello@pinnaclestrat.com>',sig:'Pinnacle Strategic Advisory, LLC<br>(713) 277-5004<br>pinnaclestrat.com'};
+      if(c==='DOVA')return{from:'D.O.V.A. LLC <support@dovausa.com>',sig:'D.O.V.A. LLC<br>(713) 300-1865<br>dovausa.com'};
+      return{from:'Owner Steel <owner@yourcompany.example.com>',sig:'Your Company, LLC<br>[COMPANY PHONE]<br>yourcompany.example.com'};
+    },
+    validate:function(){
+      var co=state.bcCompany||'Your Company';
+      var subj=(state.bcSubject||'').trim();
+      var body=(state.bcBody||'').trim();
+      var low=body.toLowerCase();
+      var issues=[],warn=[];
+      var domains={'Your Company':'yourcompany.example.com','Pinnacle':'pinnaclestrat.com','DOVA':'dovausa.com'};
+      var own=domains[co];
+      if(!subj)issues.push('Subject is empty. Name what this is about.');
+      else if(subj.split(/\s+/).filter(Boolean).length<2)issues.push('Subject is too vague. Be specific.');
+      Object.keys(domains).forEach(function(k){
+        if(k!==co && low.indexOf(domains[k])>-1){
+          issues.push('Body mentions '+domains[k]+', which is a different company. Keep this message on '+own+' only.');
+        }
+      });
+      if(!issues.length && !body)warn.push('Body is empty. Write the message for this brand.');
+      if(issues.length)return{kind:'fail',headline:'Brand is not consistent:',items:issues};
+      if(warn.length)return{kind:'warn',headline:'Brand is right, message is empty:',items:warn};
+      return{kind:'pass',headline:'On brand. The domain, signature, and phone match '+co+', and the body stays on '+own+'.',items:[]};
+    }
+  },
+
+  routeByCompany:{
+    family:'quiz', btn:'sim', icon:'phone', prefix:'rc', unit:'Contact',
+    intro:'Six contacts come in. Send each to the right company. Steel is Your Company. Consulting is Pinnacle. Remote vehicle access is DOVA. If it is none of the three, it is not ours.',
+    actions:['Your Company','Pinnacle','DOVA','Not ours, decline'],
+    scenarios:[
+      { id:'c1', fromLabel:'Contact', from:'Caller', body:'A general contractor wants a bid on structural steel fabrication and erection for a new building.',
+        correct:'Your Company', why:'Structural steel is the Your Company business. Route it there. That is the steel brand on yourcompany.example.com.' },
+      { id:'c2', fromLabel:'Contact', from:'Email', body:'A small-business owner asks about a strategy and advisory retainer.',
+        correct:'Pinnacle', why:'Advisory and consulting is Pinnacle Strategic Advisory. Route it to Pinnacle on pinnaclestrat.com.' },
+      { id:'c3', fromLabel:'Contact', from:'Customer', body:'A customer has a question about remote vehicle access on their account.',
+        correct:'DOVA', why:'Remote vehicle access is the DOVA business. Route it to DOVA on dovausa.com. Do not use any other domain for it.' },
+      { id:'c4', fromLabel:'Contact', from:'Vendor', body:'A materials vendor wants to schedule a steel delivery to the fabrication shop.',
+        correct:'Your Company', why:'Shop materials for steel fabrication are Your Company. Route it to the steel side.' },
+      { id:'c5', fromLabel:'Contact', from:'Email', body:'An invoice arrives for consulting hours billed under the advisory work.',
+        correct:'Pinnacle', why:'Consulting hours belong to Pinnacle. Route the invoice to the Pinnacle side for the books.' },
+      { id:'c6', fromLabel:'Contact', from:'Caller', body:'A caller is trying to reach a company that is not any of ours. Clearly a wrong number.',
+        correct:'Not ours, decline', why:'It is not Your Company, Pinnacle, or DOVA. Do not force it into a brand. Let them know they have the wrong number.' }
+    ]
+  },
+
+  tenantDrill:{
+    family:'quiz', btn:'drill', icon:'shield', prefix:'td', unit:'Item',
+    intro:'Six items. Pick the right domain, or send it to Joseph. Steel is yourcompany.example.com. Consulting is pinnaclestrat.com. Vehicle access is dovausa.com. Anything that creates a mailbox or grants access goes to Joseph.',
+    actions:[
+      { id:'nano', name:'yourcompany.example.com', sub:'Steel, Your Company' },
+      { id:'pinn', name:'pinnaclestrat.com', sub:'Consulting, Pinnacle' },
+      { id:'dova', name:'dovausa.com', sub:'Vehicle access, DOVA' },
+      { id:'joseph', name:'Ask Joseph', sub:'Mailbox or access setup' }
+    ],
+    scenarios:[
+      { id:'t1', fromLabel:'Item', from:'Outgoing', body:'A steel proposal email going out to a general contractor.',
+        correct:'nano', why:'Steel mail sends from yourcompany.example.com. That is the Your Company domain on the shared tenant.' },
+      { id:'t2', fromLabel:'Item', from:'Outgoing', body:'An email to a small-business consulting client about their retainer.',
+        correct:'pinn', why:'Consulting mail sends from pinnaclestrat.com. Pinnacle shares the tenant with Your Company but uses its own domain.' },
+      { id:'t3', fromLabel:'Item', from:'Outgoing', body:'A support reply to a remote vehicle-access customer.',
+        correct:'dova', why:'Vehicle-access mail sends from dovausa.com on the separate DOVA tenant. Do not use any other domain for it.' },
+      { id:'t4', fromLabel:'Item', from:'Request', body:'A new DOVA hire needs a mailbox created on the DOVA tenant.',
+        correct:'joseph', why:'Creating a mailbox is an access task. You do not do it yourself. Route it to Joseph, who sets it up on the right tenant. See M29.' },
+      { id:'t5', fromLabel:'Item', from:'Outgoing', body:'A vendor email about a steel shop delivery.',
+        correct:'nano', why:'Steel shop business sends from yourcompany.example.com. It is the Your Company domain.' },
+      { id:'t6', fromLabel:'Item', from:'Request', body:'You are not sure which tenant a shared-looking access request belongs to.',
+        correct:'joseph', why:'When the tenant is unclear, you do not guess at access. Ask Joseph. He owns access and the right tenant.' }
+    ]
+  }
+};
+
+var state={view:'home',completed:{}};
+function esc(s){ if(s==null)return''; return String(s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];}); }
+function getCat(id){ for(var i=0;i<CATEGORIES.length;i++) if(CATEGORIES[i].id===id) return CATEGORIES[i]; return null; }
+function getLesson(id){
+  for(var i=0;i<CATEGORIES.length;i++){
+    var c=CATEGORIES[i];
+    for(var j=0;j<c.lessons.length;j++) if(c.lessons[j].id===id) return{lesson:c.lessons[j],cat:c,idx:j};
+  }return null;
+}
+function totalLessons(){ return CATEGORIES.reduce(function(a,c){return a+c.lessons.length;},0); }
+function completedCount(){ return Object.keys(state.completed).length; }
+
+
+function renderHome(){
+  var done=completedCount();var html='';
+  html+='<div class="lab-hero"><div class="hero-grid"></div><div class="hero-glow"></div>';
+  html+='<div class="lab-hero-inner">';
+  html+='<p class="lab-eyebrow">Your Company &middot; Module 26 &middot; Office Manager</p>';
+  html+='<h1 class="lab-h1">Three Brands, <span class="accent">One Desk</span></h1>';
+  html+='<p class="lab-blurb">Three businesses run from one desk. This module is what each company is, writing as the right brand, routing a call to the right place, and which mailbox and tenant each one uses. Compose as a brand, route six contacts, and a tenant drill.</p>';
+  html+='<div class="lab-stats">';
+  [['4','Categories'],[String(totalLessons()),'Lessons'],['3','Drills'],[String(done),'Done']].forEach(function(s){
+    html+='<div class="lab-stat"><p class="lab-stat-num">'+s[0]+'</p><p class="lab-stat-lbl">'+s[1]+'</p></div>';
+  });
+  html+='</div></div></div>';
+  html+='<div class="cat-grid">';
+  CATEGORIES.forEach(function(cat){
+    var doneN=cat.lessons.filter(function(l){return state.completed[l.id];}).length;
+    var tot=cat.lessons.length;var allDone=doneN===tot;var pct=tot?(doneN/tot)*100:0;
+    html+='<button class="cat-card'+(allDone?' is-done':'')+'" data-action="open-cat" data-cat-id="'+cat.id+'">';
+    html+='<div class="cat-stripe" style="background:'+cat.color+';"></div>';
+    html+='<div class="cat-inner"><div class="cat-top">';
+    html+='<div class="cat-icon-tile" style="background:'+cat.color+';">'+icon(cat.iconKey,24,'#fff')+'</div>';
+    if(allDone) html+='<div class="cat-icon-tile" style="background:#10b981;width:28px;height:28px;">'+icon('check',16,'#000')+'</div>';
+    html+='</div>';
+    html+='<h3>'+esc(cat.title)+'</h3>';
+    html+='<p class="cat-card-blurb">'+esc(cat.blurb)+'</p>';
+    html+='<div class="cat-card-foot"><span>'+doneN+'/'+tot+' done</span><span class="cat-progress-track"><span class="cat-progress-fill" style="width:'+pct+'%;"></span></span></div>';
+    html+='</div></button>';
+  });
+  html+='</div>';return html;
+}
+
+function renderCategory(cat){
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-home">'+icon('arrow-left',13)+' Back to module home</button>';
+  html+='<div class="cat-header"><div class="cat-header-inner">';
+  html+='<div class="cat-header-icon" style="background:'+cat.color+';">'+icon(cat.iconKey,28,'#fff')+'</div>';
+  html+='<div><p class="cat-header-eyebrow" style="color:'+cat.color+';">Category</p>';
+  html+='<h2 class="cat-header-title">'+esc(cat.title)+'</h2>';
+  html+='<p class="cat-header-blurb">'+esc(cat.blurb)+'</p>';
+  html+='</div></div></div>';
+  html+='<div class="lesson-list">';
+  cat.lessons.forEach(function(l,i){
+    var isDone=!!state.completed[l.id];
+    var prevDone=i===0||!!state.completed[cat.lessons[i-1].id];
+    var locked=!isDone&&!prevDone;
+    var current=!isDone&&prevDone;
+    var tileCls=isDone?'done':current?'current':'pending';
+    var typeLabel=l.type==='reading'?'Reading':'Interactive';
+    var typeColor=l.type==='reading'?'#71717a':'#7dd3fc';
+    html+='<button class="lesson-row'+(isDone?' is-done':'')+(locked?' is-locked':'')+'"';
+    html+=locked?' disabled':' data-action="open-lesson" data-lesson-id="'+l.id+'"';
+    html+='>';
+    html+='<div class="lesson-num-tile '+tileCls+'">'+(locked?icon('lock',14):isDone?icon('check',18):String(i+1))+'</div>';
+    html+='<div class="lesson-row-meta"><p class="lesson-row-title">'+esc(l.title)+'</p>';
+    html+='<p class="lesson-row-tag" style="color:'+typeColor+';">'+typeLabel+' &middot; ~'+l.minutes+' min</p></div>';
+    if(!locked) html+=icon('arrow-right',16,'#71717a');
+    html+='</button>';
+  });
+  html+='</div>';
+  return html;
+}
+
+
+function renderReading(lesson,cat){
+  var c=LESSON_CONTENT[lesson.id]||{sections:[],tip:''};
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="lesson-card">';
+  html+='<div class="lesson-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="lesson-card-body">';
+  c.sections.forEach(function(s){
+    html+='<div class="lesson-section"><h3>'+esc(s.h)+'</h3><p>'+esc(s.b)+'</p></div>';
+  });
+  if(c.customHtml) html+=c.customHtml;
+  if(c.tip){
+    html+='<div class="tip-box"><p class="tip-eyebrow">Joseph&#39;s tip</p><p class="tip-body">'+esc(c.tip)+'</p></div>';
+  }
+  html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  html+='</div></div>';
+  return html;
+}
+
+
+
+function renderBuilder(key,lesson,cat){
+  var w=WIDGETS[key];
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card"><div class="int-card-header" style="background:'+cat.color+';">'+
+    '<div class="lesson-icon-tile">'+icon(w.icon,26,'#fff')+'</div>'+
+    '<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p><h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body"><p style="font-size:13px;color:#a1a1aa;margin-bottom:18px;">'+esc(w.intro)+'</p>';
+  html+='<div class="mib-grid"><div class="mib-col"><h4>'+esc(w.formTitle||'Build it')+'</h4>';
+  w.fields.forEach(function(f){
+    var val=state[w.prefix+f.key];
+    html+='<div class="mib-field"><label class="mib-label">'+esc(f.label)+'</label>';
+    if(f.kind==='textarea'){
+      html+='<textarea class="mib-textarea" data-w="'+w.prefix+'" data-f="'+f.key+'" placeholder="'+esc(f.ph||'')+'">'+esc(val)+'</textarea>';
+    } else if(f.kind==='select'){
+      html+='<select class="mib-select" data-w="'+w.prefix+'" data-f="'+f.key+'">';
+      f.opts.forEach(function(o){ html+='<option value="'+esc(o)+'"'+(val===o?' selected':'')+'>'+esc(o)+'</option>'; });
+      html+='</select>';
+    } else {
+      html+='<input class="mib-input" type="text" data-w="'+w.prefix+'" data-f="'+f.key+'" placeholder="'+esc(f.ph||'')+'" value="'+esc(val)+'">';
+    }
+    html+='</div>';
+  });
+  html+='<button class="mib-check-btn" data-action="w-check" data-key="'+key+'">'+esc(w.checkLabel||'Check it')+'</button>';
+  if(state[w.prefix+'Checked']&&state[w.prefix+'Feedback']){
+    var fb=state[w.prefix+'Feedback'];var cls=fb.kind==='pass'?'ok':fb.kind==='warn'?'warn':'bad';
+    html+='<div class="mib-feedback '+cls+'"><strong>'+esc(fb.headline)+'</strong>';
+    if(fb.items&&fb.items.length){html+='<ul>';fb.items.forEach(function(it){html+='<li>'+esc(it)+'</li>';});html+='</ul>';}
+    html+='</div>';
+    if(fb.kind==='pass'){html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';}
+  }
+  html+='</div>';
+  html+='<div class="mib-col"><h4>Live preview</h4><div id="mib-preview">'+buildPreviewInner(key)+'</div></div>';
+  html+='</div></div></div>';
+  return html;
+}
+function buildPreviewInner(key){
+  var w=WIDGETS[key];var p=w.prefix;
+  function g(k){return state[p+k];}
+  if(w.preview==='compose')return composePV(w,g);
+  if(w.preview==='week')return weekPV(w,g);
+  return invitePV(w,g);
+}
+function emptySpan(t){return '<span class="invite-empty">'+esc(t)+'</span>';}
+function invitePV(w,g){
+  var html='<div class="invite-preview"><div class="invite-preview-head">';
+  html+='<h5>'+esc(w.headTitle||'Preview')+'</h5>';
+  if(w.headSub)html+='<p>'+esc(typeof w.headSub==='function'?w.headSub(g):w.headSub)+'</p>';
+  html+='</div><div class="invite-preview-body">';
+  w.rows.forEach(function(r){
+    var v=g(r.key);
+    html+='<div class="invite-row"><div class="invite-row-key">'+esc(r.label)+'</div><div class="invite-row-val">'+(v?esc(v):emptySpan(r.empty||('Add '+r.label)))+'</div></div>';
+  });
+  html+='</div>';
+  if(w.table)html+=w.table(g);
+  html+='</div>';
+  return html;
+}
+function composePV(w,g){
+  var from=w.from,sig=w.sig;
+  if(w.brand){var b=w.brand(g('Company'));from=b.from;sig=b.sig;}
+  var body=g('Body'),subj=g('Subject'),to=g('To');
+  var html='<div class="compose"><div class="compose-bar">New Message</div>';
+  html+='<div class="compose-row"><div class="compose-key">From</div><div class="compose-val">'+esc(from)+'</div></div>';
+  html+='<div class="compose-row"><div class="compose-key">To</div><div class="compose-val">'+(to?esc(to):'<span class="compose-empty">recipient</span>')+'</div></div>';
+  html+='<div class="compose-row"><div class="compose-key">Subject</div><div class="compose-val">'+(subj?esc(subj):'<span class="compose-empty">(no subject)</span>')+'</div></div>';
+  html+='<div class="compose-body">'+(body?esc(body):'<span class="compose-empty">Write the message.</span>')+'</div>';
+  html+='<div class="compose-sig">'+sig+'</div></div>';
+  return html;
+}
+function weekPV(w,g){
+  var html='<div class="week-grid">';
+  w.days.forEach(function(d){
+    var v=g(d.key);
+    html+='<div class="week-day"><p class="week-day-name">'+esc(d.name)+'</p><p class="week-day-tag">Open hours</p><p class="week-day-body">'+(v?esc(v):'<span class="invite-empty">unassigned</span>')+'</p></div>';
+  });
+  html+='</div>';
+  return html;
+}
+function gridHtml(cells){
+  var html='<div class="week-grid">';
+  cells.forEach(function(c){
+    html+='<div class="week-day"><p class="week-day-name">'+esc(c.d)+'</p><p class="week-day-tag">'+esc(c.t||'')+'</p><p class="week-day-body">'+esc(c.b||'')+'</p></div>';
+  });
+  html+='</div>';
+  return html;
+}
+function renderQuiz(key,lesson,cat){
+  var w=WIDGETS[key];var p=w.prefix;var idx=state[p+'Idx'];var list=w.scenarios;var s=list[idx];
+  var picked=state[p+'Picked'][s.id];var revealed=state[p+'Revealed'][s.id];
+  var total=list.length;var allDone=list.every(function(x){return state[p+'Revealed'][x.id];});
+  var correctCount=list.filter(function(x){return state[p+'Picked'][x.id]===x.correct;}).length;
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card"><div class="int-card-header" style="background:'+cat.color+';">'+
+    '<div class="lesson-icon-tile">'+icon(w.icon,26,'#fff')+'</div>'+
+    '<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p><h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body"><p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">'+esc(w.intro)+'</p>';
+  html+='<div class="drill-stage"><p class="drill-tag">'+esc(w.unit||'Item')+' '+(idx+1)+' of '+total+'</p>';
+  if(s.grid)html+=gridHtml(s.grid);
+  html+='<div class="drill-scenario">';
+  if(s.card){html+=s.card;}
+  else{
+    if(s.from)html+='<div class="drill-from">'+esc((s.fromLabel||'From')+': '+s.from)+'</div>';
+    if(s.subject)html+='<div class="drill-subject">'+esc(s.subject)+'</div>';
+    html+='<div class="drill-body">'+esc(s.body)+'</div>';
+  }
+  html+='</div>';
+  if(w.btn==='drill'){
+    html+='<div class="drill-btns">';
+    w.actions.forEach(function(a){
+      var cls='drill-btn';
+      if(revealed){if(a.id===s.correct)cls+=picked===a.id?' picked-correct':' correct-shown';else if(a.id===picked)cls+=' picked-wrong';}
+      html+='<button class="'+cls+'" data-action="q-pick" data-key="'+key+'" data-act="'+esc(a.id)+'"><span>'+esc(a.name)+'</span><small>'+esc(a.sub)+'</small></button>';
+    });
+    html+='</div>';
+  } else {
+    var acts=s.opts||w.actions;
+    html+='<div class="sim-buttons">';
+    acts.forEach(function(a){
+      var cls='sim-btn';
+      if(revealed){if(a===s.correct)cls+=picked===a?' picked-correct':' correct-shown';else if(a===picked)cls+=' picked-wrong';}
+      html+='<button class="'+cls+'" data-action="q-pick" data-key="'+key+'" data-act="'+esc(a)+'">'+esc(a)+'</button>';
+    });
+    html+='</div>';
+  }
+  if(revealed){
+    var ok=picked===s.correct;var label;
+    if(w.btn==='drill'){var ca=w.actions.filter(function(a){return a.id===s.correct;})[0];label=ca?ca.name:s.correct;}
+    else label=s.correct;
+    html+='<div class="feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Answer: '+esc(label)+'. ')+esc(s.why)+'</div>';
+    if(idx<total-1)html+='<div style="text-align:right;margin-top:12px;"><button class="next-btn" data-action="q-next" data-key="'+key+'">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+  }
+  html+='</div>';
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#7dd3fc')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';return html;
+}
+function renderLesson(lesson,cat){
+  if(lesson.type==='reading')return renderReading(lesson,cat);
+  var w=WIDGETS[lesson.intKey];
+  if(w&&w.family==='builder')return renderBuilder(lesson.intKey,lesson,cat);
+  if(w)return renderQuiz(lesson.intKey,lesson,cat);
+  return renderReading(lesson,cat);
+}
+function initWidget(key){
+  var w=WIDGETS[key];if(!w)return;
+  if(w.family==='builder'){
+    state[w.prefix+'Checked']=false;state[w.prefix+'Feedback']=null;
+    w.fields.forEach(function(f){state[w.prefix+f.key]=(f.def!=null?f.def:'');});
+  } else {
+    state[w.prefix+'Idx']=0;state[w.prefix+'Picked']={};state[w.prefix+'Revealed']={};
+  }
+}
+Object.keys(WIDGETS).forEach(initWidget);
+function render(){
+  var app=document.getElementById('app');var html='';
+  if(state.view==='home'){html=renderHome();}
+  else if(state.view.indexOf('category:')===0){var cat=getCat(state.view.slice(9));html=cat?renderCategory(cat):renderHome();}
+  else if(state.view.indexOf('lesson:')===0){var info=getLesson(state.view.slice(7));html=info?renderLesson(info.lesson,info.cat):renderHome();}
+  app.innerHTML=html;
+  if(state.view.indexOf('lesson:')===0){
+    var info2=getLesson(state.view.slice(7));
+    if(info2&&info2.lesson.intKey){
+      var w=WIDGETS[info2.lesson.intKey];
+      if(w&&w.family==='builder'){
+        var key=info2.lesson.intKey;
+        setTimeout(function(){
+          document.querySelectorAll('[data-w]').forEach(function(el){
+            el.addEventListener('input',function(e){
+              var pre=e.target.getAttribute('data-w');var fld=e.target.getAttribute('data-f');
+              state[pre+fld]=e.target.value;state[pre+'Checked']=false;state[pre+'Feedback']=null;
+              var pv=document.getElementById('mib-preview');if(pv)pv.innerHTML=buildPreviewInner(key);
+            });
+          });
+        },50);
+      }
+    }
+  }
+}
+document.body.addEventListener('click',function(ev){
+  var t=ev.target.closest('[data-action]');if(!t)return;
+  var action=t.getAttribute('data-action');
+  if(action==='open-cat'){state.view='category:'+t.getAttribute('data-cat-id');render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='back-home'){state.view='home';render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='back-cat'){state.view='category:'+t.getAttribute('data-cat-id');render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='open-lesson'){var lid=t.getAttribute('data-lesson-id');var info=getLesson(lid);if(info&&info.lesson.intKey){initWidget(info.lesson.intKey);}state.view='lesson:'+lid;render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='complete-lesson'){var lid2=t.getAttribute('data-lesson-id');state.completed[lid2]=true;var info2=getLesson(lid2);if(info2){var next=null;for(var i=0;i<info2.cat.lessons.length;i++){if(info2.cat.lessons[i].id===lid2&&i+1<info2.cat.lessons.length){next=info2.cat.lessons[i+1];break;}}state.view=next?'lesson:'+next.id:'category:'+info2.cat.id;render();window.scrollTo({top:0,behavior:'smooth'});}}
+  else if(action==='w-check'){var k1=t.getAttribute('data-key');var w1=WIDGETS[k1];state[w1.prefix+'Feedback']=w1.validate();state[w1.prefix+'Checked']=true;render();}
+  else if(action==='q-pick'){var k2=t.getAttribute('data-key');var w2=WIDGETS[k2];var sc=w2.scenarios[state[w2.prefix+'Idx']];if(state[w2.prefix+'Revealed'][sc.id])return;state[w2.prefix+'Picked'][sc.id]=t.getAttribute('data-act');state[w2.prefix+'Revealed'][sc.id]=true;render();}
+  else if(action==='q-next'){var k3=t.getAttribute('data-key');var w3=WIDGETS[k3];if(state[w3.prefix+'Idx']<w3.scenarios.length-1){state[w3.prefix+'Idx']++;render();}}
+});
+
+document.getElementById('logo-slot').innerHTML=icon('building-2',22,'#fff');
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Virtual Office Frontend Design Spec (mirror of design.md)</title>
+<style>
+:root{
+  --carbon:#0a0a0c;--c2:#111114;--c3:#18181d;--c4:#1f2229;--c5:#252d38;
+  --line:rgba(255,255,255,0.055);--lineb:rgba(255,255,255,0.13);
+  --molten:#ff5f00;--mb:#ff8a00;--mg:rgba(255,95,0,0.28);
+  --cyan:#4FC3F7;--cg:rgba(79,195,247,0.18);
+  --red:#ff3b3b;--rg:rgba(255,59,59,0.22);
+  --green:#34d399;--gdim:rgba(52,211,153,0.12);
+  --amber:#fbbf24;--adim:rgba(251,191,36,0.12);
+  --text:#f5f5f7;--tm:#8a92a6;--td:#565d6e;
+}
+body{background:var(--carbon);color:var(--text);font-family:'Manrope',system-ui,sans-serif;
+  margin:0;padding:32px;line-height:1.5;}
+h1{font-family:'Big Shoulders Display','Impact',sans-serif;font-weight:900;font-size:30px;
+  letter-spacing:.02em;margin:0 0 4px;}
+h2{font-size:14px;font-weight:700;color:var(--molten);text-transform:uppercase;
+  letter-spacing:.08em;margin:36px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px;}
+.note{color:var(--tm);font-size:12px;max-width:720px;}
+.grid{display:flex;flex-wrap:wrap;gap:10px;}
+.sw{width:150px;border:1px solid var(--line);border-radius:6px;background:var(--c2);overflow:hidden;}
+.sw .chip{height:44px;}
+.sw .m{padding:6px 8px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--td);}
+.sw .m b{display:block;color:var(--text);font-size:10px;}
+.ts div{margin:2px 0;}
+.rad{display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap;}
+.rad .r{background:var(--c3);border:1px solid var(--lineb);width:72px;height:44px;
+  display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--tm);
+  font-family:'JetBrains Mono',monospace;}
+.states{display:flex;gap:10px;flex-wrap:wrap;font-size:11px;}
+.st{padding:8px 14px;border-radius:4px;border:1px solid var(--line);background:var(--c3);}
+.st.hover{border-color:var(--lineb);background:var(--c4);color:var(--molten);}
+.st.focus{border-color:var(--molten);}
+.st.ok{border-color:var(--green);background:var(--gdim);color:var(--green);}
+.st.warn{border-color:var(--amber);background:var(--adim);color:var(--amber);}
+.st.bad{border-color:var(--red);background:var(--rg);color:var(--red);}
+code{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--cyan);}
+</style>
+</head>
+<body>
+<h1>VIRTUAL OFFICE FRONTEND DESIGN SPEC</h1>
+<p class="note">Rendered mirror of <code>docs/design.md</code> (the canonical
+token spec). This file is generated from that file and must be updated in the
+same commit. Do not edit tokens here first. Dark theme only. App UI only;
+brand surfaces follow <code>brand/LOGO_RULES.md</code>.</p>
+
+<h2>Surfaces and lines</h2>
+<div class="grid">
+  <div class="sw"><div class="chip" style="background:#0a0a0c"></div><div class="m"><b>--carbon</b>#0a0a0c app background</div></div>
+  <div class="sw"><div class="chip" style="background:#111114"></div><div class="m"><b>--c2</b>#111114 elevation 1</div></div>
+  <div class="sw"><div class="chip" style="background:#18181d"></div><div class="m"><b>--c3</b>#18181d elevation 2</div></div>
+  <div class="sw"><div class="chip" style="background:#1f2229"></div><div class="m"><b>--c4</b>#1f2229 elevation 3</div></div>
+  <div class="sw"><div class="chip" style="background:#252d38"></div><div class="m"><b>--c5</b>#252d38 elevation 4</div></div>
+  <div class="sw"><div class="chip" style="background:rgba(255,255,255,0.055)"></div><div class="m"><b>--line</b>hairline border</div></div>
+  <div class="sw"><div class="chip" style="background:rgba(255,255,255,0.13)"></div><div class="m"><b>--lineb</b>bright border</div></div>
+</div>
+
+<h2>Accents, status, text</h2>
+<div class="grid">
+  <div class="sw"><div class="chip" style="background:#ff5f00"></div><div class="m"><b>--molten</b>#ff5f00 primary accent</div></div>
+  <div class="sw"><div class="chip" style="background:#ff8a00"></div><div class="m"><b>--mb</b>#ff8a00 accent bright</div></div>
+  <div class="sw"><div class="chip" style="background:rgba(255,95,0,0.28)"></div><div class="m"><b>--mg</b>accent glow</div></div>
+  <div class="sw"><div class="chip" style="background:#4FC3F7"></div><div class="m"><b>--cyan</b>#4FC3F7 info</div></div>
+  <div class="sw"><div class="chip" style="background:#ff3b3b"></div><div class="m"><b>--red</b>#ff3b3b danger</div></div>
+  <div class="sw"><div class="chip" style="background:#34d399"></div><div class="m"><b>--green</b>#34d399 success</div></div>
+  <div class="sw"><div class="chip" style="background:#fbbf24"></div><div class="m"><b>--amber</b>#fbbf24 warning</div></div>
+  <div class="sw"><div class="chip" style="background:#f5f5f7"></div><div class="m"><b>--text</b>#f5f5f7 primary text</div></div>
+  <div class="sw"><div class="chip" style="background:#8a92a6"></div><div class="m"><b>--tm</b>#8a92a6 muted text</div></div>
+  <div class="sw"><div class="chip" style="background:#565d6e"></div><div class="m"><b>--td</b>#565d6e dim text</div></div>
+</div>
+
+<h2>Typography</h2>
+<div class="ts">
+  <div style="font-family:'Big Shoulders Display','Impact',sans-serif;font-size:30px;font-weight:900;">DISPLAY / BIG SHOULDERS 900 (--disp)</div>
+  <div style="font-size:14px;">Body / Manrope 400 at 14px (--body)</div>
+  <div style="font-size:11px;color:var(--tm);">Secondary / Manrope at 11px muted</div>
+  <div style="font-size:9px;color:var(--td);font-weight:700;letter-spacing:.05em;">DENSE UI LABEL / 9PX 700, THE WORKHORSE SIZE</div>
+  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--cyan);">mono / JetBrains Mono 10px for data and timestamps (--mono)</div>
+</div>
+<p class="note">Scale (px): 8 (micro-badges), 9, 10, 11, 12, 13, 14, 15, 16, 20, 22, 24, 28, 30.
+Weights: 400 body; 600-700 emphasis; 800-900 display.</p>
+
+<h2>Radius scale</h2>
+<div class="rad">
+  <div class="r" style="border-radius:2px">2</div>
+  <div class="r" style="border-radius:3px">3 controls</div>
+  <div class="r" style="border-radius:4px">4 default</div>
+  <div class="r" style="border-radius:5px">5</div>
+  <div class="r" style="border-radius:6px">6 cards</div>
+  <div class="r" style="border-radius:8px">8 panels</div>
+  <div class="r" style="border-radius:10px">10 modals</div>
+  <div class="r" style="border-radius:50%;width:44px">50%</div>
+</div>
+
+<h2>Component states</h2>
+<div class="states">
+  <div class="st">default</div>
+  <div class="st hover">hover</div>
+  <div class="st focus">focus</div>
+  <div class="st ok">success</div>
+  <div class="st warn">warning</div>
+  <div class="st bad">danger</div>
+</div>
+<p class="note">Hover: border to --lineb or a molten tint, text to --molten, fill one elevation up,
+cards lift translateY(-1px). Focus: border --molten. Status uses the green/amber/red pairs.
+Pulses reuse pulse-slow, pulse-fast, kpi-pulse.</p>
+
+<h2>Don'ts</h2>
+<p class="note">No em-dashes in UI strings (Hard Rule 7). No supplier names or MATERIAL_COSTS in
+the UI (Tier 1). No hardcoded hex in new CSS; use the variables. No light theme, no new fonts, no
+new accent hues without a spec extension. Bridge calls only via
+<code>window.pywebview.api.&lt;method&gt;()</code> (Hard Rule 9).</p>
+</body>
+</html>

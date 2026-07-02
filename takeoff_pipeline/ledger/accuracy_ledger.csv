@@ -1,0 +1,19 @@
+date,job,test,metric,value,notes
+2026-06-11,SP183_B1,census_spike_T2,designation_recall_pct,100.0,target 95 pre-verify per Section 07
+2026-06-11,SP183_B1,census_spike_T2,full_recall_pct,85.7,includes SF value rows
+2026-06-11,SP183_B1,census_spike_T2,jst_precision_pct,100.0,JST class only; exhaustive text-verified ground truth
+2026-06-11,SP183_B1,census_spike_T2,census_hits,369,12 schedule / 357 plan
+2026-06-11,SP183_B1,census_spike_T2,conflicts,0,"logged, never silently resolved"
+2026-06-11,SP183_B1,scale_check_T3,flagged_sheets,0,mismatch beyond 2 pct
+2026-06-11,SP183_B1,sheet_router_T1,scanned_sheets,0,"routed to 4x rasterization, not processed here"
+2026-06-14,SP183_B1,census_spike_T2,designation_recall_pct,100.0,target 95 pre-verify per Section 07
+2026-06-14,SP183_B1,census_spike_T2,full_recall_pct,100.0,includes SF value rows
+2026-06-14,SP183_B1,census_spike_T2,jst_precision_pct,100.0,JST class only; exhaustive text-verified ground truth
+2026-06-14,SP183_B1,census_spike_T2,census_hits,369,12 schedule / 357 plan
+2026-06-14,SP183_B1,census_spike_T2,conflicts,0,"logged, never silently resolved"
+2026-06-14,SP183_B1,scale_check_T3,flagged_sheets,0,mismatch beyond 2 pct
+2026-06-14,SP183_B1,sheet_router_T1,scanned_sheets,0,"routed to 4x rasterization, not processed here"
+2026-06-14,SP183_B1,census_spike_T2,col_types_uncounted,4,"column sizes on a no-QTY schedule; member count from the foundation plan, Ivan (A1)"
+2026-06-14,SP183_B1,census_spike_T2,plate_types_uncounted,8,"base plate sizes on a no-QTY schedule; count derived one per column downstream (P29), Ivan (A1)"
+2026-06-14,SP183_B1,grid_geometry_B,building_sf,61950,"413x150 ft, confidence medium"
+2026-06-14,SP183_B1,grid_geometry_B,deck_sf,61950,"413x150 ft, confidence medium"

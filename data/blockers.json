@@ -1,0 +1,64 @@
+[
+  {
+    "id": "emr-letter",
+    "name": "EMR Letter",
+    "status": "BLOCKED",
+    "open_date": "2026-04-09",
+    "action": "Call Texas Mutual: 800-859-5995 \u00b7 Policy [POLICY NUMBER] \u00b7 Request current EMR letter for ISNetworld",
+    "owner": "Owner",
+    "depends_on": null,
+    "severity": "critical"
+  },
+  {
+    "id": "isn-marathon",
+    "name": "ISN [ISN ID] \u2192 Marathon",
+    "status": "BLOCKED",
+    "open_date": "2026-04-09",
+    "action": "Dependent on EMR letter. Cannot submit to ISNetworld until EMR clears.",
+    "owner": "Joseph",
+    "depends_on": "emr-letter",
+    "severity": "high"
+  },
+  {
+    "id": "auto-liability",
+    "name": "Auto Liability \u2014 $2M CSL",
+    "status": "PENDING",
+    "open_date": "2026-04-20",
+    "action": "Amber handling carrier upgrade. Currently $50K/$100K. Awaiting carrier response.",
+    "owner": "Amber",
+    "depends_on": null,
+    "severity": "med"
+  },
+  {
+    "id": "ravs-gap",
+    "name": "RAVS Coverage Gap",
+    "status": "OPEN",
+    "open_date": "2026-04-15",
+    "action": "16 of 18 on disk. Missing: Crane Operations + HAZCOM. Upload to ISNetworld.",
+    "owner": "Joseph",
+    "depends_on": null,
+    "severity": "low"
+  },
+  {
+    "id": "certs-of-insurance-\u2014-kinder-mo",
+    "name": "Certs of Insurance \u2014 Kinder Morgan",
+    "status": "RESOLVED",
+    "open_date": "2026-05-14",
+    "action": "Amber to update COI with Zachry Industrial as additional insured.",
+    "owner": "Amber",
+    "depends_on": null,
+    "severity": "med",
+    "resolved_date": "2026-05-14"
+  },
+  {
+    "id": "test-coi",
+    "name": "Test COI",
+    "status": "RESOLVED",
+    "open_date": "2026-05-14",
+    "action": "Test action",
+    "owner": "Amber",
+    "depends_on": "med",
+    "severity": "med",
+    "resolved_date": "2026-05-14"
+  }
+]

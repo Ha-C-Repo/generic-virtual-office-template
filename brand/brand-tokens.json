@@ -1,0 +1,81 @@
+{
+  "name": "Your Company brand tokens",
+  "version": "2026-07-02",
+  "status": "canonical machine-readable brand spec; subordinate to brand/LOGO_RULES.md and the Tier 1 rules in CLAUDE.md wherever they overlap",
+  "sources": {
+    "logo_rules": "brand/LOGO_RULES.md",
+    "voice": "brand-voice.md",
+    "bid_pdf_palette": "bridge/documents.py (PROPOSAL_PALETTE hex values)",
+    "app_spa_tokens": "docs/design.md"
+  },
+  "identity": {
+    "company": "Your Company, LLC",
+    "positioning_line": "Structural steel. Concept to completion.",
+    "signature_line": "Design-Build Steel Contractors",
+    "retired_lines": ["Design-Build PEMB Contractors"]
+  },
+  "logo": {
+    "rule": "Fixed mark. Reproduce from approved masters only. Never recreate, restyle, stretch, rotate, skew, recolor, outline, or add effects. Only the background behind the mark may change.",
+    "lockups": {
+      "black_on_light": "brand/logos/your company.png",
+      "silver_on_dark": "brand/logos/Your Company LLC.png",
+      "print_vector_light": "brand/logos/your company.pdf",
+      "print_vector_dark": "brand/logos/Your Company LLC.pdf",
+      "raster_fallback_white_bg_only": "brand/logos/your company.jpg"
+    },
+    "pairing": "Light background takes the black mark. Dark background takes the silver-on-dark lockup. Never the black mark on a dark panel; never hand-invert a mark."
+  },
+  "surfaces": {
+    "bid_pdf": {
+      "colors": {
+        "navy": "#1F2A44",
+        "navy_bright": "#2A3A5C",
+        "navy_deep": "#14203A",
+        "gold": "#C9A961",
+        "gold_deep": "#A88A48",
+        "cream": "#F7F5F0",
+        "charcoal": "#1A1A1A",
+        "char_70": "#5C5C5C",
+        "char_50": "#888888",
+        "confidential_red": "#B71C1C"
+      },
+      "font_body": "Calibri (Helvetica fallback when unregistered)",
+      "source_of_truth": "bridge/documents.py"
+    },
+    "app_spa": {
+      "background": "#0a0a0c",
+      "accent": "#ff5f00",
+      "fonts": ["Big Shoulders Display", "Manrope", "JetBrains Mono"],
+      "source_of_truth": "docs/design.md"
+    },
+    "website": {
+      "theme": "MCA Denver motif: bright, minimal, corporate",
+      "accent": "PENDING Owner decision; do not invent one"
+    }
+  },
+  "donts": {
+    "note": "Tier 1 rules encoded as enforceable checks. banned_strings fail a client export (whole-word, case-insensitive). warn_strings are voice violations that warn but do not fail. Supplier names stay in the out-of-repo local list (suppliers.local.txt); they are commercial data and never belong in this file.",
+    "banned_strings": [
+      "PEMB",
+      "pre-engineered metal building",
+      "pre-engineered metal buildings",
+      "Design-Build PEMB Contractors",
+      "Red Dot Buildings",
+      "[FORBIDDEN PROJECT]"
+    ],
+    "warn_strings": [
+      "leverage",
+      "synergy",
+      "Great question",
+      "it's not just"
+    ],
+    "rules": [
+      "No supplier names or MATERIAL_COSTS on any client-facing surface",
+      "No precedent projects on bids (capability statements only)",
+      "No em-dashes in any user-facing output",
+      "Never recreate or recolor the logo; masters only",
+      "Deck supply and installation always in scope, never optional",
+      "Engineering folded into fab and erection rates, never line-itemed"
+    ]
+  }
+}

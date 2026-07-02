@@ -1,0 +1,97 @@
+{
+  "schema": "ASSEMBLY_DEF_V2",
+  "assembly_id": "roof_deck_sf",
+  "description": "Roof deck assembly. Net deck area (AREA SF, openings over the threshold deducted per F4) drives sheet count, fasteners, install hours, and crane time (P29). Sheets round UP to whole-sheet increments. Qualifying openings also generate framed-opening steel adds and install labor, each citing the OPENING row's item_id.",
+  "provenance": "SEED 2026-06-12. Sheet geometry, fastening density, and hour factors seeded pending PC7 shop actuals and Owner review. Changes are file diffs proposed to Owner, never chat-session overrides.",
+  "applies_to": {
+    "item_class": "DECK",
+    "mode": "AREA",
+    "designation_includes": ["ROOF DECK", "B DECK", "TYPE B", "1.5B"],
+    "designation_excludes": ["OPENING", "COMPOSITE"]
+  },
+  "openings": {
+    "deduct_threshold_sf": 16.0,
+    "geometry_model": "square",
+    "framed_adds": [
+      {
+        "component_id": "frame_angle",
+        "description": "deck opening perimeter frame angle",
+        "designation": "L3X3X1/4",
+        "basis": "perimeter",
+        "pieces_per_opening": 1,
+        "unit": "LF",
+        "waste_factor": 0.05,
+        "round": {"direction": "up", "increment": 1.0},
+        "aisc": true
+      },
+      {
+        "component_id": "header_angle",
+        "description": "deck opening header angle, two per opening",
+        "designation": "L4X4X1/4",
+        "basis": "span",
+        "pieces_per_opening": 2,
+        "unit": "LF",
+        "waste_factor": 0.05,
+        "round": {"direction": "up", "increment": 1.0},
+        "aisc": true
+      }
+    ],
+    "labor_hours": [
+      {
+        "component_id": "opening_frame_install",
+        "description": "fit and install opening frame and headers, hours per opening",
+        "hours_per_opening": 2.0,
+        "round": {"direction": "up", "increment": 0.25}
+      }
+    ]
+  },
+  "streams": {
+    "materials": [
+      {
+        "component_id": "deck_sheets",
+        "description": "roof deck sheets, 3.0 ft cover width x 30.0 ft length, 90 SF per sheet",
+        "designation": null,
+        "designation_from_driver": true,
+        "unit": "EA",
+        "per_sheet_sf": 90.0,
+        "waste_factor": 0.05,
+        "round": {"direction": "up", "increment": 1.0},
+        "cross_check_class": null,
+        "length_lf": null,
+        "aisc": false
+      },
+      {
+        "component_id": "deck_fasteners",
+        "description": "deck fastening, support plus sidelap, per net SF",
+        "designation": "DECK FASTENERS",
+        "designation_from_driver": false,
+        "unit": "EA",
+        "qty_per_unit": 0.6,
+        "waste_factor": 0.05,
+        "round": {"direction": "up", "increment": 50.0},
+        "cross_check_class": null,
+        "length_lf": null,
+        "aisc": false
+      }
+    ],
+    "labor_hours": [
+      {
+        "component_id": "deck_install",
+        "description": "deck placement and fastening, hours per net SF",
+        "hours_per_unit": 0.01,
+        "round": {"direction": "up", "increment": 0.25}
+      }
+    ],
+    "equipment_time": [
+      {
+        "component_id": "crane_bundles",
+        "description": "crane minutes for deck bundle hoisting, per net SF",
+        "unit": "MIN",
+        "time_per_unit": 0.005,
+        "round": {"direction": "up", "increment": 5.0}
+      }
+    ],
+    "subcontract": null
+  },
+  "notes": "Deck supply and install is always Your Company scope (Bid Document Rules). Openings at or under deduct_threshold_sf are ignored, cut waste covers them; they are counted in the run report, never silently. The square geometry model (side = sqrt SF) sizes frame angles and headers; real opening dimensions from an opening schedule beat it when available."
+}

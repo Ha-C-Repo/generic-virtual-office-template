@@ -1,0 +1,14 @@
+# Supplier-name list (TEMPLATE).
+# Copy this file to suppliers.local.txt and fill it with the real supplier
+# company names, one per line. suppliers.local.txt is gitignored, so the real
+# list never enters version control. You can also keep the real list anywhere
+# (for example a OneDrive path) and point to it with --suppliers PATH or the
+# YOURCO_SUPPLIER_LIST environment variable.
+#
+# Rules: one entry per line, blank lines and # comments ignored, matching is
+# case-insensitive and whole-word. Use distinctive company names, not generic
+# words like "Steel" that would match everywhere.
+#
+# Replace the placeholders below in your .local copy:
+Example Steel Supply Co
+Example Coatings Incorporated

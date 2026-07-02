@@ -1,0 +1,68 @@
+{
+  "schema": "ASSEMBLY_DEF_V2",
+  "assembly_id": "stair_flight",
+  "description": "Stair flight assembly. One counted flight (COUNT EA, MISC designation containing STAIR) drives stringer LF, tread count, shop fabrication hours, field erection hours, and crane minutes (P29).",
+  "provenance": "SEED 2026-06-12. Stringer size, tread count, and hour factors are seeds for a typical interior egress flight, pending PC7 shop actuals and Owner review. Changes are file diffs proposed to Owner, never chat-session overrides.",
+  "applies_to": {
+    "item_class": "MISC",
+    "mode": "COUNT",
+    "designation_includes": ["STAIR"],
+    "designation_excludes": []
+  },
+  "openings": null,
+  "streams": {
+    "materials": [
+      {
+        "component_id": "stringers",
+        "description": "stair stringers, two per flight at 16 LF each",
+        "designation": "C12X20.7",
+        "designation_from_driver": false,
+        "unit": "LF",
+        "qty_per_unit": 32.0,
+        "waste_factor": 0.05,
+        "round": {"direction": "up", "increment": 5.0},
+        "cross_check_class": null,
+        "length_lf": null,
+        "aisc": true
+      },
+      {
+        "component_id": "treads",
+        "description": "stair treads, per flight",
+        "designation": "STAIR TREAD",
+        "designation_from_driver": false,
+        "unit": "EA",
+        "qty_per_unit": 18.0,
+        "waste_factor": 0.0,
+        "round": {"direction": "up", "increment": 1.0},
+        "cross_check_class": null,
+        "length_lf": null,
+        "aisc": false
+      }
+    ],
+    "labor_hours": [
+      {
+        "component_id": "fab_labor",
+        "description": "shop fabrication, hours per flight",
+        "hours_per_unit": 16.0,
+        "round": {"direction": "up", "increment": 0.25}
+      },
+      {
+        "component_id": "erection_labor",
+        "description": "field erection, hours per flight",
+        "hours_per_unit": 6.0,
+        "round": {"direction": "up", "increment": 0.25}
+      }
+    ],
+    "equipment_time": [
+      {
+        "component_id": "crane_set",
+        "description": "crane minutes per flight set",
+        "unit": "MIN",
+        "time_per_unit": 45.0,
+        "round": {"direction": "up", "increment": 5.0}
+      }
+    ],
+    "subcontract": null
+  },
+  "notes": "Handrail and guardrail are job-specific and enter the takeoff as their own measured rows, never generated here. Galvanizing or special coatings are subcontract scope added per job with Owner approval, not a default."
+}

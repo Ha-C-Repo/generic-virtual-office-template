@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Company - Virtual Office</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;900&family=Comfortaa:wght@400;600;700&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- Three.js 3D viewer (ported from Steel Suite Pro v2.3) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<input type="file" id="file-input" multiple style="display:none">
+
+<!-- ══ COMMAND PALETTE ═══════════════════════════════════════ -->
+<div class="pal-overlay" id="palette" onclick="if(event.target===this)closePal()">
+  <div class="pal-box">
+    <div class="pal-top">
+      <span class="pal-k">⌘K</span>
+      <input id="pal-inp" placeholder="Type a command..." autocomplete="off"
+        oninput="filterPal(this.value)" onkeydown="palKey(event)">
+      <span class="pal-esc" onclick="closePal()">ESC</span>
+    </div>
+    <div class="pal-list" id="pal-list"></div>
+  </div>
+</div>
+
+<!-- ══ SHELL ═════════════════════════════════════════════════ -->
+<div class="shell" id="shell" data-mode="status">
+
+  <header>
+    <img src="favicon.png" alt="" class="brand-cube" style="width:24px;height:24px;margin-right:6px;vertical-align:middle;">
+    <span class="brand-name">your company</span>
+    <span class="brand-tag">VIRTUAL OFFICE</span>
+
+    <div class="mode-bar">
+      <button class="mode-btn on" id="btn-status" onclick="setMode('status')">STATUS <span class="mode-badge red" id="mode-badge" title="Open alerts and escalated blockers on STATUS dashboard">4</span><span class="kb-hint" title="Keyboard shortcut: press 1">1</span></button>
+      <button class="mode-btn" id="btn-chat" onclick="setMode('chat')">CHAT<span class="kb-hint" title="Keyboard shortcut: press 2">2</span></button>
+      <button class="mode-btn field" id="btn-field" onclick="setMode('field')"><span class="ic ic-sm"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> FIELD<span class="kb-hint" title="Keyboard shortcut: press 3">3</span></button>
+      <button class="mode-btn" id="btn-model" onclick="setMode('model')"><span class="ic ic-sm"><svg viewBox="0 0 24 24"><path d="M12 2l9 5v10l-9 5-9-5V7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 22V12" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M21 7l-9 5-9-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span> MODEL<span class="kb-hint" title="Keyboard shortcut: press 4">4</span></button>
+      <button class="mode-btn" id="btn-settings" onclick="setMode('settings')"><span class="ic ic-sm"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.32 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="kb-hint" title="Keyboard shortcut: press 5">5</span></button>
+      <button class="mode-btn" id="btn-controls" onclick="setMode('controls')"><span class="ic ic-sm"><svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="16 7 22 7 22 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> CONTROLS<span class="kb-hint" title="Keyboard shortcut: press 6">6</span></button>
+    </div>
+
+    <div class="blockers" id="blockers">
+      <div class="bp-summary" id="bp-summary" onclick="toggleBlockerDrop()">
+        <span class="bps-red" id="bps-red-ct">2</span> BLOCKED
+        <span class="bps-sep">·</span>
+        <span class="bps-amber" id="bps-amber-ct" title="ISNetworld / RAVS compliance checklist items not yet marked current. Not new issues.">4</span> <span title="ISNetworld / RAVS compliance checklist items not yet marked current. Not new issues.">COMPLIANCE</span>
+        <span class="bps-sep">·</span>
+        <span class="bps-green" id="bps-green-ct">3</span> ✓
+        <span class="bps-arrow" id="bps-arrow">▼</span>
+      </div>
+      <div class="bp-red-row" id="bp-red-row">
+        <div class="bp red">EMR LETTER</div>
+        <div class="bp red">ISN MARATHON</div>
+      </div>
+    </div>
+    <div class="blocker-dropdown" id="blocker-dropdown">
+      <div class="bdd-hdr">COMPLIANCE ITEMS <span style="font-weight:300;font-size:10px;opacity:.6">(ISNetworld / RAVS checklist)</span></div>
+      <div class="bdd-list" id="bdd-list">
+        <div class="bp amber">AUTO LIABILITY</div>
+        <div class="bp amber">RAVS GAP</div>
+      </div>
+    </div>
+
+    <div class="hdr-right">
+      <span class="tier-status-host" id="tier-status-host"></span>
+      <span class="active-model" id="active-model">CLAUDE · CHECKING...</span>
+      <span class="live-clock" id="live-clock">--:-- CST</span>
+    </div>
+  </header>
+
+  <div class="kpi-strip">
+    <div class="kpi"><div class="kv" id="k-tons" style="color:var(--text)">0</div><div class="kl">TONS ACTIVE <span class="ktrend up" id="kt-tons">▲ 12%</span></div></div>
+    <div class="kpi"><div class="kv amber" id="k-rev">$0</div><div class="kl">PIPELINE <span class="ktrend up" id="kt-rev">▲ 8%</span></div></div>
+    <div class="kpi"><div class="kv" id="k-blk" style="color:var(--red)">0</div><div class="kl">BLOCKERS <span class="ktrend down" id="kt-blk">▼ 1</span></div></div>
+    <div class="kpi"><div class="kv" id="k-jobs">0</div><div class="kl">ACTIVE JOBS</div></div>
+  </div>
+
+  <div class="fallback-bar" id="fallback-bar">
+    <span style="color:var(--red)"><span class="ic ic-sm"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" fill="none" stroke="currentColor" stroke-width="1.8"/><line x1="12" y1="9" x2="12" y2="13" stroke="currentColor" stroke-width="1.8"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="1.8"/></svg></span></span>
+    <span id="fallback-txt">FALLBACK ACTIVE. Claude unreachable - Review output carefully</span>
+  </div>
+
+  <div class="ctx-bank-bar" id="ctx-bank-bar" style="display:none">
+    <span class="ctx-label" id="ctx-name">Project</span>
+    <span class="ctx-sep">|</span>
+    <span class="ctx-stat"><span class="ctx-val" id="ctx-files">0</span> files</span>
+    <span class="ctx-sep">|</span>
+    <span class="ctx-stat"><span class="ctx-val" id="ctx-members">0</span> members</span>
+    <span class="ctx-sep">|</span>
+    <span class="ctx-stat"><span class="ctx-val" id="ctx-tons">0</span> tons</span>
+    <span class="ctx-sep">|</span>
+    <span class="ctx-hint">drop more or type <kbd>generate bid</kbd></span>
+    <button class="ctx-clear" onclick="projectBank.clear();window._lastPipelineResult=null;activeProject=null;" title="Clear context">×</button>
+  </div>
+  <div class="xlate-bar" id="xlate-bar">
+    TRANSLATED: <span id="xlate-from" style="color:var(--tm)"></span>
+    <span style="color:var(--td)">→</span>
+    <span id="xlate-to" style="color:var(--molten)"></span>
+  </div>
+
+  <!-- ══ MAIN GRID ════════════════════════════════════════════ -->
+  <div class="main-grid" id="mgrid">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar-l" id="lsb">
+      <button class="sb-toggle left" id="ltog" onclick="toggleL()" title="Collapse">◀</button>
+      <div class="sb-full">
+        <div class="action-tiles">
+          <div class="atile wide" onclick="cmd('Start a new bid. Ask me for the project name, GC, location, and tonnage estimate.')">
+            <div class="at-ic"><span class="ic ic-lg"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14 2 14 8 20 8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="18" x2="12" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="9" y1="15" x2="15" y2="15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span></div><div class="at-lb">NEW BID</div>
+          </div>
+          <div class="atile" onclick="cmd('Run a takeoff on the current project drawings. Show member schedule with weights and connections.')">
+            <div class="at-ic"><span class="ic ic-lg"><svg viewBox="0 0 24 24"><path d="M2 20h20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M5 20v-8l4-4 3 3 4-4 3 3v10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div><div class="at-lb">TAKEOFF</div>
+          </div>
+          <div class="atile" onclick="cmd('Show current compliance status. All blockers, open items, what needs Owner today')">
+            <div class="at-ic"><span class="ic ic-lg"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="9 12 11 14 15 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div><div class="at-lb">COMPLIANCE</div>
+          </div>
+        </div>
+        <div class="panel-hdr" style="border-top:none">MORE ACTIONS</div>
+        <div class="extras" id="extras-a"></div>
+        <div class="more-btn" id="more-btn" onclick="toggleExtras()">+ Show all actions</div>
+        <div class="extras-h" id="extras-b"></div>
+      </div>
+      <div class="sb-icons">
+        <button class="sbi" title="New Bid" onclick="cmd('Start a new bid');setMode('chat')"><span class="ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" fill="none" stroke="currentColor" stroke-width="1.8"/><polyline points="14 2 14 8 20 8" fill="none" stroke="currentColor" stroke-width="1.8"/><line x1="12" y1="18" x2="12" y2="12" stroke="currentColor" stroke-width="1.8"/><line x1="9" y1="15" x2="15" y2="15" stroke="currentColor" stroke-width="1.8"/></svg></span></button>
+        <button class="sbi" title="Takeoff" onclick="cmd('Run takeoff');setMode('chat')"><span class="ic"><svg viewBox="0 0 24 24"><path d="M2 20h20" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M5 20v-8l4-4 3 3 4-4 3 3v10" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span></button>
+        <button class="sbi" title="Compliance" onclick="cmd('Show compliance status');setMode('chat')"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="none" stroke="currentColor" stroke-width="1.8"/><polyline points="9 12 11 14 15 10" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span></button>
+        <button class="sbi" onclick="toggleL()" style="margin-top:8px;font-size:11px">▶</button>
+      </div>
+    </aside>
+
+    <!-- CENTER -->
+    <main class="center">
+
+      <!-- STATUS VIEW -->
+      <div class="v-status" id="v-status">
+
+        <div class="sv-date-hdr">
+          <div>
+            <div class="sv-date-text" id="sv-day">THURSDAY, MAY 7</div>
+            <div class="sv-date-time" id="sv-time-lbl">07:14 CST &nbsp;·&nbsp; YOUR COMPANY VIRTUAL OFFICE</div>
+          </div>
+          <div class="sv-share-btns">
+            <button class="sv-sbtn" onclick="printStatus()" title="Print or save as PDF">⊞ PRINT</button>
+            <button class="sv-sbtn" onclick="copyStatus()" title="Copy status to clipboard">⧉ COPY</button>
+          </div>
+        </div>
+
+        <div>
+          <div class="sv-title">ACTIVE BLOCKERS</div>
+          <div class="blocker-grid">
+            <div class="bk red fast top-blocker" onclick="cmd('What do I need to do right now about the EMR letter? Give me the exact steps and phone number.')">
+              <div class="bk-days bkd-r">28 DAYS</div>
+              <div class="bk-sts" style="color:var(--red)">● BLOCKED <span class="esc-badge">ESCALATED</span></div>
+              <div class="bk-name">EMR Letter</div>
+              <div class="bk-impact">Blocks $2M+ Marathon Petroleum pipeline</div>
+              <div class="bk-act"><a href="tel:8008595995" class="bk-link" onclick="event.stopPropagation()"><span class="ic ic-sm"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span> Call Texas Mutual: 800-859-5995</a> · Policy [POLICY NUMBER] · Request EMR letter for ISNetworld</div>
+            </div>
+            <div class="bk red fast" onclick="cmd('What is blocking the ISN submission for Marathon and what is the exact next step?')">
+              <div class="bk-days bkd-r">28 DAYS</div>
+              <div class="bk-sts" style="color:var(--red)">● BLOCKED <span class="esc-badge">ESCALATED</span></div>
+              <div class="bk-name">ISN [ISN ID] → Marathon</div>
+              <div class="bk-act">Dependent on EMR letter (blocker above). Cannot submit to ISNetworld until EMR clears.</div>
+            </div>
+            <div class="bk amb" onclick="cmd('What is the status of the auto liability upgrade to $2M combined single limit?')">
+              <div class="bk-days bkd-a">PENDING</div>
+              <div class="bk-sts" style="color:var(--amber)">◐ IN PROGRESS</div>
+              <div class="bk-name">Auto Liability - $2M CSL</div>
+              <div class="bk-act">Amber handling carrier upgrade. Currently $50K/$100K. Awaiting carrier response.</div>
+            </div>
+            <div class="bk amb" onclick="cmd('What RAVS documents are still missing and where do I upload them?')">
+              <div class="bk-days bkd-a">OPEN</div>
+              <div class="bk-sts" style="color:var(--amber)">◐ OPEN</div>
+              <div class="bk-name">RAVS Coverage Gap</div>
+              <div class="bk-act">16 of 18 on disk. Missing: Crane Operations + HAZCOM. Upload to ISNetworld to close gap.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TODAY'S ACTIONS - what Owner must do today -->
+        <div>
+          <div class="sv-title">TODAY'S ACTIONS</div>
+          <div class="sv-today">
+            <div class="today-card" onclick="cmd('Call Texas Mutual at 800-859-5995 and request the current EMR letter for ISNetworld. What do I say?')">
+              <span class="today-pri urgent">URGENT</span>
+              <div style="flex:1">
+                <div class="today-txt">Call Texas Mutual - request EMR letter</div>
+                <div class="today-sub">800-859-5995 · Policy [POLICY NUMBER] · Blocks Marathon + ISN</div>
+              </div>
+              <span class="today-arrow">→</span>
+            </div>
+            <div class="today-card" onclick="cmd('Help me follow up with Ivan on the ICD Church hour validation. What should I tell him?')">
+              <span class="today-pri action">ACTION</span>
+              <div style="flex:1">
+                <div class="today-txt">Follow up with Ivan - ICD hour validation</div>
+                <div class="today-sub">ICD Church Spring TX · 1,500+ tons · Quantum meruit depends on this</div>
+              </div>
+              <span class="today-arrow">→</span>
+            </div>
+            <div class="today-card" onclick="runVmDiscovery()">
+              <span class="today-pri review">REVIEW</span>
+              <div style="flex:1">
+                <div class="today-txt">Review bid leads from VM scanner</div>
+                <div class="today-sub">Scan inbox for new RFQs matching Your Company scope</div>
+              </div>
+              <span class="today-arrow">→</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="sv-title">ACTIVE PROJECTS</div>
+          <div class="proj-list">
+            <div class="prow prow-act" onclick="showProjectBrief('ICD Church - Spring TX','ACTIVE / CRITICAL','1,500+ tons - 7 revision cycles - $2.4M quantum meruit risk - Ivan validates hours before Amber drafts claim')">
+              <span class="ps act">ACTIVE / CRITICAL</span>
+              <span class="pn">ICD Church - Spring TX</span>
+              <span class="pd">1,500+ tons · 7 revision cycles · $2.4M quantum meruit risk · Ivan validates hours before Amber drafts claim</span>
+            </div>
+            <div class="prow prow-good" onclick="showProjectBrief('America First Refining - Brownsville','SOQ SUBMITTED','$3.5B refinery - PRJ-2026-AFR-SOQ submitted 4/24/2026 - Awaiting selection notification')">
+              <span class="ps good">SOQ SUBMITTED</span>
+              <span class="pn">America First Refining - Brownsville</span>
+              <span class="pd">$3.5B refinery · PRJ-2026-AFR-SOQ submitted 4/24/2026 · Awaiting selection notification</span>
+            </div>
+            <div class="prow prow-blk" onclick="showProjectBrief('Marathon Petroleum','BLOCKED','ISN [ISN ID] blocked pending EMR letter. Cannot proceed. Dependent on blocker #1.')">
+              <span class="ps blk">BLOCKED</span>
+              <span class="pn">Marathon Petroleum</span>
+              <span class="pd">ISN [ISN ID] blocked pending EMR letter. Cannot proceed. Dependent on blocker #1.</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="sv-title">BID DISCOVERY <span class="sv-title-sub" id="bd-status"></span></div>
+          <div class="sv-bid-grid" id="sv-bid-cards">
+            <!-- VM discovery cards injected by loadDiscoveryCards() -->
+            <div class="sv-bcard sv-bcard-scan" onclick="runVmDiscovery()">
+              <div class="sv-bt" style="color:var(--td)">SCAN FOR BIDS</div>
+              <div class="sv-bn" style="color:var(--tm)">Run VM bid scanner</div>
+              <div class="sv-bs">Scan inbox for new RFQs matching Your Company scope</div>
+              <div class="sv-bw" style="color:var(--molten)">VM evaluates against the Owner's preferences</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sv-actions">
+          <button class="sv-btn primary" onclick="setMode('chat')">OPEN CHAT →</button>
+          <button class="sv-btn" onclick="sendMorningBriefingNow()">SEND BRIEFING</button>
+          <button class="sv-btn" onclick="setMode('chat');runDiagnostics()">TEST CONNECTIONS</button>
+          <button class="sv-btn" onclick="openPal()">⌘ COMMAND PALETTE</button>
+        </div>
+
+        <div class="sv-rates">
+          <div class="svr"><span class="svr-n">Fabrication</span><span class="svr-v">$3,750<span class="svr-u">/ton</span></span></div>
+          <div class="svr"><span class="svr-n">Erection</span><span class="svr-v">$970<span class="svr-u">/ton</span></span></div>
+          <div class="svr"><span class="svr-n">Joists</span><span class="svr-v">$4,500<span class="svr-u">/ton</span></span></div>
+          <div class="svr"><span class="svr-n">Roof Deck</span><span class="svr-v">$3.78<span class="svr-u">/SF</span></span></div>
+          <div class="svr"><span class="svr-n">G&amp;A</span><span class="svr-v">7.5<span class="svr-u">%</span></span></div>
+          <div class="sv-refresh" onclick="refreshStatus()" title="Refresh panel data">↻ REFRESH</div>
+        </div>
+
+      </div>
+
+      <!-- CHAT VIEW -->
+      <div class="v-chat" id="v-chat">
+        <div class="chat-ctx" id="chat-ctx">
+          <span>ACTIVE:</span>
+          <span class="ctx-proj" id="ctx-proj">-</span>
+          <span class="ctx-sep">·</span>
+          <span class="ctx-detail" id="ctx-detail">No active bid</span>
+        </div>
+        <div id="three-host">
+          <span class="viewer-label" id="viewer-label">3D MODEL</span>
+          <div class="viewer-controls">
+            <button onclick="resetCamera()">RESET</button>
+            <button onclick="toggleWireframe()">WIRE</button>
+            <button onclick="closeViewer()">✕ CLOSE</button>
+          </div>
+        </div>
+        <div class="messages" id="messages">
+          <div class="drop-overlay" id="drop-ov">Drop files here</div>
+          <div class="welcome" id="welcome-msg">
+            <div class="wbrand" style="font-family:'Comfortaa',sans-serif;font-weight:700;text-transform:lowercase;">your company | virtual office</div>
+            <div class="wready">Ready.</div>
+            <div class="wdate" id="welcome-date"></div>
+          </div>
+        </div>
+        <div class="file-chips" id="file-chips"></div>
+        <div class="input-zone">
+          <div class="input-row">
+            <textarea id="chat-input" rows="1" placeholder="Type or hold to speak..." onkeydown="handleKey(event)"></textarea>
+            <button class="bigbtn" id="mic-btn" title="Hold to speak"
+              onmousedown="startVoice()" onmouseup="stopVoice()"
+              ontouchstart="startVoice(event)" ontouchend="stopVoice()">
+              <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"/></svg>
+            </button>
+            <button class="bigbtn" id="att-btn" onclick="document.getElementById('file-input').click()" title="Attach file">
+              <svg viewBox="0 0 24 24"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg>
+            </button>
+            <button class="bigbtn" id="send-btn" onclick="sendMessage()">SEND</button>
+          </div>
+          <div class="input-meta" id="token-note">Claude (rules/voice) + GPT-4o (math/docs) + Gemini (vision/market) · Enter to send · Shift+Enter newline · Ctrl+K palette · Ctrl+/ shortcuts</div>
+        </div>
+      </div>
+
+      <!-- FIELD VIEW -->
+      <div class="v-field" id="v-field">
+        <div class="field-hdr"><span class="ic ic-md" style="color:var(--amber)"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> FIELD MODE - TAP A TILE OR HOLD TO SPEAK</div>
+        <div class="field-kpi-strip">
+          <span class="fkpi" id="fk-pipe">- pipeline</span>
+          <span class="fkpi-sep">|</span>
+          <span class="fkpi" id="fk-blk" style="color:var(--red)">- blockers</span>
+          <span class="fkpi-sep">|</span>
+          <span class="fkpi" id="fk-jobs">- active</span>
+        </div>
+        <div class="field-tiles">
+          <div class="ftile c-red" id="ft-urgent" onclick="fieldUrgent()">
+            <div class="ftic"><span class="ic ic-xl" style="color:var(--red)"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" fill="none" stroke="currentColor" stroke-width="1.8"/><line x1="12" y1="9" x2="12" y2="13" stroke="currentColor" stroke-width="1.8"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="1.8"/></svg></span></div>
+            <div class="ftlb">WHAT'S URGENT</div>
+          </div>
+          <div class="ftile c-cyan" id="ft-bids" onclick="fieldAct('Scan email inbox for bid leads now and show me the top results','ft-bids')">
+            <div class="ftic"><span class="ic ic-xl"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="1.8"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span></div>
+            <div class="ftlb">SCAN BIDS</div>
+          </div>
+          <div class="ftile c-green" id="ft-status" onclick="fieldAct('Give me a quick status on all active projects. Pipeline total, blockers, what needs attention.','ft-status')">
+            <div class="ftic"><span class="ic ic-xl"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/><line x1="12" y1="20" x2="12" y2="4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/><line x1="6" y1="20" x2="6" y2="14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></span></div>
+            <div class="ftlb">CHECK STATUS</div>
+          </div>
+          <div class="ftile c-orange" id="ft-call" onclick="callJoseph()">
+            <div class="ftic"><span class="ic ic-xl"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span></div>
+            <div class="ftlb">CALL JOSEPH</div>
+          </div>
+        </div>
+        <!-- Response fills space between tiles and mic -->
+        <div class="field-resp" id="fresp">TAP A TILE OR HOLD THE MIC TO SPEAK</div>
+        <!-- Mic + back anchored to bottom -->
+        <div class="field-mic">
+          <button class="field-mic-btn" id="fmic"
+            onmousedown="startFVoice(event)" onmouseup="stopFVoice()"
+            ontouchstart="startFVoice(event)" ontouchend="stopFVoice()">
+            <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"/></svg>
+            HOLD TO SPEAK
+          </button>
+          <button class="field-back" onclick="resetFieldTiles();setMode('status')">← BACK TO STATUS</button>
+        </div>
+      </div>
+
+      <!-- MODEL VIEW (3D pipeline + bid documents) -->
+      <div class="v-model" id="v-model" style="flex-direction:column;overflow-y:auto;padding:16px;gap:12px;">
+        <div class="model-hdr">
+          <div class="model-hdr-l">
+            <div class="model-title"><span class="ic ic-md" style="color:var(--cyan)"><svg viewBox="0 0 24 24"><path d="M12 2l9 5v10l-9 5-9-5V7z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 22V12" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M21 7l-9 5-9-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span> 3D MODEL VIEWER & BID DOCUMENTS</div>
+            <div class="model-sub" id="model-sub">Drop a structural PDF here to auto-extract members and build 3D model</div>
+          </div>
+          <div class="model-hdr-r">
+            <button class="model-action" onclick="openBidsFolder()"><span class="ic ic-sm"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span> OPEN BIDS FOLDER</button>
+            <button class="model-action" onclick="refreshBidList()">↻ REFRESH</button>
+          </div>
+        </div>
+
+        <!-- 3D viewer panel (full width) -->
+        <div class="model-viewer-host" id="model-viewer-host"
+             ondragover="event.preventDefault();this.classList.add('drop-active')"
+             ondragleave="this.classList.remove('drop-active')"
+             ondrop="event.preventDefault();this.classList.remove('drop-active');if(event.dataTransfer.files.length){handle3dDrop(event.dataTransfer.files)}">
+          <span class="viewer-label" id="model-viewer-label">3D MODEL. Drop a structural PDF here or in Chat.</span>
+          <div class="viewer-controls">
+            <button onclick="resetCamera()">RESET</button>
+            <button onclick="toggleWireframe()">WIRE</button>
+            <button onclick="downloadCurrentSTL()">⬇ STL</button>
+          </div>
+        </div>
+
+        <!-- Member schedule + bids list side-by-side -->
+        <div class="model-grid">
+          <div class="model-panel">
+            <div class="panel-hdr">CURRENT TAKEOFF</div>
+            <div id="model-takeoff-summary" class="takeoff-summary">No takeoff loaded yet.</div>
+            <div id="model-member-table"></div>
+          </div>
+          <div class="model-panel">
+            <div class="panel-hdr">RECENT BIDS</div>
+            <div id="model-bid-list">Loading…</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTROLS VIEW (PC4+PC5 project controls dashboard) -->
+      <div class="v-controls" id="v-controls">
+        <div class="pc-confidential">CONFIDENTIAL - INTERNAL · PROJECT CONTROLS · NEVER CLIENT-FACING</div>
+        <div class="pc-hdr">
+          <div class="pc-hdr-l">
+            <div class="model-title"><span class="ic ic-md" style="color:var(--molten)"><svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="16 7 22 7 22 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> PROJECT CONTROLS · SPI / CPI</div>
+            <div class="model-sub">Earned value per WBS line from the PC3 progress log and the PC1 frozen baseline. Flag below 0.95 either index.</div>
+          </div>
+          <div class="pc-hdr-r">
+            <input class="pc-input" id="pc-project-id" placeholder="PRJ-2026-ACP-001" value="PRJ-2026-ACP-001" onkeydown="if(event.key==='Enter')refreshControls()">
+            <button class="model-action" onclick="refreshControls()">↻ LOAD</button>
+          </div>
+        </div>
+        <div class="pc-empty" id="pc-empty" style="display:none"></div>
+        <div class="pc-body" id="pc-body" style="display:none">
+          <div class="pc-kpis" id="pc-kpis"></div>
+          <div class="pc-forecast" id="pc-forecast"></div>
+          <div class="pc-warnings" id="pc-warnings" style="display:none"></div>
+          <div class="pc-grid">
+            <div class="model-panel pc-panel">
+              <div class="panel-hdr">S-CURVE · PLANNED VS EARNED VS ACTUAL</div>
+              <div id="pc-scurve-host"></div>
+            </div>
+            <div class="model-panel pc-panel">
+              <div class="panel-hdr">FLAGS · BELOW 0.95 OR LOW CONFIDENCE</div>
+              <div class="pc-pc6" id="pc-pc6-static">Corrective hierarchy (PC6): diagnose, find root cause, then act: optimize first, spend second, accept third.</div>
+              <div id="pc-flags"></div>
+            </div>
+          </div>
+          <div class="model-panel pc-panel">
+            <div class="panel-hdr">VARIANCE BY COST CODE</div>
+            <div id="pc-variance"></div>
+          </div>
+          <div class="pc-sources" id="pc-sources"></div>
+        </div>
+        <div class="pc-confidential pc-foot">CONFIDENTIAL - INTERNAL USE ONLY. Do not share with client, GC, or any party outside Your Company.</div>
+      </div>
+
+      <!-- SETTINGS VIEW -->
+      <div class="v-settings" id="v-settings">
+        <div class="set-title">SETTINGS</div>
+        <div class="health-card" id="health-card">
+          <div class="health-icon" id="health-icon"><span class="ic ic-lg" style="color:var(--green)"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          <div class="health-txt">
+            <div class="health-title ok" id="health-title">ALL SYSTEMS OPERATIONAL</div>
+            <div class="health-sub" id="health-sub">Bridge connected · MCP active · All API keys configured</div>
+          </div>
+        </div>
+        <div class="set-grid">
+
+          <div class="set-card">
+            <div class="set-card-hdr"><span class="set-card-icon"><span class="ic ic-md" style="color:var(--amber)"><svg viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.78 7.78 5.5 5.5 0 017.78-7.78zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="set-card-title">API KEYS</span></div>
+            <div class="set-row"><span class="set-lbl"><span class="set-status no" id="ss-claude"></span>Claude (Anthropic)</span><input class="set-input key" id="si-claude" type="password" placeholder="sk-ant-..." oninput="markSettingDirty()"></div>
+            <div class="set-row"><span class="set-lbl"><span class="set-status no" id="ss-gemini"></span>Gemini (Google)</span><input class="set-input key" id="si-gemini" type="password" placeholder="AI..." oninput="markSettingDirty()"></div>
+            <div class="set-row"><span class="set-lbl"><span class="set-status no" id="ss-openai"></span>OpenAI</span><input class="set-input key" id="si-openai" type="password" placeholder="sk-..." oninput="markSettingDirty()"></div>
+            <div class="set-row"><span class="set-lbl"><span class="set-status no" id="ss-fred"></span>FRED (St. Louis Fed)</span><input class="set-input key" id="si-fred" type="password" placeholder="32-char hex" oninput="markSettingDirty()"></div>
+            <div class="set-row"><span class="set-lbl"><span class="set-status no" id="ss-lift"></span>SketchDeck LIFT</span><input class="set-input key" id="si-lift" type="password" placeholder="sk-lift-..." oninput="markSettingDirty()"></div>
+            <div class="set-row"><button class="set-btn primary" onclick="testAllKeys()">TEST CONNECTIONS</button><button class="set-btn" onclick="saveKeys()">SAVE KEYS</button></div>
+          </div>
+
+          <div class="set-card">
+            <div class="set-card-hdr"><span class="set-card-icon"><span class="ic ic-md" style="color:var(--amber)"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="set-card-title">BID RATES - Q2 2026</span></div>
+            <div class="set-row"><span class="set-lbl">Fabrication</span><span class="set-val">$<input class="set-input" id="sr-fab" type="number" value="3750" style="width:70px">/ton</span></div>
+            <div class="set-row"><span class="set-lbl">Erection</span><span class="set-val">$<input class="set-input" id="sr-erect" type="number" value="970" style="width:70px">/ton</span></div>
+            <div class="set-row"><span class="set-lbl">Joists</span><span class="set-val">$<input class="set-input" id="sr-joists" type="number" value="4500" style="width:70px">/ton</span></div>
+            <div class="set-row"><span class="set-lbl">Roof Deck</span><span class="set-val">$<input class="set-input" id="sr-rdeck" type="number" value="3.70" step="0.01" style="width:70px">/SF</span></div>
+            <div class="set-row"><span class="set-lbl">Comp Deck</span><span class="set-val">$<input class="set-input" id="sr-cdeck" type="number" value="3.61" step="0.01" style="width:70px">/SF</span></div>
+            <div class="set-row"><span class="set-lbl">G&amp;A</span><span class="set-val"><input class="set-input" id="sr-ga" type="number" value="7.5" step="0.1" style="width:50px">%</span></div>
+            <div class="set-row"><button class="set-btn primary" onclick="saveRates()">LOCK RATES</button></div>
+          </div>
+
+          <div class="set-card">
+            <div class="set-card-hdr"><span class="set-card-icon"><span class="ic ic-md" style="color:var(--amber)"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13.73 21a2 2 0 01-3.46 0" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span></span><span class="set-card-title">NOTIFICATIONS</span></div>
+            <div class="set-row"><span class="set-lbl">Morning briefing time</span><input class="set-input" id="sn-time" type="time" value="07:00" style="width:90px"></div>
+            <div class="set-row"><span class="set-lbl">Escalation threshold (days)</span><input class="set-input" id="sn-esc" type="number" value="14" style="width:50px"></div>
+            <div class="set-row"><span class="set-lbl">SMS bid won alerts</span><label class="set-toggle"><input type="checkbox" id="sn-sms-bid" checked><span class="stg-sl"></span></label></div>
+            <div class="set-row"><span class="set-lbl">SMS blocker alerts</span><label class="set-toggle"><input type="checkbox" id="sn-sms-blk" checked><span class="stg-sl"></span></label></div>
+          </div>
+
+          <div class="set-card">
+            <div class="set-card-hdr"><span class="set-card-icon"><span class="ic ic-md" style="color:var(--cyan)"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span></span><span class="set-card-title">INTEGRATIONS</span></div>
+            <div class="set-row"><span class="set-lbl"><span class="set-status no" id="ss-twilio"></span>Twilio SID</span><input class="set-input key" id="si-twsid" type="password" placeholder="AC..."></div>
+            <div class="set-row"><span class="set-lbl">Twilio Auth Token</span><input class="set-input key" id="si-twauth" type="password" placeholder="Token"></div>
+            <div class="set-row"><span class="set-lbl">Twilio From Number</span><input class="set-input" id="si-twfrom" type="text" placeholder="+1..." style="width:130px"></div>
+            <div class="set-row"><button class="set-btn" onclick="testTwilio()">TEST SMS</button><button class="set-btn primary" onclick="saveTwilio()">SAVE</button></div>
+          </div>
+
+          <div class="set-card">
+            <div class="set-card-hdr"><span class="set-card-icon"><span class="ic ic-md" style="color:var(--cyan)"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span></span><span class="set-card-title">CLOUDFLARE TUNNEL</span></div>
+            <div class="set-row"><span class="set-lbl">Status</span><span class="set-val" id="st-tunnel-status" style="color:var(--text-muted)">-</span></div>
+            <div class="set-row"><span class="set-lbl">Public URL</span><span class="set-val" id="st-tunnel-url" style="font-size:0.78em;word-break:break-all;color:var(--text-muted)">Waiting...</span></div>
+            <div class="set-row"><button class="set-btn" id="st-tunnel-copy" onclick="copyTunnelUrl()" disabled>COPY URL</button></div>
+            <div class="set-row" style="font-size:0.78em;color:var(--text-muted)">Paste into claude.ai Settings &gt; Connectors</div>
+            <div id="tunnel-url-changed" class="set-row" style="display:none;flex-direction:column;gap:6px;padding:8px;background:rgba(255,165,0,0.12);border-radius:4px;border:1px solid rgba(255,165,0,0.35)">
+              <span style="font-size:0.82em;color:#ffaa33;font-weight:600">URL changed since last session - update claude.ai Settings &gt; Connectors.</span>
+              <div style="display:flex;gap:8px">
+                <button class="set-btn" onclick="copyTunnelUrl();acknowledgeTunnelUrl()">COPY &amp; DISMISS</button>
+                <button class="set-btn" onclick="acknowledgeTunnelUrl()">DISMISS</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="set-card">
+            <div class="set-card-hdr"><span class="set-card-icon"><span class="ic ic-md" style="color:var(--molten)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2a10 10 0 010 20V2z" fill="currentColor" opacity=".3"/></svg></span></span><span class="set-card-title">DISPLAY</span></div>
+            <div class="set-row"><span class="set-lbl">Blocker bar filter</span>
+              <select class="set-input" id="sd-blkfilter" style="width:110px"><option value="red">RED only</option><option value="all">All items</option></select></div>
+            <div class="set-row"><span class="set-lbl">Font size</span>
+              <select class="set-input" id="sd-fontsize" style="width:80px"><option>Small</option><option selected>Medium</option><option>Large</option></select></div>
+            <div class="set-row"><span class="set-lbl">Sidebar default</span>
+              <select class="set-input" id="sd-sidebar" style="width:100px"><option selected>Expanded</option><option>Collapsed</option></select></div>
+          </div>
+
+          <div class="set-card">
+            <div class="set-card-hdr"><span class="set-card-icon"><span class="ic ic-md"><svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" fill="none" stroke="currentColor" stroke-width="1.8"/><polyline points="17 21 17 13 7 13 7 21" fill="none" stroke="currentColor" stroke-width="1.8"/><polyline points="7 3 7 8 15 8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span></span><span class="set-card-title">DATA &amp; BACKUP</span></div>
+            <div class="set-row"><button class="set-btn primary" onclick="exportData()">EXPORT ALL DATA (ZIP)</button></div>
+            <div class="set-row"><button class="set-btn" onclick="runSelfTest()">RUN SELF-TEST (92 checks)</button></div>
+            <div class="set-row"><span class="set-lbl">Self-test result</span><span class="set-val" id="sd-selftest" style="color:var(--green)">-</span></div>
+            <div class="set-row"><button class="set-btn danger" onclick="if(confirm('Clear all conversation history?'))clearHistory()">CLEAR CHAT HISTORY</button></div>
+          </div>
+
+          <div class="set-card">
+            <div class="set-card-hdr"><span class="set-card-icon">ℹ️</span><span class="set-card-title">ABOUT</span></div>
+            <div class="set-row"><span class="set-lbl">Version</span><span class="set-val" id="sd-version">-</span></div>
+            <div class="set-row"><span class="set-lbl">Bridge methods</span><span class="set-val">233</span></div>
+            <div class="set-row"><span class="set-lbl">Modules</span><span class="set-val">74</span></div>
+            <div class="set-row"><span class="set-lbl">License</span><span class="set-val">Your Company LLC</span></div>
+            <div class="set-row"><span class="set-lbl">Support</span><span class="set-val">joseph@yourcompany.example.com</span></div>
+            <div class="set-row"><button class="set-btn" onclick="startTour()">RESTART GUIDED TOUR</button></div>
+            <div class="set-row" id="debug-health-row" style="display:none"><button class="set-btn" onclick="simulateHandlerError()" style="background:var(--amber);color:#000;">DEBUG: SIMULATE HANDLER ERROR</button></div>
+            <div class="set-row"><span class="set-lbl">Run tour on next startup</span><label class="set-toggle"><input type="checkbox" id="sd-tour-next" onchange="saveTourToggle(this.checked)"><span class="stg-sl"></span></label></div>
+            <div class="set-row"><span class="set-lbl">Bid Template</span><span class="set-val tpl-badge" id="tpl-active">STANDARD</span></div>
+            <div class="set-row"><button class="set-btn" onclick="cycleBidTemplate()">↻ SWITCH BID TEMPLATE</button></div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+    <!-- RIGHT SIDEBAR - 3 panels only -->
+    
+
+  </div><!-- /mgrid -->
+</div><!-- /shell -->
+
+<!-- Toast container -->
+<div class="toast-container" id="toasts"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

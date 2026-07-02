@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Scheduling | Your Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:#000;color:#e4e4e7;
+  font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(circle at 85% 8%,rgba(147,51,234,0.10),transparent 40%),
+    radial-gradient(circle at 15% 92%,rgba(107,33,168,0.07),transparent 40%);
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;padding:0;}
+input,textarea,select{font-family:inherit;}
+p{margin:0;}h1,h2,h3,h4{margin:0;font-weight:normal;}
+.container{max-width:960px;margin:0 auto;padding:0 20px;}
+
+header.site{border-bottom:2px solid #27272a;background:rgba(0,0,0,.85);
+  position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);}
+.header-row{max-width:960px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;}
+.logo-tile{width:40px;height:40px;background:#9333ea;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.header-meta .small{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#52525b;}
+.header-meta .big{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin-top:2px;}
+footer.site{max-width:960px;margin:0 auto;padding:28px 20px;border-top:1px solid #27272a;text-align:center;}
+footer.site p{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#3f3f46;}
+
+.lab-hero{position:relative;border:2px solid #3f3f46;background:#18181b;overflow:hidden;margin-bottom:28px;}
+.hero-grid{position:absolute;inset:0;opacity:.1;
+  background-image:linear-gradient(rgba(147,51,234,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(147,51,234,.3) 1px,transparent 1px);
+  background-size:24px 24px;}
+.hero-glow{position:absolute;top:-40px;right:-40px;width:220px;height:220px;
+  background:#9333ea;border-radius:50%;filter:blur(80px);opacity:.22;}
+.lab-hero-inner{position:relative;padding:28px 24px;}
+.lab-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#d8b4fe;margin-bottom:8px;}
+.lab-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,9vw,68px);color:#fff;line-height:.9;margin-bottom:14px;}
+.lab-h1 .accent{color:#d8b4fe;}
+.lab-blurb{color:#a1a1aa;max-width:540px;font-size:14px;line-height:1.7;margin-bottom:22px;}
+.lab-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:460px;}
+.lab-stat{border:1px solid #3f3f46;background:rgba(0,0,0,.4);padding:8px 10px;}
+.lab-stat-num{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#d8b4fe;margin:0;}
+.lab-stat-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#52525b;margin:0;}
+
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.cat-card{text-align:left;background:#18181b;border:2px solid #3f3f46;padding:0;overflow:hidden;width:100%;}
+.cat-card.is-done{border-color:#10b981;}
+.cat-stripe{height:6px;}
+.cat-inner{padding:18px;}
+.cat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.cat-icon-tile{width:44px;height:44px;color:#fff;display:flex;align-items:center;justify-content:center;}
+.cat-card h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin:0 0 6px;line-height:1.05;}
+.cat-card-blurb{font-size:12px;color:#a1a1aa;margin:0 0 14px;line-height:1.5;}
+.cat-card-foot{display:flex;justify-content:space-between;align-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:9px;color:#71717a;text-transform:uppercase;letter-spacing:.2em;}
+.cat-progress-track{height:4px;background:#27272a;flex:1;margin-left:12px;max-width:80px;}
+.cat-progress-fill{height:100%;background:#10b981;}
+
+.cat-back-btn{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;
+  color:#71717a;display:flex;align-items:center;gap:6px;margin-bottom:20px;}
+.cat-header{background:#18181b;border:2px solid #3f3f46;padding:20px;margin-bottom:16px;}
+.cat-header-inner{display:flex;gap:16px;align-items:flex-start;}
+.cat-header-icon{width:56px;height:56px;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cat-header-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;margin:0;}
+.cat-header-title{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;margin:4px 0;line-height:1;}
+.cat-header-blurb{color:#a1a1aa;font-size:13px;margin:0;line-height:1.5;}
+
+.lesson-list{display:flex;flex-direction:column;gap:8px;}
+.lesson-row{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#18181b;
+  border:2px solid #3f3f46;width:100%;text-align:left;}
+.lesson-row.is-done{border-color:#10b981;}
+.lesson-row.is-locked{opacity:.45;cursor:not-allowed;}
+.lesson-row:not(.is-locked){cursor:pointer;}
+.lesson-num-tile{width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:16px;}
+.lesson-num-tile.done   {background:#10b981;color:#000;}
+.lesson-num-tile.current{background:#d8b4fe;color:#000;}
+.lesson-num-tile.pending{background:#27272a;color:#71717a;}
+.lesson-row-meta{flex:1;min-width:0;}
+.lesson-row-title{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin:0;line-height:1.1;}
+.lesson-row-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;margin:4px 0 0;}
+
+.lesson-card{border:2px solid #3f3f46;background:#18181b;}
+.lesson-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.lesson-icon-tile{width:52px;height:52px;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.lesson-card-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;font-weight:700;opacity:.8;margin:0;}
+.lesson-card-title{font-family:'Bebas Neue',sans-serif;font-size:32px;margin:4px 0 0;line-height:1;color:#fff;}
+.lesson-card-body{padding:24px 22px;}
+.lesson-section{margin-bottom:22px;}
+.lesson-section h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#d8b4fe;margin:0 0 8px;}
+.lesson-section p{color:#a1a1aa;line-height:1.65;margin:0;font-size:14px;}
+.tip-box{background:rgba(147,51,234,.08);border-left:4px solid #9333ea;padding:12px 16px;margin-top:20px;}
+.tip-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#d8b4fe;margin:0 0 6px;font-weight:700;}
+.tip-body{color:#e9d5ff;font-size:13px;margin:0;line-height:1.55;font-style:italic;}
+
+.complete-btn{width:100%;margin-top:24px;padding:14px 0;
+  font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.2em;
+  background:#9333ea;color:#fff;border:2px solid #9333ea;
+  display:flex;align-items:center;justify-content:center;gap:10px;}
+
+.week-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:6px;}
+.week-day{background:#0c0c0c;border:1px solid #3f3f46;padding:10px 8px;}
+.week-day-name{font-family:'Bebas Neue',sans-serif;font-size:16px;color:#d8b4fe;margin:0 0 6px;}
+.week-day-tag{font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.15em;color:#71717a;margin:0 0 6px;}
+.week-day-body{font-size:11px;color:#a1a1aa;line-height:1.4;margin:0;}
+
+.int-card{border:2px solid #3f3f46;background:#18181b;}
+.int-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.int-card-body{padding:24px 22px;}
+
+.mib-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media (max-width:720px){ .mib-grid{grid-template-columns:1fr;} }
+.mib-col h4{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#d8b4fe;margin:0 0 12px;}
+.mib-field{margin-bottom:12px;}
+.mib-label{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#71717a;margin-bottom:4px;display:block;}
+.mib-input,.mib-textarea,.mib-select{
+  width:100%;background:#0c0c0c;border:1px solid #3f3f46;color:#e4e4e7;
+  padding:8px 10px;font-size:13px;outline:none;font-family:inherit;
+}
+.mib-input:focus,.mib-textarea:focus,.mib-select:focus{border-color:#9333ea;}
+.mib-textarea{resize:vertical;min-height:60px;line-height:1.5;font-size:12px;}
+.mib-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+
+.invite-preview{background:#0c0c0c;border:1px solid #3f3f46;padding:0;overflow:hidden;}
+.invite-preview-head{background:#9333ea;color:#fff;padding:10px 14px;}
+.invite-preview-head h5{font-family:'Bebas Neue',sans-serif;font-size:20px;margin:0;line-height:1.1;}
+.invite-preview-head p{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;opacity:.8;margin:2px 0 0;}
+.invite-preview-body{padding:12px 14px;}
+.invite-row{display:flex;gap:10px;font-size:12px;color:#a1a1aa;padding:5px 0;border-bottom:1px dashed #27272a;}
+.invite-row:last-child{border-bottom:none;}
+.invite-row-key{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.15em;color:#71717a;width:70px;flex-shrink:0;padding-top:1px;}
+.invite-row-val{flex:1;color:#e4e4e7;line-height:1.5;white-space:pre-line;}
+.invite-empty{color:#52525b;font-style:italic;}
+
+.mib-check-btn{margin-top:16px;padding:10px 18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.2em;
+  background:#9333ea;color:#fff;border:2px solid #9333ea;}
+.mib-feedback{margin-top:14px;padding:12px 14px;font-size:12px;line-height:1.6;}
+.mib-feedback.ok{background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+.mib-feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+.mib-feedback.warn{background:rgba(250,204,21,.08);border:1px solid #fbbf24;color:#fde68a;}
+.mib-feedback ul{margin:6px 0 0;padding-left:18px;}
+.mib-feedback li{margin-bottom:3px;}
+
+.sim-stage{background:#0c0c0c;border:1px solid #3f3f46;padding:18px;margin-bottom:14px;}
+.sim-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#d8b4fe;margin-bottom:8px;}
+.sim-request{background:#1c1917;border-left:3px solid #9333ea;padding:12px 14px;margin-bottom:14px;}
+.sim-request-from{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:#d8b4fe;margin-bottom:4px;}
+.sim-request-body{font-size:13px;color:#e4e4e7;line-height:1.55;}
+.sim-buttons{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px;}
+.sim-btn{padding:10px 8px;background:#09090b;border:1px solid #3f3f46;
+  font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.05em;color:#a1a1aa;line-height:1.2;}
+.sim-btn:hover{border-color:#d8b4fe;}
+.sim-btn.picked-correct{background:rgba(16,185,129,.15);border-color:#10b981;color:#a7f3d0;}
+.sim-btn.picked-wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.sim-btn.correct-shown{background:rgba(16,185,129,.08);border-color:#10b981;color:#a7f3d0;}
+.sim-feedback{margin-top:14px;padding:10px 14px;font-size:12px;line-height:1.55;}
+.sim-feedback.ok{background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+.sim-feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+
+.cr-versus{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:stretch;margin-bottom:14px;}
+@media (max-width:600px){ .cr-versus{grid-template-columns:1fr;} }
+.cr-item{background:#1c1917;border:1px solid #3f3f46;padding:12px;}
+.cr-item-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#d8b4fe;margin-bottom:4px;}
+.cr-item-body{font-size:12px;color:#e4e4e7;line-height:1.5;}
+.cr-vs{display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:22px;color:#dc2626;letter-spacing:.1em;}
+@media (max-width:600px){ .cr-vs{padding:6px 0;} }
+
+.next-btn{padding:10px 18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.2em;
+  background:#9333ea;color:#fff;border:2px solid #9333ea;}
+.score-line{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;
+  color:#a1a1aa;margin-top:16px;padding-top:14px;border-top:1px solid #27272a;}
+
+.rules-list{display:flex;flex-direction:column;gap:8px;margin-top:6px;}
+.rule-row{display:flex;gap:12px;background:#0c0c0c;border:1px solid #3f3f46;padding:10px 14px;align-items:center;}
+.rule-num{width:28px;height:28px;background:#9333ea;color:#fff;display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:16px;flex-shrink:0;}
+.rule-text{font-size:12px;color:#e4e4e7;line-height:1.4;}
+.rule-text strong{color:#d8b4fe;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-row">
+    <div class="logo-tile" id="logo-slot"></div>
+    <div class="header-meta">
+      <p class="small">Your Company &middot; Module 9</p>
+      <p class="big">Scheduling</p>
+    </div>
+  </div>
+</header>
+
+<main class="container" style="padding:28px 20px 40px;">
+  <div id="app"></div>
+</main>
+
+<footer class="site">
+  <p>Built by Joseph &middot; Your Company Virtual Office &middot; Internal Use Only</p>
+</footer>
+
+<script>
+"use strict";
+
+const ICONS={
+  'arrow-right':'<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  'arrow-left': '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  'check':      '<path d="M20 6 9 17l-5-5"/>',
+  'lock':       '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  'calendar':   '<path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/>',
+  'shield':     '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>',
+  'clock':      '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+  'building-2': '<path d="M10 12h4"/><path d="M10 8h4"/><path d="M14 21v-3a2 2 0 0 0-4 0v3"/><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/>',
+  'shuffle':    '<path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.7-1.1 2-1.7 3.3-1.7H22"/><path d="m18 2 4 4-4 4"/><path d="M2 6h1.9c1.5 0 2.9.9 3.6 2.2"/><path d="M22 18h-5.9c-1.3 0-2.6-.7-3.3-1.8l-.5-.8"/><path d="m18 14 4 4-4 4"/>',
+  'calendar-clock':'<path d="M16 14v2.2l1.6 1"/><path d="M16 2v4"/><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"/><path d="M3 10h5"/><path d="M8 2v4"/><circle cx="16" cy="16" r="6"/>'
+};
+function icon(name,size,color){
+  size=size||16;color=color||'currentColor';
+  var p=ICONS[name]||'';
+  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">'+p+'</svg>';
+}
+
+const CATEGORIES=[
+  { id:'rhythm', iconKey:'calendar', color:'#9333ea',
+    title:'The Weekly Rhythm',
+    blurb:'Your Company\'s heartbeat: what happens when. Mondays, Tuesdays, Wednesdays — they each have a job.',
+    lessons:[
+      { id:'wr-1', title:'Your Company\'s Weekly Heartbeat', type:'reading', minutes:5 },
+      { id:'wr-2', title:'Owner\'s Day Patterns',       type:'reading', minutes:4 },
+      { id:'wr-3', title:'Mario, Paul, Amber, Joseph',    type:'reading', minutes:4 }
+    ] },
+  { id:'focus', iconKey:'shield', color:'#a855f7',
+    title:'Protecting Focus Time',
+    blurb:'Why Tuesday is sacred, how to decline well, how to build a meeting invite that respects everyone\'s time.',
+    lessons:[
+      { id:'pf-1', title:'Why Tuesday is Protected',      type:'reading',     minutes:4 },
+      { id:'pf-2', title:'The Decline Protocol',          type:'reading',     minutes:4 },
+      { id:'pf-3', title:'Meeting Invite Builder',        type:'interactive', minutes:7, intKey:'inviteBuilder' }
+    ] },
+  { id:'appts', iconKey:'building-2', color:'#7e22ce',
+    title:'Appointments & Site Visits',
+    blurb:'Vendor reps, sub-contractors, Thursday jobsite logistics. Then a 5-day scheduling sim to test it.',
+    lessons:[
+      { id:'av-1', title:'Vendor Appointment Protocol',   type:'reading',     minutes:4 },
+      { id:'av-2', title:'Site Visit Checklist',          type:'reading',     minutes:4 },
+      { id:'av-3', title:'5-Day Scheduling Sim',          type:'interactive', minutes:8, intKey:'schedSim' }
+    ] },
+  { id:'conflict', iconKey:'shuffle', color:'#6b21a8',
+    title:'Conflict Resolution',
+    blurb:'When two requests collide, the five priority rules decide. When the rules collide, you escalate.',
+    lessons:[
+      { id:'cr-1', title:'The Five Priority Rules',       type:'reading',     minutes:5 },
+      { id:'cr-2', title:'When to Escalate vs. Decide',   type:'reading',     minutes:4 },
+      { id:'cr-3', title:'Conflict Resolution Drill',     type:'interactive', minutes:6, intKey:'conflictDrill' }
+    ] }
+];
+
+const LESSON_CONTENT={
+  'wr-1':{ sections:[
+    { h:'Monday: week kickoff', b:'9-10 AM bid review (Owner + Joseph). Rest of Monday is open for client meetings, vendor calls (afternoon only), and admin catchup. Most external commitments land Monday because the team has the most energy and the bid pipeline is freshly reviewed.' },
+    { h:'Tuesday: deep-work day', b:'No external meetings. Owner prices bids, reviews drawings, drafts client strategy memos. The shop floor runs normally — Mario directs without Owner involvement. This is the only day of the week Owner is genuinely uninterruptible by routine items.' },
+    { h:'Wednesday: client and team day', b:'7 AM shop walk with Mario (Owner on the floor 30 minutes, reviews current builds, addresses quality concerns). Rest of Wednesday: client meetings, vendor reps in afternoon only, team huddles. Wednesday afternoon is the one and only window for vendor sales meetings.' },
+    { h:'Thursday: site visit day', b:'Owner is out at jobsites most of the day. Phone available, no office meetings. ICD Church, Topgolf, Carvana, Elite Crossing — rotated based on project status. The assistant\'s Thursday role: phones, walk-ins, urgent escalation only.' },
+    { h:'Friday: wrap-up day', b:'8:30 AM team check-in (Owner, Joseph, Paul, Mario, Amber, via Teams or in-person). Friday AM: open for meetings, paperwork review. Friday PM: paperwork, week closeout, bid pipeline review for the following week. Most legal review meetings with Amber happen Friday PM.' }
+  ], tip:'Memorize this rhythm. When a request comes in, your first question is "which day does this naturally fit?" before checking the calendar. The calendar is the second filter, not the first.',
+    customHtml:'<div style="margin-top:8px;"><p style="font-family:\'JetBrains Mono\',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:#d8b4fe;margin-bottom:8px;">The week at a glance</p>'+
+      '<div class="week-grid">'+
+        '<div class="week-day"><p class="week-day-name">Mon</p><p class="week-day-tag">Kickoff</p><p class="week-day-body">9-10 bid review. Client meetings open.</p></div>'+
+        '<div class="week-day"><p class="week-day-name">Tue</p><p class="week-day-tag">Deep work</p><p class="week-day-body">No meetings. Pricing, drawings.</p></div>'+
+        '<div class="week-day"><p class="week-day-name">Wed</p><p class="week-day-tag">Client/Team</p><p class="week-day-body">7 AM shop walk. Vendors PM only.</p></div>'+
+        '<div class="week-day"><p class="week-day-name">Thu</p><p class="week-day-tag">Site visits</p><p class="week-day-body">Owner on jobsites all day.</p></div>'+
+        '<div class="week-day"><p class="week-day-name">Fri</p><p class="week-day-tag">Wrap-up</p><p class="week-day-body">8:30 team check-in. Paperwork PM.</p></div>'+
+      '</div></div>' },
+  'wr-2':{ sections:[
+    { h:'6:30 AM start, at desk by 7', b:'Owner is in his office before most of the team. The 6:30-9 AM window is his thinking time. Do not schedule meetings before 9 AM on any day except Wednesday (shop walk) and Friday (team check-in).' },
+    { h:'Lunch is rarely formal', b:'Owner eats at his desk or grabs something between meetings. Do not block calendar for lunch (12-1) unless there is a client lunch on the books. The hour is more useful unscheduled.' },
+    { h:'Energy curve: highest 7-11 AM, dip 1-3 PM, second wind 3-5 PM', b:'Schedule cognitively demanding meetings in the morning. Schedule operational and admin meetings in the afternoon. Pricing decisions, strategic reviews → AM. Vendor check-ins, internal status meetings → PM.' },
+    { h:'Hard stop at 5:30 PM most days', b:'Owner leaves the office by 5:30 to be with family. Late meetings should be exceptional. If a client insists on a 6 PM call, get Owner\'s permission first — never volunteer his evening on his behalf.' }
+  ], tip:'Owner is most accessible in person before 9 AM. If you have a quick question, walk it over then. After 9, book time via calendar like everyone else.' },
+  'wr-3':{ sections:[
+    { h:'Mario (Crew Lead) runs the shop on his own schedule', b:'Shop opens at 6 AM, closes when the day\'s work is done (usually 4-5 PM, sometimes later). Mario\'s calendar is "shop floor" — he is on the floor, reachable by radio or text. Do not book Mario for office meetings; bring office items to him via 5-minute floor visit.' },
+    { h:'Paul (Safety Director) is mostly off-site', b:'Paul handles compliance from his vehicle and from jobsites. He answers calls and texts immediately, comes to the office for monthly compliance review (first Friday of the month, 10 AM). All non-emergency safety items go to him via email — he triages in the evening.' },
+    { h:'Amber (COO) operates on her own time', b:'Amber is hybrid: 2-3 days in-office, remote the rest. She does heavy legal review work uninterrupted. Email her instead of calling. She responds within 4 hours during business hours, 24 hours otherwise. Schedule by sending a Teams meeting invite — she accepts or declines within the day.' },
+    { h:'Joseph (IT/EA) is fluid', b:'Most of Joseph\'s work happens behind a screen. He is reachable via Teams chat anytime during business hours. For longer conversations: Teams call or in-person at his desk. Joseph keeps Tuesday-Thursday afternoons open for deep IT work — the same protection Owner has, slightly different days.' }
+  ], tip:'Routing rule: use the medium that person prefers. Radio for Mario, email for Paul, Teams chat for Joseph, calendar invite for Amber. Using the wrong channel adds friction even when it "gets there."' },
+  'pf-1':{ sections:[
+    { h:'Deep work needs uninterrupted blocks', b:'Pricing a bid, reviewing a 200-page contract, drafting a client strategy memo — these tasks lose 80% of their efficiency when interrupted every 15 minutes. Most professional work that genuinely creates value happens in 90-minute uninterrupted blocks. Tuesday is when Owner gets those blocks.' },
+    { h:'The cost of breaking Tuesday', b:'A "quick 15-minute meeting" on Tuesday morning typically costs Owner 2 hours of focus that day: 15 minutes for the meeting, plus 45 minutes of context-switching loss before and after. Three "quick 15-minute meetings" on a Tuesday and you have eliminated Tuesday as a productive day.' },
+    { h:'What Tuesday is actually for', b:'Bid pricing — the financial reality check before any quote goes out. Contract review — reading what we are about to sign. Strategy memos to clients. Drawing review for technical accuracy. Email triage of the week\'s non-urgent items.' },
+    { h:'The three exceptions', b:'(1) Verified emergency — injury, jobsite accident, OSHA notice. (2) A Marathon Petroleum or other named-priority client requiring same-day response. (3) Owner\'s own choice to take a meeting (he occasionally does — that is his prerogative). Nothing else qualifies.' }
+  ], tip:'When a Tuesday request comes in, the default answer is "Owner has standing commitments Tuesday — can we look at Monday or Wednesday?" You do not need to explain what the commitments are. The brevity itself signals these are real commitments.' },
+  'pf-2':{ sections:[
+    { h:'Most meeting requests should be declined or rescheduled', b:'A calendar full of meetings is not a productive calendar. The assistant\'s job is to be the filter that keeps the calendar mostly empty so the meetings that DO happen are the meetings that should.' },
+    { h:'Three categories of decline', b:'(1) Hard decline — vendor sales pitches, irrelevant invitations. Use Phone Script 01. (2) Soft decline plus reschedule — Tuesday requests, after-hours requests, conflicts with priority items. Counter-offer specific alternatives. (3) Queue — strategic but not urgent (conferences, panels, networking events). Send to Owner for his own evaluation.' },
+    { h:'The language of decline matters', b:'Never "Owner is too busy" — that signals he is overwhelmed. Never "he can\'t do that." Instead: "Owner has standing commitments that morning. Wednesday afternoon works better — would 2 PM suit you?" Reframe from "can\'t" to "let\'s find when he can."' },
+    { h:'Document every decline', b:'Every decline goes in the calendar log spreadsheet. Date, requester, what they wanted, what you declined or rescheduled to. This protects you (proves you handled the request) and helps Owner see patterns. If a specific vendor keeps asking, that pattern is information.' }
+  ], tip:'Declining well is more important than scheduling well. Anyone can fill a calendar — only a good gatekeeper can keep it strategic. The point is not to be unhelpful. The point is to be the filter.' },
+  'av-1':{ sections:[
+    { h:'Cold vendor calls — always Phone Script 01', b:'Anyone who calls trying to sell something gets the polite block. Take their info if they offer, route to info@yourcompany.example.com, end the call. Do not schedule them in. The vast majority of vendor cold-calls go nowhere useful.' },
+    { h:'Established vendors — Wednesday afternoon only', b:'Vendors Your Company actively buys from sometimes need to drop in to discuss pricing, new product lines, or quality issues. These go into Wednesday afternoon slots only. Not Monday, not Tuesday, not Thursday, not Friday. The one window. Holding the line on this keeps the rest of the week clean.' },
+    { h:'Vendor visits to the shop floor', b:'Coordinate with Mario before scheduling. Mario decides if the vendor visit interrupts production. If Mario says no, reschedule. Vendors do not walk through the shop on their own schedule. The shop is a working environment, not a showroom.' },
+    { h:'Sub-contractor coordination meetings', b:'Welding subs, paint subs, hauling subs. These are operational meetings, not sales. Schedule them when Owner and Mario are both available (Wednesday morning or Friday after team check-in). Bring relevant documents — BOLs, drawings, COIs — so the meeting starts with the facts in hand.' }
+  ], tip:'The default for any vendor request is "I\'ll get back to you with a time." Never agree to a time on the first call. Hang up, check the calendar, check with Mario if floor access is needed, then call back with a specific time. The 30-minute pause filters out most pressure tactics.' },
+  'av-2':{ sections:[
+    { h:'Site visits are Thursday', b:'Owner rotates jobsites. He typically visits 2-3 sites in a single Thursday, often with Mario or Paul depending on the visit purpose. Quality visits (Mario), safety/compliance visits (Paul), client relationship visits (alone or with Owner).' },
+    { h:'Before any site visit, confirm three things', b:'(1) Site contact name plus phone — the GC or client lead Owner will meet. (2) Site address with gate or access info. (3) Required PPE — hard hat always, safety glasses always; specific job sites may require FR clothing, specific boot ratings, fall protection. Marathon Petroleum sites always require FR shirt and pants.' },
+    { h:'Pack the truck the night before', b:'Hard hat, safety glasses, ear protection, gloves, boots. FR shirt and pants if visiting an FR-required site. Folder with relevant project drawings, COI copy, ID and driver\'s license. Phone charger. Notepad. Water and a snack for the day. The five-minute prep saves a wasted hour next morning.' },
+    { h:'Communicate the visit to the client', b:'Send a confirmation email the day before: "Owner will be on-site tomorrow [day] at approximately [time]. He plans to walk the structural area with [your contact]. Estimated duration 45 minutes. Please reply if anything changes." File the response in 04_Correspondence.' }
+  ], tip:'Your job for Thursday site visits is preparation, not execution. Confirm contacts, pack the truck, send the heads-up email. Owner does the walking and the talking. You handle everything else so he can focus.' },
+  'cr-1':{ sections:[
+    { h:'The five rules, in order', b:'When two requests conflict, apply in this order: (1) Safety wins, always. Paul or Mario calling about an injury beats every other item on the calendar. (2) Active compliance wins second. Marathon Petroleum, ISNetworld, Texas Mutual items have priority over routine business. (3) Existing client wins over new prospect. The work that pays this month beats the work that might pay next quarter. (4) Revenue wins over PR. Bidding a job beats sitting for a podcast. (5) Internal team wins over external vendor. Your own people get attention before someone trying to sell you something.' },
+    { h:'Apply the highest applicable rule', b:'If a Marathon compliance call conflicts with a vendor pitch, Rule 2 (compliance) applies. Vendor pitch declines. If two non-safety items conflict — a new GC inquiry vs. an existing client check-in — Rule 3 (existing > new) applies. Existing client wins.' },
+    { h:'When rules collide (rare)', b:'Active compliance vs. existing client work: usually compliance, because losing a compliance pathway can cost a client. Existing client vs. new revenue bid: existing if the new bid is speculative, new bid if existing is just maintenance. When you cannot tell, escalate to Owner.' },
+    { h:'Document your decisions', b:'Every conflict resolution gets logged. Date, the two competing items, which one won, which rule applied. This builds a record of how Your Company prioritizes. It also lets you defend a decline: "Per priority rules, Marathon compliance items take precedence over vendor demos."' }
+  ], tip:'Print the five rules and stick them on your monitor. When in doubt, run through them in order. The first applicable rule is the answer. You will escalate less often than you think once these are internalized.',
+    customHtml:'<div style="margin-top:8px;"><p style="font-family:\'JetBrains Mono\',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:#d8b4fe;margin-bottom:8px;">The five priority rules</p>'+
+      '<div class="rules-list">'+
+        '<div class="rule-row"><div class="rule-num">1</div><div class="rule-text"><strong>Safety wins, always.</strong> Injury, accident, OSHA — beats everything.</div></div>'+
+        '<div class="rule-row"><div class="rule-num">2</div><div class="rule-text"><strong>Active compliance wins second.</strong> Marathon, ISNetworld, Texas Mutual items over routine.</div></div>'+
+        '<div class="rule-row"><div class="rule-num">3</div><div class="rule-text"><strong>Existing client over new prospect.</strong> The work that pays this month wins.</div></div>'+
+        '<div class="rule-row"><div class="rule-num">4</div><div class="rule-text"><strong>Revenue over PR.</strong> Bidding a job beats sitting for a podcast.</div></div>'+
+        '<div class="rule-row"><div class="rule-num">5</div><div class="rule-text"><strong>Internal team over external vendor.</strong> Your people first.</div></div>'+
+      '</div></div>' },
+  'cr-2':{ sections:[
+    { h:'What you can decide on your own', b:'Any decline of a vendor sales pitch (Script 01). Counter-offers within established time windows (move a Tuesday request to Wednesday). Routing routine items (vendor invoice to Amber). Walk-in visitor flow. Phone routing per the scripts. Email forwarding. Calendar moves under 1 hour where no client is affected.' },
+    { h:'What needs Owner\'s input', b:'Any decline of an external party Owner has a relationship with — do not decline anyone for him without checking. Any meeting move that affects a client meeting. Any scheduling beyond the standard rhythm (early mornings, evenings, weekends). Any conflict between two of the five priority rules where you cannot tell which wins.' },
+    { h:'How to escalate without interrupting', b:'Use Teams chat with a clear question: "Vendor X requesting Wednesday 2 PM for product demo. Existing Wednesday slot is Marathon compliance call. Move vendor or decline?" One sentence. Three options or fewer. Owner replies in 2-3 minutes with a one-word answer.' },
+    { h:'Speed matters more than perfect process', b:'A 5-minute delay getting Owner\'s input is fine. A 2-day delay because you waited for him to "be free" is not. Send the chat. Move on. He answers when he sees it.' }
+  ], tip:'Escalate decisions you cannot make. Decide what you can. Most things are decidable — that\'s the point of the rules and the scripts. When you find yourself wondering whether to ask, the answer is usually that you should decide and document it.' }
+};
+
+const VAGUE_TITLES=['meeting','sync','quick chat','catch up','catchup','touch base','check in','check-in','talk','chat','huddle','call'];
+
+const SIM_ACTIONS=['Accept as proposed','Counter-offer','Wed 7 AM shop walk','Thursday site visit','Decline','Queue for Owner'];
+const SIM_SCENARIOS=[
+  { id:'s1', tag:'New external request',
+    from:'Lakefront Plaza GC (new)',
+    body:'"Hi — I\'d love to set up a 30-minute intro call with Owner about an upcoming structural package. Tuesday at 10 AM works for our team. Looking forward to it!"',
+    correct:'Counter-offer',
+    why:'Tuesday is protected deep-work day. New GC introductions land Monday or Wednesday morning. Counter-offer Monday 10 AM or Wednesday 9 AM.' },
+  { id:'s2', tag:'Active compliance',
+    from:'Marathon Petroleum compliance contact',
+    body:'"We need 1 hour with Owner to review your RAVS submission and the open audit items. Wednesday 9 AM works on our end. Is that doable?"',
+    correct:'Accept as proposed',
+    why:'Marathon compliance is a top-priority active client. Wednesday 9 AM is open meeting time. Accept as proposed, send invite, confirm same day.' },
+  { id:'s3', tag:'Cold outreach',
+    from:'CRM software sales rep',
+    body:'"Just 15 minutes to show Owner our platform — we\'ve helped 200+ fab shops streamline their lead pipeline. Any time this week works for us."',
+    correct:'Decline',
+    why:'Cold vendor sales pitch. Use Phone Script 01. Take info if offered, route to info@yourcompany.example.com, end the call. Do not put on calendar.' },
+  { id:'s4', tag:'Internal team',
+    from:'Mario (Crew Lead)',
+    body:'"Hey — found a weld defect on the Topgolf column package during shop floor inspection. Need Owner\'s eyes on it before we proceed with cleanup or rework."',
+    correct:'Wed 7 AM shop walk',
+    why:'Quality issue from Mario routes to the Wednesday 7 AM shop walk slot. That window is exactly for shop-floor decisions. If it cannot wait until Wednesday, escalate immediately — but the default is the shop walk slot.' },
+  { id:'s5', tag:'Internal — legal',
+    from:'Amber (COO)',
+    body:'"I need 30 minutes with Owner Monday afternoon to walk through the Elite Crossing contract amendment. Send a Teams invite if you can."',
+    correct:'Accept as proposed',
+    why:'Internal team item in an open meeting window (Mon PM). Standard Monday afternoon slot. Send Teams invite, brief agenda, confirm.' },
+  { id:'s6', tag:'Existing client',
+    from:'ICD Church client lead',
+    body:'"Would love to have Owner walk our site next week to look at the column installation progress. Any day works."',
+    correct:'Thursday site visit',
+    why:'Site visits land on Thursday. Confirm the contact, address, PPE requirements, and send a confirmation email the day before. Coordinate with Mario or Paul if relevant.' },
+  { id:'s7', tag:'Technical — EOR',
+    from:'EOR (Engineer of Record) for Topgolf',
+    body:'"We need 1 hour with Owner to discuss a structural revision on the canopy connections. Tuesday 2 PM is best on our end."',
+    correct:'Counter-offer',
+    why:'Tuesday is protected. EOR calls are important but not emergencies — they fit Wednesday afternoon or Monday morning. Counter-offer with two specific alternative times.' },
+  { id:'s8', tag:'Strategic — not urgent',
+    from:'Houston AGC chapter coordinator',
+    body:'"We\'d love to have Owner on a panel about structural fabrication trends at our chapter meeting in 6 weeks. 90 minutes including Q&A."',
+    correct:'Queue for Owner',
+    why:'Strategic decision (PR, networking value) — not a calendar decision the assistant makes alone. Queue for Owner: send him the request via Teams chat with the date, time commitment, and audience. Let him decide whether to accept.' }
+];
+
+const CR_SCENARIOS=[
+  { id:'c1',
+    a:{tag:'Already booked',body:'CRM vendor product demo on Tuesday 2 PM (you accepted it last week before learning the new protocol).'},
+    b:{tag:'New request',body:'Texas Mutual EMR follow-up call requesting same Tuesday 2 PM — they need to confirm policy details for Marathon approval.'},
+    options:['Keep the vendor demo (already committed)','Decline the vendor, take Texas Mutual','Move both to next week','Escalate to Owner'],
+    correct:'Decline the vendor, take Texas Mutual',
+    why:'Rule 2 (active compliance) wins decisively. Texas Mutual EMR letter is the named blocker for Marathon Petroleum approval. Cancel the vendor with Script 01 language, take the Texas Mutual call. Vendor relationships should not exist where they conflict with compliance pathways.' },
+  { id:'c2',
+    a:{tag:'New lead',body:'New GC introduction for a $50K project — they want a 30-min call this week. They can do Wed or Fri AM.'},
+    b:{tag:'Existing client',body:'Topgolf change-order discussion needed this week. Existing $200K project, Owner already invested 40 hours. Mario also needs to attend.'},
+    options:['New GC first (revenue opportunity)','Topgolf first (existing client)','Schedule both — Topgolf Wed, GC Fri','Decline the new GC'],
+    correct:'Schedule both — Topgolf Wed, GC Fri',
+    why:'Both items fit the week without conflict. Rule 3 (existing over new) determines order: Topgolf first because it is the existing active project. New GC gets the Friday slot. Both win, no escalation needed.' },
+  { id:'c3',
+    a:{tag:'Routine internal',body:'Mario\'s scheduled Wednesday 7 AM shop walk with Owner — quality discussion on Topgolf columns.'},
+    b:{tag:'Safety incident',body:'Paul calls from the Carvana site at 7:05 AM Wednesday — minor injury on-site, ironworker bruised hand on a column lift. He needs Owner on the line for 15 minutes.'},
+    options:['Mario\'s shop walk continues, Paul waits 30 min','Paul first (safety incident)','Both wait for Owner to finish current task','Escalate'],
+    correct:'Paul first (safety incident)',
+    why:'Rule 1 (safety) wins absolutely. Even a minor injury beats routine internal items. Interrupt Mario\'s shop walk, get Owner on with Paul. Mario\'s walk resumes 15 minutes later. Safety calls do not "wait" for any other item on the calendar.' },
+  { id:'c4',
+    a:{tag:'Legal review',body:'Amber requests 60 minutes Friday AM to walk Owner through the Elite Crossing contract amendment.'},
+    b:{tag:'IT planning',body:'Joseph requests 30 minutes Friday AM for Q2 IT planning — needs Owner\'s input on Microsoft 365 license decisions.'},
+    options:['Amber gets the slot, decline Joseph','Sequence: Amber 9-10 AM, Joseph 10-10:30 AM','Joseph gets the slot (shorter)','Escalate to Owner'],
+    correct:'Sequence: Amber 9-10 AM, Joseph 10-10:30 AM',
+    why:'Both are internal team requests. They fit the morning together with no conflict. Sequence them, send two separate invites with clear agendas. No rule needs to be applied because there is no actual conflict — just stacking.' },
+  { id:'c5',
+    a:{tag:'PR opportunity',body:'Houston Business Journal reporter requests a 30-minute interview with Owner for an article on Houston-area fabricators. Quote requested by end of week.'},
+    b:{tag:'Revenue work',body:'Fab quote due to a GC by 4 PM the same day — Owner is the only one with the pricing context to finalize it.'},
+    options:['Take the interview (PR value, builds Your Company name)','Quote first, queue media for next week','Schedule both back-to-back','Escalate to Owner'],
+    correct:'Quote first, queue media for next week',
+    why:'Rule 4 (revenue over PR) is direct here. The quote going out drives potential business this month. The article is nice but neither urgent nor revenue-tied. Quote first, then queue the interview to Owner so HE decides whether to take it later. Media calls also route via Phone Script 07.' },
+  { id:'c6',
+    a:{tag:'External — unknown',body:'An out-of-state recruiter wants 15 minutes with Owner about an executive search opportunity in Dallas. They keep emailing.'},
+    b:{tag:'Existing client',body:'Marathon Petroleum compliance contact wants a 15-minute follow-up Tuesday afternoon (the EMR letter just came through) to confirm next steps.'},
+    options:['Recruiter (shorter, won\'t go away)','Marathon (existing client, active compliance)','Decline recruiter, take Marathon, document','Escalate'],
+    correct:'Decline recruiter, take Marathon, document',
+    why:'Multiple rules favor Marathon: existing client (Rule 3) AND active compliance (Rule 2). Recruiter triggers no priority rule. Decline the recruiter (Script 01 language), confirm Marathon, log both in the calendar log. Tuesday is protected, but Marathon compliance is one of the three Tuesday exceptions.' }
+];
+
+var state={
+  view:'home', completed:{},
+  mibTitle:'', mibDate:'', mibTime:'', mibDuration:'30', mibAttendees:'',
+  mibLocation:'Microsoft Teams', mibPurpose:'', mibAgenda:'',
+  mibChecked:false, mibFeedback:null,
+  simIdx:0, simPicked:{}, simRevealed:{},
+  crIdx:0, crPicked:{}, crRevealed:{}
+};
+
+function esc(s){ if(s==null)return''; return String(s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];}); }
+function getCat(id){ for(var i=0;i<CATEGORIES.length;i++) if(CATEGORIES[i].id===id) return CATEGORIES[i]; return null; }
+function getLesson(id){
+  for(var i=0;i<CATEGORIES.length;i++){
+    var c=CATEGORIES[i];
+    for(var j=0;j<c.lessons.length;j++) if(c.lessons[j].id===id) return{lesson:c.lessons[j],cat:c,idx:j};
+  }return null;
+}
+function totalLessons(){ return CATEGORIES.reduce(function(a,c){return a+c.lessons.length;},0); }
+function completedCount(){ return Object.keys(state.completed).length; }
+
+function renderHome(){
+  var done=completedCount();
+  var html='';
+  html+='<div class="lab-hero"><div class="hero-grid"></div><div class="hero-glow"></div>';
+  html+='<div class="lab-hero-inner">';
+  html+='<p class="lab-eyebrow">Your Company &middot; Module 9</p>';
+  html+='<h1 class="lab-h1">Calendar <span class="accent">Discipline</span></h1>';
+  html+='<p class="lab-blurb">A full calendar is not a productive calendar. This module teaches the Your Company weekly rhythm, how to protect Tuesday for deep work, vendor and site-visit protocols, and the five rules that resolve every scheduling conflict.</p>';
+  html+='<div class="lab-stats">';
+  [['4','Categories'],[String(totalLessons()),'Lessons'],['3','Drills'],[String(done),'Done']].forEach(function(s){
+    html+='<div class="lab-stat"><p class="lab-stat-num">'+s[0]+'</p><p class="lab-stat-lbl">'+s[1]+'</p></div>';
+  });
+  html+='</div></div></div>';
+
+  html+='<div class="cat-grid">';
+  CATEGORIES.forEach(function(cat){
+    var doneN=cat.lessons.filter(function(l){return state.completed[l.id];}).length;
+    var tot=cat.lessons.length;
+    var allDone=doneN===tot;
+    var pct=tot?(doneN/tot)*100:0;
+    html+='<button class="cat-card'+(allDone?' is-done':'')+'" data-action="open-cat" data-cat-id="'+cat.id+'">';
+    html+='<div class="cat-stripe" style="background:'+cat.color+';"></div>';
+    html+='<div class="cat-inner">';
+    html+='<div class="cat-top"><div class="cat-icon-tile" style="background:'+cat.color+';">'+icon(cat.iconKey,22,'#fff')+'</div>';
+    if(allDone) html+=icon('check',18,'#10b981');
+    html+='</div>';
+    html+='<h3>'+esc(cat.title)+'</h3>';
+    html+='<p class="cat-card-blurb">'+esc(cat.blurb)+'</p>';
+    html+='<div class="cat-card-foot"><span>'+doneN+'/'+tot+' lessons</span>';
+    html+='<div class="cat-progress-track"><div class="cat-progress-fill" style="width:'+pct+'%;"></div></div>';
+    html+='</div></div></button>';
+  });
+  html+='</div>';
+  return html;
+}
+
+function renderCategory(cat){
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-home">'+icon('arrow-left',13)+' Back to module home</button>';
+  html+='<div class="cat-header"><div class="cat-header-inner">';
+  html+='<div class="cat-header-icon" style="background:'+cat.color+';">'+icon(cat.iconKey,28,'#fff')+'</div>';
+  html+='<div><p class="cat-header-eyebrow" style="color:'+cat.color+';">Category</p>';
+  html+='<h2 class="cat-header-title">'+esc(cat.title)+'</h2>';
+  html+='<p class="cat-header-blurb">'+esc(cat.blurb)+'</p>';
+  html+='</div></div></div>';
+  html+='<div class="lesson-list">';
+  cat.lessons.forEach(function(l,i){
+    var isDone=!!state.completed[l.id];
+    var prevDone=i===0||!!state.completed[cat.lessons[i-1].id];
+    var locked=!isDone&&!prevDone;
+    var current=!isDone&&prevDone;
+    var tileCls=isDone?'done':current?'current':'pending';
+    var typeLabel=l.type==='reading'?'Reading':'Drill';
+    var typeColor=l.type==='reading'?'#71717a':'#d8b4fe';
+    html+='<button class="lesson-row'+(isDone?' is-done':'')+(locked?' is-locked':'')+'"';
+    html+=locked?' disabled':' data-action="open-lesson" data-lesson-id="'+l.id+'"';
+    html+='>';
+    html+='<div class="lesson-num-tile '+tileCls+'">'+(locked?icon('lock',14):isDone?icon('check',18):String(i+1))+'</div>';
+    html+='<div class="lesson-row-meta"><p class="lesson-row-title">'+esc(l.title)+'</p>';
+    html+='<p class="lesson-row-tag" style="color:'+typeColor+';">'+typeLabel+' &middot; ~'+l.minutes+' min</p></div>';
+    if(!locked) html+=icon('arrow-right',16,'#71717a');
+    html+='</button>';
+  });
+  html+='</div>';
+  return html;
+}
+
+function renderReading(lesson,cat){
+  var c=LESSON_CONTENT[lesson.id]||{sections:[],tip:''};
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="lesson-card">';
+  html+='<div class="lesson-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="lesson-card-body">';
+  c.sections.forEach(function(s){
+    html+='<div class="lesson-section"><h3>'+esc(s.h)+'</h3><p>'+esc(s.b)+'</p></div>';
+  });
+  if(c.customHtml) html+=c.customHtml;
+  if(c.tip){
+    html+='<div class="tip-box"><p class="tip-eyebrow">Joseph\'s tip</p><p class="tip-body">'+esc(c.tip)+'</p></div>';
+  }
+  html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  html+='</div></div>';
+  return html;
+}
+
+function renderInviteBuilder(lesson,cat){
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon('calendar-clock',26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:18px;">Build a meeting invite that respects everyone\'s time. Specific title, clear purpose, real agenda. The preview updates as you type. Run the checker when you\'re done.</p>';
+
+  html+='<div class="mib-grid">';
+  html+='<div class="mib-col"><h4>Invite fields</h4>';
+
+  html+='<div class="mib-field"><label class="mib-label">Title (specific)</label>';
+  html+='<input class="mib-input" id="mib-title" data-mib="title" type="text" placeholder="e.g., Elite Crossing Contract Amendment Review" value="'+esc(state.mibTitle)+'"></div>';
+
+  html+='<div class="mib-field"><div class="mib-row">';
+  html+='<div><label class="mib-label">Date (Mon/Wed/Fri preferred)</label><input class="mib-input" id="mib-date" data-mib="date" type="text" placeholder="Mon May 19" value="'+esc(state.mibDate)+'"></div>';
+  html+='<div><label class="mib-label">Time</label><input class="mib-input" id="mib-time" data-mib="time" type="text" placeholder="2:00 PM" value="'+esc(state.mibTime)+'"></div>';
+  html+='</div></div>';
+
+  html+='<div class="mib-field"><label class="mib-label">Duration</label>';
+  html+='<select class="mib-select" id="mib-duration" data-mib="duration">';
+  ['15','30','45','60','90'].forEach(function(d){
+    html+='<option value="'+d+'"'+(state.mibDuration===d?' selected':'')+'>'+d+' min</option>';
+  });
+  html+='</select></div>';
+
+  html+='<div class="mib-field"><label class="mib-label">Attendees (one per line)</label>';
+  html+='<textarea class="mib-textarea" id="mib-attendees" data-mib="attendees" placeholder="The Owner&#10;Amber Owner">'+esc(state.mibAttendees)+'</textarea></div>';
+
+  html+='<div class="mib-field"><label class="mib-label">Location / link</label>';
+  html+='<input class="mib-input" id="mib-location" data-mib="location" type="text" value="'+esc(state.mibLocation)+'"></div>';
+
+  html+='<div class="mib-field"><label class="mib-label">Purpose (one sentence)</label>';
+  html+='<input class="mib-input" id="mib-purpose" data-mib="purpose" type="text" placeholder="Review contract amendment language and decide whether to sign or send back." value="'+esc(state.mibPurpose)+'"></div>';
+
+  html+='<div class="mib-field"><label class="mib-label">Agenda (3 bullets minimum, one per line)</label>';
+  html+='<textarea class="mib-textarea" id="mib-agenda" data-mib="agenda" placeholder="- Walk through amendment changes&#10;- Identify risk language&#10;- Decision: sign, revise, or escalate" style="min-height:80px;">'+esc(state.mibAgenda)+'</textarea></div>';
+
+  html+='<button class="mib-check-btn" data-action="mib-check">Check this invite</button>';
+
+  if(state.mibChecked&&state.mibFeedback){
+    var fb=state.mibFeedback;
+    var cls=fb.kind==='pass'?'ok':fb.kind==='warn'?'warn':'bad';
+    html+='<div class="mib-feedback '+cls+'"><strong>'+esc(fb.headline)+'</strong>';
+    if(fb.items&&fb.items.length){
+      html+='<ul>';
+      fb.items.forEach(function(it){ html+='<li>'+esc(it)+'</li>'; });
+      html+='</ul>';
+    }
+    html+='</div>';
+    if(fb.kind==='pass'){
+      html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+    }
+  }
+  html+='</div>';
+
+  html+='<div class="mib-col"><h4>Live preview</h4>';
+  html+='<div class="invite-preview">';
+  html+='<div class="invite-preview-head">';
+  html+='<h5>'+(state.mibTitle?esc(state.mibTitle):'<span style="opacity:.5;">(Untitled invite)</span>')+'</h5>';
+  html+='<p>Microsoft Outlook &middot; Calendar invite</p>';
+  html+='</div>';
+  html+='<div class="invite-preview-body">';
+  html+='<div class="invite-row"><div class="invite-row-key">When</div><div class="invite-row-val">'+
+    (state.mibDate||state.mibTime?esc((state.mibDate||'?')+' at '+(state.mibTime||'?'))+' &middot; '+esc(state.mibDuration)+' min':'<span class="invite-empty">Add date and time</span>')+
+    '</div></div>';
+  html+='<div class="invite-row"><div class="invite-row-key">Where</div><div class="invite-row-val">'+(state.mibLocation?esc(state.mibLocation):'<span class="invite-empty">Add location</span>')+'</div></div>';
+  html+='<div class="invite-row"><div class="invite-row-key">Who</div><div class="invite-row-val">'+(state.mibAttendees?esc(state.mibAttendees):'<span class="invite-empty">Add attendees</span>')+'</div></div>';
+  html+='<div class="invite-row"><div class="invite-row-key">Purpose</div><div class="invite-row-val">'+(state.mibPurpose?esc(state.mibPurpose):'<span class="invite-empty">Add purpose</span>')+'</div></div>';
+  html+='<div class="invite-row"><div class="invite-row-key">Agenda</div><div class="invite-row-val">'+(state.mibAgenda?esc(state.mibAgenda):'<span class="invite-empty">Add 3-bullet agenda</span>')+'</div></div>';
+  html+='</div></div></div>';
+
+  html+='</div></div></div>';
+  return html;
+}
+
+function checkInvite(){
+  var issues=[];
+  var warnings=[];
+  var title=state.mibTitle.trim();
+  if(!title){ issues.push('Title is empty.'); }
+  else {
+    var lowerTitle=title.toLowerCase();
+    var vagueHit=VAGUE_TITLES.some(function(v){return lowerTitle===v;});
+    if(vagueHit||title.split(/\s+/).length<3){
+      issues.push('Title is too vague. "Meeting" or "Quick chat" tell attendees nothing. Be specific about what the meeting is about.');
+    }
+  }
+  if(!state.mibDate.trim()){ issues.push('Date is missing.'); }
+  if(!state.mibTime.trim()){ issues.push('Time is missing.'); }
+  if(!state.mibAttendees.trim()){ issues.push('No attendees listed.'); }
+  if(!state.mibPurpose.trim()){
+    issues.push('Purpose statement is empty. One sentence saying why this meeting exists.');
+  } else if(state.mibPurpose.trim().split(/\s+/).length<5){
+    issues.push('Purpose is too short. Aim for a full sentence (8+ words).');
+  }
+  var agendaLines=state.mibAgenda.split(/\n+/).filter(function(l){return l.trim();});
+  if(agendaLines.length<3){
+    issues.push('Agenda needs at least 3 bullets. Without an agenda, a meeting drifts.');
+  }
+  var dur=parseInt(state.mibDuration,10);
+  if(dur>60){
+    warnings.push('Duration is '+dur+' minutes. Most internal meetings work better at 30-45. If you genuinely need '+dur+', confirm with Owner before sending.');
+  }
+  var dateLower=state.mibDate.toLowerCase();
+  if(dateLower.indexOf('tue')>=0){
+    var purposeLower=state.mibPurpose.toLowerCase();
+    var emergencyKeywords=['emergency','injury','osha','marathon','urgent','critical'];
+    var hasEmergency=emergencyKeywords.some(function(k){return purposeLower.indexOf(k)>=0;});
+    if(!hasEmergency){
+      warnings.push('Scheduled on Tuesday. Tuesday is protected deep-work day. Confirm this is an emergency or named-priority item before sending.');
+    }
+  }
+
+  if(issues.length>0){
+    state.mibFeedback={kind:'fail',headline:'Invite needs work before sending:',items:issues};
+  } else if(warnings.length>0){
+    state.mibFeedback={kind:'warn',headline:'Invite is workable but has flags:',items:warnings};
+  } else {
+    state.mibFeedback={kind:'pass',headline:'Invite is ready. Specific title, clear purpose, real agenda, reasonable duration.',items:[]};
+  }
+  state.mibChecked=true;
+}
+
+function renderSchedSim(lesson,cat){
+  var idx=state.simIdx;
+  var s=SIM_SCENARIOS[idx];
+  var picked=state.simPicked[s.id];
+  var revealed=state.simRevealed[s.id];
+  var total=SIM_SCENARIOS.length;
+  var allDone=SIM_SCENARIOS.every(function(sc){return state.simRevealed[sc.id];});
+  var correctCount=SIM_SCENARIOS.filter(function(sc){return state.simPicked[sc.id]===sc.correct;}).length;
+
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Eight calendar requests arrive over the course of a week. Pick the right action for each. The weekly rhythm and the priority rules are your guide.</p>';
+
+  html+='<div class="sim-stage">';
+  html+='<p class="sim-tag">Request '+(idx+1)+' of '+total+' &middot; '+esc(s.tag)+'</p>';
+  html+='<div class="sim-request"><div class="sim-request-from">From: '+esc(s.from)+'</div><div class="sim-request-body">'+esc(s.body)+'</div></div>';
+  html+='<div class="sim-buttons">';
+  SIM_ACTIONS.forEach(function(a){
+    var cls='sim-btn';
+    if(revealed){
+      if(a===s.correct) cls+=picked===a?' picked-correct':' correct-shown';
+      else if(a===picked) cls+=' picked-wrong';
+    }
+    html+='<button class="'+cls+'" data-action="sim-pick" data-act="'+esc(a)+'">'+esc(a)+'</button>';
+  });
+  html+='</div>';
+  if(revealed){
+    var ok=picked===s.correct;
+    html+='<div class="sim-feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Should be '+esc(s.correct)+'. ')+esc(s.why)+'</div>';
+    if(idx<total-1){
+      html+='<div style="text-align:right;margin-top:12px;"><button class="next-btn" data-action="sim-next">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+    }
+  }
+  html+='</div>';
+
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#d8b4fe')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+function renderConflictDrill(lesson,cat){
+  var idx=state.crIdx;
+  var s=CR_SCENARIOS[idx];
+  var picked=state.crPicked[s.id];
+  var revealed=state.crRevealed[s.id];
+  var total=CR_SCENARIOS.length;
+  var allDone=CR_SCENARIOS.every(function(sc){return state.crRevealed[sc.id];});
+  var correctCount=CR_SCENARIOS.filter(function(sc){return state.crPicked[sc.id]===sc.correct;}).length;
+
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Six conflicts. Apply the five priority rules. Pick the action that resolves the collision correctly.</p>';
+
+  html+='<div class="sim-stage">';
+  html+='<p class="sim-tag">Conflict '+(idx+1)+' of '+total+'</p>';
+
+  html+='<div class="cr-versus">';
+  html+='<div class="cr-item"><div class="cr-item-tag">'+esc(s.a.tag)+'</div><div class="cr-item-body">'+esc(s.a.body)+'</div></div>';
+  html+='<div class="cr-vs">VS</div>';
+  html+='<div class="cr-item"><div class="cr-item-tag">'+esc(s.b.tag)+'</div><div class="cr-item-body">'+esc(s.b.body)+'</div></div>';
+  html+='</div>';
+
+  html+='<div class="sim-buttons" style="grid-template-columns:1fr 1fr;">';
+  s.options.forEach(function(a){
+    var cls='sim-btn';
+    if(revealed){
+      if(a===s.correct) cls+=picked===a?' picked-correct':' correct-shown';
+      else if(a===picked) cls+=' picked-wrong';
+    }
+    html+='<button class="'+cls+'" data-action="cr-pick" data-act="'+esc(a)+'">'+esc(a)+'</button>';
+  });
+  html+='</div>';
+
+  if(revealed){
+    var ok=picked===s.correct;
+    html+='<div class="sim-feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Should be: '+esc(s.correct)+'. ')+esc(s.why)+'</div>';
+    if(idx<total-1){
+      html+='<div style="text-align:right;margin-top:12px;"><button class="next-btn" data-action="cr-next">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+    }
+  }
+  html+='</div>';
+
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#d8b4fe')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+function renderLesson(lesson,cat){
+  if(lesson.type==='reading') return renderReading(lesson,cat);
+  if(lesson.intKey==='inviteBuilder') return renderInviteBuilder(lesson,cat);
+  if(lesson.intKey==='schedSim')      return renderSchedSim(lesson,cat);
+  if(lesson.intKey==='conflictDrill') return renderConflictDrill(lesson,cat);
+  return renderReading(lesson,cat);
+}
+
+function render(){
+  var app=document.getElementById('app');
+  var html='';
+  if(state.view==='home'){
+    html=renderHome();
+  } else if(state.view.indexOf('category:')===0){
+    var cat=getCat(state.view.slice(9));
+    html=cat?renderCategory(cat):renderHome();
+  } else if(state.view.indexOf('lesson:')===0){
+    var info=getLesson(state.view.slice(7));
+    html=info?renderLesson(info.lesson,info.cat):renderHome();
+  }
+  app.innerHTML=html;
+
+  if(state.view.indexOf('lesson:')===0){
+    var info2=getLesson(state.view.slice(7));
+    if(info2&&info2.lesson.intKey==='inviteBuilder'){
+      setTimeout(function(){
+        document.querySelectorAll('[data-mib]').forEach(function(el){
+          el.addEventListener('input',function(e){
+            var field=e.target.getAttribute('data-mib');
+            var key='mib'+field.charAt(0).toUpperCase()+field.slice(1);
+            state[key]=e.target.value;
+            state.mibChecked=false;
+            state.mibFeedback=null;
+            // Update preview without re-render to preserve focus
+            updatePreview();
+          });
+        });
+      },50);
+    }
+  }
+}
+
+function updatePreview(){
+  var previewHead=document.querySelector('.invite-preview-head h5');
+  if(!previewHead) return;
+  previewHead.innerHTML=state.mibTitle?esc(state.mibTitle):'<span style="opacity:.5;">(Untitled invite)</span>';
+  var rows=document.querySelectorAll('.invite-row');
+  if(rows.length<5) return;
+  rows[0].querySelector('.invite-row-val').innerHTML=
+    (state.mibDate||state.mibTime?esc((state.mibDate||'?')+' at '+(state.mibTime||'?'))+' &middot; '+esc(state.mibDuration)+' min':'<span class="invite-empty">Add date and time</span>');
+  rows[1].querySelector('.invite-row-val').innerHTML=state.mibLocation?esc(state.mibLocation):'<span class="invite-empty">Add location</span>';
+  rows[2].querySelector('.invite-row-val').innerHTML=state.mibAttendees?esc(state.mibAttendees):'<span class="invite-empty">Add attendees</span>';
+  rows[3].querySelector('.invite-row-val').innerHTML=state.mibPurpose?esc(state.mibPurpose):'<span class="invite-empty">Add purpose</span>';
+  rows[4].querySelector('.invite-row-val').innerHTML=state.mibAgenda?esc(state.mibAgenda):'<span class="invite-empty">Add 3-bullet agenda</span>';
+}
+
+document.body.addEventListener('click',function(ev){
+  var t=ev.target.closest('[data-action]');
+  if(!t) return;
+  var action=t.getAttribute('data-action');
+
+  if(action==='open-cat'){ state.view='category:'+t.getAttribute('data-cat-id'); render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else if(action==='back-home'){ state.view='home'; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else if(action==='back-cat'){ state.view='category:'+t.getAttribute('data-cat-id'); render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else if(action==='open-lesson'){
+    var lid=t.getAttribute('data-lesson-id');
+    var info=getLesson(lid);
+    if(info){
+      if(info.lesson.intKey==='inviteBuilder'){
+        state.mibTitle=''; state.mibDate=''; state.mibTime=''; state.mibDuration='30';
+        state.mibAttendees=''; state.mibLocation='Microsoft Teams';
+        state.mibPurpose=''; state.mibAgenda='';
+        state.mibChecked=false; state.mibFeedback=null;
+      }
+      if(info.lesson.intKey==='schedSim'){      state.simIdx=0; state.simPicked={}; state.simRevealed={}; }
+      if(info.lesson.intKey==='conflictDrill'){ state.crIdx=0; state.crPicked={}; state.crRevealed={}; }
+    }
+    state.view='lesson:'+lid; render(); window.scrollTo({top:0,behavior:'smooth'});
+  }
+  else if(action==='complete-lesson'){
+    var lid2=t.getAttribute('data-lesson-id');
+    state.completed[lid2]=true;
+    var info2=getLesson(lid2);
+    if(info2){
+      var next=null;
+      for(var i=0;i<info2.cat.lessons.length;i++){
+        if(info2.cat.lessons[i].id===lid2&&i+1<info2.cat.lessons.length){ next=info2.cat.lessons[i+1]; break; }
+      }
+      state.view=next?'lesson:'+next.id:'category:'+info2.cat.id;
+      render(); window.scrollTo({top:0,behavior:'smooth'});
+    }
+  }
+  else if(action==='mib-check'){ checkInvite(); render(); }
+  else if(action==='sim-pick'){
+    var sc=SIM_SCENARIOS[state.simIdx];
+    if(state.simRevealed[sc.id]) return;
+    var act=t.getAttribute('data-act');
+    state.simPicked[sc.id]=act;
+    state.simRevealed[sc.id]=true;
+    render();
+  }
+  else if(action==='sim-next'){
+    if(state.simIdx<SIM_SCENARIOS.length-1){ state.simIdx++; render(); }
+  }
+  else if(action==='cr-pick'){
+    var crs=CR_SCENARIOS[state.crIdx];
+    if(state.crRevealed[crs.id]) return;
+    var act2=t.getAttribute('data-act');
+    state.crPicked[crs.id]=act2;
+    state.crRevealed[crs.id]=true;
+    render();
+  }
+  else if(action==='cr-next'){
+    if(state.crIdx<CR_SCENARIOS.length-1){ state.crIdx++; render(); }
+  }
+});
+
+document.getElementById('logo-slot').innerHTML=icon('calendar',22,'#fff');
+render();
+</script>
+</body>
+</html>

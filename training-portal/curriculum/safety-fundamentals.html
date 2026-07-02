@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>M20 &middot; Safety Fundamentals | Your Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:#000;color:#e4e4e7;
+  font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(circle at 85% 8%,rgba(29,78,216,0.16),transparent 40%),
+    radial-gradient(circle at 15% 92%,rgba(29,78,216,0.10),transparent 40%);
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;padding:0;}
+input,textarea,select{font-family:inherit;}
+p{margin:0;}h1,h2,h3,h4{margin:0;font-weight:normal;}
+.container{max-width:960px;margin:0 auto;padding:0 20px;}
+
+header.site{border-bottom:2px solid #27272a;background:rgba(0,0,0,.85);
+  position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);}
+.header-row{max-width:960px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;}
+.logo-tile{width:40px;height:40px;background:#1d4ed8;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.header-meta .small{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#52525b;}
+.header-meta .big{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin-top:2px;}
+footer.site{max-width:960px;margin:0 auto;padding:28px 20px;border-top:1px solid #27272a;text-align:center;}
+footer.site p{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#3f3f46;}
+
+.lab-hero{position:relative;border:2px solid #3f3f46;background:#18181b;overflow:hidden;margin-bottom:28px;}
+.hero-grid{position:absolute;inset:0;opacity:.1;
+  background-image:linear-gradient(rgba(29,78,216,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(29,78,216,.3) 1px,transparent 1px);
+  background-size:24px 24px;}
+.hero-glow{position:absolute;top:-40px;right:-40px;width:220px;height:220px;
+  background:#1d4ed8;border-radius:50%;filter:blur(80px);opacity:.30;}
+.lab-hero-inner{position:relative;padding:28px 24px;}
+.lab-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#93c5fd;margin-bottom:8px;}
+.lab-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,9vw,68px);color:#fff;line-height:.9;margin-bottom:14px;}
+.lab-h1 .accent{color:#93c5fd;}
+.lab-blurb{color:#a1a1aa;max-width:560px;font-size:14px;line-height:1.7;margin-bottom:22px;}
+.lab-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:460px;}
+.lab-stat{border:1px solid #3f3f46;background:rgba(0,0,0,.4);padding:8px 10px;}
+.lab-stat-num{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#93c5fd;margin:0;}
+.lab-stat-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#52525b;margin:0;}
+
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.cat-card{text-align:left;background:#18181b;border:2px solid #3f3f46;padding:0;overflow:hidden;width:100%;}
+.cat-card.is-done{border-color:#10b981;}
+.cat-stripe{height:6px;}
+.cat-inner{padding:18px;}
+.cat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.cat-icon-tile{width:44px;height:44px;color:#fff;display:flex;align-items:center;justify-content:center;}
+.cat-card h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin:0 0 6px;line-height:1.05;}
+.cat-card-blurb{font-size:12px;color:#a1a1aa;margin:0 0 14px;line-height:1.5;}
+.cat-card-foot{display:flex;justify-content:space-between;align-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:9px;color:#71717a;text-transform:uppercase;letter-spacing:.2em;}
+.cat-progress-track{height:4px;background:#27272a;flex:1;margin-left:12px;max-width:80px;}
+.cat-progress-fill{height:100%;background:#10b981;}
+
+.cat-back-btn{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;
+  color:#71717a;display:flex;align-items:center;gap:6px;margin-bottom:20px;}
+.cat-header{background:#18181b;border:2px solid #3f3f46;padding:20px;margin-bottom:16px;}
+.cat-header-inner{display:flex;gap:16px;align-items:flex-start;}
+.cat-header-icon{width:56px;height:56px;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cat-header-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;margin:0;}
+.cat-header-title{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;margin:4px 0;line-height:1;}
+.cat-header-blurb{color:#a1a1aa;font-size:13px;margin:0;line-height:1.5;}
+
+.lesson-list{display:flex;flex-direction:column;gap:8px;}
+.lesson-row{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#18181b;
+  border:2px solid #3f3f46;width:100%;text-align:left;}
+.lesson-row.is-done{border-color:#10b981;}
+.lesson-row.is-locked{opacity:.45;cursor:not-allowed;}
+.lesson-row:not(.is-locked){cursor:pointer;}
+.lesson-num-tile{width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:16px;}
+.lesson-num-tile.done   {background:#10b981;color:#000;}
+.lesson-num-tile.current{background:#93c5fd;color:#000;}
+.lesson-num-tile.pending{background:#27272a;color:#71717a;}
+.lesson-row-meta{flex:1;min-width:0;}
+.lesson-row-title{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin:0;line-height:1.1;}
+.lesson-row-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;margin:4px 0 0;}
+
+.lesson-card{border:2px solid #3f3f46;background:#18181b;}
+.lesson-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.lesson-icon-tile{width:52px;height:52px;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.lesson-card-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;font-weight:700;opacity:.85;margin:0;}
+.lesson-card-title{font-family:'Bebas Neue',sans-serif;font-size:32px;margin:4px 0 0;line-height:1;color:#fff;}
+.lesson-card-body{padding:24px 22px;}
+.lesson-section{margin-bottom:22px;}
+.lesson-section h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#93c5fd;margin:0 0 8px;}
+.lesson-section p{color:#a1a1aa;line-height:1.65;margin:0;font-size:14px;}
+.tip-box{background:rgba(29,78,216,.14);border-left:4px solid #1d4ed8;padding:12px 16px;margin-top:20px;}
+.tip-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#93c5fd;margin:0 0 6px;font-weight:700;}
+.tip-body{color:#bfdbfe;font-size:13px;margin:0;line-height:1.55;font-style:italic;}
+
+.complete-btn{width:100%;margin-top:24px;padding:14px 0;
+  font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.2em;
+  background:#1d4ed8;color:#fff;border:2px solid #1d4ed8;
+  display:flex;align-items:center;justify-content:center;gap:10px;}
+
+.pile-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px;}
+@media (max-width:600px){ .pile-grid{grid-template-columns:1fr 1fr;} }
+.pile-tile{background:#0c0c0c;border:1px solid #3f3f46;border-top:3px solid #1d4ed8;padding:10px 10px;}
+.pile-name{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#93c5fd;margin:0 0 4px;line-height:1;}
+.pile-body{font-size:11px;color:#a1a1aa;line-height:1.45;margin:0;}
+
+.int-card{border:2px solid #3f3f46;background:#18181b;}
+.int-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.int-card-body{padding:24px 22px;}
+
+.mib-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media (max-width:720px){ .mib-grid{grid-template-columns:1fr;} }
+.mib-col h4{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#93c5fd;margin:0 0 12px;}
+.mib-field{margin-bottom:12px;}
+.mib-label{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#71717a;margin-bottom:4px;display:block;}
+.mib-input,.mib-textarea,.mib-select{
+  width:100%;background:#0c0c0c;border:1px solid #3f3f46;color:#e4e4e7;
+  padding:8px 10px;font-size:13px;outline:none;font-family:inherit;
+}
+.mib-input:focus,.mib-textarea:focus,.mib-select:focus{border-color:#1d4ed8;}
+.mib-textarea{resize:vertical;min-height:60px;line-height:1.5;font-size:12px;}
+
+.invite-preview{background:#0c0c0c;border:1px solid #3f3f46;padding:0;overflow:hidden;}
+.invite-preview-head{background:#1d4ed8;color:#fff;padding:10px 14px;}
+.invite-preview-head h5{font-family:'Bebas Neue',sans-serif;font-size:20px;margin:0;line-height:1.1;}
+.invite-preview-head p{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;opacity:.85;margin:2px 0 0;}
+.invite-preview-body{padding:12px 14px;}
+.invite-row{display:flex;gap:10px;font-size:12px;color:#a1a1aa;padding:5px 0;border-bottom:1px dashed #27272a;}
+.invite-row:last-child{border-bottom:none;}
+.invite-row-key{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.15em;color:#71717a;width:80px;flex-shrink:0;padding-top:1px;}
+.invite-row-val{flex:1;color:#e4e4e7;line-height:1.5;white-space:pre-line;}
+.invite-empty{color:#52525b;font-style:italic;}
+
+.mib-check-btn{margin-top:16px;padding:10px 18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.2em;
+  background:#1d4ed8;color:#fff;border:2px solid #1d4ed8;}
+.mib-feedback{margin-top:14px;padding:12px 14px;font-size:12px;line-height:1.6;}
+.mib-feedback.ok{background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+.mib-feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+.mib-feedback.warn{background:rgba(250,204,21,.08);border:1px solid #fbbf24;color:#fde68a;}
+.mib-feedback ul{margin:6px 0 0;padding-left:18px;}
+.mib-feedback li{margin-bottom:3px;}
+
+.drill-stage{background:#0c0c0c;border:1px solid #3f3f46;padding:18px;margin-bottom:14px;}
+.drill-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#93c5fd;margin-bottom:8px;}
+.drill-scenario{background:#1c1917;border-left:3px solid #1d4ed8;padding:12px 14px;margin-bottom:14px;}
+.drill-from{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:#93c5fd;margin-bottom:4px;}
+.drill-subject{font-size:13px;color:#e4e4e7;font-weight:600;margin-bottom:4px;}
+.drill-body{font-size:12px;color:#a1a1aa;line-height:1.5;}
+.drill-btns{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;}
+.drill-btn{padding:12px 8px;background:#09090b;border:1px solid #3f3f46;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.05em;color:#a1a1aa;line-height:1.2;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.drill-btn:hover{border-color:#93c5fd;}
+.drill-btn small{font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.15em;color:#52525b;}
+.drill-btn.picked-correct{background:rgba(16,185,129,.15);border-color:#10b981;color:#a7f3d0;}
+.drill-btn.picked-correct small{color:#6ee7b7;}
+.drill-btn.picked-wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.drill-btn.correct-shown{background:rgba(16,185,129,.08);border-color:#10b981;color:#a7f3d0;}
+.drill-btn.correct-shown small{color:#6ee7b7;}
+.feedback{margin-top:14px;padding:10px 14px;font-size:12px;line-height:1.55;}
+.feedback.ok{background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+.feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+
+.sim-buttons{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;}
+.sim-btn{padding:12px 8px;background:#09090b;border:1px solid #3f3f46;
+  font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.05em;color:#a1a1aa;line-height:1.2;}
+.sim-btn:hover{border-color:#93c5fd;}
+.sim-btn.picked-correct{background:rgba(16,185,129,.15);border-color:#10b981;color:#a7f3d0;}
+.sim-btn.picked-wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.sim-btn.correct-shown{background:rgba(16,185,129,.08);border-color:#10b981;color:#a7f3d0;}
+
+.next-btn{padding:10px 18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.2em;
+  background:#1d4ed8;color:#fff;border:2px solid #1d4ed8;}
+.score-line{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;
+  color:#a1a1aa;margin-top:16px;padding-top:14px;border-top:1px solid #27272a;}
+
+.compose{background:#0c0c0c;border:1px solid #3f3f46;overflow:hidden;}
+.compose-bar{background:#1d4ed8;color:#fff;padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;}
+.compose-row{display:flex;gap:8px;padding:7px 12px;border-bottom:1px solid #27272a;font-size:12px;}
+.compose-key{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.15em;color:#71717a;width:54px;flex-shrink:0;padding-top:2px;}
+.compose-val{flex:1;color:#e4e4e7;line-height:1.4;}
+.compose-body{padding:12px;font-size:12px;color:#e4e4e7;line-height:1.6;white-space:pre-line;min-height:84px;}
+.compose-sig{padding:10px 12px 12px;border-top:1px dashed #27272a;font-size:11px;color:#a1a1aa;line-height:1.5;}
+.compose-empty{color:#52525b;font-style:italic;}
+.sigcard{background:#0c0c0c;border:1px solid #3f3f46;border-left:3px solid #1d4ed8;padding:12px 14px;margin-top:6px;font-size:12px;color:#e4e4e7;line-height:1.6;}
+.sigcard b{color:#93c5fd;}
+.annot{background:#0c0c0c;border:1px solid #3f3f46;padding:0;margin-top:6px;overflow:hidden;}
+.annot-row{display:flex;gap:10px;padding:9px 12px;border-bottom:1px solid #27272a;}
+.annot-row:last-child{border-bottom:none;}
+.annot-tag{font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.15em;color:#93c5fd;width:64px;flex-shrink:0;padding-top:2px;}
+.annot-txt{flex:1;font-size:12px;color:#e4e4e7;line-height:1.5;}
+.mini-tbl{width:100%;border-collapse:collapse;margin-top:6px;font-size:11px;}
+.mini-tbl th{font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:#93c5fd;text-align:left;padding:6px 8px;border-bottom:1px solid #3f3f46;background:#0c0c0c;}
+.mini-tbl td{padding:6px 8px;border-bottom:1px solid #27272a;color:#e4e4e7;}
+.split2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px;}
+@media(max-width:600px){.split2{grid-template-columns:1fr;}}
+.split2 .col{background:#0c0c0c;border:1px solid #3f3f46;padding:10px 12px;}
+.split2 .col h5{font-family:'Bebas Neue',sans-serif;font-size:16px;margin:0 0 6px;color:#93c5fd;}
+.split2 .col p{font-size:11px;color:#a1a1aa;line-height:1.5;margin:0;}
+.week-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:6px;}
+@media(max-width:600px){.week-grid{grid-template-columns:1fr 1fr;}}
+.week-day{background:#0c0c0c;border:1px solid #3f3f46;padding:10px 8px;}
+.week-day-name{font-family:'Bebas Neue',sans-serif;font-size:16px;color:#93c5fd;margin:0 0 6px;}
+.week-day-tag{font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.15em;color:#71717a;margin:0 0 6px;}
+.week-day-body{font-size:11px;color:#a1a1aa;line-height:1.4;margin:0;}
+</style>
+</head>
+<body>
+
+<header class="site"><div class="header-row"><div class="logo-tile" id="logo-slot"></div><div class="header-meta"><p class="small">Your Company &middot; Module 20</p><p class="big">Safety Fundamentals</p></div></div></header>
+
+<main class="container" style="padding:28px 20px 40px;"><div id="app"></div></main>
+
+<footer class="site"><p>Built by Joseph &middot; Your Company Virtual Office &middot; Internal Use Only</p></footer>
+
+<script>
+"use strict";
+const ICONS={
+  'arrow-right':'<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  'arrow-left': '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  'check':      '<path d="M20 6 9 17l-5-5"/>',
+  'lock':       '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  'inbox':      '<path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>',
+  'filter':     '<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>',
+  'mail':       '<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
+  'shield':     '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>',
+  'flag':       '<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/>',
+  'clipboard':'<rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>'
+};
+function icon(name,size,color){
+  size=size||16;color=color||'currentColor';
+  var p=ICONS[name]||'';
+  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">'+p+'</svg>';
+}
+
+
+
+const CATEGORIES=[
+  { id:'role', iconKey:'shield', color:'#1e40af', title:'The Front-Desk Role',
+    blurb:'You support and do not run it, Paul owns safety, and what you actually do.',
+    lessons:[
+      { id:'sr-1', title:'You Support, You Do Not Run It', type:'reading', minutes:4 },
+      { id:'sr-2', title:'Paul Owns Safety',              type:'reading', minutes:4 },
+      { id:'sr-3', title:'What You Actually Do',          type:'reading', minutes:4 }
+    ] },
+  { id:'docs', iconKey:'clipboard', color:'#2563eb', title:'Safety Documents',
+    blurb:'Recognize and file them, track expirations, and a document sim.',
+    lessons:[
+      { id:'sd-1', title:'Recognize And File',  type:'reading',     minutes:4 },
+      { id:'sd-2', title:'Track Expirations',   type:'reading',     minutes:4 },
+      { id:'sd-3', title:'Document Sim',        type:'interactive', minutes:7, intKey:'docSort' }
+    ] },
+  { id:'incidents', iconKey:'flag', color:'#3b82f6', title:'Incidents',
+    blurb:'Route incidents fast, document do not diagnose, and an incident drill.',
+    lessons:[
+      { id:'si-1', title:'Route Incidents Fast',     type:'reading',     minutes:4 },
+      { id:'si-2', title:'Document, Do Not Diagnose', type:'reading',    minutes:4 },
+      { id:'si-3', title:'Incident Drill',           type:'interactive', minutes:7, intKey:'incidentDrill' }
+    ] },
+  { id:'door', iconKey:'lock', color:'#60a5fa', title:'Guarding The Shop Door',
+    blurb:'No unescorted visitors, PPE and the orientation gate, and a shop-access builder.',
+    lessons:[
+      { id:'sg-1', title:'No Unescorted Visitors',        type:'reading',     minutes:4 },
+      { id:'sg-2', title:'PPE And The Orientation Gate',  type:'reading',     minutes:4 },
+      { id:'sg-3', title:'Shop-Access Builder',           type:'interactive', minutes:8, intKey:'gateBuilder' }
+    ] }
+];
+
+
+const LESSON_CONTENT={
+  'sr-1':{ sections:[
+    { h:'You support safety, you do not run it', b:'Safety at Your Company is real and serious, and it is not run from the front desk. You support it. You are not the safety director and you do not make safety calls. Knowing the limit of your role is itself part of doing it well.' },
+    { h:'Support means handling the front of it', b:'The front-desk side of safety is concrete: recognizing safety documents, filing them, tracking expirations, routing incidents, and guarding the shop door. Real work, all of it, and none of it is making safety decisions. That is the line.' },
+    { h:'Never improvise on safety', b:'When something safety related is unclear, you do not improvise an answer or a fix. You route it to Paul. Safety is the one area where a confident guess can get someone hurt. The safe move is always to hand it to the person who owns it.' }
+  ], tip:'You support safety, you do not run it. The front-desk side is real work: documents, expirations, incidents, the door. But the calls are Paul. Never improvise on safety.' },
+
+  'sr-2':{ sections:[
+    { h:'Paul owns safety', b:'Paul Guerrero is the safety director. He owns the safety programs, the decisions, and the response to anything that goes wrong. NCCER credentialed, number 27160819. When something is a safety judgment, it is his, not yours and not the front desk.' },
+    { h:'Route content and calls to Paul', b:'Any question about a safety program, a procedure, or how to handle an incident goes to Paul. You do not answer it from your own guess. You recognize that it is a safety call and you route it to the person who is qualified to make it.' },
+    { h:'Owner hears about incidents too', b:'For incidents, Paul is not the only one who needs to know. Owner does too. A real incident routes to both, fast. Paul owns the safety response, Owner needs to know what happened at his company. The next category covers the how.' }
+  ], tip:'Paul Guerrero, NCCER 27160819, owns safety: programs, procedures, and incident response. Route every safety call to him. For incidents, Paul and Owner both need to know, fast.' },
+
+  'sr-3':{ sections:[
+    { h:'Four jobs and a door', b:'The front-desk side of safety is recognize, file, track, and route, plus guarding the shop door. Recognize a safety document when it lands. File it where it belongs. Track what expires. Route incidents fast. And keep the wrong people out of the shop.' },
+    { h:'Each one supports Paul', b:'Every one of these supports Paul without stepping on his role. Filing a document keeps the record clean for him. Tracking expirations keeps the company compliant. Routing fast gets the incident to him. Guarding the door keeps people safe before they ever reach him.' }
+  ],
+  customHtml:'<div class="split2"><div class="col"><h5>You do</h5><p>Recognize and file safety documents. Track expirations. Route incidents fast. Guard the shop door.</p></div>'+
+    '<div class="col"><h5>Paul does</h5><p>The programs. The procedures. Incident response and the safety calls. Everything that is a judgment.</p></div></div>',
+  tip:'Your safety job is five things: recognize, file, track, route, and guard the door. Each one supports Paul without making a safety call. The judgments are always his.' },
+
+  'sd-1':{ sections:[
+    { h:'Recognize a safety document', b:'Safety documents include written programs, training records, certifications, and safety-related certificates of insurance. The first skill is recognizing one when it lands so it does not get treated as ordinary mail. A safety document gets handled with care, not filed blind.' },
+    { h:'File it where it belongs', b:'Once recognized, a safety document gets filed by the M08 convention and, where it belongs, into ISN per M16. The right document in the right place keeps the company compliant and keeps Paul able to find it. A misfiled safety document is a compliance gap waiting to surface.' },
+    { h:'Route the content to Paul', b:'Filing the document is yours. Anything about what the document means, whether a program is adequate, or how to act on it goes to Paul. You handle the paper, he handles the substance. Do not read a safety document and decide what it requires.' }
+  ], tip:'Recognize a safety document so it is not handled as ordinary mail. File it by M08 and into ISN per M16. The paper is yours, what it means is Paul.' },
+
+  'sd-2':{ sections:[
+    { h:'Safety documents expire', b:'Training records, certifications, and many safety documents have expiration dates. An expired certification can put the company out of compliance and a worker off a job. Tracking what expires when is a core part of the front-desk safety role.' },
+    { h:'Flag before it lapses', b:'The goal is to catch an expiration before it happens, not after a client flags it. Track the dates and raise a renewal with Paul ahead of time. The same currency rule from ISN applies: a lapsed document can stall site access until it is fixed.' }
+  ],
+  customHtml:'<table class="mini-tbl"><tr><th>Document</th><th>Watch for</th></tr>'+
+    '<tr><td>Training records</td><td>Renewal date</td></tr>'+
+    '<tr><td>Certifications</td><td>Expiration</td></tr>'+
+    '<tr><td>Safety COIs</td><td>Coverage dates</td></tr></table>',
+  tip:'Safety documents expire: training, certifications, coverage dates. Track them and flag a renewal with Paul before the lapse, not after. A lapsed document can stall site access. See M16.' },
+
+  'si-1':{ sections:[
+    { h:'Every incident routes fast', b:'Any incident, injury, or near-miss goes to Paul and Owner immediately. Not at the end of the day, not after you sort it out. Fast. Speed matters because the response and any required reporting start the moment they know. A delayed incident report is a serious problem.' },
+    { h:'Do not handle it yourself', b:'You do not investigate, fix, or downplay an incident. That is Paul. Your job is to get it to him and to Owner right away and to capture the basic facts. Trying to handle a safety incident from the front desk helps no one and can make it worse.' },
+    { h:'Life safety comes first', b:'If someone is seriously hurt, emergency services come first, before any routing or paperwork. Call for help, then notify Paul and Owner. The order is simple: a hurt person before a phone call to anyone else, and a phone call before a form.' }
+  ], tip:'Every incident, injury, or near-miss routes to Paul and Owner immediately. You do not handle it yourself. If someone is seriously hurt, emergency services come first, before anything else.' },
+
+  'si-2':{ sections:[
+    { h:'Capture facts, not conclusions', b:'When you document an incident, capture facts: what happened, when, where, and who was involved. You do not write why it happened, whose fault it was, or what should have been done. Those are conclusions, and conclusions are Paul, not the front desk.' },
+    { h:'Do not diagnose or assign blame', b:'A front-desk write-up that guesses at cause or points a finger can cause real harm later. Stick to what you saw or were told, plainly. He fell off the platform is a fact. He was careless is a conclusion you do not write. Facts only.' }
+  ],
+  customHtml:'<table class="mini-tbl"><tr><th>Capture</th><th>Not</th></tr>'+
+    '<tr><td>What happened</td><td>Why it happened</td></tr>'+
+    '<tr><td>When and where</td><td>Whose fault</td></tr>'+
+    '<tr><td>Who was involved</td><td>What should have been done</td></tr></table>',
+  tip:'Document an incident as facts only: what, when, where, who. Never write why, fault, or what should have happened. Those conclusions are Paul. A guessed cause can cause real harm.' },
+
+  'sg-1':{ sections:[
+    { h:'The shop is not open ground', b:'The shop and yard are working areas with real hazards. Nobody walks in unescorted. A visitor signs in, is escorted, and follows the rules of the floor. Guarding that door is a front-desk job, and it keeps people who do not belong there out of harm.' },
+    { h:'No sign-in, no entry', b:'A visitor who has not signed in and does not have an escort does not go onto the floor, no matter who they say they are or how quick they say it will be. The sign-in and escort are not a formality. They are how the shop knows who is in it.' },
+    { h:'When unsure, hold at the front', b:'If someone wants shop access and you are not sure they should have it, they wait at the front while you confirm with Paul or the shop lead. Holding someone at the door for a minute is never the wrong call. Letting the wrong person onto the floor is.' }
+  ], tip:'Nobody enters the shop unescorted. Sign-in and escort are required, no exceptions for who they are or how quick it is. When unsure, hold them at the front and confirm with Paul.' },
+
+  'sg-2':{ sections:[
+    { h:'PPE before the floor', b:'Anyone going onto the shop floor needs the required protective equipment. No PPE, no entry, visitor or not. The door is where that gets checked. Letting someone onto the floor without PPE is exactly the kind of thing guarding the door is meant to stop.' },
+    { h:'The orientation gate for workers', b:'A new hire does not get shop or field exposure until they have completed the safety orientation with Paul. That is the orientation gate from M29. No orientation, no exposure. At the door, that means a worker without a completed orientation does not go onto the floor.' },
+    { h:'The door is a safety control', b:'Sign-in, escort, PPE, and the orientation gate all meet at the door. Treating the door as a real safety control, not a friendly open path, is how the front desk protects everyone past it. It is the last check before the hazards start.' }
+  ], tip:'PPE before the floor, no exceptions. A new hire does not get exposure until Paul has run their orientation, the gate from M29. The door is a safety control, not an open path.' }
+};
+
+
+var WIDGETS={
+  docSort:{
+    family:'quiz', btn:'sim', icon:'clipboard', prefix:'ds', unit:'Document',
+    intro:'Six documents reach the front desk. For each, pick the move. File the ones that just need filing. Route the content questions to Paul. Track an expiration that is coming. Flag one that already lapsed.',
+    actions:['File it','Route to Paul','Track the expiration','Flag, it lapsed'],
+    scenarios:[
+      { id:'ds1', fromLabel:'Document', from:'Program PDF', body:'A completed written safety program that just needs filing in the right place.',
+        correct:'File it', why:'A finished document to file. File it by M08 and into ISN where it belongs. The paper is yours.' },
+      { id:'ds2', fromLabel:'Document', from:'Program question', body:'A question about whether a safety program covers a certain situation.',
+        correct:'Route to Paul', why:'What a program covers is a safety judgment. Route it to Paul. You file documents, you do not interpret them.' },
+      { id:'ds3', fromLabel:'Document', from:'Certificate', body:'A training certificate with an expiration date a few months out.',
+        correct:'Track the expiration', why:'It is current now but will expire. Track the date and raise a renewal with Paul before it lapses.' },
+      { id:'ds4', fromLabel:'Document', from:'Expired cert', body:'A certification whose expiration date has already passed.',
+        correct:'Flag, it lapsed', why:'It is expired, which can put the company out of compliance. Flag it to Paul now so it gets renewed.' },
+      { id:'ds5', fromLabel:'Document', from:'Orientation record', body:'A signed safety orientation record for a new hire.',
+        correct:'File it', why:'A completed record to file. File it where it belongs so the orientation is on record. See M29.' },
+      { id:'ds6', fromLabel:'Document', from:'Procedure question', body:'A technical question about what a safety document requires in practice.',
+        correct:'Route to Paul', why:'What a document requires in practice is Paul. Route the question rather than answering from a guess.' }
+    ]
+  },
+
+  incidentDrill:{
+    family:'quiz', btn:'drill', icon:'flag', prefix:'id', unit:'Situation',
+    intro:'Six situations. Sort each. Route any incident to Paul and Owner now. Capture the facts when asked to document. Call emergency services first if someone is seriously hurt. And log a truly routine event normally.',
+    actions:[
+      { id:'route',  name:'Route to Paul and Owner now', sub:'Every incident' },
+      { id:'facts',  name:'Capture the facts',             sub:'What, when, where, who' },
+      { id:'em',     name:'Call emergency services first',  sub:'Life safety first' },
+      { id:'normal', name:'Not an incident, log normally',  sub:'Routine' }
+    ],
+    scenarios:[
+      { id:'id1', fromLabel:'Situation', from:'Near-miss', body:'A worker reports a near-miss with no injury.',
+        correct:'route', why:'A near-miss is still an incident. Route it to Paul and Owner now. They decide what the response is, not you.' },
+      { id:'id2', fromLabel:'Situation', from:'Serious injury', body:'Someone is seriously injured and needs medical help right now.',
+        correct:'Call emergency services first', why:'Life safety comes first. Call for help before any routing or paperwork, then notify Paul and Owner.' },
+      { id:'id3', fromLabel:'Situation', from:'Write it up', body:'You are asked to write down what happened in an incident.',
+        correct:'Capture the facts', why:'Document facts only: what, when, where, who. No cause, no blame, no what should have happened. Those conclusions are Paul.' },
+      { id:'id4', fromLabel:'Situation', from:'Delivery', body:'A routine delivery arrives at the dock with nothing unsafe about it.',
+        correct:'Not an incident, log normally', why:'Nothing unsafe happened. This is routine, not an incident. Log it the normal way and move on.' },
+      { id:'id5', fromLabel:'Situation', from:'Equipment damage', body:'A piece of equipment is damaged on the floor, with no injury.',
+        correct:'route', why:'Still an incident even without an injury. Route it to Paul and Owner now. Do not decide it is minor and sit on it.' },
+      { id:'id6', fromLabel:'Situation', from:'Document request', body:'Paul asks you to document the near-miss that was already reported to him.',
+        correct:'Capture the facts', why:'Capture what, when, where, and who, in plain facts. No cause and no fault. The write-up supports Paul, it does not draw conclusions.' }
+    ]
+  },
+
+  gateBuilder:{
+    family:'builder', icon:'lock', prefix:'gt',
+    formTitle:'Shop-access record', checkLabel:'Check this access',
+    intro:'Build a shop-access record for someone wanting onto the floor. Name the visitor, their company, the reason, and the escort. Confirm PPE and the orientation status. The checker holds the two gates: no PPE, no entry, and no orientation, no exposure.',
+    fields:[
+      { key:'Visitor', label:'Visitor', kind:'input', ph:'e.g., visitor name', def:'' },
+      { key:'Company', label:'Company', kind:'input', ph:'e.g., their company', def:'' },
+      { key:'Reason', label:'Reason for access', kind:'input', ph:'e.g., site walk', def:'' },
+      { key:'Escort', label:'Escort', kind:'input', ph:'e.g., shop lead name', def:'' },
+      { key:'Ppe', label:'PPE', kind:'select', opts:['Pick','PPE provided and worn','No PPE'], def:'Pick' },
+      { key:'Orientation', label:'Orientation', kind:'select', opts:['Pick','Visitor only, escorted','Worker, orientation done','Worker, orientation not done'], def:'Pick' }
+    ],
+    preview:'invite',
+    headTitle:'Shop-access record',
+    headSub:function(g){ return g('Visitor')||'Visitor'; },
+    rows:[
+      { key:'Company', label:'Company', empty:'Add company' },
+      { key:'Reason', label:'Reason', empty:'Add the reason' },
+      { key:'Escort', label:'Escort', empty:'Add the escort' },
+      { key:'Ppe', label:'PPE', empty:'Confirm' },
+      { key:'Orientation', label:'Orientation', empty:'Confirm' }
+    ],
+    validate:function(){
+      var v=(state.gtVisitor||'').trim(), c=(state.gtCompany||'').trim(), r=(state.gtReason||'').trim(), e=(state.gtEscort||'').trim();
+      var p=state.gtPpe, o=state.gtOrientation;
+      var issues=[];
+      if(!v)issues.push('Add the visitor name.');
+      if(!c)issues.push('Add the company.');
+      if(!r)issues.push('Add the reason for access.');
+      if(!e)issues.push('Add the escort.');
+      if(!p||p==='Pick')issues.push('Confirm PPE.');
+      if(!o||o==='Pick')issues.push('Confirm the orientation status.');
+      if(issues.length)return{kind:'fail',headline:'Access record is incomplete:',items:issues};
+      var hard=[];
+      if(p==='No PPE')hard.push('No PPE. No entry to the shop floor, visitor or worker. PPE is required before the floor.');
+      if(o==='Worker, orientation not done')hard.push('Worker without a completed orientation. No orientation, no exposure. Schedule it with Paul first. See M29.');
+      if(hard.length)return{kind:'fail',headline:'Stop. This access cannot be granted:',items:hard};
+      return{kind:'warn',headline:'Access can be granted. Hold these:',items:['The visitor stays escorted at all times on the floor.','Sign in and sign out. The shop has to know who is in it.','If anything changes or you are unsure, hold at the front and confirm with Paul.']};
+    }
+  }
+};
+
+var state={view:'home',completed:{}};
+function esc(s){ if(s==null)return''; return String(s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];}); }
+function getCat(id){ for(var i=0;i<CATEGORIES.length;i++) if(CATEGORIES[i].id===id) return CATEGORIES[i]; return null; }
+function getLesson(id){
+  for(var i=0;i<CATEGORIES.length;i++){
+    var c=CATEGORIES[i];
+    for(var j=0;j<c.lessons.length;j++) if(c.lessons[j].id===id) return{lesson:c.lessons[j],cat:c,idx:j};
+  }return null;
+}
+function totalLessons(){ return CATEGORIES.reduce(function(a,c){return a+c.lessons.length;},0); }
+function completedCount(){ return Object.keys(state.completed).length; }
+
+
+function renderHome(){
+  var done=completedCount();var html='';
+  html+='<div class="lab-hero"><div class="hero-grid"></div><div class="hero-glow"></div>';
+  html+='<div class="lab-hero-inner">';
+  html+='<p class="lab-eyebrow">Your Company &middot; Module 20 &middot; Applied Operations</p>';
+  html+='<h1 class="lab-h1">Front-Desk <span class="accent">Safety</span></h1>';
+  html+='<p class="lab-blurb">Safety is owned by Paul, but the front desk has a real role in it. This module is recognizing and filing safety documents, tracking expirations, routing incidents to Paul and Owner fast, and guarding the shop door. Run a document sim, an incident drill, and build a shop-access record.</p>';
+  html+='<div class="lab-stats">';
+  [['4','Categories'],[String(totalLessons()),'Lessons'],['3','Drills'],[String(done),'Done']].forEach(function(s){
+    html+='<div class="lab-stat"><p class="lab-stat-num">'+s[0]+'</p><p class="lab-stat-lbl">'+s[1]+'</p></div>';
+  });
+  html+='</div></div></div>';
+  html+='<div class="cat-grid">';
+  CATEGORIES.forEach(function(cat){
+    var doneN=cat.lessons.filter(function(l){return state.completed[l.id];}).length;
+    var tot=cat.lessons.length;var allDone=doneN===tot;var pct=tot?(doneN/tot)*100:0;
+    html+='<button class="cat-card'+(allDone?' is-done':'')+'" data-action="open-cat" data-cat-id="'+cat.id+'">';
+    html+='<div class="cat-stripe" style="background:'+cat.color+';"></div>';
+    html+='<div class="cat-inner"><div class="cat-top">';
+    html+='<div class="cat-icon-tile" style="background:'+cat.color+';">'+icon(cat.iconKey,24,'#fff')+'</div>';
+    if(allDone) html+='<div class="cat-icon-tile" style="background:#10b981;width:28px;height:28px;">'+icon('check',16,'#000')+'</div>';
+    html+='</div>';
+    html+='<h3>'+esc(cat.title)+'</h3>';
+    html+='<p class="cat-card-blurb">'+esc(cat.blurb)+'</p>';
+    html+='<div class="cat-card-foot"><span>'+doneN+'/'+tot+' done</span><span class="cat-progress-track"><span class="cat-progress-fill" style="width:'+pct+'%;"></span></span></div>';
+    html+='</div></button>';
+  });
+  html+='</div>';return html;
+}
+
+function renderCategory(cat){
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-home">'+icon('arrow-left',13)+' Back to module home</button>';
+  html+='<div class="cat-header"><div class="cat-header-inner">';
+  html+='<div class="cat-header-icon" style="background:'+cat.color+';">'+icon(cat.iconKey,28,'#fff')+'</div>';
+  html+='<div><p class="cat-header-eyebrow" style="color:'+cat.color+';">Category</p>';
+  html+='<h2 class="cat-header-title">'+esc(cat.title)+'</h2>';
+  html+='<p class="cat-header-blurb">'+esc(cat.blurb)+'</p>';
+  html+='</div></div></div>';
+  html+='<div class="lesson-list">';
+  cat.lessons.forEach(function(l,i){
+    var isDone=!!state.completed[l.id];
+    var prevDone=i===0||!!state.completed[cat.lessons[i-1].id];
+    var locked=!isDone&&!prevDone;
+    var current=!isDone&&prevDone;
+    var tileCls=isDone?'done':current?'current':'pending';
+    var typeLabel=l.type==='reading'?'Reading':'Interactive';
+    var typeColor=l.type==='reading'?'#71717a':'#93c5fd';
+    html+='<button class="lesson-row'+(isDone?' is-done':'')+(locked?' is-locked':'')+'"';
+    html+=locked?' disabled':' data-action="open-lesson" data-lesson-id="'+l.id+'"';
+    html+='>';
+    html+='<div class="lesson-num-tile '+tileCls+'">'+(locked?icon('lock',14):isDone?icon('check',18):String(i+1))+'</div>';
+    html+='<div class="lesson-row-meta"><p class="lesson-row-title">'+esc(l.title)+'</p>';
+    html+='<p class="lesson-row-tag" style="color:'+typeColor+';">'+typeLabel+' &middot; ~'+l.minutes+' min</p></div>';
+    if(!locked) html+=icon('arrow-right',16,'#71717a');
+    html+='</button>';
+  });
+  html+='</div>';
+  return html;
+}
+
+
+function renderReading(lesson,cat){
+  var c=LESSON_CONTENT[lesson.id]||{sections:[],tip:''};
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="lesson-card">';
+  html+='<div class="lesson-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="lesson-card-body">';
+  c.sections.forEach(function(s){
+    html+='<div class="lesson-section"><h3>'+esc(s.h)+'</h3><p>'+esc(s.b)+'</p></div>';
+  });
+  if(c.customHtml) html+=c.customHtml;
+  if(c.tip){
+    html+='<div class="tip-box"><p class="tip-eyebrow">Joseph&#39;s tip</p><p class="tip-body">'+esc(c.tip)+'</p></div>';
+  }
+  html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  html+='</div></div>';
+  return html;
+}
+
+
+
+function renderBuilder(key,lesson,cat){
+  var w=WIDGETS[key];
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card"><div class="int-card-header" style="background:'+cat.color+';">'+
+    '<div class="lesson-icon-tile">'+icon(w.icon,26,'#fff')+'</div>'+
+    '<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p><h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body"><p style="font-size:13px;color:#a1a1aa;margin-bottom:18px;">'+esc(w.intro)+'</p>';
+  html+='<div class="mib-grid"><div class="mib-col"><h4>'+esc(w.formTitle||'Build it')+'</h4>';
+  w.fields.forEach(function(f){
+    var val=state[w.prefix+f.key];
+    html+='<div class="mib-field"><label class="mib-label">'+esc(f.label)+'</label>';
+    if(f.kind==='textarea'){
+      html+='<textarea class="mib-textarea" data-w="'+w.prefix+'" data-f="'+f.key+'" placeholder="'+esc(f.ph||'')+'">'+esc(val)+'</textarea>';
+    } else if(f.kind==='select'){
+      html+='<select class="mib-select" data-w="'+w.prefix+'" data-f="'+f.key+'">';
+      f.opts.forEach(function(o){ html+='<option value="'+esc(o)+'"'+(val===o?' selected':'')+'>'+esc(o)+'</option>'; });
+      html+='</select>';
+    } else {
+      html+='<input class="mib-input" type="text" data-w="'+w.prefix+'" data-f="'+f.key+'" placeholder="'+esc(f.ph||'')+'" value="'+esc(val)+'">';
+    }
+    html+='</div>';
+  });
+  html+='<button class="mib-check-btn" data-action="w-check" data-key="'+key+'">'+esc(w.checkLabel||'Check it')+'</button>';
+  if(state[w.prefix+'Checked']&&state[w.prefix+'Feedback']){
+    var fb=state[w.prefix+'Feedback'];var cls=fb.kind==='pass'?'ok':fb.kind==='warn'?'warn':'bad';
+    html+='<div class="mib-feedback '+cls+'"><strong>'+esc(fb.headline)+'</strong>';
+    if(fb.items&&fb.items.length){html+='<ul>';fb.items.forEach(function(it){html+='<li>'+esc(it)+'</li>';});html+='</ul>';}
+    html+='</div>';
+    if(fb.kind==='pass'){html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';}
+  }
+  html+='</div>';
+  html+='<div class="mib-col"><h4>Live preview</h4><div id="mib-preview">'+buildPreviewInner(key)+'</div></div>';
+  html+='</div></div></div>';
+  return html;
+}
+function buildPreviewInner(key){
+  var w=WIDGETS[key];var p=w.prefix;
+  function g(k){return state[p+k];}
+  if(w.preview==='compose')return composePV(w,g);
+  if(w.preview==='week')return weekPV(w,g);
+  return invitePV(w,g);
+}
+function emptySpan(t){return '<span class="invite-empty">'+esc(t)+'</span>';}
+function invitePV(w,g){
+  var html='<div class="invite-preview"><div class="invite-preview-head">';
+  html+='<h5>'+esc(w.headTitle||'Preview')+'</h5>';
+  if(w.headSub)html+='<p>'+esc(typeof w.headSub==='function'?w.headSub(g):w.headSub)+'</p>';
+  html+='</div><div class="invite-preview-body">';
+  w.rows.forEach(function(r){
+    var v=g(r.key);
+    html+='<div class="invite-row"><div class="invite-row-key">'+esc(r.label)+'</div><div class="invite-row-val">'+(v?esc(v):emptySpan(r.empty||('Add '+r.label)))+'</div></div>';
+  });
+  html+='</div>';
+  if(w.table)html+=w.table(g);
+  html+='</div>';
+  return html;
+}
+function composePV(w,g){
+  var from=w.from,sig=w.sig;
+  if(w.brand){var b=w.brand(g('Company'));from=b.from;sig=b.sig;}
+  var body=g('Body'),subj=g('Subject'),to=g('To');
+  var html='<div class="compose"><div class="compose-bar">New Message</div>';
+  html+='<div class="compose-row"><div class="compose-key">From</div><div class="compose-val">'+esc(from)+'</div></div>';
+  html+='<div class="compose-row"><div class="compose-key">To</div><div class="compose-val">'+(to?esc(to):'<span class="compose-empty">recipient</span>')+'</div></div>';
+  html+='<div class="compose-row"><div class="compose-key">Subject</div><div class="compose-val">'+(subj?esc(subj):'<span class="compose-empty">(no subject)</span>')+'</div></div>';
+  html+='<div class="compose-body">'+(body?esc(body):'<span class="compose-empty">Write the message.</span>')+'</div>';
+  html+='<div class="compose-sig">'+sig+'</div></div>';
+  return html;
+}
+function weekPV(w,g){
+  var html='<div class="week-grid">';
+  w.days.forEach(function(d){
+    var v=g(d.key);
+    html+='<div class="week-day"><p class="week-day-name">'+esc(d.name)+'</p><p class="week-day-tag">Open hours</p><p class="week-day-body">'+(v?esc(v):'<span class="invite-empty">unassigned</span>')+'</p></div>';
+  });
+  html+='</div>';
+  return html;
+}
+function gridHtml(cells){
+  var html='<div class="week-grid">';
+  cells.forEach(function(c){
+    html+='<div class="week-day"><p class="week-day-name">'+esc(c.d)+'</p><p class="week-day-tag">'+esc(c.t||'')+'</p><p class="week-day-body">'+esc(c.b||'')+'</p></div>';
+  });
+  html+='</div>';
+  return html;
+}
+function renderQuiz(key,lesson,cat){
+  var w=WIDGETS[key];var p=w.prefix;var idx=state[p+'Idx'];var list=w.scenarios;var s=list[idx];
+  var picked=state[p+'Picked'][s.id];var revealed=state[p+'Revealed'][s.id];
+  var total=list.length;var allDone=list.every(function(x){return state[p+'Revealed'][x.id];});
+  var correctCount=list.filter(function(x){return state[p+'Picked'][x.id]===x.correct;}).length;
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card"><div class="int-card-header" style="background:'+cat.color+';">'+
+    '<div class="lesson-icon-tile">'+icon(w.icon,26,'#fff')+'</div>'+
+    '<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p><h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body"><p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">'+esc(w.intro)+'</p>';
+  html+='<div class="drill-stage"><p class="drill-tag">'+esc(w.unit||'Item')+' '+(idx+1)+' of '+total+'</p>';
+  if(s.grid)html+=gridHtml(s.grid);
+  html+='<div class="drill-scenario">';
+  if(s.card){html+=s.card;}
+  else{
+    if(s.from)html+='<div class="drill-from">'+esc((s.fromLabel||'From')+': '+s.from)+'</div>';
+    if(s.subject)html+='<div class="drill-subject">'+esc(s.subject)+'</div>';
+    html+='<div class="drill-body">'+esc(s.body)+'</div>';
+  }
+  html+='</div>';
+  if(w.btn==='drill'){
+    html+='<div class="drill-btns">';
+    w.actions.forEach(function(a){
+      var cls='drill-btn';
+      if(revealed){if(a.id===s.correct)cls+=picked===a.id?' picked-correct':' correct-shown';else if(a.id===picked)cls+=' picked-wrong';}
+      html+='<button class="'+cls+'" data-action="q-pick" data-key="'+key+'" data-act="'+esc(a.id)+'"><span>'+esc(a.name)+'</span><small>'+esc(a.sub)+'</small></button>';
+    });
+    html+='</div>';
+  } else {
+    var acts=s.opts||w.actions;
+    html+='<div class="sim-buttons">';
+    acts.forEach(function(a){
+      var cls='sim-btn';
+      if(revealed){if(a===s.correct)cls+=picked===a?' picked-correct':' correct-shown';else if(a===picked)cls+=' picked-wrong';}
+      html+='<button class="'+cls+'" data-action="q-pick" data-key="'+key+'" data-act="'+esc(a)+'">'+esc(a)+'</button>';
+    });
+    html+='</div>';
+  }
+  if(revealed){
+    var ok=picked===s.correct;var label;
+    if(w.btn==='drill'){var ca=w.actions.filter(function(a){return a.id===s.correct;})[0];label=ca?ca.name:s.correct;}
+    else label=s.correct;
+    html+='<div class="feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Answer: '+esc(label)+'. ')+esc(s.why)+'</div>';
+    if(idx<total-1)html+='<div style="text-align:right;margin-top:12px;"><button class="next-btn" data-action="q-next" data-key="'+key+'">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+  }
+  html+='</div>';
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#93c5fd')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';return html;
+}
+function renderLesson(lesson,cat){
+  if(lesson.type==='reading')return renderReading(lesson,cat);
+  var w=WIDGETS[lesson.intKey];
+  if(w&&w.family==='builder')return renderBuilder(lesson.intKey,lesson,cat);
+  if(w)return renderQuiz(lesson.intKey,lesson,cat);
+  return renderReading(lesson,cat);
+}
+function initWidget(key){
+  var w=WIDGETS[key];if(!w)return;
+  if(w.family==='builder'){
+    state[w.prefix+'Checked']=false;state[w.prefix+'Feedback']=null;
+    w.fields.forEach(function(f){state[w.prefix+f.key]=(f.def!=null?f.def:'');});
+  } else {
+    state[w.prefix+'Idx']=0;state[w.prefix+'Picked']={};state[w.prefix+'Revealed']={};
+  }
+}
+Object.keys(WIDGETS).forEach(initWidget);
+function render(){
+  var app=document.getElementById('app');var html='';
+  if(state.view==='home'){html=renderHome();}
+  else if(state.view.indexOf('category:')===0){var cat=getCat(state.view.slice(9));html=cat?renderCategory(cat):renderHome();}
+  else if(state.view.indexOf('lesson:')===0){var info=getLesson(state.view.slice(7));html=info?renderLesson(info.lesson,info.cat):renderHome();}
+  app.innerHTML=html;
+  if(state.view.indexOf('lesson:')===0){
+    var info2=getLesson(state.view.slice(7));
+    if(info2&&info2.lesson.intKey){
+      var w=WIDGETS[info2.lesson.intKey];
+      if(w&&w.family==='builder'){
+        var key=info2.lesson.intKey;
+        setTimeout(function(){
+          document.querySelectorAll('[data-w]').forEach(function(el){
+            el.addEventListener('input',function(e){
+              var pre=e.target.getAttribute('data-w');var fld=e.target.getAttribute('data-f');
+              state[pre+fld]=e.target.value;state[pre+'Checked']=false;state[pre+'Feedback']=null;
+              var pv=document.getElementById('mib-preview');if(pv)pv.innerHTML=buildPreviewInner(key);
+            });
+          });
+        },50);
+      }
+    }
+  }
+}
+document.body.addEventListener('click',function(ev){
+  var t=ev.target.closest('[data-action]');if(!t)return;
+  var action=t.getAttribute('data-action');
+  if(action==='open-cat'){state.view='category:'+t.getAttribute('data-cat-id');render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='back-home'){state.view='home';render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='back-cat'){state.view='category:'+t.getAttribute('data-cat-id');render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='open-lesson'){var lid=t.getAttribute('data-lesson-id');var info=getLesson(lid);if(info&&info.lesson.intKey){initWidget(info.lesson.intKey);}state.view='lesson:'+lid;render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='complete-lesson'){var lid2=t.getAttribute('data-lesson-id');state.completed[lid2]=true;var info2=getLesson(lid2);if(info2){var next=null;for(var i=0;i<info2.cat.lessons.length;i++){if(info2.cat.lessons[i].id===lid2&&i+1<info2.cat.lessons.length){next=info2.cat.lessons[i+1];break;}}state.view=next?'lesson:'+next.id:'category:'+info2.cat.id;render();window.scrollTo({top:0,behavior:'smooth'});}}
+  else if(action==='w-check'){var k1=t.getAttribute('data-key');var w1=WIDGETS[k1];state[w1.prefix+'Feedback']=w1.validate();state[w1.prefix+'Checked']=true;render();}
+  else if(action==='q-pick'){var k2=t.getAttribute('data-key');var w2=WIDGETS[k2];var sc=w2.scenarios[state[w2.prefix+'Idx']];if(state[w2.prefix+'Revealed'][sc.id])return;state[w2.prefix+'Picked'][sc.id]=t.getAttribute('data-act');state[w2.prefix+'Revealed'][sc.id]=true;render();}
+  else if(action==='q-next'){var k3=t.getAttribute('data-key');var w3=WIDGETS[k3];if(state[w3.prefix+'Idx']<w3.scenarios.length-1){state[w3.prefix+'Idx']++;render();}}
+});
+
+document.getElementById('logo-slot').innerHTML=icon('shield',22,'#fff');
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+{"ts": "2026-05-09T03:20:12.579434", "action": "SET", "tier": "tier2_ceo", "key": "api_routing", "value": "always_claude", "reason": "Owner directive: Sonnet for everything"}
+{"ts": "2026-05-09T03:20:12.579726", "action": "BLOCKED", "tier": "tier1", "key": "no_llm_math", "value": "allow_llm_math", "reason": "CEO pref blocked by compliance rule: Weights from AISC CSV, costs from RSMeans/calibration. No LLM-computed estimates."}
+{"ts": "2026-05-09T03:20:12.579882", "action": "BLOCKED", "tier": "tier1", "key": "claude_owns_takeoff", "value": "ivan_reviews", "reason": "CEO pref blocked by compliance rule: Claude owns 100% of takeoff. No 'Ivan to verify.' No 'Owner to confirm.' No 'Pending review.' Ever."}
+{"ts": "2026-05-09T03:20:12.580526", "action": "CLEAR", "tier": "tier2_ceo", "key": "api_routing", "value": "always_claude", "reason": "preference removed"}

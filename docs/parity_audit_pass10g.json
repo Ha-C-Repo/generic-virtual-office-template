@@ -1,0 +1,1952 @@
+{
+  "by_verdict": {
+    "DISPATCHER": [
+      {
+        "file": "bridge/agents/bid_review.py",
+        "function": "bid_review",
+        "line": 351,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.08); return shapes are conceptually different products",
+        "branches": 2,
+        "shared_keys": [
+          "ok"
+        ],
+        "all_keys": [
+          "error",
+          "ok",
+          "parse_warnings",
+          "project_name",
+          "reviewed_at",
+          "risk_count",
+          "risk_flags",
+          "section_1_scope",
+          "section_2_weight",
+          "section_3_cost",
+          "section_4_risks",
+          "summary",
+          "verdict"
+        ],
+        "mean_jaccard": 0.077,
+        "key_sets": [
+          [
+            "ok",
+            "project_name",
+            "reviewed_at",
+            "risk_count",
+            "risk_flags",
+            "section_1_scope",
+            "section_2_weight",
+            "section_3_cost",
+            "section_4_risks",
+            "summary",
+            "verdict"
+          ],
+          [
+            "error",
+            "ok",
+            "parse_warnings"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/agents/steel_price/agent.py",
+        "function": "get_best_price",
+        "line": 377,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.20); return shapes are conceptually different products",
+        "branches": 2,
+        "shared_keys": [
+          "shape"
+        ],
+        "all_keys": [
+          "alternatives",
+          "best",
+          "note",
+          "shape",
+          "spread"
+        ],
+        "mean_jaccard": 0.2,
+        "key_sets": [
+          [
+            "alternatives",
+            "best",
+            "shape",
+            "spread"
+          ],
+          [
+            "note",
+            "shape"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/ai_model_router.py",
+        "function": "set_tier_for_task",
+        "line": 135,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.20); return shapes are conceptually different products",
+        "branches": 2,
+        "shared_keys": [
+          "ok"
+        ],
+        "all_keys": [
+          "error",
+          "model",
+          "ok",
+          "task_type",
+          "tier"
+        ],
+        "mean_jaccard": 0.2,
+        "key_sets": [
+          [
+            "model",
+            "ok",
+            "task_type",
+            "tier"
+          ],
+          [
+            "error",
+            "ok"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/api.py",
+        "function": "get_learning_status",
+        "line": 4196,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.17); return shapes are conceptually different products",
+        "branches": 2,
+        "shared_keys": [
+          "total_corrections"
+        ],
+        "all_keys": [
+          "error",
+          "has_prompt_supplement",
+          "next_threshold",
+          "ready_for_update",
+          "supplement_examples",
+          "total_corrections"
+        ],
+        "mean_jaccard": 0.167,
+        "key_sets": [
+          [
+            "has_prompt_supplement",
+            "next_threshold",
+            "ready_for_update",
+            "supplement_examples",
+            "total_corrections"
+          ],
+          [
+            "error",
+            "total_corrections"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/aws_d11_2025.py",
+        "function": "validate_pulsed_spray_wps",
+        "line": 189,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.20); return shapes are conceptually different products",
+        "branches": 2,
+        "shared_keys": [
+          "valid"
+        ],
+        "all_keys": [
+          "aws_spec",
+          "error",
+          "note",
+          "required_gas",
+          "valid"
+        ],
+        "mean_jaccard": 0.2,
+        "key_sets": [
+          [
+            "aws_spec",
+            "note",
+            "required_gas",
+            "valid"
+          ],
+          [
+            "error",
+            "valid"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/bid_intake/buildingconnected.py",
+        "function": "download_bid_package",
+        "line": 108,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.20); return shapes are conceptually different products",
+        "branches": 2,
+        "shared_keys": [
+          "success"
+        ],
+        "all_keys": [
+          "error",
+          "files_downloaded",
+          "invite_id",
+          "note",
+          "success"
+        ],
+        "mean_jaccard": 0.2,
+        "key_sets": [
+          [
+            "files_downloaded",
+            "invite_id",
+            "note",
+            "success"
+          ],
+          [
+            "error",
+            "success"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/bid_rates.py",
+        "function": "red_light_check",
+        "line": 215,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.25); return shapes are conceptually different products",
+        "branches": 2,
+        "shared_keys": [
+          "blocked",
+          "variance_pct"
+        ],
+        "all_keys": [
+          "action",
+          "blocked",
+          "calculated_tonnage",
+          "extracted_tonnage",
+          "reason",
+          "status",
+          "threshold_pct",
+          "variance_pct"
+        ],
+        "mean_jaccard": 0.25,
+        "key_sets": [
+          [
+            "action",
+            "blocked",
+            "calculated_tonnage",
+            "extracted_tonnage",
+            "status",
+            "threshold_pct",
+            "variance_pct"
+          ],
+          [
+            "blocked",
+            "reason",
+            "variance_pct"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/calibration_2026q2.py",
+        "function": "calibration_summary",
+        "line": 272,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.06); return shapes are conceptually different products",
+        "branches": 2,
+        "shared_keys": [
+          "loaded"
+        ],
+        "all_keys": [
+          "compliance_portals",
+          "connection_types",
+          "consumables",
+          "error",
+          "issued",
+          "jurisdictions",
+          "loaded",
+          "macro_indicators",
+          "ndt_rates",
+          "refineries",
+          "steel_grades",
+          "top_shapes",
+          "valid_through",
+          "version",
+          "wage_trades",
+          "wc_codes"
+        ],
+        "mean_jaccard": 0.062,
+        "key_sets": [
+          [
+            "compliance_portals",
+            "connection_types",
+            "consumables",
+            "issued",
+            "jurisdictions",
+            "loaded",
+            "macro_indicators",
+            "ndt_rates",
+            "refineries",
+            "steel_grades",
+            "top_shapes",
+            "valid_through",
+            "version",
+            "wage_trades",
+            "wc_codes"
+          ],
+          [
+            "error",
+            "loaded"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/documents.py",
+        "function": "generate_proposal",
+        "line": 116,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.26); return shapes are conceptually different products",
+        "branches": 3,
+        "shared_keys": [
+          "success"
+        ],
+        "all_keys": [
+          "error",
+          "filename",
+          "note",
+          "path",
+          "qc",
+          "success",
+          "template",
+          "voice_qc"
+        ],
+        "mean_jaccard": 0.257,
+        "key_sets": [
+          [
+            "filename",
+            "path",
+            "qc",
+            "success",
+            "template",
+            "voice_qc"
+          ],
+          [
+            "filename",
+            "note",
+            "path",
+            "success"
+          ],
+          [
+            "error",
+            "success"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/drawing_intel/connection_check.py",
+        "function": "check_kzone_clearance",
+        "line": 245,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.25); return shapes are conceptually different products",
+        "branches": 2,
+        "shared_keys": [
+          "feasible",
+          "shape",
+          "source"
+        ],
+        "all_keys": [
+          "T_distance",
+          "action",
+          "available_depth",
+          "feasible",
+          "kdes",
+          "max_bolt_rows",
+          "note",
+          "num_bolt_rows",
+          "required_depth",
+          "shape",
+          "source",
+          "status"
+        ],
+        "mean_jaccard": 0.25,
+        "key_sets": [
+          [
+            "T_distance",
+            "action",
+            "available_depth",
+            "feasible",
+            "kdes",
+            "max_bolt_rows",
+            "num_bolt_rows",
+            "required_depth",
+            "shape",
+            "source",
+            "status"
+          ],
+          [
+            "feasible",
+            "note",
+            "shape",
+            "source"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/governance.py",
+        "function": "set_ceo_pref",
+        "line": 225,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.14); return shapes are conceptually different products",
+        "branches": 2,
+        "shared_keys": [
+          "ok"
+        ],
+        "all_keys": [
+          "error",
+          "key",
+          "ok",
+          "previous",
+          "rule",
+          "tier",
+          "value"
+        ],
+        "mean_jaccard": 0.143,
+        "key_sets": [
+          [
+            "key",
+            "ok",
+            "previous",
+            "tier",
+            "value"
+          ],
+          [
+            "error",
+            "ok",
+            "rule"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/hash_chain.py",
+        "function": "verify_document",
+        "line": 149,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.21); return shapes are conceptually different products",
+        "branches": 3,
+        "shared_keys": [
+          "verified"
+        ],
+        "all_keys": [
+          "chain_hash",
+          "created_at",
+          "created_by",
+          "doc_name",
+          "doc_type",
+          "error",
+          "file_hash",
+          "note",
+          "verified"
+        ],
+        "mean_jaccard": 0.208,
+        "key_sets": [
+          [
+            "file_hash",
+            "note",
+            "verified"
+          ],
+          [
+            "chain_hash",
+            "created_at",
+            "created_by",
+            "doc_name",
+            "doc_type",
+            "file_hash",
+            "verified"
+          ],
+          [
+            "error",
+            "verified"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/hybrid_3d_pipeline.py",
+        "function": "extract_members_local",
+        "line": 39,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.14); return shapes are conceptually different products",
+        "branches": 2,
+        "shared_keys": [
+          "ok"
+        ],
+        "all_keys": [
+          "error",
+          "members",
+          "members_found",
+          "method",
+          "note",
+          "ok",
+          "pages_scanned"
+        ],
+        "mean_jaccard": 0.143,
+        "key_sets": [
+          [
+            "members",
+            "members_found",
+            "method",
+            "note",
+            "ok",
+            "pages_scanned"
+          ],
+          [
+            "error",
+            "ok"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/learning/prompt_updater.py",
+        "function": "generate_prompt_supplement",
+        "line": 31,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.17); return shapes are conceptually different products",
+        "branches": 2,
+        "shared_keys": [
+          "saved"
+        ],
+        "all_keys": [
+          "error",
+          "example_count",
+          "firm_count",
+          "path",
+          "saved",
+          "shape_count"
+        ],
+        "mean_jaccard": 0.167,
+        "key_sets": [
+          [
+            "example_count",
+            "firm_count",
+            "path",
+            "saved",
+            "shape_count"
+          ],
+          [
+            "error",
+            "saved"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/learning/prompt_updater.py",
+        "function": "run_learning_cycle",
+        "line": 165,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.20); return shapes are conceptually different products",
+        "branches": 2,
+        "shared_keys": [
+          "success"
+        ],
+        "all_keys": [
+          "action",
+          "error",
+          "message",
+          "success",
+          "total_corrections"
+        ],
+        "mean_jaccard": 0.2,
+        "key_sets": [
+          [
+            "action",
+            "message",
+            "success",
+            "total_corrections"
+          ],
+          [
+            "error",
+            "success"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/mcp_http_server.py",
+        "function": "stage_file_for_download",
+        "line": 175,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.20); return shapes are conceptually different products",
+        "branches": 2,
+        "shared_keys": [
+          "ok"
+        ],
+        "all_keys": [
+          "error",
+          "file_id",
+          "filename",
+          "ok",
+          "size_bytes"
+        ],
+        "mean_jaccard": 0.2,
+        "key_sets": [
+          [
+            "file_id",
+            "filename",
+            "ok",
+            "size_bytes"
+          ],
+          [
+            "error",
+            "ok"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/mcp_http_server.py",
+        "function": "server_status",
+        "line": 452,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.25); return shapes are conceptually different products",
+        "branches": 2,
+        "shared_keys": [
+          "running",
+          "token_file_exists"
+        ],
+        "all_keys": [
+          "host",
+          "port",
+          "recent_call_count",
+          "running",
+          "thread_alive",
+          "token_file",
+          "token_file_exists",
+          "url_local"
+        ],
+        "mean_jaccard": 0.25,
+        "key_sets": [
+          [
+            "host",
+            "port",
+            "recent_call_count",
+            "running",
+            "thread_alive",
+            "token_file",
+            "token_file_exists",
+            "url_local"
+          ],
+          [
+            "running",
+            "token_file_exists"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/obsidian_sync.py",
+        "function": "detect_vault",
+        "line": 47,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.25); return shapes are conceptually different products",
+        "branches": 2,
+        "shared_keys": [
+          "found",
+          "path"
+        ],
+        "all_keys": [
+          "found",
+          "has_agents",
+          "has_bid_kit",
+          "has_memory",
+          "has_templates",
+          "is_git",
+          "is_obsidian",
+          "path"
+        ],
+        "mean_jaccard": 0.25,
+        "key_sets": [
+          [
+            "found",
+            "path"
+          ],
+          [
+            "found",
+            "has_agents",
+            "has_bid_kit",
+            "has_memory",
+            "has_templates",
+            "is_git",
+            "is_obsidian",
+            "path"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/obsidian_sync.py",
+        "function": "get_vault_status",
+        "line": 175,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.22); return shapes are conceptually different products",
+        "branches": 2,
+        "shared_keys": [
+          "message",
+          "status"
+        ],
+        "all_keys": [
+          "has_bid_kit",
+          "has_memory",
+          "is_obsidian",
+          "last_modified",
+          "last_modified_file",
+          "md_files",
+          "message",
+          "path",
+          "status"
+        ],
+        "mean_jaccard": 0.222,
+        "key_sets": [
+          [
+            "has_bid_kit",
+            "has_memory",
+            "is_obsidian",
+            "last_modified",
+            "last_modified_file",
+            "md_files",
+            "message",
+            "path",
+            "status"
+          ],
+          [
+            "message",
+            "status"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/quickbooks_bridge.py",
+        "function": "parse_trial_balance",
+        "line": 118,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.29); return shapes are conceptually different products",
+        "branches": 3,
+        "shared_keys": [
+          "accounts"
+        ],
+        "all_keys": [
+          "accounts",
+          "balanced",
+          "columns_detected",
+          "columns_found",
+          "count",
+          "error",
+          "parsed_at",
+          "source",
+          "total_credit",
+          "total_debit"
+        ],
+        "mean_jaccard": 0.293,
+        "key_sets": [
+          [
+            "accounts",
+            "balanced",
+            "columns_detected",
+            "count",
+            "parsed_at",
+            "source",
+            "total_credit",
+            "total_debit"
+          ],
+          [
+            "accounts",
+            "error"
+          ],
+          [
+            "accounts",
+            "columns_found",
+            "error"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/quickbooks_bridge.py",
+        "function": "populate_cost_tracker",
+        "line": 351,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.14); return shapes are conceptually different products",
+        "branches": 2,
+        "shared_keys": [
+          "populated"
+        ],
+        "all_keys": [
+          "entries",
+          "error",
+          "message",
+          "populated",
+          "project_id",
+          "project_name",
+          "skipped_low_confidence"
+        ],
+        "mean_jaccard": 0.143,
+        "key_sets": [
+          [
+            "entries",
+            "message",
+            "populated",
+            "project_id",
+            "project_name",
+            "skipped_low_confidence"
+          ],
+          [
+            "error",
+            "populated"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/shop_floor.py",
+        "function": "get_production_kpis",
+        "line": 182,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.20); return shapes are conceptually different products",
+        "branches": 2,
+        "shared_keys": [
+          "kpis"
+        ],
+        "all_keys": [
+          "kpis",
+          "note",
+          "period_days",
+          "totals",
+          "work_days"
+        ],
+        "mean_jaccard": 0.2,
+        "key_sets": [
+          [
+            "kpis",
+            "period_days",
+            "totals",
+            "work_days"
+          ],
+          [
+            "kpis",
+            "note"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/vendor_quote_poller.py",
+        "function": "record_quote",
+        "line": 237,
+        "verdict": "DISPATCHER",
+        "reason": "branches have largely disjoint key sets (mean Jaccard 0.28); return shapes are conceptually different products",
+        "branches": 3,
+        "shared_keys": [
+          "recorded"
+        ],
+        "all_keys": [
+          "doc_number",
+          "message_id",
+          "project_ref",
+          "reason",
+          "recorded",
+          "sender",
+          "vendor"
+        ],
+        "mean_jaccard": 0.278,
+        "key_sets": [
+          [
+            "doc_number",
+            "project_ref",
+            "recorded",
+            "vendor"
+          ],
+          [
+            "reason",
+            "recorded",
+            "sender"
+          ],
+          [
+            "message_id",
+            "reason",
+            "recorded"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/agents/scraper_base.py",
+        "function": "safe_get",
+        "line": 52,
+        "verdict": "DISPATCHER",
+        "reason": "Reclassified from REVIEW (pass 10j): mixed key overlap (mean Jaccard 0.50); manual judgment needed",
+        "branches": 3,
+        "shared_keys": [
+          "ok",
+          "url"
+        ],
+        "all_keys": [
+          "domain",
+          "error",
+          "fetched_at",
+          "ok",
+          "source_hash",
+          "status",
+          "text",
+          "url"
+        ],
+        "mean_jaccard": 0.5,
+        "key_sets": [
+          [
+            "error",
+            "ok",
+            "url"
+          ],
+          [
+            "domain",
+            "fetched_at",
+            "ok",
+            "source_hash",
+            "status",
+            "text",
+            "url"
+          ],
+          [
+            "error",
+            "ok",
+            "url"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/aisc_validator.py",
+        "function": "check_engineering_viability",
+        "line": 116,
+        "verdict": "DISPATCHER",
+        "reason": "Reclassified from REVIEW (pass 10j): mixed key overlap (mean Jaccard 0.54); manual judgment needed",
+        "branches": 4,
+        "shared_keys": [
+          "checked"
+        ],
+        "all_keys": [
+          "K_factor",
+          "checked",
+          "length_ft",
+          "limit",
+          "member_type",
+          "reason",
+          "rx",
+          "ry",
+          "shape",
+          "slenderness_major",
+          "slenderness_minor",
+          "viable",
+          "warning"
+        ],
+        "mean_jaccard": 0.538,
+        "key_sets": [
+          [
+            "K_factor",
+            "checked",
+            "length_ft",
+            "limit",
+            "member_type",
+            "rx",
+            "ry",
+            "shape",
+            "slenderness_major",
+            "slenderness_minor",
+            "viable",
+            "warning"
+          ],
+          [
+            "checked",
+            "reason"
+          ],
+          [
+            "checked",
+            "reason"
+          ],
+          [
+            "checked",
+            "reason"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/autonomous_bidding.py",
+        "function": "auto_response_pipeline",
+        "line": 88,
+        "verdict": "DISPATCHER",
+        "reason": "Reclassified from REVIEW (pass 10j): mixed key overlap (mean Jaccard 0.46); manual judgment needed",
+        "branches": 3,
+        "shared_keys": [
+          "package_ready",
+          "recommendation",
+          "steps"
+        ],
+        "all_keys": [
+          "analysis",
+          "awaiting_owner_approval",
+          "email_draft",
+          "estimate",
+          "fix_required",
+          "message",
+          "package_ready",
+          "proposal",
+          "reason",
+          "recommendation",
+          "steps"
+        ],
+        "mean_jaccard": 0.458,
+        "key_sets": [
+          [
+            "analysis",
+            "awaiting_owner_approval",
+            "email_draft",
+            "estimate",
+            "message",
+            "package_ready",
+            "proposal",
+            "recommendation",
+            "steps"
+          ],
+          [
+            "package_ready",
+            "reason",
+            "recommendation",
+            "steps"
+          ],
+          [
+            "fix_required",
+            "package_ready",
+            "reason",
+            "recommendation",
+            "steps"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/vendor_quote_poller.py",
+        "function": "poll_now",
+        "line": 318,
+        "verdict": "DISPATCHER",
+        "reason": "Reclassified from REVIEW (pass 10j): mixed key overlap (mean Jaccard 0.38); manual judgment needed",
+        "branches": 4,
+        "shared_keys": [
+          "polled"
+        ],
+        "all_keys": [
+          "fix",
+          "next_poll_window",
+          "polled",
+          "polled_at",
+          "reason",
+          "recorded",
+          "skipped",
+          "whitelist_size"
+        ],
+        "mean_jaccard": 0.381,
+        "key_sets": [
+          [
+            "polled",
+            "polled_at",
+            "recorded",
+            "skipped",
+            "whitelist_size"
+          ],
+          [
+            "next_poll_window",
+            "polled",
+            "reason"
+          ],
+          [
+            "fix",
+            "polled",
+            "reason"
+          ],
+          [
+            "polled",
+            "reason"
+          ]
+        ]
+      }
+    ],
+    "REVIEW": [
+      {
+        "file": "bridge/aia_g702_g703.py",
+        "function": "generate_pay_app_pdf",
+        "line": 116,
+        "verdict": "REVIEW",
+        "reason": "mixed key overlap (mean Jaccard 0.44); manual judgment needed",
+        "branches": 3,
+        "shared_keys": [
+          "success"
+        ],
+        "all_keys": [
+          "error",
+          "filename",
+          "g702",
+          "g703_totals",
+          "path",
+          "success"
+        ],
+        "mean_jaccard": 0.444,
+        "key_sets": [
+          [
+            "filename",
+            "g702",
+            "g703_totals",
+            "path",
+            "success"
+          ],
+          [
+            "filename",
+            "g702",
+            "g703_totals",
+            "path",
+            "success"
+          ],
+          [
+            "error",
+            "success"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/api.py",
+        "function": "_build_draft_estimate",
+        "line": 9984,
+        "verdict": "REVIEW",
+        "reason": "mixed key overlap (mean Jaccard 0.57); manual judgment needed",
+        "branches": 2,
+        "shared_keys": [
+          "confidence",
+          "label",
+          "needs",
+          "rates_used",
+          "tier",
+          "tonnage",
+          "total_high",
+          "total_low"
+        ],
+        "all_keys": [
+          "confidence",
+          "erect",
+          "fab",
+          "ga",
+          "label",
+          "needs",
+          "rates_used",
+          "subtotal",
+          "tier",
+          "tonnage",
+          "tonnage_range",
+          "total",
+          "total_high",
+          "total_low"
+        ],
+        "mean_jaccard": 0.571,
+        "key_sets": [
+          [
+            "confidence",
+            "label",
+            "needs",
+            "rates_used",
+            "tier",
+            "tonnage",
+            "tonnage_range",
+            "total_high",
+            "total_low"
+          ],
+          [
+            "confidence",
+            "erect",
+            "fab",
+            "ga",
+            "label",
+            "needs",
+            "rates_used",
+            "subtotal",
+            "tier",
+            "tonnage",
+            "total",
+            "total_high",
+            "total_low"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/api_integrator.py",
+        "function": "detect_integration_request",
+        "line": 45,
+        "verdict": "REVIEW",
+        "reason": "mixed key overlap (mean Jaccard 0.40); manual judgment needed",
+        "branches": 4,
+        "shared_keys": [
+          "is_integration"
+        ],
+        "all_keys": [
+          "api_key",
+          "is_integration",
+          "purpose",
+          "raw",
+          "service_name",
+          "type"
+        ],
+        "mean_jaccard": 0.4,
+        "key_sets": [
+          [
+            "is_integration"
+          ],
+          [
+            "is_integration"
+          ],
+          [
+            "api_key",
+            "is_integration",
+            "service_name",
+            "type"
+          ],
+          [
+            "is_integration",
+            "purpose",
+            "raw",
+            "service_name",
+            "type"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/archetypes/engine.py",
+        "function": "detect_archetype",
+        "line": 167,
+        "verdict": "REVIEW",
+        "reason": "mixed key overlap (mean Jaccard 0.50); manual judgment needed",
+        "branches": 2,
+        "shared_keys": [
+          "anomalies",
+          "archetype",
+          "confidence",
+          "found_components",
+          "missing_components"
+        ],
+        "all_keys": [
+          "anomalies",
+          "archetype",
+          "archetype_name",
+          "checks_passed",
+          "confidence",
+          "description",
+          "found_components",
+          "missing_components",
+          "note",
+          "total_checks"
+        ],
+        "mean_jaccard": 0.5,
+        "key_sets": [
+          [
+            "anomalies",
+            "archetype",
+            "archetype_name",
+            "checks_passed",
+            "confidence",
+            "description",
+            "found_components",
+            "missing_components",
+            "total_checks"
+          ],
+          [
+            "anomalies",
+            "archetype",
+            "confidence",
+            "found_components",
+            "missing_components",
+            "note"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/cnc/dxf_part_gen.py",
+        "function": "generate_part_dxf",
+        "line": 25,
+        "verdict": "REVIEW",
+        "reason": "mixed key overlap (mean Jaccard 0.38); manual judgment needed",
+        "branches": 2,
+        "shared_keys": [
+          "layers",
+          "output_path",
+          "success"
+        ],
+        "all_keys": [
+          "depth_in",
+          "error",
+          "hole_count",
+          "layers",
+          "length_in",
+          "mark",
+          "output_path",
+          "success"
+        ],
+        "mean_jaccard": 0.375,
+        "key_sets": [
+          [
+            "depth_in",
+            "hole_count",
+            "layers",
+            "length_in",
+            "mark",
+            "output_path",
+            "success"
+          ],
+          [
+            "error",
+            "layers",
+            "output_path",
+            "success"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/documents.py",
+        "function": "generate_change_order",
+        "line": 568,
+        "verdict": "REVIEW",
+        "reason": "mixed key overlap (mean Jaccard 0.40); manual judgment needed",
+        "branches": 3,
+        "shared_keys": [
+          "success"
+        ],
+        "all_keys": [
+          "error",
+          "filename",
+          "path",
+          "qc",
+          "success"
+        ],
+        "mean_jaccard": 0.4,
+        "key_sets": [
+          [
+            "filename",
+            "path",
+            "qc",
+            "success"
+          ],
+          [
+            "filename",
+            "path",
+            "success"
+          ],
+          [
+            "error",
+            "success"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/drawing_intel/self_healer.py",
+        "function": "normalize_with_firm_rules",
+        "line": 112,
+        "verdict": "REVIEW",
+        "reason": "mixed key overlap (mean Jaccard 0.62); manual judgment needed",
+        "branches": 3,
+        "shared_keys": [
+          "method",
+          "normalized",
+          "original"
+        ],
+        "all_keys": [
+          "confidence",
+          "method",
+          "normalized",
+          "occurrences",
+          "original",
+          "pe_firm"
+        ],
+        "mean_jaccard": 0.617,
+        "key_sets": [
+          [
+            "method",
+            "normalized",
+            "original"
+          ],
+          [
+            "method",
+            "normalized",
+            "occurrences",
+            "original"
+          ],
+          [
+            "confidence",
+            "method",
+            "normalized",
+            "original",
+            "pe_firm"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/drawing_intel/visual_diff.py",
+        "function": "ghost_overlay",
+        "line": 50,
+        "verdict": "REVIEW",
+        "reason": "mixed key overlap (mean Jaccard 0.58); manual judgment needed",
+        "branches": 3,
+        "shared_keys": [
+          "change_pct",
+          "output_path",
+          "success"
+        ],
+        "all_keys": [
+          "change_pct",
+          "changed_pixels",
+          "dimensions",
+          "error",
+          "output_path",
+          "success",
+          "summary",
+          "total_pixels"
+        ],
+        "mean_jaccard": 0.583,
+        "key_sets": [
+          [
+            "change_pct",
+            "changed_pixels",
+            "dimensions",
+            "output_path",
+            "success",
+            "summary",
+            "total_pixels"
+          ],
+          [
+            "change_pct",
+            "error",
+            "output_path",
+            "success"
+          ],
+          [
+            "change_pct",
+            "error",
+            "output_path",
+            "success"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/fin_automation/finance.py",
+        "function": "check_bond_capacity",
+        "line": 275,
+        "verdict": "REVIEW",
+        "reason": "mixed key overlap (mean Jaccard 0.33); manual judgment needed",
+        "branches": 2,
+        "shared_keys": [
+          "has_capacity",
+          "recommendation"
+        ],
+        "all_keys": [
+          "bond_line_available",
+          "has_capacity",
+          "project_value",
+          "recommendation",
+          "single_job_limit",
+          "surety"
+        ],
+        "mean_jaccard": 0.333,
+        "key_sets": [
+          [
+            "bond_line_available",
+            "has_capacity",
+            "project_value",
+            "recommendation",
+            "single_job_limit",
+            "surety"
+          ],
+          [
+            "has_capacity",
+            "recommendation"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/hash_chain.py",
+        "function": "verify_chain",
+        "line": 102,
+        "verdict": "REVIEW",
+        "reason": "mixed key overlap (mean Jaccard 0.33); manual judgment needed",
+        "branches": 2,
+        "shared_keys": [
+          "entries",
+          "valid"
+        ],
+        "all_keys": [
+          "broken_at",
+          "entries",
+          "last_hash",
+          "note",
+          "valid",
+          "verified_at"
+        ],
+        "mean_jaccard": 0.333,
+        "key_sets": [
+          [
+            "broken_at",
+            "entries",
+            "last_hash",
+            "valid",
+            "verified_at"
+          ],
+          [
+            "entries",
+            "note",
+            "valid"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/health.py",
+        "function": "check_last_boot",
+        "line": 31,
+        "verdict": "REVIEW",
+        "reason": "mixed key overlap (mean Jaccard 0.36); manual judgment needed",
+        "branches": 3,
+        "shared_keys": [
+          "clean"
+        ],
+        "all_keys": [
+          "clean",
+          "first_boot",
+          "gap_seconds",
+          "last_heartbeat"
+        ],
+        "mean_jaccard": 0.361,
+        "key_sets": [
+          [
+            "clean"
+          ],
+          [
+            "clean",
+            "first_boot"
+          ],
+          [
+            "clean",
+            "gap_seconds",
+            "last_heartbeat"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/idea_statica_checkbot.py",
+        "function": "check_connection",
+        "line": 56,
+        "verdict": "REVIEW",
+        "reason": "mixed key overlap (mean Jaccard 0.44); manual judgment needed",
+        "branches": 3,
+        "shared_keys": [
+          "check_id"
+        ],
+        "all_keys": [
+          "check_id",
+          "error",
+          "node_id",
+          "status",
+          "summary",
+          "unity_check"
+        ],
+        "mean_jaccard": 0.444,
+        "key_sets": [
+          [
+            "check_id",
+            "node_id",
+            "status",
+            "summary",
+            "unity_check"
+          ],
+          [
+            "check_id",
+            "error"
+          ],
+          [
+            "check_id",
+            "error"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/integrations.py",
+        "function": "read_bid_kit_governance",
+        "line": 74,
+        "verdict": "REVIEW",
+        "reason": "mixed key overlap (mean Jaccard 0.57); manual judgment needed",
+        "branches": 2,
+        "shared_keys": [
+          "files",
+          "found",
+          "message",
+          "total_chars"
+        ],
+        "all_keys": [
+          "errors",
+          "file_count",
+          "files",
+          "found",
+          "message",
+          "path",
+          "total_chars"
+        ],
+        "mean_jaccard": 0.571,
+        "key_sets": [
+          [
+            "errors",
+            "file_count",
+            "files",
+            "found",
+            "message",
+            "path",
+            "total_chars"
+          ],
+          [
+            "files",
+            "found",
+            "message",
+            "total_chars"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/mcp_http_server.py",
+        "function": "start_server",
+        "line": 388,
+        "verdict": "REVIEW",
+        "reason": "mixed key overlap (mean Jaccard 0.58); manual judgment needed",
+        "branches": 3,
+        "shared_keys": [
+          "host",
+          "port",
+          "started"
+        ],
+        "all_keys": [
+          "health",
+          "host",
+          "next_step",
+          "port",
+          "reason",
+          "started",
+          "token_fingerprint",
+          "url_local"
+        ],
+        "mean_jaccard": 0.583,
+        "key_sets": [
+          [
+            "health",
+            "host",
+            "next_step",
+            "port",
+            "started",
+            "token_fingerprint",
+            "url_local"
+          ],
+          [
+            "host",
+            "port",
+            "reason",
+            "started"
+          ],
+          [
+            "host",
+            "port",
+            "reason",
+            "started"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/obsidian_sync.py",
+        "function": "build_vault_context",
+        "line": 110,
+        "verdict": "REVIEW",
+        "reason": "mixed key overlap (mean Jaccard 0.50); manual judgment needed",
+        "branches": 2,
+        "shared_keys": [
+          "context",
+          "files_read",
+          "found"
+        ],
+        "all_keys": [
+          "context",
+          "files_read",
+          "found",
+          "sections",
+          "total_chars",
+          "vault_path"
+        ],
+        "mean_jaccard": 0.5,
+        "key_sets": [
+          [
+            "context",
+            "files_read",
+            "found",
+            "sections",
+            "total_chars",
+            "vault_path"
+          ],
+          [
+            "context",
+            "files_read",
+            "found"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/page_hasher.py",
+        "function": "hash_drawing_set",
+        "line": 31,
+        "verdict": "REVIEW",
+        "reason": "mixed key overlap (mean Jaccard 0.67); manual judgment needed",
+        "branches": 5,
+        "shared_keys": [
+          "ok"
+        ],
+        "all_keys": [
+          "error",
+          "file",
+          "ok",
+          "page_count",
+          "pages",
+          "set_hash"
+        ],
+        "mean_jaccard": 0.667,
+        "key_sets": [
+          [
+            "file",
+            "ok",
+            "page_count",
+            "pages",
+            "set_hash"
+          ],
+          [
+            "error",
+            "ok"
+          ],
+          [
+            "error",
+            "ok"
+          ],
+          [
+            "error",
+            "ok"
+          ],
+          [
+            "error",
+            "ok"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/predictive/analytics.py",
+        "function": "predict_win_probability",
+        "line": 74,
+        "verdict": "REVIEW",
+        "reason": "mixed key overlap (mean Jaccard 0.43); manual judgment needed",
+        "branches": 2,
+        "shared_keys": [
+          "confidence",
+          "probability",
+          "training_data"
+        ],
+        "all_keys": [
+          "base_win_rate",
+          "confidence",
+          "gc_win_rate",
+          "note",
+          "price_adjustment",
+          "probability",
+          "training_data"
+        ],
+        "mean_jaccard": 0.429,
+        "key_sets": [
+          [
+            "base_win_rate",
+            "confidence",
+            "gc_win_rate",
+            "price_adjustment",
+            "probability",
+            "training_data"
+          ],
+          [
+            "confidence",
+            "note",
+            "probability",
+            "training_data"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/shop_floor/photo_qc.py",
+        "function": "verify_holes",
+        "line": 77,
+        "verdict": "REVIEW",
+        "reason": "mixed key overlap (mean Jaccard 0.52); manual judgment needed",
+        "branches": 3,
+        "shared_keys": [
+          "detected_count",
+          "expected_count",
+          "result"
+        ],
+        "all_keys": [
+          "detected_count",
+          "deviations",
+          "error",
+          "expected_count",
+          "max_deviation_in",
+          "reason",
+          "result",
+          "tolerance_in"
+        ],
+        "mean_jaccard": 0.524,
+        "key_sets": [
+          [
+            "detected_count",
+            "deviations",
+            "expected_count",
+            "max_deviation_in",
+            "result",
+            "tolerance_in"
+          ],
+          [
+            "detected_count",
+            "error",
+            "expected_count",
+            "result"
+          ],
+          [
+            "detected_count",
+            "deviations",
+            "expected_count",
+            "max_deviation_in",
+            "reason",
+            "result"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/vault.py",
+        "function": "onedrive_status",
+        "line": 200,
+        "verdict": "REVIEW",
+        "reason": "mixed key overlap (mean Jaccard 0.40); manual judgment needed",
+        "branches": 2,
+        "shared_keys": [
+          "path",
+          "status"
+        ],
+        "all_keys": [
+          "bid_kit",
+          "briefings",
+          "path",
+          "standing",
+          "status"
+        ],
+        "mean_jaccard": 0.4,
+        "key_sets": [
+          [
+            "bid_kit",
+            "briefings",
+            "path",
+            "standing",
+            "status"
+          ],
+          [
+            "path",
+            "status"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/vault.py",
+        "function": "vault_push",
+        "line": 259,
+        "verdict": "REVIEW",
+        "reason": "mixed key overlap (mean Jaccard 0.43); manual judgment needed",
+        "branches": 8,
+        "shared_keys": [
+          "status"
+        ],
+        "all_keys": [
+          "commit",
+          "message",
+          "path",
+          "stage",
+          "status",
+          "stderr"
+        ],
+        "mean_jaccard": 0.426,
+        "key_sets": [
+          [
+            "commit",
+            "message",
+            "status"
+          ],
+          [
+            "path",
+            "status"
+          ],
+          [
+            "status"
+          ],
+          [
+            "stage",
+            "status",
+            "stderr"
+          ],
+          [
+            "message",
+            "status"
+          ],
+          [
+            "stage",
+            "status",
+            "stderr"
+          ],
+          [
+            "stage",
+            "status",
+            "stderr"
+          ],
+          [
+            "message",
+            "status",
+            "stderr"
+          ]
+        ]
+      },
+      {
+        "file": "bridge/vault.py",
+        "function": "vault_pull",
+        "line": 297,
+        "verdict": "REVIEW",
+        "reason": "mixed key overlap (mean Jaccard 0.43); manual judgment needed",
+        "branches": 4,
+        "shared_keys": [
+          "status"
+        ],
+        "all_keys": [
+          "message",
+          "path",
+          "status",
+          "stderr"
+        ],
+        "mean_jaccard": 0.431,
+        "key_sets": [
+          [
+            "message",
+            "status"
+          ],
+          [
+            "path",
+            "status"
+          ],
+          [
+            "status"
+          ],
+          [
+            "message",
+            "status",
+            "stderr"
+          ]
+        ]
+      }
+    ]
+  },
+  "total": 48
+}

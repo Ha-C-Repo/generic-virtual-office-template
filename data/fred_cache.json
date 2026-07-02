@@ -1,0 +1,23 @@
+{
+  "fetched_at": "2026-06-29T20:38:35.078501+00:00",
+  "series": {
+    "WPU101704": {
+      "error": "FRED_API_KEY not set. Set env var: set FRED_API_KEY=your_key  (free at fred.stlouisfed.org/docs/api/api_key.html)"
+    },
+    "WPS101704": {
+      "error": "FRED_API_KEY not set. Set env var: set FRED_API_KEY=your_key  (free at fred.stlouisfed.org/docs/api/api_key.html)"
+    },
+    "WPU10170406": {
+      "error": "FRED_API_KEY not set. Set env var: set FRED_API_KEY=your_key  (free at fred.stlouisfed.org/docs/api/api_key.html)"
+    },
+    "PCU33231233231212": {
+      "error": "FRED_API_KEY not set. Set env var: set FRED_API_KEY=your_key  (free at fred.stlouisfed.org/docs/api/api_key.html)"
+    },
+    "PCU33231233231211": {
+      "error": "FRED_API_KEY not set. Set env var: set FRED_API_KEY=your_key  (free at fred.stlouisfed.org/docs/api/api_key.html)"
+    },
+    "PCU33123312": {
+      "error": "FRED_API_KEY not set. Set env var: set FRED_API_KEY=your_key  (free at fred.stlouisfed.org/docs/api/api_key.html)"
+    }
+  }
+}

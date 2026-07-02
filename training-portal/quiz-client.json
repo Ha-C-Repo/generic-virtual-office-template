@@ -1,0 +1,1024 @@
+{
+ "modules": [
+  {
+   "module_id": "front-desk",
+   "ord": 1,
+   "title": "Front Desk Training",
+   "questions": [
+    {
+     "q": "Texas Mutual calls the office line about the EMR letter. What is the correct handling?",
+     "options": [
+      "Take a message and add it to the weekly call log",
+      "Route the call straight to Owner or Joseph and keep any hold under 30 seconds",
+      "Transfer the call to Amber since it involves insurance",
+      "Ask them to email the letter to info@yourcompany.example.com instead"
+     ]
+    },
+    {
+     "q": "When do you ask Joseph to restock the visitor PPE bin?",
+     "options": [
+      "When fewer than 3 visitor hard hats remain",
+      "When the bin is completely empty",
+      "At the start of every month",
+      "Only when a visitor asks for a different size"
+     ]
+    },
+    {
+     "q": "A steel truck arrives that is not on the delivery schedule. What does the module tell you to do?",
+     "options": [
+      "Sign the BOL so the driver can leave, then investigate",
+      "Send the truck away immediately",
+      "Call Joseph before signing anything, since it is likely a mistake or the wrong yard",
+      "Have the driver unload at the shop bay and sort it out later"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "w11-m365-lab",
+   "ord": 2,
+   "title": "Win 11 + M365 Lab",
+   "questions": [
+    {
+     "q": "You get a Microsoft Authenticator prompt on your phone but you did not just sign in. What do you do?",
+     "options": [
+      "Approve it so you do not get locked out",
+      "Ignore it and let it time out",
+      "Tap Deny, then tell Joseph immediately because someone has your password",
+      "Approve it and change your password afterward"
+     ]
+    },
+    {
+     "q": "Where should company files be saved, and why?",
+     "options": [
+      "Desktop, so they are easy to find",
+      "OneDrive, because files saved to Desktop or Downloads exist only on that one computer",
+      "Downloads, because attachments land there anyway",
+      "A USB drive kept at the front desk"
+     ]
+    },
+    {
+     "q": "An email that looks like it is from Owner asks you to wire $4,750 urgently and says not to call his cell. What is the right move?",
+     "options": [
+      "Reply to confirm the wire details",
+      "Forward it to Amber to process the payment",
+      "Send the wire since the amount is small",
+      "Treat it as a likely CEO impersonation scam and confirm in person before any wire"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "ai-productivity",
+   "ord": 3,
+   "title": "AI Productivity Lab",
+   "questions": [
+    {
+     "q": "In the CGF prompting framework, what do the three letters stand for?",
+     "options": [
+      "Context, Goal, Format",
+      "Clarity, Grammar, Facts",
+      "Context, Grounding, Feedback",
+      "Goal, Constraints, Formatting"
+     ]
+    },
+    {
+     "q": "You need an AI summary of a document containing sensitive company information. Which tool does the module say to use?",
+     "options": [
+      "Free ChatGPT, since it is the strongest writer",
+      "Free Gemini, since it handles long documents",
+      "Copilot inside our M365 tenant, because the data stays in the tenant and is not used to train models",
+      "Any tool, as long as you delete the chat afterward"
+     ]
+    },
+    {
+     "q": "Why does the module say not to let AI calculate the final price on a job?",
+     "options": [
+      "AI tools are too slow for pricing work",
+      "AI can flub multi-step math with full confidence, so pricing belongs in Excel or the pricing matrix",
+      "Pricing data is too large to paste into a chat window",
+      "AI rounds every number to whole dollars"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "steel-101",
+   "ord": 4,
+   "title": "Steel 101",
+   "questions": [
+    {
+     "q": "A current drawing shows a wide flange beam with no grade noted. What grade do you assume?",
+     "options": [
+      "A36",
+      "A500 Grade B",
+      "A572 Grade 50",
+      "A992, the modern default for W-shapes"
+     ]
+    },
+    {
+     "q": "What does the 11 hours per ton baseline describe?",
+     "options": [
+      "How long delivery takes per ton of steel",
+      "The blended labor hours expected per ton of finished steel leaving the shop",
+      "The erection crew's daily output target",
+      "The detailing time required per ton of drawings"
+     ]
+    },
+    {
+     "q": "Per the glossary, how should you treat the term PEMB?",
+     "options": [
+      "Use it on capability sheets to show range",
+      "It is a building type Your Company specializes in",
+      "It means Pre-Engineered Metal Building, which is not what we do, and the language never goes in our materials",
+      "It is an AISC shape category"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "teams-full",
+   "ord": 5,
+   "title": "Microsoft Teams Full",
+   "questions": [
+    {
+     "q": "When is @channel appropriate in Teams?",
+     "options": [
+      "Whenever you post in a busy channel",
+      "Only when every person in the channel genuinely needs to act or know immediately",
+      "When you want a faster reply from one person",
+      "For every project status update"
+     ]
+    },
+    {
+     "q": "You are about to share your screen as host in a meeting. What does the module say to share?",
+     "options": [
+      "Your entire desktop so you can move between documents",
+      "The Teams window itself",
+      "A second monitor",
+      "Only the specific app window you intend to show"
+     ]
+    },
+    {
+     "q": "Owner asks you to send him the bid file. What do you send?",
+     "options": [
+      "A Teams or OneDrive link to the original file, so he gets the live version",
+      "A copy attached to the chat",
+      "A PDF export by email",
+      "A screenshot of the latest version"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "office-full",
+   "ord": 6,
+   "title": "Office Apps Full",
+   "questions": [
+    {
+     "q": "You finish a business letter that is ready to send to a client. What does the module say to do?",
+     "options": [
+      "Email the .docx so they can suggest edits",
+      "Use Save As to create a separate locked PDF and send that, keeping the editable .docx",
+      "Print it and mail only the paper copy",
+      "Paste the letter text into the email body"
+     ]
+    },
+    {
+     "q": "How is the date written at the top of a business letter?",
+     "options": [
+      "5/14/26",
+      "05-14-2026",
+      "Written out long, such as May 14, 2026",
+      "2026-05-14"
+     ]
+    },
+    {
+     "q": "What is the minimum body text size the module gives for a PowerPoint slide?",
+     "options": [
+      "12 point",
+      "18 point",
+      "32 point",
+      "24 point"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "comms",
+   "ord": 7,
+   "title": "Professional Business Communication",
+   "questions": [
+    {
+     "q": "After a call where the other side committed to a deliverable, what does the confirmation pattern require?",
+     "options": [
+      "A recap email within one hour, ending with a line like Please reply if anything is off",
+      "A text message summarizing the call",
+      "A note in your personal planner",
+      "A recap email within one week"
+     ]
+    },
+    {
+     "q": "A caller claims Your Company owes them money on an invoice. Per the scripts, what do you never do?",
+     "options": [
+      "Ask for the invoice number",
+      "Take their callback number",
+      "Acknowledge the debt or commit to a payment date",
+      "Send the details to Amber"
+     ]
+    },
+    {
+     "q": "You do not know who handles an unusual request. What is the default escalation order?",
+     "options": [
+      "Go straight to Owner since he owns the company",
+      "Joseph first, since he can usually answer or knows who can",
+      "Amber first, since she is COO",
+      "Mario first, since he runs the shop"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "doc-flow",
+   "ord": 8,
+   "title": "Document Flow",
+   "questions": [
+    {
+     "q": "A client sends a Lien Waiver and asks for same-day signature. What do you do?",
+     "options": [
+      "Get Owner to sign it before end of day",
+      "Sign it yourself since it is routine paperwork",
+      "Hold it for the next legal review meeting",
+      "Route it to Amber the same day and tell the client to expect an answer within 48 hours"
+     ]
+    },
+    {
+     "q": "Why does the naming convention require dates as YYYY-MM-DD?",
+     "options": [
+      "It matches the format on government forms",
+      "That format sorts correctly in alphabetical file listings",
+      "Excel cannot read any other format",
+      "It is shorter than other formats"
+     ]
+    },
+    {
+     "q": "An IRS letter arrives that looks routine. How is government correspondence handled?",
+     "options": [
+      "File it in 03_Admin and review at month end",
+      "Open it only if Owner asks about it",
+      "Open, scan, and email it to Paul, Owner, and Amber within 24 hours, no matter how routine it looks",
+      "Forward it to the company accountant first"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "scheduling",
+   "ord": 9,
+   "title": "Scheduling",
+   "questions": [
+    {
+     "q": "A new GC asks for a Tuesday 10 AM intro call with Owner. What is the standard response?",
+     "options": [
+      "Accept it, since new business comes first",
+      "Counter-offer another day, saying Owner has standing commitments, without explaining what they are",
+      "Decline with no alternative offered",
+      "Ask the GC to email Owner directly"
+     ]
+    },
+    {
+     "q": "Established vendor reps who want a meeting get scheduled into which window?",
+     "options": [
+      "Monday morning, after bid review",
+      "Thursday, during site visits",
+      "Wednesday afternoon only",
+      "Friday afternoon, during paperwork time"
+     ]
+    },
+    {
+     "q": "Which rule sits at the top of the five priority rules?",
+     "options": [
+      "Existing client over new prospect",
+      "Revenue over PR",
+      "Active compliance wins",
+      "Safety wins, always"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "isn-compliance",
+   "ord": 10,
+   "title": "ISNetworld & Compliance",
+   "questions": [
+    {
+     "q": "A RAVS question asks for technical safety content and the answer looks easy. What do you do?",
+     "options": [
+      "Answer it yourself to save Paul time",
+      "Route it to the content owner, because one wrong answer can flip Your Company's status from compliant to deficient",
+      "Leave it blank and submit the rest",
+      "Reuse last year's answer without checking"
+     ]
+    },
+    {
+     "q": "The Texas Mutual EMR letter arrives in the mail. What is the full sequence?",
+     "options": [
+      "File it and mention it at the Friday check-in",
+      "Send it to Paul to review first",
+      "Upload to ISN immediately, file the original, log the receipt date, and alert Owner within one hour",
+      "Mail the original directly to Marathon Petroleum"
+     ]
+    },
+    {
+     "q": "Under the expiration tracker flag rules, a document expiring in 45 days is what color?",
+     "options": [
+      "Yellow: file the document and add a 30-day reminder",
+      "Green: on track, no action",
+      "Red: send the renewal email today",
+      "Critical: suspend the related activity"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "job-lifecycle",
+   "ord": 11,
+   "title": "Job Lifecycle",
+   "questions": [
+    {
+     "q": "Every bid produces two PDFs. What is the rule for the one with the -GP suffix?",
+     "options": [
+      "It goes to the GC's accounting department",
+      "Both PDFs go to the client so they can compare",
+      "It shows internal margin math and is never sent to a client; check the filename before hitting send",
+      "It is the draft version and the other is final"
+     ]
+    },
+    {
+     "q": "Mario asks whether the shop can start cutting while drawings are still with the EOR. What is the answer?",
+     "options": [
+      "Yes, if the schedule is tight",
+      "Yes, for simple beam-and-column work only",
+      "Yes, with the GC's verbal approval",
+      "No. Nothing cuts until the EOR has stamped the shop drawings"
+     ]
+    },
+    {
+     "q": "A 60-page subcontract agreement arrives for signature. What happens before Owner signs?",
+     "options": [
+      "Amber reviews it, with a standard turnaround of 2 business days",
+      "Mario checks the schedule attachment",
+      "Owner signs immediately if the terms look standard",
+      "You summarize it so Owner can sign the same day"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "vendor-client",
+   "ord": 12,
+   "title": "Vendor & Client Management",
+   "questions": [
+    {
+     "q": "A caller says their company is an approved Your Company vendor. How do you respond?",
+     "options": [
+      "Confirm it, since they would know their own status",
+      "Say you will verify it on our records and call them back; the list is the truth, not the vendor",
+      "Ask Mario whether he recognizes the name",
+      "Add them to the spreadsheet so the claim is on record"
+     ]
+    },
+    {
+     "q": "A sub's COI expiration date passes and no renewal has arrived. What happens?",
+     "options": [
+      "They get a 60-day grace period",
+      "Nothing, as long as their work is already in progress",
+      "The sub is suspended: no site access, Mario alerted, and invoices go on hold",
+      "You backdate the renewal once it arrives"
+     ]
+    },
+    {
+     "q": "A client asks you to confirm the hourly rate for change-order extras on their project. What do you do?",
+     "options": [
+      "Confirm the standard shop rate",
+      "Check the contract and answer from what you find",
+      "Tell them rates are confidential",
+      "Route the question to Owner immediately; pricing is his exclusive domain"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "outlook-depth",
+   "ord": 13,
+   "title": "Outlook in Depth",
+   "questions": [
+    {
+     "q": "What is the golden rule for the Owner's delegate mailbox?",
+     "options": [
+      "Never send anything from it without explicit authorization; draft the reply and tell him it is waiting",
+      "Send routine replies but flag them for his review afterward",
+      "Only send replies under 100 words",
+      "Send anything as long as you BCC yourself"
+     ]
+    },
+    {
+     "q": "Which inbound email rule gets a sound alert attached, and why?",
+     "options": [
+      "BuildingConnected, because bids are time-sensitive",
+      "Texas Mutual, because the EMR letter blocking Marathon approval may arrive that way and must not sit unnoticed",
+      "Vendor invoices, so payments are never missed",
+      "Cold pitches, so they can be deleted quickly"
+     ]
+    },
+    {
+     "q": "What is the difference between Send As and Send on Behalf Of?",
+     "options": [
+      "Send As shows both names while Send on Behalf Of hides yours",
+      "They are identical except for the subject line",
+      "Send on Behalf Of shows your name on behalf of The Owner and is the default safe option; Send As shows only Owner as sender",
+      "Send As is only available on the info@ mailbox"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "pdf-pdfgear",
+   "ord": 14,
+   "title": "PDF and PDFGear",
+   "questions": [
+    {
+     "q": "A signed contract has a wrong date on it. What is the correct fix?",
+     "options": [
+      "Edit the PDF and note the change in the margin",
+      "Issue a corrected version and have it re-signed; you never edit a signed document",
+      "Fix it only if both parties agree by phone",
+      "Cross it out by hand and initial it"
+     ]
+    },
+    {
+     "q": "A scanned document arrives and you cannot select or search the text. What do you do?",
+     "options": [
+      "Retype the whole document in Word",
+      "Ask the sender for a Word version",
+      "Run OCR to add a text layer, which is allowed even on signed scans because the content does not change",
+      "File it as is, since scans cannot be processed"
+     ]
+    },
+    {
+     "q": "What three things do you confirm before any PDF leaves the building?",
+     "options": [
+      "File size, page count, and font",
+      "Signature, date, and letterhead",
+      "Password, encryption, and watermark",
+      "Right file, right recipient, and nothing internal showing"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "buildingconnected",
+   "ord": 15,
+   "title": "BuildingConnected",
+   "questions": [
+    {
+     "q": "An ITB that fits structural steel lands on the bid board. Who decides whether Your Company bids?",
+     "options": [
+      "Owner. You surface the fit; you never respond on your own",
+      "You, if the deadline is generous",
+      "Joseph, since he manages the platform",
+      "Mario, based on shop capacity"
+     ]
+    },
+    {
+     "q": "A number was built from the base drawing set, and Addendum 3 drops the day before the bid is due. What now?",
+     "options": [
+      "Submit as planned, since the addendum came too late",
+      "Ask the GC to waive the addendum",
+      "Re-check what the addendum changed before the bid goes out; only the latest set counts",
+      "Withdraw from the bid automatically"
+     ]
+    },
+    {
+     "q": "An ITB is for cold-formed metal framing only. What is the move?",
+     "options": [
+      "Bid it, since framing is close to steel",
+      "Decline it; cold-formed metal framing is not Your Company scope",
+      "Quote a steel-equivalent price",
+      "Forward it to a framing sub for a referral fee"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "isn-portal",
+   "ord": 16,
+   "title": "ISNetworld Portal",
+   "questions": [
+    {
+     "q": "In ISN terms, what is Your Company's role and what does the hiring client do?",
+     "options": [
+      "Your Company sets its own requirements; the client just verifies the fee",
+      "Both parties upload the same documents",
+      "Your Company is the subscriber that meets requirements; the hiring client sets them",
+      "Your Company audits the hiring client's record"
+     ]
+    },
+    {
+     "q": "A safety program is renewed. How is its RAVS slot handled?",
+     "options": [
+      "Upload the new version and leave the old one for history",
+      "Replace the old file with the new one; one current document per slot",
+      "Upload both files plus a cover memo",
+      "Email the new version to ISN support"
+     ]
+    },
+    {
+     "q": "A requirement has no matching document on file. What do you do?",
+     "options": [
+      "Upload the closest program so the slot is not empty",
+      "Mark the requirement not applicable",
+      "Write a short program yourself",
+      "Flag it to the owner; a wrong document in a slot is worse than an empty one"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "ap-ar",
+   "ord": 17,
+   "title": "AP and AR",
+   "questions": [
+    {
+     "q": "A vendor invoice for $12,000 arrives. Who has to approve it before payment?",
+     "options": [
+      "Owner, because it is over the $5,000 line",
+      "You, once the PO check passes",
+      "Amber alone, since she owns the books",
+      "Mario, if it is shop material"
+     ]
+    },
+    {
+     "q": "A client asks when their retainage will be released. What do you say?",
+     "options": [
+      "Thirty days after the last invoice, per standard",
+      "It releases as soon as the final invoice is paid",
+      "You note the question and route it; release timing ties to completion and the contract, which is Owner and Amber",
+      "Retainage is held permanently as a deposit"
+     ]
+    },
+    {
+     "q": "Several polite reminders on an overdue client invoice got no response. What is the next step?",
+     "options": [
+      "Send a firmer reminder with a hard deadline",
+      "Escalate the issue to Owner; you raise the issue, never the tone",
+      "Add a late fee to the next invoice",
+      "Pause work on the client's current job"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "phone-scripts",
+   "ord": 18,
+   "title": "Phone Scripts",
+   "questions": [
+    {
+     "q": "Which of these can you give a caller without checking with anyone?",
+     "options": [
+      "A ballpark price for a small job",
+      "A likely delivery date",
+      "The office hours and address",
+      "Confirmation that Your Company won a bid"
+     ]
+    },
+    {
+     "q": "What are the five parts of a usable phone message?",
+     "options": [
+      "Who called, their company, the callback number, what it is about, and when they called",
+      "Name, mood, urgency, topic, and your guess at the answer",
+      "Company, price quoted, date promised, name, and time",
+      "Caller ID, voicemail length, topic, time, and your initials"
+     ]
+    },
+    {
+     "q": "The Pinnacle line rings while you are working the Your Company desk. How do you answer?",
+     "options": [
+      "With the Your Company greeting, since that is the main company",
+      "With a neutral hello that covers all three brands",
+      "With your name only",
+      "With the Pinnacle greeting; the line that rings sets the brand"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "change-orders",
+   "ord": 19,
+   "title": "Change Orders",
+   "questions": [
+    {
+     "q": "A GC asks on site to add a steel stair that is not in the contract. What is your role?",
+     "options": [
+      "Give a rough price so the work can continue",
+      "Capture the exact ask, who asked, and when, then route it to Owner without pricing it",
+      "Approve it if it looks under $5,000",
+      "Tell the GC the stair is already included"
+     ]
+    },
+    {
+     "q": "A GC questions whether deck install should be billed as an extra on a steel job that includes deck. What is true?",
+     "options": [
+      "Deck install is optional and priced separately",
+      "Deck supply is included but install is a change order",
+      "Deck supply and install are already in Your Company's scope, never an extra and never a change",
+      "It depends on the GC's preference"
+     ]
+    },
+    {
+     "q": "Whose signatures make an AIA G701 change order official?",
+     "options": [
+      "Owner, architect, and contractor",
+      "The GC and Your Company only",
+      "Owner and Amber",
+      "The EOR and the building inspector"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "safety-fundamentals",
+   "ord": 20,
+   "title": "Safety Fundamentals",
+   "questions": [
+    {
+     "q": "Someone is seriously hurt in the shop. What comes first?",
+     "options": [
+      "Notify Paul, then Owner",
+      "Write the incident report",
+      "Call emergency services, before any routing or paperwork",
+      "Photograph the scene for the record"
+     ]
+    },
+    {
+     "q": "When you write up an incident, which line belongs in the record?",
+     "options": [
+      "He was careless near the lift",
+      "He fell off the platform",
+      "The supervisor should have stopped the work",
+      "It happened because of poor training"
+     ]
+    },
+    {
+     "q": "A new hire is scheduled for shop work but has not done the safety orientation with Paul. What happens?",
+     "options": [
+      "They can shadow on the floor if escorted",
+      "They can work as long as they wear full PPE",
+      "They sign a waiver at the desk",
+      "No orientation, no shop or field exposure; the orientation gets scheduled first"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "ceo-inbox",
+   "ord": 21,
+   "title": "Managing the CEO Inbox",
+   "questions": [
+    {
+     "q": "What are the four piles every email in the CEO inbox lands in?",
+     "options": [
+      "Act, Draft, Route, File",
+      "Urgent, Today, This Week, Someday",
+      "Read, Reply, Archive, Delete",
+      "Owner, Amber, Paul, Joseph"
+     ]
+    },
+    {
+     "q": "Owner is on a flight and a client asks you to approve a $6,500 change so work can proceed. What do you do?",
+     "options": [
+      "Approve it, since work is waiting",
+      "Approve it but flag it for review when he lands",
+      "Route it to Owner with the number and deadline surfaced; you never approve spend, even when he is out",
+      "Split it into two smaller approvals"
+     ]
+    },
+    {
+     "q": "An email from Texas Mutual about the EMR letter lands in the inbox. Which pile is it?",
+     "options": [
+      "File, since it is insurance paperwork",
+      "Draft, so Owner can reply later",
+      "Route to Amber's weekly queue",
+      "Surface now; it is a named never-wait item that unblocks Marathon approval"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "ceo-drafting",
+   "ord": 22,
+   "title": "CEO Drafting",
+   "questions": [
+    {
+     "q": "How does Owner sign Your Company mail?",
+     "options": [
+      "Matt",
+      "Owner Steel",
+      "M.C.",
+      "Your Company CEO"
+     ]
+    },
+    {
+     "q": "A reply drafted in the Owner's voice agrees to a package price. What happens to it?",
+     "options": [
+      "It holds for his approval; you never send as him unprompted",
+      "You send it if the price matches the quote",
+      "You send it and BCC Owner",
+      "You send it after Amber confirms the price"
+     ]
+    },
+    {
+     "q": "A draft contains two separate asks for the client. What does the module say?",
+     "options": [
+      "Number them so both are clear",
+      "Put the bigger ask first",
+      "Make it two emails; one decision per message",
+      "Move one ask into a postscript"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "meetings",
+   "ord": 23,
+   "title": "Meetings",
+   "questions": [
+    {
+     "q": "What three things does every action item in the minutes need?",
+     "options": [
+      "A decision, one named owner, and a real due date",
+      "A topic, a team, and a quarter",
+      "An owner, a backup owner, and a reminder",
+      "A decision, a budget, and a location"
+     ]
+    },
+    {
+     "q": "A vendor requests Tuesday 9 AM, which is the Owner's deep-work block. What do you do?",
+     "options": [
+      "Book it, since it is only an intro call",
+      "Cancel the deep-work block for that week",
+      "Ask Owner to choose between them",
+      "Move the vendor request to another slot; the protected block holds"
+     ]
+    },
+    {
+     "q": "When does the meeting recap go out, and where do the actions sit?",
+     "options": [
+      "Within a week, with attendance listed first",
+      "The same day, with the action list at the top where people see it without scrolling",
+      "The next morning, opening with a thank-you note",
+      "Only when someone asks, with decisions at the bottom"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "travel",
+   "ord": 24,
+   "title": "Travel",
+   "questions": [
+    {
+     "q": "What are the three pieces of every trip?",
+     "options": [
+      "Flights, hotel, and ground transportation",
+      "Flights, meals, and meetings",
+      "Hotel, receipts, and the recap",
+      "Flights, hotel, and per diem"
+     ]
+    },
+    {
+     "q": "A travel delay puts a client meeting at risk. Who hears about it, and how?",
+     "options": [
+      "Owner, at the end of the day",
+      "Amber, since costs may change",
+      "The client, fast, with a new time; clients forgive a delay they were warned about",
+      "No one, until the delay is confirmed"
+     ]
+    },
+    {
+     "q": "What four things make a receipt complete?",
+     "options": [
+      "Card number, vendor, tip, and total",
+      "Date, amount, signature, and currency",
+      "Vendor, category, tax, and approval code",
+      "Vendor, date, amount, and what it was for"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "discretion",
+   "ord": 25,
+   "title": "Discretion",
+   "questions": [
+    {
+     "q": "You are not certain whether a piece of information is public. What is the default?",
+     "options": [
+      "Share it if the request sounds legitimate",
+      "Treat it as confidential and hold it until someone who knows says otherwise",
+      "Share it if the asker is a known client",
+      "Share part of it as a compromise"
+     ]
+    },
+    {
+     "q": "Which three items have no exception to the never-leaves rule?",
+     "options": [
+      "The GP report, our margins, and supplier names",
+      "The office address, main phone, and website",
+      "Bids, schedules, and invoices",
+      "Drawings, COIs, and BOLs"
+     ]
+    },
+    {
+     "q": "What four things come out of a document before it goes to a client?",
+     "options": [
+      "Dates, totals, names, and titles",
+      "Logos, footers, page numbers, and headers",
+      "Supplier names, margins and GP, internal staff names, and internal notes",
+      "Scope, price, timeline, and contacts"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "three-companies",
+   "ord": 26,
+   "title": "Three Companies",
+   "questions": [
+    {
+     "q": "When you write as a brand, which three things switch together as a set?",
+     "options": [
+      "The font, the logo, and the subject line",
+      "The sending domain, the signature block, and the phone number",
+      "The greeting, the closing, and the attachment",
+      "The tenant, the password, and the alias"
+     ]
+    },
+    {
+     "q": "How are the Microsoft 365 tenants arranged across the three companies?",
+     "options": [
+      "Each company has its own tenant",
+      "All three share one tenant",
+      "DOVA and Pinnacle share a tenant; Your Company stands alone",
+      "Your Company and Pinnacle share one tenant; DOVA sits on its own separate GoDaddy tenant"
+     ]
+    },
+    {
+     "q": "A new hire needs a mailbox created. What is your move?",
+     "options": [
+      "Route the request to Joseph; you never create accounts or grant access yourself",
+      "Create it on the shared tenant to save time",
+      "Set up a temporary account until IT is free",
+      "Share your own login for the first week"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "office-ops",
+   "ord": 27,
+   "title": "Office Ops",
+   "questions": [
+    {
+     "q": "A visitor walks in. What is the required order of steps?",
+     "options": [
+      "Notify the host first, then log them if there is time",
+      "Greet them, log the entry, then notify the host while the visitor waits at the front",
+      "Walk them straight to their meeting, then log them",
+      "Log them at the end of the day from memory"
+     ]
+    },
+    {
+     "q": "At closing time you find an unfamiliar person in the shop. What do you do?",
+     "options": [
+      "Lock up around them and leave",
+      "Ask them to sign the visitor log",
+      "Call Owner right away; an unknown person in the building after hours is a security risk",
+      "Wait until morning and mention it to Joseph"
+     ]
+    },
+    {
+     "q": "A pallet of steel for an active job is delivered. Where does it route?",
+     "options": [
+      "You receive and store it with the office supplies",
+      "Amber, for the books",
+      "Owner, for approval",
+      "Mario; job materials are the field stream, not an office restock"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "purchasing",
+   "ord": 28,
+   "title": "Purchasing",
+   "questions": [
+    {
+     "q": "A supplier is ready to ship but no PO exists yet. What does the module say?",
+     "options": [
+      "Stop and raise the PO first; the document comes before the delivery, every time",
+      "Let it ship and create the PO from the invoice",
+      "Accept the delivery and note the gap",
+      "Ask the supplier to email a quote after shipping"
+     ]
+    },
+    {
+     "q": "What is Your Company's standard payment structure?",
+     "options": [
+      "50 percent up front and 50 percent at completion",
+      "NET 60 on all orders",
+      "30 percent up front, 20 percent at a defined milestone, and 50 percent on completion",
+      "100 percent on delivery"
+     ]
+    },
+    {
+     "q": "An invoice matches the PO on quantity and price but adds a freight charge that was never ordered. What do you do?",
+     "options": [
+      "Pay it; freight is always expected",
+      "Hold it and route it to Amber; it is not a simple quantity or price gap",
+      "Pay the matching lines and dispute the freight later",
+      "Deduct the freight yourself and pay the rest"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "onboarding",
+   "ord": 29,
+   "title": "Onboarding",
+   "questions": [
+    {
+     "q": "What must happen before a new hire gets any shop or field exposure?",
+     "options": [
+      "The safety orientation with Paul; you schedule it and confirm it happened, Paul runs it",
+      "They sign the employee handbook",
+      "They shadow a crew member for a day",
+      "They pass a written welding test"
+     ]
+    },
+    {
+     "q": "A new hire asks for full admin access so they will not be blocked later. What is the right call?",
+     "options": [
+      "Grant it; admin access saves IT tickets",
+      "Grant read-only admin as a compromise",
+      "Hold it and ask; access matches the role under least privilege, not what is convenient",
+      "Grant it for 30 days and then review"
+     ]
+    },
+    {
+     "q": "Which onboarding item never opens just because someone was hired?",
+     "options": [
+      "A company email account",
+      "A building door code",
+      "The first-day packet",
+      "The GP report and supplier pricing"
+     ]
+    }
+   ]
+  },
+  {
+   "module_id": "supervising",
+   "ord": 30,
+   "title": "Supervising",
+   "questions": [
+    {
+     "q": "The same person is assigned to the front desk all five days. Why is that a problem?",
+     "options": [
+      "The plan breaks the moment that one person is out; coverage should be spread",
+      "Overtime rules cap front desk work at four days",
+      "Visitors prefer variety at the desk",
+      "The alarm system requires rotating codes"
+     ]
+    },
+    {
+     "q": "A supplier calls the front asking about a payment status. As supervisor, what is the move?",
+     "options": [
+      "Answer from the last invoice you saw",
+      "Escalate it to Owner",
+      "Route it to Amber, the area owner for AP and the books",
+      "Hold and document it as unclear"
+     ]
+    },
+    {
+     "q": "Which tasks are right to delegate from the supervisor seat?",
+     "options": [
+      "Discretion calls around confidential meetings",
+      "Routine work with a checklist, like visitor logging and mail sorting, with the standard attached",
+      "Deciding what escalates to Owner",
+      "Anything touching pricing or the GP report"
+     ]
+    }
+   ]
+  }
+ ]
+}

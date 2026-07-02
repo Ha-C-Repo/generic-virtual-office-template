@@ -1,0 +1,15 @@
+{
+  "ANTHROPIC_API_KEY": "",
+  "OPENAI_API_KEY": "",
+  "GOOGLE_API_KEY": "",
+  "project_root": "",
+  "_routing_notes": {
+    "claude": "Primary: rule enforcement, voice drafting, compliance, bid strategy, cold outreach",
+    "gpt4o": "Structured output: PDF gen, data extraction, Monte Carlo, financial modeling",
+    "gemini": "Multimodal: drawing analysis, plan reading, live market data, web grounding",
+    "imessage": "Office iMac gateway via BlueBubbles. Voice-scrubbed outbound."
+  },
+  "BLUEBUBBLES_HOST": "",
+  "BLUEBUBBLES_PORT": "1234",
+  "BLUEBUBBLES_PASSWORD": ""
+}

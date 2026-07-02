@@ -1,0 +1,3 @@
+# R4 self-healer quarantine.
+# Files here must be human-merged before they will load.
+# A reviewer drops a `.human_merged` marker in the skill subdir to release it.

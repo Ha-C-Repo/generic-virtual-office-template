@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Job Lifecycle | Your Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:#000;color:#e4e4e7;
+  font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(circle at 85% 8%,rgba(8,145,178,0.10),transparent 40%),
+    radial-gradient(circle at 15% 92%,rgba(22,78,99,0.07),transparent 40%);
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;padding:0;}
+input,textarea,select{font-family:inherit;}
+p{margin:0;}h1,h2,h3,h4{margin:0;font-weight:normal;}
+.container{max-width:960px;margin:0 auto;padding:0 20px;}
+
+header.site{border-bottom:2px solid #27272a;background:rgba(0,0,0,.85);
+  position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);}
+.header-row{max-width:960px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;}
+.logo-tile{width:40px;height:40px;background:#0891b2;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.header-meta .small{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#52525b;}
+.header-meta .big{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin-top:2px;}
+footer.site{max-width:960px;margin:0 auto;padding:28px 20px;border-top:1px solid #27272a;text-align:center;}
+footer.site p{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#3f3f46;}
+
+.lab-hero{position:relative;border:2px solid #3f3f46;background:#18181b;overflow:hidden;margin-bottom:28px;}
+.hero-grid{position:absolute;inset:0;opacity:.1;
+  background-image:linear-gradient(rgba(8,145,178,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(8,145,178,.3) 1px,transparent 1px);
+  background-size:24px 24px;}
+.hero-glow{position:absolute;top:-40px;right:-40px;width:220px;height:220px;
+  background:#0891b2;border-radius:50%;filter:blur(80px);opacity:.22;}
+.lab-hero-inner{position:relative;padding:28px 24px;}
+.lab-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#67e8f9;margin-bottom:8px;}
+.lab-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,9vw,68px);color:#fff;line-height:.9;margin-bottom:14px;}
+.lab-h1 .accent{color:#67e8f9;}
+.lab-blurb{color:#a1a1aa;max-width:540px;font-size:14px;line-height:1.7;margin-bottom:22px;}
+.lab-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:460px;}
+.lab-stat{border:1px solid #3f3f46;background:rgba(0,0,0,.4);padding:8px 10px;}
+.lab-stat-num{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#67e8f9;margin:0;}
+.lab-stat-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#52525b;margin:0;}
+
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.cat-card{text-align:left;background:#18181b;border:2px solid #3f3f46;padding:0;overflow:hidden;width:100%;}
+.cat-card.is-done{border-color:#10b981;}
+.cat-stripe{height:6px;}
+.cat-inner{padding:18px;}
+.cat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.cat-icon-tile{width:44px;height:44px;color:#fff;display:flex;align-items:center;justify-content:center;}
+.cat-card h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin:0 0 6px;line-height:1.05;}
+.cat-card-blurb{font-size:12px;color:#a1a1aa;margin:0 0 14px;line-height:1.5;}
+.cat-card-foot{display:flex;justify-content:space-between;align-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:9px;color:#71717a;text-transform:uppercase;letter-spacing:.2em;}
+.cat-progress-track{height:4px;background:#27272a;flex:1;margin-left:12px;max-width:80px;}
+.cat-progress-fill{height:100%;background:#10b981;}
+
+.cat-back-btn{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;
+  color:#71717a;display:flex;align-items:center;gap:6px;margin-bottom:20px;}
+.cat-header{background:#18181b;border:2px solid #3f3f46;padding:20px;margin-bottom:16px;}
+.cat-header-inner{display:flex;gap:16px;align-items:flex-start;}
+.cat-header-icon{width:56px;height:56px;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cat-header-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;margin:0;}
+.cat-header-title{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;margin:4px 0;line-height:1;}
+.cat-header-blurb{color:#a1a1aa;font-size:13px;margin:0;line-height:1.5;}
+
+.lesson-list{display:flex;flex-direction:column;gap:8px;}
+.lesson-row{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#18181b;
+  border:2px solid #3f3f46;width:100%;text-align:left;}
+.lesson-row.is-done{border-color:#10b981;}
+.lesson-row.is-locked{opacity:.45;cursor:not-allowed;}
+.lesson-row:not(.is-locked){cursor:pointer;}
+.lesson-num-tile{width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:16px;}
+.lesson-num-tile.done   {background:#10b981;color:#000;}
+.lesson-num-tile.current{background:#67e8f9;color:#000;}
+.lesson-num-tile.pending{background:#27272a;color:#71717a;}
+.lesson-row-meta{flex:1;min-width:0;}
+.lesson-row-title{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin:0;line-height:1.1;}
+.lesson-row-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;margin:4px 0 0;}
+
+.lesson-card{border:2px solid #3f3f46;background:#18181b;}
+.lesson-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.lesson-icon-tile{width:52px;height:52px;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.lesson-card-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;font-weight:700;opacity:.8;margin:0;}
+.lesson-card-title{font-family:'Bebas Neue',sans-serif;font-size:32px;margin:4px 0 0;line-height:1;color:#fff;}
+.lesson-card-body{padding:24px 22px;}
+.lesson-section{margin-bottom:22px;}
+.lesson-section h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#67e8f9;margin:0 0 8px;}
+.lesson-section p{color:#a1a1aa;line-height:1.65;margin:0;font-size:14px;}
+.tip-box{background:rgba(8,145,178,.08);border-left:4px solid #0891b2;padding:12px 16px;margin-top:20px;}
+.tip-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#67e8f9;margin:0 0 6px;font-weight:700;}
+.tip-body{color:#cffafe;font-size:13px;margin:0;line-height:1.55;font-style:italic;}
+
+.complete-btn{width:100%;margin-top:24px;padding:14px 0;
+  font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.2em;
+  background:#0891b2;color:#fff;border:2px solid #0891b2;
+  display:flex;align-items:center;justify-content:center;gap:10px;}
+
+/* Stage list visual */
+.stage-list{display:flex;flex-direction:column;gap:6px;margin-top:6px;}
+.stage-row{display:flex;gap:12px;background:#0c0c0c;border:1px solid #3f3f46;padding:10px 14px;align-items:center;}
+.stage-num{width:28px;height:28px;background:#0891b2;color:#fff;display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:16px;flex-shrink:0;}
+.stage-text{font-size:12px;color:#e4e4e7;line-height:1.4;}
+.stage-text strong{color:#67e8f9;}
+
+/* Interactive shared */
+.int-card{border:2px solid #3f3f46;background:#18181b;}
+.int-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.int-card-body{padding:24px 22px;}
+
+/* Sequence Drill */
+.seq-progress{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:#67e8f9;margin-bottom:12px;}
+.seq-pool{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin-bottom:14px;}
+.seq-stage{background:#0c0c0c;border:2px solid #3f3f46;padding:14px 12px;text-align:left;cursor:pointer;position:relative;}
+.seq-stage:hover{border-color:#67e8f9;}
+.seq-stage.placed{background:rgba(16,185,129,.08);border-color:#10b981;cursor:default;}
+.seq-stage.placed:hover{border-color:#10b981;}
+.seq-stage.wrong-flash{animation:wrongFlash .6s;}
+@keyframes wrongFlash{
+  0%,100%{background:#0c0c0c;border-color:#3f3f46;}
+  20%,60%{background:rgba(239,68,68,.18);border-color:#ef4444;transform:translateX(-3px);}
+  40%,80%{background:rgba(239,68,68,.18);border-color:#ef4444;transform:translateX(3px);}
+}
+.seq-pos-badge{font-family:'Bebas Neue',sans-serif;font-size:14px;background:#10b981;color:#000;padding:2px 8px;display:inline-block;margin-bottom:6px;}
+.seq-name{font-family:'Bebas Neue',sans-serif;font-size:15px;color:#fff;line-height:1.15;margin-bottom:3px;}
+.seq-hint{font-size:11px;color:#71717a;line-height:1.4;}
+.seq-status{margin-top:12px;padding:10px 14px;font-size:12px;line-height:1.55;}
+.seq-status.ok{background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+
+/* Who Owns Drill */
+.wo-stage{background:#0c0c0c;border:1px solid #3f3f46;padding:18px;margin-bottom:14px;}
+.wo-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#67e8f9;margin-bottom:8px;}
+.wo-scenario{background:#1c1917;border-left:3px solid #0891b2;padding:12px 14px;margin-bottom:14px;font-size:13px;color:#e4e4e7;line-height:1.55;}
+.wo-buttons{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:6px;}
+.wo-btn{padding:14px 8px;background:#09090b;border:1px solid #3f3f46;
+  font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.05em;color:#a1a1aa;line-height:1.2;
+  display:flex;flex-direction:column;align-items:center;gap:4px;}
+.wo-btn:hover{border-color:#67e8f9;}
+.wo-btn small{font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.15em;color:#52525b;}
+.wo-btn.picked-correct{background:rgba(16,185,129,.15);border-color:#10b981;color:#a7f3d0;}
+.wo-btn.picked-correct small{color:#6ee7b7;}
+.wo-btn.picked-wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.wo-btn.picked-wrong small{color:#f87171;}
+.wo-btn.correct-shown{background:rgba(16,185,129,.08);border-color:#10b981;color:#a7f3d0;}
+.wo-btn.correct-shown small{color:#6ee7b7;}
+.wo-feedback{margin-top:14px;padding:10px 14px;font-size:12px;line-height:1.55;}
+.wo-feedback.ok{background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+.wo-feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+
+/* Gap Spotter */
+.gs-stage{background:#0c0c0c;border:1px solid #3f3f46;padding:18px;margin-bottom:14px;}
+.gs-context{background:#1c1917;border-left:3px solid #0891b2;padding:12px 14px;margin-bottom:14px;}
+.gs-context-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#67e8f9;margin-bottom:6px;}
+.gs-context-body{font-size:13px;color:#e4e4e7;line-height:1.6;}
+.gs-question{font-size:13px;color:#fbbf24;margin-bottom:12px;font-style:italic;}
+.gs-options{display:flex;flex-direction:column;gap:6px;}
+.gs-opt{padding:12px 14px;background:#09090b;border:1px solid #3f3f46;text-align:left;font-size:13px;color:#a1a1aa;}
+.gs-opt:hover{border-color:#67e8f9;}
+.gs-opt.picked-correct{background:rgba(16,185,129,.15);border-color:#10b981;color:#a7f3d0;}
+.gs-opt.picked-wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.gs-opt.correct-shown{background:rgba(16,185,129,.08);border-color:#10b981;color:#a7f3d0;}
+.gs-feedback{margin-top:14px;padding:10px 14px;font-size:12px;line-height:1.55;}
+.gs-feedback.ok{background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+.gs-feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+
+.next-btn{padding:10px 18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.2em;
+  background:#0891b2;color:#fff;border:2px solid #0891b2;}
+.score-line{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;
+  color:#a1a1aa;margin-top:16px;padding-top:14px;border-top:1px solid #27272a;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-row">
+    <div class="logo-tile" id="logo-slot"></div>
+    <div class="header-meta">
+      <p class="small">Your Company &middot; Module 11</p>
+      <p class="big">Job Lifecycle</p>
+    </div>
+  </div>
+</header>
+
+<main class="container" style="padding:28px 20px 40px;">
+  <div id="app"></div>
+</main>
+
+<footer class="site">
+  <p>Built by Joseph &middot; Your Company Virtual Office &middot; Internal Use Only</p>
+</footer>
+
+<script>
+"use strict";
+
+const ICONS={
+  'arrow-right': '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  'arrow-left':  '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  'check':       '<path d="M20 6 9 17l-5-5"/>',
+  'lock':        '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  'file-text':   '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/>',
+  'pencil-ruler':'<path d="M13 7 8.7 2.7a2.41 2.41 0 0 0-3.4 0L2.7 5.3a2.41 2.41 0 0 0 0 3.4L7 13"/><path d="m8 6 2-2"/><path d="m18 16 2-2"/><path d="m17 11 4.3 4.3c.94.94.94 2.46 0 3.4l-2.6 2.6c-.94.94-2.46.94-3.4 0L11 17"/><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/>',
+  'factory':     '<path d="M12 16h.01"/><path d="M16 16h.01"/><path d="M3 19a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.5a.5.5 0 0 0-.769-.422l-4.462 2.844A.5.5 0 0 1 15 10.5v-2a.5.5 0 0 0-.769-.422L9.77 10.922A.5.5 0 0 1 9 10.5V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"/><path d="M8 16h.01"/>',
+  'truck':       '<path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/>',
+  'hammer':      '<path d="m15 12-9.373 9.373a1 1 0 0 1-3.001-3L12 9"/><path d="m18 15 4-4"/><path d="m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172v-.344a2 2 0 0 0-.586-1.414l-1.657-1.657A6 6 0 0 0 12.516 3H9l1.243 1.243A6 6 0 0 1 12 8.485V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5"/>',
+  'package-check':'<path d="M12 22V12"/><path d="m16 17 2 2 4-4"/><path d="M21 11.127V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l1.32-.753"/><path d="M3.29 7 12 12l8.71-5"/><path d="m7.5 4.27 8.997 5.148"/>',
+  'eye':         '<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>',
+  'shuffle':     '<path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.7-1.1 2-1.7 3.3-1.7H22"/><path d="m18 2 4 4-4 4"/><path d="M2 6h1.9c1.5 0 2.9.9 3.6 2.2"/><path d="M22 18h-5.9c-1.3 0-2.6-.7-3.3-1.8l-.5-.8"/><path d="m18 14 4 4-4 4"/>',
+  'users':       '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>'
+};
+function icon(name,size,color){
+  size=size||16;color=color||'currentColor';
+  var p=ICONS[name]||'';
+  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">'+p+'</svg>';
+}
+
+// ============================================================================
+// DATA
+// ============================================================================
+const CATEGORIES=[
+  { id:'quote', iconKey:'file-text', color:'#0891b2',
+    title:'Quoting & Award',
+    blurb:'The first three stages. RFQ arrives, Owner prices, contract gets signed. The assistant logs and routes every step.',
+    lessons:[
+      { id:'jl-1', title:'Stage 1 — The RFQ Arrives',        type:'reading', minutes:5 },
+      { id:'jl-2', title:'Stage 2 — Bidding & Quote',         type:'reading', minutes:5 },
+      { id:'jl-3', title:'Stage 3 — Award & Contract',        type:'reading', minutes:4 }
+    ] },
+  { id:'preprod', iconKey:'pencil-ruler', color:'#0e7490',
+    title:'Pre-Production',
+    blurb:'Shop drawings get stamped by the EOR. Material gets ordered. Nothing cuts until both clear.',
+    lessons:[
+      { id:'jl-4', title:'Stage 4a — Shop Drawings',          type:'reading',     minutes:5 },
+      { id:'jl-5', title:'Stage 4b — Material Procurement',   type:'reading',     minutes:4 },
+      { id:'jl-6', title:'Sequence the Stages',               type:'interactive', minutes:6, intKey:'seqDrill' }
+    ] },
+  { id:'fab', iconKey:'factory', color:'#155e75',
+    title:'Fabrication & Coating',
+    blurb:'Mario\'s shop. 11 hours per ton. Cut, fit, weld, inspect, coat, load. The heart of what Your Company does.',
+    lessons:[
+      { id:'jl-7', title:'Stage 5 — Fabrication',             type:'reading',     minutes:5 },
+      { id:'jl-8', title:'Stage 6 — Coating & Delivery',      type:'reading',     minutes:4 },
+      { id:'jl-9', title:'Who Owns This Decision',            type:'interactive', minutes:7, intKey:'whoOwns' }
+    ] },
+  { id:'erect', iconKey:'package-check', color:'#164e63',
+    title:'Erection & Closeout',
+    blurb:'Out the door, into the field, signed off, invoiced, paid. Final stage. Retention tracked.',
+    lessons:[
+      { id:'jl-10', title:'Stage 7 — Erection & Punch List',  type:'reading',     minutes:4 },
+      { id:'jl-11', title:'The Closeout Package',             type:'reading',     minutes:4 },
+      { id:'jl-12', title:'Gap Spotter',                      type:'interactive', minutes:6, intKey:'gapSpotter' }
+    ] }
+];
+
+// ============================================================================
+// LESSON CONTENT
+// ============================================================================
+const LESSON_CONTENT={
+  'jl-1':{ sections:[
+    { h:'What is an RFQ', b:'RFQ stands for "Request for Quote." Sometimes called an Invitation to Bid (ITB) or Invitation for Bid (IFB). A general contractor (GC) sends one when they need a price for a structural steel package. Arrives via email most often. Sometimes by phone. Rarely by physical mail.' },
+    { h:'What an RFQ should contain', b:'Drawings (architectural plus structural). Specifications document. Bid due date and time. Scope description (which trades, which areas). Bidder contact info for questions. Site visit details if a walk is required. Most GCs use Building Connected or Procore to distribute, but plenty still send raw PDFs.' },
+    { h:'The assistant\'s first job when an RFQ lands', b:'Within 4 hours: log it in the 01_Bids folder under a project name, save all attachments, alert Owner via Teams chat with the bid due date. Bid due dates are the single most important detail to flag. Missing one costs the bid even if our number was the best.' },
+    { h:'No-go criteria Owner may apply', b:'Owner may decline to bid before any pricing work happens. Common reasons: geography too far (Houston metro plus 2-hour drive is the standard radius), scope outside our wheelhouse (we do structural, not miscellaneous), GC payment history bad, timeline impossible, terms unsignable. If he says no-go, you reply politely declining and file the package as "no bid."' }
+  ], tip:'When an RFQ arrives, the clock starts. Most are 5-10 business days due. Some are 48 hours. The first thing you read is the cover sheet for the due date. The second thing is the scope. Everything else can wait until you have Owner briefed.' },
+  'jl-2':{ sections:[
+    { h:'Owner prices the job', b:'Starts with the 11 hours per ton baseline (machine-assisted blended rate, April 2026). Adjusts for complexity: heavy connection density adds hours, simple beam-and-column subtracts hours. Special coating (galvanized, intumescent fireproofing) adds cost. Long transport distance adds freight. Engineering folded into the fab and erection rates, never line-itemed.' },
+    { h:'What goes into the number', b:'Fab labor at $145 per hour. Material at current mill prices plus 5-10% handling. Coating at the sub\'s quoted rate. Freight estimated based on tonnage and miles. Erection scope per the bid. Overhead multiplier of 1.15x. Engineering at $175 per hour folded into total, hidden in the rate.' },
+    { h:'The quote document', b:'Cover letter addressed to the GC contact (always to a named person, never "To Whom It May Concern"). Scope of work summarizing what we are bidding. Exclusions clearly stated (what is NOT included: site prep, concrete embeds, final paint touch-up, etc.). Validity period of 30 days. Payment terms (typically NET 30 from invoice). NO supplier names. NO precedent projects.' },
+    { h:'Two PDFs every time', b:'Client proposal (clean, professional, sent to GC). Internal GP report (suffix -GP in filename, NEVER sent to client). The GP report shows our internal margin math. The assistant sends the client PDF, files the GP report internally in 01_Bids under the project. If you ever send a -GP file to a client by accident, that is a fireable error. Always check the filename twice before hitting send.' }
+  ], tip:'The two-PDF rule exists because the GP report contains our cost structure. A GC seeing it would know exactly how to push our price down. Always verify the filename before sending. Look for "GP" suffix. If it is there, do not send.' },
+  'jl-3':{ sections:[
+    { h:'How awards arrive', b:'Two flavors. Award letter (formal document stating we won the bid, here is the price, here is the schedule). Notice to Proceed (NTP) which says "you are awarded, begin work, contract will follow." Both are binding. Some GCs send a "Letter of Intent" first to lock you in while contracts get drafted.' },
+    { h:'Contract documents', b:'Prime contract or subcontract agreement. Insurance requirements (GL, auto, umbrella, workers comp, professional liability if applicable). Schedule attachment with start date, milestones, completion date. Payment terms and retention schedule. Change order procedures. Termination clauses. Most are 30-80 pages.' },
+    { h:'Amber reviews ALL contracts', b:'No exceptions. Standard turnaround: 2 business days for review. Amber flags non-standard language: unusual indemnification, one-sided change order rights, pay-when-paid clauses with no time limit, broad termination-for-convenience. Owner signs only after Amber clears it. Your job: route the contract to Amber the day it arrives.' },
+    { h:'Once signed, the kickoff', b:'Enter the job in the active projects tracking sheet. Create the full project folder structure (01_Bids through 08_Closeout). Notify Mario the job is live and what the schedule looks like. Schedule a kickoff meeting if the project is larger than $100K (Owner plus Mario plus GC PM). Order the project boards and tags from the supply cabinet.' }
+  ], tip:'The moment a contract is signed, every clause becomes a thing you might need to defend or invoke later. File the executed copy in 01_Bids under "Final Contract" with a clear filename. When the GC asks 6 months later "what did we agree on for change orders," you will need that file in 30 seconds.' },
+  'jl-4':{ sections:[
+    { h:'Shop drawings vs. structural drawings', b:'The EOR (Engineer of Record) produces structural drawings showing what the building wants: beam sizes, column locations, connection types described in general terms. Shop drawings are different. They show every cut, every hole, every weld, every dimension the shop needs to fabricate. Tens of pages per project, sometimes hundreds.' },
+    { h:'Detailing is usually outsourced', b:'Your Company uses an outside detailer firm. They take the EOR drawings, the project specifications, and the contract scope, and produce shop drawings. Turnaround for first submission: 2-3 weeks. Cost is folded into our bid. The detailer name does not appear on bids or marketing.' },
+    { h:'Stamped approval is non-negotiable', b:'Shop drawings get submitted to the EOR (sent through the GC). EOR reviews and either stamps "approved," "approved as noted," or "revise and resubmit." Nothing cuts in the shop until the drawings are stamped. Fabricating from unapproved drawings is one of the biggest financial risks in this business. If the EOR rejects, the rework is on us.' },
+    { h:'Plan for the detailing bottleneck', b:'Detailing is almost always the schedule pinch point. First submission takes 2-3 weeks. Revisions take 1-2 weeks each. Some EORs are fast, some take a month to respond. Build buffer into the schedule and communicate honestly with the GC about realistic dates. A signed contract with an impossible detailing window is a contract that will cost us money.' }
+  ], tip:'The biggest red flag in pre-production: someone (Mario, the GC, occasionally a sub) asking "can we just start cutting and approve the drawings in parallel?" The answer is always no. Always. Even when it costs days. Stamped drawings before steel touches the saw.' },
+  'jl-5':{ sections:[
+    { h:'When the steel PO gets placed', b:'Once drawings are submitted to EOR (sometimes before stamped approval if Owner is confident), the steel order goes in. Owner places the PO with the mill or steel distributor. Lead times govern timing: long-lead items (heavy plate, large W-shapes, specialty tubing) get ordered first, sometimes before drawings are even submitted, if mill availability is tight.' },
+    { h:'What the PO specifies', b:'Grade — A992 standard for W-shapes, A572 Gr 50 for plate, A500 Gr B for HSS. Length and quantity per the take-off. Tolerances. Mill Test Reports (MTRs) required for every piece (these end up in the closeout package). Delivery date. Freight terms (FOB shipping point vs. delivered).' },
+    { h:'Typical lead times', b:'W-shapes: 4-6 weeks from a mill, 1-2 weeks from a service center if in stock. Plate: 4-8 weeks. Tubing: 3-6 weeks. Specialty items (jumbo shapes, exotic grades): 8-12 weeks. The schedule needs to respect these realities. Owner estimates lead time as part of pricing.' },
+    { h:'Receiving and verification', b:'Every load that arrives gets checked against the PO line by line. Quantity, grade, length, condition (dings, rust, mill marks legible). MTRs collected and filed. Mismatches reported immediately to the supplier and to Owner. Wrong material delivered = the supplier picks it up and replaces it, or Mario figures out if it works for a different job.' }
+  ], tip:'Mario logs every material receipt in the project material tracking sheet. Your job when a BOL arrives: confirm it matches the PO, sign for delivery, file the BOL in 03_Material under the project, and log the receipt date. If the BOL does not match the PO, do not sign without calling Mario first.' },
+  'jl-7':{ sections:[
+    { h:'Mario runs the shop', b:'Production sequence is established: layout, cut, drill, fit, tack-weld, final weld, grind/clean, inspect, stage for coating or shipping. Mario sequences which pieces get worked on which day based on the schedule, crew availability, and material on hand. The 11 hours-per-ton baseline is a blended average across all stages.' },
+    { h:'AWS D1.1 governs structural welding', b:'D1.1 is the American Welding Society code for structural steel. Mario is AWS D1.1 certified (welding lead). Every welder in the shop is qualified to the procedures Mario maintains. Welds get inspected: visual at minimum, sometimes ultrasonic (UT) or magnetic particle (MT) for critical connections. Inspection records get filed and end up in the closeout package.' },
+    { h:'Quality holds and signoffs', b:'Before steel leaves the shop: dimensional verification (right size, right holes, right plates welded on), weld inspection signoff, paint prep verification (cleaned to the spec, SP-2 or SP-6 surface profile typically). Nothing ships without Mario\'s signoff. He keeps a clipboard log at the shop door.' },
+    { h:'Production tracking', b:'Daily production logged: tonnage shipped vs. planned, hours worked vs. estimated, variances explained. Friday team check-in is where variances get discussed. If we are running 13 hours per ton on a job estimated at 11, that is a 18% variance that costs money. Mario reports it, Owner adjusts the next bid for similar work.' }
+  ], tip:'The assistant rarely needs to interrupt the shop floor. The shop has its own rhythm. When something does need to go to Mario, the format is: walk to him, hand him the paper or BOL, get his answer in 60 seconds, leave. Do not linger. Do not "stop by to see how things are going." Shop time is production time.' },
+  'jl-8':{ sections:[
+    { h:'Coating is subbed out', b:'Your Company does not paint or galvanize in-house. The fabricated steel goes to a coating partner (the name does not appear in client documents). Primer plus topcoat for standard projects. Galvanizing for projects that spec it. Intumescent fireproofing for projects requiring fire-rating. Coating takes 3-7 days depending on volume and weather.' },
+    { h:'DFT verification', b:'DFT stands for Dry Film Thickness. The spec says how thick the coating needs to be (typically 3-5 mils for primer, similar for topcoat). DFT is measured with a gauge after coating cures. Pieces that fail DFT either get re-coated or get rejected. Verification is critical. Bad coating on-site = re-do = expensive = client unhappy.' },
+    { h:'Loading the truck', b:'Heaviest pieces loaded first (truck weight distribution). Pieces marked with project tags and piece numbers visible. Securely strapped. Tarped if rain in the forecast. BOL prepared with piece count, total weight, project name, delivery address, delivery contact name and phone. Mario or his crew handle the loading; the assistant prepares the BOL paperwork.' },
+    { h:'Delivery scheduling', b:'Coordinates with the field. Arriving too early = no place to off-load = waste a half-day. Arriving too late = crew sitting idle = waste a full day. Mario coordinates with the GC superintendent and crew lead on-site. The assistant\'s role: track BOL paperwork, file the executed delivery receipt, log the delivery date in the project tracking sheet.' }
+  ], tip:'Delivery is the last point where Your Company fully controls the steel. After it leaves the truck on-site, the GC and the erector own it. Photo-document every load before it leaves the shop yard. Photos go in 04_Deliveries under the project. Memory loses to a photograph in every dispute.' },
+  'jl-10':{ sections:[
+    { h:'Field install', b:'Erection is the install phase. Steel arrives on-site, gets unloaded, sorted by piece number, then erected in sequence: foundations and embeds verified first, then columns, then beams, then bracing, then deck. DECK SUPPLY AND INSTALL IS ALWAYS IN YOUR COMPANY\'S SCOPE. Never optional. Never a line-item the client can strip out.' },
+    { h:'Self-perform vs. erection sub', b:'Your Company self-performs on most projects under 200 tons. Larger projects or projects far from Houston may use an erection sub. The contract specifies which. Either way, Mario coordinates from the shop side. Paul handles safety oversight for any erection involving our crew or our subs.' },
+    { h:'Field welding under AWS D1.1', b:'Same code as the shop. Field welders qualify separately (shop qualification is not automatic for field). Inspection records kept. Critical connections get UT or MT inspection. Documentation goes into the closeout package eventually.' },
+    { h:'The punch list', b:'After erection completes, the GC walks the structure and produces a punch list. Common items: bolts missing or under-torqued, paint touch-up needed, alignment issues, missing safety bolts on stairs/rails. Your Company fixes the punch list before final signoff. Most punch lists are resolved in 1-3 days. Big punch lists signal something went wrong earlier in the lifecycle.' }
+  ], tip:'A punch list is a normal, expected part of every project. It is not a failure. What MATTERS is how fast Your Company resolves it. Same-week resolution shows professionalism. Two-month-old open punch list items damage the relationship. The assistant tracks punch list status in the project tracking sheet weekly.' },
+  'jl-11':{ sections:[
+    { h:'Closeout triggers final invoice', b:'When erection is complete and the punch list is resolved, the GC signs a final acceptance or signoff document. That triggers the final invoice. Final invoice = original contract amount + approved change orders - all prior progress billings = final balance due.' },
+    { h:'The closeout package contents', b:'Mill Test Reports (MTRs) for every piece of steel. Welding inspection reports (shop and field). Coating verification records (DFT readings). As-built drawings if any field modifications were made. Warranty letter (Your Company\'s standard warranty: 1 year on workmanship, manufacturer warranty on coatings). All items in a single PDF or organized folder structure delivered to the GC.' },
+    { h:'Retention', b:'Most GC contracts hold retention of 5-10% of each progress billing. Retention gets released either at substantial completion or 30-90 days after closeout, depending on contract terms. Track retention separately in the project tracking sheet. Follow up monthly if retention is past the release date.' },
+    { h:'Filing the closed project', b:'Once the final payment hits and retention is released, the project folder moves from 01_Projects/Active to 08_Closeout/Completed. Keep everything. We need access for warranty claims, future references, tax records, and bid history. Closed-project files get archived but never deleted.' }
+  ], tip:'Closeout is where money sits unclaimed if you do not chase it. Final invoices, retention releases, punch list resolution. These are administrative tasks but they are also revenue. A diligent EA who closes out projects on time will recover 1-2% of total contract value that less-organized shops leave on the table.' }
+};
+
+// Stage list for sequence drill — canonical order
+const STAGES=[
+  { id:'s1', num:1, name:'RFQ received',        hint:'Drawings, specs, due date arrive' },
+  { id:'s2', num:2, name:'Bid submitted',       hint:'Price calculated, two PDFs out' },
+  { id:'s3', num:3, name:'Award & contract',    hint:'Amber reviews, Owner signs' },
+  { id:'s4', num:4, name:'Detailing & material',hint:'Shop drawings stamped, steel ordered' },
+  { id:'s5', num:5, name:'Fabrication',         hint:'Mario\'s shop, 11 hrs per ton' },
+  { id:'s6', num:6, name:'Coating & delivery',  hint:'Paint, BOL, truck rolls out' },
+  { id:'s7', num:7, name:'Erection & closeout', hint:'Install, punch list, final invoice' }
+];
+
+// Pre-shuffled order (deterministic — same shuffle every load)
+const STAGE_DISPLAY_ORDER=['s4','s7','s2','s6','s1','s5','s3'];
+
+// Who Owns Drill data
+const WO_OWNERS=[
+  { id:'owner', name:'Owner', sub:'pricing/contracts' },
+  { id:'mario',   name:'Mario',   sub:'shop/materials' },
+  { id:'amber',   name:'Amber',   sub:'legal/finance' },
+  { id:'paul',    name:'Paul',    sub:'safety' },
+  { id:'self',  name:'You',  sub:'handle myself' }
+];
+const WO_SCENARIOS=[
+  { id:'w1',
+    body:'GC for the Carvana job emails: "We need you 5% lower to win this. Can you sharpen your pencil?"',
+    correct:'owner',
+    why:'Pricing decision. Owner owns the quote and the margin. Forward the email to him with a Teams chat heads-up. Do not respond to the GC yourself. Do not commit to anything. He decides if and how much to move.' },
+  { id:'w2',
+    body:'Welder calls from the Topgolf install: "I bumped my head on a column flange. No injury, no bruise, but it could have been bad."',
+    correct:'paul',
+    why:'Near-miss safety report. Paul logs it. He may add a brief to the Safety Pause meeting agenda or update the JHA for that activity. Even no-injury near-misses get reported and logged. That is what builds the safety record that keeps Your Company on Marathon Petroleum\'s approved bidder list.' },
+  { id:'w3',
+    body:'EOR emails revised stamped shop drawings for ICD Church. Three columns now have different connection details. Mario has not started those columns yet.',
+    correct:'mario',
+    why:'Production decision. Mario reviews the revised drawings, adjusts the fab schedule, and answers whether the change costs us hours or pushes the schedule. Forward to Owner on cc since pricing impact may matter for a change order, but Mario owns the production answer.' },
+  { id:'w4',
+    body:'A bank form arrives by mail: "Update your business ACH deposit account information. Please sign and return."',
+    correct:'amber',
+    why:'Financial form with legal implications. Amber reviews and either confirms it is legitimate (we are actually changing accounts) or flags it as a fraud attempt (we are not changing anything). Never sign and return a banking form without Amber\'s eyes on it. Banking fraud via fake forms is common.' },
+  { id:'w5',
+    body:'Wholesale Steel delivers a W14x99 load for ICD Church. The BOL matches the PO line-for-line. No damage. Driver waiting for signature.',
+    correct:'self',
+    why:'Routine delivery. Verify BOL against PO (which you already did), sign, file the BOL in 03_Material under ICD Church, log the receipt date in the project tracking sheet. Mario knows the material arrived because it is in the yard. No call needed.' },
+  { id:'w6',
+    body:'A new GC emails: "Can you send us your W-9 for our new vendor file?"',
+    correct:'self',
+    why:'Routine request. The W-9 is on file (last refreshed January). Send the PDF, file the email request in 04_Correspondence under that GC, log the company in the active prospects sheet. Two-minute task. No need to bring anyone else in.' },
+  { id:'w7',
+    body:'Welding subcontractor calls: "My GL policy renewed last month. I am not sure if you got the new COI. Should I send it again?"',
+    correct:'amber',
+    why:'COI tracking is Amber\'s compliance domain. She maintains the sub COI tracker. Ask her to check whether the new COI is on file and respond to the sub with the answer. If the new COI is NOT on file, the sub needs to send it before they work on any Your Company project. No COI = no site access.' },
+  { id:'w8',
+    body:'Field crew calls from Elite Crossing: "Your 11 AM delivery is not here yet. It is 1 PM. What is going on?"',
+    correct:'mario',
+    why:'Delivery coordination = Mario. He tracks the truck, calls the freight company or our delivery driver, and updates the field crew with an ETA. The assistant relays the field crew\'s question to Mario, then relays his answer back to the field. Do not call the freight company yourself. Mario has the contact and the context.' }
+];
+
+// Gap Spotter data
+const GS_SCENARIOS=[
+  { id:'g1',
+    context:'ICD Church project status as of Friday afternoon: Award letter signed by Owner Monday. Steel material PO placed Tuesday with delivery scheduled for next week. Mario reports ready to fabricate Monday morning. Shop drawings were sent to the EOR last week.',
+    question:'Mario asks: "Are we cleared to start cutting Monday?" What is missing?',
+    options:[
+      'Material delivery confirmation',
+      'Stamped drawing approval from EOR',
+      'A kickoff meeting with the GC',
+      'Final coating specifications'
+    ],
+    correct:'Stamped drawing approval from EOR',
+    why:'Drawings were SENT to the EOR last week but the status reads "sent" not "stamped approved." Fabricating from unapproved drawings is a major financial risk. If the EOR rejects or revises, we re-do at our cost. Status to confirm: stamped approval received and filed in 02_Drawings/Approved. Mario does not cut steel until the stamped PDF is in that folder.' },
+  { id:'g2',
+    context:'Elite Crossing project status: Fabrication complete. Coating verified and approved (DFT readings passed). Steel staged in shop yard ready to load. Truck arrives Friday 6 AM. BOL prepared and printed. Mario\'s crew lined up to load Thursday afternoon.',
+    question:'Mario walks into your office and asks: "Who is signing for delivery on-site Friday?" What is missing?',
+    options:[
+      'Coating verification documents',
+      'Field-side delivery contact confirmed',
+      'Material tracking sheet',
+      'Photo documentation of loaded truck'
+    ],
+    correct:'Field-side delivery contact confirmed',
+    why:'The BOL is printed but no one verified WHO will sign for the load on-site at the destination. If the field is not ready or the contact is not there, the driver waits (costs us) or off-loads to the wrong place (worse). Call the GC superintendent today, confirm name and cell phone of the receiver, write it on the BOL.' },
+  { id:'g3',
+    context:'Carvana project: Erection starts tomorrow morning. Crew assembled. Steel delivered yesterday and staged correctly. Cranes mobilized. Mario doing a final pre-erection walkthrough this afternoon.',
+    question:'Mario calls and asks: "Has anyone checked the embeds?" What is missing?',
+    options:[
+      'Crane permits',
+      'Coordination with concrete sub for embed survey',
+      'Erection drawings revision',
+      'Field weld procedure documentation'
+    ],
+    correct:'Coordination with concrete sub for embed survey',
+    why:'"Embeds" are the steel plates cast into the concrete foundation. Columns bolt to them. If the embeds are misaligned (out of position by even 1/2 inch), columns will not fit and erection stops. The concrete sub installed them weeks ago. A survey verifying location should happen BEFORE erection day. Call the concrete sub or the surveyor today, get a written confirmation embeds are within tolerance.' },
+  { id:'g4',
+    context:'Topgolf project: Coating complete. Steel delivered to site three weeks ago. Erection complete two weeks ago. Punch list resolved this week. GC signed off yesterday. Final invoice drafted by Owner, ready to send Monday.',
+    question:'GC project manager emails: "Send me the closeout package when you send the final invoice." What is missing?',
+    options:[
+      'Final QA walkthrough at the shop',
+      'Mill Test Reports for the closeout package',
+      'Revised erection drawings',
+      'Steel scrap removal documentation'
+    ],
+    correct:'Mill Test Reports for the closeout package',
+    why:'MTRs (Mill Test Reports) document every piece of steel\'s grade, chemistry, and mill source. The GC requires them for their own quality file and often the building owner audits them later. They should be in 06_Coating-and-Material/MTRs. If they are not collected and packaged, the closeout package is incomplete. Welding inspection reports, DFT records, and the warranty letter also belong in the same package.' },
+  { id:'g5',
+    context:'New project ICD Church Phase 2 RFQ received Monday. Drawings reviewed by Owner Tuesday. Quote calculated and finalized Wednesday. Bid bond prepared. Cover letter drafted and brand-voice checked. Bid due Thursday at 5 PM.',
+    question:'You are about to email the bid Thursday at 3 PM. What is missing?',
+    options:[
+      'Brand voice check on cover letter',
+      'Mill Test Reports',
+      'Insurance certificate listing GC as additional insured',
+      'Bid bond original'
+    ],
+    correct:'Insurance certificate listing GC as additional insured',
+    why:'Every formal bid submission requires a Certificate of Insurance (COI) showing the GC as an additional insured party. Without it, the GC may disqualify the bid or hold the contract pending the COI. Request the COI from our insurance broker first thing in the morning if you do not already have one on file for this GC. Allow 4-24 hours for the broker to issue. Plan ahead.' }
+];
+
+// ============================================================================
+// STATE
+// ============================================================================
+var state={
+  view:'home', completed:{},
+  // Sequence drill
+  seqPlaced:{}, seqWrongCount:0, seqWrongFlash:null,
+  // Who Owns
+  woIdx:0, woPicked:{}, woRevealed:{},
+  // Gap Spotter
+  gsIdx:0, gsPicked:{}, gsRevealed:{}
+};
+
+function esc(s){ if(s==null)return''; return String(s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];}); }
+function getCat(id){ for(var i=0;i<CATEGORIES.length;i++) if(CATEGORIES[i].id===id) return CATEGORIES[i]; return null; }
+function getLesson(id){
+  for(var i=0;i<CATEGORIES.length;i++){
+    var c=CATEGORIES[i];
+    for(var j=0;j<c.lessons.length;j++) if(c.lessons[j].id===id) return{lesson:c.lessons[j],cat:c,idx:j};
+  }return null;
+}
+function totalLessons(){ return CATEGORIES.reduce(function(a,c){return a+c.lessons.length;},0); }
+function completedCount(){ return Object.keys(state.completed).length; }
+function getStage(id){ for(var i=0;i<STAGES.length;i++) if(STAGES[i].id===id) return STAGES[i]; return null; }
+
+// ============================================================================
+// RENDER: HOME
+// ============================================================================
+function renderHome(){
+  var done=completedCount();
+  var html='';
+  html+='<div class="lab-hero"><div class="hero-grid"></div><div class="hero-glow"></div>';
+  html+='<div class="lab-hero-inner">';
+  html+='<p class="lab-eyebrow">Your Company &middot; Module 11</p>';
+  html+='<h1 class="lab-h1">Quote To <span class="accent">Closeout</span></h1>';
+  html+='<p class="lab-blurb">Every Your Company project moves through seven stages. RFQ to closeout invoice. This module walks each stage, shows who owns which decision, and trains the gap-spotting reflex that keeps jobs from stalling.</p>';
+  html+='<div class="lab-stats">';
+  [['4','Categories'],[String(totalLessons()),'Lessons'],['3','Drills'],[String(done),'Done']].forEach(function(s){
+    html+='<div class="lab-stat"><p class="lab-stat-num">'+s[0]+'</p><p class="lab-stat-lbl">'+s[1]+'</p></div>';
+  });
+  html+='</div></div></div>';
+
+  html+='<div class="cat-grid">';
+  CATEGORIES.forEach(function(cat){
+    var doneN=cat.lessons.filter(function(l){return state.completed[l.id];}).length;
+    var tot=cat.lessons.length;
+    var allDone=doneN===tot;
+    var pct=tot?(doneN/tot)*100:0;
+    html+='<button class="cat-card'+(allDone?' is-done':'')+'" data-action="open-cat" data-cat-id="'+cat.id+'">';
+    html+='<div class="cat-stripe" style="background:'+cat.color+';"></div>';
+    html+='<div class="cat-inner">';
+    html+='<div class="cat-top"><div class="cat-icon-tile" style="background:'+cat.color+';">'+icon(cat.iconKey,22,'#fff')+'</div>';
+    if(allDone) html+=icon('check',18,'#10b981');
+    html+='</div>';
+    html+='<h3>'+esc(cat.title)+'</h3>';
+    html+='<p class="cat-card-blurb">'+esc(cat.blurb)+'</p>';
+    html+='<div class="cat-card-foot"><span>'+doneN+'/'+tot+' lessons</span>';
+    html+='<div class="cat-progress-track"><div class="cat-progress-fill" style="width:'+pct+'%;"></div></div>';
+    html+='</div></div></button>';
+  });
+  html+='</div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: CATEGORY
+// ============================================================================
+function renderCategory(cat){
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-home">'+icon('arrow-left',13)+' Back to module home</button>';
+  html+='<div class="cat-header"><div class="cat-header-inner">';
+  html+='<div class="cat-header-icon" style="background:'+cat.color+';">'+icon(cat.iconKey,28,'#fff')+'</div>';
+  html+='<div><p class="cat-header-eyebrow" style="color:'+cat.color+';">Category</p>';
+  html+='<h2 class="cat-header-title">'+esc(cat.title)+'</h2>';
+  html+='<p class="cat-header-blurb">'+esc(cat.blurb)+'</p>';
+  html+='</div></div></div>';
+  html+='<div class="lesson-list">';
+  cat.lessons.forEach(function(l,i){
+    var isDone=!!state.completed[l.id];
+    var prevDone=i===0||!!state.completed[cat.lessons[i-1].id];
+    var locked=!isDone&&!prevDone;
+    var current=!isDone&&prevDone;
+    var tileCls=isDone?'done':current?'current':'pending';
+    var typeLabel=l.type==='reading'?'Reading':'Drill';
+    var typeColor=l.type==='reading'?'#71717a':'#67e8f9';
+    html+='<button class="lesson-row'+(isDone?' is-done':'')+(locked?' is-locked':'')+'"';
+    html+=locked?' disabled':' data-action="open-lesson" data-lesson-id="'+l.id+'"';
+    html+='>';
+    html+='<div class="lesson-num-tile '+tileCls+'">'+(locked?icon('lock',14):isDone?icon('check',18):String(i+1))+'</div>';
+    html+='<div class="lesson-row-meta"><p class="lesson-row-title">'+esc(l.title)+'</p>';
+    html+='<p class="lesson-row-tag" style="color:'+typeColor+';">'+typeLabel+' &middot; ~'+l.minutes+' min</p></div>';
+    if(!locked) html+=icon('arrow-right',16,'#71717a');
+    html+='</button>';
+  });
+  html+='</div>';
+  return html;
+}
+
+// ============================================================================
+// READING LESSON
+// ============================================================================
+function renderReading(lesson,cat){
+  var c=LESSON_CONTENT[lesson.id]||{sections:[],tip:''};
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="lesson-card">';
+  html+='<div class="lesson-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="lesson-card-body">';
+  c.sections.forEach(function(s){
+    html+='<div class="lesson-section"><h3>'+esc(s.h)+'</h3><p>'+esc(s.b)+'</p></div>';
+  });
+  if(c.tip){
+    html+='<div class="tip-box"><p class="tip-eyebrow">Joseph\'s tip</p><p class="tip-body">'+esc(c.tip)+'</p></div>';
+  }
+  html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// INTERACTIVE 1: SEQUENCE DRILL (jl-6)
+// ============================================================================
+function renderSeqDrill(lesson,cat){
+  var placedCount=Object.keys(state.seqPlaced).length;
+  var nextPos=placedCount+1;
+  var allPlaced=placedCount===STAGES.length;
+
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon('shuffle',26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Click each stage in the order it happens. The lifecycle moves from RFQ through closeout. Wrong clicks flash red and do not count. Right clicks lock the stage in place.</p>';
+
+  if(!allPlaced){
+    html+='<p class="seq-progress">'+icon('arrow-right',11,'#67e8f9')+' Position '+nextPos+' of '+STAGES.length+'. Pick what comes next.</p>';
+  } else {
+    html+='<p class="seq-progress">'+icon('check',11,'#10b981')+' Sequence complete. '+(state.seqWrongCount===0?'No mistakes.':state.seqWrongCount+' wrong attempt'+(state.seqWrongCount===1?'':'s')+' along the way.')+'</p>';
+  }
+
+  html+='<div class="seq-pool">';
+  STAGE_DISPLAY_ORDER.forEach(function(sid){
+    var st=getStage(sid);
+    var placedPos=state.seqPlaced[sid];
+    var isPlaced=placedPos!=null;
+    var isFlashing=state.seqWrongFlash===sid;
+    var cls='seq-stage'+(isPlaced?' placed':'')+(isFlashing?' wrong-flash':'');
+    html+='<button class="'+cls+'" data-action="seq-pick" data-stage-id="'+sid+'"'+(isPlaced?' disabled':'')+'>';
+    if(isPlaced){
+      html+='<div class="seq-pos-badge">'+placedPos+'</div>';
+    }
+    html+='<div class="seq-name">'+esc(st.name)+'</div>';
+    html+='<div class="seq-hint">'+esc(st.hint)+'</div>';
+    html+='</button>';
+  });
+  html+='</div>';
+
+  if(allPlaced){
+    html+='<div class="seq-status ok">All seven stages in order. '+(state.seqWrongCount===0?'Clean run.':'Final tally: '+state.seqWrongCount+' wrong attempt'+(state.seqWrongCount===1?'':'s')+' before the correct sequence locked in.')+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// INTERACTIVE 2: WHO OWNS DRILL (jl-9)
+// ============================================================================
+function renderWhoOwns(lesson,cat){
+  var idx=state.woIdx;
+  var s=WO_SCENARIOS[idx];
+  var picked=state.woPicked[s.id];
+  var revealed=state.woRevealed[s.id];
+  var total=WO_SCENARIOS.length;
+  var allDone=WO_SCENARIOS.every(function(sc){return state.woRevealed[sc.id];});
+  var correctCount=WO_SCENARIOS.filter(function(sc){return state.woPicked[sc.id]===sc.correct;}).length;
+
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon('users',26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Eight items land in your inbox or on the phone. For each, decide who owns the decision: Owner, Mario, Amber, Paul, or You.</p>';
+
+  html+='<div class="wo-stage">';
+  html+='<p class="wo-tag">Item '+(idx+1)+' of '+total+'</p>';
+  html+='<div class="wo-scenario">'+esc(s.body)+'</div>';
+  html+='<div class="wo-buttons">';
+  WO_OWNERS.forEach(function(o){
+    var cls='wo-btn';
+    if(revealed){
+      if(o.id===s.correct) cls+=picked===o.id?' picked-correct':' correct-shown';
+      else if(o.id===picked) cls+=' picked-wrong';
+    }
+    html+='<button class="'+cls+'" data-action="wo-pick" data-owner="'+o.id+'">';
+    html+='<span>'+esc(o.name)+'</span>';
+    html+='<small>'+esc(o.sub)+'</small>';
+    html+='</button>';
+  });
+  html+='</div>';
+  if(revealed){
+    var ok=picked===s.correct;
+    var correctOwner=WO_OWNERS.filter(function(o){return o.id===s.correct;})[0];
+    html+='<div class="wo-feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Owner: '+esc(correctOwner.name)+'. ')+esc(s.why)+'</div>';
+    if(idx<total-1){
+      html+='<div style="text-align:right;margin-top:12px;"><button class="next-btn" data-action="wo-next">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+    }
+  }
+  html+='</div>';
+
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#67e8f9')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// INTERACTIVE 3: GAP SPOTTER (jl-12)
+// ============================================================================
+function renderGapSpotter(lesson,cat){
+  var idx=state.gsIdx;
+  var s=GS_SCENARIOS[idx];
+  var picked=state.gsPicked[s.id];
+  var revealed=state.gsRevealed[s.id];
+  var total=GS_SCENARIOS.length;
+  var allDone=GS_SCENARIOS.every(function(sc){return state.gsRevealed[sc.id];});
+  var correctCount=GS_SCENARIOS.filter(function(sc){return state.gsPicked[sc.id]===sc.correct;}).length;
+
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon('eye',26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Five projects mid-stride. Read the status, identify what is missing before the next step can proceed. Spot the gap.</p>';
+
+  html+='<div class="gs-stage">';
+  html+='<div class="gs-context">';
+  html+='<p class="gs-context-tag">Scenario '+(idx+1)+' of '+total+' &middot; Project status</p>';
+  html+='<div class="gs-context-body">'+esc(s.context)+'</div>';
+  html+='</div>';
+  html+='<p class="gs-question">'+icon('eye',13,'#fbbf24')+' '+esc(s.question)+'</p>';
+  html+='<div class="gs-options">';
+  s.options.forEach(function(o){
+    var cls='gs-opt';
+    if(revealed){
+      if(o===s.correct) cls+=picked===o?' picked-correct':' correct-shown';
+      else if(o===picked) cls+=' picked-wrong';
+    }
+    html+='<button class="'+cls+'" data-action="gs-pick" data-opt="'+esc(o)+'">'+esc(o)+'</button>';
+  });
+  html+='</div>';
+  if(revealed){
+    var ok=picked===s.correct;
+    html+='<div class="gs-feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Gap: '+esc(s.correct)+'. ')+esc(s.why)+'</div>';
+    if(idx<total-1){
+      html+='<div style="text-align:right;margin-top:12px;"><button class="next-btn" data-action="gs-next">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+    }
+  }
+  html+='</div>';
+
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#67e8f9')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// DISPATCH
+// ============================================================================
+function renderLesson(lesson,cat){
+  if(lesson.type==='reading') return renderReading(lesson,cat);
+  if(lesson.intKey==='seqDrill')   return renderSeqDrill(lesson,cat);
+  if(lesson.intKey==='whoOwns')    return renderWhoOwns(lesson,cat);
+  if(lesson.intKey==='gapSpotter') return renderGapSpotter(lesson,cat);
+  return renderReading(lesson,cat);
+}
+
+function render(){
+  var app=document.getElementById('app');
+  var html='';
+  if(state.view==='home'){
+    html=renderHome();
+  } else if(state.view.indexOf('category:')===0){
+    var cat=getCat(state.view.slice(9));
+    html=cat?renderCategory(cat):renderHome();
+  } else if(state.view.indexOf('lesson:')===0){
+    var info=getLesson(state.view.slice(7));
+    html=info?renderLesson(info.lesson,info.cat):renderHome();
+  }
+  app.innerHTML=html;
+}
+
+// ============================================================================
+// EVENTS
+// ============================================================================
+document.body.addEventListener('click',function(ev){
+  var t=ev.target.closest('[data-action]');
+  if(!t) return;
+  var action=t.getAttribute('data-action');
+
+  if(action==='open-cat'){ state.view='category:'+t.getAttribute('data-cat-id'); render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else if(action==='back-home'){ state.view='home'; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else if(action==='back-cat'){ state.view='category:'+t.getAttribute('data-cat-id'); render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else if(action==='open-lesson'){
+    var lid=t.getAttribute('data-lesson-id');
+    var info=getLesson(lid);
+    if(info){
+      if(info.lesson.intKey==='seqDrill'){   state.seqPlaced={}; state.seqWrongCount=0; state.seqWrongFlash=null; }
+      if(info.lesson.intKey==='whoOwns'){    state.woIdx=0; state.woPicked={}; state.woRevealed={}; }
+      if(info.lesson.intKey==='gapSpotter'){ state.gsIdx=0; state.gsPicked={}; state.gsRevealed={}; }
+    }
+    state.view='lesson:'+lid; render(); window.scrollTo({top:0,behavior:'smooth'});
+  }
+  else if(action==='complete-lesson'){
+    var lid2=t.getAttribute('data-lesson-id');
+    state.completed[lid2]=true;
+    var info2=getLesson(lid2);
+    if(info2){
+      var next=null;
+      for(var i=0;i<info2.cat.lessons.length;i++){
+        if(info2.cat.lessons[i].id===lid2&&i+1<info2.cat.lessons.length){ next=info2.cat.lessons[i+1]; break; }
+      }
+      state.view=next?'lesson:'+next.id:'category:'+info2.cat.id;
+      render(); window.scrollTo({top:0,behavior:'smooth'});
+    }
+  }
+  // Sequence drill
+  else if(action==='seq-pick'){
+    var sid=t.getAttribute('data-stage-id');
+    if(state.seqPlaced[sid]!=null) return;
+    var stage=getStage(sid);
+    var nextPos=Object.keys(state.seqPlaced).length+1;
+    if(stage.num===nextPos){
+      state.seqPlaced[sid]=nextPos;
+      state.seqWrongFlash=null;
+      render();
+    } else {
+      state.seqWrongCount++;
+      state.seqWrongFlash=sid;
+      render();
+      setTimeout(function(){
+        if(state.seqWrongFlash===sid){
+          state.seqWrongFlash=null;
+          render();
+        }
+      },650);
+    }
+  }
+  // Who Owns
+  else if(action==='wo-pick'){
+    var wos=WO_SCENARIOS[state.woIdx];
+    if(state.woRevealed[wos.id]) return;
+    var owner=t.getAttribute('data-owner');
+    state.woPicked[wos.id]=owner;
+    state.woRevealed[wos.id]=true;
+    render();
+  }
+  else if(action==='wo-next'){
+    if(state.woIdx<WO_SCENARIOS.length-1){ state.woIdx++; render(); }
+  }
+  // Gap Spotter
+  else if(action==='gs-pick'){
+    var gss=GS_SCENARIOS[state.gsIdx];
+    if(state.gsRevealed[gss.id]) return;
+    var opt=t.getAttribute('data-opt');
+    state.gsPicked[gss.id]=opt;
+    state.gsRevealed[gss.id]=true;
+    render();
+  }
+  else if(action==='gs-next'){
+    if(state.gsIdx<GS_SCENARIOS.length-1){ state.gsIdx++; render(); }
+  }
+});
+
+document.getElementById('logo-slot').innerHTML=icon('hammer',22,'#fff');
+render();
+</script>
+</body>
+</html>

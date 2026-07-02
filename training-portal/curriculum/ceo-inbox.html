@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>M21 &middot; Managing the CEO Inbox | Your Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:#000;color:#e4e4e7;
+  font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(circle at 85% 8%,rgba(30,58,138,0.16),transparent 40%),
+    radial-gradient(circle at 15% 92%,rgba(37,99,235,0.10),transparent 40%);
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;padding:0;}
+input,textarea,select{font-family:inherit;}
+p{margin:0;}h1,h2,h3,h4{margin:0;font-weight:normal;}
+.container{max-width:960px;margin:0 auto;padding:0 20px;}
+
+header.site{border-bottom:2px solid #27272a;background:rgba(0,0,0,.85);
+  position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);}
+.header-row{max-width:960px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;}
+.logo-tile{width:40px;height:40px;background:#1e3a8a;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.header-meta .small{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#52525b;}
+.header-meta .big{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin-top:2px;}
+footer.site{max-width:960px;margin:0 auto;padding:28px 20px;border-top:1px solid #27272a;text-align:center;}
+footer.site p{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#3f3f46;}
+
+.lab-hero{position:relative;border:2px solid #3f3f46;background:#18181b;overflow:hidden;margin-bottom:28px;}
+.hero-grid{position:absolute;inset:0;opacity:.1;
+  background-image:linear-gradient(rgba(37,99,235,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,.3) 1px,transparent 1px);
+  background-size:24px 24px;}
+.hero-glow{position:absolute;top:-40px;right:-40px;width:220px;height:220px;
+  background:#1e3a8a;border-radius:50%;filter:blur(80px);opacity:.30;}
+.lab-hero-inner{position:relative;padding:28px 24px;}
+.lab-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#93c5fd;margin-bottom:8px;}
+.lab-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,9vw,68px);color:#fff;line-height:.9;margin-bottom:14px;}
+.lab-h1 .accent{color:#93c5fd;}
+.lab-blurb{color:#a1a1aa;max-width:560px;font-size:14px;line-height:1.7;margin-bottom:22px;}
+.lab-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:460px;}
+.lab-stat{border:1px solid #3f3f46;background:rgba(0,0,0,.4);padding:8px 10px;}
+.lab-stat-num{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#93c5fd;margin:0;}
+.lab-stat-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#52525b;margin:0;}
+
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.cat-card{text-align:left;background:#18181b;border:2px solid #3f3f46;padding:0;overflow:hidden;width:100%;}
+.cat-card.is-done{border-color:#10b981;}
+.cat-stripe{height:6px;}
+.cat-inner{padding:18px;}
+.cat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.cat-icon-tile{width:44px;height:44px;color:#fff;display:flex;align-items:center;justify-content:center;}
+.cat-card h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin:0 0 6px;line-height:1.05;}
+.cat-card-blurb{font-size:12px;color:#a1a1aa;margin:0 0 14px;line-height:1.5;}
+.cat-card-foot{display:flex;justify-content:space-between;align-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:9px;color:#71717a;text-transform:uppercase;letter-spacing:.2em;}
+.cat-progress-track{height:4px;background:#27272a;flex:1;margin-left:12px;max-width:80px;}
+.cat-progress-fill{height:100%;background:#10b981;}
+
+.cat-back-btn{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;
+  color:#71717a;display:flex;align-items:center;gap:6px;margin-bottom:20px;}
+.cat-header{background:#18181b;border:2px solid #3f3f46;padding:20px;margin-bottom:16px;}
+.cat-header-inner{display:flex;gap:16px;align-items:flex-start;}
+.cat-header-icon{width:56px;height:56px;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cat-header-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;margin:0;}
+.cat-header-title{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;margin:4px 0;line-height:1;}
+.cat-header-blurb{color:#a1a1aa;font-size:13px;margin:0;line-height:1.5;}
+
+.lesson-list{display:flex;flex-direction:column;gap:8px;}
+.lesson-row{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#18181b;
+  border:2px solid #3f3f46;width:100%;text-align:left;}
+.lesson-row.is-done{border-color:#10b981;}
+.lesson-row.is-locked{opacity:.45;cursor:not-allowed;}
+.lesson-row:not(.is-locked){cursor:pointer;}
+.lesson-num-tile{width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:16px;}
+.lesson-num-tile.done   {background:#10b981;color:#000;}
+.lesson-num-tile.current{background:#93c5fd;color:#000;}
+.lesson-num-tile.pending{background:#27272a;color:#71717a;}
+.lesson-row-meta{flex:1;min-width:0;}
+.lesson-row-title{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin:0;line-height:1.1;}
+.lesson-row-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;margin:4px 0 0;}
+
+.lesson-card{border:2px solid #3f3f46;background:#18181b;}
+.lesson-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.lesson-icon-tile{width:52px;height:52px;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.lesson-card-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;font-weight:700;opacity:.85;margin:0;}
+.lesson-card-title{font-family:'Bebas Neue',sans-serif;font-size:32px;margin:4px 0 0;line-height:1;color:#fff;}
+.lesson-card-body{padding:24px 22px;}
+.lesson-section{margin-bottom:22px;}
+.lesson-section h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#93c5fd;margin:0 0 8px;}
+.lesson-section p{color:#a1a1aa;line-height:1.65;margin:0;font-size:14px;}
+.tip-box{background:rgba(30,58,138,.14);border-left:4px solid #1e3a8a;padding:12px 16px;margin-top:20px;}
+.tip-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#93c5fd;margin:0 0 6px;font-weight:700;}
+.tip-body{color:#bfdbfe;font-size:13px;margin:0;line-height:1.55;font-style:italic;}
+
+.complete-btn{width:100%;margin-top:24px;padding:14px 0;
+  font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.2em;
+  background:#1e3a8a;color:#fff;border:2px solid #1e3a8a;
+  display:flex;align-items:center;justify-content:center;gap:10px;}
+
+.pile-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px;}
+@media (max-width:600px){ .pile-grid{grid-template-columns:1fr 1fr;} }
+.pile-tile{background:#0c0c0c;border:1px solid #3f3f46;border-top:3px solid #1e3a8a;padding:10px 10px;}
+.pile-name{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#93c5fd;margin:0 0 4px;line-height:1;}
+.pile-body{font-size:11px;color:#a1a1aa;line-height:1.45;margin:0;}
+
+.int-card{border:2px solid #3f3f46;background:#18181b;}
+.int-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.int-card-body{padding:24px 22px;}
+
+.mib-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media (max-width:720px){ .mib-grid{grid-template-columns:1fr;} }
+.mib-col h4{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#93c5fd;margin:0 0 12px;}
+.mib-field{margin-bottom:12px;}
+.mib-label{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#71717a;margin-bottom:4px;display:block;}
+.mib-input,.mib-textarea,.mib-select{
+  width:100%;background:#0c0c0c;border:1px solid #3f3f46;color:#e4e4e7;
+  padding:8px 10px;font-size:13px;outline:none;font-family:inherit;
+}
+.mib-input:focus,.mib-textarea:focus,.mib-select:focus{border-color:#1d4ed8;}
+.mib-textarea{resize:vertical;min-height:60px;line-height:1.5;font-size:12px;}
+
+.invite-preview{background:#0c0c0c;border:1px solid #3f3f46;padding:0;overflow:hidden;}
+.invite-preview-head{background:#1e3a8a;color:#fff;padding:10px 14px;}
+.invite-preview-head h5{font-family:'Bebas Neue',sans-serif;font-size:20px;margin:0;line-height:1.1;}
+.invite-preview-head p{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;opacity:.85;margin:2px 0 0;}
+.invite-preview-body{padding:12px 14px;}
+.invite-row{display:flex;gap:10px;font-size:12px;color:#a1a1aa;padding:5px 0;border-bottom:1px dashed #27272a;}
+.invite-row:last-child{border-bottom:none;}
+.invite-row-key{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.15em;color:#71717a;width:80px;flex-shrink:0;padding-top:1px;}
+.invite-row-val{flex:1;color:#e4e4e7;line-height:1.5;white-space:pre-line;}
+.invite-empty{color:#52525b;font-style:italic;}
+
+.mib-check-btn{margin-top:16px;padding:10px 18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.2em;
+  background:#1e3a8a;color:#fff;border:2px solid #1e3a8a;}
+.mib-feedback{margin-top:14px;padding:12px 14px;font-size:12px;line-height:1.6;}
+.mib-feedback.ok{background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+.mib-feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+.mib-feedback.warn{background:rgba(250,204,21,.08);border:1px solid #fbbf24;color:#fde68a;}
+.mib-feedback ul{margin:6px 0 0;padding-left:18px;}
+.mib-feedback li{margin-bottom:3px;}
+
+.drill-stage{background:#0c0c0c;border:1px solid #3f3f46;padding:18px;margin-bottom:14px;}
+.drill-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#93c5fd;margin-bottom:8px;}
+.drill-scenario{background:#1c1917;border-left:3px solid #1e3a8a;padding:12px 14px;margin-bottom:14px;}
+.drill-from{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:#93c5fd;margin-bottom:4px;}
+.drill-subject{font-size:13px;color:#e4e4e7;font-weight:600;margin-bottom:4px;}
+.drill-body{font-size:12px;color:#a1a1aa;line-height:1.5;}
+.drill-btns{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;}
+.drill-btn{padding:12px 8px;background:#09090b;border:1px solid #3f3f46;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.05em;color:#a1a1aa;line-height:1.2;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.drill-btn:hover{border-color:#93c5fd;}
+.drill-btn small{font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.15em;color:#52525b;}
+.drill-btn.picked-correct{background:rgba(16,185,129,.15);border-color:#10b981;color:#a7f3d0;}
+.drill-btn.picked-correct small{color:#6ee7b7;}
+.drill-btn.picked-wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.drill-btn.correct-shown{background:rgba(16,185,129,.08);border-color:#10b981;color:#a7f3d0;}
+.drill-btn.correct-shown small{color:#6ee7b7;}
+.feedback{margin-top:14px;padding:10px 14px;font-size:12px;line-height:1.55;}
+.feedback.ok{background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+.feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+
+.sim-buttons{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;}
+.sim-btn{padding:12px 8px;background:#09090b;border:1px solid #3f3f46;
+  font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.05em;color:#a1a1aa;line-height:1.2;}
+.sim-btn:hover{border-color:#93c5fd;}
+.sim-btn.picked-correct{background:rgba(16,185,129,.15);border-color:#10b981;color:#a7f3d0;}
+.sim-btn.picked-wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.sim-btn.correct-shown{background:rgba(16,185,129,.08);border-color:#10b981;color:#a7f3d0;}
+
+.next-btn{padding:10px 18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.2em;
+  background:#1e3a8a;color:#fff;border:2px solid #1e3a8a;}
+.score-line{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;
+  color:#a1a1aa;margin-top:16px;padding-top:14px;border-top:1px solid #27272a;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-row">
+    <div class="logo-tile" id="logo-slot"></div>
+    <div class="header-meta">
+      <p class="small">Your Company &middot; Module 21</p>
+      <p class="big">CEO Inbox</p>
+    </div>
+  </div>
+</header>
+
+<main class="container" style="padding:28px 20px 40px;">
+  <div id="app"></div>
+</main>
+
+<footer class="site">
+  <p>Built by Joseph &middot; Your Company Virtual Office &middot; Internal Use Only</p>
+</footer>
+
+<script>
+"use strict";
+
+const ICONS={
+  'arrow-right':'<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  'arrow-left': '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  'check':      '<path d="M20 6 9 17l-5-5"/>',
+  'lock':       '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  'inbox':      '<path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>',
+  'filter':     '<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>',
+  'mail':       '<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
+  'shield':     '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>',
+  'flag':       '<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/>'
+};
+function icon(name,size,color){
+  size=size||16;color=color||'currentColor';
+  var p=ICONS[name]||'';
+  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">'+p+'</svg>';
+}
+
+const CATEGORIES=[
+  { id:'desk', iconKey:'inbox', color:'#1e3a8a',
+    title:'The Inbox You Manage',
+    blurb:'What you are actually looking at, the four piles every email lands in, and what is never allowed to wait.',
+    lessons:[
+      { id:'in-1', title:'What You Are Looking At', type:'reading', minutes:5 },
+      { id:'in-2', title:'The Four Piles',          type:'reading', minutes:4 },
+      { id:'in-3', title:'What Never Waits',        type:'reading', minutes:4 }
+    ] },
+  { id:'triage', iconKey:'filter', color:'#1d4ed8',
+    title:'Triage',
+    blurb:'Read fast, find the real ask, and sort a live inbox without drowning in it.',
+    lessons:[
+      { id:'tr-1', title:'How To Triage Fast',        type:'reading',     minutes:4 },
+      { id:'tr-2', title:'Reading For The Real Ask',  type:'reading',     minutes:4 },
+      { id:'tr-3', title:'Inbox Triage',              type:'interactive', minutes:8, intKey:'inboxTriage' }
+    ] },
+  { id:'act', iconKey:'mail', color:'#2563eb',
+    title:'Acting And Drafting',
+    blurb:'What you can send yourself, what you draft and hold, and how to hand an email up cleanly.',
+    lessons:[
+      { id:'ac-1', title:'When You Act Yourself',     type:'reading',     minutes:4 },
+      { id:'ac-2', title:'When You Draft And Hold',   type:'reading',     minutes:5 },
+      { id:'ac-3', title:'Flag And Route Builder',    type:'interactive', minutes:7, intKey:'routeBuilder' }
+    ] },
+  { id:'judgment', iconKey:'shield', color:'#3b82f6',
+    title:'Money And Judgment',
+    blurb:'The approval gate, what stays confidential, and the calls that are never yours to make alone.',
+    lessons:[
+      { id:'jg-1', title:'The Approval Gate',         type:'reading',     minutes:5 },
+      { id:'jg-2', title:'Confidential By Default',   type:'reading',     minutes:4 },
+      { id:'jg-3', title:'Approval Gate Drill',       type:'interactive', minutes:6, intKey:'approvalDrill' }
+    ] }
+];
+
+const LESSON_CONTENT={
+  'in-1':{ sections:[
+    { h:'His mailbox, your hands', b:'You are reading and sorting Owner mail, not your own. The work PC is signed in to all of his accounts. You can see the Your Company mailbox, Pinnacle, and DOVA from the same machine. Unless Owner tells you otherwise, you work the Your Company mailbox and leave the others alone.' },
+    { h:'You sort, you do not impersonate', b:'Your job is to triage, draft, and surface. It is not to speak as Owner. Nothing goes out under his name without his approval. When in doubt you draft and hold. You never guess and send.' },
+    { h:'Three companies, one screen', b:'The same machine shows mail for three brands. Keep them straight. A Pinnacle question is answered as Pinnacle, a Your Company bid as Your Company. Do not let one company mail leak into another. See M26.' }
+  ], tip:'If you are not sure whether an email is even yours to touch, it goes to Owner. Surfacing is always safe. Sending is not.' },
+
+  'in-2':{ sections:[
+    { h:'Every email lands in one of four', b:'Act, Draft, Route, File. If you can name the pile, you know what to do. If you cannot, you read one more line until you can.' },
+    { h:'One pile, one next step', b:'The point of the piles is a clear next step. Act means do it. Draft means write it and hold for approval. Route means hand it to the owner with a note. File means file it and move on. No email sits in limbo.' }
+  ],
+  customHtml:'<div class="pile-grid">'+
+    '<div class="pile-tile"><p class="pile-name">Act</p><p class="pile-body">Routine items you can finish yourself.</p></div>'+
+    '<div class="pile-tile"><p class="pile-name">Draft</p><p class="pile-body">Owner voice or a company commitment. Write and hold.</p></div>'+
+    '<div class="pile-tile"><p class="pile-name">Route</p><p class="pile-body">Send to the owner. Amber, Ivan, Paul.</p></div>'+
+    '<div class="pile-tile"><p class="pile-name">File</p><p class="pile-body">Reference. No action. Filed and done.</p></div>'+
+    '</div>',
+  tip:'Most inbox stress comes from re-reading the same email five times. Pick the pile on the first read and move.' },
+
+  'in-3':{ sections:[
+    { h:'Some mail jumps the line', b:'Most email can wait an hour. A few items cannot. Learn the short list and surface them the minute they land.' },
+    { h:'The never-wait list', b:'Anything on compliance, especially Marathon Petroleum or the Texas Mutual EMR letter. Any safety or injury report, to Paul now. A hard client deadline that is today. Money owed or a payment problem, flag Amber. A time-bound request to sign a document.' },
+    { h:'Surface, do not solve', b:'Never-wait does not mean you fix it. It means you get it in front of the right person fast. You move it, you do not sit on it.' }
+  ], tip:'The EMR letter from Texas Mutual is a named priority. It unblocks Marathon approval. Anything touching it surfaces immediately.' },
+
+  'tr-1':{ sections:[
+    { h:'Sender, subject, first line', b:'You decide the pile from three things: who it is from, the subject, and the first line or two. That is usually enough. You are not reading every word on the first pass.' },
+    { h:'Decide, do not dwell', b:'Triage is sorting, not solving. Touch each email once, give it a pile, move on. You come back to the Act and Draft items to do the work. Routing and filing happen on the spot.' },
+    { h:'Clear the easy ones first', b:'Filing and routing are fast. Clear them and the inbox shrinks. What is left is the real work: the items that need your time or Owner time.' }
+  ], tip:'A triaged inbox is calm. An un-triaged one feels like forty problems. It is usually four problems and thirty-six items that file or route in seconds.' },
+
+  'tr-2':{ sections:[
+    { h:'What does this person need', b:'Under the words there is a request. A date. A decision. A document. A dollar amount. Find it. The real ask is what tells you the pile and the urgency.' },
+    { h:'Three questions', b:'Is there a deadline. Is there a dollar amount. Is a decision required. The answers move an email up or down, and tell you whether it is yours or Owner.' },
+    { h:'Watch for the buried ask', b:'Long emails hide the ask in the middle. A friendly note can end with a contract to sign. Read to the real request before you pick the pile.' }
+  ], tip:'If an email has a number or a date in it, slow down for one second. Numbers and dates are where the real ask usually lives.' },
+
+  'ac-1':{ sections:[
+    { h:'What is safe to handle', b:'Routine confirmations, scheduling acknowledgments, sending information that is already public or already decided, confirming that something was received. If it commits nothing and speaks for no one, you can handle it.' },
+    { h:'Keep it factual', b:'When you act, you state facts. You confirm a time, you acknowledge receipt, you share an address. You do not make commitments, quote prices, or give opinions for Owner.' },
+    { h:'When in doubt, it is not Act', b:'If handling it would commit the company, spend money, set a price, or speak in Owner voice, it is not an Act item. It moves to Draft or Route.' }
+  ], tip:'A good test: could you explain your reply to Owner in one sentence and have him nod. If yes, it was probably safe. If you would have to defend it, it should have been a draft.' },
+
+  'ac-2':{ sections:[
+    { h:'Draft, then stop', b:'Anything in Owner voice, anything that commits the company, anything about money or a client decision, you write it and you hold it. You do not send it. He reviews, he approves, then it goes. See M22 for how to draft in his voice.' },
+    { h:'Never send as Owner', b:'His name does not go out without his sign-off. He signs as Owner Steel. You prepare the reply so all he has to do is read and click send. You never click send for him on a voice email unprompted.' },
+    { h:'Make the hold easy to approve', b:'A good held draft is ready to go. Right recipient, clear subject, the reply written, nothing left to fix. Approval should take him ten seconds, not ten minutes.' }
+  ], tip:'Draft and hold is not slower. A clean draft waiting for one click beats a back-and-forth where he has to tell you what to write.' },
+
+  'jg-1':{ sections:[
+    { h:'You never approve spend', b:'Money decisions are not yours. Your job is to surface the number to the person who can decide. You route, you do not approve. This holds even when Owner is traveling.' },
+    { h:'The two thresholds', b:'Anything at 5,000 dollars or more needs Owner. Anything at 50,000 dollars or more needs Owner and Amber together. Below 5,000 still gets surfaced unless it is an already-approved, routine cost.' },
+    { h:'Surface the number', b:'When you route a spend item, put the dollar amount and the deadline right at the top. Do not bury them. The decider should see the number before anything else.' }
+  ], tip:'When you are not sure if something crosses a threshold, treat it as if it does. Over-surfacing a cost is harmless. Under-surfacing one is not.' },
+
+  'jg-2':{ sections:[
+    { h:'The inbox holds secrets', b:'Owner mail carries gross-profit numbers, pricing, personnel matters, and legal items. Treat all of it as confidential. The default is do not share.' },
+    { h:'What never leaves', b:'The GP report does not leave the building and does not cross between companies. Pricing and margins are confidential. Personnel and legal are need-to-know. Supplier names do not go on anything a client sees. See M25.' },
+    { h:'Forwarding is a decision', b:'Before you forward anything outside the company, stop. Forwarding Owner mail outward is a decision, not a reflex. If you are not certain it is allowed, hold it and ask.' }
+  ], tip:'Confidential by default means the question is never can I share this. The question is am I certain I am allowed to. If you are not certain, you do not.' }
+};
+
+const TRIAGE_ACTIONS=[
+  { id:'act',   name:'Act',          sub:'Handle it yourself' },
+  { id:'draft', name:'Draft + Hold', sub:'Write, wait for approval' },
+  { id:'route', name:'Route',        sub:'Send to the owner' },
+  { id:'file',  name:'File',         sub:'Reference, no action' },
+  { id:'now',   name:'Surface Now',  sub:'Never-wait item' }
+];
+const TRIAGE_EMAILS=[
+  { id:'e1', from:'Lakefront Plaza GC', subject:'Re: site walk Thursday',
+    body:'Confirming we are on for the Thursday 9 AM site walk. See you there.',
+    correct:'act', why:'A simple confirmation of an already-set time. Acknowledge it and you are done. Nothing committed, no voice needed.' },
+  { id:'e2', from:'Texas Mutual', subject:'EMR letter - policy [POLICY NUMBER]',
+    body:'We need to confirm a few policy details to finalize the experience-rating letter.',
+    correct:'now', why:'The EMR letter is a named priority. It unblocks Marathon approval. This surfaces to Owner immediately, it does not sit in the inbox.' },
+  { id:'e3', from:'Material supplier rep', subject:'Quote for upcoming package',
+    body:'Attaching our quote of 62,000 dollars for the material package you asked about.',
+    correct:'route', why:'A 62,000 dollar number crosses the 50,000 threshold, so route it with the amount surfaced for Owner and Amber. You never approve it. And supplier names never go on a client document.' },
+  { id:'e4', from:'Prospective client', subject:'Can you send pricing?',
+    body:'Loved meeting you. Can you send over pricing for the structure we discussed?',
+    correct:'draft', why:'Pricing speaks for the company and is confidential. You do not send a price. Draft a holding reply for Owner, who decides what pricing goes out.' },
+  { id:'e5', from:'AISC digest', subject:'April industry digest',
+    body:'This month in structural steel: code updates and market notes.',
+    correct:'file', why:'Reference, no action, no deadline. File it and move on.' },
+  { id:'e6', from:'Mario (field)', subject:'Minor injury on site',
+    body:'One of the crew took a small cut on the Elite Crossing site this morning. First aid done, wanted it on record.',
+    correct:'now', why:'Any injury report surfaces now and goes to Paul, the Safety Director. Safety items never wait, even minor ones.' },
+  { id:'e7', from:'Client AP department', subject:'Invoice 2041 - payment question',
+    body:'We show a discrepancy on invoice 2041 and want to clear it before we pay.',
+    correct:'route', why:'Money owed and AP questions go to Amber, who owns the books. Route it to her.' },
+  { id:'e8', from:'Office supply vendor', subject:'Your order shipped',
+    body:'Your office supply order of 180 dollars has shipped.',
+    correct:'file', why:'A shipping notice for an already-approved small office cost. File it. No action, well under any threshold.' }
+];
+
+const APPROVAL_ACTIONS=['Handle it yourself','Draft and hold','Route to Owner','Route to Owner + Amber','Decline / hold'];
+const APPROVAL_SCENARIOS=[
+  { id:'a1', from:'Office reorder', body:'Printer toner is low. A reorder is 90 dollars from the usual vendor.',
+    correct:'Handle it yourself', why:'Small, routine, already-budgeted office cost well under 5,000. Handle it. You would only surface it if it were unusual.' },
+  { id:'a2', from:'Subcontractor', body:'A subcontractor wants to lock a 38,000 dollar erection package this week.',
+    correct:'Route to Owner', why:'38,000 is over 5,000 and under 50,000, so it needs Owner. Route it with the number and the deadline surfaced. You do not approve it.' },
+  { id:'a3', from:'Purchasing', body:'A material order totaling 71,000 dollars needs a go or no-go today.',
+    correct:'Route to Owner + Amber', why:'71,000 crosses the 50,000 threshold. It needs Owner and Amber together. Surface the number and the deadline at the top.' },
+  { id:'a4', from:'Prospective client', body:'A client emails asking for a price on a new structure.',
+    correct:'Draft and hold', why:'Pricing is confidential and speaks for the company. Draft a holding reply and hold it for Owner. You never send a price yourself.' },
+  { id:'a5', from:'Outside party', body:'Someone outside the company asks you to forward the GP report from a recent job.',
+    correct:'Decline / hold', why:'The GP report never leaves the building and never crosses companies. You do not forward it. Decline or hold and flag it. See M25.' },
+  { id:'a6', from:'Client, Owner traveling', body:'Owner is on a flight. A client asks you to approve a 6,500 dollar change so work can proceed.',
+    correct:'Route to Owner', why:'You never approve spend, even when he is out. 6,500 is over 5,000, so it needs Owner. Route and surface it, do not approve in his place.' }
+];
+
+var state={
+  view:'home', completed:{},
+  rbTo:'Owner', rbSubject:'', rbSummary:'', rbAsk:'', rbAmount:'', rbRec:'', rbUrgency:'Today',
+  rbChecked:false, rbFeedback:null,
+  trIdx:0, trPicked:{}, trRevealed:{},
+  apIdx:0, apPicked:{}, apRevealed:{}
+};
+
+function esc(s){ if(s==null)return''; return String(s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];}); }
+function getCat(id){ for(var i=0;i<CATEGORIES.length;i++) if(CATEGORIES[i].id===id) return CATEGORIES[i]; return null; }
+function getLesson(id){
+  for(var i=0;i<CATEGORIES.length;i++){
+    var c=CATEGORIES[i];
+    for(var j=0;j<c.lessons.length;j++) if(c.lessons[j].id===id) return{lesson:c.lessons[j],cat:c,idx:j};
+  }return null;
+}
+function totalLessons(){ return CATEGORIES.reduce(function(a,c){return a+c.lessons.length;},0); }
+function completedCount(){ return Object.keys(state.completed).length; }
+
+function renderHome(){
+  var done=completedCount();
+  var html='';
+  html+='<div class="lab-hero"><div class="hero-grid"></div><div class="hero-glow"></div>';
+  html+='<div class="lab-hero-inner">';
+  html+='<p class="lab-eyebrow">Your Company &middot; Module 21 &middot; Executive Assistant</p>';
+  html+='<h1 class="lab-h1">The CEO <span class="accent">Inbox</span></h1>';
+  html+='<p class="lab-blurb">You manage Owner inbox, you do not speak for it. This module is the four-pile triage, what you can act on versus what you draft and hold, the 5K and 50K approval gate, and what stays confidential. Then a live inbox to sort, a routing note to build, and a money-decision drill.</p>';
+  html+='<div class="lab-stats">';
+  [['4','Categories'],[String(totalLessons()),'Lessons'],['3','Drills'],[String(done),'Done']].forEach(function(s){
+    html+='<div class="lab-stat"><p class="lab-stat-num">'+s[0]+'</p><p class="lab-stat-lbl">'+s[1]+'</p></div>';
+  });
+  html+='</div></div></div>';
+
+  html+='<div class="cat-grid">';
+  CATEGORIES.forEach(function(cat){
+    var doneN=cat.lessons.filter(function(l){return state.completed[l.id];}).length;
+    var tot=cat.lessons.length;
+    var allDone=doneN===tot;
+    var pct=tot?(doneN/tot)*100:0;
+    html+='<button class="cat-card'+(allDone?' is-done':'')+'" data-action="open-cat" data-cat-id="'+cat.id+'">';
+    html+='<div class="cat-stripe" style="background:'+cat.color+';"></div>';
+    html+='<div class="cat-inner"><div class="cat-top">';
+    html+='<div class="cat-icon-tile" style="background:'+cat.color+';">'+icon(cat.iconKey,24,'#fff')+'</div>';
+    if(allDone) html+='<div class="cat-icon-tile" style="background:#10b981;width:28px;height:28px;">'+icon('check',16,'#000')+'</div>';
+    html+='</div>';
+    html+='<h3>'+esc(cat.title)+'</h3>';
+    html+='<p class="cat-card-blurb">'+esc(cat.blurb)+'</p>';
+    html+='<div class="cat-card-foot"><span>'+doneN+'/'+tot+' done</span><span class="cat-progress-track"><span class="cat-progress-fill" style="width:'+pct+'%;"></span></span></div>';
+    html+='</div></button>';
+  });
+  html+='</div>';
+  return html;
+}
+
+function renderCategory(cat){
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-home">'+icon('arrow-left',13)+' Back to module home</button>';
+  html+='<div class="cat-header"><div class="cat-header-inner">';
+  html+='<div class="cat-header-icon" style="background:'+cat.color+';">'+icon(cat.iconKey,28,'#fff')+'</div>';
+  html+='<div><p class="cat-header-eyebrow" style="color:'+cat.color+';">Category</p>';
+  html+='<h2 class="cat-header-title">'+esc(cat.title)+'</h2>';
+  html+='<p class="cat-header-blurb">'+esc(cat.blurb)+'</p>';
+  html+='</div></div></div>';
+  html+='<div class="lesson-list">';
+  cat.lessons.forEach(function(l,i){
+    var isDone=!!state.completed[l.id];
+    var prevDone=i===0||!!state.completed[cat.lessons[i-1].id];
+    var locked=!isDone&&!prevDone;
+    var current=!isDone&&prevDone;
+    var tileCls=isDone?'done':current?'current':'pending';
+    var typeLabel=l.type==='reading'?'Reading':'Interactive';
+    var typeColor=l.type==='reading'?'#71717a':'#93c5fd';
+    html+='<button class="lesson-row'+(isDone?' is-done':'')+(locked?' is-locked':'')+'"';
+    html+=locked?' disabled':' data-action="open-lesson" data-lesson-id="'+l.id+'"';
+    html+='>';
+    html+='<div class="lesson-num-tile '+tileCls+'">'+(locked?icon('lock',14):isDone?icon('check',18):String(i+1))+'</div>';
+    html+='<div class="lesson-row-meta"><p class="lesson-row-title">'+esc(l.title)+'</p>';
+    html+='<p class="lesson-row-tag" style="color:'+typeColor+';">'+typeLabel+' &middot; ~'+l.minutes+' min</p></div>';
+    if(!locked) html+=icon('arrow-right',16,'#71717a');
+    html+='</button>';
+  });
+  html+='</div>';
+  return html;
+}
+
+function renderReading(lesson,cat){
+  var c=LESSON_CONTENT[lesson.id]||{sections:[],tip:''};
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="lesson-card">';
+  html+='<div class="lesson-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="lesson-card-body">';
+  c.sections.forEach(function(s){
+    html+='<div class="lesson-section"><h3>'+esc(s.h)+'</h3><p>'+esc(s.b)+'</p></div>';
+  });
+  if(c.customHtml) html+=c.customHtml;
+  if(c.tip){
+    html+='<div class="tip-box"><p class="tip-eyebrow">Joseph&#39;s tip</p><p class="tip-body">'+esc(c.tip)+'</p></div>';
+  }
+  html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  html+='</div></div>';
+  return html;
+}
+
+function renderInboxTriage(lesson,cat){
+  var idx=state.trIdx;var s=TRIAGE_EMAILS[idx];var picked=state.trPicked[s.id];var revealed=state.trRevealed[s.id];
+  var total=TRIAGE_EMAILS.length;var allDone=TRIAGE_EMAILS.every(function(e){return state.trRevealed[e.id];});
+  var correctCount=TRIAGE_EMAILS.filter(function(e){return state.trPicked[e.id]===e.correct;}).length;
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card"><div class="int-card-header" style="background:'+cat.color+';">'+
+    '<div class="lesson-icon-tile">'+icon('inbox',26,'#fff')+'</div>'+
+    '<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p><h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body"><p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Eight emails hit the inbox. Pick the pile for each. Act, Draft, Route, File, or Surface Now.</p>';
+  html+='<div class="drill-stage"><p class="drill-tag">Email '+(idx+1)+' of '+total+'</p>';
+  html+='<div class="drill-scenario"><div class="drill-from">From: '+esc(s.from)+'</div><div class="drill-subject">'+esc(s.subject)+'</div><div class="drill-body">'+esc(s.body)+'</div></div>';
+  html+='<div class="drill-btns">';
+  TRIAGE_ACTIONS.forEach(function(a){
+    var cls='drill-btn';
+    if(revealed){if(a.id===s.correct)cls+=picked===a.id?' picked-correct':' correct-shown';else if(a.id===picked)cls+=' picked-wrong';}
+    html+='<button class="'+cls+'" data-action="tr-pick" data-act="'+a.id+'"><span>'+esc(a.name)+'</span><small>'+esc(a.sub)+'</small></button>';
+  });
+  html+='</div>';
+  if(revealed){
+    var ok=picked===s.correct;var ca=TRIAGE_ACTIONS.filter(function(a){return a.id===s.correct;})[0];
+    html+='<div class="feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Pile: '+esc(ca.name)+'. ')+esc(s.why)+'</div>';
+    if(idx<total-1)html+='<div style="text-align:right;margin-top:12px;"><button class="next-btn" data-action="tr-next">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+  }
+  html+='</div>';
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#93c5fd')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';return html;
+}
+
+function renderRouteBuilder(lesson,cat){
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon('flag',26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:18px;">An email needs to go to the right person. Build the routing note. Name the owner, summarize it, state the ask, surface any number, and add your recommendation. The preview updates as you type. Run the checker when you are done.</p>';
+
+  html+='<div class="mib-grid">';
+  html+='<div class="mib-col"><h4>Routing note</h4>';
+
+  html+='<div class="mib-field"><label class="mib-label">Route to</label>';
+  html+='<select class="mib-select" data-rb="To">';
+  ['Owner','Owner + Amber','Amber','Ivan','Paul'].forEach(function(o){
+    html+='<option value="'+o+'"'+(state.rbTo===o?' selected':'')+'>'+o+'</option>';
+  });
+  html+='</select></div>';
+
+  html+='<div class="mib-field"><label class="mib-label">Subject (specific)</label>';
+  html+='<input class="mib-input" data-rb="Subject" type="text" placeholder="e.g., Elite Crossing material quote - decision needed" value="'+esc(state.rbSubject)+'"></div>';
+
+  html+='<div class="mib-field"><label class="mib-label">Summary (one or two sentences)</label>';
+  html+='<textarea class="mib-textarea" data-rb="Summary" placeholder="What this is and where it came from.">'+esc(state.rbSummary)+'</textarea></div>';
+
+  html+='<div class="mib-field"><label class="mib-label">The ask / decision needed</label>';
+  html+='<input class="mib-input" data-rb="Ask" type="text" placeholder="What do you need this person to decide or do?" value="'+esc(state.rbAsk)+'"></div>';
+
+  html+='<div class="mib-field"><label class="mib-label">Amount or deadline (if any)</label>';
+  html+='<input class="mib-input" data-rb="Amount" type="text" placeholder="e.g., 62,000 dollars - needs answer today" value="'+esc(state.rbAmount)+'"></div>';
+
+  html+='<div class="mib-field"><label class="mib-label">Your recommendation (optional)</label>';
+  html+='<input class="mib-input" data-rb="Rec" type="text" placeholder="Short, factual, no pricing decisions." value="'+esc(state.rbRec)+'"></div>';
+
+  html+='<div class="mib-field"><label class="mib-label">Urgency</label>';
+  html+='<select class="mib-select" data-rb="Urgency">';
+  ['Now','Today','This week'].forEach(function(o){
+    html+='<option value="'+o+'"'+(state.rbUrgency===o?' selected':'')+'>'+o+'</option>';
+  });
+  html+='</select></div>';
+
+  html+='<button class="mib-check-btn" data-action="rb-check">Check this note</button>';
+
+  if(state.rbChecked&&state.rbFeedback){
+    var fb=state.rbFeedback;
+    var cls=fb.kind==='pass'?'ok':fb.kind==='warn'?'warn':'bad';
+    html+='<div class="mib-feedback '+cls+'"><strong>'+esc(fb.headline)+'</strong>';
+    if(fb.items&&fb.items.length){
+      html+='<ul>';
+      fb.items.forEach(function(it){ html+='<li>'+esc(it)+'</li>'; });
+      html+='</ul>';
+    }
+    html+='</div>';
+    if(fb.kind==='pass'){
+      html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+    }
+  }
+  html+='</div>';
+
+  html+='<div class="mib-col"><h4>Live preview</h4>';
+  html+='<div class="invite-preview">';
+  html+='<div class="invite-preview-head">';
+  html+='<h5>'+(state.rbSubject?esc(state.rbSubject):'<span style="opacity:.5;">(No subject)</span>')+'</h5>';
+  html+='<p>Routing note &middot; To: '+esc(state.rbTo)+' &middot; '+esc(state.rbUrgency)+'</p>';
+  html+='</div>';
+  html+='<div class="invite-preview-body">';
+  html+='<div class="invite-row"><div class="invite-row-key">Summary</div><div class="invite-row-val">'+(state.rbSummary?esc(state.rbSummary):'<span class="invite-empty">Add a one or two sentence summary</span>')+'</div></div>';
+  html+='<div class="invite-row"><div class="invite-row-key">The ask</div><div class="invite-row-val">'+(state.rbAsk?esc(state.rbAsk):'<span class="invite-empty">State the decision needed</span>')+'</div></div>';
+  html+='<div class="invite-row"><div class="invite-row-key">Amount / due</div><div class="invite-row-val">'+(state.rbAmount?esc(state.rbAmount):'<span class="invite-empty">Surface any number or deadline</span>')+'</div></div>';
+  html+='<div class="invite-row"><div class="invite-row-key">Recommend</div><div class="invite-row-val">'+(state.rbRec?esc(state.rbRec):'<span class="invite-empty">Optional</span>')+'</div></div>';
+  html+='</div></div></div>';
+
+  html+='</div></div></div>';
+  return html;
+}
+
+function checkRoute(){
+  var issues=[];var warnings=[];
+  var subject=state.rbSubject.trim();
+  var summary=state.rbSummary.trim();
+  var ask=state.rbAsk.trim();
+  if(!subject){ issues.push('Subject is empty. One specific line saying what this is.'); }
+  else if(subject.split(/\s+/).length<3){ issues.push('Subject is too vague. Be specific so the owner knows the topic at a glance.'); }
+  if(!summary){ issues.push('Summary is empty. One or two sentences on what this is and where it came from.'); }
+  else if(summary.split(/\s+/).length<5){ issues.push('Summary is too short. Give enough that the owner does not have to open the original email.'); }
+  if(!ask){ issues.push('The ask is empty. Name the decision or action you need from this person.'); }
+
+  var amt=state.rbAmount.replace(/[, ]/g,'');
+  var num=0; var mn=amt.match(/(\d{3,})/); if(mn) num=parseInt(mn[1],10);
+  if(num>=50000 && state.rbTo!=='Owner + Amber'){
+    warnings.push('This amount is 50,000 or more. That needs Owner and Amber together. Route it to both.');
+  } else if(num>=5000 && state.rbTo.indexOf('Owner')<0){
+    warnings.push('This amount is 5,000 or more. That needs Owner. Route it to him, not only to an owner.');
+  }
+
+  if(issues.length>0){
+    state.rbFeedback={kind:'fail',headline:'Note needs work before it goes:',items:issues};
+  } else if(warnings.length>0){
+    state.rbFeedback={kind:'warn',headline:'Note is clear but the routing is off:',items:warnings};
+  } else {
+    state.rbFeedback={kind:'pass',headline:'Note is ready. Right owner, clear summary, stated ask, number surfaced.',items:[]};
+  }
+  state.rbChecked=true;
+}
+
+function renderApprovalDrill(lesson,cat){
+  var idx=state.apIdx;var s=APPROVAL_SCENARIOS[idx];var picked=state.apPicked[s.id];var revealed=state.apRevealed[s.id];
+  var total=APPROVAL_SCENARIOS.length;var allDone=APPROVAL_SCENARIOS.every(function(sc){return state.apRevealed[sc.id];});
+  var correctCount=APPROVAL_SCENARIOS.filter(function(sc){return state.apPicked[sc.id]===sc.correct;}).length;
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card"><div class="int-card-header" style="background:'+cat.color+';">'+
+    '<div class="lesson-icon-tile">'+icon('shield',26,'#fff')+'</div>'+
+    '<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p><h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body"><p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Six money and judgment calls. Remember the gate: 5,000 needs Owner, 50,000 needs Owner and Amber, and you never approve spend yourself.</p>';
+  html+='<div class="drill-stage"><p class="drill-tag">Scenario '+(idx+1)+' of '+total+'</p>';
+  html+='<div class="drill-scenario"><div class="drill-from">From: '+esc(s.from)+'</div><div class="drill-body">'+esc(s.body)+'</div></div>';
+  html+='<div class="sim-buttons">';
+  APPROVAL_ACTIONS.forEach(function(a){
+    var cls='sim-btn';
+    if(revealed){if(a===s.correct)cls+=picked===a?' picked-correct':' correct-shown';else if(a===picked)cls+=' picked-wrong';}
+    html+='<button class="'+cls+'" data-action="ap-pick" data-act="'+esc(a)+'">'+esc(a)+'</button>';
+  });
+  html+='</div>';
+  if(revealed){
+    var ok=picked===s.correct;
+    html+='<div class="feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Should be: '+esc(s.correct)+'. ')+esc(s.why)+'</div>';
+    if(idx<total-1)html+='<div style="text-align:right;margin-top:12px;"><button class="next-btn" data-action="ap-next">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+  }
+  html+='</div>';
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#93c5fd')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';return html;
+}
+
+function renderLesson(lesson,cat){
+  if(lesson.type==='reading') return renderReading(lesson,cat);
+  if(lesson.intKey==='inboxTriage')  return renderInboxTriage(lesson,cat);
+  if(lesson.intKey==='routeBuilder') return renderRouteBuilder(lesson,cat);
+  if(lesson.intKey==='approvalDrill')return renderApprovalDrill(lesson,cat);
+  return renderReading(lesson,cat);
+}
+
+function render(){
+  var app=document.getElementById('app');
+  var html='';
+  if(state.view==='home'){
+    html=renderHome();
+  } else if(state.view.indexOf('category:')===0){
+    var cat=getCat(state.view.slice(9));
+    html=cat?renderCategory(cat):renderHome();
+  } else if(state.view.indexOf('lesson:')===0){
+    var info=getLesson(state.view.slice(7));
+    html=info?renderLesson(info.lesson,info.cat):renderHome();
+  }
+  app.innerHTML=html;
+
+  if(state.view.indexOf('lesson:')===0){
+    var info2=getLesson(state.view.slice(7));
+    if(info2&&info2.lesson.intKey==='routeBuilder'){
+      setTimeout(function(){
+        document.querySelectorAll('[data-rb]').forEach(function(el){
+          el.addEventListener('input',function(e){
+            var field=e.target.getAttribute('data-rb');
+            state['rb'+field]=e.target.value;
+            state.rbChecked=false; state.rbFeedback=null;
+            updateRoutePreview();
+          });
+        });
+      },50);
+    }
+  }
+}
+
+function updateRoutePreview(){
+  var head=document.querySelector('.invite-preview-head h5');
+  if(!head) return;
+  head.innerHTML=state.rbSubject?esc(state.rbSubject):'<span style="opacity:.5;">(No subject)</span>';
+  var sub=document.querySelector('.invite-preview-head p');
+  if(sub) sub.innerHTML='Routing note &middot; To: '+esc(state.rbTo)+' &middot; '+esc(state.rbUrgency);
+  var rows=document.querySelectorAll('.invite-row');
+  if(rows.length<4) return;
+  rows[0].querySelector('.invite-row-val').innerHTML=state.rbSummary?esc(state.rbSummary):'<span class="invite-empty">Add a one or two sentence summary</span>';
+  rows[1].querySelector('.invite-row-val').innerHTML=state.rbAsk?esc(state.rbAsk):'<span class="invite-empty">State the decision needed</span>';
+  rows[2].querySelector('.invite-row-val').innerHTML=state.rbAmount?esc(state.rbAmount):'<span class="invite-empty">Surface any number or deadline</span>';
+  rows[3].querySelector('.invite-row-val').innerHTML=state.rbRec?esc(state.rbRec):'<span class="invite-empty">Optional</span>';
+}
+
+document.body.addEventListener('click',function(ev){
+  var t=ev.target.closest('[data-action]');
+  if(!t) return;
+  var action=t.getAttribute('data-action');
+
+  if(action==='open-cat'){ state.view='category:'+t.getAttribute('data-cat-id'); render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else if(action==='back-home'){ state.view='home'; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else if(action==='back-cat'){ state.view='category:'+t.getAttribute('data-cat-id'); render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else if(action==='open-lesson'){
+    var lid=t.getAttribute('data-lesson-id');
+    var info=getLesson(lid);
+    if(info){
+      if(info.lesson.intKey==='routeBuilder'){
+        state.rbTo='Owner'; state.rbSubject=''; state.rbSummary=''; state.rbAsk='';
+        state.rbAmount=''; state.rbRec=''; state.rbUrgency='Today';
+        state.rbChecked=false; state.rbFeedback=null;
+      }
+      if(info.lesson.intKey==='inboxTriage'){  state.trIdx=0; state.trPicked={}; state.trRevealed={}; }
+      if(info.lesson.intKey==='approvalDrill'){ state.apIdx=0; state.apPicked={}; state.apRevealed={}; }
+    }
+    state.view='lesson:'+lid; render(); window.scrollTo({top:0,behavior:'smooth'});
+  }
+  else if(action==='complete-lesson'){
+    var lid2=t.getAttribute('data-lesson-id');
+    state.completed[lid2]=true;
+    var info2=getLesson(lid2);
+    if(info2){
+      var next=null;
+      for(var i=0;i<info2.cat.lessons.length;i++){
+        if(info2.cat.lessons[i].id===lid2&&i+1<info2.cat.lessons.length){ next=info2.cat.lessons[i+1]; break; }
+      }
+      state.view=next?'lesson:'+next.id:'category:'+info2.cat.id;
+      render(); window.scrollTo({top:0,behavior:'smooth'});
+    }
+  }
+  else if(action==='rb-check'){ checkRoute(); render(); }
+  else if(action==='tr-pick'){
+    var em=TRIAGE_EMAILS[state.trIdx];
+    if(state.trRevealed[em.id]) return;
+    state.trPicked[em.id]=t.getAttribute('data-act');
+    state.trRevealed[em.id]=true;
+    render();
+  }
+  else if(action==='tr-next'){ if(state.trIdx<TRIAGE_EMAILS.length-1){ state.trIdx++; render(); } }
+  else if(action==='ap-pick'){
+    var sc=APPROVAL_SCENARIOS[state.apIdx];
+    if(state.apRevealed[sc.id]) return;
+    state.apPicked[sc.id]=t.getAttribute('data-act');
+    state.apRevealed[sc.id]=true;
+    render();
+  }
+  else if(action==='ap-next'){ if(state.apIdx<APPROVAL_SCENARIOS.length-1){ state.apIdx++; render(); } }
+});
+
+document.getElementById('logo-slot').innerHTML=icon('inbox',22,'#fff');
+render();
+</script>
+</body>
+</html>

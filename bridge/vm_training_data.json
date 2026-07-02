@@ -1,0 +1,172 @@
+{
+  "source": "the Owner's Outlook - May 11, 2026 extraction",
+  "cases": [
+    {
+      "id": "ALPINE-001",
+      "project": "Alpine - Monument CO (PRJ-2026-ALP-001)",
+      "building_sf": 65096,
+      "total_building_sf": 97000,
+      "revisions": [
+        {
+          "rev": "Original",
+          "bid": 644640,
+          "errors": [
+            "Deck undersized: 37,000 SF captured, should be 65,096 SF (missed showroom framing area)",
+            "Joists undersized: 25T found, should be 75T (LH-series with heavy CO drift loads)",
+            "Anchor rods overcounted: 500 EA found, should be 260 EA"
+          ]
+        },
+        {
+          "rev": "R1",
+          "bid": 984147,
+          "errors": [
+            "Deck area pulled from total building footprint (97,000 SF) instead of Your Company scope (65,096 SF)",
+            "PEMB service bays + carwash (31,904 SF) are PEMB manufacturer scope, not Your Company",
+            "Added $117,000 of revenue for work Your Company has no right to bill"
+          ]
+        },
+        {
+          "rev": "R2",
+          "bid": 867212,
+          "errors": [],
+          "status": "CORRECT",
+          "breakdown": {
+            "fab_35T": 131250,
+            "joists_75T": 337500,
+            "erection_110T": 106700,
+            "roof_deck_65096SF": 240855,
+            "comp_deck_8700SF": 31407,
+            "anchors_260EA": 19500
+          },
+          "gp": {
+            "gross_pct": 31.8,
+            "net_pct": 24.3,
+            "gp_dollars": 275736
+          }
+        }
+      ],
+      "lessons": [
+        "PEMB scope separation: when project has conventional + PEMB areas, only count conventional scope for deck/tonnage",
+        "Total building SF != Your Company scope SF. Read structural notes for scope boundaries.",
+        "LH-series joists under heavy snow loads are significantly heavier than K-series. Check load tables.",
+        "Anchor rod count from foundation plan, not from column count x assumed rods per column."
+      ],
+      "new_rules": [
+        {
+          "id": "R16",
+          "name": "PEMB scope separation",
+          "check": "If structural notes reference PEMB areas, verify deck SF and tonnage exclude PEMB manufacturer scope",
+          "severity": "BLOCK"
+        },
+        {
+          "id": "R17",
+          "name": "Total SF vs scope SF",
+          "check": "If total_building_sf != building_sf (scope), verify the difference is documented and excluded",
+          "severity": "BLOCK"
+        }
+      ]
+    },
+    {
+      "id": "TSC-SUMTER",
+      "project": "Tractor Supply - Sumter SC (NC2026052)",
+      "building_sf": 21930,
+      "revisions": [
+        {
+          "rev": "Original",
+          "bid": 333723,
+          "errors": [
+            "Joist/girder tonnage undercounted (text extraction captured labels but not all instances)",
+            "GC (Logan Stanley, Rycon) flagged: 'tonnage seems low compared to other bidders'"
+          ]
+        },
+        {
+          "rev": "R2",
+          "bid": 393000,
+          "errors": [],
+          "status": "CORRECT",
+          "notes": "Corrected joist/girder tonnage + misc steel scope"
+        }
+      ],
+      "lessons": [
+        "Text extraction from 2D PDFs undercounts joists - labels appear once per bay but represent multiple joists",
+        "GC comparison is the external check - if a GC says 'seems low', it IS low",
+        "Cross-check: $393K / 21,930 SF = $17.92/SF, which is within retail range ($15-$22)"
+      ]
+    },
+    {
+      "id": "PF-LIBERTY",
+      "project": "Planet Fitness - Liberty/Kansas City MO",
+      "gc": "Poettker Construction (Mike Smith)",
+      "revisions": [
+        {
+          "rev": "Original",
+          "errors": [
+            "Wrong deck type: bid had 3\" composite deck w/ shear studs, spec (S002 notes) says 1-1/2\" 22ga",
+            "Mezzanine SF wrong: bid had 7,700 SF, actual is ~12,000 SF",
+            "Structural steel and joist tonnage low compared to other bidders (per GC)"
+          ]
+        }
+      ],
+      "lessons": [
+        "Read ALL spec pages, especially S002 general structural notes - deck type is often specified there, not on framing plans",
+        "Mezzanine SF must be measured from the mezzanine framing plan, not estimated from column grid",
+        "Three errors on one bid = systemic: stopped too early, didn't verify against spec notes",
+        "GC Mike Smith's exact feedback: 'floor deck is to be the 1-1/2\" 22ga. Per the S002 notes. I didn't see the 3\" composite deck w/ shear studs called out.'"
+      ],
+      "new_rules": [
+        {
+          "id": "R18",
+          "name": "Mezzanine SF verification",
+          "check": "If mezzanine present, verify SF from mezzanine framing plan, not estimated from grid",
+          "severity": "BLOCK"
+        },
+        {
+          "id": "R19",
+          "name": "Read all spec pages",
+          "check": "Verify deck type against S001/S002 general structural notes, not just framing plan callouts",
+          "severity": "BLOCK"
+        }
+      ]
+    }
+  ],
+  "owner_patterns": {
+    "pre_submission_questions": [
+      "Are you sure you have everything?",
+      "Is this 100% accurate?",
+      "Am I truly covered on all items, to make substantial profit?",
+      "Ready to submit to client with confidence and complete takeoff done?",
+      "Review and confirm now."
+    ],
+    "correction_signals": [
+      "GC says tonnage seems low compared to other bidders",
+      "Deck SF doesn't match building footprint or scope boundary",
+      "Multiple items wrong on one bid (systemic, not isolated)",
+      "Ivan flags a discrepancy after review"
+    ],
+    "gp_targets": {
+      "fab": {
+        "revenue_rate": 3750,
+        "gp_pct": 31
+      },
+      "joists": {
+        "revenue_rate": 4500,
+        "gp_pct": 40
+      },
+      "erection": {
+        "revenue_rate": 970,
+        "gp_pct": 30
+      },
+      "roof_deck": {
+        "revenue_rate": 3.7,
+        "gp_pct": 23
+      },
+      "comp_deck": {
+        "revenue_rate": 3.61,
+        "gp_pct": 21
+      },
+      "overall_gross_target": 31.8,
+      "overall_net_target": 24.3,
+      "ga_pct": 7.5
+    }
+  }
+}

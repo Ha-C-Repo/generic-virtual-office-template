@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Productivity Lab | Your Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:#000;color:#e4e4e7;
+  font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(circle at 85% 5%,rgba(168,85,247,0.1),transparent 40%),
+    radial-gradient(circle at 15% 95%,rgba(139,92,246,0.07),transparent 40%);
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;padding:0;}
+input,textarea,select{font-family:inherit;}
+p{margin:0;}h1,h2,h3,h4{margin:0;font-weight:normal;}
+.container{max-width:960px;margin:0 auto;padding:0 20px;}
+.bebas{font-family:'Bebas Neue',sans-serif;letter-spacing:.04em;}
+.mono{font-family:'JetBrains Mono','Cascadia Code',Consolas,monospace;}
+
+/* Header */
+header.site{border-bottom:2px solid #27272a;background:rgba(0,0,0,.85);
+  position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);}
+.header-row{max-width:960px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;}
+.logo-tile{width:40px;height:40px;background:#a855f7;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.header-meta .small{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#52525b;}
+.header-meta .big{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin-top:2px;}
+footer.site{max-width:960px;margin:0 auto;padding:28px 20px;border-top:1px solid #27272a;text-align:center;}
+footer.site p{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#3f3f46;}
+
+/* Lab Home Hero */
+.lab-hero{position:relative;border:2px solid #3f3f46;background:#18181b;overflow:hidden;margin-bottom:28px;}
+.hero-grid{position:absolute;inset:0;opacity:.12;
+  background-image:linear-gradient(rgba(168,85,247,.25) 1px,transparent 1px),linear-gradient(90deg,rgba(168,85,247,.25) 1px,transparent 1px);
+  background-size:24px 24px;}
+.hero-glow{position:absolute;top:-40px;right:-40px;width:220px;height:220px;
+  background:#a855f7;border-radius:50%;filter:blur(80px);opacity:.25;}
+.lab-hero-inner{position:relative;padding:28px 24px;}
+.lab-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#e879f9;margin-bottom:8px;}
+.lab-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,9vw,68px);color:#fff;line-height:.9;margin-bottom:14px;}
+.lab-h1 .accent{color:#e879f9;}
+.lab-blurb{color:#a1a1aa;max-width:540px;font-size:14px;line-height:1.7;margin-bottom:22px;}
+.lab-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:460px;}
+.lab-stat{border:1px solid #3f3f46;background:rgba(0,0,0,.4);padding:8px 10px;}
+.lab-stat-num{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#e879f9;margin:0;}
+.lab-stat-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#52525b;margin:0;}
+
+/* Privacy rule banner */
+.privacy-banner{
+  background:rgba(168,85,247,.08);border:1px solid #7e22ce;
+  padding:12px 16px;margin-bottom:20px;display:flex;gap:10px;align-items:flex-start;
+}
+.privacy-banner-icon{flex-shrink:0;margin-top:2px;}
+.privacy-banner-text{font-size:12px;color:#c4b5fd;line-height:1.55;}
+.privacy-banner-text strong{color:#e879f9;}
+
+/* Category cards */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.cat-card{text-align:left;background:#18181b;border:2px solid #3f3f46;padding:0;position:relative;overflow:hidden;width:100%;}
+.cat-card.is-done{border-color:#10b981;}
+.cat-stripe{height:6px;}
+.cat-inner{padding:18px;}
+.cat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.cat-icon-tile{width:44px;height:44px;color:#fff;display:flex;align-items:center;justify-content:center;}
+.cat-card h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin:0 0 6px;line-height:1.05;}
+.cat-card-blurb{font-size:12px;color:#a1a1aa;margin:0 0 14px;line-height:1.5;}
+.cat-card-foot{display:flex;justify-content:space-between;align-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:9px;color:#71717a;text-transform:uppercase;letter-spacing:.2em;}
+.cat-progress-track{height:4px;background:#27272a;flex:1;margin-left:12px;max-width:80px;}
+.cat-progress-fill{height:100%;background:#10b981;transition:width .3s;}
+
+/* Category view */
+.cat-back-btn{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;
+  color:#71717a;display:flex;align-items:center;gap:6px;margin-bottom:20px;}
+.cat-header{background:#18181b;border:2px solid #3f3f46;padding:20px;margin-bottom:16px;}
+.cat-header-inner{display:flex;gap:16px;align-items:flex-start;}
+.cat-header-icon{width:56px;height:56px;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cat-header-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;margin:0;}
+.cat-header-title{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;margin:4px 0;line-height:1;}
+.cat-header-blurb{color:#a1a1aa;font-size:13px;margin:0;line-height:1.5;}
+
+.lesson-list{display:flex;flex-direction:column;gap:8px;}
+.lesson-row{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#18181b;
+  border:2px solid #3f3f46;width:100%;text-align:left;}
+.lesson-row.is-done{border-color:#10b981;}
+.lesson-row.is-locked{opacity:.45;cursor:not-allowed;}
+.lesson-row:not(.is-locked){cursor:pointer;}
+.lesson-num-tile{width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:16px;}
+.lesson-num-tile.is-done   {background:#10b981;color:#000;}
+.lesson-num-tile.is-current{background:#e879f9;color:#000;}
+.lesson-num-tile.is-pending{background:#27272a;color:#71717a;}
+.lesson-row-meta{flex:1;min-width:0;}
+.lesson-row-title{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin:0;line-height:1.1;}
+.lesson-row-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;margin:4px 0 0;}
+
+/* Lesson reading card */
+.lesson-card{border:2px solid #3f3f46;background:#18181b;}
+.lesson-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.lesson-icon-tile{width:52px;height:52px;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.lesson-card-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;font-weight:700;opacity:.8;margin:0;}
+.lesson-card-title{font-family:'Bebas Neue',sans-serif;font-size:32px;margin:4px 0 0;line-height:1;color:#fff;}
+.lesson-card-body{padding:24px 22px;}
+.lesson-section{margin-bottom:22px;}
+.lesson-section h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#e879f9;margin:0 0 8px;letter-spacing:.04em;}
+.lesson-section p{color:#a1a1aa;line-height:1.65;margin:0;font-size:14px;}
+.tip-box{background:rgba(168,85,247,.08);border-left:4px solid #a855f7;padding:12px 16px;margin-top:20px;}
+.tip-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#c084fc;margin:0 0 6px;font-weight:700;}
+.tip-body{color:#e9d5ff;font-size:13px;margin:0;line-height:1.55;font-style:italic;}
+.complete-btn{width:100%;margin-top:24px;padding:14px 0;
+  font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.2em;
+  background:#e879f9;color:#000;border:2px solid #e879f9;
+  display:flex;align-items:center;justify-content:center;gap:10px;}
+
+/* Interactive card wrapper */
+.int-card{border:2px solid #3f3f46;background:#18181b;}
+.int-card-header{padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.int-card-body{padding:24px 22px;}
+
+/* Sort the Tasks */
+.sort-container{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+@media(max-width:600px){.sort-container{grid-template-columns:1fr;}}
+.sort-col{background:#0c0c0c;border:2px dashed #3f3f46;padding:12px;min-height:160px;}
+.sort-col.ai-col{border-color:#a855f7;}
+.sort-col.human-col{border-color:#0ea5e9;}
+.sort-col-head{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.04em;text-align:center;padding-bottom:10px;margin-bottom:10px;border-bottom:1px solid #27272a;}
+.sort-col.ai-col .sort-col-head{color:#c084fc;}
+.sort-col.human-col .sort-col-head{color:#38bdf8;}
+.sort-tasks{display:flex;flex-direction:column;gap:4px;margin-bottom:20px;}
+.sort-task-row{padding:10px 12px;background:#18181b;border:1px solid #3f3f46;
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.sort-task-text{flex:1;min-width:0;font-size:13px;color:#e4e4e7;}
+.sort-btns{display:flex;gap:6px;flex-shrink:0;}
+.sort-btn{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.12em;
+  padding:5px 10px;border:1px solid;cursor:pointer;}
+.sort-btn.ai   {border-color:#7e22ce;background:transparent;color:#c084fc;}
+.sort-btn.human{border-color:#0c4a6e;background:transparent;color:#38bdf8;}
+.sort-btn.ai.active   {background:#7e22ce;color:#fff;}
+.sort-btn.human.active{background:#0c4a6e;color:#fff;}
+.sort-task-row.correct-yes .sort-task-text{color:#a7f3d0;}
+.sort-task-row.correct-no  .sort-task-text{color:#fca5a5;}
+.sort-why{font-size:11px;font-style:italic;color:#a1a1aa;margin-top:4px;width:100%;}
+.sort-submit-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px;}
+.sort-score{font-family:'JetBrains Mono',monospace;font-size:10px;color:#a1a1aa;text-transform:uppercase;letter-spacing:.15em;}
+
+/* Tool Selector */
+.tool-grid{display:flex;flex-direction:column;gap:8px;}
+.tool-row{background:#0c0c0c;border:1px solid #3f3f46;padding:12px 14px;}
+.tool-row-text{font-size:13px;color:#e4e4e7;margin-bottom:10px;}
+.tool-options{display:flex;gap:6px;flex-wrap:wrap;}
+.tool-btn{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.12em;
+  padding:6px 12px;border:1px solid #3f3f46;cursor:pointer;color:#a1a1aa;}
+.tool-btn.picked-Copilot{border-color:#0078d4;background:rgba(0,120,212,.15);color:#7dd3fc;}
+.tool-btn.picked-Gemini {border-color:#1a73e8;background:rgba(26,115,232,.15);color:#93c5fd;}
+.tool-btn.picked-Claude {border-color:#a855f7;background:rgba(168,85,247,.15);color:#e9d5ff;}
+.tool-btn.picked-Any    {border-color:#10b981;background:rgba(16,185,129,.15);color:#a7f3d0;}
+.tool-why{font-size:11px;color:#a1a1aa;font-style:italic;margin-top:8px;padding-top:8px;border-top:1px solid #27272a;display:none;}
+.tool-why.visible{display:block;}
+.tool-why-correct{color:#a7f3d0;}
+.tool-why-text{color:#a1a1aa;}
+
+/* Bad/Good Prompts */
+.bg-pairs{display:flex;flex-direction:column;gap:20px;}
+.bg-pair{background:#0c0c0c;border:1px solid #3f3f46;padding:14px;}
+.bg-pair-label{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#9333ea;margin-bottom:10px;}
+.bg-side-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.bg-side-row{grid-template-columns:1fr;}}
+.bg-side{padding:10px;}
+.bg-side-bad {background:rgba(239,68,68,.06);border:1px solid #7f1d1d;}
+.bg-side-good{background:rgba(16,185,129,.06);border:1px solid #14532d;}
+.bg-side-head{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;margin-bottom:8px;}
+.bg-side-bad  .bg-side-head{color:#f87171;}
+.bg-side-good .bg-side-head{color:#4ade80;}
+.bg-prompt{font-size:12px;color:#d4d4d8;background:#09090b;padding:8px;border-radius:4px;font-style:italic;line-height:1.55;margin-bottom:8px;}
+.bg-output-toggle{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.15em;
+  padding:6px 10px;border:1px solid #3f3f46;color:#71717a;cursor:pointer;}
+.bg-output{font-size:12px;color:#a1a1aa;background:#09090b;padding:8px;border-radius:4px;
+  white-space:pre-wrap;line-height:1.55;margin-top:8px;display:none;}
+.bg-output.visible{display:block;}
+.bg-explain{font-size:12px;color:#c4b5fd;background:rgba(139,92,246,.06);
+  border:1px solid #581c87;padding:10px;margin-top:10px;line-height:1.55;}
+
+/* Prompt Builder */
+.pb-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:600px){.pb-grid{grid-template-columns:1fr;}}
+.pb-form{display:flex;flex-direction:column;gap:12px;}
+.pb-field label{display:block;font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;
+  letter-spacing:.2em;color:#a855f7;margin-bottom:4px;}
+.pb-field textarea,.pb-field select,.pb-field input{
+  width:100%;background:#09090b;border:1px solid #3f3f46;color:#e4e4e7;
+  padding:8px 10px;font-size:13px;resize:vertical;outline:none;
+}
+.pb-field textarea:focus,.pb-field select:focus,.pb-field input:focus{border-color:#a855f7;}
+.pb-field select option{background:#09090b;}
+.pb-assembled{position:relative;}
+.pb-assembled-head{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;
+  letter-spacing:.2em;color:#a855f7;margin-bottom:8px;}
+.pb-assembled-box{background:#09090b;border:1px solid #3f3f46;padding:14px;
+  font-size:13px;color:#e4e4e7;line-height:1.65;min-height:160px;white-space:pre-wrap;}
+.pb-copy-btn{margin-top:10px;padding:8px 16px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;
+  border:1px solid #a855f7;background:transparent;color:#c084fc;cursor:pointer;
+  display:flex;align-items:center;gap:6px;}
+.pb-copy-btn.copied{border-color:#10b981;color:#34d399;}
+.pb-empty-hint{color:#52525b;font-size:12px;font-style:italic;}
+
+/* Recipes */
+.recipes-grid{display:flex;flex-direction:column;gap:10px;}
+.recipe-card{background:#0c0c0c;border:1px solid #3f3f46;padding:12px 14px;}
+.recipe-card-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px;flex-wrap:wrap;}
+.recipe-title{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#e4e4e7;letter-spacing:.04em;}
+.recipe-when{font-family:'JetBrains Mono',monospace;font-size:9px;color:#71717a;text-transform:uppercase;letter-spacing:.15em;margin-bottom:8px;}
+.recipe-prompt{font-size:12px;color:#a1a1aa;background:#09090b;padding:10px;
+  font-style:italic;line-height:1.6;border-left:3px solid #7e22ce;margin-bottom:8px;}
+.recipe-copy-btn{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.15em;
+  padding:5px 10px;border:1px solid #7e22ce;background:transparent;color:#c084fc;cursor:pointer;
+  display:flex;align-items:center;gap:5px;flex-shrink:0;}
+.recipe-copy-btn.copied{border-color:#10b981;color:#34d399;}
+
+/* Spot the Mistake */
+.sm-grid{display:flex;flex-direction:column;gap:12px;}
+.sm-card{background:#0c0c0c;border:1px solid #3f3f46;padding:14px;}
+.sm-num{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#9333ea;margin-bottom:6px;}
+.sm-text{font-size:13px;color:#d4d4d8;line-height:1.6;margin-bottom:12px;}
+.sm-options{display:flex;gap:8px;flex-wrap:wrap;}
+.sm-opt-btn{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.12em;
+  padding:7px 14px;border:1px solid #3f3f46;cursor:pointer;color:#a1a1aa;}
+.sm-opt-btn.picked-neutral{border-color:#a855f7;background:rgba(168,85,247,.1);color:#e9d5ff;}
+.sm-opt-btn.picked-correct{border-color:#10b981;background:rgba(16,185,129,.1);color:#a7f3d0;}
+.sm-opt-btn.picked-wrong  {border-color:#ef4444;background:rgba(239,68,68,.1);color:#fca5a5;}
+.sm-verdict{font-size:12px;font-style:italic;margin-top:10px;padding:10px;line-height:1.55;}
+.sm-verdict.correct{background:rgba(16,185,129,.06);border:1px solid #14532d;color:#a7f3d0;}
+.sm-verdict.wrong  {background:rgba(239,68,68,.06);border:1px solid #7f1d1d;color:#fca5a5;}
+.sm-score-row{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;
+  color:#a1a1aa;margin-top:16px;padding-top:16px;border-top:1px solid #27272a;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-row">
+    <div class="logo-tile" id="logo-slot"></div>
+    <div class="header-meta">
+      <p class="small">Your Company &middot; AI Lab</p>
+      <p class="big">AI Productivity Lab</p>
+    </div>
+  </div>
+</header>
+
+<main class="container" style="padding:28px 20px 40px;">
+  <div id="app"></div>
+</main>
+
+<footer class="site">
+  <p>Built by Joseph &middot; Your Company Virtual Office &middot; Internal Use Only</p>
+</footer>
+
+<script>
+"use strict";
+
+// ============================================================================
+// ICONS
+// ============================================================================
+const ICONS={
+  'arrow-right':   '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  'arrow-left':    '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  'check':         '<path d="M20 6 9 17l-5-5"/>',
+  'lock':          '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  'rotate-ccw':    '<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>',
+  'sparkles':      '<path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4"/><path d="M22 4h-4"/><circle cx="4" cy="20" r="2"/>',
+  'brain':         '<path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/>',
+  'layers':        '<path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/>',
+  'wand':          '<path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8 19 13"/><path d="M15 9h.01"/><path d="M17.8 6.2 19 5"/><path d="m3 21 9-9"/><path d="M12.2 6.2 11 5"/>',
+  'hammer':        '<path d="m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9"/><path d="m18 15 4-4"/><path d="m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14"/>',
+  'triangle-alert':'<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/>',
+  'shield':        '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>',
+  'clipboard':     '<rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>',
+  'award':         '<path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/>',
+  'x':             '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>'
+};
+function icon(name,size,color){
+  size=size||16;color=color||'currentColor';
+  var p=ICONS[name]||'';
+  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">'+p+'</svg>';
+}
+
+// ============================================================================
+// CATEGORIES
+// ============================================================================
+const CATEGORIES=[
+  { id:'mindset', iconKey:'brain', color:'#a855f7',
+    title:'The Mindset',
+    blurb:'What AI is actually for. Where it breaks. Why your judgment still runs the show.',
+    lessons:[
+      { id:'m-1', title:'What AI Is Actually For',       type:'reading',     minutes:4 },
+      { id:'m-2', title:'Where AI Falls Apart',          type:'reading',     minutes:4 },
+      { id:'m-3', title:'Sort the Tasks',                type:'interactive', minutes:5, intKey:'sortTasks' }
+    ] },
+  { id:'tools', iconKey:'layers', color:'#8b5cf6',
+    title:'Pick Your Tool',
+    blurb:'Copilot for in-the-app work. Gemini for research. Claude/ChatGPT for writing and thinking.',
+    lessons:[
+      { id:'t-1', title:'Microsoft Copilot',             type:'reading',     minutes:4 },
+      { id:'t-2', title:'Google Gemini',                 type:'reading',     minutes:3 },
+      { id:'t-3', title:'Claude and ChatGPT',            type:'reading',     minutes:4 },
+      { id:'t-4', title:'Tool Selector (interactive)',   type:'interactive', minutes:4, intKey:'toolSelector' }
+    ] },
+  { id:'prompting', iconKey:'wand', color:'#c026d3',
+    title:'Prompting 101',
+    blurb:'Context, Goal, Format. Three words that turn a bad prompt into a good one.',
+    lessons:[
+      { id:'p-1', title:'The CGF Framework',             type:'reading',     minutes:4 },
+      { id:'p-2', title:'Bad Prompt vs. Good Prompt',    type:'interactive', minutes:5, intKey:'badGood' },
+      { id:'p-3', title:'Prompt Builder (live)',         type:'interactive', minutes:4, intKey:'promptBuilder' }
+    ] },
+  { id:'recipes', iconKey:'hammer', color:'#d946ef',
+    title:'Office Recipes',
+    blurb:'Ten copy-paste prompts for the tasks you will actually face at the front desk.',
+    lessons:[
+      { id:'r-1', title:'The Recipe Box (10 prompts)',   type:'interactive', minutes:6, intKey:'recipes' }
+    ] },
+  { id:'antipatterns', iconKey:'triangle-alert', color:'#ef4444',
+    title:'Anti-Patterns',
+    blurb:'The five things that get people in trouble with AI. Plus six real scenarios.',
+    lessons:[
+      { id:'a-1', title:'The Five Things You Never Do',  type:'reading',     minutes:4 },
+      { id:'a-2', title:'Spot the Mistake',              type:'interactive', minutes:5, intKey:'spotMistake' }
+    ] }
+];
+
+// ============================================================================
+// LESSON CONTENT (reading lessons)
+// ============================================================================
+const LESSON_CONTENT={
+  'm-1':{ sections:[
+    { h:'AI is your fast first-drafter', b:'Give an AI a rough idea, get back a polished 70% draft in 20 seconds. The last 30% is yours: facts, tone, the specific stuff only you know. Used right, AI saves you 30-60 minutes a day on writing alone.' },
+    { h:'Summaries are pure gold', b:"Long email thread? Long PDF? Long meeting transcript? Paste it, ask for the gist in 5 bullets, get on with your day. This is the single highest-ROI use of AI you'll find." },
+    { h:'Reformat anything into anything', b:"Got a messy list of names and numbers? Ask AI to turn it into a clean table. Got English text and need Spanish for a vendor? AI handles it. Got jargon-heavy text and need plain language? Done." },
+    { h:'Brainstorm partner that never tires', b:'Stuck? Ask AI for 10 angles on a problem. Most will be mediocre. One or two will spark something. You pick the one with juice and run with it.' }
+  ], tip:"AI is a junior staffer who works in 20-second sprints, never sleeps, and types fast. Treat it like that. You're still the one who signs off." },
+  'm-2':{ sections:[
+    { h:'AI does not know us', b:"AI does not know that the Texas Mutual EMR letter unblocks Marathon, or that Mario welds AWS D1.1, or that Owner prefers PDFs without em-dashes. Company-specific facts come from your head and our project knowledge, not from a generic AI." },
+    { h:'Most AIs cannot see today', b:'Free ChatGPT and Claude have a knowledge cutoff. They do not know steel prices today, who won the football game last night, or whether a hurricane is hitting Houston this weekend. For current info, use Gemini, Perplexity, or Copilot with web search on.' },
+    { h:'Math precision is not their thing', b:'AI does basic math fine. Multi-step math (margin &times; hours &times; rates &times; overhead &times; tax) it will sometimes flub with full confidence. For pricing, payroll, takeoffs: use Excel, our pricing matrix, or a calculator. Use AI to set up the spreadsheet, not to compute the answer.' },
+    { h:'Judgment is yours, not theirs', b:"When something feels off, listen to that. AI will produce confident-sounding nonsense and not flinch. You signed the BOL. You hit Send. You own it. AI is a tool, not a co-signer." }
+  ], tip:"If you would not trust a sharp intern on day three to do this task without supervision, do not trust AI to do it without supervision either." },
+  't-1':{ sections:[
+    { h:'What it is', b:'Microsoft Copilot lives inside the M365 apps you already use: Word, Excel, Outlook, PowerPoint, Teams. It also has a standalone version at copilot.microsoft.com. The advantage of Copilot inside M365 is it can see the document you have open and the data in your tenant (within your permissions).' },
+    { h:'Where it shines', b:'(1) Drafting Outlook replies based on the email thread. (2) Excel: "what formula calculates X." (3) Summarizing a Word doc you have open. (4) PowerPoint: turning bullets into slides. (5) Teams meeting recap with action items.' },
+    { h:'Privacy advantage', b:'Data you give Copilot inside our M365 tenant stays inside our tenant. It does not get used to train models. This is the big reason to prefer Copilot for anything sensitive over public free AIs.' },
+    { h:'Limitations', b:'Copilot is not as strong as Claude or ChatGPT for long-form writing or multi-step reasoning. It can miss recent news. Use it where it lives (in the M365 app), and reach for other tools for the harder thinking.' }
+  ], tip:'If the task is "do something in this Word/Excel/Outlook file I have open," ask Copilot first. It is right there, and it is the safe one.' },
+  't-2':{ sections:[
+    { h:'What it is', b:'Google Gemini lives at gemini.google.com (free) and inside Google Workspace if we use Gmail/Docs/Drive. The free standalone version is generous: long context windows (paste a whole book), real-time Google Search grounding, and free image generation.' },
+    { h:'Where it shines', b:'(1) Research where you need current sources, since Gemini can search the web while answering. (2) Long documents: it handles big PDFs better than most free AIs. (3) Quick image generation when you need a graphic for a quick presentation.' },
+    { h:'When to pick Gemini over Copilot', b:'For research questions, news, or anything where "what does the internet currently say" matters. Copilot inside Word does not browse. Gemini does.' },
+    { h:'Caution', b:'Free Gemini may use your conversations to improve the product. Do not paste anything truly confidential into the free version. For sensitive work, stay inside Copilot.' }
+  ], tip:'Use Gemini when you would otherwise be doing 6 Google searches and reading 6 articles. Just ask Gemini and verify the cited sources.' },
+  't-3':{ sections:[
+    { h:'What they are', b:"Claude (claude.ai) and ChatGPT (chat.openai.com) are general-purpose AI assistants. Both have free tiers. They are not tied to any office suite. You go to their site, you talk to them in plain language, you get answers." },
+    { h:'Where they shine', b:'(1) Long-form writing: drafts, narratives, summaries that need nuance. (2) Multi-step reasoning: "help me think through this decision." (3) Creative work: brainstorming, naming, angle-finding. (4) Anything where you want a thinking partner, not just a tool.' },
+    { h:'Claude vs. ChatGPT', b:"Both are excellent. Claude tends toward longer, more careful reasoning and tends to push back politely if it thinks you are heading wrong. ChatGPT tends toward action and tighter integrations with images, voice, and file uploads. For writing tasks, try both on the same prompt and pick what you like." },
+    { h:'Privacy reminder', b:'These are public services on the free tier. Do not paste customer SSNs, internal financial details, contract terms, medical info, or anything you would not put on a postcard. For that work, use Copilot inside our M365.' }
+  ], tip:'When the task starts with "help me think through" or "draft a long..." reach for Claude or ChatGPT. They are built for the messy, multi-turn work.' },
+  'p-1':{ sections:[
+    { h:'Three things in every prompt', b:'CONTEXT, GOAL, FORMAT. CGF. Memorize these three letters and your prompts will jump in quality overnight.' },
+    { h:'CONTEXT (1-2 sentences)', b:'Who are you and what is happening. Example: "I am the front desk at a structural steel fab shop. A vendor just emailed asking to schedule a meeting next week."' },
+    { h:'GOAL (specific verb-noun)', b:'What do you want produced. Example: "Draft a 3-sentence reply declining the meeting politely. We do not need their service right now."' },
+    { h:'FORMAT (length, tone, structure)', b:'How should it look. Example: "Tone: warm but firm. No bullet points. Sign as yourself."' },
+    { h:'Put it all together', b:'"I am the front desk at a structural steel fab shop. A vendor just emailed asking to schedule a meeting next week. Draft a 3-sentence reply declining the meeting politely. Tone: warm but firm. Sign as yourself."' }
+  ], tip:'When the AI gives you a bad answer, the prompt was probably bad. Add more CONTEXT, sharpen the GOAL, lock down the FORMAT.' },
+  'a-1':{ sections:[
+    { h:'1. Do not paste confidential data into free public AIs', b:"No customer SSNs, no employee personal info, no signed contracts, no internal financials, no Texas Mutual policy details, no Marathon RFP terms. If it would be bad on a postcard, do not paste it into ChatGPT free or Gemini free. For sensitive work, use Copilot inside our M365 tenant." },
+    { h:'2. Do not trust AI on facts about us', b:'AI does not know our employees, our projects, our pricing, our compliance status. It will guess and guess wrong. Verify every company-specific fact against project knowledge, our records, or a human.' },
+    { h:'3. Do not send AI emails to clients without reading every word', b:"AI hallucinates names, dates, numbers, even legal terms. Read every word. If the email goes to a client, run it past Owner before sending the first time. Once you've sent 20 of these, you'll catch issues fast on your own." },
+    { h:'4. Do not use AI for legal, tax, or medical advice', b:'Amber handles legal. Our accountant handles tax. Doctors handle medical. AI is a writing tool, not an attorney. For these areas, AI can help you organize your question to ask the right human, nothing more.' },
+    { h:'5. Do not let AI replace your judgment', b:"AI is a thinking partner. It is not the decider. The decider is the human whose name is on the document. When something feels wrong, listen to that, even if AI is confidently disagreeing." }
+  ], tip:"Public AI is a brilliant intern who will absolutely repeat your secrets at the bar that night. Treat it that way." }
+};
+
+// ============================================================================
+// INTERACTIVE DATA
+// ============================================================================
+const SORT_TASKS=[
+  { id:1, t:'Draft a polite email declining a vendor pitch',                    correct:'ai',    why:'Drafting routine email is exactly what AI does well. You review and send.' },
+  { id:2, t:'Decide if a contract clause is acceptable',                         correct:'human', why:'Contract judgment goes to Amber. AI can summarize the clause but cannot decide.' },
+  { id:3, t:'Summarize a 40-page government RFP into 5 key points',              correct:'ai',    why:'Long-document summary is the highest-ROI AI task. Sensitive content — use Copilot in our tenant.' },
+  { id:4, t:'Calculate the final price for a 50-ton job (margin, overhead, tax)',correct:'human', why:'Multi-step math AI fakes confidently. Use the pricing matrix or Excel. AI can set up the spreadsheet, not compute the answer.' },
+  { id:5, t:'Brainstorm 10 names for a new line of fabricated barriers',         correct:'ai',    why:'Naming and brainstorming is what AI is built for. Generate 10, throw away 8, refine 2.' },
+  { id:6, t:'Decide whether to fire a crew member',                              correct:'human', why:'Personnel decisions are human, full stop. AI does not know our people, history, or context.' },
+  { id:7, t:'Convert a messy paragraph of vendor specs into a table',            correct:'ai',    why:'Reformatting unstructured text into structured tables is bread-and-butter AI work.' },
+  { id:8, t:'Sign off on a BOL before the truck leaves the yard',                correct:'human', why:'Signing your name means you read it, you verified it, you own it. No AI gets to put pen to paper.' }
+];
+
+const TOOL_TASKS=[
+  { id:'t1', t:'Help me write an Excel formula',                              tool:'Copilot', why:'Copilot lives in Excel. Click the Copilot button, describe the formula you want, paste the cells. Stays inside our M365 tenant.' },
+  { id:'t2', t:'Draft a reply to this Outlook email',                          tool:'Copilot', why:'Copilot in Outlook reads the thread and drafts the reply. One click, then edit. Privacy stays inside the tenant.' },
+  { id:'t3', t:'Summarize a long Word document I have open',                   tool:'Copilot', why:'Copilot in Word can see the open document and produce a summary in seconds. Faster than copying text out to another tool.' },
+  { id:'t4', t:'Research the latest news on Marathon Petroleum',               tool:'Gemini',  why:'Gemini grounds answers in current Google search results and shows sources. Better than Copilot for "what is happening right now."' },
+  { id:'t5', t:'Read and summarize a 50-page government RFP PDF',              tool:'Gemini',  why:'Gemini handles huge documents in one go. Free tier accepts long PDFs without chunking. For really sensitive RFPs, prefer Copilot in our tenant.' },
+  { id:'t6', t:'Help me think through a tricky vendor situation',              tool:'Claude',  why:'Claude (or ChatGPT) is built for multi-turn reasoning. Explain the situation in plain language. It pushes back, asks questions, helps you find the angle.' },
+  { id:'t7', t:'Draft a long-form welcome letter for our new safety policy',   tool:'Claude',  why:'Long-form writing with nuance is Claude/ChatGPT territory. Give it CONTEXT and GOAL, edit the output.' },
+  { id:'t8', t:'Generate a quick graphic for an internal slide deck',          tool:'Gemini',  why:'Free Gemini does image generation in the chat window. Quick and cheap. Good enough for internal slides.' }
+];
+const TOOL_OPTIONS=['Copilot','Gemini','Claude','Any'];
+
+const BG_PAIRS=[
+  { id:'bg1', label:'Pair 1 — Email reply',
+    bad:'Write me an email back.',
+    badOutput:'Subject: Re: Your message\n\nHi,\n\nThanks for reaching out. I appreciate your message and will get back to you soon.\n\nBest regards',
+    good:'I am the front desk at a structural steel fabrication shop in Houston. A vendor selling rust-prevention coatings emailed asking for a 30-minute meeting next week. We already have a coating partner. Draft a 3-sentence reply declining the meeting politely. Tone: warm but firm. Sign as yourself.',
+    goodOutput:'Subject: Re: Coating service inquiry\n\nThanks for reaching out about your coating product. We have an established partner for that work and are not currently looking to evaluate alternatives. I appreciate the offer and wish you the best.\n\n[Your Name]',
+    explain:'The bad prompt has no CONTEXT, no specific GOAL, and no FORMAT. The good prompt locks in all three. The output goes from generic to send-ready.' },
+  { id:'bg2', label:'Pair 2 — Summarize a thread',
+    bad:'Summarize this for me.',
+    badOutput:'This is a discussion between several people about a project. They cover scheduling, materials, and some concerns about the timeline. Various participants share their views.',
+    good:'Below is an Outlook thread about the ICD Church project. Summarize in 5 bullet points: (1) what was decided, (2) open questions, (3) action items by name, (4) deadlines mentioned, (5) anything blocking us. Use plain language, no jargon.',
+    goodOutput:'• DECIDED: Use 8" W-shapes for the main beams; A992 grade.\n• OPEN: Whether the architect approves field-cut openings.\n• ACTIONS: Mario to schedule fabrication start (his crew); Owner to confirm pricing with the customer.\n• DEADLINES: Detailing complete by next Friday; first delivery 3 weeks out.\n• BLOCKER: Awaiting signed BOL template from the customer.',
+    explain:'CONTEXT (what the thread is about) plus a structured FORMAT (the 5 specific bullets) turns a mush summary into something you can act on.' },
+  { id:'bg3', label:'Pair 3 — Plain language',
+    bad:'Make this simpler.',
+    badOutput:'Here is a simpler version: this is about a project with some technical requirements that need to be met for compliance.',
+    good:'I will paste a paragraph of construction-industry jargon below. Rewrite it in 2-3 sentences a high school senior could understand. Keep all the numbers and proper nouns exactly. Do not editorialize.',
+    goodOutput:'The shop has to meet a specific welding standard called AWS D1.1 on every joint. Two welders, Mario and Paul, are certified for it. The customer requires a copy of their certifications before any steel ships.',
+    explain:'Specifying the audience ("high school senior"), the length, AND the constraints ("keep numbers and proper nouns exactly") prevents AI from softening or dropping the parts that matter.' }
+];
+
+const RECIPES=[
+  { id:'r1', title:'Decline a vendor cold-pitch politely',
+    when:'When a vendor cold-emails wanting a meeting',
+    prompt:'I am the front desk at a structural steel fabrication shop. A vendor just emailed pitching [their product/service]. We are not looking for new vendors in that category right now. Draft a 3-sentence reply declining politely. Warm but firm. Sign as yourself.' },
+  { id:'r2', title:'Summarize a long email thread',
+    when:'When a thread balloons past 10 replies',
+    prompt:'Below is a long Outlook thread. Summarize in 5 bullets: (1) what was decided, (2) open questions, (3) action items by name, (4) deadlines, (5) anything blocking us. Plain language, no jargon.' },
+  { id:'r3', title:'Read a long PDF, give me the gist',
+    when:'When you receive a 30+ page document',
+    prompt:'Below is the text of a [vendor proposal / RFP / spec sheet]. Summarize in 8 bullets covering: scope, deadlines, dollars, payment terms, who is responsible for what, any unusual clauses, what they want from us, and what they are offering. Plain language.' },
+  { id:'r4', title:'Turn messy text into a clean table',
+    when:'When you have a wall of unstructured info',
+    prompt:'Below is a paragraph of [contact info / specs / line items]. Convert it to a clean Markdown table with columns for [Name, Phone, Email, Role]. Preserve every value exactly. Do not add or guess any data.' },
+  { id:'r5', title:'Translate to Spanish (or back)',
+    when:'When you need to communicate with a Spanish-speaking vendor or visitor',
+    prompt:'Translate the text below into Spanish suitable for a business email. Use formal "usted" form. Preserve all numbers, proper nouns, and dates exactly. Do not paraphrase technical terms — use the standard construction-industry equivalent.' },
+  { id:'r6', title:'Brainstorm 10 angles on a problem',
+    when:'When you are stuck and need ideas',
+    prompt:'I need 10 different angles on this problem: [describe problem]. Be varied — not 10 versions of the same idea. Number them 1-10. One sentence each. After the list, mark which 2 you would explore first and why.' },
+  { id:'r7', title:'Outlook calendar invite — clean copy',
+    when:'When you need to send a meeting invite that does not look thrown together',
+    prompt:'Draft an Outlook calendar invite for: [topic, attendees, date/time, location]. Subject line should be clear in 8 words or less. Body: 2 sentences on purpose, then a 3-bullet agenda. Polite, neutral tone.' },
+  { id:'r8', title:'Phone message — clean handoff',
+    when:'When someone calls and you need to forward the message',
+    prompt:'Below is a rough phone-call note I just took. Convert it to a clean, scannable Outlook email to [Owner/Mario/Paul]. Top: who called, when, callback number. Then: what they want, in 2-3 bullets. Sign as yourself.' },
+  { id:'r9', title:'Rewrite something in plain English',
+    when:'When jargon-heavy text needs to go to someone who does not speak the jargon',
+    prompt:'Below is technical text. Rewrite for someone who has never worked in construction. Keep all numbers, names, and dates exactly. Do not editorialize. 2-3 sentences max.' },
+  { id:'r10', title:'Quick gut-check on a draft',
+    when:'Before you send anything that matters',
+    prompt:'I am about to send the message below to [a customer / a vendor / leadership / a regulator]. Read it as if you were the recipient. Tell me: (1) is the ask clear in the first line, (2) is anything ambiguous, (3) anything that could be read wrong, (4) one specific edit you would make. Do not rewrite the whole thing.' }
+];
+
+const SM_SCENARIOS=[
+  { id:'s1',
+    text:'The assistant is in a hurry and pastes the company\'s entire payroll spreadsheet (with employee names and salaries) into free ChatGPT and asks "summarize the totals by department." They get a clean answer back and email it to Owner.',
+    options:['That is fine','Major mistake'], correct:'Major mistake',
+    why:'Salary data is confidential employee information. Free ChatGPT may use that data to improve its model. The correct tool here is Copilot inside Excel — it stays in our M365 tenant. Or use Excel\'s native PivotTable.' },
+  { id:'s2',
+    text:'The assistant drafts an email reply with Copilot in Outlook. The draft says "We received your purchase order on March 15 and shipped on March 22." The assistant\'s memory says March 17 and March 24. They send the AI version anyway because the AI is "probably right."',
+    options:['Reasonable','Major mistake'], correct:'Major mistake',
+    why:'AI hallucinates dates and numbers. When AI says one thing and your memory says another, your memory wins. Verify against the actual records (the PO PDF, the shipping log) before sending. Read every word of every AI-drafted client email.' },
+  { id:'s3',
+    text:'Mario asks the assistant to look up "what does AWS D1.1 say about minimum preheat for 1-inch A572-50 plate." The assistant asks free Claude. Claude gives an answer. The assistant forwards the answer directly to Mario as a definitive reference.',
+    options:['Useful shortcut','Major mistake'], correct:'Major mistake',
+    why:'Welding code questions are technical and have legal/safety consequences. AI can be wrong about specific code paragraphs. Mario should consult the actual AWS D1.1 document or the welding inspector. AI can help formulate the question, not answer it definitively.' },
+  { id:'s4',
+    text:'The assistant has a 60-page customer RFP and uses Gemini\'s free tier to generate an 8-bullet summary covering scope, deadlines, and unusual clauses. They read the bullets, then pull up the original PDF to verify the specific dollar figures and dates before forwarding to Owner.',
+    options:['Smart','Major mistake'], correct:'Smart',
+    why:'This is the right pattern: use AI to compress the document, then verify the specific facts in the original before passing it on. AI as fast first-drafter, human as verifier. (Caveat: if the RFP contains highly sensitive client info, use Copilot in our tenant instead of Gemini.)' },
+  { id:'s5',
+    text:'A vendor calls and asks for a copy of our "Texas Mutual policy declarations page." The assistant is not sure what that is and pastes the vendor\'s exact request into ChatGPT and asks "what should I send them?" ChatGPT gives a generic answer about insurance certificates.',
+    options:['Reasonable','Mistake'], correct:'Mistake',
+    why:'AI does not know Your Company\'s specific insurance documents, vendor relationships, or what Joseph already has filed. The assistant should walk to Joseph\'s desk (or send him a chat) and ask. AI can help them draft the followup once Joseph confirms what to send — but the company knowledge has to come from a human.' },
+  { id:'s6',
+    text:'The assistant is brainstorming names for a new internal newsletter, asks Claude for 10 name ideas, gets 10, and picks one. They run it past Owner before printing letterhead.',
+    options:['Smart','Mistake'], correct:'Smart',
+    why:'Brainstorming is one of AI\'s best uses. The assistant did the right thing: generate options, pick one, get human sign-off before committing. This is the pattern — AI generates, human selects, human ships.' }
+];
+
+// ============================================================================
+// STATE
+// ============================================================================
+var state={
+  view:'home', completed:{},
+  // Sort the Tasks
+  sortPlacement:{}, sortSubmitted:false,
+  // Tool Selector
+  toolPicked:{},
+  // Bad/Good
+  bgRevealedBad:{}, bgRevealedGood:{},
+  // Prompt Builder
+  pbContext:'', pbGoal:'',
+  pbTone:'Warm but firm', pbLength:'Short (3-5 sentences)', pbMusts:'',
+  pbCopied:false,
+  // Recipes
+  recipeCopied:{},
+  // Spot the Mistake
+  smPicked:{}
+};
+
+// ============================================================================
+// HELPERS
+// ============================================================================
+function escapeHtml(str){
+  if(str==null)return'';
+  return String(str).replace(/[&<>"']/g,function(c){
+    return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+  });
+}
+function passHtml(str){return str||'';}
+function getCategory(id){for(var i=0;i<CATEGORIES.length;i++)if(CATEGORIES[i].id===id)return CATEGORIES[i];return null;}
+function getLesson(id){
+  for(var i=0;i<CATEGORIES.length;i++){
+    var c=CATEGORIES[i];
+    for(var j=0;j<c.lessons.length;j++)if(c.lessons[j].id===id)return{lesson:c.lessons[j],cat:c,idx:j};
+  }return null;
+}
+function totalLessons(){return CATEGORIES.reduce(function(a,c){return a+c.lessons.length;},0);}
+function completedCount(){return Object.keys(state.completed).length;}
+function buildPrompt(){
+  var lines=[];
+  if(state.pbContext.trim()) lines.push('CONTEXT: '+state.pbContext.trim());
+  if(state.pbGoal.trim())    lines.push('GOAL: '+state.pbGoal.trim());
+  if(state.pbTone)           lines.push('TONE: '+state.pbTone);
+  if(state.pbLength)         lines.push('LENGTH: '+state.pbLength);
+  if(state.pbMusts.trim())   lines.push('MUST: '+state.pbMusts.trim());
+  return lines.join('\n');
+}
+
+// ============================================================================
+// RENDER: LAB HOME
+// ============================================================================
+function renderLabHome(){
+  var done=completedCount();
+  var html='';
+  // Privacy banner
+  html+='<div class="privacy-banner">';
+  html+=icon('shield',16,'#c084fc');
+  html+='<span class="privacy-banner-text"><strong>Privacy rule to memorize:</strong> Sensitive work (payroll, contracts, insurance, customer details) stays inside Copilot in our M365 tenant. Non-sensitive work (drafts, summaries, research) can go to free Gemini, Claude, or ChatGPT. When in doubt, use Copilot.</span>';
+  html+='</div>';
+  // Hero
+  html+='<div class="lab-hero">';
+  html+='<div class="hero-grid"></div><div class="hero-glow"></div>';
+  html+='<div class="lab-hero-inner">';
+  html+='<p class="lab-eyebrow">Your Company &middot; AI Lab</p>';
+  html+='<h1 class="lab-h1">AI <span class="accent">Productivity</span> Lab</h1>';
+  html+='<p class="lab-blurb">Five categories. Hands-on interactives. Real prompts for the work you actually do. By the end you will know which tool to reach for, how to write a prompt that works, and what never to do.</p>';
+  html+='<div class="lab-stats">';
+  var stats=[['5','Categories'],[String(totalLessons()),'Lessons'],['6','Interactives'],[String(done),'Done']];
+  for(var i=0;i<stats.length;i++){
+    html+='<div class="lab-stat"><p class="lab-stat-num">'+stats[i][0]+'</p><p class="lab-stat-lbl">'+stats[i][1]+'</p></div>';
+  }
+  html+='</div></div></div>';
+  // Category grid
+  html+='<div class="cat-grid">';
+  for(var c=0;c<CATEGORIES.length;c++){
+    var cat=CATEGORIES[c];
+    var doneInCat=0;
+    for(var l=0;l<cat.lessons.length;l++)if(state.completed[cat.lessons[l].id])doneInCat++;
+    var totalInCat=cat.lessons.length;
+    var allDone=doneInCat===totalInCat;
+    var pct=totalInCat?(doneInCat/totalInCat)*100:0;
+    html+='<button class="cat-card'+(allDone?' is-done':'')+'" data-action="open-cat" data-cat-id="'+cat.id+'">';
+    html+='<div class="cat-stripe" style="background:'+cat.color+';"></div>';
+    html+='<div class="cat-inner">';
+    html+='<div class="cat-top"><div class="cat-icon-tile" style="background:'+cat.color+';">'+icon(cat.iconKey,22,'#fff')+'</div>';
+    if(allDone) html+=icon('check',18,'#10b981');
+    html+='</div>';
+    html+='<h3>'+escapeHtml(cat.title)+'</h3>';
+    html+='<p class="cat-card-blurb">'+escapeHtml(cat.blurb)+'</p>';
+    html+='<div class="cat-card-foot"><span>'+doneInCat+'/'+totalInCat+' lessons</span>';
+    html+='<div class="cat-progress-track"><div class="cat-progress-fill" style="width:'+pct+'%;"></div></div>';
+    html+='</div></div></button>';
+  }
+  html+='</div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: CATEGORY VIEW
+// ============================================================================
+function renderCategory(cat){
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-home">'+icon('arrow-left',13)+' Back to lab home</button>';
+  html+='<div class="cat-header"><div class="cat-header-inner">';
+  html+='<div class="cat-header-icon" style="background:'+cat.color+';">'+icon(cat.iconKey,28,'#fff')+'</div>';
+  html+='<div><p class="cat-header-eyebrow" style="color:'+cat.color+';">Category</p>';
+  html+='<h2 class="cat-header-title">'+escapeHtml(cat.title)+'</h2>';
+  html+='<p class="cat-header-blurb">'+escapeHtml(cat.blurb)+'</p>';
+  html+='</div></div></div>';
+  html+='<div class="lesson-list">';
+  for(var i=0;i<cat.lessons.length;i++){
+    var l=cat.lessons[i];
+    var isDone=!!state.completed[l.id];
+    var prevDone=i===0||!!state.completed[cat.lessons[i-1].id];
+    var locked=!isDone&&!prevDone;
+    var current=!isDone&&prevDone;
+    var rowCls='lesson-row'+(isDone?' is-done':'')+(locked?' is-locked':'');
+    var tileCls='lesson-num-tile'+(isDone?' is-done':current?' is-current':' is-pending');
+    var typeLabel=l.type==='reading'?'Reading':l.type==='interactive'?'Interactive':'Sim';
+    var typeColor=l.type==='reading'?'#71717a':'#e879f9';
+    html+='<button class="'+rowCls+'"'+(locked?' disabled':' data-action="open-lesson" data-lesson-id="'+l.id+'"')+'>';
+    html+='<div class="'+tileCls+'">'+(locked?icon('lock',14):isDone?icon('check',18):String(i+1))+'</div>';
+    html+='<div class="lesson-row-meta"><p class="lesson-row-title">'+escapeHtml(l.title)+'</p>';
+    html+='<p class="lesson-row-tag" style="color:'+typeColor+';">'+typeLabel+' &middot; ~'+l.minutes+' min</p></div>';
+    if(!locked) html+=icon('arrow-right',16,'#71717a');
+    html+='</button>';
+  }
+  html+='</div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: READING LESSON
+// ============================================================================
+function renderReadingLesson(lesson,cat){
+  var content=LESSON_CONTENT[lesson.id]||{sections:[],tip:''};
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+escapeHtml(cat.title)+'</button>';
+  html+='<div class="lesson-card">';
+  html+='<div class="lesson-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+escapeHtml(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+escapeHtml(lesson.title)+'</h2></div>';
+  html+='</div><div class="lesson-card-body">';
+  for(var i=0;i<content.sections.length;i++){
+    var s=content.sections[i];
+    html+='<div class="lesson-section"><h3>'+escapeHtml(s.h)+'</h3><p>'+passHtml(s.b)+'</p></div>';
+  }
+  if(content.tip){
+    html+='<div class="tip-box"><p class="tip-eyebrow">Joseph\'s tip</p>';
+    html+='<p class="tip-body">'+passHtml(content.tip)+'</p></div>';
+  }
+  html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#000')+'</button>';
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: SORT THE TASKS (m-3)
+// ============================================================================
+function renderSortTasks(lesson,cat){
+  var allAnswered=SORT_TASKS.every(function(t){return!!state.sortPlacement[t.id];});
+  var scoreHtml='';
+  if(state.sortSubmitted){
+    var correct=0;
+    for(var t=0;t<SORT_TASKS.length;t++) if(state.sortPlacement[SORT_TASKS[t].id]===SORT_TASKS[t].correct) correct++;
+    scoreHtml='<div class="sort-score">Score: '+correct+'/'+SORT_TASKS.length+'</div>';
+  }
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+escapeHtml(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+escapeHtml(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+escapeHtml(lesson.title)+'</h2></div>';
+  html+='</div><div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Label each task: should a human do it, or is AI a good fit? Then submit to see how you did.</p>';
+  html+='<div class="sort-tasks">';
+  for(var i=0;i<SORT_TASKS.length;i++){
+    var task=SORT_TASKS[i];
+    var picked=state.sortPlacement[task.id];
+    var isCorrect=picked===task.correct;
+    var rowCls='sort-task-row'+(state.sortSubmitted?(isCorrect?' correct-yes':' correct-no'):'');
+    html+='<div class="'+rowCls+'">';
+    html+='<div class="sort-task-text">'+escapeHtml(task.t)+'</div>';
+    if(!state.sortSubmitted){
+      html+='<div class="sort-btns">';
+      html+='<button class="sort-btn ai'+(picked==='ai'?' active':'') +'" data-action="sort-pick" data-task-id="'+task.id+'" data-choice="ai">AI</button>';
+      html+='<button class="sort-btn human'+(picked==='human'?' active':'')+'" data-action="sort-pick" data-task-id="'+task.id+'" data-choice="human">Human</button>';
+      html+='</div>';
+    } else {
+      var badge=isCorrect?icon('check',13,'#34d399'):icon('x',13,'#f87171');
+      html+='<div style="flex-shrink:0;">'+badge+'</div>';
+      html+='<div class="sort-why">'+escapeHtml(task.why)+'</div>';
+    }
+    html+='</div>';
+  }
+  html+='</div>';
+  html+='<div class="sort-submit-row">';
+  if(!state.sortSubmitted){
+    html+='<button class="complete-btn" style="margin-top:0;width:auto;padding:10px 22px;" data-action="sort-submit"'+(allAnswered?'':' disabled style="opacity:.4;cursor:not-allowed;"')+'>Submit Answers</button>';
+    if(!allAnswered) html+='<span style="font-family:\'JetBrains Mono\',monospace;font-size:10px;color:#52525b;text-transform:uppercase;letter-spacing:.15em;">Label all 8 to unlock</span>';
+  } else {
+    html+=scoreHtml;
+    html+='<button class="complete-btn" style="margin-top:0;width:auto;padding:10px 22px;" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#000')+'</button>';
+    html+='<button style="font-family:\'JetBrains Mono\',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;padding:10px 16px;background:#27272a;color:#a1a1aa;border:1px solid #3f3f46;" data-action="sort-reset">Try again</button>';
+  }
+  html+='</div>';
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: TOOL SELECTOR (t-4)
+// ============================================================================
+function renderToolSelector(lesson,cat){
+  var allPicked=TOOL_TASKS.every(function(t){return!!state.toolPicked[t.id];});
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+escapeHtml(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+escapeHtml(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+escapeHtml(lesson.title)+'</h2></div>';
+  html+='</div><div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Pick the best tool for each task. Tap to reveal why.</p>';
+  html+='<div class="tool-grid">';
+  for(var i=0;i<TOOL_TASKS.length;i++){
+    var task=TOOL_TASKS[i];
+    var picked=state.toolPicked[task.id];
+    html+='<div class="tool-row">';
+    html+='<div class="tool-row-text">'+escapeHtml(task.t)+'</div>';
+    html+='<div class="tool-options">';
+    for(var j=0;j<TOOL_OPTIONS.length;j++){
+      var opt=TOOL_OPTIONS[j];
+      var isCorrect=opt===task.tool;
+      var btnCls='tool-btn'+(picked===opt?' picked-'+opt:'');
+      html+='<button class="'+btnCls+'" data-action="tool-pick" data-task-id="'+task.id+'" data-choice="'+opt+'">'+escapeHtml(opt)+'</button>';
+    }
+    html+='</div>';
+    if(picked){
+      var whyCls='tool-why visible '+(picked===task.tool?'tool-why-correct':'tool-why-text');
+      var prefix=picked===task.tool?'Correct. ':task.tool+' is better. ';
+      html+='<div class="'+whyCls+'">'+escapeHtml(prefix+task.why)+'</div>';
+    }
+    html+='</div>';
+  }
+  html+='</div>';
+  if(allPicked){
+    html+='<button class="complete-btn" style="margin-top:20px;" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#000')+'</button>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: BAD/GOOD PROMPTS (p-2)
+// ============================================================================
+function renderBadGood(lesson,cat){
+  var allRevealed=BG_PAIRS.every(function(p){return state.bgRevealedGood[p.id];});
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+escapeHtml(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+escapeHtml(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+escapeHtml(lesson.title)+'</h2></div>';
+  html+='</div><div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">For each pair, read both prompts. Reveal the AI output to see the difference. Then read the explanation.</p>';
+  html+='<div class="bg-pairs">';
+  for(var i=0;i<BG_PAIRS.length;i++){
+    var pair=BG_PAIRS[i];
+    html+='<div class="bg-pair">';
+    html+='<p class="bg-pair-label">'+escapeHtml(pair.label)+'</p>';
+    html+='<div class="bg-side-row">';
+    // Bad side
+    html+='<div class="bg-side bg-side-bad">';
+    html+='<div class="bg-side-head">The weak prompt</div>';
+    html+='<div class="bg-prompt">'+escapeHtml(pair.bad)+'</div>';
+    html+='<button class="bg-output-toggle" data-action="bg-reveal-bad" data-pair-id="'+pair.id+'">'+(state.bgRevealedBad[pair.id]?'Hide output':'Reveal AI output')+'</button>';
+    html+='<div class="bg-output'+(state.bgRevealedBad[pair.id]?' visible':'')+'">'+escapeHtml(pair.badOutput)+'</div>';
+    html+='</div>';
+    // Good side
+    html+='<div class="bg-side bg-side-good">';
+    html+='<div class="bg-side-head">The CGF prompt</div>';
+    html+='<div class="bg-prompt">'+escapeHtml(pair.good)+'</div>';
+    html+='<button class="bg-output-toggle" data-action="bg-reveal-good" data-pair-id="'+pair.id+'">'+(state.bgRevealedGood[pair.id]?'Hide output':'Reveal AI output')+'</button>';
+    html+='<div class="bg-output'+(state.bgRevealedGood[pair.id]?' visible':'')+'">'+escapeHtml(pair.goodOutput)+'</div>';
+    html+='</div>';
+    html+='</div>';
+    html+='<div class="bg-explain">'+icon('sparkles',12,'#a855f7')+' <strong>Why it matters:</strong> '+escapeHtml(pair.explain)+'</div>';
+    html+='</div>';
+  }
+  html+='</div>';
+  if(allRevealed){
+    html+='<button class="complete-btn" style="margin-top:20px;" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#000')+'</button>';
+  } else {
+    html+='<p style="font-family:\'JetBrains Mono\',monospace;font-size:10px;color:#52525b;text-transform:uppercase;letter-spacing:.15em;margin-top:16px;">Reveal all 3 good outputs to unlock</p>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: PROMPT BUILDER (p-3)
+// ============================================================================
+function renderPromptBuilder(lesson,cat){
+  var prompt=buildPrompt();
+  var hasContent=!!state.pbContext.trim()||!!state.pbGoal.trim();
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+escapeHtml(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+escapeHtml(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+escapeHtml(lesson.title)+'</h2></div>';
+  html+='</div><div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:20px;">Fill in the fields. Your assembled prompt appears live on the right. Copy it and paste into any AI.</p>';
+  html+='<div class="pb-grid">';
+  // Left: form
+  html+='<div class="pb-form">';
+  html+='<div class="pb-field"><label>Context (who are you, what\'s happening)</label>';
+  html+='<textarea rows="3" id="pb-context" placeholder="I am the front desk at a structural steel fabrication shop in Houston...">'+escapeHtml(state.pbContext)+'</textarea></div>';
+  html+='<div class="pb-field"><label>Goal (what you want produced)</label>';
+  html+='<textarea rows="3" id="pb-goal" placeholder="Draft a 3-sentence reply declining the meeting politely...">'+escapeHtml(state.pbGoal)+'</textarea></div>';
+  html+='<div class="pb-field"><label>Tone</label>';
+  html+='<select id="pb-tone">';
+  var tones=['Warm but firm','Professional','Casual','Formal','Apologetic'];
+  for(var t=0;t<tones.length;t++) html+='<option'+(state.pbTone===tones[t]?' selected':'')+'>'+escapeHtml(tones[t])+'</option>';
+  html+='</select></div>';
+  html+='<div class="pb-field"><label>Length</label>';
+  html+='<select id="pb-length">';
+  var lengths=['Short (3-5 sentences)','Medium (1-2 paragraphs)','Long (full document)','Bullet list'];
+  for(var ll=0;ll<lengths.length;ll++) html+='<option'+(state.pbLength===lengths[ll]?' selected':'')+'>'+escapeHtml(lengths[ll])+'</option>';
+  html+='</select></div>';
+  html+='<div class="pb-field"><label>Must (constraints, don\'t include, etc.)</label>';
+  html+='<input type="text" id="pb-musts" placeholder="No bullet points. Sign as yourself." value="'+escapeHtml(state.pbMusts)+'" /></div>';
+  html+='</div>';
+  // Right: assembled
+  html+='<div class="pb-assembled">';
+  html+='<div class="pb-assembled-head">Your assembled prompt</div>';
+  html+='<div class="pb-assembled-box">';
+  if(hasContent) html+=escapeHtml(prompt);
+  else html+='<span class="pb-empty-hint">Start filling in the fields to build your prompt...</span>';
+  html+='</div>';
+  if(hasContent){
+    var copyCls='pb-copy-btn'+(state.pbCopied?' copied':'');
+    html+='<button class="'+copyCls+'" data-action="pb-copy">'+icon('clipboard',12)+' '+(state.pbCopied?'Copied!':'Copy to clipboard')+'</button>';
+  }
+  html+='<div class="tip-box" style="margin-top:20px;">';
+  html+='<p class="tip-eyebrow">Joseph\'s tip</p>';
+  html+='<p class="tip-body">Context and Goal are the only required fields. Tone, Length, and Must are refiners. A 2-field prompt beats a 0-field prompt every time.</p>';
+  html+='</div>';
+  html+='</div>';
+  html+='</div>';
+  if(hasContent){
+    html+='<button class="complete-btn" style="margin-top:24px;" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#000')+'</button>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: RECIPES (r-1)
+// ============================================================================
+function renderRecipes(lesson,cat){
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+escapeHtml(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+escapeHtml(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+escapeHtml(lesson.title)+'</h2></div>';
+  html+='</div><div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Ten copy-paste prompts for situations you will actually face. Replace the text in [brackets] with real details, paste into any AI, review and send.</p>';
+  html+='<div class="recipes-grid">';
+  for(var i=0;i<RECIPES.length;i++){
+    var r=RECIPES[i];
+    var isCopied=!!state.recipeCopied[r.id];
+    html+='<div class="recipe-card">';
+    html+='<div class="recipe-card-head"><span class="recipe-title">'+escapeHtml(r.title)+'</span>';
+    html+='<button class="recipe-copy-btn'+(isCopied?' copied':'')+'" data-action="recipe-copy" data-recipe-id="'+r.id+'">'+icon('clipboard',11)+(isCopied?' Copied':' Copy')+'</button>';
+    html+='</div>';
+    html+='<div class="recipe-when">When: '+escapeHtml(r.when)+'</div>';
+    html+='<div class="recipe-prompt">'+escapeHtml(r.prompt)+'</div>';
+    html+='</div>';
+  }
+  html+='</div>';
+  html+='<button class="complete-btn" style="margin-top:20px;" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#000')+'</button>';
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: SPOT THE MISTAKE (a-2)
+// ============================================================================
+function renderSpotMistake(lesson,cat){
+  var allAnswered=SM_SCENARIOS.every(function(s){return!!state.smPicked[s.id];});
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+escapeHtml(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+escapeHtml(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+escapeHtml(lesson.title)+'</h2></div>';
+  html+='</div><div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Read each scenario. Decide if the assistant did the right thing or made a mistake. Tap to lock in your answer.</p>';
+  html+='<div class="sm-grid">';
+  for(var i=0;i<SM_SCENARIOS.length;i++){
+    var sc=SM_SCENARIOS[i];
+    var picked=state.smPicked[sc.id];
+    var isCorrect=picked===sc.correct;
+    html+='<div class="sm-card">';
+    html+='<div class="sm-num">Scenario '+(i+1)+'</div>';
+    html+='<div class="sm-text">'+escapeHtml(sc.text)+'</div>';
+    html+='<div class="sm-options">';
+    for(var j=0;j<sc.options.length;j++){
+      var opt=sc.options[j];
+      var btnCls='sm-opt-btn';
+      if(picked===opt){
+        btnCls+=picked===sc.correct?' picked-correct':' picked-wrong';
+      }
+      html+='<button class="'+btnCls+'" data-action="sm-pick" data-scenario-id="'+sc.id+'" data-choice="'+escapeHtml(opt)+'">'+escapeHtml(opt)+'</button>';
+    }
+    html+='</div>';
+    if(picked){
+      var verdictCls='sm-verdict '+(isCorrect?'correct':'wrong');
+      html+='<div class="'+verdictCls+'">'+(isCorrect?'Correct. ':sc.correct+'. ')+escapeHtml(sc.why)+'</div>';
+    }
+    html+='</div>';
+  }
+  html+='</div>';
+  if(allAnswered){
+    var correct=0;
+    for(var s=0;s<SM_SCENARIOS.length;s++) if(state.smPicked[SM_SCENARIOS[s].id]===SM_SCENARIOS[s].correct) correct++;
+    html+='<div class="sm-score-row">'+icon('award',14,'#e879f9')+' Score: '+correct+'/'+SM_SCENARIOS.length+'</div>';
+    html+='<button class="complete-btn" style="margin-top:16px;" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#000')+'</button>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// LESSON DISPATCHER
+// ============================================================================
+function renderLesson(lesson,cat){
+  if(lesson.type==='reading') return renderReadingLesson(lesson,cat);
+  if(lesson.intKey==='sortTasks')     return renderSortTasks(lesson,cat);
+  if(lesson.intKey==='toolSelector')  return renderToolSelector(lesson,cat);
+  if(lesson.intKey==='badGood')       return renderBadGood(lesson,cat);
+  if(lesson.intKey==='promptBuilder') return renderPromptBuilder(lesson,cat);
+  if(lesson.intKey==='recipes')       return renderRecipes(lesson,cat);
+  if(lesson.intKey==='spotMistake')   return renderSpotMistake(lesson,cat);
+  return renderReadingLesson(lesson,cat);
+}
+
+// ============================================================================
+// RENDER DISPATCH
+// ============================================================================
+function render(){
+  var app=document.getElementById('app');
+  var html='';
+  if(state.view==='home'){
+    html=renderLabHome();
+  } else if(state.view.indexOf('category:')===0){
+    var cat=getCategory(state.view.slice(9));
+    html=cat?renderCategory(cat):renderLabHome();
+  } else if(state.view.indexOf('lesson:')===0){
+    var info=getLesson(state.view.slice(7));
+    html=info?renderLesson(info.lesson,info.cat):renderLabHome();
+  }
+  app.innerHTML=html;
+
+  // Wire up live Prompt Builder inputs after DOM inject
+  if(state.view.indexOf('lesson:')===0){
+    var info2=getLesson(state.view.slice(7));
+    if(info2&&info2.lesson.intKey==='promptBuilder'){
+      setTimeout(function(){
+        var ctx=document.getElementById('pb-context');
+        var goal=document.getElementById('pb-goal');
+        var tone=document.getElementById('pb-tone');
+        var len=document.getElementById('pb-length');
+        var musts=document.getElementById('pb-musts');
+        function refresh(){ render(); }
+        if(ctx) ctx.addEventListener('input',function(e){state.pbContext=e.target.value;render();});
+        if(goal) goal.addEventListener('input',function(e){state.pbGoal=e.target.value;render();});
+        if(tone) tone.addEventListener('change',function(e){state.pbTone=e.target.value;render();});
+        if(len) len.addEventListener('change',function(e){state.pbLength=e.target.value;render();});
+        if(musts) musts.addEventListener('input',function(e){state.pbMusts=e.target.value;render();});
+      },50);
+    }
+  }
+
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ============================================================================
+// EVENT DELEGATION
+// ============================================================================
+document.body.addEventListener('click',function(ev){
+  var t=ev.target.closest('[data-action]');
+  if(!t) return;
+  var action=t.getAttribute('data-action');
+
+  // Navigation
+  if(action==='open-cat'){
+    state.view='category:'+t.getAttribute('data-cat-id');
+    render();
+  } else if(action==='back-home'){
+    state.view='home'; render();
+  } else if(action==='open-lesson'){
+    var lid=t.getAttribute('data-lesson-id');
+    var info=getLesson(lid);
+    // Reset interactive state when entering fresh
+    if(info&&info.lesson.intKey==='sortTasks'){state.sortPlacement={};state.sortSubmitted=false;}
+    if(info&&info.lesson.intKey==='toolSelector') state.toolPicked={};
+    if(info&&info.lesson.intKey==='badGood'){state.bgRevealedBad={};state.bgRevealedGood={};}
+    if(info&&info.lesson.intKey==='promptBuilder'){state.pbCopied=false;}
+    if(info&&info.lesson.intKey==='recipes') state.recipeCopied={};
+    if(info&&info.lesson.intKey==='spotMistake') state.smPicked={};
+    state.view='lesson:'+lid; render();
+  } else if(action==='back-cat'){
+    state.view='category:'+t.getAttribute('data-cat-id'); render();
+  } else if(action==='complete-lesson'){
+    var lid2=t.getAttribute('data-lesson-id');
+    state.completed[lid2]=true;
+    var info2=getLesson(lid2);
+    if(info2){
+      var next=null;
+      for(var i=0;i<info2.cat.lessons.length;i++){
+        if(info2.cat.lessons[i].id===lid2&&i+1<info2.cat.lessons.length){
+          next=info2.cat.lessons[i+1]; break;
+        }
+      }
+      if(next){ state.view='lesson:'+next.id; }
+      else { state.view='category:'+info2.cat.id; }
+      render();
+    }
+  }
+
+  // Sort the Tasks
+  else if(action==='sort-pick'){
+    if(state.sortSubmitted) return;
+    var tid=parseInt(t.getAttribute('data-task-id'),10);
+    var choice=t.getAttribute('data-choice');
+    state.sortPlacement[tid]=choice;
+    render();
+  } else if(action==='sort-submit'){
+    state.sortSubmitted=true; render();
+  } else if(action==='sort-reset'){
+    state.sortPlacement={}; state.sortSubmitted=false; render();
+  }
+
+  // Tool Selector
+  else if(action==='tool-pick'){
+    var ttid=t.getAttribute('data-task-id');
+    var tchoice=t.getAttribute('data-choice');
+    state.toolPicked[ttid]=tchoice; render();
+  }
+
+  // Bad/Good Prompts
+  else if(action==='bg-reveal-bad'){
+    var pid=t.getAttribute('data-pair-id');
+    state.bgRevealedBad[pid]=!state.bgRevealedBad[pid]; render();
+  } else if(action==='bg-reveal-good'){
+    var pid2=t.getAttribute('data-pair-id');
+    state.bgRevealedGood[pid2]=!state.bgRevealedGood[pid2]; render();
+  }
+
+  // Prompt Builder copy
+  else if(action==='pb-copy'){
+    var prompt=buildPrompt();
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(prompt).then(function(){
+        state.pbCopied=true; render();
+        setTimeout(function(){state.pbCopied=false;render();},2500);
+      });
+    } else {
+      // Fallback
+      var ta=document.createElement('textarea');
+      ta.value=prompt; ta.style.position='fixed'; ta.style.top='-9999px';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      state.pbCopied=true; render();
+      setTimeout(function(){state.pbCopied=false;render();},2500);
+    }
+  }
+
+  // Recipes copy
+  else if(action==='recipe-copy'){
+    var rid=t.getAttribute('data-recipe-id');
+    var recipe=null;
+    for(var r=0;r<RECIPES.length;r++) if(RECIPES[r].id===rid) recipe=RECIPES[r];
+    if(!recipe) return;
+    var rtext=recipe.prompt;
+    function doRecipeCopied(){
+      state.recipeCopied[rid]=true; render();
+      setTimeout(function(){state.recipeCopied[rid]=false;render();},2500);
+    }
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(rtext).then(doRecipeCopied);
+    } else {
+      var ta2=document.createElement('textarea');
+      ta2.value=rtext; ta2.style.position='fixed'; ta2.style.top='-9999px';
+      document.body.appendChild(ta2); ta2.select();
+      document.execCommand('copy'); document.body.removeChild(ta2);
+      doRecipeCopied();
+    }
+  }
+
+  // Spot the Mistake
+  else if(action==='sm-pick'){
+    var sid=t.getAttribute('data-scenario-id');
+    var schoice=t.getAttribute('data-choice');
+    state.smPicked[sid]=schoice; render();
+  }
+});
+
+// ============================================================================
+// INIT
+// ============================================================================
+document.getElementById('logo-slot').innerHTML=icon('sparkles',22,'#fff');
+render();
+</script>
+</body>
+</html>

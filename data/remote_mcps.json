@@ -1,0 +1,15 @@
+[
+  {
+    "name": "microsoft-365",
+    "url": "https://microsoft365.mcp.claude.com/mcp",
+    "description": "Outlook mail/calendar/files, SharePoint, Teams. Alternative path for vendor quote poller when local Outlook COM unavailable.",
+    "categories": [
+      "email",
+      "calendar",
+      "files",
+      "office"
+    ],
+    "added_at": "2026-05-13",
+    "enabled": true
+  }
+]

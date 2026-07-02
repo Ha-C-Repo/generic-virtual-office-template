@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Company VirtualOffice - Admin Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --carbon:#0a0a0c; --carbon-2:#111114; --carbon-3:#18181d;
+  --steel:#1f2229; --line:rgba(255,255,255,.07); --line-b:rgba(255,255,255,.16);
+  --molten:#ff5f00; --molten-deep:#c44600;
+  --text:#f5f5f7; --mute:#8a92a6; --dim:#565d6e;
+  --ok:#3ecf8e; --warn:#ffd700; --bad:#ff4d4d;
+  --display:'Big Shoulders Display',Impact,sans-serif;
+  --body:'Manrope',system-ui,sans-serif;
+  --mono:'JetBrains Mono','SF Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--carbon);color:var(--text);font-family:var(--body);line-height:1.5;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+header{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--line);background:var(--carbon-2);flex:none}
+.brand{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:1.2rem;letter-spacing:.04em}
+.brand b{color:var(--molten)}
+.conn{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.conn.on{color:var(--ok)}
+nav{display:flex;border-bottom:1px solid var(--line);background:var(--carbon-2);flex:none}
+nav button{flex:1;background:none;border:none;border-right:1px solid var(--line);color:var(--mute);font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:2px;font-size:.9rem;padding:13px;cursor:pointer}
+nav button.on{color:var(--text);background:var(--carbon);box-shadow:inset 0 -2px 0 var(--molten)}
+main{flex:1;overflow:auto;padding:20px}
+.tab{display:none}.tab.on{display:block}
+h2{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:1.6rem;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.card{background:var(--carbon-3);border:1px solid var(--line);padding:18px}
+.card h3{font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--molten);margin-bottom:10px}
+.card pre{font-family:var(--mono);font-size:.78rem;color:var(--mute);white-space:pre-wrap;word-break:break-word;max-height:300px;overflow:auto}
+.kpi{font-family:var(--display);font-weight:900;font-size:2.2rem;line-height:1}
+.kpi-l{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-top:6px}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line)}
+th{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+tr:hover td{background:var(--carbon-2);cursor:pointer}
+.btn{background:linear-gradient(135deg,var(--molten),var(--molten-deep));color:#fff;border:none;border-radius:0;padding:11px 20px;font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:1.6px;font-size:.82rem;cursor:pointer}
+.btn.sec{background:transparent;border:1px solid var(--line-b);color:var(--text)}
+input,textarea,select{background:var(--steel);border:1px solid var(--line-b);border-radius:0;color:var(--text);font-family:var(--body);font-size:.9rem;padding:10px}
+input:focus,textarea:focus{outline:1px solid var(--molten)}
+/* chat */
+#chatwrap{display:flex;flex-direction:column;height:calc(100vh - 175px)}
+#chatlog{flex:1;overflow:auto;border:1px solid var(--line);background:var(--carbon-2);padding:16px;display:flex;flex-direction:column;gap:12px}
+.msg{max-width:78%;padding:11px 14px;font-size:.92rem;white-space:pre-wrap;word-break:break-word}
+.msg.user{align-self:flex-end;background:var(--molten-deep);color:#fff}
+.msg.ai{align-self:flex-start;background:var(--carbon-3);border:1px solid var(--line)}
+.msg .files{font-family:var(--mono);font-size:.64rem;color:var(--dim);margin-top:6px;letter-spacing:.08em}
+#chatbar{display:flex;gap:8px;margin-top:10px}
+#chatbar textarea{flex:1;resize:none;height:64px}
+#attachlist{font-family:var(--mono);font-size:.66rem;color:var(--molten);margin-top:6px;letter-spacing:.08em}
+/* login overlay */
+#login{position:fixed;inset:0;background:var(--carbon);display:flex;align-items:center;justify-content:center;z-index:99}
+#login .box{background:var(--carbon-2);border:1px solid var(--line-b);padding:40px;width:380px;text-align:center}
+#login h1{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:1.6rem;margin-bottom:6px}
+#login h1 b{color:var(--molten)}
+#login p{color:var(--dim);font-size:.8rem;margin-bottom:18px}
+#login input{width:100%;margin-bottom:12px;text-align:center;font-family:var(--mono)}
+.err{color:var(--bad);font-size:.78rem;margin-top:8px;min-height:1em}
+.muted{color:var(--dim);font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid var(--dim);border-top-color:var(--molten);border-radius:50%;animation:r 0.8s linear infinite;vertical-align:middle}
+@keyframes r{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <div class="box">
+    <h1>Your Company <b>VirtualOffice</b></h1>
+    <p>ADMIN DASHBOARD - AUTHORIZED USERS ONLY</p>
+    <input id="tok" type="password" placeholder="access token" autocomplete="current-password">
+    <button class="btn" style="width:100%" onclick="login()">Enter</button>
+    <div class="err" id="loginerr"></div>
+  </div>
+</div>
+
+<header>
+  <span class="brand">Your Company <b>VirtualOffice</b> &middot; Web</span>
+  <span class="conn" id="conn">connecting...</span>
+</header>
+<nav>
+  <button class="on" data-tab="status" onclick="tab(this)">Status</button>
+  <button data-tab="bids" onclick="tab(this)">Bids</button>
+  <button data-tab="chat" onclick="tab(this)">Chat</button>
+  <button data-tab="files" onclick="tab(this)">Files</button>
+</nav>
+<main>
+
+<div class="tab on" id="tab-status">
+  <h2>Status <button class="btn sec" style="float:right" onclick="loadStatus()">Refresh</button></h2>
+  <div class="grid" id="statusgrid"><div class="card"><span class="spin"></span> loading...</div></div>
+</div>
+
+<div class="tab" id="tab-bids">
+  <h2>Bid Pipeline <button class="btn sec" style="float:right" onclick="loadBids()">Refresh</button></h2>
+  <div style="margin-bottom:12px">
+    <select id="bidfilter" onchange="loadBids()">
+      <option value="">All statuses</option><option>ACTIVE</option><option>SUBMITTED</option>
+      <option>WON</option><option>LOST</option><option>DRAFT</option>
+    </select>
+  </div>
+  <div class="card"><table id="bidtable">
+    <thead><tr><th>Proposal</th><th>Project</th><th>GC</th><th>Status</th><th>Total</th><th>Deadline</th></tr></thead>
+    <tbody></tbody></table></div>
+  <div class="card" id="biddetail" style="margin-top:14px;display:none">
+    <h3>Bid detail</h3><pre id="biddetailpre"></pre>
+  </div>
+</div>
+
+<div class="tab" id="tab-chat">
+  <div id="chatwrap">
+    <div id="chatlog"></div>
+    <div id="attachlist"></div>
+    <div id="chatbar">
+      <textarea id="chatmsg" placeholder="Ask VirtualOffice anything. Same AI as the desktop CHAT tab. Shift+Enter for newline."></textarea>
+      <input type="file" id="chatfiles" multiple style="display:none" onchange="attach()">
+      <button class="btn sec" onclick="document.getElementById('chatfiles').click()">Attach</button>
+      <button class="btn" id="sendbtn" onclick="send()">Send</button>
+    </div>
+  </div>
+</div>
+
+<div class="tab" id="tab-files">
+  <h2>Upload to VirtualOffice</h2>
+  <div class="card">
+    <p class="muted" style="margin-bottom:10px">Files land in _requests/dashboard_uploads/ on the office PC. Drawings, PDFs, photos.</p>
+    <input type="file" id="upfiles" multiple>
+    <button class="btn" style="margin-left:8px" onclick="upload()">Upload</button>
+    <pre id="upresult" style="margin-top:12px"></pre>
+  </div>
+</div>
+
+</main>
+
+<script>
+const $=id=>document.getElementById(id);
+let TOKEN=localStorage.getItem('ncvo_token')||'';
+let HISTORY=[];     // [{role, content}]
+let ATTACH=[];      // [{name,type,cat,data}]
+
+const api=async(path,body)=>{
+  const opt={method:body?'POST':'GET',headers:{'Authorization':'Bearer '+TOKEN}};
+  if(body){opt.headers['Content-Type']='application/json';opt.body=JSON.stringify(body);}
+  const r=await fetch(path,opt);
+  if(r.status===401){localStorage.removeItem('ncvo_token');$('login').style.display='flex';throw new Error('unauthorized');}
+  return r.json();
+};
+
+async function login(){
+  TOKEN=$('tok').value.trim();
+  try{
+    const r=await api('/api/status');
+    if(r.ok){localStorage.setItem('ncvo_token',TOKEN);$('login').style.display='none';boot(r);}
+    else $('loginerr').textContent='rejected';
+  }catch(e){$('loginerr').textContent='invalid token';}
+}
+$('tok').addEventListener('keydown',e=>{if(e.key==='Enter')login();});
+
+function tab(btn){
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  btn.classList.add('on');$('tab-'+btn.dataset.tab).classList.add('on');
+}
+
+// ---- STATUS ----
+function card(title,inner){return `<div class="card"><h3>${title}</h3>${inner}</div>`;}
+function renderStatus(d){
+  let h='';
+  const ds=d.daily_status&&d.daily_status.data;
+  if(ds)h+=card('Daily status',`<pre>${esc(JSON.stringify(ds,null,1))}</pre>`);
+  const k=d.get_kpis&&d.get_kpis.data;
+  if(k&&typeof k==='object'){
+    for(const[key,val]of Object.entries(k)){
+      if(typeof val==='number'||typeof val==='string')
+        h+=card(key.replace(/_/g,' '),`<div class="kpi">${esc(String(val))}</div>`);
+    }
+  }
+  const p=d.get_pipeline_summary&&d.get_pipeline_summary.data;
+  if(p)h+=card('Pipeline',`<pre>${esc(JSON.stringify(p,null,1))}</pre>`);
+  const c=d.compliance_summary&&d.compliance_summary.data;
+  if(c)h+=card('Compliance',`<pre>${esc(JSON.stringify(c,null,1))}</pre>`);
+  $('statusgrid').innerHTML=h||card('No data','<pre>Bridge returned nothing.</pre>');
+}
+async function loadStatus(){
+  $('statusgrid').innerHTML='<div class="card"><span class="spin"></span> loading...</div>';
+  const r=await api('/api/status');if(r.ok)renderStatus(r.data);
+}
+
+// ---- BIDS ----
+async function loadBids(){
+  const r=await api('/api/invoke',{method:'list_bids',args:{status:$('bidfilter').value,limit:50}});
+  const rows=(r.data&&(r.data.bids||r.data))||[];
+  const tb=$('bidtable').querySelector('tbody');tb.innerHTML='';
+  (Array.isArray(rows)?rows:[]).forEach(b=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td class="muted">${esc(b.proposal_no||b.id||'')}</td><td>${esc(b.project_name||'')}</td><td>${esc(b.gc_name||b.gc_company||'')}</td><td>${esc(b.status||'')}</td><td>${b.base_bid_total?('$'+Number(b.base_bid_total).toLocaleString()):''}</td><td>${esc(b.deadline||'')}</td>`;
+    tr.onclick=()=>bidDetail(b.id);
+    tb.appendChild(tr);
+  });
+  if(!tb.children.length)tb.innerHTML='<tr><td colspan="6" class="muted">no bids returned</td></tr>';
+}
+async function bidDetail(id){
+  if(!id)return;
+  const r=await api('/api/invoke',{method:'get_bid_detail',args:{bid_id:id}});
+  $('biddetail').style.display='block';
+  $('biddetailpre').textContent=JSON.stringify(r.data||r,null,2);
+}
+
+// ---- CHAT ----
+function bubble(role,text,files){
+  const div=document.createElement('div');div.className='msg '+role;
+  div.textContent=text;
+  if(files&&files.length){const f=document.createElement('div');f.className='files';
+    f.textContent='attached: '+files.map(x=>x.name).join(', ');div.appendChild(f);}
+  $('chatlog').appendChild(div);$('chatlog').scrollTop=1e9;
+  return div;
+}
+function attach(){
+  const fl=$('chatfiles').files;
+  for(const f of fl){
+    const rd=new FileReader();
+    rd.onload=()=>{
+      const b64=rd.result.split(',')[1];
+      const cat=f.type.startsWith('image/')?'image':(f.type==='application/pdf'?'pdf':(f.type.startsWith('text/')?'text':'other'));
+      ATTACH.push({name:f.name,type:f.type,cat:cat,data:b64});
+      $('attachlist').textContent='attach: '+ATTACH.map(a=>a.name).join(', ');
+    };
+    rd.readAsDataURL(f);
+  }
+  $('chatfiles').value='';
+}
+async function send(){
+  const msg=$('chatmsg').value.trim();
+  if(!msg&&!ATTACH.length)return;
+  bubble('user',msg,ATTACH);
+  const files=ATTACH;ATTACH=[];$('attachlist').textContent='';$('chatmsg').value='';
+  $('sendbtn').disabled=true;
+  const wait=bubble('ai','...');wait.innerHTML='<span class="spin"></span>';
+  try{
+    const r=await api('/api/chat',{message:msg,history:HISTORY,files:files});
+    const reply=(r.data&&(r.data.reply||r.data.text||r.data.response))||r.error||JSON.stringify(r.data||r);
+    wait.textContent=typeof reply==='string'?reply:JSON.stringify(reply,null,2);
+    HISTORY.push({role:'user',content:msg});
+    HISTORY.push({role:'assistant',content:wait.textContent});
+    if(HISTORY.length>30)HISTORY=HISTORY.slice(-30);
+  }catch(e){wait.textContent='error: '+e.message;}
+  $('sendbtn').disabled=false;$('chatlog').scrollTop=1e9;
+}
+$('chatmsg').addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}
+});
+
+// ---- FILES ----
+async function upload(){
+  const fl=$('upfiles').files;if(!fl.length)return;
+  $('upresult').textContent='uploading...';
+  const lines=[];
+  for(const f of fl){
+    const b64=await new Promise(res=>{const rd=new FileReader();
+      rd.onload=()=>res(rd.result.split(',')[1]);rd.readAsDataURL(f);});
+    const r=await api('/api/upload',{name:f.name,data_b64:b64});
+    lines.push(f.name+' -> '+(r.ok?'saved ('+r.data.bytes+' bytes)':('FAILED: '+r.error)));
+  }
+  $('upresult').textContent=lines.join('\n');$('upfiles').value='';
+}
+
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+async function boot(pre){
+  $('conn').textContent='connected';$('conn').classList.add('on');
+  if(pre&&pre.ok)renderStatus(pre.data);else loadStatus();
+  loadBids();
+}
+(async()=>{
+  if(TOKEN){
+    try{const r=await api('/api/status');if(r.ok){$('login').style.display='none';boot(r);return;}}catch(e){}
+  }
+  $('login').style.display='flex';
+})();
+</script>
+</body>
+</html>

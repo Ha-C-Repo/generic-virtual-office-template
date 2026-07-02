@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Front Desk Training | Your Company</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #000; color: #e4e4e7;
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.5; min-height: 100vh;
+    background-image:
+      radial-gradient(circle at 90% 10%, rgba(255,184,0,0.06), transparent 40%),
+      radial-gradient(circle at 10% 90%, rgba(77,208,225,0.04), transparent 40%);
+  }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; padding: 0; }
+  p { margin: 0; }
+  h1, h2, h3 { margin: 0; font-weight: normal; }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+  .bebas { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; }
+  .mono  { font-family: 'JetBrains Mono', 'Cascadia Code', Consolas, monospace; }
+
+  /* Header */
+  header.site {
+    border-bottom: 2px solid #27272a;
+    background: rgba(0,0,0,0.85);
+    position: sticky; top: 0; z-index: 10;
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  }
+  .header-row { max-width: 960px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; gap: 12px; }
+  .logo-tile { width: 40px; height: 40px; background: #fbbf24; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .header-meta { flex: 1; min-width: 0; }
+  .header-meta .small { font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; color: #52525b; }
+  .header-meta .big { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: #fff; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .header-progress-wrap { width: 180px; flex-shrink: 0; }
+
+  /* Weld-bead progress bar */
+  .weld-row { display: flex; justify-content: space-between; margin-bottom: 6px; }
+  .weld-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: #71717a; }
+  .weld-count { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; color: #fbbf24; font-weight: 700; }
+  .weld-track { position: relative; height: 12px; background: #18181b; border: 1px solid #3f3f46; overflow: hidden; }
+  .weld-fill {
+    position: absolute; top: 0; left: 0; height: 100%;
+    background: linear-gradient(90deg, #f59e0b, #fb923c, #fbbf24);
+    box-shadow: inset 0 0 8px rgba(255,180,0,0.5);
+    transition: width 0.6s ease;
+  }
+
+  /* Footer */
+  footer.site { max-width: 960px; margin: 0 auto; padding: 28px 20px; border-top: 1px solid #27272a; text-align: center; }
+  footer.site p { font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; color: #3f3f46; }
+
+  /* Stamps (rotating tags) */
+  .stamp {
+    display: inline-block; background: #fbbf24; color: #000;
+    font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.15em;
+    font-size: 11px; font-weight: 900; text-transform: uppercase;
+    padding: 3px 10px; border: 2px solid #000;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.85);
+  }
+
+  /* Welcome hero */
+  .welcome-hero {
+    position: relative; border: 2px solid #3f3f46; background: #18181b;
+    overflow: hidden; margin-bottom: 32px;
+  }
+  .welcome-grid {
+    position: absolute; inset: 0; opacity: 0.18;
+    background-image: linear-gradient(rgba(77,208,225,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(77,208,225,0.2) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .welcome-glow {
+    position: absolute; top: -40px; right: -40px; width: 180px; height: 180px;
+    background: #fbbf24; border-radius: 50%; filter: blur(60px); opacity: 0.15;
+  }
+  .welcome-inner { position: relative; padding: 28px 24px; }
+  .welcome-stamps { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+  .welcome-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.3em; color: #fbbf24; margin-bottom: 10px; }
+  .welcome-h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 10vw, 80px); color: #fff; line-height: 0.9; margin-bottom: 16px; }
+  .welcome-h1 .accent { color: #fbbf24; }
+  .welcome-blurb { color: #a1a1aa; max-width: 520px; font-size: 14px; line-height: 1.7; margin-bottom: 24px; }
+  .welcome-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 380px; margin-bottom: 28px; }
+  .welcome-stat { border: 1px solid #3f3f46; background: rgba(0,0,0,0.4); padding: 10px 12px; }
+  .welcome-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: #fbbf24; margin: 0 0 2px; }
+  .welcome-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: #52525b; }
+  .start-btn {
+    font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.2em;
+    background: #fbbf24; color: #000; border: 2px solid #fbbf24;
+    padding: 14px 28px; display: inline-flex; align-items: center; gap: 10px;
+  }
+
+  /* Team grid */
+  .team-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .team-head h2 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: #fff; margin: 0; }
+  .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .team-card { border: 2px solid #3f3f46; background: #18181b; padding: 14px 16px; }
+  .team-avatar { width: 38px; height: 38px; margin-bottom: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: #000; font-weight: 900; font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px; letter-spacing: 0.04em; }
+  .team-name { color: #fff; font-weight: 700; font-size: 13px; margin: 0 0 2px; }
+  .team-role { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: #fbbf24; margin: 0 0 6px; }
+  .team-tag { font-size: 12px; color: #71717a; margin: 0; line-height: 1.5; }
+
+  /* Dashboard */
+  .dash-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+  .dash-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.3em; color: #fbbf24; margin-bottom: 4px; }
+  .dash-h2 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: #fff; margin: 0; }
+  .module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+
+  /* Module card */
+  .mod-card {
+    text-align: left; width: 100%;
+    border: 2px solid #3f3f46; background: #18181b; padding: 0;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .mod-card.is-locked { cursor: not-allowed; opacity: 0.45; border-color: #27272a; }
+  .mod-card.is-done   { border-color: #10b981; }
+  .mod-card.is-current { border-color: #fbbf24; box-shadow: 6px 6px 0 rgba(255,184,0,0.85); }
+  .mod-card-inner { padding: 16px 18px; }
+  .mod-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; gap: 8px; }
+  .mod-card-icon-tile {
+    width: 44px; height: 44px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .mod-card-icon-tile.is-done    { background: #10b981; border: 2px solid #10b981; color: #000; }
+  .mod-card-icon-tile.is-current { background: #fbbf24; border: 2px solid #fbbf24; color: #000; }
+  .mod-card-icon-tile.is-pending { background: #27272a; border: 2px solid #3f3f46; color: #71717a; }
+  .mod-card-subtitle { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.25em; color: #52525b; margin-top: 2px; }
+  .mod-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: #fff; margin: 0 0 4px; line-height: 1; }
+  .mod-card-blurb { font-size: 12px; color: #71717a; line-height: 1.5; margin: 0 0 10px; }
+  .mod-card-foot { display: flex; justify-content: space-between; align-items: center; }
+  .mod-card-foot-meta { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #3f3f46; }
+
+  /* Module view (lesson reading) */
+  .lesson-back-btn { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: #71717a; display: flex; align-items: center; gap: 6px; margin-bottom: 20px; }
+  .lesson-card { border: 2px solid #3f3f46; background: #18181b; }
+  .lesson-card-header {
+    background: #fbbf24; color: #000; padding: 16px 20px;
+    display: flex; align-items: center; gap: 16px;
+    border-bottom: 2px solid #3f3f46;
+  }
+  .lesson-icon-tile { width: 52px; height: 52px; background: #000; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .lesson-card-subtitle { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 700; opacity: 0.7; margin: 0; }
+  .lesson-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; margin: 4px 0 0; line-height: 1; color: #000; }
+  .lesson-card-body { padding: 24px 22px; }
+  .lesson-section { margin-bottom: 24px; }
+  .lesson-section.callout { border-left: 4px solid #ef4444; background: rgba(239,68,68,0.06); padding: 12px 16px; }
+  .lesson-section h3 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #fbbf24; margin: 0 0 8px; letter-spacing: 0.04em; display: flex; align-items: center; gap: 6px; }
+  .lesson-section.callout h3 { color: #fca5a5; }
+  .lesson-section p { color: #a1a1aa; line-height: 1.65; margin: 0; font-size: 14px; }
+
+  .read-btn {
+    width: 100%; background: #27272a; border: 2px solid #3f3f46; color: #d4d4d8;
+    padding: 12px 0; font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.2em;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+
+  /* Quick check */
+  .check-card { border: 2px solid #fbbf24; background: #09090b; padding: 20px; margin-top: 24px; }
+  .check-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+  .check-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.25em; color: #fbbf24; font-weight: 700; }
+  .check-q { color: #fff; margin-bottom: 14px; font-weight: 600; font-size: 14px; }
+  .check-options { display: flex; flex-direction: column; gap: 8px; }
+  .check-option {
+    text-align: left; padding: 10px 14px; border: 2px solid #3f3f46;
+    background: #18181b; color: #d4d4d8; font-size: 14px;
+    display: flex; justify-content: space-between; align-items: center; gap: 8px;
+    width: 100%;
+  }
+  .check-option.ok-picked   { background: rgba(16,185,129,0.12); border-color: #10b981; color: #6ee7b7; }
+  .check-option.bad-picked  { background: rgba(239,68,68,0.12); border-color: #ef4444; color: #fca5a5; }
+  .check-fail-msg { font-size: 12px; color: #fca5a5; margin-top: 10px; font-style: italic; }
+
+  /* Quiz view */
+  .quiz-card { border: 2px solid #3f3f46; background: #18181b; }
+  .quiz-card-header { background: #fbbf24; color: #000; padding: 16px 20px; border-bottom: 2px solid #3f3f46; }
+  .quiz-card-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 700; opacity: 0.7; margin: 0; }
+  .quiz-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; margin: 4px 0 2px; line-height: 1; color: #000; }
+  .quiz-card-body { padding: 24px 22px; }
+  .quiz-q { margin-bottom: 24px; }
+  .quiz-q-text { color: #fff; font-weight: 600; margin-bottom: 10px; font-size: 14px; }
+  .quiz-q-num { font-family: 'JetBrains Mono', monospace; color: #fbbf24; margin-right: 6px; }
+  .quiz-opt-list { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-opt {
+    text-align: left; padding: 10px 14px; border: 2px solid #3f3f46;
+    background: #09090b; color: #a1a1aa; font-size: 14px;
+    display: flex; justify-content: space-between; align-items: center; gap: 8px;
+    width: 100%;
+  }
+  .quiz-opt.is-picked  { background: rgba(251,191,36,0.1); border-color: #fbbf24; color: #fde68a; }
+  .quiz-opt.is-correct { background: rgba(16,185,129,0.12); border-color: #10b981; color: #6ee7b7; }
+  .quiz-opt.is-wrong   { background: rgba(239,68,68,0.12); border-color: #ef4444; color: #fca5a5; }
+  .quiz-submit {
+    width: 100%; font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.2em;
+    padding: 14px 0; background: #fbbf24; color: #000; border: 2px solid #fbbf24;
+  }
+  .quiz-submit:disabled { background: #27272a; color: #52525b; border-color: #3f3f46; cursor: not-allowed; }
+  .quiz-result {
+    border: 2px solid #10b981; padding: 20px; margin-top: 8px;
+    background: rgba(16,185,129,0.08);
+  }
+  .quiz-result.fail { border-color: #ef4444; background: rgba(239,68,68,0.08); }
+  .quiz-result-h { font-family: 'Bebas Neue', sans-serif; font-size: 30px; color: #6ee7b7; margin: 0 0 8px; }
+  .quiz-result.fail .quiz-result-h { color: #fca5a5; }
+  .quiz-result-p { color: #d4d4d8; font-size: 14px; margin-bottom: 14px; }
+  .quiz-reset {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em;
+    background: #27272a; border: 2px solid #3f3f46; color: #fff;
+    padding: 8px 16px; display: flex; align-items: center; gap: 6px;
+  }
+
+  /* Big yellow "View certificate" button */
+  .cert-btn {
+    width: 100%; margin-top: 24px; padding: 16px 0;
+    font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.2em;
+    background: #fbbf24; color: #000; border: 2px solid #fbbf24;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+
+  /* Certificate */
+  .cert-actions { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .cert-action-btn {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em;
+    padding: 10px 20px; display: flex; align-items: center; gap: 6px; font-weight: 700;
+  }
+  .cert-action-btn.print  { background: #fbbf24; border: 2px solid #fbbf24; color: #000; }
+  .cert-action-btn.reset  { background: #18181b; border: 2px solid #3f3f46; color: #fff; }
+
+  .cert-paper {
+    position: relative;
+    background: #f5f1e8; color: #000;
+    border: 6px double #000;
+    padding: 48px 40px;
+    text-align: center;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(0,0,0,0.02) 0 2px, transparent 2px 6px),
+      radial-gradient(circle at 20% 20%, rgba(255,184,0,0.1), transparent 50%);
+  }
+  .cert-corner-tl { position: absolute; top: 14px; right: 14px; }
+  .cert-corner-bl { position: absolute; bottom: 14px; left: 14px; }
+  .cert-eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.4em; color: #57534e; margin-bottom: 8px;
+  }
+  .cert-rule { width: 48px; height: 4px; background: #d97706; margin: 0 auto 28px; }
+  .cert-h1 { font-family: 'Bebas Neue', sans-serif; font-size: 64px; line-height: 1; margin: 0 0 20px; color: #000; }
+  .cert-italic { font-style: italic; color: #57534e; margin-bottom: 20px; font-size: 15px; }
+  .cert-name {
+    font-family: 'Bebas Neue', sans-serif; font-size: 52px; display: inline-block;
+    border-top: 2px solid #000; border-bottom: 2px solid #000;
+    padding: 10px 32px; margin: 0 0 20px; color: #000;
+  }
+  .cert-narration { color: #57534e; max-width: 420px; margin: 0 auto 24px; font-size: 14px; line-height: 1.7; }
+  .cert-status {
+    font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.1em;
+    color: #92400e; margin-bottom: 36px;
+  }
+  .cert-signature-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+    max-width: 420px; margin: 0 auto;
+    padding-top: 20px; border-top: 1px solid #a8a29e;
+  }
+  .cert-sig-line { border-bottom: 1px solid #000; height: 28px; margin-bottom: 6px; }
+  .cert-sig-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: #78716c; }
+  .cert-date { font-family: 'Bebas Neue', sans-serif; font-size: 22px; margin: 0 0 4px; color: #000; }
+  .cert-foot {
+    font-family: 'JetBrains Mono', monospace; font-size: 9px;
+    text-transform: uppercase; letter-spacing: 0.3em;
+    color: #a8a29e; margin-top: 28px;
+  }
+
+  /* Print rules */
+  @media print {
+    body { background: #fff; }
+    header.site, footer.site, .cert-actions { display: none !important; }
+    .container { padding: 0; max-width: none; }
+    .cert-paper { border-color: #000; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-row">
+    <div class="logo-tile" id="logo-slot"></div>
+    <div class="header-meta">
+      <p class="small">Your Company &middot; Training Bay</p>
+      <p class="big">Front Desk Onboarding</p>
+    </div>
+    <div class="header-progress-wrap" id="header-progress-wrap"></div>
+  </div>
+</header>
+
+<main class="container" style="padding: 28px 20px 40px;">
+  <div id="app"></div>
+</main>
+
+<footer class="site">
+  <p>Built by Joseph &middot; Your Company Virtual Office &middot; Internal Use Only</p>
+</footer>
+
+<script>
+"use strict";
+
+// ============================================================================
+// ICON LIBRARY
+// ============================================================================
+const ICONS = {
+  'hard-hat':       '<path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M14 6a6 6 0 0 1 6 6v3"/><path d="M4 15v-3a6 6 0 0 1 6-6"/><rect x="2" y="15" width="20" height="4" rx="1"/>',
+  'arrow-right':    '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  'arrow-left':     '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  'check':          '<path d="M20 6 9 17l-5-5"/>',
+  'x':              '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+  'lock':           '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  'rotate-ccw':     '<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>',
+  'sun':            '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>',
+  'moon':           '<path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/>',
+  'phone':          '<path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/>',
+  'package':        '<path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/>',
+  'flame':          '<path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4"/>',
+  'shield-check':   '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
+  'award':          '<path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/>',
+  'triangle-alert': '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/>',
+  'clipboard-list': '<rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/>',
+  'printer':        '<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/>',
+  'users':          '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/>'
+};
+function icon(name, size, color) {
+  size = size || 16;
+  color = color || 'currentColor';
+  var path = ICONS[name] || '';
+  return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="' + color + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">' + path + '</svg>';
+}
+
+// ============================================================================
+// TEAM
+// ============================================================================
+const TEAM = [
+  { name:'The Owner', role:'CEO / Founder',                tag:'Strategy + final approval',           color:'#fbbf24' },
+  { name:'Joseph Hasse',    role:'Director of I.T. / EA to CEO', tag:'Your shadow host. The systems guy.',  color:'#22d3ee' },
+  { name:'Amber',           role:'COO',                          tag:'Legal review, contracts, insurance',  color:'#fb7185' },
+  { name:'Paul Guerrero',   role:'Safety Director',              tag:'NCCER #27160819. ISN + Avetta.',      color:'#34d399' },
+  { name:'Mario Gutierrez', role:'Crew & Welding Lead',          tag:'AWS D1.1. Your shop liaison.',        color:'#fb923c' }
+];
+
+// ============================================================================
+// MODULES
+// ============================================================================
+const MODULES = [
+  { id:'m1', iconKey:'hard-hat', title:'Punch In', subtitle:'Module 01',
+    blurb:'Meet the crew. Learn what the virtual office handles vs. what stays human.',
+    minutes:4,
+    sections:[
+      { heading:'The split',
+        body:'The virtual office handles email triage, bid drafts, RAVS answers, change orders, and research. It runs 24/7 and never forgets a number. What it cannot do is stand at the front, shake a hand, sign a BOL, or smell smoke in the shop. That is your seat.' },
+      { heading:'Today you are the face of Your Company',
+        body:'Anyone who walks in or calls [COMPANY PHONE] forms an opinion of the company in the first 10 seconds. That opinion is built by you. Not the website. Not the CEO. You.' }
+    ],
+    check:{ q:'Which of these is a HUMAN-only task at the front desk?',
+      options:[
+        { t:'Drafting a bid proposal',           ok:false },
+        { t:'Greeting a walk-in client',         ok:true  },
+        { t:'Answering an ISN questionnaire',    ok:false }
+      ] }
+  },
+  { id:'m2', iconKey:'sun', title:'Open the House', subtitle:'Module 02',
+    blurb:'The morning routine. Lights, lock, log, calendar. In that order.',
+    minutes:5,
+    sections:[
+      { heading:'Arrive 7:45 AM',
+        body:'Unlock front entrance. Lights on in lobby and break room. Disarm alarm. Confirm shop bay is unlocked from the inside (do not wander out alone before crew arrives).' },
+      { heading:'Coffee + cleanup',
+        body:'Start the coffee. Wipe the conference table. A spotless lobby is non-negotiable. Steel buyers notice dust before they notice smiles.' },
+      { heading:'Glance at the calendar',
+        body:'Check Joseph\'s shared calendar for visitors expected today. Pre-stage visitor PPE if anyone is coming past the office door. Note any shop walk-throughs.' }
+    ],
+    check:{ q:'A vendor is on the calendar for 9:00 AM. What do you stage before they arrive?',
+      options:[
+        { t:'A bid packet',                       ok:false },
+        { t:'Visitor hard hat + safety glasses',  ok:true  },
+        { t:'A welding hood',                     ok:false }
+      ] }
+  },
+  { id:'m3', iconKey:'phone', title:'Phone Sergeant', subtitle:'Module 03',
+    blurb:'[COMPANY PHONE]. Greeting, routing tree, the EMR call to never miss.',
+    minutes:7,
+    sections:[
+      { heading:'The greeting (memorize)',
+        body:'"Your Company, this is [Your Name]. How can I help you?" Calm voice. No "uhh." If you do not know the answer, say "Let me get the right person on this." Never guess pricing, never guess timelines.' },
+      { heading:'Routing tree',
+        body:'Bid or quote inquiry &rarr; Owner. ISN, Avetta, safety question &rarr; Paul. Insurance, legal, contract &rarr; Amber. Vendor, supplier, IT &rarr; Joseph. Job site, delivery, welding question &rarr; Mario. Cold sales call &rarr; polite decline, get name and email, log it.' },
+      { heading:'PRIORITY CALL',
+        callout:true,
+        body:'If Texas Mutual rings (800-859-5995, Policy [POLICY NUMBER]) about the EMR letter, that goes straight to Owner or Joseph. Do not put them on hold for more than 30 seconds. That letter unblocks our Marathon Petroleum approval. It is the most important inbound call we get.' }
+    ],
+    check:{ q:'A caller asks about an Avetta compliance question. Who do you route to?',
+      options:[
+        { t:'Owner (CEO)',                    ok:false },
+        { t:'Paul Guerrero (Safety Director)',  ok:true  },
+        { t:'Amber (COO)',                      ok:false }
+      ] }
+  },
+  { id:'m4', iconKey:'shield-check', title:'The Gate', subtitle:'Module 04',
+    blurb:'Visitor sign-in, PPE handoff, safety briefing in 60 seconds.',
+    minutes:6,
+    sections:[
+      { heading:'Sign them in',
+        body:'Every visitor logs: name, company, who they are seeing, time in, time out. No exceptions. Even friends of the CEO. The log is your alibi if OSHA ever asks who was on site.' },
+      { heading:'PPE before the line',
+        body:'Past the office door is the shop. Hard hat AND safety glasses are required. Hi-vis vest if walking near the bay. Visitor PPE lives in the bin by the inner door. Ask Joseph to restock when fewer than 3 hard hats remain.' },
+      { heading:'The 60-second brief',
+        body:'"Stay on the yellow lines. Do not walk under suspended loads. If you hear the air horn, walk to the front parking lot. Mario is in charge back there. Do what he says."' }
+    ],
+    check:{ q:'A walk-in says they are late and tries to skip the sign-in log. What do you do?',
+      options:[
+        { t:'Wave them through. The CEO knows them.',  ok:false },
+        { t:'Stop them. Sign them in. Hand them PPE.', ok:true  },
+        { t:'Sign them in yourself after they leave.', ok:false }
+      ] }
+  },
+  { id:'m5', iconKey:'package', title:'Mail & Freight', subtitle:'Module 05',
+    blurb:'Letters get sorted. Steel trucks get directed. BOLs get signed.',
+    minutes:6,
+    sections:[
+      { heading:'Mail routing',
+        body:'Insurance &rarr; Amber. IRS or tax &rarr; Amber. ISNetworld or Avetta &rarr; Paul. Vendor invoices &rarr; scan into the shared drive, then to Owner. Bank statements &rarr; Owner unopened. Junk &rarr; recycle bin (not trash, recycle).' },
+      { heading:'Freight + steel deliveries',
+        body:'Truck pulls up. Direct them to the shop bay (around the right side of the building). Get the BOL. Verify the load matches what was ordered before you sign. If unsure, radio Mario. Never sign a BOL you have not verified.' },
+      { heading:'Hot tip',
+        body:'Steel deliveries are usually scheduled. If a truck shows up unannounced, it is either a mistake or the wrong yard. Call Joseph before signing anything.' }
+    ],
+    check:{ q:'A FedEx envelope arrives marked "Texas Mutual". Where does it go?',
+      options:[
+        { t:'Recycle. Probably junk.',                          ok:false },
+        { t:'Amber, immediately. This may be the EMR letter.',  ok:true  },
+        { t:'Hold it for next week.',                           ok:false }
+      ] }
+  },
+  { id:'m6', iconKey:'flame', title:'Shop Floor 101', subtitle:'Module 06',
+    blurb:'You are not a welder. Here is how to stay safe and useful when you visit the bay.',
+    minutes:5,
+    sections:[
+      { heading:'PPE every time',
+        body:'No exceptions, no "just a quick look." Hard hat, safety glasses, closed-toe shoes minimum. Hi-vis vest if walking near active welding.' },
+      { heading:'The yellow lines are sacred',
+        body:'They mark walk paths. Stay inside them. Crossing the line means you are in someone\'s blind spot.' },
+      { heading:'Three things you never do',
+        body:'1) Stand under a suspended load, ever. 2) Stare at a welding arc without a hood. 3) Wander alone. If you go back, tell Mario you are coming.' }
+    ],
+    check:{ q:'You are walking the shop and hear a long air horn blast. What does that mean?',
+      options:[
+        { t:'Lunch break',                            ok:false },
+        { t:'Evacuate to the front parking lot',      ok:true  },
+        { t:'A new delivery arrived',                 ok:false }
+      ] }
+  },
+  { id:'m7', iconKey:'moon', title:'Lock It Down', subtitle:'Module 07',
+    blurb:'End of day. Coffee off, doors locked, voicemail clear, alarm set.',
+    minutes:4,
+    sections:[
+      { heading:'After 5:00 PM',
+        body:'Coffee machine off. Dishes in the sink, not on the counter. Conference table cleared. Lights off in the lobby (leave the back office light on for the cleaners on Tuesdays).' },
+      { heading:'Voicemail sweep',
+        body:'Listen to any messages. Forward urgent ones to the right team member by text. Anything Texas Mutual related, ping Owner immediately, even if it is 5:01 PM.' },
+      { heading:'Out the door',
+        body:'Front entrance locked. Alarm armed. Do a parking lot glance before you drive off. If anyone is loitering near the shop bay, call Joseph from the car.' }
+    ],
+    check:{ q:'It is 5:02 PM. Voicemail has a message from Texas Mutual. What do you do?',
+      options:[
+        { t:'Wait until tomorrow morning.',      ok:false },
+        { t:'Text Owner right now.',           ok:true  },
+        { t:'Delete it. Probably a sales call.', ok:false }
+      ] }
+  },
+  { id:'m8', iconKey:'award', title:'Final Stamp', subtitle:'Module 08',
+    blurb:'Seven questions. Pass and earn the Front Desk Certified stamp.',
+    minutes:6, isQuiz:true }
+];
+
+// ============================================================================
+// FINAL QUIZ
+// ============================================================================
+const QUIZ = [
+  { q:'What is the office address?',
+    options:['[COMPANY ADDRESS]','[COMPANY ADDRESS] Rd, Spring, TX 77064','8630 N Houston Pkwy, Houston, TX 77064'],
+    correct:0 },
+  { q:'What is the Texas Mutual EMR phone number?',
+    options:['800-555-5995','800-859-5995','713-859-5995'],
+    correct:1 },
+  { q:'A caller wants pricing on a job. Who do you route to?',
+    options:['Owner (CEO)','Paul (Safety)','Amber (COO)'],
+    correct:0 },
+  { q:'PPE required past the office door:',
+    options:['Just safety glasses','Hard hat AND safety glasses','Welding hood'],
+    correct:1 },
+  { q:'Who is the AWS D1.1 welding lead?',
+    options:['Joseph Hasse','Mario Gutierrez','Paul Guerrero'],
+    correct:1 },
+  { q:'A capability sheet draft lists "[FORBIDDEN PROJECT]" as a Your Company project. What do you do?',
+    options:['Approve it. Sounds legit.','Flag it. [FORBIDDEN PROJECT] is NOT a Your Company project.','Add it to the website too.'],
+    correct:1 },
+  { q:'What year was Your Company established?',
+    options:['2015','2017','2020'],
+    correct:1 }
+];
+
+// ============================================================================
+// STATE
+// ============================================================================
+var state = {
+  view: 'welcome',          // 'welcome' | 'dashboard' | 'module:<id>' | 'certificate'
+  completed: {},            // moduleId -> true
+  // per-module reading + check state
+  readDone: {},             // moduleId -> true (after "I read this section")
+  checkPicked: {},          // moduleId -> { idx: option-index, tried: bool }
+  // final quiz state
+  quizAnswers: {},          // q-idx -> opt-idx
+  quizSubmitted: false
+};
+
+// ============================================================================
+// HELPERS
+// ============================================================================
+function escapeHtml(str) {
+  if (str == null) return '';
+  return String(str).replace(/[&<>"']/g, function(c) {
+    return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
+  });
+}
+// Allow specific HTML entities (rarrs, etc.) — these are pre-encoded in source.
+function passHtml(str) { return str || ''; }
+
+function getModule(id) { for (var i = 0; i < MODULES.length; i++) if (MODULES[i].id === id) return MODULES[i]; return null; }
+function completedCount() { return Object.keys(state.completed).length; }
+
+// ============================================================================
+// WELD PROGRESS BAR (header)
+// ============================================================================
+function renderWeldBar() {
+  if (state.view === 'welcome' || state.view === 'certificate') {
+    document.getElementById('header-progress-wrap').innerHTML = '';
+    return;
+  }
+  var done = completedCount();
+  var total = MODULES.length;
+  var pct = (done / total) * 100;
+  var html = '<div class="weld-row">' +
+    '<span class="weld-label">Weld Progress</span>' +
+    '<span class="weld-count">' + done + '/' + total + ' BEADS</span>' +
+    '</div>' +
+    '<div class="weld-track"><div class="weld-fill" style="width:' + pct + '%;"></div></div>';
+  document.getElementById('header-progress-wrap').innerHTML = html;
+}
+
+// ============================================================================
+// RENDER: WELCOME
+// ============================================================================
+function renderWelcome() {
+  var html = '';
+  html += '<div class="welcome-hero">';
+  html += '<div class="welcome-grid"></div><div class="welcome-glow"></div>';
+  html += '<div class="welcome-inner">';
+  html += '<div class="welcome-stamps">';
+  html += '<span class="stamp" style="transform:rotate(-6deg);">Day 1</span>';
+  html += '<span class="stamp" style="background:#22d3ee;transform:rotate(3deg);">Owner Onboarding</span>';
+  html += '<span class="stamp" style="background:#fb7185;transform:rotate(-3deg);">Confidential</span>';
+  html += '</div>';
+  html += '<p class="welcome-eyebrow">Your Company &middot; Front Desk Training</p>';
+  html += '<h1 class="welcome-h1">Welcome<br /><span class="accent">aboard.</span></h1>';
+  html += '<p class="welcome-blurb">You own the place. You also said you wanted to learn from the ground up. Joseph put together eight short modules that cover everything the virtual office cannot do for us. This is the human side of Your Company. Pour a coffee. Take notes. Ask Joseph anything.</p>';
+  html += '<div class="welcome-stats">';
+  var stats = [['8','Modules'],['~45','Minutes'],['1','Stamp']];
+  for (var i = 0; i < stats.length; i++) {
+    html += '<div class="welcome-stat"><p class="welcome-stat-num">' + stats[i][0] + '</p><p class="welcome-stat-label">' + stats[i][1] + '</p></div>';
+  }
+  html += '</div>';
+  html += '<button class="start-btn" data-action="start">Punch In ' + icon('arrow-right', 18) + '</button>';
+  html += '</div></div>';
+
+  // Team grid
+  html += '<div class="team-head">';
+  html += '<h2>Meet the crew</h2>' + icon('users', 20, '#fbbf24');
+  html += '</div>';
+  html += '<div class="team-grid">';
+  for (var t = 0; t < TEAM.length; t++) {
+    var p = TEAM[t];
+    var initials = p.name.split(' ').map(function(n) { return n[0]; }).slice(0, 2).join('');
+    html += '<div class="team-card">';
+    html += '<div class="team-avatar" style="background:' + p.color + ';">' + initials + '</div>';
+    html += '<p class="team-name">' + escapeHtml(p.name) + '</p>';
+    html += '<p class="team-role">' + escapeHtml(p.role) + '</p>';
+    html += '<p class="team-tag">' + escapeHtml(p.tag) + '</p>';
+    html += '</div>';
+  }
+  html += '</div>';
+
+  return html;
+}
+
+// ============================================================================
+// RENDER: DASHBOARD
+// ============================================================================
+function renderDashboard() {
+  var done = completedCount();
+  var total = MODULES.length;
+  var allDone = done === total;
+
+  // Find current (first not-completed) module
+  var currentId = null;
+  for (var i = 0; i < MODULES.length; i++) {
+    if (!state.completed[MODULES[i].id]) { currentId = MODULES[i].id; break; }
+  }
+
+  var headlineText = done === 0 ? 'Pick a module to start.' :
+                     done === total ? 'All beads laid down.' :
+                     (total - done) + ' to go.';
+
+  var html = '';
+  html += '<div class="dash-head">';
+  html += '<div><p class="dash-eyebrow">Training Dashboard</p>';
+  html += '<h2 class="dash-h2">' + escapeHtml(headlineText) + '</h2></div>';
+  if (done > 0 && done < total) {
+    html += '<span class="stamp" style="background:#34d399;transform:rotate(2deg);">' + done + '/' + total + ' Done</span>';
+  }
+  html += '</div>';
+
+  // Module grid
+  html += '<div class="module-grid">';
+  for (var m = 0; m < MODULES.length; m++) {
+    var mod = MODULES[m];
+    var isDone = !!state.completed[mod.id];
+    var prevDone = m === 0 || !!state.completed[MODULES[m - 1].id];
+    var locked = !isDone && !prevDone;
+    var current = currentId === mod.id;
+
+    var classes = 'mod-card';
+    if (locked) classes += ' is-locked';
+    if (isDone) classes += ' is-done';
+    if (current && !isDone) classes += ' is-current';
+
+    html += '<button class="' + classes + '"';
+    if (!locked) html += ' data-action="open-module" data-mod-id="' + mod.id + '"';
+    if (locked) html += ' disabled';
+    html += '>';
+    html += '<div class="mod-card-inner">';
+    html += '<div class="mod-card-top">';
+    var iconCls = isDone ? 'is-done' : current ? 'is-current' : 'is-pending';
+    var iconColor = isDone || current ? '#000' : '#71717a';
+    html += '<div class="mod-card-icon-tile ' + iconCls + '">';
+    if (locked)      html += icon('lock', 18, '#71717a');
+    else if (isDone) html += icon('check', 20, iconColor);
+    else             html += icon(mod.iconKey, 20, iconColor);
+    html += '</div>';
+    html += '<span class="mod-card-subtitle">' + escapeHtml(mod.subtitle) + '</span>';
+    html += '</div>';
+    html += '<h3>' + escapeHtml(mod.title) + '</h3>';
+    html += '<p class="mod-card-blurb">' + escapeHtml(mod.blurb) + '</p>';
+    html += '<div class="mod-card-foot">';
+    html += '<span class="mod-card-foot-meta">~' + mod.minutes + ' MIN</span>';
+    if (isDone) html += '<span class="stamp" style="background:#34d399;transform:rotate(3deg);">Done</span>';
+    else if (current) html += '<span class="stamp" style="transform:rotate(-6deg);">Active</span>';
+    html += '</div></div></button>';
+  }
+  html += '</div>';
+
+  if (allDone) {
+    html += '<button class="cert-btn" data-action="view-cert">';
+    html += icon('award', 22, '#000') + ' View certificate ' + icon('arrow-right', 18, '#000');
+    html += '</button>';
+  }
+  return html;
+}
+
+// ============================================================================
+// RENDER: MODULE READING VIEW
+// ============================================================================
+function renderModule(mod) {
+  var readDone = !!state.readDone[mod.id];
+  var html = '';
+  html += '<button class="lesson-back-btn" data-action="back-dash">' + icon('arrow-left', 13) + ' Back to dashboard</button>';
+  html += '<div class="lesson-card">';
+  html += '<div class="lesson-card-header">';
+  html += '<div class="lesson-icon-tile">' + icon(mod.iconKey, 26, '#fbbf24') + '</div>';
+  html += '<div><p class="lesson-card-subtitle">' + escapeHtml(mod.subtitle) + ' &middot; ~' + mod.minutes + ' min</p>';
+  html += '<h2 class="lesson-card-title">' + escapeHtml(mod.title) + '</h2></div>';
+  html += '</div>';
+  html += '<div class="lesson-card-body">';
+
+  for (var i = 0; i < mod.sections.length; i++) {
+    var s = mod.sections[i];
+    html += '<div class="lesson-section' + (s.callout ? ' callout' : '') + '">';
+    html += '<h3>';
+    if (s.callout) html += icon('triangle-alert', 17, '#f87171');
+    html += escapeHtml(s.heading) + '</h3>';
+    html += '<p>' + passHtml(s.body) + '</p>';
+    html += '</div>';
+  }
+
+  if (!readDone) {
+    html += '<button class="read-btn" data-action="mark-read" data-mod-id="' + mod.id + '">';
+    html += 'I read this section ' + icon('arrow-right', 13);
+    html += '</button>';
+  } else if (mod.check) {
+    html += renderCheck(mod);
+  }
+
+  html += '</div></div>';
+  return html;
+}
+
+function renderCheck(mod) {
+  var picked = state.checkPicked[mod.id];
+  var pickedIdx = picked && typeof picked.idx === 'number' ? picked.idx : null;
+  var tried = picked && picked.tried;
+
+  var html = '<div class="check-card">';
+  html += '<div class="check-row">' + icon('clipboard-list', 15, '#fbbf24');
+  html += '<span class="check-label">Quick Check</span></div>';
+  html += '<p class="check-q">' + escapeHtml(mod.check.q) + '</p>';
+  html += '<div class="check-options">';
+  for (var i = 0; i < mod.check.options.length; i++) {
+    var opt = mod.check.options[i];
+    var isPicked = pickedIdx === i;
+    var locked = pickedIdx !== null && mod.check.options[pickedIdx].ok;
+    var cls = 'check-option';
+    if (isPicked && tried && opt.ok) cls += ' ok-picked';
+    else if (isPicked && tried && !opt.ok) cls += ' bad-picked';
+    html += '<button class="' + cls + '"';
+    if (!locked) html += ' data-action="check-pick" data-mod-id="' + mod.id + '" data-opt-idx="' + i + '" data-ok="' + (opt.ok ? '1' : '0') + '"';
+    if (locked) html += ' disabled';
+    html += '><span>' + escapeHtml(opt.t) + '</span>';
+    if (isPicked && tried && opt.ok) html += icon('check', 16, '#34d399');
+    if (isPicked && tried && !opt.ok) html += icon('x', 16, '#f87171');
+    html += '</button>';
+  }
+  html += '</div>';
+  if (tried && pickedIdx !== null && !mod.check.options[pickedIdx].ok) {
+    html += '<p class="check-fail-msg">Not quite. Re-read the section above and try again.</p>';
+  }
+  html += '</div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: QUIZ VIEW (Module 8)
+// ============================================================================
+function renderQuizView() {
+  var totalQ = QUIZ.length;
+  var allAnswered = Object.keys(state.quizAnswers).length === totalQ;
+  var score = 0;
+  for (var i = 0; i < totalQ; i++) if (state.quizAnswers[i] === QUIZ[i].correct) score++;
+  var passed = score >= 6;
+
+  var html = '';
+  html += '<button class="lesson-back-btn" data-action="back-dash">' + icon('arrow-left', 13) + ' Back to dashboard</button>';
+  html += '<div class="quiz-card">';
+  html += '<div class="quiz-card-header">';
+  html += '<p class="quiz-card-eyebrow">Module 08</p>';
+  html += '<h2 class="quiz-card-title">Final Stamp</h2>';
+  html += '<p style="font-size:12px;font-weight:500;margin:0;">Pass = 6 of 7 correct.</p>';
+  html += '</div>';
+  html += '<div class="quiz-card-body">';
+
+  for (var qi = 0; qi < totalQ; qi++) {
+    var q = QUIZ[qi];
+    html += '<div class="quiz-q">';
+    html += '<p class="quiz-q-text"><span class="quiz-q-num">Q' + (qi + 1) + '.</span>' + escapeHtml(q.q) + '</p>';
+    html += '<div class="quiz-opt-list">';
+    for (var oi = 0; oi < q.options.length; oi++) {
+      var picked = state.quizAnswers[qi] === oi;
+      var isCorrect = oi === q.correct;
+      var optCls = 'quiz-opt';
+      if (state.quizSubmitted && isCorrect) optCls += ' is-correct';
+      else if (state.quizSubmitted && picked && !isCorrect) optCls += ' is-wrong';
+      else if (picked) optCls += ' is-picked';
+      html += '<button class="' + optCls + '"';
+      if (!state.quizSubmitted) html += ' data-action="quiz-pick" data-q-idx="' + qi + '" data-opt-idx="' + oi + '"';
+      if (state.quizSubmitted) html += ' disabled';
+      html += '><span>' + escapeHtml(q.options[oi]) + '</span>';
+      if (state.quizSubmitted && isCorrect) html += icon('check', 16, '#34d399');
+      else if (state.quizSubmitted && picked && !isCorrect) html += icon('x', 16, '#f87171');
+      html += '</button>';
+    }
+    html += '</div></div>';
+  }
+
+  if (!state.quizSubmitted) {
+    html += '<button class="quiz-submit" data-action="quiz-submit"' + (allAnswered ? '' : ' disabled') + '>';
+    html += allAnswered ? 'Submit Final Stamp' : ('Answer all ' + totalQ + ' questions');
+    html += '</button>';
+  } else {
+    html += '<div class="quiz-result' + (passed ? '' : ' fail') + '">';
+    html += '<h3 class="quiz-result-h">' + (passed ? 'Stamped. Welcome aboard.' : 'Almost there.') + '</h3>';
+    html += '<p class="quiz-result-p">You scored ' + score + ' of ' + totalQ + '. ';
+    html += passed ? 'Loading your certificate...' : 'Need 6 to pass. Review the modules and try again. Joseph will not judge.';
+    html += '</p>';
+    if (!passed) {
+      html += '<button class="quiz-reset" data-action="quiz-reset">' + icon('rotate-ccw', 13) + ' Reset quiz</button>';
+    }
+    html += '</div>';
+  }
+
+  html += '</div></div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: CERTIFICATE
+// ============================================================================
+function renderCertificate() {
+  var date = new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+
+  var html = '';
+  html += '<div class="cert-actions">';
+  html += '<button class="cert-action-btn print" data-action="print-cert">' + icon('printer', 13) + ' Print certificate</button>';
+  html += '<button class="cert-action-btn reset" data-action="reset-all">' + icon('rotate-ccw', 13) + ' Restart training</button>';
+  html += '</div>';
+
+  html += '<div class="cert-paper">';
+  html += '<div class="cert-corner-tl"><span class="stamp" style="background:#34d399;transform:rotate(12deg);">Approved</span></div>';
+  html += '<div class="cert-corner-bl"><span class="stamp" style="transform:rotate(-3deg);">Front Desk</span></div>';
+  html += '<p class="cert-eyebrow">Your Company, LLC &middot; Houston, TX &middot; Est. 2017</p>';
+  html += '<div class="cert-rule"></div>';
+  html += '<h1 class="cert-h1">Certificate<br />of Completion</h1>';
+  html += '<p class="cert-italic">This is to certify that</p>';
+  html += '<h2 class="cert-name">[Your Name]</h2>';
+  html += '<p class="cert-narration">has completed the Front Desk Training Module under the supervision of Joseph Hasse, and is hereby recognized as</p>';
+  html += '<p class="cert-status">FRONT DESK CERTIFIED</p>';
+  html += '<div class="cert-signature-grid">';
+  html += '<div><div class="cert-sig-line"></div><p class="cert-sig-label">The Owner, CEO</p></div>';
+  html += '<div><p class="cert-date">' + escapeHtml(date) + '</p><p class="cert-sig-label">Date Issued</p></div>';
+  html += '</div>';
+  html += '<p class="cert-foot">[COMPANY ADDRESS] &middot; Houston, TX 77064 &middot; [COMPANY PHONE]</p>';
+  html += '</div>';
+
+  return html;
+}
+
+// ============================================================================
+// RENDER DISPATCH
+// ============================================================================
+function render() {
+  var app = document.getElementById('app');
+  var html = '';
+  if (state.view === 'welcome') {
+    html = renderWelcome();
+  } else if (state.view === 'dashboard') {
+    html = renderDashboard();
+  } else if (state.view === 'certificate') {
+    html = renderCertificate();
+  } else if (state.view.indexOf('module:') === 0) {
+    var mid = state.view.slice(7);
+    var mod = getModule(mid);
+    if (mod) html = mod.isQuiz ? renderQuizView() : renderModule(mod);
+  }
+  app.innerHTML = html;
+  renderWeldBar();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================================================================
+// EVENTS
+// ============================================================================
+document.body.addEventListener('click', function(ev) {
+  var t = ev.target.closest('[data-action]');
+  if (!t) return;
+  var action = t.getAttribute('data-action');
+
+  if (action === 'start') {
+    state.view = 'dashboard';
+    render();
+  } else if (action === 'back-dash') {
+    state.view = 'dashboard';
+    render();
+  } else if (action === 'open-module') {
+    state.view = 'module:' + t.getAttribute('data-mod-id');
+    render();
+  } else if (action === 'mark-read') {
+    state.readDone[t.getAttribute('data-mod-id')] = true;
+    render();
+  } else if (action === 'check-pick') {
+    var mid = t.getAttribute('data-mod-id');
+    var optIdx = parseInt(t.getAttribute('data-opt-idx'), 10);
+    var ok = t.getAttribute('data-ok') === '1';
+    state.checkPicked[mid] = { idx: optIdx, tried: true };
+    render();
+    if (ok) {
+      // Auto-advance to dashboard after 700ms (matches original animation)
+      setTimeout(function() {
+        state.completed[mid] = true;
+        state.view = 'dashboard';
+        render();
+      }, 700);
+    }
+  } else if (action === 'quiz-pick') {
+    var qIdx = parseInt(t.getAttribute('data-q-idx'), 10);
+    state.quizAnswers[qIdx] = parseInt(t.getAttribute('data-opt-idx'), 10);
+    render();
+  } else if (action === 'quiz-submit') {
+    state.quizSubmitted = true;
+    render();
+    var score = 0;
+    for (var i = 0; i < QUIZ.length; i++) if (state.quizAnswers[i] === QUIZ[i].correct) score++;
+    if (score >= 6) {
+      setTimeout(function() {
+        state.completed['m8'] = true;
+        state.view = 'certificate';
+        render();
+      }, 1200);
+    }
+  } else if (action === 'quiz-reset') {
+    state.quizAnswers = {};
+    state.quizSubmitted = false;
+    render();
+  } else if (action === 'view-cert') {
+    state.view = 'certificate';
+    render();
+  } else if (action === 'print-cert') {
+    window.print();
+  } else if (action === 'reset-all') {
+    state.completed = {};
+    state.readDone = {};
+    state.checkPicked = {};
+    state.quizAnswers = {};
+    state.quizSubmitted = false;
+    state.view = 'welcome';
+    render();
+  }
+});
+
+// ============================================================================
+// INIT
+// ============================================================================
+document.getElementById('logo-slot').innerHTML = icon('hard-hat', 22, '#000');
+render();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="quiz-meta.js"></script>
+<script>window.NC_GATE = {"module_id": "front-desk", "title": "Front Desk Training", "next": "w11-m365-lab.html", "questions": [{"q": "Texas Mutual calls the office line about the EMR letter. What is the correct handling?", "options": ["Take a message and add it to the weekly call log", "Route the call straight to Owner or Joseph and keep any hold under 30 seconds", "Transfer the call to Amber since it involves insurance", "Ask them to email the letter to info@yourcompany.example.com instead"]}, {"q": "When do you ask Joseph to restock the visitor PPE bin?", "options": ["When fewer than 3 visitor hard hats remain", "When the bin is completely empty", "At the start of every month", "Only when a visitor asks for a different size"]}, {"q": "A steel truck arrives that is not on the delivery schedule. What does the module tell you to do?", "options": ["Sign the BOL so the driver can leave, then investigate", "Send the truck away immediately", "Call Joseph before signing anything, since it is likely a mistake or the wrong yard", "Have the driver unload at the shop bay and sort it out later"]}]};</script>
+<script src="portal.js"></script>
+<script>ncInitModulePage();</script>
+</body>
+</html>

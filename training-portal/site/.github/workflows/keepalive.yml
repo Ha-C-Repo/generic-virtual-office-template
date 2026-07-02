@@ -1,0 +1,58 @@
+name: Supabase keep-alive
+
+on:
+  schedule:
+    # Twice a week: Monday and Thursday, 13:10 UTC
+    - cron: "10 13 * * 1,4"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase auth health endpoint
+        run: |
+          # Do NOT ping the REST root /rest/v1/ - it returns 401 with
+          # sb_publishable_ keys even when valid. Auth health returns 200.
+          code=$(curl -s -o /tmp/body -w "%{http_code}" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            "${{ secrets.SUPABASE_URL }}/auth/v1/health")
+          echo "auth health: HTTP $code"
+          cat /tmp/body
+          test "$code" = "200"
+
+      - name: Ping REST data endpoint (RPC, counts as DB activity)
+        run: |
+          # submit_quiz requires auth, so expect 401 here; any gateway
+          # response other than 5xx proves the project is awake. The
+          # primary health gate is the step above.
+          code=$(curl -s -o /tmp/body -w "%{http_code}" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/rpc/submit_quiz" \
+            -X POST -H "Content-Type: application/json" -d '{}')
+          echo "rest gateway: HTTP $code"
+          if [ "$code" -ge 500 ]; then exit 1; fi
+
+  backup:
+    runs-on: ubuntu-latest
+    needs: ping
+    steps:
+      - name: Optional SQL backup export
+        run: |
+          if [ -z "${{ secrets.SUPABASE_DB_URL }}" ]; then
+            echo "SUPABASE_DB_URL not set - skipping backup (keep-alive ran fine)."
+            exit 0
+          fi
+          sudo apt-get update -qq && sudo apt-get install -y -qq postgresql-client
+          pg_dump "${{ secrets.SUPABASE_DB_URL }}" \
+            --schema=public --no-owner --no-privileges -f backup.sql
+          echo "Backup rows: $(wc -l < backup.sql)"
+      - name: Upload backup artifact
+        if: ${{ env.HAVE_DB != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: supabase-backup
+          path: backup.sql
+          retention-days: 30
+        env:
+          HAVE_DB: ${{ secrets.SUPABASE_DB_URL }}

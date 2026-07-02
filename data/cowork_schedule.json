@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "description": "CoworkScheduler task configuration. All times are America/Chicago.",
+  "tasks": [
+    {
+      "id": "morning_brief",
+      "label": "Morning Brief",
+      "hour_ct": 6,
+      "minute_ct": 0,
+      "days": null,
+      "enabled": true,
+      "description": "Daily 6 AM CT - send SMS summary to Owner: blockers and deadlines."
+    },
+    {
+      "id": "bid_lead_check",
+      "label": "Bid Lead Check",
+      "hour_ct": 8,
+      "minute_ct": 0,
+      "days": [0, 1, 2, 3, 4],
+      "enabled": true,
+      "description": "Weekdays 8 AM CT - scan for high-priority bid leads."
+    },
+    {
+      "id": "marathon_status",
+      "label": "Marathon Status Check",
+      "hour_ct": 10,
+      "minute_ct": 0,
+      "days": [0, 2, 4],
+      "enabled": true,
+      "description": "Mon/Wed/Fri 10 AM CT - check Marathon Petroleum prequal blocker status."
+    },
+    {
+      "id": "ar_reminder",
+      "label": "AR Invoice Reminder",
+      "hour_ct": 16,
+      "minute_ct": 0,
+      "days": [0, 1, 2, 3, 4],
+      "enabled": true,
+      "description": "Weekdays 4 PM CT - check AR invoices past 30 days."
+    },
+    {
+      "id": "eod_summary",
+      "label": "End-of-Day Summary",
+      "hour_ct": 17,
+      "minute_ct": 0,
+      "days": [0, 1, 2, 3, 4],
+      "enabled": true,
+      "description": "Weekdays 5 PM CT - brief end-of-day SMS to Owner."
+    }
+  ]
+}

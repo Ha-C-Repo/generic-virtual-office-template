@@ -1,0 +1,19 @@
+designation,item_class,qty_verified,unit,scoring,mode,primary_source,confidence,provenance
+COLUMNS,column,16,EA,count_approx,COUNT,column schedule / framing plan,high,Ivan email 2026-05-25: approximately 16 columns
+ANCHOR RODS 3/4 IN,anchor,64,EA,count_min,COUNT,column schedule + typical details,high,"Ivan email 2026-05-25: 4 rods per column minimum, 3/4 in dia UNO. CONFLICT: takeoff.xlsx 2026-06 shows B1 anchors 160 EA. Resolve with Ivan"
+BUILDING SF,area,61621,SF,value,AREA,floor plan gross area,high,"Ivan email 2026-05-25: drawings indicate approx 61,621 SF gross"
+DECK SF,deck,61621,SF,value_approx,AREA,roof framing plan,medium,"Ivan email 2026-05-25: deck SF generally equals building SF, RTU openings minor"
+28K7,joist,,EA,presence,COUNT,roof framing plan + joist schedule,high,Ivan email 2026-05-25 + takeoff.xlsx Joist Inventory (text-verified)
+30K7,joist,,EA,presence,COUNT,roof framing plan + joist schedule,high,takeoff.xlsx PRJ-2026-KEAT-001 Joist Inventory B1 (text-verified)
+30K8,joist,,EA,presence,COUNT,roof framing plan + joist schedule,high,Ivan email 2026-05-25 + takeoff.xlsx Joist Inventory (text-verified)
+30K9,joist,,EA,presence,COUNT,roof framing plan + joist schedule,high,takeoff.xlsx PRJ-2026-KEAT-001 Joist Inventory B1 (text-verified)
+32LH07,joist,,EA,presence,COUNT,roof framing plan + joist schedule,high,Ivan email 2026-05-25 + takeoff.xlsx Joist Inventory (text-verified)
+36G8N11.5K,joist_girder,,EA,presence,COUNT,roof framing plan + joist schedule,high,takeoff.xlsx PRJ-2026-KEAT-001 Joist Inventory B1 (text-verified)
+54G8N12.1K,joist_girder,,EA,presence,COUNT,roof framing plan + joist schedule,high,takeoff.xlsx PRJ-2026-KEAT-001 Joist Inventory B1 (text-verified)
+54G8N12.5K,joist_girder,,EA,presence,COUNT,roof framing plan + joist schedule,high,Ivan email 2026-05-25 + takeoff.xlsx Joist Inventory (text-verified)
+CAGED LADDER,misc,1,EA,presence,COUNT,plans / details,high,"Ivan email 2026-05-25: includes a caged ladder, add to scope"
+TILT WALL EMBED PLATES,embed,,EA,presence,COUNT,tilt panel details,medium,Ivan email 2026-05-25: embeds supporting joists appear in our scope
+FINISH=PAINT,attribute,,-,attribute,-,general notes,high,Ivan email 2026-05-25: standard paint UNO
+STAGE=IFC,attribute,,-,attribute,-,title block,high,Ivan email 2026-05-25: complete 100 percent IFC set
+CAMBER=NONE,attribute,,-,attribute,-,framing plans,high,Ivan email 2026-05-25: no camber call-outs identified
+CONNECTIONS=SIMPLE,attribute,,-,attribute,-,details,high,"Ivan email 2026-05-25: tilt wall + joists + HSS, mostly simple connections (8 percent class)"

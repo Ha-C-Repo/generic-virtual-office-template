@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Staff Training | Your Company</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;}
+body{margin:0;background:#0c0c0e;color:#e4e4e7;font-family:'Inter',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
+.card{width:100%;max-width:420px;background:#18181b;border:2px solid #3f3f46;border-top:4px solid #ea580c;padding:32px;}
+.logo{display:flex;align-items:center;gap:12px;margin-bottom:22px;}
+.logo-tile{width:40px;height:40px;background:#ea580c;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+h1{font-family:'Bebas Neue',sans-serif;font-size:30px;margin:0;line-height:1;color:#fff;}
+.sub{color:#a1a1aa;font-size:12px;margin:2px 0 0;}
+label{display:block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#a1a1aa;margin:14px 0 5px;}
+input{width:100%;background:#27272a;border:1px solid #3f3f46;color:#fff;padding:11px 12px;font-size:14px;font-family:inherit;}
+input:focus{outline:none;border-color:#ea580c;}
+button{width:100%;margin-top:20px;background:#ea580c;color:#fff;border:0;padding:13px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;}
+button:hover{background:#c2410c;}
+button[disabled]{opacity:.5;cursor:not-allowed;}
+.toggle{margin-top:16px;text-align:center;font-size:13px;color:#a1a1aa;}
+.toggle a{color:#ea580c;cursor:pointer;font-weight:600;text-decoration:none;}
+.msg{margin-top:14px;font-size:13px;min-height:18px;}
+.msg.err{color:#f87171;}
+.msg.ok{color:#22c55e;}
+.hidden{display:none;}
+.foot{margin-top:22px;text-align:center;font-size:11px;color:#52525b;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">
+    <div class="logo-tile">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1z"/><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M4 15v-3a6 6 0 0 1 6-6"/><path d="M14 6a6 6 0 0 1 6 6v3"/></svg>
+    </div>
+    <div>
+      <h1>Staff Training</h1>
+      <p class="sub">Your Company &middot; Internal Use Only</p>
+    </div>
+  </div>
+
+  <div id="signin-form">
+    <label>Email</label>
+    <input id="si-email" type="email" autocomplete="email" placeholder="you@yourcompany.example.com">
+    <label>Password</label>
+    <input id="si-pass" type="password" autocomplete="current-password" placeholder="Password">
+    <button id="si-btn">Sign in</button>
+    <div class="toggle">New here? <a id="show-signup">Create your account</a></div>
+  </div>
+
+  <div id="signup-form" class="hidden">
+    <label>Full name</label>
+    <input id="su-name" type="text" autocomplete="name" placeholder="First Last">
+    <label>Email</label>
+    <input id="su-email" type="email" autocomplete="email" placeholder="you@yourcompany.example.com">
+    <label>Password (8+ characters)</label>
+    <input id="su-pass" type="password" autocomplete="new-password" placeholder="Choose a password">
+    <label>Signup code</label>
+    <input id="su-code" type="text" autocomplete="off" placeholder="Provided by the office">
+    <button id="su-btn">Create account</button>
+    <div class="toggle">Already registered? <a id="show-signin">Sign in</a></div>
+  </div>
+
+  <div class="msg" id="msg"></div>
+  <p class="foot">Built by Joseph &middot; Your Company Virtual Office</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script>
+"use strict";
+var sb = window.supabase.createClient(window.NC_SUPABASE_URL, window.NC_SUPABASE_KEY);
+var msg = document.getElementById('msg');
+function show(id){
+  document.getElementById('signin-form').classList.toggle('hidden', id!=='signin');
+  document.getElementById('signup-form').classList.toggle('hidden', id!=='signup');
+  msg.textContent=''; msg.className='msg';
+}
+document.getElementById('show-signup').onclick=function(){show('signup');};
+document.getElementById('show-signin').onclick=function(){show('signin');};
+
+function nextUrl(){
+  var p = new URLSearchParams(location.search).get('next');
+  return (p && /^[a-z0-9-]+\.html$/.test(p)) ? p : 'suite.html';
+}
+sb.auth.getSession().then(function(r){ if(r.data.session) location.href = nextUrl(); });
+
+document.getElementById('si-btn').onclick=async function(){
+  this.disabled=true; msg.className='msg'; msg.textContent='Signing in...';
+  var r=await sb.auth.signInWithPassword({
+    email:document.getElementById('si-email').value.trim(),
+    password:document.getElementById('si-pass').value
+  });
+  if(r.error){ msg.className='msg err'; msg.textContent=r.error.message; this.disabled=false; return; }
+  location.href=nextUrl();
+};
+
+document.getElementById('su-btn').onclick=async function(){
+  this.disabled=true; msg.className='msg'; msg.textContent='Creating account...';
+  var name=document.getElementById('su-name').value.trim();
+  var code=document.getElementById('su-code').value.trim();
+  if(!name){ msg.className='msg err'; msg.textContent='Enter your full name.'; this.disabled=false; return; }
+  var r=await sb.auth.signUp({
+    email:document.getElementById('su-email').value.trim(),
+    password:document.getElementById('su-pass').value,
+    options:{ data:{ full_name:name, signup_code:code } }
+  });
+  if(r.error){
+    msg.className='msg err';
+    msg.textContent=/invalid signup code|database error saving new user/i.test(r.error.message)
+      ? 'Signup rejected. Check the signup code (ask the office) and try again.'
+      : r.error.message;
+    this.disabled=false; return;
+  }
+  location.href=nextUrl();
+};
+</script>
+</body>
+</html>

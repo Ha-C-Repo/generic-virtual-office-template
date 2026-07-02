@@ -1,0 +1,23 @@
+designation,family,weight_each_lbs,description
+ANCHOR_ROD_3/4X9,anchor_rod,1.83,3/4 inch diameter x 9 inch length F1554 Grade 36
+ANCHOR_ROD_3/4X12,anchor_rod,2.44,3/4 inch dia x 12 in
+ANCHOR_ROD_3/4X18,anchor_rod,3.66,3/4 inch dia x 18 in
+ANCHOR_ROD_7/8X18,anchor_rod,4.98,7/8 inch dia x 18 in
+ANCHOR_ROD_1X12,anchor_rod,3.66,1 inch dia x 12 in
+ANCHOR_ROD_1X18,anchor_rod,5.49,1 inch dia x 18 in F1554
+ANCHOR_ROD_1X20,anchor_rod,6.10,1 inch diameter x 20 inch length F1554 Grade 36
+ANCHOR_ROD_1X24,anchor_rod,7.32,1 inch dia x 24 in
+ANCHOR_ROD_1-1/4X18,anchor_rod,8.57,1-1/4 inch dia x 18 in
+ANCHOR_ROD_1-1/4X24,anchor_rod,11.43,1-1/4 inch dia x 24 in
+ANCHOR_ROD_1-1/2X18,anchor_rod,12.34,1-1/2 inch dia x 18 in
+ANCHOR_ROD_1-1/2X24,anchor_rod,16.46,1-1/2 inch dia x 24 in
+HEADED_STUD_3/4X4,headed_stud,0.40,3/4 in dia x 4 in headed shear stud Nelson
+HEADED_STUD_3/4X5,headed_stud,0.45,3/4 in dia x 5 in
+HEADED_STUD_3/4X6,headed_stud,0.55,3/4 in dia x 6 in
+HEADED_STUD_7/8X6,headed_stud,0.75,7/8 in dia x 6 in
+DBL_NUT_PLATE_1X4X4,nut_plate,0.45,Double nut plate, 1 inch dia rod hole
+EMBED_PLATE_3/8X6X6,embed_plate,4.59,3/8 inch thick 6x6 tilt-wall embed
+EMBED_PLATE_1/2X8X8,embed_plate,10.89,1/2 inch thick 8x8 tilt-wall embed
+EMBED_PLATE_1/2X12X12,embed_plate,24.50,1/2 inch thick 12x12 tilt-wall embed
+EMBED_PLATE_3/4X12X12,embed_plate,36.75,3/4 inch thick 12x12 tilt-wall embed
+EMBED_PLATE_1X12X12,embed_plate,49.00,1 inch thick 12x12 tilt-wall embed

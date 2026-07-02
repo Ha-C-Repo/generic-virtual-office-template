@@ -1,0 +1,226 @@
+[
+  {
+    "file": "bridge/page_hasher.py",
+    "function": "hash_drawing_set",
+    "line": 31,
+    "audit_jaccard": 0.667,
+    "returns_inspected": 5,
+    "dict_returns": 5,
+    "helper_returns": 0,
+    "verdict": "INTENTIONAL",
+    "reason": "mixed but acceptable (overlap=17%, branches=5)"
+  },
+  {
+    "file": "bridge/drawing_intel/self_healer.py",
+    "function": "normalize_with_firm_rules",
+    "line": 112,
+    "audit_jaccard": 0.617,
+    "returns_inspected": 3,
+    "dict_returns": 3,
+    "helper_returns": 0,
+    "verdict": "INTENTIONAL",
+    "reason": "mixed but acceptable (overlap=50%, branches=3)"
+  },
+  {
+    "file": "bridge/drawing_intel/visual_diff.py",
+    "function": "ghost_overlay",
+    "line": 50,
+    "audit_jaccard": 0.583,
+    "returns_inspected": 3,
+    "dict_returns": 3,
+    "helper_returns": 0,
+    "verdict": "INTENTIONAL",
+    "reason": "mixed but acceptable (overlap=38%, branches=3)"
+  },
+  {
+    "file": "bridge/mcp_http_server.py",
+    "function": "start_server",
+    "line": 388,
+    "audit_jaccard": 0.583,
+    "returns_inspected": 3,
+    "dict_returns": 3,
+    "helper_returns": 0,
+    "verdict": "INTENTIONAL",
+    "reason": "mixed but acceptable (overlap=38%, branches=3)"
+  },
+  {
+    "file": "bridge/api.py",
+    "function": "_build_draft_estimate",
+    "line": 9984,
+    "audit_jaccard": 0.571,
+    "returns_inspected": 2,
+    "dict_returns": 2,
+    "helper_returns": 0,
+    "verdict": "INTENTIONAL",
+    "reason": "mixed but acceptable (overlap=57%, branches=2)"
+  },
+  {
+    "file": "bridge/integrations.py",
+    "function": "read_bid_kit_governance",
+    "line": 74,
+    "audit_jaccard": 0.571,
+    "returns_inspected": 2,
+    "dict_returns": 2,
+    "helper_returns": 0,
+    "verdict": "TRUE PARITY",
+    "reason": "branches share 4 keys, smallest missing 3 keys"
+  },
+  {
+    "file": "bridge/aisc_validator.py",
+    "function": "check_engineering_viability",
+    "line": 116,
+    "audit_jaccard": 0.538,
+    "returns_inspected": 4,
+    "dict_returns": 4,
+    "helper_returns": 0,
+    "verdict": "TRUE DISPATCHER",
+    "reason": "branches return conceptually different products (overlap=8%, union=13 keys)"
+  },
+  {
+    "file": "bridge/shop_floor/photo_qc.py",
+    "function": "verify_holes",
+    "line": 77,
+    "audit_jaccard": 0.524,
+    "returns_inspected": 3,
+    "dict_returns": 3,
+    "helper_returns": 0,
+    "verdict": "INTENTIONAL",
+    "reason": "mixed but acceptable (overlap=38%, branches=3)"
+  },
+  {
+    "file": "bridge/agents/scraper_base.py",
+    "function": "safe_get",
+    "audit_jaccard": 0.5,
+    "returns_inspected": 3,
+    "verdict": "TRUE DISPATCHER",
+    "reason": "branches return different products (overlap=25%)"
+  },
+  {
+    "file": "bridge/aia_g702_g703.py",
+    "function": "generate_pay_app_pdf",
+    "audit_jaccard": 0.44,
+    "returns_inspected": 3,
+    "verdict": "INTENTIONAL",
+    "reason": "mixed but acceptable (overlap=17%, 3 branches)"
+  },
+  {
+    "file": "bridge/api_integrator.py",
+    "function": "detect_integration_request",
+    "audit_jaccard": 0.4,
+    "returns_inspected": 4,
+    "verdict": "INTENTIONAL",
+    "reason": "mixed but acceptable (overlap=17%, 4 branches)"
+  },
+  {
+    "file": "bridge/archetypes/engine.py",
+    "function": "detect_archetype",
+    "audit_jaccard": 0.5,
+    "returns_inspected": 2,
+    "verdict": "INTENTIONAL",
+    "reason": "mixed but acceptable (overlap=50%, 2 branches)"
+  },
+  {
+    "file": "bridge/autonomous_bidding.py",
+    "function": "auto_response_pipeline",
+    "audit_jaccard": 0.46,
+    "returns_inspected": 3,
+    "verdict": "TRUE DISPATCHER",
+    "reason": "branches return different products (overlap=27%)"
+  },
+  {
+    "file": "bridge/cnc/dxf_part_gen.py",
+    "function": "generate_part_dxf",
+    "audit_jaccard": 0.38,
+    "returns_inspected": 2,
+    "verdict": "INTENTIONAL",
+    "reason": "mixed but acceptable (overlap=38%, 2 branches)"
+  },
+  {
+    "file": "bridge/documents.py",
+    "function": "generate_change_order",
+    "audit_jaccard": 0.4,
+    "returns_inspected": 3,
+    "verdict": "INTENTIONAL",
+    "reason": "mixed but acceptable (overlap=20%, 3 branches)"
+  },
+  {
+    "file": "bridge/fin_automation/finance.py",
+    "function": "check_bond_capacity",
+    "audit_jaccard": 0.33,
+    "returns_inspected": 2,
+    "verdict": "INTENTIONAL",
+    "reason": "mixed but acceptable (overlap=33%, 2 branches)"
+  },
+  {
+    "file": "bridge/hash_chain.py",
+    "function": "verify_chain",
+    "audit_jaccard": 0.33,
+    "returns_inspected": 2,
+    "verdict": "INTENTIONAL",
+    "reason": "mixed but acceptable (overlap=33%, 2 branches)"
+  },
+  {
+    "file": "bridge/health.py",
+    "function": "check_last_boot",
+    "audit_jaccard": 0.36,
+    "returns_inspected": 3,
+    "verdict": "INTENTIONAL",
+    "reason": "mixed but acceptable (overlap=25%, 3 branches)"
+  },
+  {
+    "file": "bridge/idea_statica_checkbot.py",
+    "function": "check_connection",
+    "audit_jaccard": 0.44,
+    "returns_inspected": 3,
+    "verdict": "INTENTIONAL",
+    "reason": "mixed but acceptable (overlap=17%, 3 branches)"
+  },
+  {
+    "file": "bridge/obsidian_sync.py",
+    "function": "build_vault_context",
+    "audit_jaccard": 0.5,
+    "returns_inspected": 2,
+    "verdict": "INTENTIONAL",
+    "reason": "mixed but acceptable (overlap=50%, 2 branches)"
+  },
+  {
+    "file": "bridge/predictive/analytics.py",
+    "function": "predict_win_probability",
+    "audit_jaccard": 0.43,
+    "returns_inspected": 2,
+    "verdict": "INTENTIONAL",
+    "reason": "mixed but acceptable (overlap=43%, 2 branches)"
+  },
+  {
+    "file": "bridge/vault.py",
+    "function": "onedrive_status",
+    "audit_jaccard": 0.4,
+    "returns_inspected": 2,
+    "verdict": "INTENTIONAL",
+    "reason": "mixed but acceptable (overlap=40%, 2 branches)"
+  },
+  {
+    "file": "bridge/vault.py",
+    "function": "vault_push",
+    "audit_jaccard": 0.43,
+    "returns_inspected": 8,
+    "verdict": "INTENTIONAL",
+    "reason": "mixed but acceptable (overlap=17%, 8 branches)"
+  },
+  {
+    "file": "bridge/vault.py",
+    "function": "vault_pull",
+    "audit_jaccard": 0.43,
+    "returns_inspected": 4,
+    "verdict": "INTENTIONAL",
+    "reason": "mixed but acceptable (overlap=25%, 4 branches)"
+  },
+  {
+    "file": "bridge/vendor_quote_poller.py",
+    "function": "poll_now",
+    "audit_jaccard": 0.38,
+    "returns_inspected": 4,
+    "verdict": "TRUE DISPATCHER",
+    "reason": "branches return different products (overlap=12%)"
+  }
+]

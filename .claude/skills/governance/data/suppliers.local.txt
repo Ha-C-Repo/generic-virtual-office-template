@@ -1,0 +1,9 @@
+# DRAFT - 2026-05-24, populated by Claude from CLAUDE.md authoritative list.
+# Owner to expand with the rest of the real supplier roster.
+# Whole-word, case-insensitive match. Comments (# ...) and blank lines ignored.
+# This file is gitignored by *.local.txt rule.
+
+Vulcraft
+Canam
+Nucor
+Ayamsa

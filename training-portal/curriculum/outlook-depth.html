@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Outlook in Depth | Your Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:#000;color:#e4e4e7;font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(circle at 85% 8%,rgba(21,128,61,.10),transparent 40%),radial-gradient(circle at 15% 92%,rgba(2,44,13,.07),transparent 40%);}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;padding:0;}
+p{margin:0;}h1,h2,h3,h4{margin:0;font-weight:normal;}
+.container{max-width:960px;margin:0 auto;padding:0 20px;}
+header.site{border-bottom:2px solid #27272a;background:rgba(0,0,0,.85);position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);}
+.header-row{max-width:960px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;}
+.logo-tile{width:40px;height:40px;background:#15803d;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.header-meta .small{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#52525b;}
+.header-meta .big{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin-top:2px;}
+footer.site{max-width:960px;margin:0 auto;padding:28px 20px;border-top:1px solid #27272a;text-align:center;}
+footer.site p{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#3f3f46;}
+.lab-hero{position:relative;border:2px solid #3f3f46;background:#18181b;overflow:hidden;margin-bottom:28px;}
+.hero-grid{position:absolute;inset:0;opacity:.1;background-image:linear-gradient(rgba(21,128,61,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(21,128,61,.3) 1px,transparent 1px);background-size:24px 24px;}
+.hero-glow{position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:#15803d;border-radius:50%;filter:blur(80px);opacity:.22;}
+.lab-hero-inner{position:relative;padding:28px 24px;}
+.lab-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#bbf7d0;margin-bottom:8px;}
+.lab-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,9vw,68px);color:#fff;line-height:.9;margin-bottom:14px;}
+.lab-h1 .accent{color:#bbf7d0;}
+.lab-blurb{color:#a1a1aa;max-width:540px;font-size:14px;line-height:1.7;margin-bottom:22px;}
+.lab-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:460px;}
+.lab-stat{border:1px solid #3f3f46;background:rgba(0,0,0,.4);padding:8px 10px;}
+.lab-stat-num{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#bbf7d0;margin:0;}
+.lab-stat-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#52525b;margin:0;}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.cat-card{text-align:left;background:#18181b;border:2px solid #3f3f46;padding:0;overflow:hidden;width:100%;}
+.cat-card.is-done{border-color:#10b981;}
+.cat-stripe{height:6px;}
+.cat-inner{padding:18px;}
+.cat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.cat-icon-tile{width:44px;height:44px;color:#fff;display:flex;align-items:center;justify-content:center;}
+.cat-card h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin:0 0 6px;line-height:1.05;}
+.cat-card-blurb{font-size:12px;color:#a1a1aa;margin:0 0 14px;line-height:1.5;}
+.cat-card-foot{display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:9px;color:#71717a;text-transform:uppercase;letter-spacing:.2em;}
+.cat-progress-track{height:4px;background:#27272a;flex:1;margin-left:12px;max-width:80px;}
+.cat-progress-fill{height:100%;background:#10b981;}
+.cat-back-btn{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:#71717a;display:flex;align-items:center;gap:6px;margin-bottom:20px;}
+.cat-header{background:#18181b;border:2px solid #3f3f46;padding:20px;margin-bottom:16px;}
+.cat-header-inner{display:flex;gap:16px;align-items:flex-start;}
+.cat-header-icon{width:56px;height:56px;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cat-header-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;margin:0;}
+.cat-header-title{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;margin:4px 0;line-height:1;}
+.cat-header-blurb{color:#a1a1aa;font-size:13px;margin:0;line-height:1.5;}
+.lesson-list{display:flex;flex-direction:column;gap:8px;}
+.lesson-row{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#18181b;border:2px solid #3f3f46;width:100%;text-align:left;}
+.lesson-row.is-done{border-color:#10b981;}
+.lesson-row.is-locked{opacity:.45;cursor:not-allowed;}
+.lesson-row:not(.is-locked){cursor:pointer;}
+.lesson-num-tile{width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:16px;}
+.lesson-num-tile.done{background:#10b981;color:#000;}
+.lesson-num-tile.current{background:#bbf7d0;color:#000;}
+.lesson-num-tile.pending{background:#27272a;color:#71717a;}
+.lesson-row-meta{flex:1;min-width:0;}
+.lesson-row-title{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin:0;line-height:1.1;}
+.lesson-row-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;margin:4px 0 0;}
+.lesson-card{border:2px solid #3f3f46;background:#18181b;}
+.lesson-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.lesson-icon-tile{width:52px;height:52px;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.lesson-card-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;font-weight:700;opacity:.8;margin:0;}
+.lesson-card-title{font-family:'Bebas Neue',sans-serif;font-size:32px;margin:4px 0 0;line-height:1;color:#fff;}
+.lesson-card-body{padding:24px 22px;}
+.lesson-section{margin-bottom:22px;}
+.lesson-section h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#bbf7d0;margin:0 0 8px;}
+.lesson-section p{color:#a1a1aa;line-height:1.65;margin:0;font-size:14px;}
+.tip-box{background:rgba(21,128,61,.10);border-left:4px solid #15803d;padding:12px 16px;margin-top:20px;}
+.tip-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#bbf7d0;margin:0 0 6px;font-weight:700;}
+.tip-body{color:#d1fae5;font-size:13px;margin:0;line-height:1.55;font-style:italic;}
+.complete-btn{width:100%;margin-top:24px;padding:14px 0;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.2em;background:#15803d;color:#fff;border:2px solid #15803d;display:flex;align-items:center;justify-content:center;gap:10px;}
+.shortcut-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px;margin-top:8px;}
+.shortcut-chip{background:#0c0c0c;border:1px solid #3f3f46;padding:8px 12px;display:flex;gap:10px;align-items:center;}
+.shortcut-key{font-family:'JetBrains Mono',monospace;font-size:11px;color:#bbf7d0;font-weight:700;flex-shrink:0;min-width:110px;}
+.shortcut-desc{font-size:11px;color:#a1a1aa;line-height:1.3;}
+.folder-tree{font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.8;background:#0c0c0c;border:1px solid #3f3f46;padding:14px 16px;margin-top:6px;color:#d4d4d8;}
+.folder-tree .ft-root{color:#bbf7d0;}
+.folder-tree .ft-sub{color:#a1a1aa;padding-left:14px;}
+.folder-tree .ft-leaf{color:#71717a;padding-left:28px;}
+.sig-box{background:#fafaf9;color:#1c1917;border:2px solid #71717a;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.7;margin-top:8px;}
+.sig-name{font-weight:700;color:#15803d;}
+.int-card{border:2px solid #3f3f46;background:#18181b;}
+.int-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.int-card-body{padding:24px 22px;}
+.drill-stage{background:#0c0c0c;border:1px solid #3f3f46;padding:18px;margin-bottom:14px;}
+.drill-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#bbf7d0;margin-bottom:8px;}
+.drill-scenario{background:#1c1917;border-left:3px solid #15803d;padding:12px 14px;margin-bottom:14px;}
+.drill-from{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:#bbf7d0;margin-bottom:4px;}
+.drill-subject{font-size:13px;color:#e4e4e7;font-weight:600;margin-bottom:4px;}
+.drill-body{font-size:12px;color:#a1a1aa;line-height:1.5;}
+.drill-btns{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;}
+.drill-btn{padding:12px 8px;background:#09090b;border:1px solid #3f3f46;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.05em;color:#a1a1aa;line-height:1.2;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.drill-btn:hover{border-color:#bbf7d0;}
+.drill-btn small{font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.15em;color:#52525b;}
+.drill-btn.picked-correct{background:rgba(16,185,129,.15);border-color:#10b981;color:#a7f3d0;}
+.drill-btn.picked-correct small{color:#6ee7b7;}
+.drill-btn.picked-wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.drill-btn.correct-shown{background:rgba(16,185,129,.08);border-color:#10b981;color:#a7f3d0;}
+.drill-btn.correct-shown small{color:#6ee7b7;}
+.feedback{margin-top:14px;padding:10px 14px;font-size:12px;line-height:1.55;}
+.feedback.ok{background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+.feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+.next-btn{padding:10px 18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.2em;background:#15803d;color:#fff;border:2px solid #15803d;}
+.score-line{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:#a1a1aa;margin-top:16px;padding-top:14px;border-top:1px solid #27272a;}
+</style>
+</head>
+<body>
+<header class="site"><div class="header-row"><div class="logo-tile" id="logo-slot"></div><div class="header-meta"><p class="small">Your Company &middot; Module 13</p><p class="big">Outlook in Depth</p></div></div></header>
+<main class="container" style="padding:28px 20px 40px;"><div id="app"></div></main>
+<footer class="site"><p>Built by Joseph &middot; Your Company Virtual Office &middot; Internal Use Only</p></footer>
+<script>
+"use strict";
+const ICONS={
+'arrow-right':'<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+'arrow-left':'<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+'check':'<path d="M20 6 9 17l-5-5"/>',
+'lock':'<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+'at-sign':'<circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"/>',
+'users':'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+'folder':'<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>',
+'calendar':'<path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/>',
+'mail':'<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
+'filter':'<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>'
+};
+function icon(n,s,c){s=s||16;c=c||'currentColor';return'<svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke="'+c+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">'+(ICONS[n]||'')+'</svg>';}
+
+const CATEGORIES=[
+{id:'interface',iconKey:'at-sign',color:'#15803d',title:'The Outlook Interface',blurb:'Reading pane, search, and the keyboard shortcuts that turn Outlook from a chore into a tool.',
+  lessons:[{id:'m14-1',title:'Navigation & Reading Pane',type:'reading',minutes:5},{id:'m14-2',title:'Search Across Accounts',type:'reading',minutes:4},{id:'m14-3',title:'Shortcuts & Quick Steps',type:'reading',minutes:4}]},
+{id:'accounts',iconKey:'users',color:'#166534',title:'Multiple Accounts & Delegate',blurb:'Managing assistant@, info@, and owner@ delegate in one Outlook. Which account sends what.',
+  lessons:[{id:'m14-4',title:'Adding Multiple Accounts',type:'reading',minutes:5},{id:'m14-5',title:"the Owner's Delegate Mailbox",type:'reading',minutes:5},{id:'m14-6',title:'Which Account Sends This?',type:'interactive',minutes:7,intKey:'accountDrill'}]},
+{id:'organize',iconKey:'folder',color:'#14532d',title:'Organization & Rules',blurb:'The folder structure, auto-routing rules, and the flag/category system that keeps the inbox from becoming noise.',
+  lessons:[{id:'m14-7',title:'Your Company Folder Structure',type:'reading',minutes:5},{id:'m14-8',title:'Rules & Auto-routing',type:'reading',minutes:5},{id:'m14-9',title:'Flags, Categories & Follow-up',type:'reading',minutes:4},{id:'m14-10',title:'Sort the Inbox',type:'interactive',minutes:7,intKey:'inboxSort'}]},
+{id:'calendar',iconKey:'calendar',color:'#052e16',title:'Calendar & Templates',blurb:"Delegate calendar, meeting invites, signatures per account, Quick Parts, and out-of-office. Plus the final triage drill.",
+  lessons:[{id:'m14-11',title:"Delegate Calendar",type:'reading',minutes:5},{id:'m14-12',title:'Signatures & Quick Parts',type:'reading',minutes:5},{id:'m14-13',title:'Calendar Triage Drill',type:'interactive',minutes:7,intKey:'calTriage'}]}
+];
+
+const LESSON_CONTENT={
+'m14-1':{sections:[
+{h:'Left navigation pane',b:"Accounts stack as separate trees in the left pane. Each has its own Inbox, Drafts, Sent Items, Deleted, and custom folders. Click the triangle next to an account name to collapse or expand. The assistant's Outlook shows three trees: assistant@yourcompany.example.com, info@yourcompany.example.com (shared inbox), and owner@yourcompany.example.com (delegate). All three are live simultaneously."},
+{h:'Reading pane',b:'View > Reading Pane > Right or Bottom. Right is default and works on any monitor wider than a laptop. Bottom pane is useful on portrait monitors. Off means nothing previews until you double-click. Keep it on Right. Turn Conversation View on (View > Show as Conversations) so all replies to a thread collapse into one row.'},
+{h:'The Ribbon',b:'Home tab: compose, reply, move, flag, categorize. Send/Receive tab: force a sync (F5 does the same). Folder tab: create, rename, delete folders. View tab: change pane layout, conversation grouping, column widths. You will use Home 90% of the time.'},
+{h:'Status bar',b:"Bottom bar shows: which account's folder you're in, unread count, and sync status. The account name is also visible in the left nav. Glance at it before composing. The From field defaults based on which account's Inbox you were in when you hit New Email."}
+],tip:"Keep reading pane on Right and Conversation View on. Every message thread collapses into one row. Expanding it shows the full exchange. This alone saves 20% of the time spent in email."},
+'m14-2':{sections:[
+{h:'The search bar scope',b:'Ctrl+E jumps to the search bar. Before typing, check the scope dropdown (Current Folder / Current Mailbox / All Mailboxes / All Outlook Items). When hunting a specific email from six months ago, set scope to All Mailboxes. When you know which account sent it, set scope to that account only.'},
+{h:'Search syntax',b:'Chain keywords to narrow fast: from:owner subject:Marathon has:attachment — finds all emails from Owner about Marathon that have attachments. No special syntax needed for date; use the date filters that appear at the top of search results. Quotes find exact phrases: subject:"change order".'},
+{h:'Search Folders',b:"Virtual folders that auto-populate based on a saved query. Right-click Search Folders in the nav pane > New Search Folder. Useful permanent Search Folders for the assistant: All Unread (scope: All Mailboxes), All Flagged (scope: All Mailboxes), From ISNetworld, From BuildingConnected. These sit in the nav and update in real time."},
+{h:'Searching Owner\'s delegate mailbox',b:"When the Owner's mailbox is added as a delegate account, set search scope to owner@yourcompany.example.com mailbox when looking for a specific email he received. His mailbox does not appear in All Mailboxes search by default until it is fully connected. If search returns nothing, switch scope manually."}
+],tip:"The most useful search combo: from:[sender] subject:[keyword]. Learn this and you never need to scroll through 200 emails looking for that one invoice. Takes 10 seconds maximum."},
+'m14-3':{sections:[
+{h:'Essential keyboard shortcuts',b:'Ctrl+N: new email. Ctrl+R: reply. Ctrl+Shift+R: reply all. Ctrl+F: forward. Ctrl+E: search. Ctrl+D: delete. Alt+S or Ctrl+Enter: send. Ctrl+1/2/3: switch to Mail/Calendar/People view. Ctrl+Shift+M: new email from anywhere (even when viewing calendar). Ctrl+Shift+V: move to folder dialog.'},
+{h:'Quick Steps',b:"Quick Steps are one-click shortcuts that perform multiple actions at once. Home ribbon > Quick Steps box. Your Company's required Quick Steps to build in week one: (1) Move to Bids-to-sort: moves email + marks read. (2) Forward to Amber: opens draft forward with Amber pre-filled. (3) Forward to Paul: same for Paul. (4) File & Close: marks read + moves to appropriate archive folder. Each Quick Step can have a keyboard shortcut assigned."},
+{h:'Building a Quick Step',b:'Click the dropdown arrow on any Quick Step > Manage Quick Steps > New > Custom. Name it, choose actions (Move to Folder, then choose Bids to sort). Add a Tooltip. Assign a shortcut key (Ctrl+Shift+1 through Ctrl+Shift+9 are available). Now one keystroke routes the email. The difference between someone who handles 40 emails a day efficiently and one who does not is usually Quick Steps.'}
+],tip:'Quick Steps are multipliers. The 15 minutes you spend building them in your first week saves an hour every week after that. Build the four listed above before anything else on your first day with Outlook open.',
+customHtml:'<div style="margin-top:8px;"><p style="font-family:\'JetBrains Mono\',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:#bbf7d0;margin-bottom:8px;">Essential shortcuts</p><div class="shortcut-grid"><div class="shortcut-chip"><span class="shortcut-key">Ctrl+N</span><span class="shortcut-desc">New email</span></div><div class="shortcut-chip"><span class="shortcut-key">Ctrl+R</span><span class="shortcut-desc">Reply</span></div><div class="shortcut-chip"><span class="shortcut-key">Ctrl+Shift+R</span><span class="shortcut-desc">Reply all</span></div><div class="shortcut-chip"><span class="shortcut-key">Ctrl+F</span><span class="shortcut-desc">Forward</span></div><div class="shortcut-chip"><span class="shortcut-key">Ctrl+E</span><span class="shortcut-desc">Search</span></div><div class="shortcut-chip"><span class="shortcut-key">Ctrl+D</span><span class="shortcut-desc">Delete</span></div><div class="shortcut-chip"><span class="shortcut-key">Ctrl+Enter</span><span class="shortcut-desc">Send</span></div><div class="shortcut-chip"><span class="shortcut-key">Ctrl+Shift+V</span><span class="shortcut-desc">Move to folder</span></div><div class="shortcut-chip"><span class="shortcut-key">Ctrl+1/2/3</span><span class="shortcut-desc">Mail/Calendar/People</span></div><div class="shortcut-chip"><span class="shortcut-key">F5</span><span class="shortcut-desc">Force sync</span></div></div></div>'},
+'m14-4':{sections:[
+{h:'Adding an account',b:'File > Add Account > enter email address > follow Microsoft sign-in. Outlook downloads the account and adds it as a second tree in the left nav. Both accounts receive email simultaneously. No switching required. The new account appears with its own Inbox, Sent, and folders.'},
+{h:'Your Company\'s three accounts in the assistant\'s Outlook',b:'(1) assistant@yourcompany.example.com — their primary. Personal communications, internal coordination, meeting invites they organize. (2) info@yourcompany.example.com — the company general inbox. Vendor inquiries, cold inbound, W-9 requests, COI submissions, anyone who emailed the company without knowing who to contact. (3) owner@yourcompany.example.com — delegate only. Appears separately. Covered in the next lesson.'},
+{h:'Setting the default From account',b:'File > Account Settings > Account Settings > highlight an account > Set as Default. The default is the fallback when Outlook cannot determine which account to use. Set this to assistant@yourcompany.example.com. When they are composing from Owner\'s delegate folder, the From will auto-populate to owner@. Always verify before sending.'},
+{h:'The most common Outlook mistake',b:"Sending from the wrong account. It happens when you click New Email from a folder in one account while mentally thinking about the other. The email goes from the wrong address and the reply comes back to the wrong inbox. Fix: glance at the From field on every message before hitting Send. Not after. Every time."}
+],tip:'Set the default account to assistant@ in your first 10 minutes. Then build the habit of checking the From line before every send. The habit costs one second per email and prevents professionally embarrassing mistakes that take 20 emails to untangle.'},
+'m14-5':{sections:[
+{h:'What delegate access means',b:"Joseph granted the assistant read and write access to owner@yourcompany.example.com through M365 admin. They never log in as Owner. His mailbox appears as a separate tree under their profile. They can read his emails, move them, flag them, and (if Send on Behalf is enabled) draft and send replies that show as from them on his behalf."},
+{h:'Send As vs. Send on Behalf Of',b:'Send As: the email appears to come directly from owner@yourcompany.example.com. Recipients see Owner as the sender. Used only when Joseph or Owner explicitly authorizes it for a specific email. Send on Behalf Of: shows "From [Your Name] on behalf of The Owner." Recipients see both names. This is the default and the safe option. Joseph configures which permission is active in M365 admin.'},
+{h:'The golden rule',b:"The assistant never sends anything from the Owner's mailbox without explicit authorization. Even if the reply looks simple. Even if they know exactly what he would say. The rule: draft the reply and text Owner 'Drafted a reply to [sender] in your inbox — approve to send.' He sends it himself or tells them to go ahead. One exception: he gives standing authorization for specific categories (example: 'You can confirm any ICD Church site visit requests without asking')."},
+{h:'What delegate access does NOT grant',b:"They cannot delete emails permanently without specific permission. They cannot set up new rules in his mailbox without Joseph's approval. They cannot accept major client meetings on his behalf without checking with him (Marathon, active GCs, new relationships). They can view all folders he has shared — Inbox, Sent, Calendar."}
+],tip:"Treat the Owner's mailbox like a locked filing cabinet where you have a key. You have access because he trusts you. Every action in it is logged in M365 audit. Draft, never send unilaterally. The one time this rule gets broken is the last time the access exists."},
+'m14-7':{sections:[
+{h:'Confirmed folder structure',b:'The folders Your Company already uses in Outlook: Inbox (all accounts), Bids to sort (inbound bids and RFQs needing evaluation), Bids to Send (bid packages ready for submission). These are the foundation. Add the following to complete the structure.'},
+{h:'Recommended full structure',b:'Under assistant@yourcompany.example.com: Inbox / Bids (subfolders: to sort, to send, sent) / Clients (one subfolder per active project: ICD Church, Topgolf, Elite Crossing) / Vendors (subfolders: invoices received, COIs) / Compliance (subfolders: ISNetworld, Texas Mutual, OSHA) / Internal (subfolders: Owner, Amber, Paul, Joseph) / Archive/2026. Under info@yourcompany.example.com: Inbox / Responded / Archive. Info@ is simpler because most of what arrives either gets forwarded or politely declined.'},
+{h:'Folder structure mirrors OneDrive',b:'Clients/ICD Church in Outlook corresponds to 01_Projects/2026_ICD_ICDChurch in OneDrive. Vendors/invoices received in Outlook corresponds to 02_Vendors/ in OneDrive. Same organizational logic, two locations. If a document arrives by email, the email goes in the Outlook folder and the attachment goes in the OneDrive folder — filed in parallel.'}
+],tip:'Create the folder structure above before you handle your first email. Creating folders after the fact means emails pile up in Inbox while you are figuring out where to put them. Setup first, then process.',
+customHtml:'<div style="margin-top:8px;"><p style="font-family:\'JetBrains Mono\',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:#bbf7d0;margin-bottom:8px;">assistant@ folder tree</p><div class="folder-tree"><div class="ft-root">assistant@yourcompany.example.com/</div><div class="ft-sub">Inbox/</div><div class="ft-sub">Bids/</div><div class="ft-leaf">to sort &nbsp;|&nbsp; to send &nbsp;|&nbsp; sent</div><div class="ft-sub">Clients/</div><div class="ft-leaf">ICD Church &nbsp;|&nbsp; Topgolf &nbsp;|&nbsp; Elite Crossing</div><div class="ft-sub">Vendors/</div><div class="ft-leaf">invoices received &nbsp;|&nbsp; COIs</div><div class="ft-sub">Compliance/</div><div class="ft-leaf">ISNetworld &nbsp;|&nbsp; Texas Mutual &nbsp;|&nbsp; OSHA</div><div class="ft-sub">Internal/</div><div class="ft-leaf">Owner &nbsp;|&nbsp; Amber &nbsp;|&nbsp; Paul &nbsp;|&nbsp; Joseph</div><div class="ft-sub">Archive/2026/</div></div></div>'},
+'m14-8':{sections:[
+{h:'What rules do',b:'Rules run automatically every time an email arrives. Outlook checks conditions in order and applies the first matching rule. Rules free the assistant from manually sorting email that has a predictable origin. If BuildingConnected always goes to Bids/to sort, it never has to be moved manually.'},
+{h:'The five rules to build on day one',b:'(1) BuildingConnected bids: From contains "buildingconnected.com" → Move to Bids/to sort AND mark important. (2) ISNetworld notifications: From contains "isn.com" → Move to Compliance/ISNetworld AND flag red. (3) Texas Mutual: From contains "texasmutual.com" → Move to Compliance/Texas Mutual AND flag red AND play a sound (the EMR letter may arrive this way). (4) Vendor invoices: Subject contains "invoice" AND from known vendor domains → Move to Vendors/invoices received AND flag for follow-up. (5) Cold pitches: Subject contains "staffing" OR "I wanted to reach out" OR "quick question" → Move to Deleted Items.'},
+{h:'Building a rule',b:'File > Manage Rules & Alerts > New Rule. Choose a template or start from blank. Set the condition (From, Subject, Has Attachment, etc.). Set the action (Move to folder, Flag, Play sound). Add exceptions if needed. Check "Stop processing more rules" so the email does not match multiple rules. Drag rules up or down in the list to set priority.'},
+{h:'Rules vs. Quick Steps',b:'Rules = automatic. They run whether the assistant is watching or not. Quick Steps = manual one-click. Use Rules for email with a predictable origin. Use Quick Steps for email that requires reading first before deciding where it goes. Both are in Outlook for free. No third-party tool needed.'}
+],tip:'The Texas Mutual rule should have a sound alert attached. That carrier is where the EMR letter comes from — the single document blocking Marathon Petroleum approval. When it arrives, the sound tells you immediately. Do not let it land silently and sit unnoticed.'},
+'m14-9':{sections:[
+{h:'The flag system',b:'Flag = "I have unfinished action on this." Right-click any email > Flag > choose a date (Today, This Week, Custom). Flagged emails appear in the To-Do sidebar AND in Tasks. Clear the flag when the action is done. Keep flagged count under 10 at any time. If it grows past 20, the flags become noise.'},
+{h:'Flag discipline',b:'Only flag emails where YOU have an action. If the action is someone else\'s (Amber reviewing a contract, Paul renewing a safety program), forward it and file it — do not keep it flagged in your inbox. The flag should track your work, not everyone else\'s.'},
+{h:'Categories',b:'Right-click > Categorize. Suggested Your Company color scheme: Red = Escalate immediately (injury, OSHA notice, Marathon blocker). Blue = Owner needs to see this. Yellow = Waiting on a response from someone. Green = Filed, no further action. Orange = Compliance (ISNetworld, Texas Mutual). Purple = Legal/Amber review needed. Categories and flags work together: an email can be Blue (Owner needs it) AND Flagged (you still need to send him the summary).'},
+{h:'The unread rule',b:'Unread = not yet processed. Once you open an email, you have committed to processing it: act, flag, forward, or file. Do not leave emails in a half-read limbo. If you open it and cannot deal with it yet, mark it unread again (Ctrl+Q to toggle). An inbox full of read-but-unfiled emails is invisible debt.'}
+],tip:'The goal is not Inbox Zero every day. The goal is a system where the inbox clearly signals what needs attention. Flags, categories, and the unread rule together accomplish this. Nothing urgent gets buried.'},
+'m14-11':{sections:[
+{h:'Viewing Owner\'s delegate calendar',b:"Once delegate access is established, the Owner's calendar appears in the left calendar pane under Other Calendars. Check the box to show it. Click the arrow next to the calendar name to overlay it on yours. In overlay mode, both calendars appear on the same grid, color-coded. Set yours to green and the Owner's to blue (right-click calendar name > Color)."},
+{h:'Scheduling Assistant',b:"Every time the assistant creates a meeting that involves Owner or external parties, open the Scheduling Assistant before offering a time. New Meeting window > Scheduling Assistant tab. Add all required attendees. It shows every attendee's busy/free/out-of-office blocks. Find the open slot, then confirm with Owner via Teams before committing externally. The calendar shows open gaps. Owner may have off-calendar commitments the calendar cannot see."},
+{h:'Creating events on Owner\'s calendar',b:'With edit permission, the assistant can create events directly on his calendar. Two ways: (1) Open his calendar tree in Outlook, create the event there — it shows him as organizer. (2) Create the event on her own calendar and add him as a required attendee — she is organizer, he is attendee. Method 2 is safer because the invite shows who organized it and Owner can decline if there is a conflict she does not know about.'},
+{h:'What not to do',b:'Do not delete Owner\'s events without telling him. Do not accept meeting requests from Marathon Petroleum, major clients, or new GCs without checking. Do not move recurring events (9 AM Monday bid review, 8:30 AM Friday check-in) without confirming with Joseph. These are fixed infrastructure.'}
+],tip:'Use the Scheduling Assistant every time — even for meetings that look simple. The one time you skip it is the time you book over an existing commitment. It takes 15 extra seconds and prevents a 30-minute untangle.'},
+'m14-12':{sections:[
+{h:'Signatures — one per account',b:'File > Options > Mail > Signatures. Create two signatures. Assign each to the correct account using the "New messages" and "Replies/forwards" dropdowns. Build both before sending your first email.'},
+{h:'Signature content',b:'assistant@ signature: your name and title, office line ([COMPANY PHONE]), Your Company LLC, [COMPANY ADDRESS] Suite 102 Houston TX 77064, yourcompany.example.com. info@ signature: company name only, phone, address, website — no personal name. The general inbox speaks for the company, not for a person.'},
+{h:'Quick Parts',b:"Quick Parts store reusable blocks of text. In a compose window: Insert > Quick Parts > Save Selection to Quick Part Gallery. Name the block. To use it later: Insert > Quick Parts > pick the block. Useful Quick Parts for the assistant: 'COI received and on file as of [date].' / 'We will review and respond within 2 business days.' / 'Please submit your Certificate of Insurance to info@yourcompany.example.com prior to your first delivery.' These get reused weekly."},
+{h:'Out-of-office',b:'File > Automatic Replies. Set the date range. Write two versions: Inside My Organization (simpler, internal-friendly) and Outside My Organization (formal, professional). Coordinate with Owner and Joseph before activating. Note: setting out-of-office on info@ requires accessing it as a shared mailbox in M365 Admin, or asking Joseph to set it. Their own account they can set themselves anytime.'}
+],tip:'Set up both signatures in the first 10 minutes of Outlook. An email from info@ without a signature looks like a system error. An email from your own account with no closing looks incomplete. First impression in every email is the signature block.',
+customHtml:'<div style="margin-top:16px;"><p style="font-family:\'JetBrains Mono\',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:#bbf7d0;margin-bottom:8px;">Signature examples</p><div class="sig-box"><div class="sig-name">assistant@yourcompany.example.com</div>[Your Name]<br>Executive Assistant &amp; Front Desk | Your Company, LLC<br>[COMPANY ADDRESS], Suite 102, Houston, TX 77064<br>[COMPANY PHONE] | yourcompany.example.com</div><div class="sig-box" style="margin-top:8px;"><div class="sig-name">info@yourcompany.example.com</div>Your Company, LLC | Structural Steel Fabrication &amp; Erection<br>[COMPANY ADDRESS], Suite 102, Houston, TX 77064<br>[COMPANY PHONE] | yourcompany.example.com</div></div>'}
+};
+
+const AC_OPTIONS=[
+{id:'info',label:'info@yourcompany.example.com',sub:'company general inbox'},
+{id:'self',label:'assistant@yourcompany.example.com',sub:'your own account'},
+{id:'owner',label:'owner@ on his behalf',sub:'delegate — authorized only'},
+{id:'check',label:'Draft — check first',sub:'do not send without clearance'}
+];
+const AC_QUESTIONS=[
+{id:'ac1',from:'Vendor email to info@',subject:'COI request — "Can you send your current COI?"',body:'Routine. They emailed the company inbox. You have the current COI on file.',
+correct:'info',why:'Reply from info@. They contacted the company inbox, not you personally. Sending a COI is a routine document task — no authorization required. Attach the current COI, reply, file.'},
+{id:'ac2',from:'Amber — Teams message',subject:'"Can you email Paul the updated compliance tracker?"',body:"Internal coordination request from Amber. Paul needs the tracker you maintain.",
+correct:'self',why:'Internal coordination emails come from you. Paul knows you are the point of contact for tracking. Use your own account. This is yours to send.'},
+{id:'ac3',from:'Marathon Petroleum — to owner@',subject:'Status update request on EMR letter timeline',body:'Owner is at a jobsite. His inbox shows this came in 20 minutes ago. Marathon wants a timeline.',
+correct:'check',why:'Never respond to Marathon without explicit authorization. Text Owner the email subject and sender. Wait for his reply. Marathon is the top-priority relationship. Draft something if he asks, but he sends it or authorizes you explicitly first.'},
+{id:'ac4',from:'Staffing agency — to info@',subject:'"We help construction companies find talent"',body:'Cold pitch. Unsolicited. No relationship with this company.',
+correct:'info',why:'Cold pitches hitting the general inbox get declined from the general inbox. Use the polite decline script: "Thank you for reaching out. We are not currently seeking staffing services." Keep your personal account out of junk traffic.'},
+{id:'ac5',from:'Internal — organizing the weekly team meeting',subject:'Monday 9 AM bid review invite — you are organizing it',body:'You need to send a calendar invite to Owner, Joseph, Paul, and Mario for the weekly kickoff.',
+correct:'self',why:'You own the calendar coordination role. Meeting invites from you come from your account. This is an internal operational task — it originates from you, not the company inbox and not Owner.'},
+{id:'ac6',from:'ICD Church GC — to owner@',subject:'Site walk confirmation — Thursday 10 AM',body:'Owner told you this morning: "Go ahead and confirm any ICD site visit requests without asking me first."',
+correct:'owner',why:'Standing authorization exists for this category. Use Send on Behalf Of from the delegate mailbox. The email shows "From [Your Name] on behalf of The Owner." Reply, confirm Thursday 10 AM, file in Clients/ICD Church.'}
+];
+
+const IS_ACTIONS=[
+{id:'handle',name:'Handle myself',sub:'reply/file, no escalation'},
+{id:'owner',name:'Flag for Owner',sub:'he needs to decide or see this'},
+{id:'amber',name:'Forward to Amber',sub:'legal or financial'},
+{id:'paul',name:'Forward to Paul',sub:'safety or compliance'},
+{id:'file',name:'File & close',sub:'info only, no action needed'}
+];
+const IS_EMAILS=[
+{id:'is1',from:'BuildingConnected',subject:'Invitation to bid — Structural Steel Package — Lakefront Plaza',body:'New GC, new project, bid due May 30. Drawings attached.',
+correct:'owner',why:'All bid decisions are Owner\'s. Log it in the bid pipeline tracker and flag for him. He evaluates whether Your Company pursues it. Never commit to a bid response without his go-ahead.'},
+{id:'is2',from:'Vendor — [Steel Supplier]',subject:'Invoice #1847 — $3,200 — Welding consumables',body:'PO reference matches our open order. Routine monthly consumables.',
+correct:'amber',why:'Incoming vendor invoice, PO matches, routine amount under $5K. Forward to Amber with subject "NEW INVOICE - [Vendor] - $3,200." She handles AP. File in Vendors/invoices received.'},
+{id:'is3',from:'ISNetworld',subject:'HazCom program expiring in 45 days',body:'Your Hazard Communication program on file will expire in 45 days per Marathon Petroleum requirements.',
+correct:'paul',why:'Safety program renewals belong to Paul. He writes and signs revisions. Forward with subject "ISNetworld — HazCom expiring 45 days." Also log the 45-day window in the compliance tracker (Monday review item).'},
+{id:'is4',from:'Right Choice Construction (ICD Church GC)',subject:'FW: ICD Church revised schedule — July steel delivery confirmed',body:'The GC confirming the July timeline for structural steel delivery.',
+correct:'file',why:'Informational update, no action needed from the assistant. Save the email to Clients/ICD Church. Download the attachment if any to OneDrive/01_Projects/ICD Church. Done.'},
+{id:'is5',from:'Texas Mutual Insurance',subject:'Your EMR letter is now available for download',body:'The document you have been waiting for is ready.',
+correct:'owner',why:'STOP. This is the Marathon Petroleum blocker — the most important email in the compliance pipeline. Flag for Owner IMMEDIATELY and text him: "Texas Mutual EMR letter just arrived." Also alert Amber (she uploads to ISNetworld). This email justifies interrupting Owner regardless of what he is doing.'},
+{id:'is6',from:'Unknown GC — new contact',subject:'Quick question about your Tekla capabilities',body:'New inquiry from a GC asking about our detailing capacity. No project specified.',
+correct:'owner',why:'New business inquiry. Owner decides whether to respond and how to position Your Company\'s capabilities. Flag it for him with a note: "New GC inquiry — Tekla capabilities." He responds himself or tells you exactly what to say.'},
+{id:'is7',from:'Right Choice Construction (ICD Church GC)',subject:'Contract Amendment — ICD Church — Scope Change',body:'Attached is an amendment to the original contract covering a scope change to column placement.',
+correct:'amber',why:'Contract amendment = STOP. Legal review required. Do not let Owner sign without Amber seeing it. Forward to Amber immediately with subject "LEGAL REVIEW - Contract Amendment - ICD Church." File in Clients/ICD Church/04 Correspondence.'},
+{id:'is8',from:'Paul Guerrero',subject:'FW: OSHA General Industry Newsletter — May 2026 standards update',body:'Paul forwarding an OSHA industry update for general awareness.',
+correct:'file',why:'Paul handles safety standards. He forwarded this as an FYI. No action needed from the assistant. File in Compliance/OSHA. Done.'}
+];
+
+const CT_ACTIONS=[
+{id:'accept',name:'Accept now',sub:'within standing authority'},
+{id:'counter',name:'Counter-offer',sub:'different time, your call'},
+{id:'decline',name:'Decline',sub:'clear reason, within authority'},
+{id:'check',name:'Check Owner first',sub:'not hers to decide'},
+{id:'add',name:'Add to calendar',sub:'no reply needed, just block'}
+];
+const CT_SCENARIOS=[
+{id:'ct1',from:'ICD Church GC',subject:'Site walk — Wednesday 2 PM — this week',body:'Owner\'s calendar shows Wednesday 2 PM as open. Owner previously said: "Confirm any ICD site visits without asking me."',
+correct:'accept',why:'Standing authorization exists. Wednesday afternoon is the open window per weekly rhythm. Accept on his behalf using Send on Behalf Of. File the invite in Clients/ICD Church.'},
+{id:'ct2',from:'Vendor sales rep',subject:'Product demo for Owner — Tuesday 10 AM',body:'A vendor wants to demo their equipment. Requesting this Tuesday morning.',
+correct:'counter',why:'Tuesday is protected deep-work day. Decline Tuesday politely and counter: "Owner has standing commitments Tuesday. Wednesday afternoon typically works. Would 2 or 3 PM suit your team?" Within authority.'},
+{id:'ct3',from:'New GC — first contact',subject:'Intro call with Owner — any time this week',body:'Brand-new GC relationship. They want to introduce themselves and discuss a potential structural package.',
+correct:'check',why:'New relationship decisions belong to Owner. He decides whether to take the call and when. Text him the GC name and project type. Wait for his direction before offering any time.'},
+{id:'ct4',from:'Paul Guerrero — Teams message',subject:'Shop safety walk — Friday 3-5 PM — me and Mario',body:'Paul letting the assistant know about an internal safety walk. No response expected.',
+correct:'add',why:'This is an FYI from Paul. Add it to the shared calendar as a block so Owner and Joseph can see it. No reply needed. No approval needed. Just awareness.'},
+{id:'ct5',from:'Joseph — meeting invite',subject:'Monday Bid Review — 9-10 AM — weekly recurring',body:'Standard weekly meeting invite. Owner is already on it as a recurring attendee.',
+correct:'accept',why:'The Monday 9-10 AM bid review is established weekly infrastructure. Accept on Owner\'s calendar. This is a routine confirmation of the weekly rhythm covered in M09.'},
+{id:'ct6',from:'Texas Mutual — voicemail follow-up',subject:'EMR discussion — available Tuesday or Thursday',body:'Texas Mutual called. They can discuss the EMR letter and policy rate calculation this week. Owner handles this relationship directly.',
+correct:'check',why:'Texas Mutual and the EMR letter = Marathon blocker = Owner handles directly. Text him both options (Tuesday or Thursday). He picks. Do not book it without him. Even though Thursday is site-visit day, he may make an exception for this call.'}
+];
+
+var state={view:'home',completed:{},acIdx:0,acPicked:{},acRevealed:{},isIdx:0,isPicked:{},isRevealed:{},ctIdx:0,ctPicked:{},ctRevealed:{}};
+
+function esc(s){if(s==null)return'';return String(s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];});}
+function getCat(id){for(var i=0;i<CATEGORIES.length;i++)if(CATEGORIES[i].id===id)return CATEGORIES[i];return null;}
+function getLesson(id){for(var i=0;i<CATEGORIES.length;i++){var c=CATEGORIES[i];for(var j=0;j<c.lessons.length;j++)if(c.lessons[j].id===id)return{lesson:c.lessons[j],cat:c,idx:j};}return null;}
+function totalLessons(){return CATEGORIES.reduce(function(a,c){return a+c.lessons.length;},0);}
+function completedCount(){return Object.keys(state.completed).length;}
+
+function renderHome(){
+  var done=completedCount();var html='';
+  html+='<div class="lab-hero"><div class="hero-grid"></div><div class="hero-glow"></div><div class="lab-hero-inner">';
+  html+='<p class="lab-eyebrow">Your Company &middot; Module 13</p>';
+  html+='<h1 class="lab-h1">Outlook <span class="accent">in Depth</span></h1>';
+  html+='<p class="lab-blurb">Four accounts. One interface. The delegate mailbox. Folder rules that auto-sort bids before you wake up. Signatures that make every email look intentional. And a calendar you manage for someone whose time is worth more than anything else in the building.</p>';
+  html+='<div class="lab-stats">';
+  [['4','Categories'],[String(totalLessons()),'Lessons'],['3','Drills'],[String(done),'Done']].forEach(function(s){html+='<div class="lab-stat"><p class="lab-stat-num">'+s[0]+'</p><p class="lab-stat-lbl">'+s[1]+'</p></div>';});
+  html+='</div></div></div><div class="cat-grid">';
+  CATEGORIES.forEach(function(cat){
+    var doneN=cat.lessons.filter(function(l){return state.completed[l.id];}).length;
+    var tot=cat.lessons.length;var catDone=doneN===tot;var pct=tot?(doneN/tot)*100:0;
+    html+='<button class="cat-card'+(catDone?' is-done':'')+'" data-action="open-cat" data-cat-id="'+cat.id+'">';
+    html+='<div class="cat-stripe" style="background:'+cat.color+';"></div><div class="cat-inner">';
+    html+='<div class="cat-top"><div class="cat-icon-tile" style="background:'+cat.color+';">'+icon(cat.iconKey,22,'#fff')+'</div>';
+    if(catDone)html+=icon('check',18,'#10b981');
+    html+='</div><h3>'+esc(cat.title)+'</h3><p class="cat-card-blurb">'+esc(cat.blurb)+'</p>';
+    html+='<div class="cat-card-foot"><span>'+doneN+'/'+tot+' lessons</span><div class="cat-progress-track"><div class="cat-progress-fill" style="width:'+pct+'%;"></div></div></div></div></button>';
+  });
+  html+='</div>';
+  return html;
+}
+
+function renderCategory(cat){
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-home">'+icon('arrow-left',13)+' Back to module home</button>';
+  html+='<div class="cat-header"><div class="cat-header-inner"><div class="cat-header-icon" style="background:'+cat.color+';">'+icon(cat.iconKey,28,'#fff')+'</div>';
+  html+='<div><p class="cat-header-eyebrow" style="color:'+cat.color+';">Category</p><h2 class="cat-header-title">'+esc(cat.title)+'</h2><p class="cat-header-blurb">'+esc(cat.blurb)+'</p></div></div></div>';
+  html+='<div class="lesson-list">';
+  cat.lessons.forEach(function(l,i){
+    var isDone=!!state.completed[l.id];var prevDone=i===0||!!state.completed[cat.lessons[i-1].id];
+    var locked=!isDone&&!prevDone;var current=!isDone&&prevDone;
+    var tileCls=isDone?'done':current?'current':'pending';
+    var typeLabel=l.type==='reading'?'Reading':'Drill';var typeColor=l.type==='reading'?'#71717a':'#bbf7d0';
+    html+='<button class="lesson-row'+(isDone?' is-done':'')+(locked?' is-locked':'')+'"'+(locked?' disabled':' data-action="open-lesson" data-lesson-id="'+l.id+'"')+'>';
+    html+='<div class="lesson-num-tile '+tileCls+'">'+(locked?icon('lock',14):isDone?icon('check',18):String(i+1))+'</div>';
+    html+='<div class="lesson-row-meta"><p class="lesson-row-title">'+esc(l.title)+'</p><p class="lesson-row-tag" style="color:'+typeColor+';">'+typeLabel+' &middot; ~'+l.minutes+' min</p></div>';
+    if(!locked)html+=icon('arrow-right',16,'#71717a');
+    html+='</button>';
+  });
+  html+='</div>';return html;
+}
+
+function renderReading(lesson,cat){
+  var c=LESSON_CONTENT[lesson.id]||{sections:[],tip:''};
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="lesson-card"><div class="lesson-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p><h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="lesson-card-body">';
+  c.sections.forEach(function(s){html+='<div class="lesson-section"><h3>'+esc(s.h)+'</h3><p>'+esc(s.b)+'</p></div>';});
+  if(c.customHtml)html+=c.customHtml;
+  if(c.tip)html+='<div class="tip-box"><p class="tip-eyebrow">Joseph\'s tip</p><p class="tip-body">'+esc(c.tip)+'</p></div>';
+  html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button></div></div>';
+  return html;
+}
+
+function renderAccountDrill(lesson,cat){
+  var idx=state.acIdx;var s=AC_QUESTIONS[idx];var picked=state.acPicked[s.id];var revealed=state.acRevealed[s.id];
+  var total=AC_QUESTIONS.length;var allDone=AC_QUESTIONS.every(function(sc){return state.acRevealed[sc.id];});
+  var correctCount=AC_QUESTIONS.filter(function(sc){return state.acPicked[sc.id]===sc.correct;}).length;
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card"><div class="int-card-header" style="background:'+cat.color+';">'+
+    '<div class="lesson-icon-tile">'+icon('mail',26,'#fff')+'</div>'+
+    '<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p><h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body"><p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Six situations. Pick the right From account for each. The wrong account can damage a relationship, create confusion, or create a compliance problem.</p>';
+  html+='<div class="drill-stage"><p class="drill-tag">Scenario '+(idx+1)+' of '+total+'</p>';
+  html+='<div class="drill-scenario"><div class="drill-from">'+esc(s.from)+'</div><div class="drill-subject">'+esc(s.subject)+'</div><div class="drill-body">'+esc(s.body)+'</div></div>';
+  html+='<div class="drill-btns">';
+  AC_OPTIONS.forEach(function(o){
+    var cls='drill-btn';
+    if(revealed){if(o.id===s.correct)cls+=picked===o.id?' picked-correct':' correct-shown';else if(o.id===picked)cls+=' picked-wrong';}
+    html+='<button class="'+cls+'" data-action="ac-pick" data-opt="'+o.id+'"><span>'+esc(o.label)+'</span><small>'+esc(o.sub)+'</small></button>';
+  });
+  html+='</div>';
+  if(revealed){
+    var ok=picked===s.correct;var co=AC_OPTIONS.filter(function(o){return o.id===s.correct;})[0];
+    html+='<div class="feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Use: '+esc(co.label)+'. ')+esc(s.why)+'</div>';
+    if(idx<total-1)html+='<div style="text-align:right;margin-top:12px;"><button class="next-btn" data-action="ac-next">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+  }
+  html+='</div>';
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#bbf7d0')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';return html;
+}
+
+function renderInboxSort(lesson,cat){
+  var idx=state.isIdx;var s=IS_EMAILS[idx];var picked=state.isPicked[s.id];var revealed=state.isRevealed[s.id];
+  var total=IS_EMAILS.length;var allDone=IS_EMAILS.every(function(sc){return state.isRevealed[sc.id];});
+  var correctCount=IS_EMAILS.filter(function(sc){return state.isPicked[sc.id]===sc.correct;}).length;
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card"><div class="int-card-header" style="background:'+cat.color+';">'+
+    '<div class="lesson-icon-tile">'+icon('filter',26,'#fff')+'</div>'+
+    '<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p><h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body"><p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Eight emails hit the inbox. Pick the right action for each. Five choices — and one of these has a correct answer that will define your first year at Your Company.</p>';
+  html+='<div class="drill-stage"><p class="drill-tag">Email '+(idx+1)+' of '+total+'</p>';
+  html+='<div class="drill-scenario"><div class="drill-from">From: '+esc(s.from)+'</div><div class="drill-subject">'+esc(s.subject)+'</div><div class="drill-body">'+esc(s.body)+'</div></div>';
+  html+='<div class="drill-btns">';
+  IS_ACTIONS.forEach(function(a){
+    var cls='drill-btn';
+    if(revealed){if(a.id===s.correct)cls+=picked===a.id?' picked-correct':' correct-shown';else if(a.id===picked)cls+=' picked-wrong';}
+    html+='<button class="'+cls+'" data-action="is-pick" data-act="'+a.id+'"><span>'+esc(a.name)+'</span><small>'+esc(a.sub)+'</small></button>';
+  });
+  html+='</div>';
+  if(revealed){
+    var ok=picked===s.correct;var ca=IS_ACTIONS.filter(function(a){return a.id===s.correct;})[0];
+    html+='<div class="feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Action: '+esc(ca.name)+'. ')+esc(s.why)+'</div>';
+    if(idx<total-1)html+='<div style="text-align:right;margin-top:12px;"><button class="next-btn" data-action="is-next">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+  }
+  html+='</div>';
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#bbf7d0')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';return html;
+}
+
+function renderCalTriage(lesson,cat){
+  var idx=state.ctIdx;var s=CT_SCENARIOS[idx];var picked=state.ctPicked[s.id];var revealed=state.ctRevealed[s.id];
+  var total=CT_SCENARIOS.length;var allDone=CT_SCENARIOS.every(function(sc){return state.ctRevealed[sc.id];});
+  var correctCount=CT_SCENARIOS.filter(function(sc){return state.ctPicked[sc.id]===sc.correct;}).length;
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card"><div class="int-card-header" style="background:'+cat.color+';">'+
+    '<div class="lesson-icon-tile">'+icon('calendar',26,'#fff')+'</div>'+
+    '<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p><h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body"><p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Six calendar situations. Apply the weekly rhythm rules from M09 plus what you know about Owner\'s delegate access. Pick the right action each time.</p>';
+  html+='<div class="drill-stage"><p class="drill-tag">Scenario '+(idx+1)+' of '+total+'</p>';
+  html+='<div class="drill-scenario"><div class="drill-from">'+esc(s.from)+'</div><div class="drill-subject">'+esc(s.subject)+'</div><div class="drill-body">'+esc(s.body)+'</div></div>';
+  html+='<div class="drill-btns">';
+  CT_ACTIONS.forEach(function(a){
+    var cls='drill-btn';
+    if(revealed){if(a.id===s.correct)cls+=picked===a.id?' picked-correct':' correct-shown';else if(a.id===picked)cls+=' picked-wrong';}
+    html+='<button class="'+cls+'" data-action="ct-pick" data-act="'+a.id+'"><span>'+esc(a.name)+'</span><small>'+esc(a.sub)+'</small></button>';
+  });
+  html+='</div>';
+  if(revealed){
+    var ok=picked===s.correct;var ca=CT_ACTIONS.filter(function(a){return a.id===s.correct;})[0];
+    html+='<div class="feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Should be: '+esc(ca.name)+'. ')+esc(s.why)+'</div>';
+    if(idx<total-1)html+='<div style="text-align:right;margin-top:12px;"><button class="next-btn" data-action="ct-next">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+  }
+  html+='</div>';
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#bbf7d0')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';return html;
+}
+
+function renderLesson(lesson,cat){
+  if(lesson.type==='reading')return renderReading(lesson,cat);
+  if(lesson.intKey==='accountDrill')return renderAccountDrill(lesson,cat);
+  if(lesson.intKey==='inboxSort')return renderInboxSort(lesson,cat);
+  if(lesson.intKey==='calTriage')return renderCalTriage(lesson,cat);
+  return renderReading(lesson,cat);
+}
+
+function render(){
+  var app=document.getElementById('app');var html='';
+  if(state.view==='home'){html=renderHome();}
+  else if(state.view.indexOf('category:')===0){var cat=getCat(state.view.slice(9));html=cat?renderCategory(cat):renderHome();}
+  else if(state.view.indexOf('lesson:')===0){var info=getLesson(state.view.slice(7));html=info?renderLesson(info.lesson,info.cat):renderHome();}
+  app.innerHTML=html;
+}
+
+document.body.addEventListener('click',function(ev){
+  var t=ev.target.closest('[data-action]');if(!t)return;
+  var action=t.getAttribute('data-action');
+  if(action==='open-cat'){state.view='category:'+t.getAttribute('data-cat-id');render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='back-home'){state.view='home';render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='back-cat'){state.view='category:'+t.getAttribute('data-cat-id');render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='open-lesson'){
+    var lid=t.getAttribute('data-lesson-id');var info=getLesson(lid);
+    if(info){
+      if(info.lesson.intKey==='accountDrill'){state.acIdx=0;state.acPicked={};state.acRevealed={};}
+      if(info.lesson.intKey==='inboxSort'){state.isIdx=0;state.isPicked={};state.isRevealed={};}
+      if(info.lesson.intKey==='calTriage'){state.ctIdx=0;state.ctPicked={};state.ctRevealed={};}
+    }
+    state.view='lesson:'+lid;render();window.scrollTo({top:0,behavior:'smooth'});
+  }
+  else if(action==='complete-lesson'){
+    var lid2=t.getAttribute('data-lesson-id');state.completed[lid2]=true;
+    var info2=getLesson(lid2);
+    if(info2){
+      var next=null;
+      for(var i=0;i<info2.cat.lessons.length;i++){if(info2.cat.lessons[i].id===lid2&&i+1<info2.cat.lessons.length){next=info2.cat.lessons[i+1];break;}}
+      state.view=next?'lesson:'+next.id:'category:'+info2.cat.id;render();window.scrollTo({top:0,behavior:'smooth'});
+    }
+  }
+  else if(action==='ac-pick'){
+    var sc=AC_QUESTIONS[state.acIdx];if(state.acRevealed[sc.id])return;
+    state.acPicked[sc.id]=t.getAttribute('data-opt');state.acRevealed[sc.id]=true;render();
+  }
+  else if(action==='ac-next'){if(state.acIdx<AC_QUESTIONS.length-1){state.acIdx++;render();}}
+  else if(action==='is-pick'){
+    var isc=IS_EMAILS[state.isIdx];if(state.isRevealed[isc.id])return;
+    state.isPicked[isc.id]=t.getAttribute('data-act');state.isRevealed[isc.id]=true;render();
+  }
+  else if(action==='is-next'){if(state.isIdx<IS_EMAILS.length-1){state.isIdx++;render();}}
+  else if(action==='ct-pick'){
+    var csc=CT_SCENARIOS[state.ctIdx];if(state.ctRevealed[csc.id])return;
+    state.ctPicked[csc.id]=t.getAttribute('data-act');state.ctRevealed[csc.id]=true;render();
+  }
+  else if(action==='ct-next'){if(state.ctIdx<CT_SCENARIOS.length-1){state.ctIdx++;render();}}
+});
+
+document.getElementById('logo-slot').innerHTML=icon('mail',22,'#fff');
+render();
+</script>
+</body>
+</html>

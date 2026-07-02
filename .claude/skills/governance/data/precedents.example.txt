@@ -1,0 +1,12 @@
+# Precedent-project list (TEMPLATE).
+# Copy this file to precedents.local.txt and fill it with the project names that
+# must never appear on a bid. Precedent projects belong on capability statements
+# only, never on a client bid. precedents.local.txt is gitignored. You can also
+# point to a list elsewhere with --precedents PATH or YOURCO_PRECEDENT_LIST.
+#
+# Rules: one entry per line, blank lines and # comments ignored, matching is
+# case-insensitive and whole-word.
+#
+# Replace the placeholders below in your .local copy:
+Example Plaza Project
+Example Distribution Center

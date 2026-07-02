@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Microsoft Teams Full | Your Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:#000;color:#e4e4e7;
+  font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(circle at 85% 5%,rgba(91,95,199,0.12),transparent 40%),
+    radial-gradient(circle at 15% 95%,rgba(91,95,199,0.07),transparent 40%);
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;padding:0;}
+input,textarea,select{font-family:inherit;}
+p{margin:0;}h1,h2,h3,h4{margin:0;font-weight:normal;}
+.container{max-width:960px;margin:0 auto;padding:0 20px;}
+
+/* Header */
+header.site{border-bottom:2px solid #27272a;background:rgba(0,0,0,.85);
+  position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);}
+.header-row{max-width:960px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;}
+.logo-tile{width:40px;height:40px;background:#5b5fc7;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.header-meta .small{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#52525b;}
+.header-meta .big{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin-top:2px;}
+footer.site{max-width:960px;margin:0 auto;padding:28px 20px;border-top:1px solid #27272a;text-align:center;}
+footer.site p{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#3f3f46;}
+
+/* Hero */
+.lab-hero{position:relative;border:2px solid #3f3f46;background:#18181b;overflow:hidden;margin-bottom:28px;}
+.hero-grid{position:absolute;inset:0;opacity:.1;
+  background-image:linear-gradient(rgba(91,95,199,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(91,95,199,.3) 1px,transparent 1px);
+  background-size:24px 24px;}
+.hero-glow{position:absolute;top:-40px;right:-40px;width:220px;height:220px;
+  background:#5b5fc7;border-radius:50%;filter:blur(80px);opacity:.22;}
+.lab-hero-inner{position:relative;padding:28px 24px;}
+.lab-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#818cf8;margin-bottom:8px;}
+.lab-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,9vw,68px);color:#fff;line-height:.9;margin-bottom:14px;}
+.lab-h1 .accent{color:#818cf8;}
+.lab-blurb{color:#a1a1aa;max-width:540px;font-size:14px;line-height:1.7;margin-bottom:22px;}
+.lab-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:460px;}
+.lab-stat{border:1px solid #3f3f46;background:rgba(0,0,0,.4);padding:8px 10px;}
+.lab-stat-num{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#818cf8;margin:0;}
+.lab-stat-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#52525b;margin:0;}
+
+/* Category cards */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.cat-card{text-align:left;background:#18181b;border:2px solid #3f3f46;padding:0;overflow:hidden;width:100%;}
+.cat-card.is-done{border-color:#10b981;}
+.cat-stripe{height:6px;}
+.cat-inner{padding:18px;}
+.cat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.cat-icon-tile{width:44px;height:44px;color:#fff;display:flex;align-items:center;justify-content:center;}
+.cat-card h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin:0 0 6px;line-height:1.05;}
+.cat-card-blurb{font-size:12px;color:#a1a1aa;margin:0 0 14px;line-height:1.5;}
+.cat-card-foot{display:flex;justify-content:space-between;align-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:9px;color:#71717a;text-transform:uppercase;letter-spacing:.2em;}
+.cat-progress-track{height:4px;background:#27272a;flex:1;margin-left:12px;max-width:80px;}
+.cat-progress-fill{height:100%;background:#10b981;}
+
+/* Category view */
+.cat-back-btn{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;
+  color:#71717a;display:flex;align-items:center;gap:6px;margin-bottom:20px;}
+.cat-header{background:#18181b;border:2px solid #3f3f46;padding:20px;margin-bottom:16px;}
+.cat-header-inner{display:flex;gap:16px;align-items:flex-start;}
+.cat-header-icon{width:56px;height:56px;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cat-header-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;margin:0;}
+.cat-header-title{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;margin:4px 0;line-height:1;}
+.cat-header-blurb{color:#a1a1aa;font-size:13px;margin:0;line-height:1.5;}
+
+.lesson-list{display:flex;flex-direction:column;gap:8px;}
+.lesson-row{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#18181b;
+  border:2px solid #3f3f46;width:100%;text-align:left;}
+.lesson-row.is-done{border-color:#10b981;}
+.lesson-row.is-locked{opacity:.45;cursor:not-allowed;}
+.lesson-row:not(.is-locked){cursor:pointer;}
+.lesson-num-tile{width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:16px;}
+.lesson-num-tile.done   {background:#10b981;color:#000;}
+.lesson-num-tile.current{background:#818cf8;color:#000;}
+.lesson-num-tile.pending{background:#27272a;color:#71717a;}
+.lesson-row-meta{flex:1;min-width:0;}
+.lesson-row-title{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin:0;line-height:1.1;}
+.lesson-row-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;margin:4px 0 0;}
+
+/* Reading card */
+.lesson-card{border:2px solid #3f3f46;background:#18181b;}
+.lesson-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.lesson-icon-tile{width:52px;height:52px;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.lesson-card-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;font-weight:700;opacity:.8;margin:0;}
+.lesson-card-title{font-family:'Bebas Neue',sans-serif;font-size:32px;margin:4px 0 0;line-height:1;color:#fff;}
+.lesson-card-body{padding:24px 22px;}
+.lesson-section{margin-bottom:22px;}
+.lesson-section h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#818cf8;margin:0 0 8px;}
+.lesson-section p{color:#a1a1aa;line-height:1.65;margin:0;font-size:14px;}
+.tip-box{background:rgba(91,95,199,.08);border-left:4px solid #5b5fc7;padding:12px 16px;margin-top:20px;}
+.tip-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#818cf8;margin:0 0 6px;font-weight:700;}
+.tip-body{color:#c7d2fe;font-size:13px;margin:0;line-height:1.55;font-style:italic;}
+.complete-btn{width:100%;margin-top:24px;padding:14px 0;
+  font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.2em;
+  background:#5b5fc7;color:#fff;border:2px solid #5b5fc7;
+  display:flex;align-items:center;justify-content:center;gap:10px;}
+
+/* Interactive card */
+.int-card{border:2px solid #3f3f46;background:#18181b;}
+.int-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.int-card-body{padding:24px 22px;}
+
+/* Teams Message Builder */
+.tmb-stage{background:#18181b;border:1px solid #3f3f46;overflow:hidden;}
+.tmb-bar{background:#4a4b9c;padding:8px 14px;display:flex;align-items:center;justify-content:space-between;font-size:12px;}
+.tmb-bar-title{font-weight:600;color:#fff;}
+.tmb-composer{padding:14px;}
+.tmb-composer-label{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#818cf8;margin-bottom:8px;}
+.tmb-field{margin-bottom:14px;}
+.tmb-field label{display:block;font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#71717a;margin-bottom:5px;}
+.tmb-field select,.tmb-field textarea,.tmb-field input{
+  width:100%;background:#09090b;border:1px solid #3f3f46;color:#e4e4e7;
+  padding:8px 10px;font-size:13px;outline:none;}
+.tmb-field select:focus,.tmb-field textarea:focus,.tmb-field input:focus{border-color:#5b5fc7;}
+.tmb-field select option{background:#09090b;}
+.tmb-preview-label{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#818cf8;margin:16px 0 8px;}
+.tmb-preview{background:#2d2d3b;border:1px solid #4a4b9c;padding:14px;border-radius:4px;}
+.tmb-preview-channel{font-family:'JetBrains Mono',monospace;font-size:9px;color:#818cf8;text-transform:uppercase;letter-spacing:.15em;margin-bottom:8px;}
+.tmb-preview-from{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.tmb-avatar{width:32px;height:32px;background:#5b5fc7;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;flex-shrink:0;}
+.tmb-preview-name{font-weight:600;font-size:13px;color:#fff;}
+.tmb-preview-time{font-size:10px;color:#71717a;margin-left:4px;}
+.tmb-preview-body{font-size:13px;color:#d4d4d8;line-height:1.6;white-space:pre-wrap;margin-left:42px;}
+.tmb-mention{color:#818cf8;font-weight:600;}
+.tmb-feedback{margin-top:16px;padding:12px 14px;font-size:12px;line-height:1.55;}
+.tmb-feedback.ok   {background:rgba(16,185,129,.1);border:1px solid #10b981;color:#a7f3d0;}
+.tmb-feedback.warn {background:rgba(251,191,36,.08);border:1px solid #fbbf24;color:#fde68a;}
+.tmb-check-btn{padding:10px 20px;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.2em;
+  background:#5b5fc7;color:#fff;border:2px solid #5b5fc7;margin-top:14px;}
+
+/* Meeting Host Sim */
+.meeting-shell{background:#1c1c30;border:1px solid #4a4b9c;overflow:hidden;}
+.meeting-header{background:#323264;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;}
+.meeting-title-text{font-weight:600;font-size:13px;color:#fff;}
+.meeting-badge{font-family:'JetBrains Mono',monospace;font-size:9px;padding:3px 8px;border-radius:99px;text-transform:uppercase;letter-spacing:.12em;}
+.meeting-badge.live{background:#ef4444;color:#fff;}
+.meeting-badge.prep{background:#4a4b9c;color:#c7d2fe;}
+.meeting-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:16px;min-height:160px;}
+.participant-tile{background:#2d2d4a;border-radius:6px;padding:14px;text-align:center;position:relative;}
+.participant-tile.host-tile{border:2px solid #818cf8;}
+.participant-name{font-size:11px;font-weight:600;color:#e4e4e7;margin-top:8px;}
+.participant-status{font-size:9px;color:#71717a;margin-top:2px;}
+.mute-icon{font-size:14px;}
+.meeting-controls{display:flex;justify-content:center;gap:8px;padding:12px 16px;background:#0c0c1a;flex-wrap:wrap;}
+.ctrl-btn{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.12em;
+  padding:8px 14px;border:1px solid #3f3f46;color:#a1a1aa;display:flex;align-items:center;gap:5px;}
+.ctrl-btn.active{border-color:#ef4444;background:rgba(239,68,68,.1);color:#fca5a5;}
+.ctrl-btn.highlight{border-color:#818cf8;background:rgba(129,140,248,.1);color:#c7d2fe;}
+.meeting-steps{display:flex;flex-direction:column;gap:8px;margin-top:16px;}
+.meet-step{padding:10px 12px;background:#09090b;border:1px solid #3f3f46;display:flex;gap:10px;align-items:flex-start;}
+.meet-step.done-step{border-color:#10b981;background:rgba(16,185,129,.05);}
+.meet-step.active-step{border-color:#818cf8;background:rgba(91,95,199,.08);}
+.meet-step-num{width:22px;height:22px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:14px;border:1px solid #3f3f46;}
+.meet-step.done-step .meet-step-num{background:#10b981;border-color:#10b981;color:#000;}
+.meet-step.active-step .meet-step-num{background:#5b5fc7;border-color:#5b5fc7;color:#fff;}
+.meet-step-text{flex:1;font-size:12px;color:#a1a1aa;line-height:1.5;}
+.meet-step.active-step .meet-step-text{color:#e4e4e7;}
+.meet-action-btn{padding:8px 18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.2em;
+  background:#5b5fc7;color:#fff;border:2px solid #5b5fc7;margin-top:12px;}
+.meet-reset-btn{padding:8px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;
+  letter-spacing:.15em;background:#27272a;color:#a1a1aa;border:1px solid #3f3f46;margin-top:12px;margin-left:8px;}
+
+/* Notification Tuner */
+.notif-grid{display:flex;flex-direction:column;gap:8px;}
+.notif-row{background:#0c0c0c;border:1px solid #3f3f46;padding:12px 14px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.notif-label{flex:1;min-width:180px;}
+.notif-label-title{font-size:13px;color:#e4e4e7;font-weight:500;}
+.notif-label-sub{font-size:11px;color:#71717a;margin-top:2px;}
+.notif-select{background:#09090b;border:1px solid #3f3f46;color:#e4e4e7;padding:6px 10px;font-size:12px;outline:none;min-width:140px;}
+.notif-select:focus{border-color:#5b5fc7;}
+.notif-verdict{font-size:11px;font-style:italic;margin-top:6px;width:100%;}
+.notif-verdict.good{color:#a7f3d0;}
+.notif-verdict.bad {color:#fca5a5;}
+.notif-score{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;
+  color:#a1a1aa;margin-top:16px;padding-top:16px;border-top:1px solid #27272a;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-row">
+    <div class="logo-tile" id="logo-slot"></div>
+    <div class="header-meta">
+      <p class="small">Your Company &middot; Module 5</p>
+      <p class="big">Microsoft Teams Full</p>
+    </div>
+  </div>
+</header>
+
+<main class="container" style="padding:28px 20px 40px;">
+  <div id="app"></div>
+</main>
+
+<footer class="site">
+  <p>Built by Joseph &middot; Your Company Virtual Office &middot; Internal Use Only</p>
+</footer>
+
+<script>
+"use strict";
+
+// ============================================================================
+// ICONS
+// ============================================================================
+const ICONS={
+  'arrow-right':    '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  'arrow-left':     '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  'check':          '<path d="M20 6 9 17l-5-5"/>',
+  'lock':           '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  'hash':           '<line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/>',
+  'video':          '<path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/>',
+  'bell':           '<path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/>',
+  'at-sign':        '<circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/>',
+  'message-circle': '<path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/>',
+  'users':          '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/>',
+  'settings':       '<path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/>'
+};
+function icon(name,size,color){
+  size=size||16;color=color||'currentColor';
+  var p=ICONS[name]||'';
+  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">'+p+'</svg>';
+}
+
+// ============================================================================
+// DATA
+// ============================================================================
+const CATEGORIES=[
+  { id:'channels', iconKey:'hash', color:'#5b5fc7',
+    title:'Channels in Depth',
+    blurb:'Standard vs. private, tabs, pinning, and @mentions that actually get noticed.',
+    lessons:[
+      { id:'ch-1', title:'Channel Anatomy',            type:'reading',     minutes:3 },
+      { id:'ch-2', title:'@Mentions Done Right',       type:'reading',     minutes:3 },
+      { id:'ch-3', title:'Build a Channel Message',    type:'interactive', minutes:5, intKey:'msgBuilder' }
+    ] },
+  { id:'meetings', iconKey:'video', color:'#4f46e5',
+    title:'Hosting Meetings',
+    blurb:'Schedule, launch, manage participants, record, and wrap a meeting without panic.',
+    lessons:[
+      { id:'mt-1', title:'Before the Call: Setup Right',     type:'reading',     minutes:3 },
+      { id:'mt-2', title:'Running the Room (as Host)',       type:'reading',     minutes:4 },
+      { id:'mt-3', title:'Meeting Host Walkthrough',         type:'interactive', minutes:6, intKey:'meetHost' }
+    ] },
+  { id:'files', iconKey:'message-circle', color:'#6366f1',
+    title:'Files in Teams',
+    blurb:'The right way to share files. When Teams, when OneDrive link, when never.',
+    lessons:[
+      { id:'fi-1', title:'The Files Tab',                   type:'reading', minutes:3 },
+      { id:'fi-2', title:'Teams Link vs. OneDrive Link',    type:'reading', minutes:3 },
+      { id:'fi-3', title:'Co-authoring from Teams',         type:'reading', minutes:2 }
+    ] },
+  { id:'notifications', iconKey:'bell', color:'#7c3aed',
+    title:'Notifications & Focus',
+    blurb:'Tune out the noise without missing what matters. One wrong setting drowns you.',
+    lessons:[
+      { id:'nt-1', title:'Activity Feed vs. Notifications', type:'reading',     minutes:2 },
+      { id:'nt-2', title:'Do Not Disturb & Quiet Hours',    type:'reading',     minutes:2 },
+      { id:'nt-3', title:'Tune Your Notifications',         type:'interactive', minutes:5, intKey:'notifTuner' }
+    ] }
+];
+
+const LESSON_CONTENT={
+  'ch-1':{ sections:[
+    { h:'Standard channels are public to the team', b:'Everyone on the Your Company team can see every standard channel. Use standard channels for project threads (ICD Church, Marathon prep, Elite Crossing) so the whole team can follow along. Nothing confidential lives here.' },
+    { h:'Private channels are invitation-only', b:'If you create a private channel, only the people you invite can see it or even know it exists. Use private channels for conversations that should not be visible to the whole team — vendor pricing discussions, HR topics, or anything Owner wants contained.' },
+    { h:'Tabs keep everything in one place', b:'Every channel has a tabs bar at the top (Files, Posts, sometimes a OneNote or a website). Whoever sets up a channel can pin a SharePoint folder, a document, or even the Your Company bid tracker as a tab. Ask Joseph to pin what you use daily.' },
+    { h:'Pin and unpin channels', b:'Right-click any channel and choose Pin. Pinned channels float to the top of your sidebar. Unpin anything you do not use weekly. A sidebar with 20 unpinned channels means you miss things.' }
+  ], tip:'New channel names at Your Company should follow the pattern: Project-Name or Topic-Name. No spaces. Example: ICD-Church, Marathon-Prep, Admin-Ops.' },
+  'ch-2':{ sections:[
+    { h:'@name pings one person', b:'Type @Mario and Teams sends Mario a notification even if he has the app in the background. Use this when the message is specifically for one person but the conversation belongs in the channel so others can see it.' },
+    { h:'@channel pings everyone in that channel', b:'Use @channel only when every single person in the channel genuinely needs to act or know immediately. Owner\'s rule: if you would not text all of them individually, do not @channel them.' },
+    { h:'@team pings every member of the whole team', b:'Reserved for true company-wide announcements. Safety alerts, office closures, confirmed job wins. Never use @team for a routine question.' },
+    { h:'No @mention = no notification', b:'If you post in a channel without an @mention, people only see it when they open Teams and scroll. Fine for non-urgent updates. Not fine when you need Mario to stop welding and read something.' }
+  ], tip:'At Your Company: @Mario for shop-floor questions, @Paul for safety items, @Joseph for IT or scheduling, @Owner only when he is the decision-maker. Do not @Owner for things Joseph can handle.' },
+  'mt-1':{ sections:[
+    { h:'Schedule the meeting from Outlook or Teams Calendar', b:'Both sync to the same calendar. From Teams: click Calendar on the left rail, then New Meeting. Add title, attendees, date, time. Flip the Teams Meeting toggle on — this generates the join link automatically and puts it in the invite.' },
+    { h:'Set an agenda in the meeting body', b:'Two sentences on the purpose and a 3-bullet agenda. People who accept a blank calendar invite walk in not knowing why they are there. That wastes the first five minutes of every meeting.' },
+    { h:'Send it early enough to matter', b:'Same-day meeting invites for non-urgent topics are rude. At Your Company, next-day minimum for planned meetings. Urgent same-day: Teams chat first, then send the invite.' },
+    { h:'Check everyone\'s availability before picking a time', b:'In the scheduling panel, Teams shows colored bars for each attendee\'s calendar. White = free. Colored = busy. Pick a slot where all bars are white. Do not guess.' }
+  ], tip:'If a meeting could have been an email, make it an email. If it needs real-time back-and-forth, make it a meeting. The test: would this take more than 3 replies to resolve in chat?' },
+  'mt-2':{ sections:[
+    { h:'Start with everyone muted', b:'Open the Participants pane and mute all before the call starts. As host you can mute any participant at any time. You cannot force someone to unmute — you can only prompt them.' },
+    { h:'Use the lobby to control who gets in', b:'The lobby holds external attendees (clients, GCs) until you admit them. Internal Your Company team members join directly. Always check the lobby before starting — one wrong attendee in a pricing call is a problem.' },
+    { h:'Screen sharing: share a window, not your desktop', b:'When you click Share, choose a specific app window rather than your entire screen. Your whole desktop exposes every other open tab, notification, and personal item. Share only the document you intend to show.' },
+    { h:'Record when it matters, but tell everyone first', b:'Start recording via the three-dot menu. Teams announces the recording to all participants automatically. For client calls, always ask permission first. For internal planning meetings, recording is your best note-taker.' }
+  ], tip:'End every meeting by naming the action items out loud: who does what by when. Teams Recap (if enabled) will transcribe the call, but do not count on it — state the actions clearly before you hang up.' },
+  'fi-1':{ sections:[
+    { h:'The Files tab is the channel\'s shared folder', b:'Every Teams channel has a Files tab. Files uploaded there live in a SharePoint folder behind the scenes. Everyone in the channel has access. This is where project documents should live — not in someone\'s personal OneDrive.' },
+    { h:'Upload directly into the channel', b:'Drag and drop a file into the Files tab. Or use the paperclip in the channel chat — but note: files attached in chat go to the Files tab automatically. Either way, the file is in SharePoint, visible to the whole team.' },
+    { h:'Organize with folders inside the tab', b:'You can create subfolders inside the Files tab just like in File Explorer. For a project channel, create folders: Drawings, Bids, BOLs, Correspondence. Keeps the tab from becoming a flat pile of 200 files.' }
+  ], tip:'The Files tab and the SharePoint site for that channel are the same place. If someone sends you a SharePoint link to a file in a project channel, it will open inside Teams. You do not need to leave Teams to work on it.' },
+  'fi-2':{ sections:[
+    { h:'Paste a link, not a file attachment', b:'When you want to share a file in a Teams chat or channel message, do not upload a copy. Click the paperclip, choose Browse OneDrive or Browse Teams and Channels, and share the original file. Everyone edits the same version. No duplicates.' },
+    { h:'Teams link vs. OneDrive link: same file, different path', b:'A Teams link opens the file inside Teams. A OneDrive link opens it in the browser or OneDrive app. Both point to the same file in SharePoint. Use Teams links when messaging inside Teams. Use OneDrive links when sending to someone outside Teams (email, text, Outlook invite).' },
+    { h:'Never email a file attachment for a company document', b:'Email attachments create orphan copies. Someone edits the attachment, saves it locally, emails it back, and now you have three versions with no clear winner. Share the link. Period.' }
+  ], tip:'If Owner asks you to "send him the bid file," send a Teams link or OneDrive link — not an attachment. He gets the live version. He can edit it and you see the changes in real time.' },
+  'fi-3':{ sections:[
+    { h:'Multiple people can edit the same file simultaneously', b:'Open a Word or Excel file from the Teams Files tab. You will see colored cursors showing where others are typing. Edits sync in seconds. This is how the Your Company team works on a bid document together without emailing versions back and forth.' },
+    { h:'Open in Desktop App when you need full power', b:'The browser version covers 90% of tasks. For complex Excel formulas, mail merge, or heavy PowerPoint formatting, click the Edit in Desktop App button at the top of the file. The desktop app saves back to the same SharePoint location automatically.' },
+    { h:'See who changed what', b:'Every Office file in SharePoint tracks version history. Click File → Info → Version History (desktop) or the clock icon (browser). If someone deletes a paragraph or overwrites a number, you can restore the previous version without losing anything.' }
+  ], tip:'If you see Owner\'s cursor in a section of the document, work somewhere else. When his cursor moves away, that section is yours. Do not type over someone while they are actively in the same paragraph.' },
+  'nt-1':{ sections:[
+    { h:'Activity Feed is your catch-all', b:'The bell icon on the left rail shows every @mention, reply, reaction, and missed message across all channels. Check it first when you open Teams. Everything that needed your attention is here, in time order.' },
+    { h:'Notifications are the popups and pings', b:'Banner notifications appear in the corner of your screen. Sound pings play when a message comes in. These interrupt you in real time. The Activity Feed is passive — you check it. Notifications are active — they come to you.' },
+    { h:'Not every channel needs to notify you', b:'By default, Teams notifies you of every message in channels you follow. At Your Company with multiple project channels, this becomes noise fast. You need to tune per-channel so the shop crew channel does not ping you every time Mario sends a photo of a weld.' }
+  ], tip:'A rule that works: Activity Feed — check twice a day (morning open, post-lunch). Real-time notifications — only for channels where you are the first responder. Everything else: mute banners, check Activity Feed.' },
+  'nt-2':{ sections:[
+    { h:'Do Not Disturb blocks all notifications', b:'Set your status to Do Not Disturb and no banners, sounds, or badges interrupt you. Only people on your Priority Access list (set in Settings → Privacy) can break through. Use DND when you are on a client call, focused on a critical document, or in a meeting that does not use Teams.' },
+    { h:'Quiet Hours silence the mobile app', b:'In Teams mobile, go to Settings → Notifications → Quiet Hours. Set a start and end time — for example, 8 PM to 7 AM. During quiet hours, mobile notifications are suppressed. You will see them when you open the app, but they will not wake your phone.' },
+    { h:'Away vs. DND: they are not the same', b:'Away means you stepped out briefly — Teams sets this automatically after 5 minutes of inactivity. DND means do not interrupt me, I am actively working. Set DND intentionally. Do not rely on Away to signal focus time — it just means your keyboard is idle.' }
+  ], tip:'At Your Company: add Owner and Joseph to your Priority Access list so they can always reach you even when you are in DND. Everyone else has to wait.' }
+};
+
+// Message Builder data
+const MB_CHANNELS=['#ICD-Church','#Marathon-Prep','#Admin-Ops','#Shop-Floor','#Elite-Crossing'];
+const MB_RECIP_SUGGESTIONS=['@Mario','@Paul','@Owner','@Joseph','@Channel'];
+
+// Meeting steps
+const MEET_STEPS=[
+  'Open Teams Calendar. Click New Meeting.',
+  'Enter title, attendees, date and time.',
+  'Toggle "Teams Meeting" ON to generate the join link.',
+  'Write a 2-sentence purpose and 3-bullet agenda in the body.',
+  'Check the Scheduling Assistant — make sure all bars are white.',
+  'Send the invite.',
+  'On call day: open the meeting, mute all, check the lobby.',
+  'Share only a specific window (not your full desktop).',
+  'State action items before ending. Stop the recording.'
+];
+
+// Notification rows
+const NOTIF_ROWS=[
+  { id:'n1', title:'#Shop-Floor channel',        sub:'Mario and crew post photos and updates here all day',
+    correct:'Only @mentions', options:['All activity','Only @mentions','Off'] },
+  { id:'n2', title:'#Marathon-Prep channel',     sub:'Active compliance project — items need attention',
+    correct:'All activity',   options:['All activity','Only @mentions','Off'] },
+  { id:'n3', title:'@Direct messages to you',    sub:'1-on-1 chats from Owner, Joseph, Paul',
+    correct:'All activity',   options:['All activity','Only @mentions','Off'] },
+  { id:'n4', title:'#Admin-Ops channel',         sub:'You manage this channel — all updates are yours to handle',
+    correct:'All activity',   options:['All activity','Only @mentions','Off'] },
+  { id:'n5', title:'Teams phone calls',          sub:'Someone calling your Teams number',
+    correct:'All activity',   options:['All activity','Only @mentions','Off'] },
+  { id:'n6', title:'Reactions to your messages', sub:'Someone thumbs-up or hearts your post',
+    correct:'Off',            options:['All activity','Only @mentions','Off'] }
+];
+
+// ============================================================================
+// STATE
+// ============================================================================
+var state={
+  view:'home', completed:{},
+  // Message Builder
+  mbChannel:'#ICD-Church', mbMention:'', mbBody:'', mbChecked:false, mbFeedback:null,
+  // Meeting Host
+  meetStep:0, meetDone:false,
+  // Notification Tuner
+  notifPicked:{}, notifChecked:false
+};
+
+// ============================================================================
+// HELPERS
+// ============================================================================
+function esc(s){ if(s==null)return''; return String(s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];}); }
+function pass(s){ return s||''; }
+function getCat(id){ for(var i=0;i<CATEGORIES.length;i++) if(CATEGORIES[i].id===id) return CATEGORIES[i]; return null; }
+function getLesson(id){
+  for(var i=0;i<CATEGORIES.length;i++){
+    var c=CATEGORIES[i];
+    for(var j=0;j<c.lessons.length;j++) if(c.lessons[j].id===id) return{lesson:c.lessons[j],cat:c,idx:j};
+  }return null;
+}
+function totalLessons(){ return CATEGORIES.reduce(function(a,c){return a+c.lessons.length;},0); }
+function completedCount(){ return Object.keys(state.completed).length; }
+
+// ============================================================================
+// RENDER: HOME
+// ============================================================================
+function renderHome(){
+  var done=completedCount();
+  var html='';
+  html+='<div class="lab-hero"><div class="hero-grid"></div><div class="hero-glow"></div>';
+  html+='<div class="lab-hero-inner">';
+  html+='<p class="lab-eyebrow">Your Company &middot; Module 5</p>';
+  html+='<h1 class="lab-h1">Microsoft <span class="accent">Teams</span> Full</h1>';
+  html+='<p class="lab-blurb">You joined meetings in Module 2. This module teaches you to run them. Four categories covering channels, hosting, file sharing, and notification control. By the end you are the person who sets up the call, not the one who asks how to join it.</p>';
+  html+='<div class="lab-stats">';
+  [['4','Categories'],[String(totalLessons()),'Lessons'],['3','Interactives'],[String(done),'Done']].forEach(function(s){
+    html+='<div class="lab-stat"><p class="lab-stat-num">'+s[0]+'</p><p class="lab-stat-lbl">'+s[1]+'</p></div>';
+  });
+  html+='</div></div></div>';
+
+  html+='<div class="cat-grid">';
+  CATEGORIES.forEach(function(cat){
+    var doneN=cat.lessons.filter(function(l){return state.completed[l.id];}).length;
+    var tot=cat.lessons.length;
+    var allDone=doneN===tot;
+    var pct=tot?(doneN/tot)*100:0;
+    html+='<button class="cat-card'+(allDone?' is-done':'')+'" data-action="open-cat" data-cat-id="'+cat.id+'">';
+    html+='<div class="cat-stripe" style="background:'+cat.color+';"></div>';
+    html+='<div class="cat-inner">';
+    html+='<div class="cat-top"><div class="cat-icon-tile" style="background:'+cat.color+';">'+icon(cat.iconKey,22,'#fff')+'</div>';
+    if(allDone) html+=icon('check',18,'#10b981');
+    html+='</div>';
+    html+='<h3>'+esc(cat.title)+'</h3>';
+    html+='<p class="cat-card-blurb">'+esc(cat.blurb)+'</p>';
+    html+='<div class="cat-card-foot"><span>'+doneN+'/'+tot+' lessons</span>';
+    html+='<div class="cat-progress-track"><div class="cat-progress-fill" style="width:'+pct+'%;"></div></div>';
+    html+='</div></div></button>';
+  });
+  html+='</div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: CATEGORY
+// ============================================================================
+function renderCategory(cat){
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-home">'+icon('arrow-left',13)+' Back to module home</button>';
+  html+='<div class="cat-header"><div class="cat-header-inner">';
+  html+='<div class="cat-header-icon" style="background:'+cat.color+';">'+icon(cat.iconKey,28,'#fff')+'</div>';
+  html+='<div><p class="cat-header-eyebrow" style="color:'+cat.color+';">Category</p>';
+  html+='<h2 class="cat-header-title">'+esc(cat.title)+'</h2>';
+  html+='<p class="cat-header-blurb">'+esc(cat.blurb)+'</p>';
+  html+='</div></div></div>';
+  html+='<div class="lesson-list">';
+  cat.lessons.forEach(function(l,i){
+    var isDone=!!state.completed[l.id];
+    var prevDone=i===0||!!state.completed[cat.lessons[i-1].id];
+    var locked=!isDone&&!prevDone;
+    var current=!isDone&&prevDone;
+    var tileCls=isDone?'done':current?'current':'pending';
+    var typeLabel=l.type==='reading'?'Reading':'Interactive';
+    var typeColor=l.type==='reading'?'#71717a':'#818cf8';
+    html+='<button class="lesson-row'+(isDone?' is-done':'')+(locked?' is-locked':'')+'"';
+    html+=locked?' disabled':' data-action="open-lesson" data-lesson-id="'+l.id+'"';
+    html+='>';
+    html+='<div class="lesson-num-tile '+tileCls+'">'+(locked?icon('lock',14):isDone?icon('check',18):String(i+1))+'</div>';
+    html+='<div class="lesson-row-meta"><p class="lesson-row-title">'+esc(l.title)+'</p>';
+    html+='<p class="lesson-row-tag" style="color:'+typeColor+';">'+typeLabel+' &middot; ~'+l.minutes+' min</p></div>';
+    if(!locked) html+=icon('arrow-right',16,'#71717a');
+    html+='</button>';
+  });
+  html+='</div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: READING LESSON
+// ============================================================================
+function renderReading(lesson,cat){
+  var c=LESSON_CONTENT[lesson.id]||{sections:[],tip:''};
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="lesson-card">';
+  html+='<div class="lesson-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="lesson-card-body">';
+  c.sections.forEach(function(s){
+    html+='<div class="lesson-section"><h3>'+esc(s.h)+'</h3><p>'+pass(s.b)+'</p></div>';
+  });
+  if(c.tip){
+    html+='<div class="tip-box"><p class="tip-eyebrow">Joseph\'s tip</p><p class="tip-body">'+pass(c.tip)+'</p></div>';
+  }
+  html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// INTERACTIVE 1: MESSAGE BUILDER (ch-3)
+// ============================================================================
+function renderMsgBuilder(lesson,cat){
+  // Build live preview
+  var mention=state.mbMention.trim();
+  var body=state.mbBody.trim();
+  var preview='';
+  if(body){
+    var text=body;
+    if(mention) text=mention+' '+text;
+    preview=text;
+  }
+  // Feedback logic
+  var fb=state.mbFeedback;
+
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:20px;">Fill in the fields to build a proper Teams channel message. Then hit "Check it" to see how well you followed the rules.</p>';
+
+  html+='<div class="tmb-stage">';
+  html+='<div class="tmb-bar"><span class="tmb-bar-title">Teams &mdash; Your Company</span><span style="font-size:11px;color:#c7d2fe;">Channel: '+esc(state.mbChannel)+'</span></div>';
+  html+='<div class="tmb-composer">';
+
+  html+='<div class="tmb-field"><label>Post to channel</label>';
+  html+='<select id="mb-channel">';
+  MB_CHANNELS.forEach(function(ch){
+    html+='<option'+(state.mbChannel===ch?' selected':'')+'>'+esc(ch)+'</option>';
+  });
+  html+='</select></div>';
+
+  html+='<div class="tmb-field"><label>@Mention (who specifically needs to act?)</label>';
+  html+='<input type="text" id="mb-mention" placeholder="@Mario, @Owner, @Channel..." value="'+esc(state.mbMention)+'" />';
+  html+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;">';
+  MB_RECIP_SUGGESTIONS.forEach(function(r){
+    html+='<button style="font-family:\'JetBrains Mono\',monospace;font-size:9px;padding:3px 8px;border:1px solid #3f3f46;color:#71717a;text-transform:uppercase;letter-spacing:.12em;" data-action="mb-suggest" data-val="'+esc(r)+'">'+esc(r)+'</button>';
+  });
+  html+='</div></div>';
+
+  html+='<div class="tmb-field"><label>Message body</label>';
+  html+='<textarea id="mb-body" rows="4" placeholder="Write your message here. Be specific about what you need and by when...">'+esc(state.mbBody)+'</textarea></div>';
+
+  // Live preview
+  html+='<p class="tmb-preview-label">Live preview</p>';
+  html+='<div class="tmb-preview">';
+  html+='<div class="tmb-preview-channel">'+esc(state.mbChannel)+'</div>';
+  html+='<div class="tmb-preview-from">';
+  html+='<div class="tmb-avatar">R</div>';
+  html+='<span class="tmb-preview-name">You</span><span class="tmb-preview-time">just now</span>';
+  html+='</div>';
+  if(preview){
+    var previewFormatted=esc(preview).replace(/(@\w+)/g,'<span class="tmb-mention">$1</span>');
+    html+='<div class="tmb-preview-body">'+previewFormatted+'</div>';
+  } else {
+    html+='<div class="tmb-preview-body" style="color:#52525b;font-style:italic;">Your message will appear here...</div>';
+  }
+  html+='</div>';
+
+  if(fb){
+    html+='<div class="tmb-feedback '+fb.type+'">'+esc(fb.msg)+'</div>';
+  }
+
+  html+='<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;">';
+  if(!state.mbChecked||fb){
+    html+='<button class="tmb-check-btn" data-action="mb-check">Check it</button>';
+  }
+  if(state.mbChecked&&fb&&fb.type==='ok'){
+    html+='<button class="complete-btn" style="width:auto;margin-top:0;padding:10px 22px;" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div>';
+  html+='</div></div>';
+  html+='</div></div>';
+  return html;
+}
+
+function checkMsgBuilder(){
+  var ch=state.mbChannel;
+  var mention=state.mbMention.trim();
+  var body=state.mbBody.trim();
+  var issues=[];
+  if(!body) issues.push('Write a message body first.');
+  if(body.length < 20) issues.push('Message is too short to be useful. Add context: what do you need and by when?');
+  if(ch==='#Shop-Floor'&&mention.toLowerCase().indexOf('@channel')>-1) issues.push('Do not @Channel the shop floor — that pings everyone including people off-shift. Use @Mario or @Paul specifically.');
+  if(!mention&&body.toLowerCase().indexOf('please')>-1) issues.push('You said "please" which implies you want someone to act — add an @mention so they get notified.');
+  if(body.length>400) issues.push('Message is getting long. If it needs this much text, consider a Teams call instead.');
+
+  if(issues.length>0){
+    state.mbFeedback={type:'warn',msg:issues[0]};
+    state.mbChecked=true;
+  } else {
+    state.mbFeedback={type:'ok',msg:'Good message. Channel is appropriate, @mention is specific, body is clear. Ready to send.'};
+    state.mbChecked=true;
+  }
+  render();
+}
+
+// ============================================================================
+// INTERACTIVE 2: MEETING HOST WALKTHROUGH (mt-3)
+// ============================================================================
+function renderMeetHost(lesson,cat){
+  var step=state.meetStep;
+  var done=state.meetDone;
+
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:20px;">Walk through every step of hosting a Teams meeting from scratch. Hit Next Step to advance. On call day you will have this muscle memory.</p>';
+
+  // Meeting window mock
+  html+='<div class="meeting-shell">';
+  html+='<div class="meeting-header">';
+  html+='<span class="meeting-title-text">Marathon Prep — Weekly Check-In</span>';
+  html+='<span class="meeting-badge '+(step>=6?'live':'prep')+'">'+(step>=6?'Live':'Preparing')+'</span>';
+  html+='</div>';
+  html+='<div class="meeting-grid">';
+  var participants=[
+    {name:'You',role:'Host',muted:step>=6,color:'#5b5fc7'},
+    {name:'The Owner',role:'CEO',muted:step>=6,color:'#4f46e5'},
+    {name:'Paul Guerrero',role:'Safety',muted:step>=6,color:'#7c3aed'}
+  ];
+  participants.forEach(function(p,i){
+    html+='<div class="participant-tile'+(i===0?' host-tile':'')+'">';
+    html+='<div class="tmb-avatar" style="background:'+p.color+';margin:0 auto;">'+p.name[0]+'</div>';
+    html+='<div class="participant-name">'+esc(p.name)+'</div>';
+    html+='<div class="participant-status">'+(p.muted&&step>=6?'🔇 Muted':'')+(i===0?' (Host)':p.role)+'</div>';
+    html+='</div>';
+  });
+  html+='</div>';
+  html+='<div class="meeting-controls">';
+  [
+    {l:'Mute All',active:step>=6,hi:step===6},
+    {l:'Share Screen',active:false,hi:step===7},
+    {l:'Participants',active:false,hi:step===6},
+    {l:'Record',active:step>=7,hi:step===7},
+    {l:'End',active:false,hi:step>=8}
+  ].forEach(function(b){
+    html+='<button class="ctrl-btn'+(b.active?' active':'')+(b.hi?' highlight':'')+'" style="pointer-events:none;">'+esc(b.l)+'</button>';
+  });
+  html+='</div></div>';
+
+  // Step list
+  html+='<div class="meeting-steps">';
+  MEET_STEPS.forEach(function(s,i){
+    var cls='meet-step';
+    if(i<step) cls+=' done-step';
+    else if(i===step) cls+=' active-step';
+    var numHtml=i<step?icon('check',14,'#000'):String(i+1);
+    html+='<div class="'+cls+'">';
+    html+='<div class="meet-step-num">'+numHtml+'</div>';
+    html+='<div class="meet-step-text">'+esc(s)+'</div>';
+    html+='</div>';
+  });
+  html+='</div>';
+
+  html+='<div style="display:flex;gap:8px;flex-wrap:wrap;">';
+  if(!done){
+    html+='<button class="meet-action-btn" data-action="meet-next">'+(step<MEET_STEPS.length-1?'Next Step':'Finish Walkthrough')+' '+icon('arrow-right',14,'#fff')+'</button>';
+  }
+  if(step>0){
+    html+='<button class="meet-reset-btn" data-action="meet-reset">Reset</button>';
+  }
+  if(done){
+    html+='<button class="complete-btn" style="width:auto;margin-top:0;padding:10px 22px;" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div>';
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// INTERACTIVE 3: NOTIFICATION TUNER (nt-3)
+// ============================================================================
+function renderNotifTuner(lesson,cat){
+  var allPicked=NOTIF_ROWS.every(function(r){return!!state.notifPicked[r.id];});
+
+  var correctCount=0;
+  if(state.notifChecked){
+    NOTIF_ROWS.forEach(function(r){ if(state.notifPicked[r.id]===r.correct) correctCount++; });
+  }
+
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:20px;">Set the right notification level for each source at Your Company. Wrong settings mean you either miss critical messages or drown in noise.</p>';
+
+  html+='<div class="notif-grid">';
+  NOTIF_ROWS.forEach(function(r){
+    var picked=state.notifPicked[r.id]||'';
+    var verdict='';
+    if(state.notifChecked&&picked){
+      verdict=picked===r.correct?'Correct. '+getNotifWhy(r,true):r.correct+' is right. '+getNotifWhy(r,false);
+    }
+    html+='<div class="notif-row">';
+    html+='<div class="notif-label"><div class="notif-label-title">'+esc(r.title)+'</div>';
+    html+='<div class="notif-label-sub">'+esc(r.sub)+'</div></div>';
+    html+='<select class="notif-select" data-action="notif-pick" data-row-id="'+r.id+'">';
+    html+='<option value="">Select...</option>';
+    r.options.forEach(function(o){
+      html+='<option value="'+esc(o)+'"'+(picked===o?' selected':'')+'>'+esc(o)+'</option>';
+    });
+    html+='</select>';
+    if(verdict){
+      var vCls=picked===r.correct?'good':'bad';
+      html+='<div class="notif-verdict '+vCls+'">'+esc(verdict)+'</div>';
+    }
+    html+='</div>';
+  });
+  html+='</div>';
+
+  if(state.notifChecked){
+    html+='<div class="notif-score">'+icon('check',13,'#818cf8')+' Score: '+correctCount+'/'+NOTIF_ROWS.length+'</div>';
+  }
+
+  html+='<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;">';
+  if(!state.notifChecked){
+    var disabled=!allPicked;
+    html+='<button class="complete-btn" style="width:auto;margin-top:0;padding:10px 22px;"'+(disabled?' disabled style="opacity:.4;"':'')+' data-action="notif-check">Check answers</button>';
+    if(disabled) html+='<span style="font-family:\'JetBrains Mono\',monospace;font-size:10px;color:#52525b;text-transform:uppercase;letter-spacing:.15em;align-self:center;">Set all 6 to unlock</span>';
+  } else {
+    html+='<button class="complete-btn" style="width:auto;margin-top:0;padding:10px 22px;" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+    html+='<button style="font-family:\'JetBrains Mono\',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;padding:10px 16px;background:#27272a;color:#a1a1aa;border:1px solid #3f3f46;" data-action="notif-reset">Try again</button>';
+  }
+  html+='</div>';
+  html+='</div></div>';
+  return html;
+}
+
+function getNotifWhy(r,correct){
+  var whys={
+    'n1':{ good:'The shop floor is high-volume low-urgency. @Mentions only means you only hear it when someone actually needs you.', bad:'All activity from the shop floor will bury you in weld photos and crew check-ins all day.' },
+    'n2':{ good:'Marathon is active and critical. You need to see every update as it comes in.', bad:'Marathon prep items can be time-sensitive. Mentions-only risks missing updates that do not tag you.' },
+    'n3':{ good:'Direct messages to you always need your attention. These are personal, not channel noise.', bad:'A DM from Owner is not optional. You need all activity on direct messages.' },
+    'n4':{ good:'You run Admin-Ops. Every post there is yours to act on.', bad:'If you run the channel, you need to see everything posted there, not just items that @mention you.' },
+    'n5':{ good:'A phone call is the highest-urgency contact method. You cannot miss calls.', bad:'A Teams call going to voicemail because notifications were off is a problem.' },
+    'n6':{ good:'Reactions are social noise. A thumbs-up does not need to interrupt your day.', bad:'Getting notified every time someone reacts to your message is pure distraction.' }
+  };
+  var w=whys[r.id];
+  return w?(correct?w.good:w.bad):'';
+}
+
+// ============================================================================
+// LESSON DISPATCHER
+// ============================================================================
+function renderLesson(lesson,cat){
+  if(lesson.type==='reading') return renderReading(lesson,cat);
+  if(lesson.intKey==='msgBuilder') return renderMsgBuilder(lesson,cat);
+  if(lesson.intKey==='meetHost')   return renderMeetHost(lesson,cat);
+  if(lesson.intKey==='notifTuner') return renderNotifTuner(lesson,cat);
+  return renderReading(lesson,cat);
+}
+
+// ============================================================================
+// RENDER DISPATCH
+// ============================================================================
+function render(){
+  var app=document.getElementById('app');
+  var html='';
+  if(state.view==='home'){
+    html=renderHome();
+  } else if(state.view.indexOf('category:')===0){
+    var cat=getCat(state.view.slice(9));
+    html=cat?renderCategory(cat):renderHome();
+  } else if(state.view.indexOf('lesson:')===0){
+    var info=getLesson(state.view.slice(7));
+    html=info?renderLesson(info.lesson,info.cat):renderHome();
+  }
+  app.innerHTML=html;
+
+  // Wire live inputs for Message Builder
+  if(state.view.indexOf('lesson:')===0){
+    var info2=getLesson(state.view.slice(7));
+    if(info2&&info2.lesson.intKey==='msgBuilder'){
+      setTimeout(function(){
+        var ch=document.getElementById('mb-channel');
+        var mn=document.getElementById('mb-mention');
+        var bd=document.getElementById('mb-body');
+        if(ch) ch.addEventListener('change',function(e){ state.mbChannel=e.target.value; state.mbFeedback=null; state.mbChecked=false; render(); });
+        if(mn) mn.addEventListener('input',function(e){ state.mbMention=e.target.value; state.mbFeedback=null; state.mbChecked=false; });
+        if(bd) bd.addEventListener('input',function(e){ state.mbBody=e.target.value; state.mbFeedback=null; state.mbChecked=false; });
+        // Debounced preview
+        if(mn||bd){
+          clearTimeout(window._mbTimer);
+          window._mbTimer=setTimeout(function(){ render(); },400);
+        }
+      },50);
+    }
+    if(info2&&info2.lesson.intKey==='notifTuner'){
+      setTimeout(function(){
+        document.querySelectorAll('.notif-select').forEach(function(sel){
+          sel.addEventListener('change',function(e){
+            var rid=e.target.getAttribute('data-row-id');
+            state.notifPicked[rid]=e.target.value;
+            render();
+          });
+        });
+      },50);
+    }
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ============================================================================
+// EVENT DELEGATION
+// ============================================================================
+document.body.addEventListener('click',function(ev){
+  var t=ev.target.closest('[data-action]');
+  if(!t) return;
+  var action=t.getAttribute('data-action');
+
+  if(action==='open-cat'){ state.view='category:'+t.getAttribute('data-cat-id'); render(); }
+  else if(action==='back-home'){ state.view='home'; render(); }
+  else if(action==='back-cat'){ state.view='category:'+t.getAttribute('data-cat-id'); render(); }
+  else if(action==='open-lesson'){
+    var lid=t.getAttribute('data-lesson-id');
+    var info=getLesson(lid);
+    if(info){
+      if(info.lesson.intKey==='msgBuilder'){ state.mbChannel='#ICD-Church'; state.mbMention=''; state.mbBody=''; state.mbChecked=false; state.mbFeedback=null; }
+      if(info.lesson.intKey==='meetHost'){ state.meetStep=0; state.meetDone=false; }
+      if(info.lesson.intKey==='notifTuner'){ state.notifPicked={}; state.notifChecked=false; }
+    }
+    state.view='lesson:'+lid; render();
+  }
+  else if(action==='complete-lesson'){
+    var lid2=t.getAttribute('data-lesson-id');
+    state.completed[lid2]=true;
+    var info2=getLesson(lid2);
+    if(info2){
+      var next=null;
+      for(var i=0;i<info2.cat.lessons.length;i++){
+        if(info2.cat.lessons[i].id===lid2&&i+1<info2.cat.lessons.length){ next=info2.cat.lessons[i+1]; break; }
+      }
+      state.view=next?'lesson:'+next.id:'category:'+info2.cat.id;
+      render();
+    }
+  }
+  // Message Builder
+  else if(action==='mb-suggest'){
+    state.mbMention=(state.mbMention.trim()+' '+t.getAttribute('data-val')).trim();
+    state.mbFeedback=null; state.mbChecked=false;
+    render();
+  }
+  else if(action==='mb-check'){ checkMsgBuilder(); }
+  // Meeting Host
+  else if(action==='meet-next'){
+    if(state.meetStep<MEET_STEPS.length-1){ state.meetStep++; }
+    else { state.meetDone=true; }
+    render();
+  }
+  else if(action==='meet-reset'){ state.meetStep=0; state.meetDone=false; render(); }
+  // Notification Tuner
+  else if(action==='notif-pick'){
+    var rid=t.getAttribute('data-row-id');
+    state.notifPicked[rid]=t.value;
+    render();
+  }
+  else if(action==='notif-check'){ state.notifChecked=true; render(); }
+  else if(action==='notif-reset'){ state.notifPicked={}; state.notifChecked=false; render(); }
+});
+
+// ============================================================================
+// INIT
+// ============================================================================
+document.getElementById('logo-slot').innerHTML=icon('hash',22,'#fff');
+render();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="quiz-meta.js"></script>
+<script>window.NC_GATE = {"module_id": "teams-full", "title": "Microsoft Teams Full", "next": "office-full.html", "questions": [{"q": "When is @channel appropriate in Teams?", "options": ["Whenever you post in a busy channel", "Only when every person in the channel genuinely needs to act or know immediately", "When you want a faster reply from one person", "For every project status update"]}, {"q": "You are about to share your screen as host in a meeting. What does the module say to share?", "options": ["Your entire desktop so you can move between documents", "The Teams window itself", "A second monitor", "Only the specific app window you intend to show"]}, {"q": "Owner asks you to send him the bid file. What do you send?", "options": ["A Teams or OneDrive link to the original file, so he gets the live version", "A copy attached to the chat", "A PDF export by email", "A screenshot of the latest version"]}]};</script>
+<script src="portal.js"></script>
+<script>ncInitModulePage();</script>
+</body>
+</html>

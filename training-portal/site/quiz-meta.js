@@ -1,0 +1,2 @@
+// generated - module unlock order
+window.NC_MODULE_ORDER = ["front-desk", "w11-m365-lab", "ai-productivity", "steel-101", "teams-full", "office-full", "comms", "doc-flow", "scheduling", "isn-compliance", "job-lifecycle", "vendor-client", "outlook-depth", "pdf-pdfgear", "buildingconnected", "isn-portal", "ap-ar", "phone-scripts", "change-orders", "safety-fundamentals", "ceo-inbox", "ceo-drafting", "meetings", "travel", "discretion", "three-companies", "office-ops", "purchasing", "onboarding", "supervising", "shopqc-quality"];

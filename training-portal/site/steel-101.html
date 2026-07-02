@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Steel 101 | Your Company</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #000; color: #e4e4e7;
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.5; min-height: 100vh;
+    background-image:
+      radial-gradient(circle at 90% 10%, rgba(234,88,12,0.08), transparent 40%),
+      radial-gradient(circle at 10% 90%, rgba(255,184,0,0.04), transparent 40%);
+  }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; padding: 0; }
+  a { color: inherit; text-decoration: none; }
+  p { margin: 0; }
+  h1, h2, h3 { margin: 0; font-weight: normal; }
+  ul { margin: 0; padding: 0; }
+  input { font-family: inherit; }
+
+  .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+  .bebas { font-family: 'Bebas Neue', 'Impact', 'Arial Black', sans-serif; letter-spacing: 0.04em; }
+  .mono  { font-family: 'JetBrains Mono', 'Cascadia Code', Consolas, monospace; }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25%      { transform: translateX(-4px); }
+    75%      { transform: translateX(4px); }
+  }
+  .shake { animation: shake 0.4s ease-in-out; }
+
+  /* ─── Header ─── */
+  header.site {
+    border-bottom: 2px solid #27272a;
+    background: rgba(0,0,0,0.85);
+    position: sticky; top: 0; z-index: 10;
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  }
+  .header-row { max-width: 1000px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; gap: 12px; }
+  .logo-tile { width: 40px; height: 40px; background: #fbbf24; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .header-meta { flex: 1; min-width: 0; }
+  .header-meta .small { font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; color: #52525b; }
+  .header-meta .big { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; font-size: 18px; color: #fff; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .header-progress { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #ea580c; letter-spacing: 0.2em; }
+
+  /* ─── Footer ─── */
+  footer.site { max-width: 1000px; margin: 0 auto; padding: 20px; border-top: 1px solid #27272a; text-align: center; }
+  footer.site p { font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; color: #3f3f46; }
+
+  /* ─── Back button ─── */
+  .back-btn { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: #71717a; display: flex; align-items: center; gap: 6px; margin-bottom: 16px; }
+
+  /* ─── Hero (module home) ─── */
+  .hero {
+    position: relative; border: 2px solid #ea580c; background: #1a0a05;
+    overflow: hidden; margin-bottom: 28px;
+  }
+  .hero-glow {
+    position: absolute; top: -30%; right: -15%;
+    width: 360px; height: 360px;
+    background: radial-gradient(circle, #ea580c 0%, transparent 70%);
+    filter: blur(80px); opacity: 0.3;
+  }
+  .hero-grain {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: radial-gradient(#ea580c 0.5px, transparent 0.5px);
+    background-size: 4px 4px;
+  }
+  .hero-inner { position: relative; padding: 32px 26px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px;
+    background: #000; border: 1px solid #ea580c; margin-bottom: 16px;
+  }
+  .hero-badge span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: #ea580c;
+    text-transform: uppercase; letter-spacing: 0.3em;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', 'Impact', sans-serif;
+    letter-spacing: 0.04em; font-size: clamp(48px, 9vw, 76px);
+    color: #fff; line-height: 0.9; margin: 0 0 16px;
+  }
+  .hero h1 .accent { color: #ea580c; }
+  .hero-blurb {
+    color: #e4e4e7; max-width: 600px;
+    font-size: 15px; line-height: 1.7; margin-bottom: 22px;
+  }
+  .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 460px; }
+  .hero-stat-tile { border: 1px solid #ea580c; background: rgba(0,0,0,0.6); padding: 8px 10px; }
+  .hero-stat-num { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; font-size: 24px; color: #ea580c; }
+  .hero-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; color: #9a3412; }
+
+  /* ─── Category cards ─── */
+  .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .cat-card { text-align: left; background: #18181b; border: 2px solid #3f3f46; padding: 0; overflow: hidden; cursor: pointer; display: block; }
+  .cat-card.is-complete { border-color: #10b981; }
+  .cat-card-band { height: 6px; }
+  .cat-card-body { padding: 18px; }
+  .cat-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+  .cat-card-icon { width: 44px; height: 44px; color: #000; display: flex; align-items: center; justify-content: center; }
+  .cat-card-title { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; font-size: 22px; color: #fff; margin: 0 0 6px; line-height: 1.05; }
+  .cat-card-blurb { font-size: 12px; color: #a1a1aa; margin: 0 0 14px; line-height: 1.5; }
+  .cat-card-meta { display: flex; justify-content: space-between; align-items: center; }
+  .cat-card-meta-text { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #71717a; text-transform: uppercase; letter-spacing: 0.2em; }
+  .cat-card-progress { margin-top: 10px; height: 4px; background: #27272a; }
+  .cat-card-progress-fill { height: 100%; transition: width 0.4s; }
+
+  /* ─── Info bar ─── */
+  .info-bar {
+    margin-top: 28px; padding: 18px;
+    background: #1a0a05; border: 1px dashed #ea580c;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .info-bar-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #ea580c; text-transform: uppercase; letter-spacing: 0.2em; margin: 0 0 6px; }
+  .info-bar-text { font-size: 13px; color: #d4d4d8; line-height: 1.7; }
+
+  /* ─── Category page header card ─── */
+  .cat-header { border: 2px solid #3f3f46; background: #18181b; margin-bottom: 20px; }
+  .cat-header-top { padding: 20px 22px; display: flex; gap: 16px; align-items: center; }
+  .cat-header-icon-tile { width: 56px; height: 56px; background: #000; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .cat-header-title { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; font-size: 36px; color: #000; margin: 0; line-height: 1; }
+  .cat-header-blurb { color: rgba(0,0,0,0.78); font-size: 13px; margin: 6px 0 0; font-weight: 500; }
+
+  /* ─── Lesson row ─── */
+  .lesson-list { display: flex; flex-direction: column; gap: 10px; }
+  .lesson-row {
+    text-align: left; width: 100%; background: #18181b;
+    border: 2px solid #3f3f46; padding: 14px 18px; cursor: pointer;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .lesson-row.is-complete { border-color: #10b981; }
+  .lesson-row.is-locked { cursor: not-allowed; opacity: 0.45; border-color: #27272a; }
+  .lesson-num-tile {
+    width: 38px; height: 38px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; font-size: 16px;
+  }
+  .lesson-row-title { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; font-size: 18px; color: #fff; margin: 0; line-height: 1.1; }
+  .lesson-row-meta { font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; margin: 4px 0 0; }
+
+  /* ─── Lesson view ─── */
+  .lesson-card { border: 2px solid #3f3f46; background: #18181b; }
+  .lesson-card-header { color: #000; padding: 16px 22px; }
+  .lesson-card-cat-meta { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.25em; opacity: 0.85; margin: 0; font-weight: 700; }
+  .lesson-card-title { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; font-size: 32px; color: #000; margin: 4px 0 0; line-height: 1; }
+  .lesson-card-body { padding: 24px 22px; }
+  .lesson-section { margin-bottom: 22px; }
+  .lesson-section-h { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; font-size: 22px; color: #ea580c; margin: 0 0 8px; }
+  .lesson-section-b { color: #d4d4d8; font-size: 14px; line-height: 1.75; margin: 0; }
+
+  .tip-box {
+    margin-top: 24px; padding: 14px;
+    background: #1a0a05; border-left: 3px solid #fbbf24;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .tip-box .tip-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #fbbf24; text-transform: uppercase; letter-spacing: 0.25em; margin: 0 0 4px; font-weight: 700; }
+  .tip-box .tip-body { font-size: 13px; color: #fde68a; line-height: 1.6; margin: 0; }
+
+  .continue-btn {
+    font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.2em; font-size: 16px;
+    margin-top: 28px; background: #fbbf24; color: #000;
+    padding: 12px 24px; border: 2px solid #fbbf24;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+
+  /* ─── Prompt card (info above interactive) ─── */
+  .prompt-card { background: #09090b; border: 1px solid #ea580c; padding: 14px; margin-bottom: 20px; }
+  .prompt-card-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .prompt-card-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #ea580c; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 700; }
+  .prompt-card-text { color: #fed7aa; font-size: 13px; line-height: 1.6; }
+
+  /* ─── Quiz / scenario shared ─── */
+  .quiz-q { margin-bottom: 18px; }
+  .quiz-q-text { color: #fff; font-size: 14px; margin-bottom: 10px; line-height: 1.5; }
+  .quiz-q-num { font-family: 'JetBrains Mono', monospace; color: #ea580c; margin-right: 8px; font-size: 11px; letter-spacing: 0.15em; font-weight: 700; }
+  .quiz-options { display: flex; flex-direction: column; gap: 6px; }
+  .quiz-option {
+    text-align: left; padding: 10px 14px;
+    background: #18181b; border: 2px solid #3f3f46;
+    color: #d4d4d8; font-size: 13px; line-height: 1.5;
+    display: flex; justify-content: space-between; align-items: center; gap: 8px;
+    cursor: pointer; font-family: inherit; width: 100%;
+  }
+  .quiz-option.is-picked { background: #2a1410; border-color: #ea580c; color: #fed7aa; }
+  .quiz-option.is-correct { background: rgba(16,185,129,0.12); border-color: #10b981; color: #86efac; }
+  .quiz-option.is-wrong { background: rgba(239,68,68,0.12); border-color: #ef4444; color: #fca5a5; }
+  .quiz-option:disabled { cursor: default; }
+  .quiz-why {
+    font-size: 11px; margin-top: 6px;
+    padding-left: 10px; border-left: 2px solid #fbbf24;
+    color: #fde68a; line-height: 1.6; font-style: italic;
+  }
+
+  /* ─── Submit / result ─── */
+  .submit-btn {
+    font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.2em; font-size: 16px;
+    width: 100%; padding: 12px 0;
+    border: 2px solid #ea580c; background: #ea580c; color: #fff;
+  }
+  .submit-btn:disabled { background: #27272a; color: #52525b; border-color: #3f3f46; cursor: not-allowed; }
+  .result-box { padding: 18px; }
+  .result-box.passed { background: rgba(16,185,129,0.1); border: 2px solid #10b981; }
+  .result-box.failed { background: rgba(234,88,12,0.1); border: 2px solid #ea580c; }
+  .result-headline { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; font-size: 22px; margin: 0 0 8px; }
+  .result-headline.passed { color: #6ee7b7; }
+  .result-headline.failed { color: #fed7aa; }
+  .result-body { font-size: 13px; color: #d4d4d8; margin: 0 0 14px; line-height: 1.6; }
+  .result-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .try-again-btn {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.15em;
+    background: #27272a; color: #a1a1aa; padding: 8px 14px; border: 1px solid #3f3f46;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .complete-btn {
+    font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.2em; font-size: 16px;
+    background: #fbbf24; color: #000; padding: 10px 22px; border: 2px solid #fbbf24;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  /* ─── Shape Library ─── */
+  .shape-row { background: #18181b; border: 2px solid #3f3f46; overflow: hidden; }
+  .shape-row.is-open { border-color: #ea580c; }
+  .shape-row-toggle {
+    width: 100%; text-align: left; background: transparent; border: none;
+    padding: 12px 14px; cursor: pointer;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .shape-svg-wrap { background: #000; padding: 6px; flex-shrink: 0; display: flex; }
+  .shape-row-meta { flex: 1; min-width: 0; }
+  .shape-row-code { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #ea580c; margin: 0; letter-spacing: 0.1em; }
+  .shape-row-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: #fff; margin: 2px 0 0; line-height: 1.1; }
+  .shape-row-cat { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #71717a; text-transform: uppercase; letter-spacing: 0.2em; margin: 4px 0 0; }
+  .shape-row-detail { padding: 0 14px 16px; border-top: 1px solid #ea580c; }
+  .shape-row-detail p { color: #e4e4e7; font-size: 13px; margin: 12px 0 0; line-height: 1.6; }
+  .shape-row-detail p strong.use { color: #ea580c; }
+  .shape-row-detail p strong.read { color: #fbbf24; }
+
+  /* ─── Welds reference grid ─── */
+  .weld-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8; padding: 12px; background: #0f0f10; border: 1px solid #3f3f46; margin-bottom: 22px; }
+  .weld-grid > div { text-align: center; padding: 4px; }
+  .weld-grid p { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #fb923c; text-transform: uppercase; letter-spacing: 0.15em; margin: 0; }
+
+  /* ─── Process flow & order quiz ─── */
+  .process-ref { background: #0f0f10; border: 1px solid #3f3f46; padding: 12px; margin-bottom: 20px; }
+  .process-ref p { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #71717a; text-transform: uppercase; letter-spacing: 0.2em; margin: 0 0 8px; text-align: center; }
+  .picked-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .picked-tile {
+    background: #10b981; color: #000; padding: 6px 10px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.1em;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .picked-tile .picked-num { font-family: 'JetBrains Mono', monospace; font-size: 10px; }
+  .step-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-bottom: 18px; }
+  .step-tile { background: #18181b; border: 2px solid #3f3f46; padding: 12px; cursor: pointer; text-align: left; }
+  .step-tile.shake-now { border-color: #ef4444; }
+  .step-tile-label { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: #ea580c; margin: 0; line-height: 1; }
+  .step-tile-desc { font-size: 11px; color: #a1a1aa; margin: 4px 0 0; line-height: 1.4; }
+
+  /* ─── Glossary ─── */
+  .gloss-search-wrap { position: relative; margin-bottom: 14px; }
+  .gloss-search-wrap .gloss-search-icon { position: absolute; top: 12px; left: 12px; pointer-events: none; }
+  .gloss-search-input {
+    width: 100%; background: #09090b; border: 1px solid #3f3f46; color: #e4e4e7;
+    padding: 10px 10px 10px 34px; font-size: 13px; outline: none;
+  }
+  .gloss-search-input:focus { border-color: #ea580c; }
+  .gloss-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; margin-bottom: 18px; }
+  .gloss-card {
+    text-align: left; background: #18181b; border: 2px solid #3f3f46;
+    padding: 12px; cursor: pointer;
+  }
+  .gloss-card.is-reviewed { background: #2a1410; border-color: #ea580c; }
+  .gloss-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .gloss-card-term { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: #fff; letter-spacing: 0.05em; }
+  .gloss-card.is-reviewed .gloss-card-term { color: #ea580c; }
+  .gloss-card-def { font-size: 12px; color: #a1a1aa; margin: 0; line-height: 1.5; }
+
+  /* ─── Term Match ─── */
+  .match-term-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-bottom: 18px; }
+  .match-term-tile {
+    background: #18181b; border: 2px solid #3f3f46; padding: 10px 8px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 16px; color: #fff; letter-spacing: 0.05em;
+    cursor: pointer;
+  }
+  .match-term-tile.is-active { background: #2a1410; border-color: #ea580c; }
+  .match-term-tile.is-matched { background: #27272a; border-color: #fbbf24; }
+  .match-term-tile.is-correct { background: rgba(16,185,129,0.12); border-color: #10b981; }
+  .match-term-tile.is-wrong { background: rgba(239,68,68,0.12); border-color: #ef4444; }
+  .match-def-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+  .match-def-tile {
+    text-align: left; padding: 10px 14px;
+    background: #18181b; border: 2px solid #3f3f46; color: #d4d4d8;
+    font-size: 13px; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  }
+  .match-def-tile.is-matched { background: #27272a; border-color: #fbbf24; color: #fde68a; }
+  .match-def-tile.is-correct { background: rgba(16,185,129,0.12); border-color: #10b981; color: #86efac; }
+  .match-def-tile.is-wrong { background: rgba(239,68,68,0.12); border-color: #ef4444; color: #fca5a5; }
+  .match-def-tile.is-dim { opacity: 0.5; }
+  .match-def-tile .match-def-arrow { font-family: 'Bebas Neue', sans-serif; font-size: 14px; color: #fbbf24; margin-left: 8px; }
+
+  .reviewed-counter { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #71717a; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 12px; }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-row">
+    <div class="logo-tile" id="logo-slot"></div>
+    <div class="header-meta">
+      <p class="small">Your Company &middot; Owner Onboarding</p>
+      <p class="big">Module 04</p>
+    </div>
+    <div class="header-progress" id="header-progress"></div>
+  </div>
+</header>
+
+<main class="container" style="padding: 24px 20px 40px;">
+  <div id="app"></div>
+</main>
+
+<footer class="site">
+  <p>Built by Joseph &middot; Module 04 &middot; Confidential &middot; Offline Edition</p>
+</footer>
+
+<script>
+"use strict";
+// ============================================================================
+// ICON LIBRARY
+// ============================================================================
+const ICONS = {
+  'hard-hat':      '<path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M14 6a6 6 0 0 1 6 6v3"/><path d="M4 15v-3a6 6 0 0 1 6-6"/><rect x="2" y="15" width="20" height="4" rx="1"/>',
+  'arrow-right':   '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  'arrow-left':    '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  'check':         '<path d="M20 6 9 17l-5-5"/>',
+  'x':             '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+  'lock':          '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  'rotate-ccw':    '<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>',
+  'crown':         '<path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/>',
+  'sparkles':      '<path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4"/><path d="M22 4h-4"/><circle cx="4" cy="20" r="2"/>',
+  'layers':        '<path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/>',
+  'box':           '<path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>',
+  'git-branch':    '<path d="M15 6a9 9 0 0 0-9 9V3"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>',
+  'factory':       '<path d="M12 16h.01"/><path d="M16 16h.01"/><path d="M3 19a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.5a.5.5 0 0 0-.769-.422l-4.462 2.844A.5.5 0 0 1 15 10.5v-2a.5.5 0 0 0-.769-.422L9.77 10.922A.5.5 0 0 1 9 10.5V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"/><path d="M8 16h.01"/>',
+  'book-open':     '<path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>',
+  'chevron-right': '<path d="m9 18 6-6-6-6"/>',
+  'chevron-down':  '<path d="m6 9 6 6 6-6"/>',
+  'search':        '<path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/>',
+  'hash':          '<line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/>',
+  'cog':           '<path d="M11 10.27 7 3.34"/><path d="m11 13.73-4 6.93"/><path d="M12 22v-2"/><path d="M12 2v2"/><path d="M14 12h8"/><path d="m17 20.66-1-1.73"/><path d="m17 3.34-1 1.73"/><path d="M2 12h2"/><path d="m20.66 17-1.73-1"/><path d="m20.66 7-1.73 1"/><path d="m3.34 17 1.73-1"/><path d="m3.34 7 1.73 1"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="8"/>'
+};
+function icon(name, size, color) {
+  size = size || 16;
+  color = color || 'currentColor';
+  var path = ICONS[name] || '';
+  return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="' + color + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">' + path + '</svg>';
+}
+
+// ============================================================================
+// SHAPE / WELD / FLOW SVG GENERATORS
+// ============================================================================
+function shapeSVG(type, color, size) {
+  color = color || '#a1a1aa';
+  size = size || 80;
+  var inner = '';
+  switch (type) {
+    case 'W':         inner = '<rect x="18" y="20" width="64" height="8" fill="' + color + '"/><rect x="46" y="28" width="8" height="44" fill="' + color + '"/><rect x="18" y="72" width="64" height="8" fill="' + color + '"/>'; break;
+    case 'HSS_sq':    inner = '<rect x="22" y="22" width="56" height="56" fill="none" stroke="' + color + '" stroke-width="8"/>'; break;
+    case 'HSS_rect':  inner = '<rect x="14" y="32" width="72" height="36" fill="none" stroke="' + color + '" stroke-width="7"/>'; break;
+    case 'HSS_round': inner = '<circle cx="50" cy="50" r="26" fill="none" stroke="' + color + '" stroke-width="8"/>'; break;
+    case 'C':         inner = '<path d="M 28 18 L 78 18 L 78 28 L 38 28 L 38 72 L 78 72 L 78 82 L 28 82 Z" fill="' + color + '"/>'; break;
+    case 'L':         inner = '<path d="M 25 18 L 25 82 L 82 82 L 82 72 L 35 72 L 35 18 Z" fill="' + color + '"/>'; break;
+    case 'PL':        inner = '<rect x="14" y="42" width="72" height="16" fill="' + color + '"/>'; break;
+    case 'T':         inner = '<rect x="18" y="28" width="64" height="8" fill="' + color + '"/><rect x="46" y="36" width="8" height="44" fill="' + color + '"/>'; break;
+  }
+  return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 100 100">' + inner + '</svg>';
+}
+
+function weldSVG(type, size) {
+  size = size || 120;
+  var inner = '';
+  switch (type) {
+    case 'fillet':
+      inner =
+        '<rect x="10" y="60" width="80" height="14" fill="#71717a"/>' +
+        '<rect x="40" y="20" width="14" height="40" fill="#71717a"/>' +
+        '<path d="M 40 60 L 40 50 Q 45 55 50 60 Z" fill="#ea580c" stroke="#9a3412" stroke-width="0.5"/>' +
+        '<path d="M 54 60 L 54 50 Q 60 55 65 60 Z" fill="#ea580c" stroke="#9a3412" stroke-width="0.5"/>' +
+        '<text x="22" y="50" font-size="6" fill="#a1a1aa">vertical plate</text>' +
+        '<text x="55" y="86" font-size="6" fill="#a1a1aa">horizontal plate</text>' +
+        '<text x="32" y="44" font-size="6" fill="#fb923c" font-weight="bold">fillet</text>';
+      break;
+    case 'groove':
+      inner =
+        '<path d="M 10 40 L 45 40 L 50 55 L 45 70 L 10 70 Z" fill="#71717a"/>' +
+        '<path d="M 90 40 L 55 40 L 50 55 L 55 70 L 90 70 Z" fill="#71717a"/>' +
+        '<path d="M 45 40 L 55 40 L 55 70 L 45 70 L 50 55 Z" fill="#ea580c" stroke="#9a3412" stroke-width="0.5"/>' +
+        '<text x="42" y="32" font-size="6" fill="#fb923c" font-weight="bold">groove (V)</text>' +
+        '<text x="14" y="84" font-size="6" fill="#a1a1aa">two plates joined end-to-end</text>';
+      break;
+    case 'plug':
+      inner =
+        '<rect x="10" y="55" width="80" height="14" fill="#71717a"/>' +
+        '<path d="M 10 35 L 40 35 L 40 55 L 10 55 Z" fill="#71717a"/>' +
+        '<path d="M 60 35 L 90 35 L 90 55 L 60 55 Z" fill="#71717a"/>' +
+        '<ellipse cx="50" cy="45" rx="10" ry="8" fill="#ea580c" stroke="#9a3412" stroke-width="0.5"/>' +
+        '<rect x="42" y="45" width="16" height="10" fill="#ea580c" stroke="#9a3412" stroke-width="0.5"/>' +
+        '<text x="42" y="28" font-size="6" fill="#fb923c" font-weight="bold">plug weld</text>' +
+        '<text x="14" y="84" font-size="6" fill="#a1a1aa">fills a hole to join two plates</text>';
+      break;
+  }
+  return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 100 100">' + inner + '</svg>';
+}
+
+function boltSVG(size) {
+  size = size || 120;
+  var bolts = '';
+  [28, 50, 72].forEach(function(x) {
+    bolts +=
+      '<circle cx="' + x + '" cy="32" r="5" fill="#fbbf24" stroke="#000" stroke-width="0.5"/>' +
+      '<rect x="' + (x - 2) + '" y="36" width="4" height="28" fill="#fbbf24"/>' +
+      '<circle cx="' + x + '" cy="68" r="5" fill="#fbbf24" stroke="#000" stroke-width="0.5"/>';
+  });
+  return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 100 100">' +
+    '<rect x="10" y="38" width="80" height="10" fill="#71717a"/>' +
+    '<rect x="10" y="52" width="80" height="10" fill="#52525b"/>' +
+    bolts +
+    '<text x="14" y="20" font-size="6" fill="#fb923c" font-weight="bold">bolted connection</text>' +
+    '<text x="14" y="86" font-size="6" fill="#a1a1aa">3 high-strength bolts in shear</text>' +
+    '</svg>';
+}
+
+function processFlowSVG() {
+  var labels = ['RFQ','Bid','Award','Detail','Material','Fab','Coat','Ship','Erect'];
+  var svg = '<svg viewBox="0 0 540 100" style="width:100%;height:auto;">' +
+    '<line x1="20" y1="50" x2="500" y2="50" stroke="#52525b" stroke-width="2" stroke-dasharray="3,3"/>';
+  for (var i = 0; i < labels.length; i++) {
+    var x = 20 + i * 60;
+    var color = i % 2 === 0 ? '#ea580c' : '#fbbf24';
+    svg += '<g>' +
+      '<circle cx="' + x + '" cy="50" r="14" fill="' + color + '" stroke="#000" stroke-width="1.5"/>' +
+      '<text x="' + x + '" y="53" font-size="9" fill="#000" text-anchor="middle" font-weight="bold">' + (i + 1) + '</text>' +
+      '<text x="' + x + '" y="80" font-size="9" fill="#e4e4e7" text-anchor="middle" font-family="JetBrains Mono, monospace">' + labels[i] + '</text>' +
+      '</g>';
+  }
+  return svg + '</svg>';
+}
+
+// ============================================================================
+// CATEGORIES & LESSONS
+// ============================================================================
+const CATEGORIES = [
+  { id:'material', iconKey:'layers', color:'#ea580c',
+    title:'The Material',
+    blurb:'Steel itself. The grades we use, why we use them, where it comes from.',
+    lessons:[
+      { id:'mat-1', title:'What Structural Steel Is', type:'reading', minutes:4 },
+      { id:'mat-2', title:'Grades We Work With',      type:'reading', minutes:4 },
+      { id:'mat-3', title:'The Supply Chain',         type:'reading', minutes:3 }
+    ]
+  },
+  { id:'shapes', iconKey:'box', color:'#f97316',
+    title:'The Shapes',
+    blurb:'Wide flange, HSS, channel, angle, plate. The AISC catalog explained.',
+    lessons:[
+      { id:'shp-1', title:'Reading a Shape Designation', type:'reading',     minutes:4 },
+      { id:'shp-2', title:'Shape Library (interactive)', type:'interactive', minutes:6, intKey:'shapeLibrary' },
+      { id:'shp-3', title:'Spot the Shape (quiz)',       type:'interactive', minutes:5, intKey:'shapeQuiz' }
+    ]
+  },
+  { id:'connections', iconKey:'git-branch', color:'#fb923c',
+    title:'The Connections',
+    blurb:'Welded vs. bolted. The weld symbols to recognize. Shear vs. moment.',
+    lessons:[
+      { id:'cnx-1', title:'Welded vs. Bolted',     type:'reading',     minutes:4 },
+      { id:'cnx-2', title:'Weld Symbols 101',      type:'reading',     minutes:5 },
+      { id:'cnx-3', title:'Connection Type Quiz',  type:'interactive', minutes:4, intKey:'connectionQuiz' }
+    ]
+  },
+  { id:'process', iconKey:'factory', color:'#fbbf24',
+    title:'The Process',
+    blurb:'From RFQ to erection. What happens inside our shop. The 11 hrs/ton baseline.',
+    lessons:[
+      { id:'pr-1', title:'From RFQ to Erection',           type:'reading',     minutes:5 },
+      { id:'pr-2', title:'Inside the Fab Shop',            type:'reading',     minutes:5 },
+      { id:'pr-3', title:'The 11 Hours Per Ton Baseline',  type:'reading',     minutes:4 },
+      { id:'pr-4', title:'Order the Process (quiz)',       type:'interactive', minutes:5, intKey:'processOrder' }
+    ]
+  },
+  { id:'language', iconKey:'book-open', color:'#facc15',
+    title:'The Language',
+    blurb:'25 terms you will hear at the front desk. Plus a matching quiz.',
+    lessons:[
+      { id:'lng-1', title:'Glossary (flashcards)', type:'interactive', minutes:8, intKey:'glossary' },
+      { id:'lng-2', title:'Term Match (quiz)',     type:'interactive', minutes:5, intKey:'termMatch' }
+    ]
+  }
+];
+
+// ============================================================================
+// LESSON CONTENT (reading lessons)
+// ============================================================================
+const LESSON_CONTENT = {
+  'mat-1': {
+    sections: [
+      { h:'Steel is iron with a recipe',
+        b:'Steel is iron alloyed with a small amount of carbon (0.05% to 2%) and trace elements. Change the recipe slightly and you change the strength, ductility, weldability, and price. Structural steel is engineered to be strong in tension and compression, ductile enough to bend before breaking, and predictable enough that engineers can calculate exactly how much weight it will hold.' },
+      { h:'Why structures use it',
+        b:'Three reasons. First, strength-to-weight is excellent: a steel beam carries far more load per pound than wood or concrete. Second, it is predictable: every batch has a Mill Test Report (MTR) certifying its exact properties. Third, it is fast: we can build a steel skeleton in weeks where concrete takes months.' },
+      { h:'It is recyclable, which matters',
+        b:'Roughly 90% of new structural steel in the US is made from recycled scrap. When you tear down a building, the steel does not get thrown out, it goes back to the mill. Customers care about this for sustainability scoring on big projects.' }
+    ],
+    tip:'When a customer asks "is steel sustainable," the honest answer is yes. The recycled content is real and the EPA and AISC document it.'
+  },
+  'mat-2': {
+    sections: [
+      { h:'A36 — the workhorse plate steel',
+        b:'ASTM A36 is the most common structural steel grade. Yield strength 36 ksi (kilopounds per square inch). Used for plates, angles, and miscellaneous shapes. Cheap, easy to weld, available everywhere. If we are bidding plates or gussets, default assumption is A36 unless the spec calls for something else.' },
+      { h:'A992 — the wide flange standard',
+        b:'ASTM A992 is the modern grade for W-shapes (wide flange beams). 50 ksi yield, controlled chemistry for predictable welding. Replaced A36 as the default for W-shapes around 2002. When you see a wide flange beam on a current drawing, it is A992 unless noted otherwise.' },
+      { h:'A500 — for HSS (tubes)',
+        b:'ASTM A500 covers Hollow Structural Sections, including square, rectangular, and round tubes. Common grades are A500 Grade B and Grade C. Used everywhere we need a tube: columns, handrails, exposed structural elements.' },
+      { h:'A572 — high-strength alternative',
+        b:'ASTM A572 Grade 50 is a higher-strength steel sometimes used for plates and shapes when the engineer wants more capacity in a smaller cross-section. More expensive than A36. Specified when the design needs the extra strength.' }
+    ],
+    tip:'When in doubt about grade, look at the drawing notes or MTR. Never assume. The wrong grade in fab is a callback.'
+  },
+  'mat-3': {
+    sections: [
+      { h:'Mills make steel. Service centers stock it.',
+        b:'Steel is melted and rolled at giant integrated mills. They produce in mill-run quantities — far more than any single fab shop needs at once. Service centers (the middlemen) buy from mills, stock inventory, and sell us what we need by the piece or stick.' },
+      { h:'Where we buy',
+        b:'We use multiple service centers in the Houston area, and we are evaluating direct-from-mill purchases for high-volume jobs. Names of specific suppliers stay internal — never include supplier names in client-facing documents (this is a hard rule).' },
+      { h:'Lead times',
+        b:'Standard shapes (W12, W14, W16, common HSS sizes) are usually in stock and we can get them in 1-3 days. Unusual sizes or grades may be 2-6 weeks if it requires a mill run. When customers ask "when can you start," lead time on material is one of the limits.' },
+      { h:'Price volatility',
+        b:'Steel is a global commodity. Prices move week to week based on tariffs, scrap availability, energy costs, and demand. We refresh our pricing assumptions regularly. A bid we sent six months ago may not reflect today\'s costs.' }
+    ],
+    tip:'When a customer asks "can you match this old quote," check the date. If it is more than 60 days old, prices have moved. Always confirm with Owner.'
+  },
+  'shp-1': {
+    sections: [
+      { h:'Every shape has a code',
+        b:'AISC (American Institute of Steel Construction) maintains a catalog of standard shapes. Each shape has a designation that tells you the type, the depth, and the weight per foot. Reading the code is the foundation of understanding fabrication drawings.' },
+      { h:'The pattern: TYPE - DEPTH x WEIGHT',
+        b:'Example: W12x26. The "W" means Wide Flange. The "12" means nominally 12 inches deep. The "26" means 26 pounds per linear foot. So if you have a 20-foot piece of W12x26, it weighs 20 x 26 = 520 lbs.' },
+      { h:'More examples',
+        b:'W14x90 = wide flange, 14" deep, 90 lb/ft. HSS6x6x1/4 = square hollow section, 6" by 6", 1/4" wall thickness. C9x15 = channel, 9" deep, 15 lb/ft. L4x4x3/8 = angle, 4" by 4" legs, 3/8" thick. PL1/2x12x36 = plate, 1/2" thick, 12" wide, 36" long.' },
+      { h:'Why weight matters',
+        b:'We sell tonnage. The weight of a shape determines its cost (steel is priced per pound), how heavy our trucks are, and how long fabrication will take (heavier piece = more handling, more weld). Reading the weight from the designation lets you estimate fast.' }
+    ],
+    tip:'A handy mental check: 1 ton of steel is 2000 lbs. A W12x26 weighs 26 lb/ft, so 1 ton is about 77 feet of that beam.'
+  },
+  'cnx-1': {
+    sections: [
+      { h:'Steel parts get joined two ways',
+        b:'Welded or bolted. Sometimes both. Each method has trade-offs in cost, strength, speed, and where it makes sense to do the work (in our shop or out in the field).' },
+      { h:'Welded',
+        b:'Two pieces are fused with molten metal at the joint. Strong as the parent material when done right. Permanent. Best done in our shop in controlled conditions. Done in the field too, but field welding is slower and quality varies more with weather and access.' },
+      { h:'Bolted',
+        b:'Two pieces are connected with high-strength bolts (typically A325 or A490). Faster to install in the field, no power required, no weather sensitivity. The connection can be disassembled if needed. Most field connections we ship are designed to be bolted because field welding is slow.' },
+      { h:'Common pattern: shop weld + field bolt',
+        b:'We weld the connection plates onto the beam in our shop, then ship the beam to site with bolt holes ready. The erector bolts the beams to columns at the site. Best of both worlds: shop-quality welds, fast field assembly.' }
+    ],
+    tip:'When a drawing shows a "shop connection" you weld it in the bay. When it shows a "field connection," you prepare for bolting and the erector handles it on site.'
+  },
+  'cnx-2': {
+    sections: [
+      { h:'Three weld types you will see',
+        b:'Fillet, groove (also called butt or full-pen), and plug. Each one fits a different geometry. Recognizing them on a drawing is enough for front desk understanding.' },
+      { h:'Fillet weld',
+        b:'When two pieces meet at 90 degrees (like a beam flange to a column), the weld is a triangular bead in the corner. Most common weld type in fabrication. Fast, strong, easy to inspect visually.' },
+      { h:'Groove weld',
+        b:'When two pieces butt end-to-end (like splicing two sections of beam), the edges are beveled and the gap is filled with weld metal. Slower, more expensive, but creates a joint as strong as the original material.' },
+      { h:'Plug weld',
+        b:'A hole in one plate gets filled with weld to join it to the plate behind. Used when you cannot get a torch into a corner. Less common, but you will see it.' },
+      { h:'AWS D1.1',
+        b:'AWS (American Welding Society) D1.1 is the structural welding code we follow. It defines weld procedures, qualifications for welders, and inspection criteria. Mario welds AWS D1.1 certified. When a spec calls for "AWS D1.1 compliant," it means our crew is qualified to do the work.' }
+    ],
+    tip:'On drawings, weld symbols include a triangular flag and a number (the leg length in fractions of an inch). A "1/4" fillet" means the leg is 1/4 inch. Bigger number = more weld metal = stronger but slower.'
+  },
+  'pr-1': {
+    sections: [
+      { h:'A typical job runs in nine phases',
+        b:'(1) RFQ — customer asks for a quote. (2) Bid — we send a proposal. (3) Award — customer says yes. (4) Detail — we draw shop drawings. (5) Material — we order steel. (6) Fab — we cut, weld, assemble. (7) Coat — primer or galvanize. (8) Ship — load truck, deliver. (9) Erect — field crew installs.' },
+      { h:'How long it takes',
+        b:'For a typical mid-size project (say 50 tons), the phases break down roughly: detail 2-3 weeks, material 1-3 weeks, fab 3-6 weeks, coating 1 week, ship 1-2 days, erect 1-2 weeks. Total 8-15 weeks from award to building standing. Bigger jobs run longer.' },
+      { h:'Where we add value',
+        b:'A general contractor could buy steel and hire a separate detailer, fabricator, coater, trucker, and erector. Or they hire us and we coordinate the whole chain. Most of our value is in the fab and the coordination. We do not own a mill or an erection crew most of the time, but we run the show.' },
+      { h:'Why the customer cares about each phase',
+        b:'Detail delays push everything else. Material price changes can blow the bid. Fab quality is what people see. Coating defects cause callbacks years later. Shipping logistics is its own headache. Erection scheduling has to align with the rest of the building trades. Our job is to keep the chain moving.' }
+    ]
+  },
+  'pr-2': {
+    sections: [
+      { h:'What happens in the bay',
+        b:'Steel arrives on a truck. We unload to the staging area. The shop drawings tell us exactly what each piece needs to become. We cut, drill, weld, grind, and assemble per the drawings. Quality control checks at each stage. When a piece is done, it gets tagged, painted (or sent out for galvanizing), and staged for shipping.' },
+      { h:'Cutting',
+        b:'Beams, channels, and angles get cut to length on a band saw or beam line. Plates get cut on a CNC plasma table or shear. Tube and pipe get cut on a saw or torch. Accuracy matters: a 1/8 inch error compounds when you have to make 200 identical pieces.' },
+      { h:'Drilling and punching',
+        b:'Bolt holes get punched (faster, cheaper, slightly rougher) or drilled (cleaner, slower, more expensive) per spec. Holes that are visible or load-critical usually call for drilling. Holes inside connections often allow punching.' },
+      { h:'Welding',
+        b:'Mario and the welding team join pieces per the shop drawings. Common processes: SMAW (stick), GMAW (MIG), FCAW (flux-cored). Selection depends on position, accessibility, and material. AWS D1.1 procedures govern.' },
+      { h:'Quality control',
+        b:'Visual inspection on every weld. Magnetic particle (MT) or ultrasonic (UT) testing on critical welds when the spec requires. We document every check. The MTR (mill test report) for each piece of steel is on file. Traceability matters when something fails years later.' }
+    ],
+    tip:'The shop is loud, hot, and bright. PPE is non-negotiable. When you bring a visitor through, never go alone, never skip the brief, and never get in front of a moving crane load.'
+  },
+  'pr-3': {
+    sections: [
+      { h:'What "11 hrs/ton" means',
+        b:'It is our blended labor benchmark for fabrication. For every ton of finished steel that leaves our shop, we expect roughly 11 hours of total labor across cutting, drilling, welding, grinding, and assembly. This is a machine-assisted blended rate, our April 2026 baseline.' },
+      { h:'Why it matters for bids',
+        b:'When Owner prices a 50-ton job, fab labor alone is roughly 50 x 11 = 550 hours. At our shop rate of $145/hr, that is around $79,750 just in labor before material, coating, freight, engineering, overhead, and profit. The 11 hrs/ton number is a critical input.' },
+      { h:'Why it varies',
+        b:'Simple, repetitive structural beams might come in at 8-9 hrs/ton. AESS (architecturally exposed) work, complex connections, or ornamental work can run 18-25+ hrs/ton because every weld is visible and grinding takes longer. Joseph and Owner adjust the baseline up or down based on job complexity.' },
+      { h:'How we beat the number',
+        b:'Better drawings up front, smarter material handling, the right cutting equipment, and welder skill. Mario welding clean is the difference between 9 hrs/ton and 13 hrs/ton on the same job. Skill compounds.' }
+    ],
+    tip:'When a customer asks "why does fabrication cost X," the answer is hours. Hours times rate plus material is the whole pricing equation.'
+  }
+};
+
+// ============================================================================
+// SHAPE LIBRARY DATA
+// ============================================================================
+const SHAPE_LIBRARY = [
+  { id:'W',         code:'W12x26',           name:'Wide Flange (W-shape)',  cat:'Beam / Column',
+    common:'The workhorse. Used for almost every horizontal beam and most columns in modern steel construction.',
+    detail:'Designation: W = wide flange, 12 = nominal depth in inches, 26 = weight in lb/ft. A992 grade. Typical span 20-40 ft as a beam. We use these on nearly every project.' },
+  { id:'HSS_sq',    code:'HSS6x6x1/4',       name:'Square HSS',             cat:'Tube',
+    common:'Used for columns, posts, and bracing where you want a clean tube look. Also common in handrails and ornamental.',
+    detail:'HSS = Hollow Structural Section. 6x6 = outside dimensions in inches. 1/4 = wall thickness. A500 Grade B or C grade. Good appearance, good torsional strength.' },
+  { id:'HSS_rect',  code:'HSS8x4x3/8',       name:'Rectangular HSS',        cat:'Tube',
+    common:'Used when you need a non-square tube. Common for canopies, awnings, secondary framing.',
+    detail:'8 = larger dimension, 4 = smaller, 3/8 = wall thickness. Same A500 family as square HSS.' },
+  { id:'HSS_round', code:'HSS6.625x0.250',   name:'Round HSS / Pipe',       cat:'Tube',
+    common:'Round columns. Aesthetic exposed work. Sometimes specified as "Pipe" instead of "HSS Round" depending on the spec.',
+    detail:'Outer diameter in inches, then wall thickness. Hollow round members handle torsion and look clean in exposed conditions.' },
+  { id:'C',         code:'C9x15',            name:'Channel (C-shape)',      cat:'Beam',
+    common:'Used for stair stringers, edge beams, lintels, and lighter framing. The C-profile is one-sided, useful when you need to attach things to the open side.',
+    detail:'C = channel. 9 = depth. 15 = lb/ft. A36 grade typically. The shape looks like the letter C in cross-section.' },
+  { id:'L',         code:'L4x4x3/8',         name:'Angle (L-shape)',        cat:'Bracing / Connection',
+    common:'Used for bracing, connection clips, edge angles, and small framing. The most versatile small shape in fabrication.',
+    detail:'L = angle. 4x4 = leg lengths in inches. 3/8 = thickness. A36 grade. Equal-leg or unequal-leg variants available.' },
+  { id:'PL',        code:'PL 1/2 x 12 x 36', name:'Plate',                  cat:'Connection / Base',
+    common:'Connection plates, gusset plates, base plates, stiffeners. Bought in flat sheets, cut to size on the plasma table.',
+    detail:'PL = plate. Thickness x width x length in inches. A36 is the default grade. We stock common thicknesses and cut to size from sheets.' },
+  { id:'T',         code:'WT6x13',           name:'Tee (T-shape)',          cat:'Beam',
+    common:'Used as light beams or for trusses. Made by splitting a W-shape down the middle, hence "WT" (W cut to T).',
+    detail:'WT = wide flange tee. 6 = depth. 13 = lb/ft. Half of a W12x26 split down the web.' }
+];
+
+// ============================================================================
+// QUIZ DATA
+// ============================================================================
+const SHAPE_QUIZ = [
+  { q:'A drawing calls for "W14x90". What is it?',
+    options:['Square tube, 14" sides','Wide flange, 14" deep, 90 lb/ft','Channel, 14" deep'],
+    correct:1, why:'W = wide flange. 14 = depth in inches. 90 = pounds per linear foot.' },
+  { q:'Which shape would you use for a column where you want a clean tube look?',
+    options:['Wide flange (W)','Square HSS','Channel (C)'],
+    correct:1, why:'HSS (Hollow Structural Section) gives a closed tube look. W-shapes are I-beam profile. Channels are open on one side.' },
+  { q:'"L4x4x3/8" describes:',
+    options:['A 4 ft by 4 ft plate','An angle with 4" legs and 3/8" thickness','A plate 3/8" thick'],
+    correct:1, why:'L = angle. The two 4s are the leg lengths, 3/8 is the thickness. Equal-leg angle in this case.' },
+  { q:'What does "PL 1/2 x 12 x 24" mean?',
+    options:['A pipe, 1/2 inch diameter','A plate 1/2" thick, 12" wide, 24" long','A bolt pattern'],
+    correct:1, why:'PL = plate. The three numbers are thickness, width, length in that order.' },
+  { q:'A WT6x13 is made by:',
+    options:['Welding two angles together','Splitting a W12x26 down the middle','Casting in a foundry'],
+    correct:1, why:'WT = W cut to T. A W12x26 split through the web yields two WT6x13 sections (half the depth, half the weight).' }
+];
+
+const CONNECTION_SCENARIOS = [
+  { s:'Joining two short pieces of W12 in our shop to create a longer beam end-to-end (a splice)',
+    options:['Fillet weld','Groove weld','Plug weld'],
+    correct:1, why:'Splicing end-to-end requires a full-penetration groove weld so the joint is as strong as the parent material.' },
+  { s:'Connecting a beam flange to a column face at 90 degrees',
+    options:['Fillet weld','Groove weld','Bolted only'],
+    correct:0, why:'When two pieces meet at 90 degrees, a fillet weld in the corner is the standard fast strong solution.' },
+  { s:'Field connection between a beam and a column on a job site, fast install needed',
+    options:['Field welded','Bolted (high-strength bolts)','Plug weld'],
+    correct:1, why:'Field bolted connections install fast, work in any weather, do not require power, and the erector handles them quickly.' },
+  { s:'Joining two overlapping plates where you cannot reach the edge with a torch',
+    options:['Fillet weld','Groove weld','Plug weld'],
+    correct:2, why:'When you cannot get to the edge, you drill a hole in the top plate and fill it with weld metal. That is a plug weld.' },
+  { s:'Mario welds a clip angle onto a beam in the shop. The piece will then be bolted to a column on site.',
+    options:['Shop weld + field bolt (hybrid)','Field weld only','No connection needed'],
+    correct:0, why:'This is the most common pattern in modern fabrication. Shop weld for quality, field bolt for speed. Everyone wins.' }
+];
+
+const PROCESS_STEPS = [
+  { id:1, label:'RFQ',      desc:'Customer sends request for quote' },
+  { id:2, label:'Bid',      desc:'We send a proposal' },
+  { id:3, label:'Award',    desc:'Customer accepts' },
+  { id:4, label:'Detail',   desc:'Shop drawings drafted' },
+  { id:5, label:'Material', desc:'Steel ordered from service center' },
+  { id:6, label:'Fab',      desc:'Cut, drill, weld, assemble in shop' },
+  { id:7, label:'Coat',     desc:'Primer or galvanize' },
+  { id:8, label:'Ship',     desc:'Truck loaded and delivered' },
+  { id:9, label:'Erect',    desc:'Field crew installs at site' }
+];
+
+const GLOSSARY = [
+  { term:'A36',          def:'ASTM grade for general structural plate steel. 36 ksi yield. Cheap, weldable, available everywhere.' },
+  { term:'A325',         def:'High-strength structural bolt grade. The standard bolt for most steel-to-steel field connections.' },
+  { term:'A992',         def:'ASTM grade for wide flange beams (W-shapes). 50 ksi yield. The default grade for modern W-shapes.' },
+  { term:'AESS',         def:'Architecturally Exposed Structural Steel. Steel that will be visible in the finished building. Higher quality, more expensive, every weld matters.' },
+  { term:'AISC',         def:'American Institute of Steel Construction. The industry body that publishes the shape catalog and design specifications.' },
+  { term:'AWS D1.1',     def:'American Welding Society code for structural welding. The rulebook our welders are certified against.' },
+  { term:'BOL',          def:'Bill of Lading. The shipping document signed when a truck delivers steel to or from us.' },
+  { term:'Detailer',     def:'The person or firm that creates shop drawings from the engineer\'s design drawings.' },
+  { term:'DFT',          def:'Dry Film Thickness. How thick the paint or primer measures after it dries. Specs require minimum DFT.' },
+  { term:'Erector',      def:'The field crew that installs (erects) the fabricated steel at the job site. Often a separate company.' },
+  { term:'Galvanized',   def:'Steel coated in molten zinc for corrosion resistance. Standard for outdoor or wet-environment work.' },
+  { term:'GC',           def:'General Contractor. The company that runs the whole construction job. Our customer is often the GC.' },
+  { term:'HSS',          def:'Hollow Structural Section. A structural tube. Square, rectangular, or round.' },
+  { term:'IFC',          def:'Issued For Construction. The drawing version that is approved and ready to build from. Earlier versions are drafts.' },
+  { term:'kip',          def:'Kilopound. 1000 pounds of force. Engineers spec loads in kips. "10 kip load" means 10,000 lbs.' },
+  { term:'MTR',          def:'Mill Test Report. A certificate from the steel mill showing the chemistry and properties of the batch we received.' },
+  { term:'NDT',          def:'Non-Destructive Testing. Checking welds without breaking them. UT (ultrasonic), MT (magnetic particle), PT (dye penetrant).' },
+  { term:'PEMB',         def:'Pre-Engineered Metal Building. A different kind of steel building. NOT what we do. Never use PEMB language in our materials.' },
+  { term:'RFI',          def:'Request for Information. A formal question from the field or fab shop back to the engineer about a drawing detail.' },
+  { term:'RFQ',          def:'Request for Quote. A customer asks us to price a job. The starting point of every project.' },
+  { term:'Shop Drawing', def:'Detailed fabrication drawing made from the engineer\'s design. Tells the shop exactly what to cut, drill, and weld.' },
+  { term:'Submittal',    def:'A package of drawings or specs sent to the engineer for approval before fabrication starts.' },
+  { term:'Takeoff',      def:'The process of counting and measuring everything on a drawing to create a material list and a labor estimate.' },
+  { term:'Tonnage',      def:'The weight of fabricated steel on a project, in tons. The unit we sell by. "We bid 80 tons" means 80 tons of fabricated steel.' },
+  { term:'W-shape',      def:'Wide Flange. The most common structural beam profile. The "I-beam" everyone pictures, made by modern rolling mills.' }
+];
+
+const MATCH_PAIRS = [
+  { term:'BOL',      def:'Document signed when a truck delivers steel' },
+  { term:'RFQ',      def:'Customer asks us to price a job' },
+  { term:'AESS',     def:'Steel that will be visible in the finished building' },
+  { term:'kip',      def:'1,000 pounds of force' },
+  { term:'AWS D1.1', def:'Structural welding code' },
+  { term:'PEMB',     def:'Pre-Engineered Metal Building (NOT what we do)' },
+  { term:'IFC',      def:'Drawings approved and ready to build from' },
+  { term:'MTR',      def:'Steel mill certificate of chemistry and properties' }
+];
+
+// ============================================================================
+// STATE
+// ============================================================================
+function shuffleArr(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+var state = {
+  view: 'home',
+  completed: {},
+  // shape library
+  expandedShapes: {},
+  // shape & connection quizzes
+  quizAnswers: {},
+  quizSubmitted: {},
+  // process order
+  processAvailable: shuffleArr(PROCESS_STEPS),
+  processPicked: [],
+  shakeId: null,
+  // glossary
+  glossReviewed: {},
+  glossFilter: '',
+  // term match
+  matchDefs: shuffleArr(MATCH_PAIRS).map(function(p) { return p.def; }),
+  matchActiveTerm: null,
+  matchAssignments: {},
+  matchSubmitted: false
+};
+
+// ============================================================================
+// HELPERS
+// ============================================================================
+function escapeHtml(str) {
+  if (str == null) return '';
+  return String(str).replace(/[&<>"']/g, function(c) {
+    return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
+  });
+}
+function getCategory(catId) { for (var i = 0; i < CATEGORIES.length; i++) if (CATEGORIES[i].id === catId) return CATEGORIES[i]; return null; }
+function getLesson(cat, lessonId) { for (var i = 0; i < cat.lessons.length; i++) if (cat.lessons[i].id === lessonId) return cat.lessons[i]; return null; }
+function totalLessons() { var t = 0; for (var i = 0; i < CATEGORIES.length; i++) t += CATEGORIES[i].lessons.length; return t; }
+function completedCount() { return Object.keys(state.completed).length; }
+function size(obj) { return Object.keys(obj).length; }
+
+// ============================================================================
+// RENDER: HOME
+// ============================================================================
+function renderHome() {
+  var html = '';
+  html += '<div class="hero">';
+  html += '<div class="hero-glow"></div><div class="hero-grain"></div>';
+  html += '<div class="hero-inner">';
+  html += '<div class="hero-badge">' + icon('crown', 12, '#ea580c') + '<span>Module 04</span></div>';
+  html += '<h1>Steel <span class="accent">101</span></h1>';
+  html += '<p class="hero-blurb">Material, shapes, connections, the process from RFQ to erection, and the language. Five categories, fifteen lessons, six interactives. By the end you will read fab drawings, talk shop with Mario, and sound credible to any customer who calls in.</p>';
+
+  var stats = [['5','Categories'],[String(totalLessons()),'Lessons'],['25','Glossary'],[String(completedCount()),'Done']];
+  html += '<div class="hero-stats">';
+  for (var i = 0; i < stats.length; i++) {
+    html += '<div class="hero-stat-tile"><p class="hero-stat-num">' + stats[i][0] + '</p><p class="hero-stat-label">' + stats[i][1] + '</p></div>';
+  }
+  html += '</div></div></div>';
+
+  html += '<div class="cat-grid">';
+  for (var c = 0; c < CATEGORIES.length; c++) html += renderCategoryCard(CATEGORIES[c]);
+  html += '</div>';
+
+  html += '<div class="info-bar">' + icon('sparkles', 16, '#ea580c');
+  html += '<div><p class="info-bar-label">How this module works</p>';
+  html += '<p class="info-bar-text">Read each category in order. The interactive exercises check your understanding before you advance. The Glossary is searchable; come back to it any time you hear a term you do not recognize. Most of this becomes second nature after a few weeks at the front desk.</p>';
+  html += '</div></div>';
+
+  return html;
+}
+
+function renderCategoryCard(c) {
+  var done = 0;
+  for (var i = 0; i < c.lessons.length; i++) if (state.completed[c.lessons[i].id]) done++;
+  var total = c.lessons.length;
+  var allDone = done === total;
+  var pct = (done / total) * 100;
+  var html = '';
+  html += '<button class="cat-card ' + (allDone ? 'is-complete' : '') + '" data-action="open-cat" data-cat-id="' + c.id + '">';
+  html += '<div class="cat-card-band" style="background: ' + c.color + ';"></div>';
+  html += '<div class="cat-card-body">';
+  html += '<div class="cat-card-top">';
+  html += '<div class="cat-card-icon" style="background: ' + c.color + ';">' + icon(c.iconKey, 22, '#000') + '</div>';
+  if (allDone) html += icon('check', 18, '#10b981');
+  html += '</div>';
+  html += '<h3 class="cat-card-title">' + escapeHtml(c.title) + '</h3>';
+  html += '<p class="cat-card-blurb">' + escapeHtml(c.blurb) + '</p>';
+  html += '<div class="cat-card-meta">';
+  html += '<span class="cat-card-meta-text">' + done + '/' + total + ' lessons</span>';
+  html += icon('arrow-right', 14, c.color);
+  html += '</div>';
+  html += '<div class="cat-card-progress"><div class="cat-card-progress-fill" style="width: ' + pct + '%; background: ' + c.color + ';"></div></div>';
+  html += '</div></button>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: CATEGORY
+// ============================================================================
+function renderCategory(cat) {
+  var html = '';
+  html += '<button class="back-btn" data-action="back-home">' + icon('arrow-left', 13) + ' Back to module home</button>';
+  html += '<div class="cat-header">';
+  html += '<div class="cat-header-top" style="background: ' + cat.color + ';">';
+  html += '<div class="cat-header-icon-tile">' + icon(cat.iconKey, 28, cat.color) + '</div>';
+  html += '<div><h2 class="cat-header-title">' + escapeHtml(cat.title) + '</h2>';
+  html += '<p class="cat-header-blurb">' + escapeHtml(cat.blurb) + '</p></div>';
+  html += '</div></div>';
+  html += '<div class="lesson-list">';
+  for (var i = 0; i < cat.lessons.length; i++) html += renderLessonRow(cat, cat.lessons[i], i);
+  html += '</div>';
+  return html;
+}
+
+function renderLessonRow(cat, l, idx) {
+  var isDone = !!state.completed[l.id];
+  var prevDone = idx === 0 || !!state.completed[cat.lessons[idx - 1].id];
+  var locked = !isDone && !prevDone;
+  var typeLabel = l.type === 'interactive' ? 'Interactive' : 'Reading';
+  var typeColor = l.type === 'interactive' ? '#ea580c' : '#a1a1aa';
+  var classNames = 'lesson-row';
+  if (isDone) classNames += ' is-complete';
+  if (locked) classNames += ' is-locked';
+  var html = '<button class="' + classNames + '"';
+  if (!locked) html += ' data-action="open-lesson" data-cat-id="' + cat.id + '" data-lesson-id="' + l.id + '"';
+  if (locked) html += ' disabled';
+  html += '>';
+  var bg, fg;
+  if (isDone) { bg = '#10b981'; fg = '#fff'; }
+  else if (locked) { bg = '#27272a'; fg = '#52525b'; }
+  else { bg = cat.color; fg = '#000'; }
+  html += '<div class="lesson-num-tile" style="background: ' + bg + '; color: ' + fg + ';">';
+  if (locked) html += icon('lock', 14, '#52525b');
+  else if (isDone) html += icon('check', 18, '#fff');
+  else html += String(idx + 1);
+  html += '</div>';
+  html += '<div style="flex:1;">';
+  html += '<p class="lesson-row-title">' + escapeHtml(l.title) + '</p>';
+  html += '<p class="lesson-row-meta" style="color: ' + typeColor + ';">' + typeLabel + ' &middot; ~' + l.minutes + ' min</p>';
+  html += '</div>';
+  if (!locked) html += icon('arrow-right', 16, '#71717a');
+  html += '</button>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: LESSON
+// ============================================================================
+function renderLesson(cat, lesson) {
+  var html = '';
+  html += '<button class="back-btn" data-action="open-cat" data-cat-id="' + cat.id + '">' + icon('arrow-left', 13) + ' Back to ' + escapeHtml(cat.title) + '</button>';
+  html += '<div class="lesson-card">';
+  html += '<div class="lesson-card-header" style="background: ' + cat.color + ';">';
+  html += '<p class="lesson-card-cat-meta">' + escapeHtml(cat.title) + ' &middot; ' + lesson.minutes + ' min</p>';
+  html += '<h2 class="lesson-card-title">' + escapeHtml(lesson.title) + '</h2>';
+  html += '</div>';
+  html += '<div class="lesson-card-body">';
+
+  if (lesson.type === 'interactive') {
+    html += renderInteractive(cat, lesson);
+  } else {
+    var content = LESSON_CONTENT[lesson.id];
+    if (content && content.sections) {
+      for (var i = 0; i < content.sections.length; i++) {
+        var s = content.sections[i];
+        html += '<div class="lesson-section">';
+        html += '<h3 class="lesson-section-h">' + escapeHtml(s.h) + '</h3>';
+        html += '<p class="lesson-section-b">' + escapeHtml(s.b) + '</p>';
+        html += '</div>';
+      }
+    }
+    if (content && content.tip) {
+      html += '<div class="tip-box">' + icon('sparkles', 14, '#fbbf24');
+      html += '<div><p class="tip-label">Front desk tip</p><p class="tip-body">' + escapeHtml(content.tip) + '</p></div>';
+      html += '</div>';
+    }
+    html += '<button class="continue-btn" data-action="complete-reading" data-cat-id="' + cat.id + '" data-lesson-id="' + lesson.id + '">';
+    html += 'Continue ' + icon('arrow-right', 16, '#000');
+    html += '</button>';
+  }
+
+  html += '</div></div>';
+  return html;
+}
+
+// ============================================================================
+// INTERACTIVE DISPATCH
+// ============================================================================
+function renderInteractive(cat, lesson) {
+  switch (lesson.intKey) {
+    case 'shapeLibrary':   return renderShapeLibrary(cat, lesson);
+    case 'shapeQuiz':      return renderQuizMC(cat, lesson, SHAPE_QUIZ, 4, 'Spot the Shape', 'You can read shape designations. That alone will let you understand 80% of any drawing put in front of you.', 'Need 4 of 5 to pass. Review the shape library and try again.');
+    case 'connectionQuiz': return renderConnectionQuiz(cat, lesson);
+    case 'processOrder':   return renderProcessOrder(cat, lesson);
+    case 'glossary':       return renderGlossary(cat, lesson);
+    case 'termMatch':      return renderTermMatch(cat, lesson);
+  }
+  return '<p>Interactive not found.</p>';
+}
+
+// ─── SHAPE LIBRARY ──────────────────────────────────────────────────────────
+function renderShapeLibrary(cat, lesson) {
+  var seen = size(state.expandedShapes);
+  var allSeen = seen >= SHAPE_LIBRARY.length;
+  var html = '';
+  html += '<div class="prompt-card">';
+  html += '<div class="prompt-card-row">' + icon('layers', 14, '#ea580c');
+  html += '<span class="prompt-card-label">Tap each shape to expand</span></div>';
+  html += '<p class="prompt-card-text">Eight shapes you will see on every drawing. Tap to see the cross-section, the designation breakdown, and where we use it.</p>';
+  html += '</div>';
+
+  html += '<div style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px;">';
+  for (var i = 0; i < SHAPE_LIBRARY.length; i++) {
+    var sh = SHAPE_LIBRARY[i];
+    var isOpen = !!state.expandedShapes[sh.id];
+    html += '<div class="shape-row ' + (isOpen ? 'is-open' : '') + '">';
+    html += '<button class="shape-row-toggle" data-action="toggle-shape" data-shape-id="' + sh.id + '">';
+    html += '<div class="shape-svg-wrap">' + shapeSVG(sh.id, isOpen ? '#ea580c' : '#a1a1aa', 56) + '</div>';
+    html += '<div class="shape-row-meta">';
+    html += '<p class="shape-row-code">' + escapeHtml(sh.code) + '</p>';
+    html += '<p class="shape-row-name">' + escapeHtml(sh.name) + '</p>';
+    html += '<p class="shape-row-cat">' + escapeHtml(sh.cat) + '</p>';
+    html += '</div>';
+    html += isOpen ? icon('chevron-down', 18, '#ea580c') : icon('chevron-right', 18, '#71717a');
+    html += '</button>';
+    if (isOpen) {
+      html += '<div class="shape-row-detail">';
+      html += '<p><strong class="use">Where we use it: </strong>' + escapeHtml(sh.common) + '</p>';
+      html += '<p style="color:#a1a1aa;font-size:12px;"><strong class="read">How to read it: </strong>' + escapeHtml(sh.detail) + '</p>';
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+  html += '</div>';
+
+  html += '<p class="reviewed-counter">' + seen + '/' + SHAPE_LIBRARY.length + ' shapes reviewed</p>';
+
+  html += '<button class="submit-btn" style="background:' + (allSeen ? '#fbbf24' : '#27272a') + ';color:' + (allSeen ? '#000' : '#52525b') + ';border-color:' + (allSeen ? '#fbbf24' : '#3f3f46') + ';" ';
+  if (allSeen) html += 'data-action="complete-quiz" data-cat-id="' + cat.id + '" data-lesson-id="' + lesson.id + '"';
+  else html += 'disabled';
+  html += '>';
+  html += allSeen ? 'Mark Complete' : ('Review all ' + SHAPE_LIBRARY.length + ' shapes first');
+  html += '</button>';
+  return html;
+}
+
+// ─── MULTIPLE CHOICE QUIZ (Shape Quiz, generic) ─────────────────────────────
+function renderQuizMC(cat, lesson, questions, passThreshold, label, passMsg, failMsg) {
+  var key = lesson.id;
+  var answers = state.quizAnswers[key] || {};
+  var submitted = !!state.quizSubmitted[key];
+  var totalQ = questions.length;
+  var allAnswered = size(answers) === totalQ;
+  var score = 0;
+  for (var i = 0; i < totalQ; i++) if (answers[i] === questions[i].correct) score++;
+  var passed = score >= passThreshold;
+
+  var html = '';
+  html += '<div class="prompt-card">';
+  html += '<div class="prompt-card-row">' + icon('search', 14, '#ea580c');
+  html += '<span class="prompt-card-label">' + totalQ + ' questions &middot; ' + passThreshold + ' to pass</span></div>';
+  html += '<p class="prompt-card-text">Test what you learned. Read each designation, pick the right answer.</p>';
+  html += '</div>';
+
+  html += '<div style="display:flex;flex-direction:column;gap:18px;margin-bottom:18px;">';
+  for (var qi = 0; qi < totalQ; qi++) {
+    html += renderQuizQuestion(key, qi, questions[qi], answers[qi], submitted);
+  }
+  html += '</div>';
+
+  if (!submitted) {
+    html += '<button class="submit-btn" data-action="submit-quiz" data-lesson-id="' + key + '"' + (allAnswered ? '' : ' disabled') + '>';
+    html += allAnswered ? 'Submit Answers' : ('Answer all ' + totalQ + ' questions');
+    html += '</button>';
+  } else {
+    html += '<div class="result-box ' + (passed ? 'passed' : 'failed') + '">';
+    html += '<p class="result-headline ' + (passed ? 'passed' : 'failed') + '">';
+    html += score + ' of ' + totalQ + (passed ? '. Passed.' : '. Almost.');
+    html += '</p>';
+    html += '<p class="result-body">' + (passed ? passMsg : failMsg) + '</p>';
+    html += '<div class="result-actions">';
+    if (!passed) html += '<button class="try-again-btn" data-action="reset-quiz" data-lesson-id="' + key + '">' + icon('rotate-ccw', 11) + ' Try again</button>';
+    else html += '<button class="complete-btn" data-action="complete-quiz" data-cat-id="' + cat.id + '" data-lesson-id="' + key + '">Mark Complete ' + icon('arrow-right', 16, '#000') + '</button>';
+    html += '</div></div>';
+  }
+  return html;
+}
+
+function renderQuizQuestion(quizKey, idx, q, picked, submitted) {
+  var html = '<div class="quiz-q">';
+  html += '<p class="quiz-q-text"><span class="quiz-q-num">Q' + (idx + 1) + '.</span>' + escapeHtml(q.q || q.s) + '</p>';
+  html += '<div class="quiz-options">';
+  for (var o = 0; o < q.options.length; o++) {
+    var isPicked = picked === o;
+    var isCorrect = o === q.correct;
+    var cls = 'quiz-option';
+    if (submitted && isCorrect) cls += ' is-correct';
+    else if (submitted && isPicked) cls += ' is-wrong';
+    else if (isPicked) cls += ' is-picked';
+    html += '<button class="' + cls + '"';
+    if (!submitted) html += ' data-action="pick-option" data-quiz-key="' + quizKey + '" data-q-idx="' + idx + '" data-v="' + o + '"';
+    if (submitted) html += ' disabled';
+    html += '><span>' + escapeHtml(q.options[o]) + '</span>';
+    if (submitted && isCorrect) html += icon('check', 14, '#34d399');
+    else if (submitted && isPicked && !isCorrect) html += icon('x', 14, '#f87171');
+    html += '</button>';
+  }
+  html += '</div>';
+  if (submitted) html += '<p class="quiz-why">' + escapeHtml(q.why) + '</p>';
+  html += '</div>';
+  return html;
+}
+
+// ─── CONNECTION QUIZ (with weld diagrams) ───────────────────────────────────
+function renderConnectionQuiz(cat, lesson) {
+  var key = lesson.id;
+  var answers = state.quizAnswers[key] || {};
+  var submitted = !!state.quizSubmitted[key];
+  var totalQ = CONNECTION_SCENARIOS.length;
+  var allAnswered = size(answers) === totalQ;
+  var score = 0;
+  for (var i = 0; i < totalQ; i++) if (answers[i] === CONNECTION_SCENARIOS[i].correct) score++;
+  var passed = score >= 4;
+
+  var html = '';
+  html += '<div class="prompt-card">';
+  html += '<div class="prompt-card-row">' + icon('git-branch', 14, '#ea580c');
+  html += '<span class="prompt-card-label">5 scenarios &middot; 4 to pass</span></div>';
+  html += '<p class="prompt-card-text">Each scenario describes a real connection situation. Pick the right join method.</p>';
+  html += '</div>';
+
+  // weld reference grid
+  html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;padding:12px;background:#0f0f10;border:1px solid #3f3f46;margin-bottom:22px;">';
+  html += '<div style="text-align:center;">' + weldSVG('fillet', 120) + '<p class="mono" style="font-size:9px;color:#fb923c;text-transform:uppercase;letter-spacing:0.15em;margin:0;">Fillet</p></div>';
+  html += '<div style="text-align:center;">' + weldSVG('groove', 120) + '<p class="mono" style="font-size:9px;color:#fb923c;text-transform:uppercase;letter-spacing:0.15em;margin:0;">Groove</p></div>';
+  html += '<div style="text-align:center;">' + weldSVG('plug', 120) + '<p class="mono" style="font-size:9px;color:#fb923c;text-transform:uppercase;letter-spacing:0.15em;margin:0;">Plug</p></div>';
+  html += '<div style="text-align:center;">' + boltSVG(120) + '<p class="mono" style="font-size:9px;color:#fb923c;text-transform:uppercase;letter-spacing:0.15em;margin:0;">Bolted</p></div>';
+  html += '</div>';
+
+  html += '<div style="display:flex;flex-direction:column;gap:18px;margin-bottom:18px;">';
+  for (var qi = 0; qi < totalQ; qi++) {
+    html += renderQuizQuestion(key, qi, CONNECTION_SCENARIOS[qi], answers[qi], submitted);
+  }
+  html += '</div>';
+
+  if (!submitted) {
+    html += '<button class="submit-btn" data-action="submit-quiz" data-lesson-id="' + key + '"' + (allAnswered ? '' : ' disabled') + '>';
+    html += allAnswered ? 'Submit Answers' : ('Answer all ' + totalQ + ' scenarios');
+    html += '</button>';
+  } else {
+    html += '<div class="result-box ' + (passed ? 'passed' : 'failed') + '">';
+    html += '<p class="result-headline ' + (passed ? 'passed' : 'failed') + '">' + score + ' of ' + totalQ + (passed ? '. You read connections.' : '.') + '</p>';
+    html += '<p class="result-body">' + (passed ? 'Connections are 80% of the engineering conversation. Knowing the basic types means you can follow when Owner or Mario talks shop.' : 'Almost there. Re-read the diagrams and try again.') + '</p>';
+    html += '<div class="result-actions">';
+    if (!passed) html += '<button class="try-again-btn" data-action="reset-quiz" data-lesson-id="' + key + '">' + icon('rotate-ccw', 11) + ' Try again</button>';
+    else html += '<button class="complete-btn" data-action="complete-quiz" data-cat-id="' + cat.id + '" data-lesson-id="' + key + '">Mark Complete ' + icon('arrow-right', 16, '#000') + '</button>';
+    html += '</div></div>';
+  }
+  return html;
+}
+
+// ─── PROCESS ORDER ──────────────────────────────────────────────────────────
+function renderProcessOrder(cat, lesson) {
+  var html = '';
+  html += '<div class="prompt-card">';
+  html += '<div class="prompt-card-row">' + icon('cog', 14, '#ea580c');
+  html += '<span class="prompt-card-label">Click in correct order</span></div>';
+  html += '<p class="prompt-card-text">The 9 phases got scrambled. Click them in order from RFQ to Erection. Wrong click shakes red, try again.</p>';
+  html += '</div>';
+
+  html += '<div class="process-ref"><p>Reference: the correct order</p>' + processFlowSVG() + '</div>';
+
+  if (state.processPicked.length > 0) {
+    html += '<div style="margin-bottom:16px;">';
+    html += '<p class="mono" style="font-size:9px;color:#71717a;text-transform:uppercase;letter-spacing:0.2em;margin:0 0 8px;">Your sequence so far</p>';
+    html += '<div class="picked-row">';
+    for (var i = 0; i < state.processPicked.length; i++) {
+      var p = state.processPicked[i];
+      html += '<div class="picked-tile"><span class="picked-num">' + (i + 1) + '.</span> ' + escapeHtml(p.label) + ' ' + icon('check', 12, '#000') + '</div>';
+    }
+    html += '</div></div>';
+  }
+
+  var isDone = state.processPicked.length === PROCESS_STEPS.length;
+
+  if (!isDone) {
+    html += '<div class="step-grid">';
+    for (var s = 0; s < state.processAvailable.length; s++) {
+      var step = state.processAvailable[s];
+      var shakeClass = state.shakeId === step.id ? ' shake-now shake' : '';
+      html += '<button class="step-tile' + shakeClass + '" data-action="pick-step" data-step-id="' + step.id + '">';
+      html += '<p class="step-tile-label">' + escapeHtml(step.label) + '</p>';
+      html += '<p class="step-tile-desc">' + escapeHtml(step.desc) + '</p>';
+      html += '</button>';
+    }
+    html += '</div>';
+  }
+
+  if (isDone) {
+    html += '<div style="background:rgba(16,185,129,0.1);border:2px solid #10b981;padding:18px;margin-bottom:14px;">';
+    html += '<p class="bebas" style="font-size:24px;color:#6ee7b7;margin:0 0 8px;">All 9 in order. Done.</p>';
+    html += '<p style="font-size:13px;color:#d4d4d8;margin:0;line-height:1.6;">That is the lifecycle of every project we run. RFQ in, building standing 8-15 weeks later. The front desk touches Phase 1 (RFQ intake), Phase 2 (sending bids), and Phase 3 (logging the award). The shop runs 4 through 8. The erector handles 9.</p>';
+    html += '</div>';
+  }
+
+  html += '<div class="result-actions">';
+  html += '<button class="try-again-btn" data-action="reset-process">' + icon('rotate-ccw', 11) + ' Reshuffle</button>';
+  if (isDone) {
+    html += '<button class="complete-btn" data-action="complete-quiz" data-cat-id="' + cat.id + '" data-lesson-id="' + lesson.id + '" style="margin-left:auto;">Mark Complete ' + icon('arrow-right', 16, '#000') + '</button>';
+  }
+  html += '</div>';
+  return html;
+}
+
+// ─── GLOSSARY ───────────────────────────────────────────────────────────────
+function renderGlossary(cat, lesson) {
+  var filter = (state.glossFilter || '').toLowerCase();
+  var filtered = GLOSSARY.filter(function(g) {
+    return g.term.toLowerCase().indexOf(filter) >= 0 || g.def.toLowerCase().indexOf(filter) >= 0;
+  });
+  var reviewedCount = size(state.glossReviewed);
+  var canComplete = reviewedCount >= 20;
+
+  var html = '';
+  html += '<div class="prompt-card">';
+  html += '<div class="prompt-card-row">' + icon('book-open', 14, '#ea580c');
+  html += '<span class="prompt-card-label">25 terms &middot; tap to mark reviewed</span></div>';
+  html += '<p class="prompt-card-text">The vocabulary of structural steel. You do not need to memorize all 25, but you should recognize them when you hear them on the phone or in an email.</p>';
+  html += '</div>';
+
+  html += '<div class="gloss-search-wrap">';
+  html += '<div class="gloss-search-icon">' + icon('search', 14, '#71717a') + '</div>';
+  html += '<input class="gloss-search-input" type="text" id="gloss-filter-input" placeholder="Filter terms..." value="' + escapeHtml(state.glossFilter) + '" />';
+  html += '</div>';
+
+  html += '<div class="gloss-grid">';
+  for (var i = 0; i < filtered.length; i++) {
+    var g = filtered[i];
+    var isReviewed = !!state.glossReviewed[g.term];
+    html += '<button class="gloss-card ' + (isReviewed ? 'is-reviewed' : '') + '" data-action="review-term" data-term="' + escapeHtml(g.term) + '">';
+    html += '<div class="gloss-card-top">';
+    html += '<span class="gloss-card-term">' + escapeHtml(g.term) + '</span>';
+    if (isReviewed) html += icon('check', 14, '#ea580c');
+    html += '</div>';
+    html += '<p class="gloss-card-def">' + escapeHtml(g.def) + '</p>';
+    html += '</button>';
+  }
+  html += '</div>';
+
+  html += '<p class="reviewed-counter">' + reviewedCount + ' of ' + GLOSSARY.length + ' reviewed</p>';
+
+  html += '<button class="submit-btn" style="background:' + (canComplete ? '#fbbf24' : '#27272a') + ';color:' + (canComplete ? '#000' : '#52525b') + ';border-color:' + (canComplete ? '#fbbf24' : '#3f3f46') + ';" ';
+  if (canComplete) html += 'data-action="complete-quiz" data-cat-id="' + cat.id + '" data-lesson-id="' + lesson.id + '"';
+  else html += 'disabled';
+  html += '>';
+  html += canComplete ? 'Mark Complete' : ('Review at least 20 terms (' + reviewedCount + '/20)');
+  html += '</button>';
+  return html;
+}
+
+// ─── TERM MATCH ─────────────────────────────────────────────────────────────
+function renderTermMatch(cat, lesson) {
+  var assignments = state.matchAssignments;
+  var submitted = state.matchSubmitted;
+  var allMatched = MATCH_PAIRS.every(function(p) { return !!assignments[p.term]; });
+  var correctCount = 0;
+  for (var i = 0; i < MATCH_PAIRS.length; i++) {
+    if (assignments[MATCH_PAIRS[i].term] === MATCH_PAIRS[i].def) correctCount++;
+  }
+  var passed = correctCount >= 7;
+
+  var html = '';
+  html += '<div class="prompt-card">';
+  html += '<div class="prompt-card-row">' + icon('hash', 14, '#ea580c');
+  html += '<span class="prompt-card-label">Match terms to definitions</span></div>';
+  html += '<p class="prompt-card-text">Tap a term, then tap its definition. Tap again to change. 7 of 8 to pass.</p>';
+  html += '</div>';
+
+  // term tiles
+  html += '<div class="match-term-grid">';
+  for (var t = 0; t < MATCH_PAIRS.length; t++) {
+    var p = MATCH_PAIRS[t];
+    var isActive = state.matchActiveTerm === p.term;
+    var matched = assignments[p.term];
+    var cls = 'match-term-tile';
+    if (submitted && matched && matched === p.def) cls += ' is-correct';
+    else if (submitted && matched && matched !== p.def) cls += ' is-wrong';
+    else if (isActive) cls += ' is-active';
+    else if (matched) cls += ' is-matched';
+    html += '<button class="' + cls + '"';
+    if (!submitted) html += ' data-action="match-tap-term" data-term="' + escapeHtml(p.term) + '"';
+    if (submitted) html += ' disabled';
+    html += '>' + escapeHtml(p.term) + '</button>';
+  }
+  html += '</div>';
+
+  // definitions
+  html += '<div class="match-def-list">';
+  for (var d = 0; d < state.matchDefs.length; d++) {
+    var def = state.matchDefs[d];
+    var matchedTo = null;
+    for (var ti = 0; ti < MATCH_PAIRS.length; ti++) {
+      if (assignments[MATCH_PAIRS[ti].term] === def) { matchedTo = MATCH_PAIRS[ti].term; break; }
+    }
+    var defCls = 'match-def-tile';
+    if (submitted && matchedTo) {
+      var isCorrectMatch = false;
+      for (var pi = 0; pi < MATCH_PAIRS.length; pi++) {
+        if (MATCH_PAIRS[pi].term === matchedTo && MATCH_PAIRS[pi].def === def) { isCorrectMatch = true; break; }
+      }
+      defCls += isCorrectMatch ? ' is-correct' : ' is-wrong';
+    } else if (matchedTo) {
+      defCls += ' is-matched';
+    } else if (!state.matchActiveTerm && !submitted) {
+      defCls += ' is-dim';
+    }
+    html += '<button class="' + defCls + '"';
+    if (!submitted && state.matchActiveTerm) html += ' data-action="match-tap-def" data-def="' + escapeHtml(def) + '"';
+    else html += ' disabled';
+    html += '><span>' + escapeHtml(def) + '</span>';
+    if (matchedTo) html += '<span class="match-def-arrow">&larr; ' + escapeHtml(matchedTo) + '</span>';
+    html += '</button>';
+  }
+  html += '</div>';
+
+  if (!submitted) {
+    html += '<button class="submit-btn" data-action="submit-match"' + (allMatched ? '' : ' disabled') + '>';
+    html += allMatched ? 'Submit Answers' : ('Match all ' + MATCH_PAIRS.length + ' terms');
+    html += '</button>';
+  } else {
+    html += '<div class="result-box ' + (passed ? 'passed' : 'failed') + '">';
+    html += '<p class="result-headline ' + (passed ? 'passed' : 'failed') + '">' + correctCount + ' of ' + MATCH_PAIRS.length + (passed ? '. The vocabulary is yours.' : '. Almost.') + '</p>';
+    html += '<div class="result-actions">';
+    if (!passed) html += '<button class="try-again-btn" data-action="reset-match">' + icon('rotate-ccw', 11) + ' Try again</button>';
+    else html += '<button class="complete-btn" data-action="complete-quiz" data-cat-id="' + cat.id + '" data-lesson-id="' + lesson.id + '">Mark Complete ' + icon('arrow-right', 16, '#000') + '</button>';
+    html += '</div></div>';
+  }
+  return html;
+}
+
+// ============================================================================
+// RENDER DISPATCH
+// ============================================================================
+function render() {
+  var app = document.getElementById('app');
+  var html = '';
+  if (state.view === 'home') {
+    html = renderHome();
+  } else if (state.view.indexOf('cat:') === 0) {
+    var c = getCategory(state.view.slice(4));
+    if (c) html = renderCategory(c);
+  } else if (state.view.indexOf('lesson:') === 0) {
+    var parts = state.view.split(':');
+    var c2 = getCategory(parts[1]);
+    var l2 = c2 ? getLesson(c2, parts[2]) : null;
+    if (c2 && l2) html = renderLesson(c2, l2);
+  }
+  app.innerHTML = html;
+  document.getElementById('header-progress').textContent = completedCount() + '/' + totalLessons();
+
+  // re-attach glossary search input listener since it gets recreated
+  var glossInput = document.getElementById('gloss-filter-input');
+  if (glossInput) {
+    glossInput.addEventListener('input', function(ev) {
+      state.glossFilter = ev.target.value;
+      // update only the grid + counter, not the whole view (to keep input focus)
+      var newFilter = (state.glossFilter || '').toLowerCase();
+      var matches = GLOSSARY.filter(function(g) {
+        return g.term.toLowerCase().indexOf(newFilter) >= 0 || g.def.toLowerCase().indexOf(newFilter) >= 0;
+      });
+      var grid = document.querySelector('.gloss-grid');
+      if (grid) {
+        var html = '';
+        for (var i = 0; i < matches.length; i++) {
+          var g = matches[i];
+          var isReviewed = !!state.glossReviewed[g.term];
+          html += '<button class="gloss-card ' + (isReviewed ? 'is-reviewed' : '') + '" data-action="review-term" data-term="' + escapeHtml(g.term) + '">';
+          html += '<div class="gloss-card-top">';
+          html += '<span class="gloss-card-term">' + escapeHtml(g.term) + '</span>';
+          if (isReviewed) html += icon('check', 14, '#ea580c');
+          html += '</div>';
+          html += '<p class="gloss-card-def">' + escapeHtml(g.def) + '</p>';
+          html += '</button>';
+        }
+        grid.innerHTML = html;
+      }
+    });
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================================================================
+// EVENTS
+// ============================================================================
+function markComplete(catId, lessonId) {
+  state.completed[lessonId] = true;
+  var cat = getCategory(catId);
+  var lesson = getLesson(cat, lessonId);
+  var idx = cat.lessons.indexOf(lesson);
+  if (idx >= 0 && idx < cat.lessons.length - 1) {
+    state.view = 'lesson:' + catId + ':' + cat.lessons[idx + 1].id;
+  } else {
+    state.view = 'cat:' + catId;
+  }
+  render();
+}
+
+document.body.addEventListener('click', function(ev) {
+  var t = ev.target.closest('[data-action]');
+  if (!t) return;
+  var action = t.getAttribute('data-action');
+
+  if (action === 'open-cat') {
+    state.view = 'cat:' + t.getAttribute('data-cat-id');
+    render();
+  } else if (action === 'open-lesson') {
+    state.view = 'lesson:' + t.getAttribute('data-cat-id') + ':' + t.getAttribute('data-lesson-id');
+    render();
+  } else if (action === 'back-home') {
+    state.view = 'home';
+    render();
+  } else if (action === 'complete-reading') {
+    markComplete(t.getAttribute('data-cat-id'), t.getAttribute('data-lesson-id'));
+  } else if (action === 'pick-option') {
+    var qkey = t.getAttribute('data-quiz-key');
+    var qidx = parseInt(t.getAttribute('data-q-idx'), 10);
+    var v = parseInt(t.getAttribute('data-v'), 10);
+    if (!state.quizAnswers[qkey]) state.quizAnswers[qkey] = {};
+    state.quizAnswers[qkey][qidx] = v;
+    render();
+  } else if (action === 'submit-quiz') {
+    state.quizSubmitted[t.getAttribute('data-lesson-id')] = true;
+    render();
+  } else if (action === 'reset-quiz') {
+    var lk = t.getAttribute('data-lesson-id');
+    state.quizAnswers[lk] = {};
+    state.quizSubmitted[lk] = false;
+    render();
+  } else if (action === 'complete-quiz') {
+    markComplete(t.getAttribute('data-cat-id'), t.getAttribute('data-lesson-id'));
+  } else if (action === 'toggle-shape') {
+    var sid = t.getAttribute('data-shape-id');
+    if (state.expandedShapes[sid]) delete state.expandedShapes[sid];
+    else state.expandedShapes[sid] = true;
+    render();
+  } else if (action === 'pick-step') {
+    var sId = parseInt(t.getAttribute('data-step-id'), 10);
+    var expectedNext = state.processPicked.length + 1;
+    if (sId !== expectedNext) {
+      state.shakeId = sId;
+      render();
+      setTimeout(function() { state.shakeId = null; render(); }, 400);
+      return;
+    }
+    var step = null;
+    for (var si = 0; si < state.processAvailable.length; si++) {
+      if (state.processAvailable[si].id === sId) { step = state.processAvailable[si]; break; }
+    }
+    if (step) {
+      state.processPicked.push(step);
+      state.processAvailable = state.processAvailable.filter(function(x) { return x.id !== sId; });
+    }
+    render();
+  } else if (action === 'reset-process') {
+    state.processPicked = [];
+    state.processAvailable = shuffleArr(PROCESS_STEPS);
+    render();
+  } else if (action === 'review-term') {
+    state.glossReviewed[t.getAttribute('data-term')] = true;
+    render();
+  } else if (action === 'match-tap-term') {
+    var term = t.getAttribute('data-term');
+    state.matchActiveTerm = state.matchActiveTerm === term ? null : term;
+    render();
+  } else if (action === 'match-tap-def') {
+    if (!state.matchActiveTerm) return;
+    var newDef = t.getAttribute('data-def');
+    var newAss = {};
+    Object.keys(state.matchAssignments).forEach(function(k) {
+      if (state.matchAssignments[k] !== newDef) newAss[k] = state.matchAssignments[k];
+    });
+    newAss[state.matchActiveTerm] = newDef;
+    state.matchAssignments = newAss;
+    state.matchActiveTerm = null;
+    render();
+  } else if (action === 'submit-match') {
+    state.matchSubmitted = true;
+    render();
+  } else if (action === 'reset-match') {
+    state.matchAssignments = {};
+    state.matchActiveTerm = null;
+    state.matchSubmitted = false;
+    state.matchDefs = shuffleArr(MATCH_PAIRS).map(function(p) { return p.def; });
+    render();
+  }
+});
+
+// ============================================================================
+// INIT
+// ============================================================================
+document.getElementById('logo-slot').innerHTML = icon('hard-hat', 22, '#000');
+render();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="quiz-meta.js"></script>
+<script>window.NC_GATE = {"module_id": "steel-101", "title": "Steel 101", "next": "teams-full.html", "questions": [{"q": "A current drawing shows a wide flange beam with no grade noted. What grade do you assume?", "options": ["A36", "A500 Grade B", "A572 Grade 50", "A992, the modern default for W-shapes"]}, {"q": "What does the 11 hours per ton baseline describe?", "options": ["How long delivery takes per ton of steel", "The blended labor hours expected per ton of finished steel leaving the shop", "The erection crew's daily output target", "The detailing time required per ton of drawings"]}, {"q": "Per the glossary, how should you treat the term PEMB?", "options": ["Use it on capability sheets to show range", "It is a building type Your Company specializes in", "It means Pre-Engineered Metal Building, which is not what we do, and the language never goes in our materials", "It is an AISC shape category"]}]};</script>
+<script src="portal.js"></script>
+<script>ncInitModulePage();</script>
+</body>
+</html>

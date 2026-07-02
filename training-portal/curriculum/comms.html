@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Professional Business Communication | Your Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:#000;color:#e4e4e7;
+  font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(circle at 85% 8%,rgba(13,148,136,0.10),transparent 40%),
+    radial-gradient(circle at 15% 92%,rgba(8,145,178,0.07),transparent 40%);
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;padding:0;}
+input,textarea,select{font-family:inherit;}
+p{margin:0;}h1,h2,h3,h4{margin:0;font-weight:normal;}
+.container{max-width:960px;margin:0 auto;padding:0 20px;}
+
+header.site{border-bottom:2px solid #27272a;background:rgba(0,0,0,.85);
+  position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);}
+.header-row{max-width:960px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;}
+.logo-tile{width:40px;height:40px;background:#0d9488;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.header-meta .small{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#52525b;}
+.header-meta .big{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin-top:2px;}
+footer.site{max-width:960px;margin:0 auto;padding:28px 20px;border-top:1px solid #27272a;text-align:center;}
+footer.site p{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#3f3f46;}
+
+/* Hero */
+.lab-hero{position:relative;border:2px solid #3f3f46;background:#18181b;overflow:hidden;margin-bottom:28px;}
+.hero-grid{position:absolute;inset:0;opacity:.1;
+  background-image:linear-gradient(rgba(13,148,136,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(13,148,136,.3) 1px,transparent 1px);
+  background-size:24px 24px;}
+.hero-glow{position:absolute;top:-40px;right:-40px;width:220px;height:220px;
+  background:#0d9488;border-radius:50%;filter:blur(80px);opacity:.22;}
+.lab-hero-inner{position:relative;padding:28px 24px;}
+.lab-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#5eead4;margin-bottom:8px;}
+.lab-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,9vw,68px);color:#fff;line-height:.9;margin-bottom:14px;}
+.lab-h1 .accent{color:#5eead4;}
+.lab-blurb{color:#a1a1aa;max-width:540px;font-size:14px;line-height:1.7;margin-bottom:22px;}
+.lab-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:460px;}
+.lab-stat{border:1px solid #3f3f46;background:rgba(0,0,0,.4);padding:8px 10px;}
+.lab-stat-num{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#5eead4;margin:0;}
+.lab-stat-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#52525b;margin:0;}
+
+/* Category cards */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.cat-card{text-align:left;background:#18181b;border:2px solid #3f3f46;padding:0;overflow:hidden;width:100%;}
+.cat-card.is-done{border-color:#10b981;}
+.cat-stripe{height:6px;}
+.cat-inner{padding:18px;}
+.cat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.cat-icon-tile{width:44px;height:44px;color:#fff;display:flex;align-items:center;justify-content:center;}
+.cat-card h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin:0 0 6px;line-height:1.05;}
+.cat-card-blurb{font-size:12px;color:#a1a1aa;margin:0 0 14px;line-height:1.5;}
+.cat-card-foot{display:flex;justify-content:space-between;align-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:9px;color:#71717a;text-transform:uppercase;letter-spacing:.2em;}
+.cat-progress-track{height:4px;background:#27272a;flex:1;margin-left:12px;max-width:80px;}
+.cat-progress-fill{height:100%;background:#10b981;}
+
+/* Category view */
+.cat-back-btn{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;
+  color:#71717a;display:flex;align-items:center;gap:6px;margin-bottom:20px;}
+.cat-header{background:#18181b;border:2px solid #3f3f46;padding:20px;margin-bottom:16px;}
+.cat-header-inner{display:flex;gap:16px;align-items:flex-start;}
+.cat-header-icon{width:56px;height:56px;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cat-header-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;margin:0;}
+.cat-header-title{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;margin:4px 0;line-height:1;}
+.cat-header-blurb{color:#a1a1aa;font-size:13px;margin:0;line-height:1.5;}
+
+.lesson-list{display:flex;flex-direction:column;gap:8px;}
+.lesson-row{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#18181b;
+  border:2px solid #3f3f46;width:100%;text-align:left;}
+.lesson-row.is-done{border-color:#10b981;}
+.lesson-row.is-locked{opacity:.45;cursor:not-allowed;}
+.lesson-row:not(.is-locked){cursor:pointer;}
+.lesson-num-tile{width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:16px;}
+.lesson-num-tile.done   {background:#10b981;color:#000;}
+.lesson-num-tile.current{background:#5eead4;color:#000;}
+.lesson-num-tile.pending{background:#27272a;color:#71717a;}
+.lesson-row-meta{flex:1;min-width:0;}
+.lesson-row-title{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin:0;line-height:1.1;}
+.lesson-row-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;margin:4px 0 0;}
+
+/* Reading card */
+.lesson-card{border:2px solid #3f3f46;background:#18181b;}
+.lesson-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.lesson-icon-tile{width:52px;height:52px;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.lesson-card-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;font-weight:700;opacity:.8;margin:0;}
+.lesson-card-title{font-family:'Bebas Neue',sans-serif;font-size:32px;margin:4px 0 0;line-height:1;color:#fff;}
+.lesson-card-body{padding:24px 22px;}
+.lesson-section{margin-bottom:22px;}
+.lesson-section h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#5eead4;margin:0 0 8px;}
+.lesson-section p{color:#a1a1aa;line-height:1.65;margin:0;font-size:14px;}
+.tip-box{background:rgba(13,148,136,.08);border-left:4px solid #0d9488;padding:12px 16px;margin-top:20px;}
+.tip-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#5eead4;margin:0 0 6px;font-weight:700;}
+.tip-body{color:#99f6e4;font-size:13px;margin:0;line-height:1.55;font-style:italic;}
+
+/* Roster table (for er-1) */
+.roster{display:flex;flex-direction:column;gap:8px;margin-top:6px;}
+.roster-row{background:#0c0c0c;border:1px solid #3f3f46;padding:12px 14px;}
+.roster-name{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#5eead4;margin-bottom:4px;}
+.roster-owns{font-size:12px;color:#a1a1aa;line-height:1.5;}
+
+/* Phone scripts table */
+.scripts-list{display:flex;flex-direction:column;gap:10px;margin-top:6px;}
+.script-block{background:#0c0c0c;border:1px solid #3f3f46;padding:14px;}
+.script-num{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#5eead4;margin-bottom:4px;}
+.script-title{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin-bottom:8px;line-height:1.1;}
+.script-quote{font-style:italic;font-size:13px;color:#d4d4d8;border-left:3px solid #0d9488;padding-left:10px;line-height:1.6;}
+.script-rule{font-size:11px;color:#a1a1aa;margin-top:8px;line-height:1.5;}
+
+.complete-btn{width:100%;margin-top:24px;padding:14px 0;
+  font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.2em;
+  background:#0d9488;color:#fff;border:2px solid #0d9488;
+  display:flex;align-items:center;justify-content:center;gap:10px;}
+
+/* Interactive shared */
+.int-card{border:2px solid #3f3f46;background:#18181b;}
+.int-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.int-card-body{padding:24px 22px;}
+
+/* Voice Rewrite */
+.vr-stage{background:#0c0c0c;border:1px solid #3f3f46;padding:16px;margin-bottom:14px;}
+.vr-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#5eead4;margin-bottom:8px;}
+.vr-original{background:#1c1917;border-left:3px solid #ef4444;padding:10px 14px;margin-bottom:14px;}
+.vr-original-label{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#fca5a5;margin-bottom:4px;}
+.vr-original-text{font-size:13px;color:#e4e4e7;font-style:italic;line-height:1.5;}
+.vr-options{display:flex;flex-direction:column;gap:6px;margin-top:14px;}
+.vr-opt{padding:10px 14px;background:#09090b;border:1px solid #3f3f46;text-align:left;font-size:13px;color:#a1a1aa;line-height:1.45;}
+.vr-opt:hover{border-color:#5eead4;}
+.vr-opt.correct{background:rgba(16,185,129,.12);border-color:#10b981;color:#a7f3d0;}
+.vr-opt.wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.vr-feedback{margin-top:14px;padding:10px 14px;font-size:12px;line-height:1.55;}
+.vr-feedback.ok{background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+.vr-feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+.vr-nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px;}
+.vr-progress{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:#71717a;}
+.vr-next{padding:10px 18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.2em;
+  background:#0d9488;color:#fff;border:2px solid #0d9488;}
+
+/* Escalation Routing Quiz */
+.er-stage{background:#0c0c0c;border:1px solid #3f3f46;padding:16px;margin-bottom:14px;}
+.er-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#22d3ee;margin-bottom:8px;}
+.er-scenario{font-size:14px;color:#e4e4e7;margin-bottom:14px;line-height:1.55;}
+.er-buttons{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:6px;}
+.er-btn{padding:10px 8px;background:#09090b;border:1px solid #3f3f46;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.1em;color:#a1a1aa;}
+.er-btn:hover{border-color:#22d3ee;}
+.er-btn.picked-correct{background:rgba(16,185,129,.15);border-color:#10b981;color:#a7f3d0;}
+.er-btn.picked-wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.er-btn.correct-shown{background:rgba(16,185,129,.08);border-color:#10b981;color:#a7f3d0;}
+.er-feedback{margin-top:14px;padding:10px 14px;font-size:12px;line-height:1.55;}
+.er-feedback.ok{background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+.er-feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+
+/* Phone Script Picker */
+.psp-stage{background:#0c0c0c;border:1px solid #3f3f46;padding:16px;margin-bottom:14px;}
+.psp-call-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#60a5fa;margin-bottom:8px;}
+.psp-call-line{font-style:italic;font-size:13px;color:#d4d4d8;border-left:3px solid #1e40af;padding:10px 12px;background:#1e1e2e;line-height:1.6;}
+.psp-pick-label{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#a1a1aa;margin-top:14px;margin-bottom:8px;}
+.psp-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:6px;}
+.psp-opt{padding:10px 12px;background:#09090b;border:1px solid #3f3f46;text-align:left;font-size:12px;color:#a1a1aa;line-height:1.4;}
+.psp-opt:hover{border-color:#60a5fa;}
+.psp-opt.correct{background:rgba(16,185,129,.15);border-color:#10b981;color:#a7f3d0;}
+.psp-opt.wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.psp-reveal{margin-top:14px;}
+.psp-script-box{background:#1c1917;border:1px solid #0d9488;padding:14px;}
+.psp-script-label{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#5eead4;margin-bottom:6px;}
+.psp-script-text{font-style:italic;font-size:13px;color:#d4d4d8;line-height:1.65;}
+.psp-rule{font-size:11px;color:#a1a1aa;margin-top:10px;line-height:1.5;font-style:normal;}
+
+.score-line{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;
+  color:#a1a1aa;margin-top:16px;padding-top:14px;border-top:1px solid #27272a;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-row">
+    <div class="logo-tile" id="logo-slot"></div>
+    <div class="header-meta">
+      <p class="small">Your Company &middot; Module 7</p>
+      <p class="big">Professional Business Communication</p>
+    </div>
+  </div>
+</header>
+
+<main class="container" style="padding:28px 20px 40px;">
+  <div id="app"></div>
+</main>
+
+<footer class="site">
+  <p>Built by Joseph &middot; Your Company Virtual Office &middot; Internal Use Only</p>
+</footer>
+
+<script>
+"use strict";
+
+// ============================================================================
+// ICONS
+// ============================================================================
+const ICONS={
+  'arrow-right':'<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  'arrow-left': '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  'check':      '<path d="M20 6 9 17l-5-5"/>',
+  'lock':       '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  'megaphone':  '<path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/><path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14"/><path d="M8 6v8"/>',
+  'shuffle':    '<path d="m18 14 4 4-4 4"/><path d="m18 2 4 4-4 4"/><path d="M2 18h1.973a4 4 0 0 0 3.3-1.7l5.454-8.6a4 4 0 0 1 3.3-1.7H22"/><path d="M2 6h1.972a4 4 0 0 1 3.6 2.2"/><path d="M22 18h-6.041a4 4 0 0 1-3.3-1.8l-.359-.45"/>',
+  'archive':    '<rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/>',
+  'phone':      '<path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/>',
+  'mic':        '<path d="M12 19v3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><rect x="9" y="2" width="6" height="13" rx="3"/>'
+};
+function icon(name,size,color){
+  size=size||16;color=color||'currentColor';
+  var p=ICONS[name]||'';
+  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">'+p+'</svg>';
+}
+
+// ============================================================================
+// DATA
+// ============================================================================
+const CATEGORIES=[
+  { id:'voice', iconKey:'megaphone', color:'#0d9488',
+    title:"the Owner's Voice",
+    blurb:'Writing on his behalf without sounding like a different person.',
+    lessons:[
+      { id:'mv-1', title:'The Voice Principles',         type:'reading',     minutes:4 },
+      { id:'mv-2', title:'Words That Out You As Not-Owner', type:'reading', minutes:4 },
+      { id:'mv-3', title:'Voice Rewrite Trainer',        type:'interactive', minutes:6, intKey:'voiceRewrite' }
+    ] },
+  { id:'routing', iconKey:'shuffle', color:'#0891b2',
+    title:'Escalation Routing',
+    blurb:'Who handles what. The 5-minute rule. Hot transfers vs. messages.',
+    lessons:[
+      { id:'er-1', title:'Who Owns What at Your Company',   type:'reading',     minutes:4 },
+      { id:'er-2', title:'Routing Rules in Practice',    type:'reading',     minutes:3 },
+      { id:'er-3', title:'Routing Quiz',                 type:'interactive', minutes:6, intKey:'routingQuiz' }
+    ] },
+  { id:'paper', iconKey:'archive', color:'#0369a1',
+    title:'Paper Trail Discipline',
+    blurb:'If it is not in email, it did not happen. The confirmation pattern.',
+    lessons:[
+      { id:'pt-1', title:'Email vs. Text vs. Call',      type:'reading',     minutes:3 },
+      { id:'pt-2', title:'What to Document',             type:'reading',     minutes:3 },
+      { id:'pt-3', title:'The Confirmation Pattern',     type:'reading',     minutes:3 }
+    ] },
+  { id:'phone', iconKey:'phone', color:'#1e40af',
+    title:'Phone Scripts',
+    blurb:'Eight scripts ready to use. Vendor, client, emergency, collections, media, more.',
+    lessons:[
+      { id:'ps-1', title:'Phone Discipline Basics',      type:'reading',     minutes:3 },
+      { id:'ps-2', title:'The 8 Critical Scripts',       type:'reading',     minutes:6 },
+      { id:'ps-3', title:'Script Picker Drill',          type:'interactive', minutes:6, intKey:'scriptPicker' }
+    ] }
+];
+
+const LESSON_CONTENT={
+  'mv-1':{ sections:[
+    { h:'Short sentences carry weight', b:'If a sentence can be split in two, split it. "We received your quote and we appreciate the detailed work but we have some concerns about the timeline that we would like to discuss." Becomes: "We received your quote. The detail is appreciated. We have concerns about the timeline. Let us discuss." Same content. Half the words. More impact.' },
+    { h:'Specific numbers beat vague language', b:'"Soon" means nothing. "By Friday at 5 PM" means something. "A lot of jobs" is weak. "47 jobs since 2020" is strong. If you do not have a number, find one before sending.' },
+    { h:'Active voice, never passive', b:'Active: Mario welded the connection. Passive: The connection was welded by Mario. Active is shorter and clearer. Passive hides who did what. Owner does not hide who did what.' },
+    { h:'Skip the warm-up', b:'No "I hope this email finds you well." No "Thanks for reaching out." No "I just wanted to follow up on..." Open with the point. Close with what happens next. Everything in between supports those two.' }
+  ], tip:'Draft the email. Delete the first sentence. Read it again. If the email still makes sense, the first sentence was filler. Send.' },
+  'mv-2':{ sections:[
+    { h:'Corporate jargon', b:'Leverage, synergy, circle back, touch base, low-hanging fruit, moving forward, going forward, at this time, please be advised, kindly. Each of these signals "someone trying to sound professional." Owner does not need to sound professional. He is professional. He uses plain words.' },
+    { h:'Three-adjective lists', b:'"We deliver quality, reliable, professional work." This is filler. Pick one adjective if you need one. Better: drop them all and use a fact. "We deliver on schedule and to spec." Reads as confidence, not marketing.' },
+    { h:'The em-dash habit', b:'Em-dashes used to be Owner\'s style. They are not anymore. Em-dashes now signal AI-written copy. Use periods or hyphens. If a sentence needs an em-dash to make sense, it probably needs to be two sentences.' },
+    { h:'Hedge words', b:'Might. Perhaps. Could potentially. Possibly. Just wanted to. Drop them. "I might be able to send the quote tomorrow" is weak. "The quote will be sent tomorrow" commits. Hedging signals you do not believe what you are saying.' }
+  ], tip:'Before sending any email from Owner\'s address: read it back. If any sentence contains a banned word from this lesson, rewrite that sentence. No exceptions.' },
+  'er-1':{ sections:[
+    { h:'The Your Company roster', b:'Six people, six lanes. Knowing the lanes is most of the job at the front desk.' }
+  ], tip:'When in doubt: route to Joseph first. He can usually answer or knows who can. Never go directly to Owner unless the caller is a client he is expecting, an emergency, or Joseph has told you it is a CEO-only decision.',
+    customHtml:'<div class="roster">'+
+      '<div class="roster-row"><div class="roster-name">You</div><div class="roster-owns">Visitor log, phones, daily admin, document filing, calendar management, vendor appointment scheduling. You decide: how to route a call, accepting deliveries with paperwork match, declining vendor sales pitches, telling a visitor where to wait.</div></div>'+
+      '<div class="roster-row"><div class="roster-name">The Owner (CEO)</div><div class="roster-owns">Strategic decisions, client-facing commitments, pricing, bid acceptance and rejection, hiring, anything over $5,000 unbudgeted, all media or PR. Final approval on anything that commits the company externally.</div></div>'+
+      '<div class="roster-row"><div class="roster-name">Joseph Hasse (IT / EA to CEO)</div><div class="roster-owns">IT infrastructure, M365, this training, virtual office systems, document templates, Excel formulas, calendar templates, anything technical that breaks. Default routing destination when you are unsure.</div></div>'+
+      '<div class="roster-row"><div class="roster-name">Amber (COO)</div><div class="roster-owns">Legal review, LLC paperwork, contracts before signature, commercial product reviews, IP questions, insurance claims, collections from vendors or to vendors.</div></div>'+
+      '<div class="roster-row"><div class="roster-name">Paul Guerrero (Safety Director, NCCER #27160819)</div><div class="roster-owns">All safety incidents, ISNetworld document submissions, RAVS questionnaires, OSHA inspections, EMR letter coordination with Texas Mutual (Policy [POLICY NUMBER], 800-859-5995), safety training records, Marathon Petroleum compliance pathway.</div></div>'+
+      '<div class="roster-row"><div class="roster-name">Mario Gutierrez (Crew Lead / Welding Lead, AWS D1.1)</div><div class="roster-owns">Shop floor operations, weld questions, fab quality, ironworker schedules, jobsite execution. Day-to-day shop authority when Owner is offsite.</div></div>'+
+    '</div>' },
+  'er-2':{ sections:[
+    { h:'Default escalation order', b:'If you do not know who handles it: Joseph first. He can usually answer or knows who can. Joseph escalates to Owner if it requires the CEO. Never go directly to Owner unless it is a client he is expecting, an emergency, or Joseph has told you it is his decision.' },
+    { h:'The 5-minute rule', b:'If someone calls or walks in and you genuinely do not know what to do, give yourself 5 minutes to figure it out before interrupting anyone. Check Teams, search OneDrive for past handling of similar items, or ask Joseph by chat (not phone). Most situations resolve in 5 minutes of clear thinking.' },
+    { h:'Hot transfers vs. messages', b:'Emergency or time-sensitive: hot-transfer the call (put them on hold, tell the recipient who is holding and why, then transfer). Routine: take a message and send it via Teams chat with caller name, company, callback number, and the reason in one sentence. Never write down "caller wants to discuss something." Useless.' }
+  ], tip:'A good message has all four: name spelled out, company, callback number, reason in one sentence. If you cannot give all four, you did not finish the call.' },
+  'pt-1':{ sections:[
+    { h:'Email is the default for everything that matters', b:'A decision. A commitment. A price. A deadline. A question that needs an answer in writing. Email. Email creates the paper trail. Email is searchable, archivable, and admissible. Text and phone calls are not. Default to email.' },
+    { h:'Text only for urgency-with-no-decision', b:'"I am running 10 minutes late." Text. "Can you confirm the meeting price?" Email. Text is for time-sensitive operational signals: I am here, I am running late, the gate is open, the truck is loaded. Anything that requires a decision or commits to a number goes in email.' },
+    { h:'Phone calls are the worst record', b:'Most call notes are reconstructed after the fact, which means they are wrong. If you call someone, follow up the call with an email summarizing what was discussed and what each side committed to. Subject: "Recap from our call today." Do this even when it feels redundant. The recap is the record.' }
+  ], tip:'Owner\'s rule: if it is not in email, it did not happen. That does not mean every conversation needs a paragraph-long follow-up. It means anything that commits Your Company to action, money, or time gets a confirmation email. No exceptions.' },
+  'pt-2':{ sections:[
+    { h:'Document: commitments and dollar amounts', b:'Anyone (vendor, client, employee) makes a commitment involving Your Company money or time, document it. Email confirmation: "Confirming our conversation today. ICD will deliver the structural drawings by Friday May 17. We will return marked-up drawings by Tuesday May 21." Names, dates, deliverables, deadlines.' },
+    { h:'Document: anything that could be disputed later', b:'A vendor delivers late. A client changes scope verbally on site. An employee verbally agrees to overtime. These can all become disputes. The email record protects everyone. Send the documentation email even when the other side is cooperative. Especially then.' },
+    { h:'Document: every inspection, audit, or compliance interaction', b:'OSHA visit. Texas Mutual call. ISNetworld update. Marathon Petroleum compliance review. Every one gets a written summary in email immediately afterward. Cc Paul on safety items. Cc Amber on compliance items. The compliance record at Your Company is built from these emails.' }
+  ], tip:'Write the subject line so a stranger reading it six months from now knows what is inside. "Recap: ICD drawing delivery commitment - May 14" beats "Following up."' },
+  'pt-3':{ sections:[
+    { h:'Confirm in writing within one hour', b:'After any meeting, call, or in-person commitment involving Your Company, send the confirmation email within one hour. Memory degrades fast. After 24 hours you are guessing what was said.' },
+    { h:'The structure: who, what, when, who owns what', b:'Subject: "Recap: [topic] - [date]." Body: "Confirming our conversation today. [Their name] committed to [X] by [date]. Your Company will [Y] by [date]. Please reply if anything is off." Five sentences. Done.' },
+    { h:'"Please reply if anything is off" is the magic phrase', b:'This sentence flips the burden of correction onto the other party. If they do not reply, you have a documented agreement. If they reply with corrections, you have a documented agreement. Either way, you have the record.' }
+  ], tip:'Confirmation emails are not negotiations. Do not write "I think we agreed that..." Write "We agreed that..." Then "Please reply if anything is off." Confidence flips the dynamic.' },
+  'ps-1':{ sections:[
+    { h:'The Your Company greeting', b:'"Your Company, this is [Your Name], how can I help you?" Eight words. Says the company. Says who is answering. Opens the door. Never "hello?" Never "this is [Your Name] speaking." Never your personal cell voicemail greeting.' },
+    { h:'Listen before you speak', b:'Let the caller finish their first sentence before responding. Most callers tell you in the first sentence why they are calling. If you cut them off, you waste both your time.' },
+    { h:'Always get three things: name, company, callback', b:'Before transferring or taking a message: name (spelled), company, callback number. If they refuse to provide these, that itself is information. Tell Owner "caller refused to identify themselves." He will know what to do.' },
+    { h:'The hold protocol', b:'"I am going to put you on hold for one moment while I check on that." Press hold. Do not leave the line open. When you return: "Thanks for holding. [Outcome.]" Never leave anyone on hold for more than 90 seconds. If you need longer, take their number and call back.' }
+  ], tip:'Speak slower on the phone than you think you need to. Phone audio is worse than in-person. Names and numbers especially: slow down for those.' },
+  'ps-2':{ sections:[
+    { h:'These are scripts, not rituals', b:'Each one handles a specific call type that comes in regularly. Read them, save them where you can grab them in 5 seconds, practice them once or twice. Then they become muscle memory.' }
+  ], tip:'Print these. Put them in a folder at the front desk. The first call you take that fits one of the eight types: read the script word for word until the conversation flows. By the fifth call of that type, the words are yours.',
+    customHtml:'<div class="scripts-list">'+
+      '<div class="script-block"><div class="script-num">Script 01 &middot; Vendor pitch (incoming sales call)</div>'+
+        '<div class="script-title">Polite block, no callback</div>'+
+        '<div class="script-quote">"Thanks for the call. We are not actively evaluating new vendors right now. If you would like to send a brief introduction to info@yourcompany.example.com, we will add it to our file for future reference. Have a good day."</div>'+
+        '<div class="script-rule">Do not promise a callback. Do not transfer. Do not ask what they are selling. End the call.</div></div>'+
+      '<div class="script-block"><div class="script-num">Script 02 &middot; Client inquiry (new business)</div>'+
+        '<div class="script-title">Hand to Owner, fast and clean</div>'+
+        '<div class="script-quote">"Thanks for calling Your Company. I would like to get your information to The Owner, our CEO, who handles new client conversations. Could I get your name, company, and the type of project you are looking at? I will have Owner call you back today."</div>'+
+        '<div class="script-rule">Get full details. Email Owner within 10 minutes with the recap. Subject: "NEW CLIENT - [Company] - [Project type]."</div></div>'+
+      '<div class="script-block"><div class="script-num">Script 03 &middot; Emergency (injury, accident)</div>'+
+        '<div class="script-title">Stay on the line. Hot-transfer to Paul.</div>'+
+        '<div class="script-quote">"Are you safe right now? Is anyone hurt? Where are you calling from? Do not hang up. I am getting Paul Guerrero, our Safety Director, on the line right now."</div>'+
+        '<div class="script-rule">Hot-transfer to Paul. If Paul unavailable, hot-transfer to Owner. Document the call timestamp immediately. After: email both with what was said.</div></div>'+
+      '<div class="script-block"><div class="script-num">Script 04 &middot; Delivery dispute (driver at gate, no paperwork)</div>'+
+        '<div class="script-title">Verify before accepting</div>'+
+        '<div class="script-quote">"Thanks for letting me know. I am not showing a scheduled delivery for that. Can you give me the company name on your bill of lading and the customer name listed for delivery? Hold on while I check our records."</div>'+
+        '<div class="script-rule">Do not accept delivery without paperwork match. Check the bid pipeline. Call the project lead. If unsure: politely ask driver to wait, escalate to Joseph or Owner.</div></div>'+
+      '<div class="script-block"><div class="script-num">Script 05 &middot; Collections (caller claims Your Company owes money)</div>'+
+        '<div class="script-title">Do not acknowledge. Route to Amber.</div>'+
+        '<div class="script-quote">"I understand. I do not handle billing personally. Let me get your information and route this to Amber, who handles our accounts. Could I have your name, company, the invoice number you are calling about, and a callback number?"</div>'+
+        '<div class="script-rule">Do not commit to a payment date. Do not acknowledge the debt. Get details. Send to Amber within 30 minutes.</div></div>'+
+      '<div class="script-block"><div class="script-num">Script 06 &middot; Inspection notice (OSHA / State inspector)</div>'+
+        '<div class="script-title">Route to Paul, fast</div>'+
+        '<div class="script-quote">"Thank you for calling. I want to make sure this goes to the right person. May I have your name, agency, and a callback number? I am going to get Paul Guerrero, our Safety Director, who handles all inspections."</div>'+
+        '<div class="script-rule">Hot-transfer if Paul is available. If not, get all details. Tell inspector Paul will call back within one hour. Email Paul and Owner immediately.</div></div>'+
+      '<div class="script-block"><div class="script-num">Script 07 &middot; Media (journalist, reporter, podcaster)</div>'+
+        '<div class="script-title">No comment. No confirmation. Route to Owner.</div>'+
+        '<div class="script-quote">"Thank you for reaching out. All media inquiries go through The Owner, our CEO. May I have your name, outlet, and what you are working on? Owner will return your call. He may not be able to comment depending on the topic."</div>'+
+        '<div class="script-rule">Do not comment on anything. Do not confirm or deny any project. Get the journalist\'s details. Email Owner immediately. Subject: "MEDIA INQUIRY - [outlet] - [topic]."</div></div>'+
+      '<div class="script-block"><div class="script-num">Script 08 &middot; Wrong-number GC (project not ours)</div>'+
+        '<div class="script-title">Help them, no defensiveness</div>'+
+        '<div class="script-quote">"I am checking our records. I do not see that project in our system. Could you double-check the company name you have on file? Sometimes Your Company gets confused with other contractors. Our address is [COMPANY ADDRESS] N Houston Road. Does that match what you have?"</div>'+
+        '<div class="script-rule">This happens. Help the caller identify their actual vendor. If they confirm they are calling the right place but you do not recognize the project: email Owner with the call details.</div></div>'+
+    '</div>' }
+};
+
+// ============================================================================
+// VOICE REWRITE SCENARIOS
+// ============================================================================
+const VR_SCENARIOS=[
+  { id:'vr1', tag:'Email follow-up',
+    original:'I hope this email finds you well. I just wanted to reach out and follow up on the bid we sent over last week.',
+    options:[
+      'Following up on the bid we sent.',
+      'Hope you are doing well! Just a quick follow-up on the bid.',
+      'I wanted to circle back regarding the bid we leveraged last week.',
+      'Touching base about the bid moving forward.'
+    ],
+    correctIdx:0,
+    why:'Opens with the point. No warm-up, no jargon, no hedging. The other three are filler-heavy and signal "trying to sound professional."' },
+  { id:'vr2', tag:'Schedule change',
+    original:'Please be advised that the delivery has been rescheduled to a date later this week.',
+    options:[
+      'Kindly note that the delivery has been postponed.',
+      'Delivery rescheduled to Friday.',
+      'We regret to inform you that the delivery date has shifted.',
+      'FYI - the delivery will be coming sometime this week.'
+    ],
+    correctIdx:1,
+    why:'Specific (Friday), short (four words), no apologetic preamble. "Please be advised" and "We regret to inform you" are corporate filler.' },
+  { id:'vr3', tag:'Capabilities pitch',
+    original:'We deliver quality, reliable, professional work to all of our valued clients.',
+    options:[
+      'Our work is the best in Houston.',
+      'We deliver on schedule and to spec.',
+      'Nobody does it better than Your Company.',
+      'We are known for excellence in everything we do.'
+    ],
+    correctIdx:1,
+    why:'Concrete and verifiable. Three-adjective lists ("quality, reliable, professional") signal marketing copy. "On schedule and to spec" is a claim someone can hold you to.' },
+  { id:'vr4', tag:'Process change',
+    original:'Going forward, we will be implementing a new process for handling delivery confirmations moving forward.',
+    options:[
+      'Starting Monday, here is the new delivery process.',
+      'From this point on, we will be moving forward with a refined approach.',
+      'In the future, we plan to implement enhanced delivery protocols.',
+      'We will be rolling out a new initiative around delivery confirmations shortly.'
+    ],
+    correctIdx:0,
+    why:'Specific start date (Monday). No "going forward" + "moving forward" redundancy. Opens with the change, not the announcement of the change.' },
+  { id:'vr5', tag:'Quote commitment',
+    original:'I might be able to get you a quote by end of week perhaps, depending on a few factors.',
+    options:[
+      'I will try to get the quote to you soon.',
+      'Hopefully you will have it before the weekend.',
+      'Quote will be in your inbox by Friday at 5 PM.',
+      'The quote should be coming sometime this week.'
+    ],
+    correctIdx:2,
+    why:'Commits to a specific time. Hedging ("might", "perhaps", "depending") signals you do not believe what you are saying. If you cannot commit to a deadline, find out what you can commit to and say that instead.' },
+  { id:'vr6', tag:'Resource request',
+    original:'Per our conversation, we will need to leverage some additional resources to move this forward effectively.',
+    options:[
+      'Following up - we will need more bandwidth on this.',
+      'As discussed, we will require additional capacity going forward.',
+      'We need two more weeks and one more welder. Approve?',
+      'Just touching base - we will need to expand the team.'
+    ],
+    correctIdx:2,
+    why:'Specific numbers (two weeks, one welder). Direct ask ("Approve?"). The other three hide what is actually needed behind jargon. Owner\'s voice names the resource, the timeframe, and the decision required.' }
+];
+
+// ============================================================================
+// ESCALATION ROUTING SCENARIOS
+// ============================================================================
+const ER_OPTIONS=['Handle yourself','Joseph','Owner','Amber','Paul'];
+const ER_SCENARIOS=[
+  { id:'er1', scenario:'A delivery driver is at the gate with a steel shipment you have no record of scheduled today.',
+    correct:'Joseph',
+    why:'Verify paperwork first (Script 04). When records do not match, Joseph is the default routing destination for operational issues. He can check the bid pipeline or escalate to Owner if needed.' },
+  { id:'er2', scenario:'An inspector from TCEQ calls to schedule a compliance review for next week.',
+    correct:'Paul',
+    why:'Paul handles all inspections, including OSHA, TCEQ, and Texas Mutual. Hot-transfer if he is available. If not, get the inspector\'s details and tell them Paul will call back within one hour.' },
+  { id:'er3', scenario:'A journalist from the Houston Business Journal wants to interview Owner about industrial safety.',
+    correct:'Owner',
+    why:'All media routes to Owner, period. Do not comment. Do not confirm or deny anything. Get the journalist\'s name, outlet, and topic. Email Owner immediately with subject "MEDIA INQUIRY."' },
+  { id:'er4', scenario:'The Wi-Fi in the office goes down right before a client meeting.',
+    correct:'Joseph',
+    why:'Anything technical that breaks goes to Joseph. He owns IT infrastructure, M365, and all systems. He can usually fix in under 10 minutes or knows the next step.' },
+  { id:'er5', scenario:'A vendor calls demanding payment on an unpaid invoice from three months ago.',
+    correct:'Amber',
+    why:'Collections (in either direction) goes to Amber. Do not acknowledge the debt. Do not commit to a payment date. Get name, company, invoice number, callback. Send to Amber within 30 minutes per Script 05.' },
+  { id:'er6', scenario:'A walk-in visitor asks where the restroom is.',
+    correct:'Handle yourself',
+    why:'Daily admin and visitor logistics are yours. Point them to the restroom, note the visitor on the log if they have not signed in. You do not need to interrupt anyone for this.' },
+  { id:'er7', scenario:'Mario calls saying an ironworker just had a hand injury at the Carvana jobsite.',
+    correct:'Paul',
+    why:'All safety incidents go to Paul immediately. He coordinates with Texas Mutual on workplace injuries. Use Script 03: stay on the line, hot-transfer to Paul. If Paul unavailable, Owner is the backup. Then document the call timestamp.' },
+  { id:'er8', scenario:'A new general contractor calls wanting to discuss a $400K steel bid package.',
+    correct:'Owner',
+    why:'New client conversations and any pricing discussion go to Owner. Get the GC\'s name, company, project details using Script 02. Email Owner within 10 minutes with the recap.' },
+  { id:'er9', scenario:'A sales rep from a CRM software company wants to schedule a demo.',
+    correct:'Handle yourself',
+    why:'Vendor sales pitches are yours to decline. Use Script 01: polite block, offer the info@ email for them to send an intro, do not transfer, do not promise a callback.' },
+  { id:'er10', scenario:'Texas Mutual calls about the EMR letter status (Policy [POLICY NUMBER]).',
+    correct:'Paul',
+    why:'EMR letter coordination with Texas Mutual goes through Paul. This is on the active Marathon Petroleum compliance pathway. Hot-transfer if available, or get Texas Mutual\'s contact and email Paul immediately. Cc Owner.' }
+];
+
+// ============================================================================
+// PHONE SCRIPT PICKER SCENARIOS
+// ============================================================================
+const PSP_SCRIPTS=[
+  { id:'s1', label:'Script 01 - Vendor pitch',
+    text:'"Thanks for the call. We are not actively evaluating new vendors right now. If you would like to send a brief introduction to info@yourcompany.example.com, we will add it to our file for future reference. Have a good day."',
+    rule:'Do not promise a callback. Do not transfer. End the call politely.' },
+  { id:'s2', label:'Script 02 - Client inquiry',
+    text:'"Thanks for calling Your Company. I would like to get your information to The Owner, our CEO, who handles new client conversations. Could I get your name, company, and the type of project you are looking at?"',
+    rule:'Get full details. Email Owner within 10 minutes with subject "NEW CLIENT - [Company]."' },
+  { id:'s3', label:'Script 03 - Emergency',
+    text:'"Are you safe right now? Is anyone hurt? Where are you calling from? Do not hang up. I am getting Paul Guerrero, our Safety Director, on the line right now."',
+    rule:'Stay on the line. Hot-transfer to Paul. Document the call timestamp immediately.' },
+  { id:'s4', label:'Script 04 - Delivery dispute',
+    text:'"Thanks for letting me know. I am not showing a scheduled delivery for that. Can you give me the company name on your bill of lading and the customer name listed for delivery? Hold on while I check our records."',
+    rule:'Do not accept delivery without paperwork match. Check bid pipeline. Escalate to Joseph if unclear.' },
+  { id:'s5', label:'Script 05 - Collections',
+    text:'"I understand. I do not handle billing personally. Let me get your information and route this to Amber, who handles our accounts. Could I have your name, company, the invoice number, and a callback number?"',
+    rule:'Do not commit to a payment date. Do not acknowledge the debt. Send to Amber within 30 minutes.' },
+  { id:'s6', label:'Script 06 - Inspection notice',
+    text:'"Thank you for calling. I want to make sure this goes to the right person. May I have your name, agency, and callback number? I am going to get Paul Guerrero, our Safety Director, who handles all inspections."',
+    rule:'Hot-transfer to Paul if available. If not, tell inspector Paul will call back within one hour.' },
+  { id:'s7', label:'Script 07 - Media',
+    text:'"Thank you for reaching out. All media inquiries go through The Owner, our CEO. May I have your name, outlet, and what you are working on? Owner will return your call."',
+    rule:'Do not comment. Do not confirm or deny anything. Email Owner immediately with "MEDIA INQUIRY" subject.' },
+  { id:'s8', label:'Script 08 - Wrong-number GC',
+    text:'"I am checking our records. I do not see that project in our system. Could you double-check the company name you have on file? Sometimes Your Company gets confused with other contractors. Our address is [COMPANY ADDRESS] N Houston Road."',
+    rule:'Help the caller identify their actual vendor. If they confirm right number but project is unknown, email Owner with details.' }
+];
+
+const PSP_SCENARIOS=[
+  { id:'psp1', call:'"Hi, I am calling from Quality Industrial Coatings. We would love to set up a quick 15-minute call to discuss our consumables pricing program."',
+    correctScript:'s1' },
+  { id:'psp2', call:'"Hello, this is Mark Thornton from Pinnacle Builders. We are putting together a bid package for a 40,000 square foot warehouse in Spring Branch and was told you guys do structural steel."',
+    correctScript:'s2' },
+  { id:'psp3', call:'"Hey! It is Mario. We have got a guy down at the Carvana site. Got hit by a panel falling off the lift. He is conscious but bleeding."',
+    correctScript:'s3' },
+  { id:'psp4', call:'"Hi, I am here at your gate with a 53-foot trailer loaded with W12 beams. My BOL says drop-off at Your Company for Project Bayou Crossing."',
+    correctScript:'s4' },
+  { id:'psp5', call:'"This is Karen with Brookfield Finance. We are showing past-due invoice 4471 from January. The balance is $12,400 and we need to know when payment is coming."',
+    correctScript:'s5' },
+  { id:'psp6', call:'"Good morning, this is Inspector Rodriguez with TCEQ Region 12. We have Your Company on our schedule for an air quality compliance audit next Tuesday at 9 AM."',
+    correctScript:'s6' },
+  { id:'psp7', call:'"Hi, this is Jordan Liu with the Houston Chronicle. We are working on a feature about steel suppliers serving the petrochemical sector and would love to get Owner on the record about Marathon."',
+    correctScript:'s7' },
+  { id:'psp8', call:'"This is procurement from GC West. We are calling about delivery confirmation on PO 887729 for the new VA medical center foundation steel."',
+    correctScript:'s8' }
+];
+
+// ============================================================================
+// STATE
+// ============================================================================
+var state={
+  view:'home', completed:{},
+  // Voice Rewrite
+  vrIdx:0, vrPicked:{}, vrRevealed:{},
+  // Routing Quiz
+  erIdx:0, erPicked:{}, erRevealed:{},
+  // Phone Script Picker
+  pspIdx:0, pspPicked:{}, pspRevealed:{}
+};
+
+// ============================================================================
+// HELPERS
+// ============================================================================
+function esc(s){ if(s==null)return''; return String(s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];}); }
+function getCat(id){ for(var i=0;i<CATEGORIES.length;i++) if(CATEGORIES[i].id===id) return CATEGORIES[i]; return null; }
+function getLesson(id){
+  for(var i=0;i<CATEGORIES.length;i++){
+    var c=CATEGORIES[i];
+    for(var j=0;j<c.lessons.length;j++) if(c.lessons[j].id===id) return{lesson:c.lessons[j],cat:c,idx:j};
+  }return null;
+}
+function totalLessons(){ return CATEGORIES.reduce(function(a,c){return a+c.lessons.length;},0); }
+function completedCount(){ return Object.keys(state.completed).length; }
+
+// ============================================================================
+// RENDER: HOME
+// ============================================================================
+function renderHome(){
+  var done=completedCount();
+  var html='';
+  html+='<div class="lab-hero"><div class="hero-grid"></div><div class="hero-glow"></div>';
+  html+='<div class="lab-hero-inner">';
+  html+='<p class="lab-eyebrow">Your Company &middot; Module 7</p>';
+  html+='<h1 class="lab-h1">Business <span class="accent">Communication</span></h1>';
+  html+='<p class="lab-blurb">Owner\'s voice on the page. The escalation matrix in your head. Paper trail discipline so nothing falls through. Eight phone scripts ready to deploy. Four categories, twelve lessons, three drills.</p>';
+  html+='<div class="lab-stats">';
+  [['4','Categories'],[String(totalLessons()),'Lessons'],['3','Drills'],[String(done),'Done']].forEach(function(s){
+    html+='<div class="lab-stat"><p class="lab-stat-num">'+s[0]+'</p><p class="lab-stat-lbl">'+s[1]+'</p></div>';
+  });
+  html+='</div></div></div>';
+
+  html+='<div class="cat-grid">';
+  CATEGORIES.forEach(function(cat){
+    var doneN=cat.lessons.filter(function(l){return state.completed[l.id];}).length;
+    var tot=cat.lessons.length;
+    var allDone=doneN===tot;
+    var pct=tot?(doneN/tot)*100:0;
+    html+='<button class="cat-card'+(allDone?' is-done':'')+'" data-action="open-cat" data-cat-id="'+cat.id+'">';
+    html+='<div class="cat-stripe" style="background:'+cat.color+';"></div>';
+    html+='<div class="cat-inner">';
+    html+='<div class="cat-top"><div class="cat-icon-tile" style="background:'+cat.color+';">'+icon(cat.iconKey,22,'#fff')+'</div>';
+    if(allDone) html+=icon('check',18,'#10b981');
+    html+='</div>';
+    html+='<h3>'+esc(cat.title)+'</h3>';
+    html+='<p class="cat-card-blurb">'+esc(cat.blurb)+'</p>';
+    html+='<div class="cat-card-foot"><span>'+doneN+'/'+tot+' lessons</span>';
+    html+='<div class="cat-progress-track"><div class="cat-progress-fill" style="width:'+pct+'%;"></div></div>';
+    html+='</div></div></button>';
+  });
+  html+='</div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: CATEGORY
+// ============================================================================
+function renderCategory(cat){
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-home">'+icon('arrow-left',13)+' Back to module home</button>';
+  html+='<div class="cat-header"><div class="cat-header-inner">';
+  html+='<div class="cat-header-icon" style="background:'+cat.color+';">'+icon(cat.iconKey,28,'#fff')+'</div>';
+  html+='<div><p class="cat-header-eyebrow" style="color:'+cat.color+';">Category</p>';
+  html+='<h2 class="cat-header-title">'+esc(cat.title)+'</h2>';
+  html+='<p class="cat-header-blurb">'+esc(cat.blurb)+'</p>';
+  html+='</div></div></div>';
+  html+='<div class="lesson-list">';
+  cat.lessons.forEach(function(l,i){
+    var isDone=!!state.completed[l.id];
+    var prevDone=i===0||!!state.completed[cat.lessons[i-1].id];
+    var locked=!isDone&&!prevDone;
+    var current=!isDone&&prevDone;
+    var tileCls=isDone?'done':current?'current':'pending';
+    var typeLabel=l.type==='reading'?'Reading':'Drill';
+    var typeColor=l.type==='reading'?'#71717a':'#5eead4';
+    html+='<button class="lesson-row'+(isDone?' is-done':'')+(locked?' is-locked':'')+'"';
+    html+=locked?' disabled':' data-action="open-lesson" data-lesson-id="'+l.id+'"';
+    html+='>';
+    html+='<div class="lesson-num-tile '+tileCls+'">'+(locked?icon('lock',14):isDone?icon('check',18):String(i+1))+'</div>';
+    html+='<div class="lesson-row-meta"><p class="lesson-row-title">'+esc(l.title)+'</p>';
+    html+='<p class="lesson-row-tag" style="color:'+typeColor+';">'+typeLabel+' &middot; ~'+l.minutes+' min</p></div>';
+    if(!locked) html+=icon('arrow-right',16,'#71717a');
+    html+='</button>';
+  });
+  html+='</div>';
+  return html;
+}
+
+// ============================================================================
+// RENDER: READING LESSON
+// ============================================================================
+function renderReading(lesson,cat){
+  var c=LESSON_CONTENT[lesson.id]||{sections:[],tip:''};
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="lesson-card">';
+  html+='<div class="lesson-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="lesson-card-body">';
+  c.sections.forEach(function(s){
+    html+='<div class="lesson-section"><h3>'+esc(s.h)+'</h3><p>'+esc(s.b)+'</p></div>';
+  });
+  if(c.customHtml){
+    html+=c.customHtml;
+  }
+  if(c.tip){
+    html+='<div class="tip-box"><p class="tip-eyebrow">Joseph\'s tip</p><p class="tip-body">'+esc(c.tip)+'</p></div>';
+  }
+  html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// INTERACTIVE 1: VOICE REWRITE (mv-3)
+// ============================================================================
+function renderVoiceRewrite(lesson,cat){
+  var idx=state.vrIdx;
+  var s=VR_SCENARIOS[idx];
+  var picked=state.vrPicked[s.id];
+  var revealed=state.vrRevealed[s.id];
+  var total=VR_SCENARIOS.length;
+  var allDone=VR_SCENARIOS.every(function(sc){return state.vrRevealed[sc.id];});
+  var correctCount=VR_SCENARIOS.filter(function(sc){return state.vrPicked[sc.id]===sc.correctIdx;}).length;
+
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:18px;">Six off-voice phrases. Pick the rewrite that actually sounds like Owner.</p>';
+
+  html+='<div class="vr-stage">';
+  html+='<p class="vr-tag">'+esc(s.tag)+'</p>';
+  html+='<div class="vr-original"><p class="vr-original-label">Off-voice original</p><p class="vr-original-text">'+esc(s.original)+'</p></div>';
+  html+='<div class="vr-options">';
+  s.options.forEach(function(opt,i){
+    var cls='vr-opt';
+    if(revealed){
+      if(i===s.correctIdx) cls+=' correct';
+      else if(i===picked) cls+=' wrong';
+    }
+    html+='<button class="'+cls+'" data-action="vr-pick" data-opt-idx="'+i+'">'+esc(opt)+'</button>';
+  });
+  html+='</div>';
+  if(revealed){
+    var ok=picked===s.correctIdx;
+    html+='<div class="vr-feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Not quite. ')+esc(s.why)+'</div>';
+  }
+  html+='<div class="vr-nav">';
+  html+='<span class="vr-progress">Scenario '+(idx+1)+' of '+total+'</span>';
+  if(revealed&&idx<total-1){
+    html+='<button class="vr-next" data-action="vr-next">Next '+icon('arrow-right',14,'#fff')+'</button>';
+  }
+  html+='</div>';
+  html+='</div>';
+
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#5eead4')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// INTERACTIVE 2: ROUTING QUIZ (er-3)
+// ============================================================================
+function renderRoutingQuiz(lesson,cat){
+  var idx=state.erIdx;
+  var s=ER_SCENARIOS[idx];
+  var picked=state.erPicked[s.id];
+  var revealed=state.erRevealed[s.id];
+  var total=ER_SCENARIOS.length;
+  var allDone=ER_SCENARIOS.every(function(sc){return state.erRevealed[sc.id];});
+  var correctCount=ER_SCENARIOS.filter(function(sc){return state.erPicked[sc.id]===sc.correct;}).length;
+
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:18px;">Ten scenarios. Pick who should handle each one. Some are yours. Some go to one specific person. Get it right and you stop interrupting Owner for things Joseph could solve.</p>';
+
+  html+='<div class="er-stage">';
+  html+='<p class="er-tag">Scenario '+(idx+1)+' of '+total+'</p>';
+  html+='<p class="er-scenario">'+esc(s.scenario)+'</p>';
+  html+='<div class="er-buttons">';
+  ER_OPTIONS.forEach(function(o){
+    var cls='er-btn';
+    if(revealed){
+      if(o===s.correct) cls+=picked===o?' picked-correct':' correct-shown';
+      else if(o===picked) cls+=' picked-wrong';
+    }
+    html+='<button class="'+cls+'" data-action="er-pick" data-opt="'+esc(o)+'">'+esc(o)+'</button>';
+  });
+  html+='</div>';
+  if(revealed){
+    var ok=picked===s.correct;
+    html+='<div class="er-feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Should be '+esc(s.correct)+'. ')+esc(s.why)+'</div>';
+    if(idx<total-1){
+      html+='<div style="text-align:right;margin-top:12px;"><button class="vr-next" data-action="er-next">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+    }
+  }
+  html+='</div>';
+
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#22d3ee')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// INTERACTIVE 3: PHONE SCRIPT PICKER (ps-3)
+// ============================================================================
+function renderScriptPicker(lesson,cat){
+  var idx=state.pspIdx;
+  var s=PSP_SCENARIOS[idx];
+  var picked=state.pspPicked[s.id];
+  var revealed=state.pspRevealed[s.id];
+  var total=PSP_SCENARIOS.length;
+  var allDone=PSP_SCENARIOS.every(function(sc){return state.pspRevealed[sc.id];});
+  var correctCount=PSP_SCENARIOS.filter(function(sc){return state.pspPicked[sc.id]===sc.correctScript;}).length;
+
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:18px;">Eight calls coming in. Pick the right script for each one. The reveal shows the full script you would actually run.</p>';
+
+  html+='<div class="psp-stage">';
+  html+='<p class="psp-call-tag">'+icon('phone',10,'#60a5fa')+' Incoming call &middot; Scenario '+(idx+1)+' of '+total+'</p>';
+  html+='<div class="psp-call-line">'+esc(s.call)+'</div>';
+  html+='<p class="psp-pick-label">Which script?</p>';
+  html+='<div class="psp-options">';
+  PSP_SCRIPTS.forEach(function(sc){
+    var cls='psp-opt';
+    if(revealed){
+      if(sc.id===s.correctScript) cls+=' correct';
+      else if(sc.id===picked) cls+=' wrong';
+    }
+    html+='<button class="'+cls+'" data-action="psp-pick" data-script-id="'+sc.id+'">'+esc(sc.label)+'</button>';
+  });
+  html+='</div>';
+  if(revealed){
+    var correctScript=null;
+    for(var i=0;i<PSP_SCRIPTS.length;i++){ if(PSP_SCRIPTS[i].id===s.correctScript){ correctScript=PSP_SCRIPTS[i]; break; } }
+    html+='<div class="psp-reveal">';
+    var ok=picked===s.correctScript;
+    html+='<div class="vr-feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. Use this script:':'Should be '+esc(correctScript.label)+'. Use this script:')+'</div>';
+    html+='<div class="psp-script-box" style="margin-top:10px;">';
+    html+='<p class="psp-script-label">'+esc(correctScript.label)+'</p>';
+    html+='<p class="psp-script-text">'+esc(correctScript.text)+'</p>';
+    html+='<p class="psp-rule">'+icon('check',10,'#a1a1aa')+' '+esc(correctScript.rule)+'</p>';
+    html+='</div></div>';
+    if(idx<total-1){
+      html+='<div style="text-align:right;margin-top:12px;"><button class="vr-next" data-action="psp-next">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+    }
+  }
+  html+='</div>';
+
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#60a5fa')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// LESSON DISPATCHER
+// ============================================================================
+function renderLesson(lesson,cat){
+  if(lesson.type==='reading') return renderReading(lesson,cat);
+  if(lesson.intKey==='voiceRewrite') return renderVoiceRewrite(lesson,cat);
+  if(lesson.intKey==='routingQuiz')  return renderRoutingQuiz(lesson,cat);
+  if(lesson.intKey==='scriptPicker') return renderScriptPicker(lesson,cat);
+  return renderReading(lesson,cat);
+}
+
+// ============================================================================
+// RENDER DISPATCH
+// ============================================================================
+function render(){
+  var app=document.getElementById('app');
+  var html='';
+  if(state.view==='home'){
+    html=renderHome();
+  } else if(state.view.indexOf('category:')===0){
+    var cat=getCat(state.view.slice(9));
+    html=cat?renderCategory(cat):renderHome();
+  } else if(state.view.indexOf('lesson:')===0){
+    var info=getLesson(state.view.slice(7));
+    html=info?renderLesson(info.lesson,info.cat):renderHome();
+  }
+  app.innerHTML=html;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ============================================================================
+// EVENT DELEGATION
+// ============================================================================
+document.body.addEventListener('click',function(ev){
+  var t=ev.target.closest('[data-action]');
+  if(!t) return;
+  var action=t.getAttribute('data-action');
+
+  if(action==='open-cat'){ state.view='category:'+t.getAttribute('data-cat-id'); render(); }
+  else if(action==='back-home'){ state.view='home'; render(); }
+  else if(action==='back-cat'){ state.view='category:'+t.getAttribute('data-cat-id'); render(); }
+  else if(action==='open-lesson'){
+    var lid=t.getAttribute('data-lesson-id');
+    var info=getLesson(lid);
+    if(info){
+      if(info.lesson.intKey==='voiceRewrite'){ state.vrIdx=0; state.vrPicked={}; state.vrRevealed={}; }
+      if(info.lesson.intKey==='routingQuiz'){  state.erIdx=0; state.erPicked={}; state.erRevealed={}; }
+      if(info.lesson.intKey==='scriptPicker'){ state.pspIdx=0; state.pspPicked={}; state.pspRevealed={}; }
+    }
+    state.view='lesson:'+lid; render();
+  }
+  else if(action==='complete-lesson'){
+    var lid2=t.getAttribute('data-lesson-id');
+    state.completed[lid2]=true;
+    var info2=getLesson(lid2);
+    if(info2){
+      var next=null;
+      for(var i=0;i<info2.cat.lessons.length;i++){
+        if(info2.cat.lessons[i].id===lid2&&i+1<info2.cat.lessons.length){ next=info2.cat.lessons[i+1]; break; }
+      }
+      state.view=next?'lesson:'+next.id:'category:'+info2.cat.id;
+      render();
+    }
+  }
+  // Voice Rewrite
+  else if(action==='vr-pick'){
+    var sc=VR_SCENARIOS[state.vrIdx];
+    if(state.vrRevealed[sc.id]) return;
+    var idx=parseInt(t.getAttribute('data-opt-idx'),10);
+    state.vrPicked[sc.id]=idx;
+    state.vrRevealed[sc.id]=true;
+    render();
+  }
+  else if(action==='vr-next'){
+    if(state.vrIdx<VR_SCENARIOS.length-1){ state.vrIdx++; render(); }
+  }
+  // Routing Quiz
+  else if(action==='er-pick'){
+    var ers=ER_SCENARIOS[state.erIdx];
+    if(state.erRevealed[ers.id]) return;
+    var opt=t.getAttribute('data-opt');
+    state.erPicked[ers.id]=opt;
+    state.erRevealed[ers.id]=true;
+    render();
+  }
+  else if(action==='er-next'){
+    if(state.erIdx<ER_SCENARIOS.length-1){ state.erIdx++; render(); }
+  }
+  // Phone Script Picker
+  else if(action==='psp-pick'){
+    var psps=PSP_SCENARIOS[state.pspIdx];
+    if(state.pspRevealed[psps.id]) return;
+    var sid=t.getAttribute('data-script-id');
+    state.pspPicked[psps.id]=sid;
+    state.pspRevealed[psps.id]=true;
+    render();
+  }
+  else if(action==='psp-next'){
+    if(state.pspIdx<PSP_SCENARIOS.length-1){ state.pspIdx++; render(); }
+  }
+});
+
+// ============================================================================
+// INIT
+// ============================================================================
+document.getElementById('logo-slot').innerHTML=icon('megaphone',22,'#fff');
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>M29 &middot; Onboarding | Your Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:#000;color:#e4e4e7;
+  font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(circle at 85% 8%,rgba(162,28,175,0.16),transparent 40%),
+    radial-gradient(circle at 15% 92%,rgba(162,28,175,0.10),transparent 40%);
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;padding:0;}
+input,textarea,select{font-family:inherit;}
+p{margin:0;}h1,h2,h3,h4{margin:0;font-weight:normal;}
+.container{max-width:960px;margin:0 auto;padding:0 20px;}
+
+header.site{border-bottom:2px solid #27272a;background:rgba(0,0,0,.85);
+  position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);}
+.header-row{max-width:960px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;}
+.logo-tile{width:40px;height:40px;background:#a21caf;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.header-meta .small{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#52525b;}
+.header-meta .big{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin-top:2px;}
+footer.site{max-width:960px;margin:0 auto;padding:28px 20px;border-top:1px solid #27272a;text-align:center;}
+footer.site p{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#3f3f46;}
+
+.lab-hero{position:relative;border:2px solid #3f3f46;background:#18181b;overflow:hidden;margin-bottom:28px;}
+.hero-grid{position:absolute;inset:0;opacity:.1;
+  background-image:linear-gradient(rgba(162,28,175,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(162,28,175,.3) 1px,transparent 1px);
+  background-size:24px 24px;}
+.hero-glow{position:absolute;top:-40px;right:-40px;width:220px;height:220px;
+  background:#a21caf;border-radius:50%;filter:blur(80px);opacity:.30;}
+.lab-hero-inner{position:relative;padding:28px 24px;}
+.lab-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#f0abfc;margin-bottom:8px;}
+.lab-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,9vw,68px);color:#fff;line-height:.9;margin-bottom:14px;}
+.lab-h1 .accent{color:#f0abfc;}
+.lab-blurb{color:#a1a1aa;max-width:560px;font-size:14px;line-height:1.7;margin-bottom:22px;}
+.lab-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:460px;}
+.lab-stat{border:1px solid #3f3f46;background:rgba(0,0,0,.4);padding:8px 10px;}
+.lab-stat-num{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#f0abfc;margin:0;}
+.lab-stat-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#52525b;margin:0;}
+
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.cat-card{text-align:left;background:#18181b;border:2px solid #3f3f46;padding:0;overflow:hidden;width:100%;}
+.cat-card.is-done{border-color:#10b981;}
+.cat-stripe{height:6px;}
+.cat-inner{padding:18px;}
+.cat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.cat-icon-tile{width:44px;height:44px;color:#fff;display:flex;align-items:center;justify-content:center;}
+.cat-card h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin:0 0 6px;line-height:1.05;}
+.cat-card-blurb{font-size:12px;color:#a1a1aa;margin:0 0 14px;line-height:1.5;}
+.cat-card-foot{display:flex;justify-content:space-between;align-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:9px;color:#71717a;text-transform:uppercase;letter-spacing:.2em;}
+.cat-progress-track{height:4px;background:#27272a;flex:1;margin-left:12px;max-width:80px;}
+.cat-progress-fill{height:100%;background:#10b981;}
+
+.cat-back-btn{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;
+  color:#71717a;display:flex;align-items:center;gap:6px;margin-bottom:20px;}
+.cat-header{background:#18181b;border:2px solid #3f3f46;padding:20px;margin-bottom:16px;}
+.cat-header-inner{display:flex;gap:16px;align-items:flex-start;}
+.cat-header-icon{width:56px;height:56px;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cat-header-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;margin:0;}
+.cat-header-title{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;margin:4px 0;line-height:1;}
+.cat-header-blurb{color:#a1a1aa;font-size:13px;margin:0;line-height:1.5;}
+
+.lesson-list{display:flex;flex-direction:column;gap:8px;}
+.lesson-row{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#18181b;
+  border:2px solid #3f3f46;width:100%;text-align:left;}
+.lesson-row.is-done{border-color:#10b981;}
+.lesson-row.is-locked{opacity:.45;cursor:not-allowed;}
+.lesson-row:not(.is-locked){cursor:pointer;}
+.lesson-num-tile{width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:16px;}
+.lesson-num-tile.done   {background:#10b981;color:#000;}
+.lesson-num-tile.current{background:#f0abfc;color:#000;}
+.lesson-num-tile.pending{background:#27272a;color:#71717a;}
+.lesson-row-meta{flex:1;min-width:0;}
+.lesson-row-title{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin:0;line-height:1.1;}
+.lesson-row-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;margin:4px 0 0;}
+
+.lesson-card{border:2px solid #3f3f46;background:#18181b;}
+.lesson-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.lesson-icon-tile{width:52px;height:52px;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.lesson-card-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;font-weight:700;opacity:.85;margin:0;}
+.lesson-card-title{font-family:'Bebas Neue',sans-serif;font-size:32px;margin:4px 0 0;line-height:1;color:#fff;}
+.lesson-card-body{padding:24px 22px;}
+.lesson-section{margin-bottom:22px;}
+.lesson-section h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#f0abfc;margin:0 0 8px;}
+.lesson-section p{color:#a1a1aa;line-height:1.65;margin:0;font-size:14px;}
+.tip-box{background:rgba(162,28,175,.14);border-left:4px solid #a21caf;padding:12px 16px;margin-top:20px;}
+.tip-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#f0abfc;margin:0 0 6px;font-weight:700;}
+.tip-body{color:#bfdbfe;font-size:13px;margin:0;line-height:1.55;font-style:italic;}
+
+.complete-btn{width:100%;margin-top:24px;padding:14px 0;
+  font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.2em;
+  background:#a21caf;color:#fff;border:2px solid #a21caf;
+  display:flex;align-items:center;justify-content:center;gap:10px;}
+
+.pile-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px;}
+@media (max-width:600px){ .pile-grid{grid-template-columns:1fr 1fr;} }
+.pile-tile{background:#0c0c0c;border:1px solid #3f3f46;border-top:3px solid #a21caf;padding:10px 10px;}
+.pile-name{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#f0abfc;margin:0 0 4px;line-height:1;}
+.pile-body{font-size:11px;color:#a1a1aa;line-height:1.45;margin:0;}
+
+.int-card{border:2px solid #3f3f46;background:#18181b;}
+.int-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.int-card-body{padding:24px 22px;}
+
+.mib-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media (max-width:720px){ .mib-grid{grid-template-columns:1fr;} }
+.mib-col h4{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#f0abfc;margin:0 0 12px;}
+.mib-field{margin-bottom:12px;}
+.mib-label{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#71717a;margin-bottom:4px;display:block;}
+.mib-input,.mib-textarea,.mib-select{
+  width:100%;background:#0c0c0c;border:1px solid #3f3f46;color:#e4e4e7;
+  padding:8px 10px;font-size:13px;outline:none;font-family:inherit;
+}
+.mib-input:focus,.mib-textarea:focus,.mib-select:focus{border-color:#a21caf;}
+.mib-textarea{resize:vertical;min-height:60px;line-height:1.5;font-size:12px;}
+
+.invite-preview{background:#0c0c0c;border:1px solid #3f3f46;padding:0;overflow:hidden;}
+.invite-preview-head{background:#a21caf;color:#fff;padding:10px 14px;}
+.invite-preview-head h5{font-family:'Bebas Neue',sans-serif;font-size:20px;margin:0;line-height:1.1;}
+.invite-preview-head p{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;opacity:.85;margin:2px 0 0;}
+.invite-preview-body{padding:12px 14px;}
+.invite-row{display:flex;gap:10px;font-size:12px;color:#a1a1aa;padding:5px 0;border-bottom:1px dashed #27272a;}
+.invite-row:last-child{border-bottom:none;}
+.invite-row-key{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.15em;color:#71717a;width:80px;flex-shrink:0;padding-top:1px;}
+.invite-row-val{flex:1;color:#e4e4e7;line-height:1.5;white-space:pre-line;}
+.invite-empty{color:#52525b;font-style:italic;}
+
+.mib-check-btn{margin-top:16px;padding:10px 18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.2em;
+  background:#a21caf;color:#fff;border:2px solid #a21caf;}
+.mib-feedback{margin-top:14px;padding:12px 14px;font-size:12px;line-height:1.6;}
+.mib-feedback.ok{background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+.mib-feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+.mib-feedback.warn{background:rgba(250,204,21,.08);border:1px solid #fbbf24;color:#fde68a;}
+.mib-feedback ul{margin:6px 0 0;padding-left:18px;}
+.mib-feedback li{margin-bottom:3px;}
+
+.drill-stage{background:#0c0c0c;border:1px solid #3f3f46;padding:18px;margin-bottom:14px;}
+.drill-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#f0abfc;margin-bottom:8px;}
+.drill-scenario{background:#1c1917;border-left:3px solid #a21caf;padding:12px 14px;margin-bottom:14px;}
+.drill-from{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:#f0abfc;margin-bottom:4px;}
+.drill-subject{font-size:13px;color:#e4e4e7;font-weight:600;margin-bottom:4px;}
+.drill-body{font-size:12px;color:#a1a1aa;line-height:1.5;}
+.drill-btns{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;}
+.drill-btn{padding:12px 8px;background:#09090b;border:1px solid #3f3f46;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.05em;color:#a1a1aa;line-height:1.2;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.drill-btn:hover{border-color:#f0abfc;}
+.drill-btn small{font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.15em;color:#52525b;}
+.drill-btn.picked-correct{background:rgba(16,185,129,.15);border-color:#10b981;color:#a7f3d0;}
+.drill-btn.picked-correct small{color:#6ee7b7;}
+.drill-btn.picked-wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.drill-btn.correct-shown{background:rgba(16,185,129,.08);border-color:#10b981;color:#a7f3d0;}
+.drill-btn.correct-shown small{color:#6ee7b7;}
+.feedback{margin-top:14px;padding:10px 14px;font-size:12px;line-height:1.55;}
+.feedback.ok{background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+.feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+
+.sim-buttons{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;}
+.sim-btn{padding:12px 8px;background:#09090b;border:1px solid #3f3f46;
+  font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.05em;color:#a1a1aa;line-height:1.2;}
+.sim-btn:hover{border-color:#f0abfc;}
+.sim-btn.picked-correct{background:rgba(16,185,129,.15);border-color:#10b981;color:#a7f3d0;}
+.sim-btn.picked-wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.sim-btn.correct-shown{background:rgba(16,185,129,.08);border-color:#10b981;color:#a7f3d0;}
+
+.next-btn{padding:10px 18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.2em;
+  background:#a21caf;color:#fff;border:2px solid #a21caf;}
+.score-line{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;
+  color:#a1a1aa;margin-top:16px;padding-top:14px;border-top:1px solid #27272a;}
+
+.compose{background:#0c0c0c;border:1px solid #3f3f46;overflow:hidden;}
+.compose-bar{background:#a21caf;color:#fff;padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;}
+.compose-row{display:flex;gap:8px;padding:7px 12px;border-bottom:1px solid #27272a;font-size:12px;}
+.compose-key{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.15em;color:#71717a;width:54px;flex-shrink:0;padding-top:2px;}
+.compose-val{flex:1;color:#e4e4e7;line-height:1.4;}
+.compose-body{padding:12px;font-size:12px;color:#e4e4e7;line-height:1.6;white-space:pre-line;min-height:84px;}
+.compose-sig{padding:10px 12px 12px;border-top:1px dashed #27272a;font-size:11px;color:#a1a1aa;line-height:1.5;}
+.compose-empty{color:#52525b;font-style:italic;}
+.sigcard{background:#0c0c0c;border:1px solid #3f3f46;border-left:3px solid #a21caf;padding:12px 14px;margin-top:6px;font-size:12px;color:#e4e4e7;line-height:1.6;}
+.sigcard b{color:#f0abfc;}
+.annot{background:#0c0c0c;border:1px solid #3f3f46;padding:0;margin-top:6px;overflow:hidden;}
+.annot-row{display:flex;gap:10px;padding:9px 12px;border-bottom:1px solid #27272a;}
+.annot-row:last-child{border-bottom:none;}
+.annot-tag{font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.15em;color:#f0abfc;width:64px;flex-shrink:0;padding-top:2px;}
+.annot-txt{flex:1;font-size:12px;color:#e4e4e7;line-height:1.5;}
+.mini-tbl{width:100%;border-collapse:collapse;margin-top:6px;font-size:11px;}
+.mini-tbl th{font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:#f0abfc;text-align:left;padding:6px 8px;border-bottom:1px solid #3f3f46;background:#0c0c0c;}
+.mini-tbl td{padding:6px 8px;border-bottom:1px solid #27272a;color:#e4e4e7;}
+.split2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px;}
+@media(max-width:600px){.split2{grid-template-columns:1fr;}}
+.split2 .col{background:#0c0c0c;border:1px solid #3f3f46;padding:10px 12px;}
+.split2 .col h5{font-family:'Bebas Neue',sans-serif;font-size:16px;margin:0 0 6px;color:#f0abfc;}
+.split2 .col p{font-size:11px;color:#a1a1aa;line-height:1.5;margin:0;}
+.week-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:6px;}
+@media(max-width:600px){.week-grid{grid-template-columns:1fr 1fr;}}
+.week-day{background:#0c0c0c;border:1px solid #3f3f46;padding:10px 8px;}
+.week-day-name{font-family:'Bebas Neue',sans-serif;font-size:16px;color:#f0abfc;margin:0 0 6px;}
+.week-day-tag{font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.15em;color:#71717a;margin:0 0 6px;}
+.week-day-body{font-size:11px;color:#a1a1aa;line-height:1.4;margin:0;}
+</style>
+</head>
+<body>
+
+<header class="site"><div class="header-row"><div class="logo-tile" id="logo-slot"></div><div class="header-meta"><p class="small">Your Company &middot; Module 29</p><p class="big">Onboarding</p></div></div></header>
+
+<main class="container" style="padding:28px 20px 40px;"><div id="app"></div></main>
+
+<footer class="site"><p>Built by Joseph &middot; Your Company Virtual Office &middot; Internal Use Only</p></footer>
+
+<script>
+"use strict";
+const ICONS={
+  'arrow-right':'<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  'arrow-left': '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  'check':      '<path d="M20 6 9 17l-5-5"/>',
+  'lock':       '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  'inbox':      '<path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>',
+  'filter':     '<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>',
+  'mail':       '<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
+  'shield':     '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>',
+  'flag':       '<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/>',
+  'users':'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  'key':'<path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4"/><path d="m21 2-9.6 9.6"/><circle cx="7.5" cy="15.5" r="5.5"/>'
+};
+function icon(name,size,color){
+  size=size||16;color=color||'currentColor';
+  var p=ICONS[name]||'';
+  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">'+p+'</svg>';
+}
+
+
+
+const CATEGORIES=[
+  { id:'intro', iconKey:'users', color:'#86198f', title:'Welcoming A New Hire',
+    blurb:'Your role in onboarding, the first-day feeling, and confidentiality from day one.',
+    lessons:[
+      { id:'on-1', title:'Your Role In Onboarding',       type:'reading', minutes:4 },
+      { id:'on-2', title:'Safety Orientation With Paul',    type:'reading', minutes:4 },
+      { id:'on-3', title:'Confidentiality From Day One',  type:'reading', minutes:4 }
+    ] },
+  { id:'firstday', iconKey:'check', color:'#a21caf', title:'The First-Day Packet',
+    blurb:'What goes in the packet, equipment and workspace, and a first-day sheet builder.',
+    lessons:[
+      { id:'fd-1', title:'What Goes In The Packet',   type:'reading',     minutes:4 },
+      { id:'fd-2', title:'Equipment And Workspace',   type:'reading',     minutes:4 },
+      { id:'fd-3', title:'First-Day Sheet Builder',   type:'interactive', minutes:8, intKey:'firstDayBuilder' }
+    ] },
+  { id:'access', iconKey:'key', color:'#c026d3', title:'Access Requests',
+    blurb:'Access goes through Joseph, the right tenant and least privilege, and an access sim.',
+    lessons:[
+      { id:'ac-1', title:'Access Goes Through Joseph',     type:'reading',     minutes:4 },
+      { id:'ac-2', title:'Right Tenant, Least Privilege',  type:'reading',     minutes:4 },
+      { id:'ac-3', title:'Access Sim',                     type:'interactive', minutes:7, intKey:'accessSim' }
+    ] },
+  { id:'judgment', iconKey:'shield', color:'#d946ef', title:'Onboarding Judgment',
+    blurb:'What a new hire gets day one, what waits for approval, and an onboarding drill.',
+    lessons:[
+      { id:'oj-1', title:'What A New Hire Gets Day One', type:'reading',     minutes:4 },
+      { id:'oj-2', title:'What Waits For Approval',      type:'reading',     minutes:4 },
+      { id:'oj-3', title:'Onboarding Drill',             type:'interactive', minutes:7, intKey:'onboardDrill' }
+    ] }
+];
+
+
+const LESSON_CONTENT={
+  'on-1':{ sections:[
+    { h:'You set up the start', b:'Onboarding is one of your jobs as office manager. You get the packet ready, the workspace set, and the first-day plan in place so a new hire walks into something organized. A good first day starts with your prep the week before.' },
+    { h:'You coordinate, you do not approve', b:'You pull the pieces together and route the requests. Accounts and access go to Joseph. Spend goes through the approval thresholds. Your part is making sure nothing falls through, not signing off on it.' },
+    { h:'You are the first point of contact', b:'For the small questions on day one, where is the badge, who do I see, where do I sit, you are the answer. That is a real part of the job. A new hire who can find you is a new hire who settles in fast.' }
+  ], tip:'Prep onboarding the week before, not the morning of. A packet ready and a desk set up the day before turns a chaotic first morning into a calm one.' },
+
+  'on-2':{ sections:[
+    { h:'Every new hire gets a safety orientation', b:'Before a new hire sets foot in the shop or on a job, they get a safety orientation with Paul Guerrero, the safety director. It is mandatory, not optional, and it happens early in onboarding. No orientation, no shop or field exposure.' },
+    { h:'You schedule it, Paul runs it', b:'Your part is getting it on the calendar and confirming it happened. Paul, NCCER number 27160819, runs the orientation itself. You coordinate the timing with him and the new hire, you do not deliver the safety content.' },
+    { h:'It ties to the safety standard', b:'The orientation is the front end of the safety program covered in M20. It is where a new hire learns the rules before they are ever exposed to the work. Treat scheduling it with the same weight as the paperwork. It is not a formality.' }
+  ],
+  customHtml:'<div class="split2"><div class="col"><h5>Paul runs it</h5><p>The orientation itself. The safety rules. Sign-off that the new hire is cleared for shop or field. See M20.</p></div>'+
+    '<div class="col"><h5>You handle it</h5><p>Get it on the calendar before day one. Confirm with Paul and the hire. Confirm it happened. No orientation, no exposure.</p></div></div>',
+  tip:'The safety orientation with Paul is a hard gate, not a nice-to-have. A new hire does not touch the shop or a job until it is done. Schedule it before the start date.' },
+
+  'on-3':{ sections:[
+    { h:'Confidentiality starts day one', b:'A new hire is inside the company from the first hour, but inside does not mean everything is open to them. The discretion rules from M25 apply to them and to how you talk around them. Confidential is confidential on day one.' },
+    { h:'Access is granted, not assumed', b:'Being hired does not hand someone the keys to everything. Access is granted on purpose, for what the role needs, through Joseph. A new hire starts with what the role requires and nothing more.' },
+    { h:'Pricing and the GP report stay closed', b:'Margins, the GP report, and supplier pricing do not open up just because someone joined. Those stay closed to roles that do not need them, new or not. See M25 on what never leaves the building.' }
+  ], tip:'New hire does not mean full access. Confidentiality and least privilege apply from the first hour. Welcome them warmly and still hold the line.' },
+
+  'fd-1':{ sections:[
+    { h:'The packet covers the basics', b:'A first-day packet has the essentials in one place. Who the person reports to, where they sit, the schedule for the first day, key contacts, and the policies they need to sign. One packet, no scavenger hunt.' },
+    { h:'Build it from the role', b:'What goes in depends on the role. A field hire needs safety and crew contacts. An office hire needs desk and systems basics. Start from what the role actually does and build the packet to match.' },
+    { h:'Ready before they arrive', b:'The packet is done before the new hire walks in, not assembled while they wait. Print it, set it on the desk, and have the digital pieces queued. Ready beats scrambling.' }
+  ], tip:'A first-day packet that is ready on the desk before nine is the single clearest signal that the company is organized. Have it done the day before.' },
+
+  'fd-2':{ sections:[
+    { h:'Equipment matches the role', b:'A new hire needs the right gear ready. An office role needs a desk, a laptop, and a phone setup. A field role needs different equipment entirely. Line up what the role uses so day one is not a waiting game.' },
+    { h:'Workspace set the day before', b:'The desk, the chair, the basic supplies are in place before the start, not ordered that morning. A workspace that is ready says you were expected. A bare desk says you were not.' },
+    { h:'Accounts and access are separate', b:'Equipment is yours to set up. Accounts and access are not. Those route to Joseph as a request. You can have the laptop on the desk, but the logins and system access come from IT, not from you.' }
+  ],
+  customHtml:'<table class="mini-tbl"><tr><th>Item</th><th>Owner</th><th>Status</th></tr>'+
+    '<tr><td>Desk and chair</td><td>You</td><td>Set day before</td></tr>'+
+    '<tr><td>Laptop and phone</td><td>You set up, IT provisions</td><td>Ready day one</td></tr>'+
+    '<tr><td>Accounts and logins</td><td>Joseph (IT)</td><td>Requested in advance</td></tr>'+
+    '<tr><td>Building access</td><td>Joseph (IT)</td><td>Requested in advance</td></tr></table>',
+  tip:'Split the list in two. Equipment and workspace are yours to set up. Accounts and access route to Joseph. Send those requests early so they are live on day one.' },
+
+  'ac-1':{ sections:[
+    { h:'Access requests go to Joseph', b:'Any account, login, or system access for a new hire goes to Joseph, the director of IT. You do not create accounts or grant access yourself. You raise the request, Joseph provisions it. That line does not move.' },
+    { h:'Request early, not on the morning', b:'Access takes time to set up. Send the request days ahead so the new hire has working logins on day one. A request sent the morning of means a new hire sitting with no access while it gets built.' },
+    { h:'You never grant access yourself', b:'Even for something that seems routine, you route it to Joseph. Granting access is an IT function, not a desk function. Your job is the clean request with the role and what it needs, not the grant.' }
+  ], tip:'There is one correct move for any access request. Route it to Joseph. You never create the account or grant the access yourself, no matter how small it seems.' },
+
+  'ac-2':{ sections:[
+    { h:'Right tenant matters', b:'Your Company and Pinnacle Strategic Advisory share one M365 tenant. D.O.V.A. LLC is a separate tenant on its own GoDaddy M365. A new hire goes in the tenant their company actually uses. The wrong tenant is a fix-first problem. See M26.' },
+    { h:'Least privilege is the default', b:'A new account starts with what the role needs and nothing extra. Not full access, not whatever is easiest. The smallest set of access that lets the person do the job. More can be added later if the role grows.' },
+    { h:'You note the role, Joseph sets the level', b:'On the request, you say what the role is and what it needs to do. Joseph sets the actual access level to match. You do not ask for everything to be safe. You ask for what the role needs, and least privilege does the rest.' }
+  ], tip:'Two checks on any access request. Right tenant for the company, and least privilege for the role. DOVA is its own tenant. Get both right before it goes to Joseph.' },
+
+  'oj-1':{ sections:[
+    { h:'Day one is the routine basics', b:'A new hire gets the things every hire needs on day one. A desk, a laptop, a phone, the company directory, the basic logins their role requires. These are routine and expected. They are ready and waiting.' },
+    { h:'Routine does not mean automatic', b:'Even the day-one basics come through the right path. Equipment from you, access from Joseph. Routine means it is expected, not that it skips the process. The process just runs ahead of time so it is ready.' },
+    { h:'Match the basics to the role', b:'An office hire and a field hire get different day-one basics. Build the day-one set from what the role does. The point is that the person can start working, not that everyone gets the same box.' }
+  ], tip:'Day one is the routine set that lets the person start working. Desk, device, directory, and the role basics. Everything beyond that gets a second look.' },
+
+  'oj-2':{ sections:[
+    { h:'Sensitive access waits', b:'Some things do not come on day one no matter the role. The GP report, margins, and pricing stay closed unless the role truly needs them and it is approved. A new hire does not get sensitive access just to be thorough.' },
+    { h:'Spend and approvals stay above you', b:'Anything that commits money for a new hire, gear over a threshold or a service that costs, follows the same rules. Over 5,000 dollars to Owner. You never approve spend for onboarding any more than for anything else.' },
+    { h:'When unsure, it waits', b:'If you are not sure whether a new hire should get something on day one, the answer is it waits and you ask. Holding and checking is always safe. Granting something sensitive that should have waited is the mistake.' }
+  ], tip:'Two buckets. Routine basics are ready day one. Sensitive access, GP, pricing, and real spend wait for the right approval. When unsure, it waits.' }
+};
+
+
+var WIDGETS={
+  firstDayBuilder:{
+    family:'builder', icon:'check', prefix:'fb',
+    formTitle:'First-day sheet', checkLabel:'Check this sheet',
+    intro:'Build a first-day sheet for a new hire. Name, role, start date, the accounts they will need, equipment, and a buddy. Equipment is yours to set up. Accounts and access route to Joseph. Run the checker when the sheet is complete.',
+    fields:[
+      { key:'Name', label:'New hire name', kind:'input', ph:'e.g., D. Flores', def:'' },
+      { key:'Role', label:'Role', kind:'select', opts:['Pick role','Office','Field crew','Engineering','Admin support'], def:'Pick role' },
+      { key:'Start', label:'Start date', kind:'input', ph:'e.g., 2026-07-01', def:'' },
+      { key:'Accounts', label:'Accounts needed (one per line)', kind:'textarea', ph:'e.g., Email\nProject system', def:'' },
+      { key:'Equip', label:'Equipment', kind:'input', ph:'e.g., Laptop, phone, desk', def:'' },
+      { key:'Buddy', label:'Buddy', kind:'input', ph:'e.g., assigned teammate', def:'' }
+    ],
+    preview:'invite',
+    headTitle:'Onboarding sheet',
+    headSub:function(g){ return g('Name')||'New hire name'; },
+    rows:[
+      { key:'Role', label:'Role', empty:'Pick role' },
+      { key:'Start', label:'Start date', empty:'Add date' },
+      { key:'Equip', label:'Equipment', empty:'Add equipment' },
+      { key:'Buddy', label:'Buddy', empty:'Add a buddy' }
+    ],
+    table:function(g){
+      var raw=String(g('Accounts')||'');
+      var lines=raw.split(/\n/).map(function(x){return x.trim();}).filter(Boolean);
+      if(!lines.length)return '';
+      var rows=lines.map(function(a){return '<tr><td>'+esc(a)+'</td><td>Joseph (IT)</td></tr>';}).join('');
+      return '<table class="mini-tbl"><tr><th>Account needed</th><th>Routes to</th></tr>'+rows+'</table>';
+    },
+    validate:function(){
+      var name=(state.fbName||'').trim();
+      var role=state.fbRole;
+      var start=(state.fbStart||'').trim();
+      var accounts=String(state.fbAccounts||'').split(/\n/).map(function(x){return x.trim();}).filter(Boolean);
+      var issues=[],warn=[];
+      if(!name)issues.push('Add the new hire name.');
+      if(!role||role==='Pick role')issues.push('Pick the role.');
+      if(!start)issues.push('Add the start date.');
+      if(issues.length)return{kind:'fail',headline:'Sheet is incomplete:',items:issues};
+      if(!accounts.length)warn.push('No accounts listed. If the role needs any, list them so the request can go to Joseph early.');
+      warn.push('Accounts and access route to Joseph in IT. You set up equipment, he provisions logins. Send the request ahead of the start date.');
+      warn.push('Schedule the mandatory safety orientation with Paul before any shop or field exposure. See M20.');
+      return{kind:'warn',headline:'Sheet is ready. Two reminders before it goes out:',items:warn};
+    }
+  },
+
+  accessSim:{
+    family:'quiz', btn:'sim', icon:'key', prefix:'as', unit:'Request',
+    intro:'Six access situations for a new hire. You never grant access yourself. Routine access still routes to Joseph. Anything sensitive holds for Owner. A wrong tenant gets fixed first. For each, pick the move.',
+    actions:['Route to Joseph (IT)','Hold, needs Owner','Wrong tenant, fix first','Hold and ask'],
+    scenarios:[
+      { id:'a1', fromLabel:'Request', from:'Email login', body:'A new office hire needs a company email account set up for day one.',
+        correct:'Route to Joseph (IT)', why:'Routine, but you never create the account. Route it to Joseph and send the request early so it is live on day one.' },
+      { id:'a2', fromLabel:'Request', from:'GP report', body:'A new hire asks for access to the GP report on their first day.',
+        correct:'Hold, needs Owner', why:'The GP report is confidential and does not open on day one. Hold it. If the role truly needs it, that is Owner approval, not a routine grant.' },
+      { id:'a3', fromLabel:'Request', from:'Wrong tenant', body:'A new Your Company hire was queued in the DOVA tenant by mistake. DOVA is a separate M365 tenant.',
+        correct:'Wrong tenant, fix first', why:'DOVA is its own tenant. A Your Company hire does not belong there. Fix the tenant first, then the access goes in the right place. See M26.' },
+      { id:'a4', fromLabel:'Request', from:'Project system', body:'A new field crew hire needs login to the project system the crew uses.',
+        correct:'Route to Joseph (IT)', why:'A role-appropriate login. Routine, but it still goes through Joseph. Route it with the role and what it needs, least privilege.' },
+      { id:'a5', fromLabel:'Request', from:'Full admin', body:'A new hire asks for full admin access so they will not be blocked later.',
+        correct:'Hold and ask', why:'Full admin is not least privilege and not a day-one default. Hold it and ask. Access matches the role, not what is convenient.' },
+      { id:'a6', fromLabel:'Request', from:'Pricing folder', body:'A new hire wants into the folder with supplier pricing and margins.',
+        correct:'Hold, needs Owner', why:'Pricing and margins are confidential. They do not open because someone joined. Hold it. That is a Owner decision, never a desk grant.' }
+    ]
+  },
+
+  onboardDrill:{
+    family:'quiz', btn:'drill', icon:'shield', prefix:'ob', unit:'Item',
+    intro:'Six onboarding items for a new hire. Sort each. Routine basics are fine on day one. Sensitive access is never granted by you. Spend over the threshold needs Owner. Account and login items route to Joseph.',
+    actions:[
+      { id:'day1',    name:'Day one, fine',         sub:'Routine basic' },
+      { id:'owner', name:'Needs Owner',          sub:'Spend or sensitive approval' },
+      { id:'never',   name:'Never (confidential)',   sub:'Stays closed' },
+      { id:'joseph',  name:'Route to Joseph',        sub:'Account or access' }
+    ],
+    scenarios:[
+      { id:'b1', fromLabel:'Item', from:'Laptop', body:'A laptop and a desk set up and ready for a new office hire.',
+        correct:'day1', why:'Routine equipment for the role. You set it up and have it ready. Day one, fine.' },
+      { id:'b2', fromLabel:'Item', from:'GP access', body:'Access to the gross-profit report for a new hire.',
+        correct:'never', why:'The GP report is confidential and never leaves the building. It does not open for a new hire. This stays closed.' },
+      { id:'b3', fromLabel:'Item', from:'Door code', body:'A building door code for a new hire who needs to get in.',
+        correct:'joseph', why:'Building access is an IT and access item. Route it to Joseph and request it ahead of the start date.' },
+      { id:'b4', fromLabel:'Item', from:'Pricing', body:'Supplier pricing and margin detail for a new hire to review.',
+        correct:'never', why:'Pricing and margins are confidential. They do not open because someone was hired. This stays closed.' },
+      { id:'b5', fromLabel:'Item', from:'New phone plan', body:'A new phone line and plan for a new hire that costs 6,000 dollars for the year.',
+        correct:'owner', why:'Over 5,000 dollars. Spend at that level needs Owner before it commits. You never approve it from the desk.' },
+      { id:'b6', fromLabel:'Item', from:'Email account', body:'The company email account a new hire needs to start work.',
+        correct:'joseph', why:'An account and login is an IT item. You never create it yourself. Route it to Joseph, early enough to be live on day one.' }
+    ]
+  }
+};
+
+var state={view:'home',completed:{}};
+function esc(s){ if(s==null)return''; return String(s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];}); }
+function getCat(id){ for(var i=0;i<CATEGORIES.length;i++) if(CATEGORIES[i].id===id) return CATEGORIES[i]; return null; }
+function getLesson(id){
+  for(var i=0;i<CATEGORIES.length;i++){
+    var c=CATEGORIES[i];
+    for(var j=0;j<c.lessons.length;j++) if(c.lessons[j].id===id) return{lesson:c.lessons[j],cat:c,idx:j};
+  }return null;
+}
+function totalLessons(){ return CATEGORIES.reduce(function(a,c){return a+c.lessons.length;},0); }
+function completedCount(){ return Object.keys(state.completed).length; }
+
+
+function renderHome(){
+  var done=completedCount();var html='';
+  html+='<div class="lab-hero"><div class="hero-grid"></div><div class="hero-glow"></div>';
+  html+='<div class="lab-hero-inner">';
+  html+='<p class="lab-eyebrow">Your Company &middot; Module 29 &middot; Office Manager</p>';
+  html+='<h1 class="lab-h1">First <span class="accent">Day</span></h1>';
+  html+='<p class="lab-blurb">Onboarding is how a new hire starts ready instead of lost. This module is your role in welcoming someone, the first-day packet, how access requests route through Joseph, and what a new person gets on day one versus what waits for approval. Build a first-day sheet, run an access sim, and an onboarding drill.</p>';
+  html+='<div class="lab-stats">';
+  [['4','Categories'],[String(totalLessons()),'Lessons'],['3','Drills'],[String(done),'Done']].forEach(function(s){
+    html+='<div class="lab-stat"><p class="lab-stat-num">'+s[0]+'</p><p class="lab-stat-lbl">'+s[1]+'</p></div>';
+  });
+  html+='</div></div></div>';
+  html+='<div class="cat-grid">';
+  CATEGORIES.forEach(function(cat){
+    var doneN=cat.lessons.filter(function(l){return state.completed[l.id];}).length;
+    var tot=cat.lessons.length;var allDone=doneN===tot;var pct=tot?(doneN/tot)*100:0;
+    html+='<button class="cat-card'+(allDone?' is-done':'')+'" data-action="open-cat" data-cat-id="'+cat.id+'">';
+    html+='<div class="cat-stripe" style="background:'+cat.color+';"></div>';
+    html+='<div class="cat-inner"><div class="cat-top">';
+    html+='<div class="cat-icon-tile" style="background:'+cat.color+';">'+icon(cat.iconKey,24,'#fff')+'</div>';
+    if(allDone) html+='<div class="cat-icon-tile" style="background:#10b981;width:28px;height:28px;">'+icon('check',16,'#000')+'</div>';
+    html+='</div>';
+    html+='<h3>'+esc(cat.title)+'</h3>';
+    html+='<p class="cat-card-blurb">'+esc(cat.blurb)+'</p>';
+    html+='<div class="cat-card-foot"><span>'+doneN+'/'+tot+' done</span><span class="cat-progress-track"><span class="cat-progress-fill" style="width:'+pct+'%;"></span></span></div>';
+    html+='</div></button>';
+  });
+  html+='</div>';return html;
+}
+
+function renderCategory(cat){
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-home">'+icon('arrow-left',13)+' Back to module home</button>';
+  html+='<div class="cat-header"><div class="cat-header-inner">';
+  html+='<div class="cat-header-icon" style="background:'+cat.color+';">'+icon(cat.iconKey,28,'#fff')+'</div>';
+  html+='<div><p class="cat-header-eyebrow" style="color:'+cat.color+';">Category</p>';
+  html+='<h2 class="cat-header-title">'+esc(cat.title)+'</h2>';
+  html+='<p class="cat-header-blurb">'+esc(cat.blurb)+'</p>';
+  html+='</div></div></div>';
+  html+='<div class="lesson-list">';
+  cat.lessons.forEach(function(l,i){
+    var isDone=!!state.completed[l.id];
+    var prevDone=i===0||!!state.completed[cat.lessons[i-1].id];
+    var locked=!isDone&&!prevDone;
+    var current=!isDone&&prevDone;
+    var tileCls=isDone?'done':current?'current':'pending';
+    var typeLabel=l.type==='reading'?'Reading':'Interactive';
+    var typeColor=l.type==='reading'?'#71717a':'#f0abfc';
+    html+='<button class="lesson-row'+(isDone?' is-done':'')+(locked?' is-locked':'')+'"';
+    html+=locked?' disabled':' data-action="open-lesson" data-lesson-id="'+l.id+'"';
+    html+='>';
+    html+='<div class="lesson-num-tile '+tileCls+'">'+(locked?icon('lock',14):isDone?icon('check',18):String(i+1))+'</div>';
+    html+='<div class="lesson-row-meta"><p class="lesson-row-title">'+esc(l.title)+'</p>';
+    html+='<p class="lesson-row-tag" style="color:'+typeColor+';">'+typeLabel+' &middot; ~'+l.minutes+' min</p></div>';
+    if(!locked) html+=icon('arrow-right',16,'#71717a');
+    html+='</button>';
+  });
+  html+='</div>';
+  return html;
+}
+
+
+function renderReading(lesson,cat){
+  var c=LESSON_CONTENT[lesson.id]||{sections:[],tip:''};
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="lesson-card">';
+  html+='<div class="lesson-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="lesson-card-body">';
+  c.sections.forEach(function(s){
+    html+='<div class="lesson-section"><h3>'+esc(s.h)+'</h3><p>'+esc(s.b)+'</p></div>';
+  });
+  if(c.customHtml) html+=c.customHtml;
+  if(c.tip){
+    html+='<div class="tip-box"><p class="tip-eyebrow">Joseph&#39;s tip</p><p class="tip-body">'+esc(c.tip)+'</p></div>';
+  }
+  html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  html+='</div></div>';
+  return html;
+}
+
+
+
+function renderBuilder(key,lesson,cat){
+  var w=WIDGETS[key];
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card"><div class="int-card-header" style="background:'+cat.color+';">'+
+    '<div class="lesson-icon-tile">'+icon(w.icon,26,'#fff')+'</div>'+
+    '<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p><h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body"><p style="font-size:13px;color:#a1a1aa;margin-bottom:18px;">'+esc(w.intro)+'</p>';
+  html+='<div class="mib-grid"><div class="mib-col"><h4>'+esc(w.formTitle||'Build it')+'</h4>';
+  w.fields.forEach(function(f){
+    var val=state[w.prefix+f.key];
+    html+='<div class="mib-field"><label class="mib-label">'+esc(f.label)+'</label>';
+    if(f.kind==='textarea'){
+      html+='<textarea class="mib-textarea" data-w="'+w.prefix+'" data-f="'+f.key+'" placeholder="'+esc(f.ph||'')+'">'+esc(val)+'</textarea>';
+    } else if(f.kind==='select'){
+      html+='<select class="mib-select" data-w="'+w.prefix+'" data-f="'+f.key+'">';
+      f.opts.forEach(function(o){ html+='<option value="'+esc(o)+'"'+(val===o?' selected':'')+'>'+esc(o)+'</option>'; });
+      html+='</select>';
+    } else {
+      html+='<input class="mib-input" type="text" data-w="'+w.prefix+'" data-f="'+f.key+'" placeholder="'+esc(f.ph||'')+'" value="'+esc(val)+'">';
+    }
+    html+='</div>';
+  });
+  html+='<button class="mib-check-btn" data-action="w-check" data-key="'+key+'">'+esc(w.checkLabel||'Check it')+'</button>';
+  if(state[w.prefix+'Checked']&&state[w.prefix+'Feedback']){
+    var fb=state[w.prefix+'Feedback'];var cls=fb.kind==='pass'?'ok':fb.kind==='warn'?'warn':'bad';
+    html+='<div class="mib-feedback '+cls+'"><strong>'+esc(fb.headline)+'</strong>';
+    if(fb.items&&fb.items.length){html+='<ul>';fb.items.forEach(function(it){html+='<li>'+esc(it)+'</li>';});html+='</ul>';}
+    html+='</div>';
+    if(fb.kind==='pass'){html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';}
+  }
+  html+='</div>';
+  html+='<div class="mib-col"><h4>Live preview</h4><div id="mib-preview">'+buildPreviewInner(key)+'</div></div>';
+  html+='</div></div></div>';
+  return html;
+}
+function buildPreviewInner(key){
+  var w=WIDGETS[key];var p=w.prefix;
+  function g(k){return state[p+k];}
+  if(w.preview==='compose')return composePV(w,g);
+  if(w.preview==='week')return weekPV(w,g);
+  return invitePV(w,g);
+}
+function emptySpan(t){return '<span class="invite-empty">'+esc(t)+'</span>';}
+function invitePV(w,g){
+  var html='<div class="invite-preview"><div class="invite-preview-head">';
+  html+='<h5>'+esc(w.headTitle||'Preview')+'</h5>';
+  if(w.headSub)html+='<p>'+esc(typeof w.headSub==='function'?w.headSub(g):w.headSub)+'</p>';
+  html+='</div><div class="invite-preview-body">';
+  w.rows.forEach(function(r){
+    var v=g(r.key);
+    html+='<div class="invite-row"><div class="invite-row-key">'+esc(r.label)+'</div><div class="invite-row-val">'+(v?esc(v):emptySpan(r.empty||('Add '+r.label)))+'</div></div>';
+  });
+  html+='</div>';
+  if(w.table)html+=w.table(g);
+  html+='</div>';
+  return html;
+}
+function composePV(w,g){
+  var from=w.from,sig=w.sig;
+  if(w.brand){var b=w.brand(g('Company'));from=b.from;sig=b.sig;}
+  var body=g('Body'),subj=g('Subject'),to=g('To');
+  var html='<div class="compose"><div class="compose-bar">New Message</div>';
+  html+='<div class="compose-row"><div class="compose-key">From</div><div class="compose-val">'+esc(from)+'</div></div>';
+  html+='<div class="compose-row"><div class="compose-key">To</div><div class="compose-val">'+(to?esc(to):'<span class="compose-empty">recipient</span>')+'</div></div>';
+  html+='<div class="compose-row"><div class="compose-key">Subject</div><div class="compose-val">'+(subj?esc(subj):'<span class="compose-empty">(no subject)</span>')+'</div></div>';
+  html+='<div class="compose-body">'+(body?esc(body):'<span class="compose-empty">Write the message.</span>')+'</div>';
+  html+='<div class="compose-sig">'+sig+'</div></div>';
+  return html;
+}
+function weekPV(w,g){
+  var html='<div class="week-grid">';
+  w.days.forEach(function(d){
+    var v=g(d.key);
+    html+='<div class="week-day"><p class="week-day-name">'+esc(d.name)+'</p><p class="week-day-tag">Open hours</p><p class="week-day-body">'+(v?esc(v):'<span class="invite-empty">unassigned</span>')+'</p></div>';
+  });
+  html+='</div>';
+  return html;
+}
+function gridHtml(cells){
+  var html='<div class="week-grid">';
+  cells.forEach(function(c){
+    html+='<div class="week-day"><p class="week-day-name">'+esc(c.d)+'</p><p class="week-day-tag">'+esc(c.t||'')+'</p><p class="week-day-body">'+esc(c.b||'')+'</p></div>';
+  });
+  html+='</div>';
+  return html;
+}
+function renderQuiz(key,lesson,cat){
+  var w=WIDGETS[key];var p=w.prefix;var idx=state[p+'Idx'];var list=w.scenarios;var s=list[idx];
+  var picked=state[p+'Picked'][s.id];var revealed=state[p+'Revealed'][s.id];
+  var total=list.length;var allDone=list.every(function(x){return state[p+'Revealed'][x.id];});
+  var correctCount=list.filter(function(x){return state[p+'Picked'][x.id]===x.correct;}).length;
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card"><div class="int-card-header" style="background:'+cat.color+';">'+
+    '<div class="lesson-icon-tile">'+icon(w.icon,26,'#fff')+'</div>'+
+    '<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p><h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body"><p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">'+esc(w.intro)+'</p>';
+  html+='<div class="drill-stage"><p class="drill-tag">'+esc(w.unit||'Item')+' '+(idx+1)+' of '+total+'</p>';
+  if(s.grid)html+=gridHtml(s.grid);
+  html+='<div class="drill-scenario">';
+  if(s.card){html+=s.card;}
+  else{
+    if(s.from)html+='<div class="drill-from">'+esc((s.fromLabel||'From')+': '+s.from)+'</div>';
+    if(s.subject)html+='<div class="drill-subject">'+esc(s.subject)+'</div>';
+    html+='<div class="drill-body">'+esc(s.body)+'</div>';
+  }
+  html+='</div>';
+  if(w.btn==='drill'){
+    html+='<div class="drill-btns">';
+    w.actions.forEach(function(a){
+      var cls='drill-btn';
+      if(revealed){if(a.id===s.correct)cls+=picked===a.id?' picked-correct':' correct-shown';else if(a.id===picked)cls+=' picked-wrong';}
+      html+='<button class="'+cls+'" data-action="q-pick" data-key="'+key+'" data-act="'+esc(a.id)+'"><span>'+esc(a.name)+'</span><small>'+esc(a.sub)+'</small></button>';
+    });
+    html+='</div>';
+  } else {
+    var acts=s.opts||w.actions;
+    html+='<div class="sim-buttons">';
+    acts.forEach(function(a){
+      var cls='sim-btn';
+      if(revealed){if(a===s.correct)cls+=picked===a?' picked-correct':' correct-shown';else if(a===picked)cls+=' picked-wrong';}
+      html+='<button class="'+cls+'" data-action="q-pick" data-key="'+key+'" data-act="'+esc(a)+'">'+esc(a)+'</button>';
+    });
+    html+='</div>';
+  }
+  if(revealed){
+    var ok=picked===s.correct;var label;
+    if(w.btn==='drill'){var ca=w.actions.filter(function(a){return a.id===s.correct;})[0];label=ca?ca.name:s.correct;}
+    else label=s.correct;
+    html+='<div class="feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Answer: '+esc(label)+'. ')+esc(s.why)+'</div>';
+    if(idx<total-1)html+='<div style="text-align:right;margin-top:12px;"><button class="next-btn" data-action="q-next" data-key="'+key+'">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+  }
+  html+='</div>';
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#f0abfc')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';return html;
+}
+function renderLesson(lesson,cat){
+  if(lesson.type==='reading')return renderReading(lesson,cat);
+  var w=WIDGETS[lesson.intKey];
+  if(w&&w.family==='builder')return renderBuilder(lesson.intKey,lesson,cat);
+  if(w)return renderQuiz(lesson.intKey,lesson,cat);
+  return renderReading(lesson,cat);
+}
+function initWidget(key){
+  var w=WIDGETS[key];if(!w)return;
+  if(w.family==='builder'){
+    state[w.prefix+'Checked']=false;state[w.prefix+'Feedback']=null;
+    w.fields.forEach(function(f){state[w.prefix+f.key]=(f.def!=null?f.def:'');});
+  } else {
+    state[w.prefix+'Idx']=0;state[w.prefix+'Picked']={};state[w.prefix+'Revealed']={};
+  }
+}
+Object.keys(WIDGETS).forEach(initWidget);
+function render(){
+  var app=document.getElementById('app');var html='';
+  if(state.view==='home'){html=renderHome();}
+  else if(state.view.indexOf('category:')===0){var cat=getCat(state.view.slice(9));html=cat?renderCategory(cat):renderHome();}
+  else if(state.view.indexOf('lesson:')===0){var info=getLesson(state.view.slice(7));html=info?renderLesson(info.lesson,info.cat):renderHome();}
+  app.innerHTML=html;
+  if(state.view.indexOf('lesson:')===0){
+    var info2=getLesson(state.view.slice(7));
+    if(info2&&info2.lesson.intKey){
+      var w=WIDGETS[info2.lesson.intKey];
+      if(w&&w.family==='builder'){
+        var key=info2.lesson.intKey;
+        setTimeout(function(){
+          document.querySelectorAll('[data-w]').forEach(function(el){
+            el.addEventListener('input',function(e){
+              var pre=e.target.getAttribute('data-w');var fld=e.target.getAttribute('data-f');
+              state[pre+fld]=e.target.value;state[pre+'Checked']=false;state[pre+'Feedback']=null;
+              var pv=document.getElementById('mib-preview');if(pv)pv.innerHTML=buildPreviewInner(key);
+            });
+          });
+        },50);
+      }
+    }
+  }
+}
+document.body.addEventListener('click',function(ev){
+  var t=ev.target.closest('[data-action]');if(!t)return;
+  var action=t.getAttribute('data-action');
+  if(action==='open-cat'){state.view='category:'+t.getAttribute('data-cat-id');render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='back-home'){state.view='home';render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='back-cat'){state.view='category:'+t.getAttribute('data-cat-id');render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='open-lesson'){var lid=t.getAttribute('data-lesson-id');var info=getLesson(lid);if(info&&info.lesson.intKey){initWidget(info.lesson.intKey);}state.view='lesson:'+lid;render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='complete-lesson'){var lid2=t.getAttribute('data-lesson-id');state.completed[lid2]=true;var info2=getLesson(lid2);if(info2){var next=null;for(var i=0;i<info2.cat.lessons.length;i++){if(info2.cat.lessons[i].id===lid2&&i+1<info2.cat.lessons.length){next=info2.cat.lessons[i+1];break;}}state.view=next?'lesson:'+next.id:'category:'+info2.cat.id;render();window.scrollTo({top:0,behavior:'smooth'});}}
+  else if(action==='w-check'){var k1=t.getAttribute('data-key');var w1=WIDGETS[k1];state[w1.prefix+'Feedback']=w1.validate();state[w1.prefix+'Checked']=true;render();}
+  else if(action==='q-pick'){var k2=t.getAttribute('data-key');var w2=WIDGETS[k2];var sc=w2.scenarios[state[w2.prefix+'Idx']];if(state[w2.prefix+'Revealed'][sc.id])return;state[w2.prefix+'Picked'][sc.id]=t.getAttribute('data-act');state[w2.prefix+'Revealed'][sc.id]=true;render();}
+  else if(action==='q-next'){var k3=t.getAttribute('data-key');var w3=WIDGETS[k3];if(state[w3.prefix+'Idx']<w3.scenarios.length-1){state[w3.prefix+'Idx']++;render();}}
+});
+
+document.getElementById('logo-slot').innerHTML=icon('users',22,'#fff');
+render();
+</script>
+</body>
+</html>

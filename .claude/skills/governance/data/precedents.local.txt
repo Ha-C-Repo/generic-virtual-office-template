@@ -1,0 +1,18 @@
+# DRAFT - 2026-05-24, populated by Claude from CLAUDE.md authoritative list.
+# Per PATCH-01: the verified portfolio plus anything that must stay on
+# capability statements only. Precedent projects never go on a bid.
+# Owner to add or remove as needed.
+# Whole-word, case-insensitive match. Comments (# ...) and blank lines ignored.
+# This file is gitignored by *.local.txt rule.
+
+# Verified Your Company portfolio (capability statements only, never on a bid)
+ICD Church
+Elite Crossing
+Topgolf New Braunfels
+Carvana
+
+# Explicitly NOT a Your Company project. Must never appear anywhere we publish.
+[FORBIDDEN PROJECT]
+
+# Separate project belonging to Amber, not Your Company. Out of scope on any bid.
+Lady Law Amber

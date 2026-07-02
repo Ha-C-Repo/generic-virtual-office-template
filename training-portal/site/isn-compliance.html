@@ -1,0 +1,572 @@
+text
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ISNetworld & Compliance | Your Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:#000;color:#e4e4e7;font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(circle at 85% 8%,rgba(71,85,105,0.12),transparent 40%),radial-gradient(circle at 15% 92%,rgba(15,23,42,0.08),transparent 40%);}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;padding:0;}
+p{margin:0;}h1,h2,h3,h4{margin:0;font-weight:normal;}
+.container{max-width:960px;margin:0 auto;padding:0 20px;}
+header.site{border-bottom:2px solid #27272a;background:rgba(0,0,0,.85);position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);}
+.header-row{max-width:960px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;}
+.logo-tile{width:40px;height:40px;background:#475569;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.header-meta .small{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#52525b;}
+.header-meta .big{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin-top:2px;}
+footer.site{max-width:960px;margin:0 auto;padding:28px 20px;border-top:1px solid #27272a;text-align:center;}
+footer.site p{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#3f3f46;}
+.lab-hero{position:relative;border:2px solid #3f3f46;background:#18181b;overflow:hidden;margin-bottom:28px;}
+.hero-grid{position:absolute;inset:0;opacity:.1;background-image:linear-gradient(rgba(148,163,184,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.3) 1px,transparent 1px);background-size:24px 24px;}
+.hero-glow{position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:#475569;border-radius:50%;filter:blur(80px);opacity:.22;}
+.lab-hero-inner{position:relative;padding:28px 24px;}
+.lab-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#cbd5e1;margin-bottom:8px;}
+.lab-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,9vw,68px);color:#fff;line-height:.9;margin-bottom:14px;}
+.lab-h1 .accent{color:#cbd5e1;}
+.lab-blurb{color:#a1a1aa;max-width:540px;font-size:14px;line-height:1.7;margin-bottom:22px;}
+.lab-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:460px;}
+.lab-stat{border:1px solid #3f3f46;background:rgba(0,0,0,.4);padding:8px 10px;}
+.lab-stat-num{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#cbd5e1;margin:0;}
+.lab-stat-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#52525b;margin:0;}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.cat-card{text-align:left;background:#18181b;border:2px solid #3f3f46;padding:0;overflow:hidden;width:100%;}
+.cat-card.is-done{border-color:#10b981;}
+.cat-stripe{height:6px;}
+.cat-inner{padding:18px;}
+.cat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.cat-icon-tile{width:44px;height:44px;color:#fff;display:flex;align-items:center;justify-content:center;}
+.cat-card h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin:0 0 6px;line-height:1.05;}
+.cat-card-blurb{font-size:12px;color:#a1a1aa;margin:0 0 14px;line-height:1.5;}
+.cat-card-foot{display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:9px;color:#71717a;text-transform:uppercase;letter-spacing:.2em;}
+.cat-progress-track{height:4px;background:#27272a;flex:1;margin-left:12px;max-width:80px;}
+.cat-progress-fill{height:100%;background:#10b981;}
+.cat-back-btn{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:#71717a;display:flex;align-items:center;gap:6px;margin-bottom:20px;}
+.cat-header{background:#18181b;border:2px solid #3f3f46;padding:20px;margin-bottom:16px;}
+.cat-header-inner{display:flex;gap:16px;align-items:flex-start;}
+.cat-header-icon{width:56px;height:56px;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cat-header-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;margin:0;}
+.cat-header-title{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;margin:4px 0;line-height:1;}
+.cat-header-blurb{color:#a1a1aa;font-size:13px;margin:0;line-height:1.5;}
+.lesson-list{display:flex;flex-direction:column;gap:8px;}
+.lesson-row{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#18181b;border:2px solid #3f3f46;width:100%;text-align:left;}
+.lesson-row.is-done{border-color:#10b981;}
+.lesson-row.is-locked{opacity:.45;cursor:not-allowed;}
+.lesson-row:not(.is-locked){cursor:pointer;}
+.lesson-num-tile{width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:16px;}
+.lesson-num-tile.done{background:#10b981;color:#000;}
+.lesson-num-tile.current{background:#cbd5e1;color:#000;}
+.lesson-num-tile.pending{background:#27272a;color:#71717a;}
+.lesson-row-meta{flex:1;min-width:0;}
+.lesson-row-title{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin:0;line-height:1.1;}
+.lesson-row-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;margin:4px 0 0;}
+.lesson-card{border:2px solid #3f3f46;background:#18181b;}
+.lesson-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.lesson-icon-tile{width:52px;height:52px;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.lesson-card-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;font-weight:700;opacity:.8;margin:0;}
+.lesson-card-title{font-family:'Bebas Neue',sans-serif;font-size:32px;margin:4px 0 0;line-height:1;color:#fff;}
+.lesson-card-body{padding:24px 22px;}
+.lesson-section{margin-bottom:22px;}
+.lesson-section h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#cbd5e1;margin:0 0 8px;}
+.lesson-section p{color:#a1a1aa;line-height:1.65;margin:0;font-size:14px;}
+.tip-box{background:rgba(71,85,105,.12);border-left:4px solid #475569;padding:12px 16px;margin-top:20px;}
+.tip-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#cbd5e1;margin:0 0 6px;font-weight:700;}
+.tip-body{color:#e2e8f0;font-size:13px;margin:0;line-height:1.55;font-style:italic;}
+.complete-btn{width:100%;margin-top:24px;padding:14px 0;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.2em;background:#475569;color:#fff;border:2px solid #475569;display:flex;align-items:center;justify-content:center;gap:10px;}
+.prog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:6px;margin-top:8px;}
+.prog-tile{background:#0c0c0c;border:1px solid #3f3f46;padding:8px 12px;font-size:11px;color:#cbd5e1;line-height:1.3;display:flex;align-items:center;gap:6px;}
+.prog-num{font-family:'Bebas Neue',sans-serif;font-size:13px;color:#94a3b8;flex-shrink:0;min-width:18px;}
+.step-list{display:flex;flex-direction:column;gap:6px;margin-top:6px;}
+.step-row{display:flex;gap:10px;background:#0c0c0c;border:1px solid #3f3f46;padding:10px 14px;align-items:center;}
+.step-row.pending{border-left:3px solid #f59e0b;}
+.step-row.done{border-left:3px solid #10b981;}
+.step-num{width:24px;height:24px;background:#1e293b;color:#cbd5e1;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:13px;flex-shrink:0;}
+.step-text{font-size:12px;color:#e4e4e7;line-height:1.4;flex:1;}
+.step-badge{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;padding:2px 6px;flex-shrink:0;}
+.step-badge.done{background:#10b981;color:#000;}
+.step-badge.pending{background:#f59e0b;color:#000;}
+.int-card{border:2px solid #3f3f46;background:#18181b;}
+.int-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.int-card-body{padding:24px 22px;}
+.stage{background:#0c0c0c;border:1px solid #3f3f46;padding:18px;margin-bottom:14px;}
+.stage-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#cbd5e1;margin-bottom:8px;}
+.q-bubble{background:#1c1917;border-left:3px solid #475569;padding:12px 14px;margin-bottom:14px;font-size:13px;color:#e4e4e7;line-height:1.55;font-style:italic;}
+.q-source{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#fbbf24;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+.btns{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;}
+.btn-opt{padding:12px 8px;background:#09090b;border:1px solid #3f3f46;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.05em;color:#a1a1aa;line-height:1.2;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.btn-opt:hover{border-color:#cbd5e1;}
+.btn-opt small{font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.15em;color:#52525b;}
+.btn-opt.flag-green{border-left:4px solid #10b981;}
+.btn-opt.flag-yellow{border-left:4px solid #f59e0b;}
+.btn-opt.flag-red{border-left:4px solid #ef4444;}
+.btn-opt.flag-critical{border-left:4px solid #b91c1c;}
+.btn-opt.picked-correct{background:rgba(16,185,129,.15);border-color:#10b981;color:#a7f3d0;}
+.btn-opt.picked-correct small{color:#6ee7b7;}
+.btn-opt.picked-wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.btn-opt.picked-wrong small{color:#f87171;}
+.btn-opt.correct-shown{background:rgba(16,185,129,.08);border-color:#10b981;color:#a7f3d0;}
+.btn-opt.correct-shown small{color:#6ee7b7;}
+.doc-card{background:#fafaf9;color:#1c1917;border:2px solid #71717a;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.6;margin-bottom:14px;}
+.doc-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #71717a;padding-bottom:6px;margin-bottom:8px;}
+.doc-row{display:grid;grid-template-columns:130px 1fr;gap:8px;padding:3px 0;}
+.doc-key{color:#52525b;text-transform:uppercase;letter-spacing:.05em;font-size:10px;}
+.doc-val{color:#1c1917;font-weight:600;}
+.days-badge{display:inline-block;padding:2px 10px;font-weight:700;font-size:11px;}
+.days-badge.green{background:#10b981;color:#000;}
+.days-badge.yellow{background:#f59e0b;color:#000;}
+.days-badge.red{background:#ef4444;color:#fff;}
+.days-badge.critical{background:#1f1f1f;color:#ef4444;border:1px dashed #ef4444;}
+.feedback{margin-top:14px;padding:10px 14px;font-size:12px;line-height:1.55;}
+.feedback.ok{background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+.feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+.next-btn{padding:10px 18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.2em;background:#475569;color:#fff;border:2px solid #475569;}
+.score-line{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:#a1a1aa;margin-top:16px;padding-top:14px;border-top:1px solid #27272a;}
+.final-banner{background:linear-gradient(135deg,#475569,#1e293b);padding:20px;margin-top:20px;text-align:center;border:2px solid #cbd5e1;}
+.final-banner h3{font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;margin:0 0 6px;line-height:1;}
+.final-banner p{color:#cbd5e1;font-size:12px;font-family:'JetBrains Mono',monospace;letter-spacing:.15em;text-transform:uppercase;}
+</style>
+</head>
+<body>
+<header class="site"><div class="header-row"><div class="logo-tile" id="logo-slot"></div><div class="header-meta"><p class="small">Your Company &middot; Module 10</p><p class="big">ISN & Compliance</p></div></div></header>
+<main class="container" style="padding:28px 20px 40px;"><div id="app"></div></main>
+<footer class="site"><p>Built by Joseph &middot; Your Company Virtual Office &middot; Internal Use Only</p></footer>
+<script>
+"use strict";
+const ICONS={
+'arrow-right':'<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+'arrow-left':'<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+'check':'<path d="M20 6 9 17l-5-5"/>',
+'lock':'<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+'shield-check':'<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
+'clipboard-list':'<rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/>',
+'award':'<circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>',
+'calendar-clock':'<path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h5"/><path d="M17.5 17.5 16 16.3V14"/><circle cx="16" cy="16" r="6"/>',
+'triangle-alert':'<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/>',
+'scroll-text':'<path d="M15 12h-5"/><path d="M15 8h-5"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/>',
+'bell':'<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>'
+};
+function icon(n,s,c){s=s||16;c=c||'currentColor';return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke="'+c+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">'+(ICONS[n]||'')+'</svg>';}
+
+const CATEGORIES=[
+{id:'fundamentals',iconKey:'shield-check',color:'#475569',title:'ISN Fundamentals',blurb:'What ISNetworld is, why operators require it, who at Your Company owns what, and the 18 safety programs that anchor compliance.',lessons:[
+  {id:'m11-1',title:'What ISNetworld Is',type:'reading',minutes:5},
+  {id:'m11-2',title:'Who Owns What at Your Company',type:'reading',minutes:5},
+  {id:'m11-3',title:'The 18 Safety Programs',type:'reading',minutes:5}]},
+{id:'ravs',iconKey:'clipboard-list',color:'#334155',title:'The RAVS Process',blurb:'Operator questionnaires. How they arrive, who answers what, how they get filed. The discipline that keeps Your Company compliant.',lessons:[
+  {id:'m11-4',title:'RAVS Questionnaires',type:'reading',minutes:5},
+  {id:'m11-5',title:'Documentation & Filing',type:'reading',minutes:4},
+  {id:'m11-6',title:'RAVS Question Triage',type:'interactive',minutes:7,intKey:'ravsTriage'}]},
+{id:'marathon',iconKey:'award',color:'#1e293b',title:'The Marathon Pathway',blurb:'Marathon Petroleum is the target. Eight steps to approval, one critical blocker (Texas Mutual EMR letter), and the playbook for what comes after.',lessons:[
+  {id:'m11-7',title:'Texas Mutual EMR Letter',type:'reading',minutes:5},
+  {id:'m11-8',title:'Marathon Approval Pathway',type:'reading',minutes:5},
+  {id:'m11-9',title:'Compliance Tracker Build',type:'interactive',minutes:7,intKey:'tracker'}]},
+{id:'maintenance',iconKey:'calendar-clock',color:'#0f172a',title:'Maintenance & Renewals',blurb:'Compliance is a weekly rhythm. Tracking expirations, managing parallel systems like Avetta, and responding to flags before they cost a contract.',lessons:[
+  {id:'m11-10',title:'Document Expiration Tracking',type:'reading',minutes:5},
+  {id:'m11-11',title:'Avetta & Parallel Systems',type:'reading',minutes:4},
+  {id:'m11-12',title:'Compliance Flag Drill',type:'interactive',minutes:7,intKey:'flagDrill'}]}
+];
+
+const LESSON_CONTENT={
+'m11-1':{sections:[
+  {h:'What ISN is',b:'ISNetworld is a contractor compliance database run by ISN (Dallas-based). Major oil and gas operators, refineries, and industrial clients (Marathon, Shell, Valero, Chevron, Phillips 66, BP, ExxonMobil) use it to vet contractors before allowing site work. Dominant system in our industry.'},
+  {h:'How it works',b:'Each operator sets compliance requirements (safety programs, insurance limits, training, incident history). ISN collects documents and grades contractors per operator. Contractors get a status (compliant / pending / deficient) per operator. Operators check ISN before approving you to bid.'},
+  {h:'Why operators use it',b:'Liability transfer. If a clean-status contractor causes a problem on-site, the operator documents that they performed due diligence. Cuts their legal exposure. From the operator view, ISN is risk management on a subscription.'},
+  {h:'Your Company\'s profile',b:'ISN ID: [ISN ID]. Profile active. Marathon Petroleum is the target operator. Status with Marathon: currently pending. The EMR letter from Texas Mutual is the active blocker.'}
+],tip:'ISN is not one-time. Documents expire. New questionnaires arrive. Operators change requirements. A "compliant" status today can become "deficient" next quarter. Your job is the calendar of what is due when.'},
+'m11-2':{sections:[
+  {h:'Paul Guerrero (Safety Director, NCCER #27160819)',b:'Owns: safety program content, training records, incident reporting, OSHA logs (300/300A/301), Job Hazard Analyses, behavioral safety observations. Paul writes and signs safety documents. Paul updates programs annually. Paul is the only person who answers technical safety questions on RAVS.'},
+  {h:'Amber (COO)',b:'Owns: insurance documents (COI through broker, policy renewals), W-9, business licenses, sub COI tracking, contract review, legal compliance, Texas Mutual workers compensation policy administration.'},
+  {h:'Owner (CEO)',b:'Owns: strategic decisions about which operators to pursue, escalations needing executive response, contract pricing on Marathon-approved work, EMR letter strategy (direct contact with Texas Mutual underwriter on rate calculations).'},
+  {h:'You',b:'Owns: the tracking system. The expiration calendar. The renewal reminders. The filing workflow. The daily ISN portal uploads. You do NOT write safety content. You do NOT decide insurance limits. You do NOT answer technical questionnaire content. You coordinate and you track.'}
+],tip:'Hardest discipline: resisting the urge to "just answer" a question that looks easy. A wrong answer on a RAVS questionnaire can flip Your Company\'s status from compliant to deficient overnight. Always route content questions to the owner.'},
+'m11-3':{sections:[
+  {h:'Eighteen written programs',b:'Your Company maintains 18 written safety programs covering OSHA-required topics for structural steel fabrication and erection, plus topics operators commonly require. Each is 5-15 pages, signed by Owner (CEO) and Paul (Safety Director).'},
+  {h:'Review and revision',b:'Every program reviewed annually. Filename carries revision date. Next-review date tracked in the expiration spreadsheet. Paul handles revisions; you handle the calendar surfacing when each is due. Reviews spread across the year so Paul is not buried.'},
+  {h:'Storage and naming',b:'03_Admin/Safety_Programs/. Naming: ProgramName_v[version]_YYYY-MM-DD.pdf (example: HazCom_v3.2_2025-09-15.pdf). PDF and Word source in subfolders. Old versions move to /Archive/, never deleted.'}
+],tip:'Operators often spot-check specific programs during audits. Paul should pull the latest version in under 30 seconds. Every version uploaded to ISN matches the latest signed version in our files. No version skew.'},
+'m11-4':{sections:[
+  {h:'What RAVS is',b:'RAVS = Review and Verification Service. ISN\'s process for evaluating contractor compliance against operator requirements. Operators submit required topics; contractors answer with supporting documents; ISN reviews and scores.'},
+  {h:'Format and scope',b:'Typically 50-200 questions per operator. Topics: safety programs, incident rates, training, insurance, drug and alcohol, vehicle safety, subcontractor management, environmental, security. Each question = yes/no answer + supporting document upload.'},
+  {h:'Frequency',b:'Most operators re-issue RAVS annually. Some quarterly. Marathon is annual but with mid-year spot checks where they may pull 5-10 specific documents.'},
+  {h:'Workflow when a new RAVS arrives',b:'ISN emails the notification with due date. You log receipt in tracker and due date in calendar. Route to Paul (safety), Amber (insurance/legal), Owner (strategic). Each owner answers their section. You compile, upload, submit before deadline.'}
+],tip:'A RAVS due date is treated like a bid due date. Missing it can flip your status to non-responsive. Block calendar time for the team when one arrives. Paul cannot answer technical questions between site visits.'},
+'m11-5':{sections:[
+  {h:'Documentation backs every answer',b:'Every RAVS answer is backed by a document. "We have HazCom" = upload the program PDF. "Our TRIR is 1.2" = upload the OSHA 300A that supports the number. Without a document, the answer does not count.'},
+  {h:'Document categories',b:'Written safety programs (the 18). Training records (per employee, per topic, dated). COIs (current). Drug and alcohol testing records (program + 12-month logs). Incident records (OSHA 300/300A/301). Vehicle records. Equipment records (crane, forklift certs).'},
+  {h:'Filing structure',b:'03_Admin/ISN/[Operator]/[Year]/. Each operator gets their own subfolder because submission requirements vary. Some require redacted W-2s; others do not. Operator-specific filing prevents cross-contamination of submissions.'},
+  {h:'Version control',b:'Every uploaded document carries its version date in the filename. When Paul revises HazCom in March, the new version goes up; the old version moves to /Archive/ with retirement date noted. Documents never just disappear.'}
+],tip:'When an operator audits you, the question is rarely "do you have a program?" It is "show me the version active when [incident] happened." Clean archive produces it. Messy archive cannot, and that costs the contract.'},
+'m11-7':{sections:[
+  {h:'EMR explained',b:'EMR = Experience Modification Rate. A workers comp insurance metric. Industry average is 1.00. Below 1.00 = better than average (lower premiums, fewer claims). Above 1.00 = worse than average. Calculated by your workers comp carrier based on 3-year claim history.'},
+  {h:'Why operators require it',b:'Marathon (and most majors) require EMR of 1.00 or lower. Above 1.00 disqualifies. The EMR is documented in a letter from the carrier on their letterhead with policy number, rate, and underwriting period. The letter is the only acceptable proof.'},
+  {h:'Your Company\'s situation',b:'Carrier: Texas Mutual Insurance. Policy [POLICY NUMBER]. Phone 800-859-5995. Our current EMR letter is the critical blocker for Marathon approval. When the latest letter arrives, it goes to ISN immediately, the Marathon profile updates, approval moves forward. Owner is in direct contact with the Texas Mutual underwriter on the rate calculation.'},
+  {h:'Your role when the letter arrives',b:'Upload to ISN immediately. File the original in 03_Admin/ISN/Texas_Mutual/EMR_Letters/. Log the receipt date. Alert Owner within 1 hour. Full sequence: 15 minutes from arrival to fully processed.'}
+],tip:'The EMR letter is one sheet of paper worth more than most of the 200 other documents in our ISN profile combined. When it arrives, treat it like a cashier\'s check. Stop. Upload. File. Notify Owner. Then continue. Do not let it sit in the inbox until Friday.'},
+'m11-8':{sections:[
+  {h:'Eight steps to Marathon approval',b:'Marathon\'s compliance pathway through ISN has specific milestones. Each clears one barrier to being on Marathon\'s approved bidder list. We have cleared most. One remains pending (the EMR letter).'},
+  {h:'After Marathon clears',b:'The pathway is not unique to Marathon. Shell, Phillips 66, Chevron, Valero use similar stepwise ISN approval. Once approved with Marathon, parallel approvals with the others use mostly the same documents already uploaded. First approval = hardest. Subsequent = increment.'},
+  {h:'Your role on the pathway',b:'Track the eight steps in the Marathon section of the compliance tracker. Verify each completed step has its supporting documentation filed correctly. Flag any step at risk of regressing (expiring document) immediately. Do not mark a step "complete" without Owner, Paul, or Amber confirming.'}
+],tip:'When Marathon approval lands, you will know first (the ISN email arrives in your inbox before Owner\'s). Protocol: read the letter completely, confirm it is genuine, then walk to Owner\'s office and hand him the printed copy. This justifies an interruption regardless of what he is doing.'},
+'m11-10':{sections:[
+  {h:'Where the tracker lives',b:'03_Admin/ISN/Expiration_Tracker.xlsx. Columns: document name, operator (if specific), expiration date, days until expiration (=expiration_date-TODAY()), responsible party, status, file location, last action date.'},
+  {h:'Monday morning cadence',b:'Every Monday morning. Open the tracker. Sort by days-until-expiration ascending. Scan the top 20 rows. Within 60 days = yellow. Within 30 = red. Expired = critical. Send the renewal email or escalation that morning. The 20-minute Monday review prevents 95% of compliance fires.'},
+  {h:'The flag rules',b:'GREEN (60+ days): on track, no action. YELLOW (31-60): file the document, add 30-day reminder. RED (1-30): urgent — send renewal email today, notify owner via Teams, log the action. CRITICAL (expired): suspend the activity or relationship that depends on the document, escalate, expedite renewal.'},
+  {h:'What you control vs. what you do not',b:'Documents we control (safety programs, training records): ping Paul 60 days out, signed before expiration. Documents we do not (EMR letter, workers comp renewals, vehicle insurance): you cannot generate them. Track and ping Amber or Owner to follow up with the carrier early.'}
+],tip:'The tracker does not expire documents. It surfaces them. Discipline = checking it every Monday without fail. First sign of organized compliance: Monday-morning review. First sign of disorganized: panicked Friday-afternoon email saying "I just realized our HazCom expired three weeks ago."'},
+'m11-11':{sections:[
+  {h:'Avetta',b:'ISN\'s main competitor. Same model. Some operators use Avetta instead of ISN. Some use both. Your Company has an Avetta profile but it is secondary. Mid-tier operators we reach through GCs (rather than direct) often check Avetta rather than ISN.'},
+  {h:'Other parallel systems',b:'You may encounter Browz, Veriforce (formerly PEC), ComplyWorks, and railroad-specific systems like e-RAILSAFE. Each is a parallel platform with its own profile and upload requirements. Documents are mostly the same as ISN; the destination differs.'},
+  {h:'Your Company\'s strategy',b:'Active profiles on ISN (primary, Marathon lives there) and Avetta (secondary, mid-tier work). Others stay inactive until an operator requires them. Setting up a new system = 20-40 hours; we only do it when there is a confirmed paying opportunity that justifies the setup.'},
+  {h:'When a new system gets asked about',b:'A GC asks "are you on [obscure system]?" Answer: "We are on ISN and Avetta. We can join [their system] if your project requires it. Let me confirm with Owner and check the timeline." Do not commit to setting up on the spot. Some have annual fees of $500-2,000 plus dozens of hours to populate.'}
+],tip:'When a new compliance system request arrives, document the request (which operator, which project, what value of work). Owner evaluates whether the project value justifies the setup. A new system gating a $500K project is worth it. One gating a $20K bid is not. Math comes from him.'}
+};
+
+const SAFETY_PROGRAMS=['Hazard Communication','Personal Protective Equipment','Fall Protection','Crane & Rigging Safety','Welding & Hot Work','Confined Space Entry','Lockout / Tagout','Respiratory Protection','Hearing Conservation','Bloodborne Pathogens','Fire Prevention','First Aid & Medical','Drug & Alcohol Testing','Behavior-Based Safety','Job Hazard Analysis','Short Service Employee','Stop Work Authority','Driver / Vehicle Safety'];
+
+const MARATHON_STEPS=[
+{n:1,body:'Active ISNetworld profile with Marathon as a connection',status:'done'},
+{n:2,body:'All 18 written safety programs uploaded and matched to Marathon requirements',status:'done'},
+{n:3,body:'Insurance documentation meeting Marathon-specific limits ($1M GL / $1M auto / $1M WC)',status:'done'},
+{n:4,body:'Current EMR letter from Texas Mutual showing 1.00 or below',status:'pending'},
+{n:5,body:'Drug & Alcohol Testing program + 12-month testing log',status:'done'},
+{n:6,body:'Marathon-specific RAVS questionnaire response (current)',status:'done'},
+{n:7,body:'Marathon site-specific orientation completion for crew leads (Mario)',status:'done'},
+{n:8,body:'Marathon approval letter received — Your Company on bidder list',status:'pending'}
+];
+
+const RAVS_OWNERS=[
+{id:'paul',name:'Paul',sub:'safety/training'},
+{id:'amber',name:'Amber',sub:'insurance/legal'},
+{id:'owner',name:'Owner',sub:'strategic/financial'},
+{id:'self',name:'You',sub:'on file, handle'}
+];
+const RAVS_QUESTIONS=[
+{id:'r1',body:'"Provide your written Hazard Communication program (latest signed version)."',correct:'paul',why:'Safety program content. Paul writes and signs. He pulls the latest from 03_Admin/Safety_Programs/ and confirms it matches what is uploaded to ISN.'},
+{id:'r2',body:'"Upload your current General Liability insurance certificate showing limits and effective dates."',correct:'amber',why:'Insurance documentation. Amber maintains the broker relationship and can request a fresh COI within 24 hours. She verifies limits and additional insured before sending.'},
+{id:'r3',body:'"Upload a current W-9 form for Your Company, LLC."',correct:'self',why:'On file. W-9 is in 02_Vendors/Your_Company_W-9.pdf, refreshed annually. Pull it, confirm current version, upload directly. Log the action. Two-minute task.'},
+{id:'r4',body:'"Provide your OSHA 300A summary and Total Recordable Incident Rate (TRIR) for the prior calendar year."',correct:'paul',why:'Incident records. Paul maintains OSHA 300/300A/301 and has the TRIR. The 300A is signed by Paul and posted in the shop February through April every year per OSHA rule.'},
+{id:'r5',body:'"Provide annual revenue figure for the prior fiscal year (or financial standing reference)."',correct:'owner',why:'Financial information. Owner decides what level of detail to share and how to frame it. Some operators want raw revenue; some accept a banking reference. He owns the decision and the answer.'},
+{id:'r6',body:'"Provide current EMR letter from your workers compensation carrier on carrier letterhead."',correct:'amber',why:'Workers comp policy administration = Amber\'s domain. The EMR letter comes from Texas Mutual; Amber requests it through the policy contact and files it. Owner is informed on strategy but Amber owns the document request.'}
+];
+
+const CT_FLAGS=[
+{id:'green',label:'Green',sub:'60+ days, on track'},
+{id:'yellow',label:'Yellow',sub:'31-60 days, file + remind'},
+{id:'red',label:'Red',sub:'1-30 days, urgent'},
+{id:'critical',label:'Critical',sub:'expired, suspend'}
+];
+const CT_DOCS=[
+{id:'ct1',docType:'Hazard Communication Program (v3.2)',owner:'Paul',period:'Signed Aug 15, 2025 — Expires Aug 15, 2026',days:93,correct:'green',
+why:'93 days out — past the 60-day yellow threshold. Green. File and log only. The annual review window opens around mid-July (60 days out) when this turns yellow.'},
+{id:'ct2',docType:'Sub COI — Premier Welding & Fab',owner:'Amber',period:'Effective Jul 5, 2025 — Expires Jul 5, 2026',days:52,correct:'yellow',
+why:'52 days out. Within the 31-60 day yellow window. File and add a 30-day reminder. Around June 5, send Premier Welding the standard renewal email asking for their new certificate.'},
+{id:'ct3',docType:'Texas Mutual EMR Letter',owner:'Amber + Owner',period:'Effective Jun 8, 2025 — Expires Jun 8, 2026',days:25,correct:'red',
+why:'25 days out. Red. AND this is the Marathon blocker — the most important document in our profile. Notify Owner today (walk to office), confirm Amber requested the renewal from Texas Mutual, track daily until received.'},
+{id:'ct4',docType:'Forklift Operator Cert (Mario)',owner:'Paul',period:'Issued Apr 25, 2023 — Expired Apr 25, 2026',days:-19,correct:'critical',
+why:'Expired 19 days ago. Critical. Mario should not operate the forklift until renewed (compliance and liability risk). Notify Paul today, schedule recertification immediately. Log the gap. If forklift work happened during the gap, flag for Owner.'},
+{id:'ct5',docType:'Workers Compensation Policy (Texas Mutual)',owner:'Amber',period:'Effective Oct 1, 2025 — Expires Oct 1, 2026',days:140,correct:'green',
+why:'140 days out. Green. Renewal conversations with Texas Mutual typically start 60-90 days before expiration (around August). Today, no action. Amber will know when the renewal cycle starts.'},
+{id:'ct6',docType:'Marathon RAVS Renewal Submission',owner:'Paul + Amber',period:'Last submitted Jul 1, 2025 — Due Jul 1, 2026',days:48,correct:'yellow',
+why:'48 days out. Yellow. Block calendar time for Paul (safety questions) and Amber (insurance) in the next two weeks. RAVS responses take real time. Send the kickoff Teams chat to both this week.'},
+{id:'ct7',docType:'Sub COI — Quick-Cut Steel Fabrication',owner:'Amber',period:'Effective May 20, 2025 — Expires May 20, 2026',days:6,correct:'red',
+why:'6 days out. Deep red. The 30-day renewal window has long passed. Send the urgent renewal email today AND notify Amber via Teams (slipped past the standard workflow). If no renewal in 5 days, Quick-Cut loses site access May 21. Mario needs a heads-up.'}
+];
+
+const CF_ACTIONS=[
+{id:'handle',name:'Handle myself',sub:'just upload / log'},
+{id:'paul',name:'Route to Paul',sub:'safety / training'},
+{id:'amber',name:'Route to Amber',sub:'legal / finance'},
+{id:'walk',name:'Walk to Owner',sub:'urgent / Marathon'},
+{id:'teams',name:'Teams Owner',sub:'non-urgent FYI'}
+];
+const CF_SCENARIOS=[
+{id:'cf1',source:'ISNetworld notification',body:'"Your Hazard Communication program on file is dated September 2024 (more than 12 months old). The operator (Marathon Petroleum) requires programs reviewed annually. Update required within 30 days or status downgrades."',correct:'paul',
+why:'Safety program content needs annual review. Paul writes and signs revisions. Teams chat: "ISN flagged HazCom for age — needs annual review revision in 30 days." Track the 30-day deadline. When Paul completes, upload the new version and archive the old.'},
+{id:'cf2',source:'Marathon Petroleum portal',body:'"Your ISN profile shows EMR letter pending. Marathon approval cannot proceed until current EMR letter is on file in your ISN profile."',correct:'walk',
+why:'Marathon blocker. The walk-to-Owner list explicitly includes Marathon-related compliance items. Walk to his office: "Marathon portal flagged EMR pending. Approval is stuck on the Texas Mutual letter." He will want to call Texas Mutual or his Marathon contact directly.'},
+{id:'cf3',source:'ISNetworld notification',body:'"Your General Liability Certificate of Insurance expires May 25, 2026. Please upload renewal certificate before expiration to maintain compliant status."',correct:'amber',
+why:'Insurance renewal. Amber handles broker relationship and renewal cycle. Teams: "ISN flagged GL COI expiring May 25. Renewal needed." She requests the renewal from broker, you upload once it arrives.'},
+{id:'cf4',source:'ISNetworld spot audit',body:'"Spot audit on your Drug & Alcohol Testing Policy. Provide records of random testing for employee John Smith for the prior 12 months within 5 business days."',correct:'paul',
+why:'D&A testing records are Paul\'s (he owns the program and records). Route to him with operator name, employee, and deadline. He pulls the records, you upload to ISN. 5 business days is tight — log the deadline, follow up mid-week if not provided.'},
+{id:'cf5',source:'ISN administration',body:'"Your annual ISNetworld subscription renewal is due in 60 days. Invoice for $X,XXX attached. Please remit payment or contact billing."',correct:'amber',
+why:'Accounts payable. Amber handles invoices and payment scheduling. Forward to her, log the renewal date in the tracker so we do not lose access to a billing delay. Not urgent (60 days) but queue in next AP cycle.'},
+{id:'cf6',source:'Marathon Petroleum compliance',body:'"Spot audit on your Welding & Hot Work program for Marathon-approved projects. Provide latest signed program and training records for all welders within 10 business days."',correct:'walk',
+why:'Marathon-specific audit with tight deadline. Marathon = walk-to-Owner. "Marathon spot audit on Welding & Hot Work — 10-day deadline. Routing to Paul for the documents but you should know." Owner may want to call his Marathon contact about scope.'},
+{id:'cf7',source:'Marathon Petroleum strategic',body:'"Friendly update: Marathon is beginning a bidder list expansion review next quarter and is evaluating new fabricators in the Houston area. No action required at this time."',correct:'teams',
+why:'Not urgent, no deadline, no action. But Owner should know. Marathon is actively expanding and our pathway just became more strategically valuable. Teams: "Marathon emailed about bidder list expansion next quarter — no action needed, just FYI. Full email forwarded." He may want to time our final approval push.'},
+{id:'cf8',source:'Avetta portal',body:'"Your Avetta profile is missing the required Confined Space Entry safety program. Operator [X] requires this for compliance. Status will downgrade in 14 days if not provided."',correct:'handle',
+why:'Routine. We have Confined Space Entry in 03_Admin/Safety_Programs/ from our 18 (Paul wrote it). Fix: upload the same PDF to Avetta. No content question, no escalation. Log, upload, confirm status updates. Two-minute task.'}
+];
+
+var state={view:'home',completed:{},rvIdx:0,rvPicked:{},rvRevealed:{},ctIdx:0,ctPicked:{},ctRevealed:{},cfIdx:0,cfPicked:{},cfRevealed:{}};
+
+function esc(s){if(s==null)return'';return String(s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];});}
+function getCat(id){for(var i=0;i<CATEGORIES.length;i++)if(CATEGORIES[i].id===id)return CATEGORIES[i];return null;}
+function getLesson(id){for(var i=0;i<CATEGORIES.length;i++){var c=CATEGORIES[i];for(var j=0;j<c.lessons.length;j++)if(c.lessons[j].id===id)return{lesson:c.lessons[j],cat:c,idx:j};}return null;}
+function totalLessons(){return CATEGORIES.reduce(function(a,c){return a+c.lessons.length;},0);}
+function completedCount(){return Object.keys(state.completed).length;}
+
+function renderHome(){
+  var done=completedCount();var allDone=done===totalLessons();var html='';
+  html+='<div class="lab-hero"><div class="hero-grid"></div><div class="hero-glow"></div><div class="lab-hero-inner">';
+  html+='<p class="lab-eyebrow">Your Company &middot; Module 10</p>';
+  html+='<h1 class="lab-h1">ISN & <span class="accent">Compliance</span></h1>';
+  html+='<p class="lab-blurb">ISNetworld is the gate. Marathon Petroleum is the prize. Eighteen safety programs, one workers comp EMR letter, dozens of expiring documents, and a Monday-morning tracker review keep the gate open. This module is the routine.</p>';
+  html+='<div class="lab-stats">';
+  [['4','Categories'],[String(totalLessons()),'Lessons'],['3','Drills'],[String(done),'Done']].forEach(function(s){html+='<div class="lab-stat"><p class="lab-stat-num">'+s[0]+'</p><p class="lab-stat-lbl">'+s[1]+'</p></div>';});
+  html+='</div></div></div><div class="cat-grid">';
+  CATEGORIES.forEach(function(cat){
+    var doneN=cat.lessons.filter(function(l){return state.completed[l.id];}).length;
+    var tot=cat.lessons.length;var catDone=doneN===tot;var pct=tot?(doneN/tot)*100:0;
+    html+='<button class="cat-card'+(catDone?' is-done':'')+'" data-action="open-cat" data-cat-id="'+cat.id+'">';
+    html+='<div class="cat-stripe" style="background:'+cat.color+';"></div><div class="cat-inner">';
+    html+='<div class="cat-top"><div class="cat-icon-tile" style="background:'+cat.color+';">'+icon(cat.iconKey,22,'#fff')+'</div>';
+    if(catDone)html+=icon('check',18,'#10b981');
+    html+='</div><h3>'+esc(cat.title)+'</h3><p class="cat-card-blurb">'+esc(cat.blurb)+'</p>';
+    html+='<div class="cat-card-foot"><span>'+doneN+'/'+tot+' lessons</span><div class="cat-progress-track"><div class="cat-progress-fill" style="width:'+pct+'%;"></div></div></div></div></button>';
+  });
+  html+='</div>';
+  if(allDone){html+='<div class="final-banner"><h3>Module 10 complete</h3><p>ISN &amp; compliance &middot; done</p></div>';}
+  return html;
+}
+
+function renderCategory(cat){
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-home">'+icon('arrow-left',13)+' Back to module home</button>';
+  html+='<div class="cat-header"><div class="cat-header-inner"><div class="cat-header-icon" style="background:'+cat.color+';">'+icon(cat.iconKey,28,'#fff')+'</div>';
+  html+='<div><p class="cat-header-eyebrow" style="color:'+cat.color+';">Category</p><h2 class="cat-header-title">'+esc(cat.title)+'</h2><p class="cat-header-blurb">'+esc(cat.blurb)+'</p></div></div></div>';
+  html+='<div class="lesson-list">';
+  cat.lessons.forEach(function(l,i){
+    var isDone=!!state.completed[l.id];
+    var prevDone=i===0||!!state.completed[cat.lessons[i-1].id];
+    var locked=!isDone&&!prevDone;var current=!isDone&&prevDone;
+    var tileCls=isDone?'done':current?'current':'pending';
+    var typeLabel=l.type==='reading'?'Reading':'Drill';
+    var typeColor=l.type==='reading'?'#71717a':'#cbd5e1';
+    html+='<button class="lesson-row'+(isDone?' is-done':'')+(locked?' is-locked':'')+'"'+(locked?' disabled':' data-action="open-lesson" data-lesson-id="'+l.id+'"')+'>';
+    html+='<div class="lesson-num-tile '+tileCls+'">'+(locked?icon('lock',14):isDone?icon('check',18):String(i+1))+'</div>';
+    html+='<div class="lesson-row-meta"><p class="lesson-row-title">'+esc(l.title)+'</p><p class="lesson-row-tag" style="color:'+typeColor+';">'+typeLabel+' &middot; ~'+l.minutes+' min</p></div>';
+    if(!locked)html+=icon('arrow-right',16,'#71717a');
+    html+='</button>';
+  });
+  html+='</div>';
+  return html;
+}
+
+function renderReading(lesson,cat){
+  var c=LESSON_CONTENT[lesson.id]||{sections:[],tip:''};
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="lesson-card"><div class="lesson-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p><h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="lesson-card-body">';
+  c.sections.forEach(function(s){html+='<div class="lesson-section"><h3>'+esc(s.h)+'</h3><p>'+esc(s.b)+'</p></div>';});
+  if(lesson.id==='m11-3'){
+    html+='<div style="margin-top:8px;"><p style="font-family:\'JetBrains Mono\',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:#cbd5e1;margin-bottom:8px;">The 18 written programs on file</p><div class="prog-grid">';
+    SAFETY_PROGRAMS.forEach(function(p,i){html+='<div class="prog-tile"><span class="prog-num">'+(i+1).toString().padStart(2,'0')+'</span><span>'+esc(p)+'</span></div>';});
+    html+='</div></div>';
+  }
+  if(lesson.id==='m11-8'){
+    html+='<div style="margin-top:8px;"><p style="font-family:\'JetBrains Mono\',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:#cbd5e1;margin-bottom:8px;">The 8 steps to Marathon approval</p><div class="step-list">';
+    MARATHON_STEPS.forEach(function(s){html+='<div class="step-row '+s.status+'"><div class="step-num">'+s.n+'</div><div class="step-text">'+esc(s.body)+'</div><div class="step-badge '+s.status+'">'+s.status+'</div></div>';});
+    html+='</div></div>';
+  }
+  if(c.tip){html+='<div class="tip-box"><p class="tip-eyebrow">Joseph\'s tip</p><p class="tip-body">'+esc(c.tip)+'</p></div>';}
+  html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button></div></div>';
+  return html;
+}
+
+function renderRavsTriage(lesson,cat){
+  var idx=state.rvIdx;var s=RAVS_QUESTIONS[idx];
+  var picked=state.rvPicked[s.id];var revealed=state.rvRevealed[s.id];var total=RAVS_QUESTIONS.length;
+  var allDone=RAVS_QUESTIONS.every(function(sc){return state.rvRevealed[sc.id];});
+  var correctCount=RAVS_QUESTIONS.filter(function(sc){return state.rvPicked[sc.id]===sc.correct;}).length;
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card"><div class="int-card-header" style="background:'+cat.color+';"><div class="lesson-icon-tile">'+icon('scroll-text',26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p><h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body"><p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Six RAVS questions arrive from the Marathon questionnaire. Route each to the right owner: Paul (safety/training), Amber (insurance/legal), Owner (strategic/financial), or handle yourself if the document is already on file.</p>';
+  html+='<div class="stage"><p class="stage-tag">Question '+(idx+1)+' of '+total+'</p>';
+  html+='<div class="q-bubble"><div style="font-family:\'JetBrains Mono\',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.15em;color:#94a3b8;margin-bottom:6px;">RAVS Item</div>'+esc(s.body)+'</div>';
+  html+='<div class="btns">';
+  RAVS_OWNERS.forEach(function(o){
+    var cls='btn-opt';
+    if(revealed){if(o.id===s.correct)cls+=picked===o.id?' picked-correct':' correct-shown';else if(o.id===picked)cls+=' picked-wrong';}
+    html+='<button class="'+cls+'" data-action="rv-pick" data-owner="'+o.id+'"><span>'+esc(o.name)+'</span><small>'+esc(o.sub)+'</small></button>';
+  });
+  html+='</div>';
+  if(revealed){
+    var ok=picked===s.correct;var co=RAVS_OWNERS.filter(function(o){return o.id===s.correct;})[0];
+    html+='<div class="feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Owner: '+esc(co.name)+'. ')+esc(s.why)+'</div>';
+    if(idx<total-1)html+='<div style="text-align:right;margin-top:12px;"><button class="next-btn" data-action="rv-next">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+  }
+  html+='</div>';
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#cbd5e1')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+function renderTracker(lesson,cat){
+  var idx=state.ctIdx;var s=CT_DOCS[idx];
+  var picked=state.ctPicked[s.id];var revealed=state.ctRevealed[s.id];var total=CT_DOCS.length;
+  var allDone=CT_DOCS.every(function(sc){return state.ctRevealed[sc.id];});
+  var correctCount=CT_DOCS.filter(function(sc){return state.ctPicked[sc.id]===sc.correct;}).length;
+  var daysCls;
+  if(s.days<=0)daysCls='critical';
+  else if(s.days<=30)daysCls='red';
+  else if(s.days<=60)daysCls='yellow';
+  else daysCls='green';
+  var daysLabel=s.days<=0?(Math.abs(s.days)+' DAYS EXPIRED'):(s.days+' DAYS');
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card"><div class="int-card-header" style="background:'+cat.color+';"><div class="lesson-icon-tile">'+icon('calendar-clock',26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p><h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body"><p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Seven documents come up in your Monday tracker review. Today: May 14, 2026. For each, pick the flag color. Green (60+ days), Yellow (31-60), Red (1-30), Critical (expired).</p>';
+  html+='<div style="margin-bottom:14px;font-family:\'JetBrains Mono\',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:#cbd5e1;">Document '+(idx+1)+' of '+total+'</div>';
+  html+='<div class="doc-card">';
+  html+='<div class="doc-head"><span style="font-weight:700;font-size:10px;letter-spacing:.1em;">Compliance Tracker Row</span><span class="days-badge '+daysCls+'">'+daysLabel+'</span></div>';
+  html+='<div class="doc-row"><div class="doc-key">Document</div><div class="doc-val">'+esc(s.docType)+'</div></div>';
+  html+='<div class="doc-row"><div class="doc-key">Owner</div><div class="doc-val">'+esc(s.owner)+'</div></div>';
+  html+='<div class="doc-row"><div class="doc-key">Period</div><div class="doc-val">'+esc(s.period)+'</div></div>';
+  html+='<div class="doc-row"><div class="doc-key">Today</div><div class="doc-val">May 14, 2026</div></div>';
+  html+='</div>';
+  html+='<div class="btns">';
+  CT_FLAGS.forEach(function(f){
+    var cls='btn-opt flag-'+f.id;
+    if(revealed){if(f.id===s.correct)cls+=picked===f.id?' picked-correct':' correct-shown';else if(f.id===picked)cls+=' picked-wrong';}
+    html+='<button class="'+cls+'" data-action="ct-pick" data-flag="'+f.id+'"><span>'+esc(f.label)+'</span><small>'+esc(f.sub)+'</small></button>';
+  });
+  html+='</div>';
+  if(revealed){
+    var ok=picked===s.correct;var cf=CT_FLAGS.filter(function(f){return f.id===s.correct;})[0];
+    html+='<div class="feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Flag: '+esc(cf.label)+'. ')+esc(s.why)+'</div>';
+    if(idx<total-1)html+='<div style="text-align:right;margin-top:12px;"><button class="next-btn" data-action="ct-next">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+  }
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#cbd5e1')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+function renderFlagDrill(lesson,cat){
+  var idx=state.cfIdx;var s=CF_SCENARIOS[idx];
+  var picked=state.cfPicked[s.id];var revealed=state.cfRevealed[s.id];var total=CF_SCENARIOS.length;
+  var allDone=CF_SCENARIOS.every(function(sc){return state.cfRevealed[sc.id];});
+  var correctCount=CF_SCENARIOS.filter(function(sc){return state.cfPicked[sc.id]===sc.correct;}).length;
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card"><div class="int-card-header" style="background:'+cat.color+';"><div class="lesson-icon-tile">'+icon('bell',26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p><h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body"><p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Eight compliance flags arrive over a busy week. For each, decide: handle yourself, route to Paul, route to Amber, walk to Owner (urgent), or Teams Owner (non-urgent FYI).</p>';
+  html+='<div class="stage"><p class="stage-tag">Flag '+(idx+1)+' of '+total+'</p>';
+  html+='<p class="q-source">'+icon('triangle-alert',11,'#fbbf24')+' '+esc(s.source)+'</p>';
+  html+='<div class="q-bubble">'+esc(s.body)+'</div>';
+  html+='<div class="btns">';
+  CF_ACTIONS.forEach(function(a){
+    var cls='btn-opt';
+    if(revealed){if(a.id===s.correct)cls+=picked===a.id?' picked-correct':' correct-shown';else if(a.id===picked)cls+=' picked-wrong';}
+    html+='<button class="'+cls+'" data-action="cf-pick" data-act="'+a.id+'"><span>'+esc(a.name)+'</span><small>'+esc(a.sub)+'</small></button>';
+  });
+  html+='</div>';
+  if(revealed){
+    var ok=picked===s.correct;var ca=CF_ACTIONS.filter(function(a){return a.id===s.correct;})[0];
+    html+='<div class="feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Best action: '+esc(ca.name)+'. ')+esc(s.why)+'</div>';
+    if(idx<total-1)html+='<div style="text-align:right;margin-top:12px;"><button class="next-btn" data-action="cf-next">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+  }
+  html+='</div>';
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#cbd5e1')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+function renderLesson(lesson,cat){
+  if(lesson.type==='reading')return renderReading(lesson,cat);
+  if(lesson.intKey==='ravsTriage')return renderRavsTriage(lesson,cat);
+  if(lesson.intKey==='tracker')return renderTracker(lesson,cat);
+  if(lesson.intKey==='flagDrill')return renderFlagDrill(lesson,cat);
+  return renderReading(lesson,cat);
+}
+
+function render(){
+  var app=document.getElementById('app');var html='';
+  if(state.view==='home'){html=renderHome();}
+  else if(state.view.indexOf('category:')===0){var cat=getCat(state.view.slice(9));html=cat?renderCategory(cat):renderHome();}
+  else if(state.view.indexOf('lesson:')===0){var info=getLesson(state.view.slice(7));html=info?renderLesson(info.lesson,info.cat):renderHome();}
+  app.innerHTML=html;
+}
+
+document.body.addEventListener('click',function(ev){
+  var t=ev.target.closest('[data-action]');
+  if(!t)return;
+  var action=t.getAttribute('data-action');
+  if(action==='open-cat'){state.view='category:'+t.getAttribute('data-cat-id');render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='back-home'){state.view='home';render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='back-cat'){state.view='category:'+t.getAttribute('data-cat-id');render();window.scrollTo({top:0,behavior:'smooth'});}
+  else if(action==='open-lesson'){
+    var lid=t.getAttribute('data-lesson-id');var info=getLesson(lid);
+    if(info){
+      if(info.lesson.intKey==='ravsTriage'){state.rvIdx=0;state.rvPicked={};state.rvRevealed={};}
+      if(info.lesson.intKey==='tracker'){state.ctIdx=0;state.ctPicked={};state.ctRevealed={};}
+      if(info.lesson.intKey==='flagDrill'){state.cfIdx=0;state.cfPicked={};state.cfRevealed={};}
+    }
+    state.view='lesson:'+lid;render();window.scrollTo({top:0,behavior:'smooth'});
+  }
+  else if(action==='complete-lesson'){
+    var lid2=t.getAttribute('data-lesson-id');state.completed[lid2]=true;
+    var info2=getLesson(lid2);
+    if(info2){
+      var next=null;
+      for(var i=0;i<info2.cat.lessons.length;i++){
+        if(info2.cat.lessons[i].id===lid2&&i+1<info2.cat.lessons.length){next=info2.cat.lessons[i+1];break;}
+      }
+      state.view=next?'lesson:'+next.id:'category:'+info2.cat.id;
+      render();window.scrollTo({top:0,behavior:'smooth'});
+    }
+  }
+  else if(action==='rv-pick'){
+    var rs=RAVS_QUESTIONS[state.rvIdx];
+    if(state.rvRevealed[rs.id])return;
+    state.rvPicked[rs.id]=t.getAttribute('data-owner');state.rvRevealed[rs.id]=true;render();
+  }
+  else if(action==='rv-next'){if(state.rvIdx<RAVS_QUESTIONS.length-1){state.rvIdx++;render();}}
+  else if(action==='ct-pick'){
+    var cs=CT_DOCS[state.ctIdx];
+    if(state.ctRevealed[cs.id])return;
+    state.ctPicked[cs.id]=t.getAttribute('data-flag');state.ctRevealed[cs.id]=true;render();
+  }
+  else if(action==='ct-next'){if(state.ctIdx<CT_DOCS.length-1){state.ctIdx++;render();}}
+  else if(action==='cf-pick'){
+    var fs=CF_SCENARIOS[state.cfIdx];
+    if(state.cfRevealed[fs.id])return;
+    state.cfPicked[fs.id]=t.getAttribute('data-act');state.cfRevealed[fs.id]=true;render();
+  }
+  else if(action==='cf-next'){if(state.cfIdx<CF_SCENARIOS.length-1){state.cfIdx++;render();}}
+});
+
+document.getElementById('logo-slot').innerHTML=icon('shield-check',22,'#fff');
+render();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="quiz-meta.js"></script>
+<script>window.NC_GATE = {"module_id": "isn-compliance", "title": "ISNetworld & Compliance", "next": "job-lifecycle.html", "questions": [{"q": "A RAVS question asks for technical safety content and the answer looks easy. What do you do?", "options": ["Answer it yourself to save Paul time", "Route it to the content owner, because one wrong answer can flip Your Company's status from compliant to deficient", "Leave it blank and submit the rest", "Reuse last year's answer without checking"]}, {"q": "The Texas Mutual EMR letter arrives in the mail. What is the full sequence?", "options": ["File it and mention it at the Friday check-in", "Send it to Paul to review first", "Upload to ISN immediately, file the original, log the receipt date, and alert Owner within one hour", "Mail the original directly to Marathon Petroleum"]}, {"q": "Under the expiration tracker flag rules, a document expiring in 45 days is what color?", "options": ["Yellow: file the document and add a 30-day reminder", "Green: on track, no action", "Red: send the renewal email today", "Critical: suspend the related activity"]}]};</script>
+<script src="portal.js"></script>
+<script>ncInitModulePage();</script>
+</body>
+</html>

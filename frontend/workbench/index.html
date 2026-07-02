@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Company - Review Workbench</title>
+  <link rel="stylesheet" href="workbench.css">
+  <!-- PDF.js from Mozilla CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs" type="module"></script>
+</head>
+<body>
+  <header id="wb-header">
+    <div class="wb-brand">
+      <span class="wb-logo">&#x1f536;</span>
+      <span class="wb-title">your company</span>
+      <span class="wb-sub">REVIEW WORKBENCH</span>
+    </div>
+    <div class="wb-project" id="wb-project-info">No project loaded</div>
+    <div class="wb-actions">
+      <button id="btn-prev" onclick="prevPage()" disabled>&#9664; Prev</button>
+      <span id="page-info">0 / 0</span>
+      <button id="btn-next" onclick="nextPage()" disabled>Next &#9654;</button>
+      <button id="btn-zoom-in" onclick="zoomIn()">+</button>
+      <button id="btn-zoom-out" onclick="zoomOut()">-</button>
+      <span id="zoom-level">100%</span>
+    </div>
+    <div class="wb-stats" id="wb-stats"></div>
+    <div class="wb-right-actions">
+      <button id="btn-export" onclick="exportTekla()" class="btn-molten" disabled>Export to Tekla</button>
+    </div>
+  </header>
+
+  <div id="wb-main">
+    <!-- Drawing viewer -->
+    <div id="wb-viewer">
+      <div id="wb-canvas-container">
+        <canvas id="pdf-canvas"></canvas>
+        <svg id="detection-overlay" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+      <div id="wb-empty-state">
+        <div class="wb-empty-icon">&#128209;</div>
+        <div class="wb-empty-text">Drop a structural PDF here or click Load Drawing</div>
+        <button onclick="loadDrawing()" class="btn-molten">Load Drawing</button>
+      </div>
+    </div>
+
+    <!-- Sidebar: takeoff data + edit panel -->
+    <aside id="wb-sidebar">
+      <div id="wb-edit-panel" class="wb-panel" style="display:none">
+        <div class="wb-panel-hdr">EDIT DETECTION</div>
+        <div class="wb-edit-fields">
+          <label>Mark<input type="text" id="edit-mark"></label>
+          <label>Shape<input type="text" id="edit-shape"></label>
+          <label>Quantity<input type="number" id="edit-qty" min="1"></label>
+          <label>Length (ft)<input type="number" id="edit-length" step="0.1"></label>
+          <label>Camber<input type="text" id="edit-camber" placeholder="e.g., 3/4"></label>
+          <label>Grade<input type="text" id="edit-grade" value="A992"></label>
+        </div>
+        <div id="edit-validation" class="wb-validation"></div>
+        <div class="wb-edit-actions">
+          <button onclick="saveEdit()" class="btn-molten">Save</button>
+          <button onclick="approveDetection()">Approve</button>
+          <button onclick="cancelEdit()">Cancel</button>
+        </div>
+      </div>
+
+      <div id="wb-member-list" class="wb-panel">
+        <div class="wb-panel-hdr">
+          MEMBERS
+          <span id="member-count" class="wb-badge">0</span>
+        </div>
+        <div id="member-list-body"></div>
+      </div>
+
+      <div id="wb-legend" class="wb-panel">
+        <div class="wb-panel-hdr">LEGEND</div>
+        <div class="wb-legend-items">
+          <span class="wb-legend-item"><span class="wb-dot" style="background:#4FC3F7"></span> AI High (&gt;90%)</span>
+          <span class="wb-legend-item"><span class="wb-dot" style="background:#ff5f00"></span> Needs Review</span>
+          <span class="wb-legend-item"><span class="wb-dot" style="background:#34d399"></span> User Approved</span>
+          <span class="wb-legend-item"><span class="wb-dot" style="background:#ff3b3b"></span> AISC Invalid</span>
+        </div>
+      </div>
+
+      <div id="wb-corrections" class="wb-panel">
+        <div class="wb-panel-hdr">
+          CORRECTIONS
+          <span id="correction-count" class="wb-badge">0</span>
+        </div>
+        <div id="correction-list-body"></div>
+      </div>
+    </aside>
+  </div>
+
+  <script src="workbench.js"></script>
+</body>
+</html>

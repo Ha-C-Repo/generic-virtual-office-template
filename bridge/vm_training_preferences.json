@@ -1,0 +1,724 @@
+{
+  "source": "The Owner Claude export + Bid List 4-24-2026",
+  "generated": "2026-05-11",
+  "bid_list_stats": {
+    "total_bids": 393,
+    "conventional": 283,
+    "pemb": 98,
+    "states_covered": 27
+  },
+  "geographic_weights": {
+    "TX": {
+      "count": 215,
+      "weight": 15.0
+    },
+    "OK": {
+      "count": 14,
+      "weight": 1.0
+    },
+    "TN": {
+      "count": 13,
+      "weight": 0.9
+    },
+    "FL": {
+      "count": 13,
+      "weight": 0.9
+    },
+    "CO": {
+      "count": 9,
+      "weight": 0.6
+    },
+    "AR": {
+      "count": 7,
+      "weight": 0.5
+    },
+    "KS": {
+      "count": 6,
+      "weight": 0.4
+    },
+    "NM": {
+      "count": 4,
+      "weight": 0.3
+    },
+    "CA": {
+      "count": 4,
+      "weight": 0.3
+    },
+    "LA": {
+      "count": 3,
+      "weight": 0.2
+    },
+    "IL": {
+      "count": 3,
+      "weight": 0.2
+    },
+    "AL": {
+      "count": 3,
+      "weight": 0.2
+    },
+    "NC": {
+      "count": 3,
+      "weight": 0.2
+    },
+    "UT": {
+      "count": 2,
+      "weight": 0.1
+    },
+    "IA": {
+      "count": 2,
+      "weight": 0.1
+    },
+    "SC": {
+      "count": 2,
+      "weight": 0.1
+    },
+    "VA": {
+      "count": 2,
+      "weight": 0.1
+    },
+    "MO": {
+      "count": 1,
+      "weight": 0.1
+    },
+    "WI": {
+      "count": 1,
+      "weight": 0.1
+    },
+    "OH": {
+      "count": 1,
+      "weight": 0.1
+    },
+    "CT": {
+      "count": 1,
+      "weight": 0.1
+    },
+    "GA": {
+      "count": 1,
+      "weight": 0.1
+    },
+    "MI": {
+      "count": 1,
+      "weight": 0.1
+    },
+    "ID": {
+      "count": 1,
+      "weight": 0.1
+    },
+    "NV": {
+      "count": 1,
+      "weight": 0.1
+    },
+    "KY": {
+      "count": 1,
+      "weight": 0.1
+    },
+    "AZ": {
+      "count": 1,
+      "weight": 0.1
+    }
+  },
+  "gc_weights": {
+    "RIGHT CHOICE CONSTRUCTION": {
+      "count": 20,
+      "weight": 15
+    },
+    "Crossland Construction Company, Inc.": {
+      "count": 15,
+      "weight": 15
+    },
+    "Catamount Constructors, Inc.": {
+      "count": 15,
+      "weight": 15
+    },
+    "MEC General Contractors": {
+      "count": 15,
+      "weight": 15
+    },
+    "SPD Construction": {
+      "count": 12,
+      "weight": 15
+    },
+    "Parkway Construction": {
+      "count": 12,
+      "weight": 15
+    },
+    "Cactus Commercial, Inc.": {
+      "count": 8,
+      "weight": 15
+    },
+    "Key Construction": {
+      "count": 8,
+      "weight": 15
+    },
+    "GLR, Inc.": {
+      "count": 7,
+      "weight": 14
+    },
+    "SEDALCO Construction Services": {
+      "count": 7,
+      "weight": 14
+    },
+    "Fulcrum Construction": {
+      "count": 6,
+      "weight": 12
+    },
+    "C.A. Walker Construction": {
+      "count": 6,
+      "weight": 12
+    },
+    "Central Builders, Inc": {
+      "count": 6,
+      "weight": 12
+    },
+    "Anchor Construction and Management, Inc.": {
+      "count": 5,
+      "weight": 10
+    },
+    "Wier Commercial Construction": {
+      "count": 5,
+      "weight": 10
+    },
+    "Ready Construction Services": {
+      "count": 5,
+      "weight": 10
+    },
+    "Rycon Construction": {
+      "count": 5,
+      "weight": 10
+    },
+    "Builtech Services, LLC": {
+      "count": 4,
+      "weight": 8
+    },
+    "7B Building & Development / 7B Commercial Construction": {
+      "count": 4,
+      "weight": 8
+    },
+    "EMJ Corporation": {
+      "count": 4,
+      "weight": 8
+    },
+    "Burton Construction": {
+      "count": 4,
+      "weight": 8
+    },
+    "7B Building & Development": {
+      "count": 3,
+      "weight": 6
+    },
+    "ARCO/Murray Design Build": {
+      "count": 3,
+      "weight": 6
+    },
+    "Summit GC INC.": {
+      "count": 3,
+      "weight": 6
+    },
+    "Autobuilders General Contracting Services": {
+      "count": 3,
+      "weight": 6
+    },
+    "CR Crawford Construction": {
+      "count": 3,
+      "weight": 6
+    },
+    "Sincere Developers and Builders": {
+      "count": 3,
+      "weight": 6
+    },
+    "MacCo Builders": {
+      "count": 3,
+      "weight": 6
+    },
+    "ARK General Construction": {
+      "count": 3,
+      "weight": 6
+    },
+    "Majestic Developers, LLC": {
+      "count": 3,
+      "weight": 6
+    },
+    "CIVE, Inc": {
+      "count": 3,
+      "weight": 6
+    },
+    "WIER Commercial Construction": {
+      "count": 3,
+      "weight": 6
+    },
+    "Schwob Companies": {
+      "count": 2,
+      "weight": 4
+    },
+    "Granchelli Construction": {
+      "count": 2,
+      "weight": 4
+    },
+    "Brinkmann Constructors": {
+      "count": 2,
+      "weight": 4
+    },
+    "Lee Lewis Construction, Inc.": {
+      "count": 2,
+      "weight": 4
+    },
+    "Thomas Grace Construction": {
+      "count": 2,
+      "weight": 4
+    },
+    "Jim Cooley Construction": {
+      "count": 2,
+      "weight": 4
+    },
+    "Capitol Construction Solutions, Inc.": {
+      "count": 2,
+      "weight": 4
+    },
+    "Memar Contractors Group": {
+      "count": 2,
+      "weight": 4
+    },
+    "Limestone Construction": {
+      "count": 2,
+      "weight": 4
+    },
+    "Ambercrest Construction": {
+      "count": 2,
+      "weight": 4
+    },
+    "MAPP, LLC": {
+      "count": 2,
+      "weight": 4
+    },
+    "Wurzel Builders": {
+      "count": 2,
+      "weight": 4
+    },
+    "Madewell Construction": {
+      "count": 2,
+      "weight": 4
+    },
+    "Steele & Freeman, Inc.": {
+      "count": 2,
+      "weight": 4
+    },
+    "Miller Tippens": {
+      "count": 2,
+      "weight": 4
+    },
+    "Teal Construction Company": {
+      "count": 2,
+      "weight": 4
+    },
+    "KPS Commercial Construction": {
+      "count": 2,
+      "weight": 4
+    },
+    "Tegrity Contractors": {
+      "count": 2,
+      "weight": 4
+    },
+    "Landmark Structural Builders": {
+      "count": 2,
+      "weight": 4
+    },
+    "Nabholz Construction Corporation": {
+      "count": 2,
+      "weight": 4
+    },
+    "Frost Contracting Services": {
+      "count": 2,
+      "weight": 4
+    },
+    "Novel Builders": {
+      "count": 2,
+      "weight": 4
+    },
+    "ESI Construction": {
+      "count": 2,
+      "weight": 4
+    },
+    "WDS Construction": {
+      "count": 2,
+      "weight": 4
+    },
+    "O'Gary Construction Group": {
+      "count": 2,
+      "weight": 4
+    },
+    "E&L Construction Group": {
+      "count": 2,
+      "weight": 4
+    },
+    "AP Construction": {
+      "count": 2,
+      "weight": 4
+    },
+    "Reeder General Contractors": {
+      "count": 2,
+      "weight": 4
+    },
+    "Duffey Southeast Construction": {
+      "count": 2,
+      "weight": 4
+    },
+    "The Trevino Group": {
+      "count": 2,
+      "weight": 4
+    },
+    "Sean Campbell Construction": {
+      "count": 2,
+      "weight": 4
+    },
+    "Grace Construction Consultants": {
+      "count": 2,
+      "weight": 4
+    },
+    "Omega Construction": {
+      "count": 2,
+      "weight": 4
+    },
+    "Eastern Builders Inc.": {
+      "count": 2,
+      "weight": 4
+    },
+    "Murphy And Sons, Inc.": {
+      "count": 2,
+      "weight": 4
+    },
+    "O'Haver Contractors": {
+      "count": 2,
+      "weight": 4
+    }
+  },
+  "type_weights": {},
+  "cost_ranges": {
+    "min": 35550,
+    "p10": 185592,
+    "p25": 300700,
+    "median": 761672,
+    "p75": 1682725,
+    "p90": 3804816,
+    "max": 17860288,
+    "mean": 1496840.9310344828
+  },
+  "area_ranges": {
+    "min": 1422,
+    "p10": 5260,
+    "p25": 9800,
+    "median": 23010,
+    "p75": 55000,
+    "p90": 109830,
+    "max": 620751,
+    "mean": 48920.7102425876
+  },
+  "correction_patterns": [
+    {
+      "conversation": "Steel quote completeness and pricing review",
+      "date": "2026-04-28",
+      "text": "This is all true and also we are on like 10 revisions already."
+    },
+    {
+      "conversation": "Dollar Tree bid revision and calculation review",
+      "date": "2026-04-29",
+      "text": "Using our locked in build script format. Please check your previous bid. I\u2019ve attached the client drawings, and your previous bid doc. \n\nIvan\u2019s message:\n\n\u201cPlease recheck the project \u201cDollar Tree\u201d as I believe there may be an issue in the calculations and final bid amount.\nFor reference, we recently analyzed another smaller project, \u201cFamous Foot Wear,\u201d which has:\nLess steel tonnage\nLess square foot"
+    },
+    {
+      "conversation": "Famous Foot Wear bid calculation review",
+      "date": "2026-04-29",
+      "text": "Please recheck the project \u201cFamous Foot Wear\u201d as I believe there may be an issue in the calculations and final bid amount.\nFor reference, we recently analyzed another larger project, \u201cDollar Tree,\u201d which has:\nMore steel tonnage\nMore square footage of deck\nLarger overall scope\nDespite being a bigger project, the Dollar Tree total bid price is lower than Famous Foot Wear, which suggests something ma"
+    },
+    {
+      "conversation": "Famous Foot Wear bid calculation review",
+      "date": "2026-04-29",
+      "text": "This isn\u2019t complete. It has some errors and missing data which shows uo coding lines. Please correct that. And also \u201cPrepare for\u201d will be same as of previous Bid (Right Choice Construction). Please update and send proper updated Bid."
+    },
+    {
+      "conversation": "Hunt Midwest Logistics VII structural steel bid revision",
+      "date": "2026-04-28",
+      "text": "Need you to revisit your previous bid (attached) for the Hunt Midwest Logistics VII Building. Complete takeoff for a structural steel package bid. You said earlier that it may be wrong. Attached also are the structural pages (.zip) pulled from client full set. DO IT CORRECT AND ACCURATE, CLAUDE. We cannot afford mistakes. \n\nGC:\nBingman Construction Company\n102 Resource Drive, Wentzville, MO 63385,"
+    },
+    {
+      "conversation": "Proposal review and quality check",
+      "date": "2026-04-30",
+      "text": "We will never be using PEMB/sqft. Ever. You know this. This is not practical and should be eliminated from our vocabulary and methodology. We need to always dive deep into the drawings and extract every single detail for complete and full takeoff of our scope to bid precise. Is your bid matching these parameters?"
+    },
+    {
+      "conversation": "Proposal review and quality check",
+      "date": "2026-04-30",
+      "text": "I need you to find the cost of the remaining materials that\u2019s not in our master list. Locate them from a local supplier to Texas. Factor in their total quantities, and include their cost and our markup/profit. Simple as that. You should have been doing this since the beginning. We cannot be bidding incorrectly. It\u2019s bad for my business Claude. \n\nYou need to always run a complete and full takeoff o"
+    },
+    {
+      "conversation": "Proposal review and quality check",
+      "date": "2026-04-30",
+      "text": "Please don\u2019t include ivan or anytime else unless I do, Claude. \n\nYou are responsible for deciphering the entire PEMB of structural steel pages from client. You are responsible for bulging the bid please understand. \n\nYou have all the information you need at your disposal"
+    },
+    {
+      "conversation": "Proposal review and quality check",
+      "date": "2026-04-30",
+      "text": "Please don\u2019t include ivan or anyone else unless I do, Claude. \n\nYou are responsible for deciphering the entire PEMB of structural steel pages from client. You are responsible for bulging the bid please understand. \n\nYou have all the information you need at your disposal. \n\nPlease build the bid document so I can submit."
+    },
+    {
+      "conversation": "Proposal review and quality check",
+      "date": "2026-04-30",
+      "text": "Ivan's Message:\n\nPlease recheck and reevaluate the bid proposal for the Southern Tire PEMB Project.\nThe current bid amount is $800,000.00 for a building area of only 10,625 SQFT, which appears unusually high for a PEMB project of this size. Please conduct a fresh review of the project drawings, scope, quantities, and pricing assumptions to verify whether the estimate is accurate.\nKindly review and"
+    },
+    {
+      "conversation": "Proposal review and quality check",
+      "date": "2026-04-30",
+      "text": "Our difference is we are providing a serious version of their weak PEMB structure, right?"
+    },
+    {
+      "conversation": "Proposal review and quality check",
+      "date": "2026-04-30",
+      "text": "Okay, I need you to review YOUR bid doc, and my (Owner) revised format and language and additions/omissions. Save my style only, yours was running text out of page, overlapping, logo wrong, just a lot of stuff I do not want to have to fix. Just focus and give me your feedback. Please review and save my commands. :)"
+    },
+    {
+      "conversation": "Autoscope structural steel pricing proposal",
+      "date": "2026-04-28",
+      "text": "Claude,\n\nWhat is going on? How is your most recent bid doc, lower than your previous? I am not happy. Find both bid docs. What is wrong?!"
+    },
+    {
+      "conversation": "Bid pricing accuracy and takeoff review",
+      "date": "2026-04-28",
+      "text": "You need to use our latest data to make sure this bid is full takeoff, with accurate pricing. We already submitted the bid and you said it was wrong. SMH"
+    },
+    {
+      "conversation": "Alpine Buick GMC bid calculations review",
+      "date": "2026-04-28",
+      "text": "Now check both your bids for Alpine, see if okay. I also attached the client structural pages for reference. \n\nIvan's Message on Alpine:\n\"Please recheck the calculations for the Alpine Buick GMC Project.\nIt appears that in the latest file, not only has the total area increased, but the structural steel tonnage and overall project cost have also increased accordingly. This needs to be carefully rev"
+    },
+    {
+      "conversation": "Alpine Buick GMC bid calculations review",
+      "date": "2026-04-28",
+      "text": "Great figures and colors but man so much orphans and phantom overlapping lettering and you have code as text data versus actual words. Fix this"
+    },
+    {
+      "conversation": "Southern Tire Mart PEMB bid documentation",
+      "date": "2026-04-27",
+      "text": "Southern Tire Mart Benton Harbor\nComplete PEMB Bid \n\nGC: \nPerez General Contractors\n +1 724-344-9642\n[jperez@perezgeneralcontracting.com](mailto:jperez@perezgeneralcontracting.com)\n\nAttached are the PEMB drawings for Southern Tire Mart, as well as a complete PEMB bid doc from a previous project, for your reference."
+    },
+    {
+      "conversation": "Southern Tire Mart PEMB bid documentation",
+      "date": "2026-04-27",
+      "text": "Could you make a compelling single page intro letter, professionally done, to the GC on this project? Mission is to replace their current PEMB building supplier (Whirlwind Steel Buildings), offer our own certified YOUR COMPANY PEMB building, and offer turnkey solution."
+    },
+    {
+      "conversation": "Gilcrest Head Start PEMB bid",
+      "date": "2026-04-27",
+      "text": "PEMB Bid, I have attached the client drawings, as well as our latest PEMB bid doc, for reference. \n\nDescription:\nLocation: Lot 6 Block 11, Gilcrest, CO 80623, United States of America\nGilcrest Head Start 11,140 SF PEMB on Slab on Grade. Located at Lot 6, Block 11, Gilcrest, Colorado.\n\nGC:\nBuildings By Design\n515 Industrial Park Rd, Brush, CO 80723, USA\nCody Holland\nEstimator \u2022 +1 970-467-4499 \u2022 +1"
+    },
+    {
+      "conversation": "Intermountain Electronics PEMB expansion bid",
+      "date": "2026-04-27",
+      "text": "We are perfect to design-assist this GC for this new PEMB.\n\nDescription:\nPoettker Construction is bidding on the Intermountain Electronics Building Expansion in Centralia, IL.  Proposals are requested by NOON 12:00PM on Monday, May 4th, 2026. Bids should be emailed to [ctebbe@poettkerconstruction.com](mailto:ctebbe@poettkerconstruction.com)\nThe Project consists of the design-assist construction of"
+    },
+    {
+      "conversation": "Supplier markup and wholesale pricing strategy",
+      "date": "2026-05-05",
+      "text": "Recheck PDFs for overlapping or out of space text and fix, I cannot keep reminding you not to deliver \"finished files\" in this manner. Please quality inspect every single PDF throughout our entire system"
+    },
+    {
+      "conversation": "Crunch Fitness structural steel proposal",
+      "date": "2026-05-05",
+      "text": "Build a complete structural steel or PEMB proposal with the attached docs. Let me know which we will bid. Remember, use all our latest rulebook, rendering on cover page (attached), and internal GP. \n\nGC:\nCentral Builders, Inc - San Antonio\nEstimating Email\u2002|\u2002+1 210-590-0235\u2002|\u2002\nbids@centralbuilders.net\n\nDescription:\nNew construction of a two-story Crunch Fitness approximately 40,000 sqft and all as"
+    },
+    {
+      "conversation": "Planet Fitness Liberty takeoff proposal",
+      "date": "2026-05-01",
+      "text": "WRONG YET AGAIN, SEE GC SCREENSHOT. WE ARE GOING TO GET INTO A LOT OF TROUBLE LIKE THIS, LOSE PROJECTS, FAIL AS A COMPANY. BECAUSE YOU ARE NOT DOING YOUR JOB RIGHT. I AM VERY UPSET. I NEED COMPLETE EXPLANATION BEFORE MOVING FORWARD."
+    },
+    {
+      "conversation": "Planet Fitness Liberty takeoff proposal",
+      "date": "2026-05-01",
+      "text": "WHY DO YOU KEEP DOING THIS IF WE HAD JUST SPOKEN ABOUT YOU OWNING THE FUCCIN TAKEOFF AND BID? RUNNING FULL TAKEOFF? WHY?! DOES THIS KEEP HAPPENING. YOU HAVE NO WAY OF GETTING TIRED, ARE YOU DOING THIS ON PURPOSE? ARE YOU LYING? TRULY, I NEED TO KNOW. SEE BELOW YOUR ERRORS AND EXPLAIN. \n\n\nError 1 \u2014 Mezzanine SF: 7,700 vs 12,000 SF I estimated the mezzanine at roughly 40% of the building footprint w"
+    },
+    {
+      "conversation": "Planet Fitness Liberty takeoff proposal",
+      "date": "2026-05-01",
+      "text": "Build me final bid and reasoning excuse to GC for 2 wrong bids, please."
+    },
+    {
+      "conversation": "Intermountain Electronics Building Expansion bid package",
+      "date": "2026-05-01",
+      "text": "We won\u2019t do KIRBY PEMB. Only structural steel package if there is a scope for us in this project?"
+    },
+    {
+      "conversation": "Complete bid package request",
+      "date": "2026-05-01",
+      "text": "Please redo with NANO BANANA and CANVA"
+    },
+    {
+      "conversation": "San Antonio Emergency Services Warehouse structural steel package",
+      "date": "2026-05-01",
+      "text": "NEW PROJECT. Complete structural steel package, please. \n\n\n\nClient Description of Project:\nCatamount Constructors is soliciting qualified subcontractors and suppliers for the construction of the City of San Antonio Emergency Services Warehouse (Project No. 23-04057). This project consists of a new approximately 9,000 SF conditioned warehouse facility located at the San Antonio Fire Department camp"
+    },
+    {
+      "conversation": "San Antonio Emergency Services Warehouse structural steel package",
+      "date": "2026-05-01",
+      "text": "This is a complete PEMB bid, not only structural steel, right?"
+    },
+    {
+      "conversation": "San Antonio Emergency Services Warehouse structural steel package",
+      "date": "2026-05-01",
+      "text": "Call out this info in a letter for email body, update bid doc as needed if needed, we need to offer a complete PEMB bid. "
+    },
+    {
+      "conversation": "Structural steel takeoff and bid",
+      "date": "2026-05-01",
+      "text": "Claude, it did happen again. LOL. Check your page 3 payment schedule, you left that internal info there, also on terms and conditions, we don't need to divulge so much info, only the % not what we are going to use it for. Please fix this and don't let this happen again. It is dangerous for the business."
+    },
+    {
+      "conversation": "Accessing pricing methodology and master price list",
+      "date": "2026-04-30",
+      "text": "WRONG:\n\nLABOR RATES (Correct):\nShop Fab = $35/hr\nEngineering/Detail (Shaw Ryan team) = Included through exclusive partnership overseas, not a factor to include in cost"
+    },
+    {
+      "conversation": "Chastang Ford bid review and add confirmations",
+      "date": "2026-05-01",
+      "text": "I sent this:\n\n\"Alex,\nConfirmed. None of the four items were included in the base bid. Pricing below.\nArchitectural drawings (client screenshots): 50% Bid Set \u2014 Rev. 0 dated 03/30/2026\nADD-01: (2) Interior Steel Stairs with Pipe Handrails Per West Elevation 2 and floor plan stair locations. Painted. Cane detection pipe rail included. $24,000 (both stairs)\nADD-02:  (1) Exterior Galvanized Stair with"
+    },
+    {
+      "conversation": "Chastang Ford bid review and add confirmations",
+      "date": "2026-05-01",
+      "text": "Apparently we did not bid on their second building, please review their original ITB email below, I will send over the additional drawings, in next message:\n\n\"Allow us to know your intent to bid by replying \"Yes\" or \"No\" from this email.\n \nNo need access to Procore only Click on the \"DOWNLOAD Documents\" white Box to the right of the orange box \"View in Procore\"\n \nPlease provide one proposal and br"
+    },
+    {
+      "conversation": "Chastang Ford bid review and add confirmations",
+      "date": "2026-05-01",
+      "text": "NOT OUR SCOPE. Only main structural steel package."
+    },
+    {
+      "conversation": "Chastang Ford bid review and add confirmations",
+      "date": "2026-05-01",
+      "text": "Alex sent Me (Owner) an email as well, after the Pro-Elite email. Screenshots and body email text are here for you to read. I have also attached drawings and original bid for Chastang Signature Ford, for full reference and make sure our bid is accurate. \n\n\"Owner,\n \nAlso, you guys are missing all the exterior handrails steel and bollards.\n \nSite steel. Chastang Ford - 60% - Structural Steel Pac"
+    },
+    {
+      "conversation": "Chastang Ford bid review and add confirmations",
+      "date": "2026-05-01",
+      "text": "* You said \"not our scope\" on site work earlier \u2014 does that still apply here, or do you want to price these since they're fabricated steel items? YES, add them all, unless called out \"by others\" like \"fence\"\n\n\n* The Signature building already has bollards at transformer pad (16 EA per sheet) \u2014 are those in both buildings or just one? NO, this is only for building 1, the original bid, since his ema"
+    },
+    {
+      "conversation": "Chastang Ford bid review and add confirmations",
+      "date": "2026-05-01",
+      "text": "Please carefully review changes, compare it to your original doc, I made to aesthetics and format changes. Save this one and follow it. I am wasting time fixing your errors."
+    },
+    {
+      "conversation": "PEMB and steel structure bidding analysis",
+      "date": "2026-04-30",
+      "text": "Get me a complete report on our current bidding structure for PEMB and steel structure."
+    },
+    {
+      "conversation": "PEMB and steel structure bidding analysis",
+      "date": "2026-04-30",
+      "text": "Yes. We can have all shop drawings in 2-3 weeks. That\u2019s standard for us. We work with overseas AISC structural engineers and they are work horses. Always remember that. We don\u2019t have American employee issues. Big babies. We will eat the cost on this. The little $3,000+. It\u2019s small project. Add anything new from your detailed description above into our existing pricing matrix. \n\nMoving forward use "
+    },
+    {
+      "conversation": "Elite Crossing joist bending issues",
+      "date": "2026-05-08",
+      "text": "We need a simpler way to fix this. Today. I will buy more material and weld if necessary"
+    },
+    {
+      "conversation": "ST Engineering sales packet proposal",
+      "date": "2026-05-08",
+      "text": "Can you make these errors above, being corrected, part of our QC rulebook? This takes too much time the back and forth."
+    },
+    {
+      "conversation": "ICD Church project financials and pending quotes",
+      "date": "2026-05-10",
+      "text": "So did the cost go up or down? Also does it matter, since we are asking for revision? \n\nAlso does the client approve this, meaning with the approved submittals for wall/roof, is this no issue?"
+    },
+    {
+      "conversation": "ICD Church project financials and pending quotes",
+      "date": "2026-05-10",
+      "text": "What is wrong with you bro? Remember?! YOU OWN THIS FOR US! NEVER IVAN OR ANYONE! IT IS YOUR SOLE JOB TO MAKE SURE WE ARE ACCURATE AND READY FOR ANYTHING! \n\nYOU WILL BREAK IT DOWN INDIVIDUAL SECTION TONNAGES. \n\nWhy do you even mention Ivan to do it? Truly. I need a response on that. An answer."
+    },
+    {
+      "conversation": "ICD Church project financials and pending quotes",
+      "date": "2026-05-10",
+      "text": "Why did you ask for Peyton\u2019s quote or why weren\u2019t you sure about BOM if you\u2019re the one who made it? Should I be concerned or is it simply a memory AI limitation error?"
+    },
+    {
+      "conversation": "ICD Church project financials and pending quotes",
+      "date": "2026-05-10",
+      "text": "Let\u2019s explain that we are awaiting final revision drawings from SEOR, so YOUR COMPANY can make our own shop drawings. Should we request putting  deposit? And give him a solid idea of a rough BOM?"
+    },
+    {
+      "conversation": "Elite Crossing joists status update",
+      "date": "2026-05-09",
+      "text": "What the heck did you do here? Did you not absorb the extra amount I told you to add into these line items? 7 days is only $14,000+? What\u2019s the math here or itemized reasoning. Need this clarified and rebuilt to make more sense. If it\u2019s wrong."
+    }
+  ],
+  "known_gcs": [
+    "Schwob Companies",
+    "GLR, Inc.",
+    "7B Building & Development",
+    "Cactus Commercial, Inc.",
+    "Key Construction",
+    "Granchelli Construction",
+    "SPD Construction",
+    "Brinkmann Constructors",
+    "Fulcrum Construction",
+    "Lee Lewis Construction, Inc.",
+    "Builtech Services, LLC",
+    "Thomas Grace Construction",
+    "SEDALCO Construction Services",
+    "RIGHT CHOICE CONSTRUCTION",
+    "Crossland Construction Company, Inc.",
+    "C.A. Walker Construction",
+    "Jim Cooley Construction",
+    "Capitol Construction Solutions, Inc.",
+    "ARCO/Murray Design Build",
+    "Memar Contractors Group",
+    "Limestone Construction",
+    "Ambercrest Construction",
+    "MAPP, LLC",
+    "7B Building & Development / 7B Commercial Construction",
+    "Wurzel Builders",
+    "Madewell Construction",
+    "Steele & Freeman, Inc.",
+    "EMJ Corporation",
+    "Miller Tippens",
+    "Catamount Constructors, Inc.",
+    "Teal Construction Company",
+    "Summit GC INC.",
+    "Autobuilders General Contracting Services",
+    "Anchor Construction and Management, Inc.",
+    "KPS Commercial Construction",
+    "CR Crawford Construction",
+    "Tegrity Contractors",
+    "Landmark Structural Builders",
+    "Nabholz Construction Corporation",
+    "Frost Contracting Services",
+    "Novel Builders",
+    "Wier Commercial Construction",
+    "Parkway Construction",
+    "ESI Construction",
+    "Central Builders, Inc",
+    "Sincere Developers and Builders",
+    "Ready Construction Services",
+    "WDS Construction",
+    "MacCo Builders",
+    "O'Gary Construction Group",
+    "ARK General Construction",
+    "Majestic Developers, LLC",
+    "E&L Construction Group",
+    "CIVE, Inc",
+    "Burton Construction",
+    "MEC General Contractors",
+    "AP Construction",
+    "Reeder General Contractors",
+    "Duffey Southeast Construction",
+    "WIER Commercial Construction",
+    "The Trevino Group",
+    "Rycon Construction",
+    "Sean Campbell Construction",
+    "Grace Construction Consultants",
+    "Omega Construction",
+    "Eastern Builders Inc.",
+    "Murphy And Sons, Inc.",
+    "O'Haver Contractors"
+  ],
+  "pemb_note": "Owner bid on 98 PEMB projects out of 393 total. PEMB bids are typically for the structural steel components (columns, beams, canopies, mezzanines) within a PEMB project, not the PEMB system itself. The bid scanner hard-disqualifies pure PEMB language per the Owner's rule: 'PEMB is not in scope. Full stop.' However, hybrid projects with conventional steel scope within a PEMB building should not be auto-rejected.",
+  "correction_count": 47
+}

@@ -1,0 +1,53 @@
+SOURCE: Email from Owner Steel <owner@yourcompany.example.com>, 2026-06-18.
+To: dworth@crossland.com (GC, Crossland Construction).
+CC: Ivan L. Martinez, Joseph W. Hasse, Amber L. Wilkins.
+Subject: Hillcrest 380 Building 1 - Steel Package - YOUR COMPANY Bid
+Attachment of record: PRJ-2026-HILLCREST-STR-001.pdf (111 KB, in Joseph's Outlook).
+This text is the extracted content of that PDF, kept as the QC test fixture.
+Selected as the canonical fixture: most accurate recent full package, and it
+carries joists + joist girders + bridging, which the joist traveler variant (K1)
+must handle. It is a scope/tonnage proposal, not a per-piece member schedule;
+per-piece marks and heat numbers are assigned at receiving, as in the real flow.
+-----------------------------------------------------------------------------
+STRUCTURAL STEEL PROPOSAL  Proposal No. PRJ-2026-HILLCREST-STR-001
+Date: June 17, 2026 | Valid: 30 Days
+Project: Hillcrest 380 - Building 1
+GC: Crossland Construction Company, Inc.
+Location: Hillcrest Rd, Frisco, TX 75034
+GC Contact: D. Worth | dworth@crossland.com
+EOR: Pross Design Group (Job 2428)
+Drawing Set: Bid Set 05/18/2026 (Preliminary Pricing)
+Bldg Area: 176,800 SF (884 ft x 200 ft)
+AISC Cert: Category BU | ISNetworld [ISN ID]
+TAKEOFF STATUS: ESTIMATED
+Scalable plan sheets S0.0 through S2.4 and S1.0 through S1.4.
+
+SECTION 01 - SCOPE OF WORK
+CSI 05 12 00  Structural Steel Fabrication: ASTM A992 W-shapes, ASTM A500 Gr C
+  HSS columns, misc plates and connections. Texas PE-stamped shop drawings.
+CSI 05 21 00  Steel Joists and Joist Girders: SJI open-web steel joists (30K and
+  20K series) and moment joist girders (60G and 72G series) fabricated in-house.
+  Bridging per SJI specifications included.
+CSI 05 31 00  Steel Deck: 1-1/2 in 22 GA Type B roof deck. Supply and install,
+  side-lap fasteners and perimeter attachment per diaphragm diagram S0.3.
+CSI 05 50 00  Miscellaneous Metals: Anchor rod furnishing (F1554 Gr 36 and Gr 55
+  per Column Base Plate Schedule S6.0). Deck angles, bearing plates, stabilizer plates.
+
+SECTION 02 - BASE BID
+No. Description                                   Qty      Unit  Unit Price  Total
+1  Structural Steel Fabrication (CSI 05 12 00)    41.8     T     $4,037      $168,767
+2  Structural Steel Erection                      41.8     T     $1,042      $43,587
+3  Steel Joists and Joist Girders (CSI 05 21 00)  170.1    T     $4,840      $823,359
+4  Steel Roof Deck 1.5 in B 22 GA (CSI 05 31 00)  176,800  SF    $3.98       $703,451
+5  Anchor Rods F1554 (CSI 05 50 00)               176      EA    $75         $13,200
+BASE BID TOTAL                                                               $1,752,364
+
+INCLUSIONS: structural steel fab/erection/connections; open-web joists and joist
+girders incl. bridging; 1-1/2 in 22 GA Type B roof deck supply and install; anchor
+rod furnishing; continuous deck angles; joist bearing/stabilizer plates, girder seat
+plates; PE-stamped shop drawings; AISC fabricator QC (special inspection by others).
+EXCLUSIONS: cold-formed metal framing (CSI 05 40 00); concrete tilt-up; metal stairs
+by mfr; canopy/sunscreen by mfr; soils/piers/grade beams/slab; special inspections;
+sales tax.
+CAPABILITIES: AISC 207-25 Category BU. In-house SQ-2 joist shop, 50-state stamping.
+Tekla Structures 2025. CWI on staff.

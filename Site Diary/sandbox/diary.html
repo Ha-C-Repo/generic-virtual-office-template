@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Company - Site Diary (SANDBOX)</title>
+<!--
+  SANDBOX PROTOTYPE. Goes live as a NEW file in the training portal repo
+  (Ha-C-Repo/yourco-training-portal) beside the Regina pages. Reuses
+  config.js and the Supabase session: crew register and sign in exactly
+  like the training portal index.html flow. No Regina file is modified.
+  Palette: MCA public kit. Regina blues (#1e3a8a #1d4ed8 #93c5fd) unused.
+  Backend: Apps Script web app (Code.gs in this folder). Set EXEC_URL and
+  SECRET before deploy. No external JS beyond the Supabase CDN already
+  used by every portal page.
+-->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<style>
+:root{--panel:#ffffff;--panel-2:#f5f5f3;--seam:#d8d8d4;--ink:#0d0d0f;
+--ink-2:#54585c;--ink-3:#8b9094;--accent:#2e6e66;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--panel-2);color:var(--ink);font-family:system-ui,sans-serif;line-height:1.5;max-width:560px;margin:0 auto;padding:16px}
+h1{font-size:1.2rem;text-transform:uppercase;letter-spacing:.06em;margin:10px 0 2px}
+.sub{color:var(--ink-3);font-size:.75rem;text-transform:uppercase;letter-spacing:.14em;margin-bottom:16px}
+.card{background:var(--panel);border:1px solid var(--seam);padding:16px;margin-bottom:14px}
+label{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-2);margin:12px 0 4px}
+input,select,textarea{width:100%;padding:12px;border:1px solid var(--seam);border-radius:0;font-size:1rem;background:var(--panel)}
+textarea{min-height:120px}
+button{width:100%;padding:15px;margin-top:16px;background:var(--ink);color:#fff;border:none;border-radius:0;font-size:1rem;text-transform:uppercase;letter-spacing:.12em;font-weight:700}
+button:disabled{background:var(--ink-3)}
+button.approve{background:var(--accent)}
+#msg{margin-top:12px;font-size:.85rem;min-height:1.2em}
+.ok{color:var(--accent)}.bad{color:#b3261e}
+#approvebox{display:none}
+#authgate{text-align:center;padding:40px 16px}
+a{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<h1>Site Diary</h1>
+<div class="sub">Your Company - Field Reports</div>
+
+<div id="authgate" class="card">
+  Checking sign in...<br><br>
+  <span style="font-size:.85rem;color:var(--ink-2)">
+  Not signed in? <a href="index.html">Register or sign in here</a>
+  (same account as the training portal), then come back.</span>
+</div>
+
+<div id="app" style="display:none">
+
+  <div class="card" id="approvebox">
+    <label>Yesterday's diary, pending your approval</label>
+    <div id="pendingtext" style="font-size:.92rem;margin:6px 0"></div>
+    <button class="approve" onclick="approve()">Approve diary entry</button>
+  </div>
+
+  <div class="card">
+    <label for="project">Project</label>
+    <select id="project">
+      <option>Genius Kids STEM Academy (Katy)</option>
+    </select>
+
+    <label for="date">Date</label>
+    <input type="date" id="date">
+
+    <label for="weather">Weather</label>
+    <select id="weather">
+      <option>Clear</option><option>Cloudy</option><option>Rain</option>
+      <option>Storm</option><option>Heat advisory</option><option>Wind hold</option>
+    </select>
+
+    <label for="body">Today's update (crew, work done, deliveries, delays, issues)</label>
+    <textarea id="body" placeholder="Example: 6 guys. Set 8 of 12 columns line A. Steel load 2 of 3 came at 1pm. Lost 2 hrs to rain."></textarea>
+
+    <label for="photos">Photos</label>
+    <input type="file" id="photos" accept="image/*" multiple>
+
+    <label for="voice">Voice note (record a memo on your phone, upload it here)</label>
+    <input type="file" id="voice" accept="audio/*">
+
+    <button id="submitbtn" onclick="submitEntry()">Submit diary entry</button>
+    <div id="msg"></div>
+  </div>
+</div>
+
+<script>
+var EXEC_URL = "REPLACE_WITH_APPS_SCRIPT_EXEC_URL";   // sandbox deployment
+var SECRET   = "REPLACE_WITH_SHARED_SECRET";
+var sb = window.supabase.createClient(window.NC_SUPABASE_URL, window.NC_SUPABASE_KEY);
+var USER = null;
+
+// Local date parts. valueAsDate works in UTC and prefills tomorrow for
+// any Houston entry after 7pm. Same fix as the portal diary.js.
+var _now = new Date();
+document.getElementById('date').value = _now.getFullYear() + '-' +
+  String(_now.getMonth() + 1).padStart(2, '0') + '-' +
+  String(_now.getDate()).padStart(2, '0');
+
+(async function init(){
+  var s = await sb.auth.getSession();
+  if (!s.data.session) return;     // gate stays, link to index.html
+  USER = s.data.session.user;
+  document.getElementById('authgate').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  loadPending();
+})();
+
+async function loadPending(){
+  try{
+    var r = await fetch(EXEC_URL + '?secret=' + encodeURIComponent(SECRET) +
+      '&action=pending&supervisor=' + encodeURIComponent(USER.email));
+    var j = await r.json();
+    if (j.ok && j.row > 0){
+      window._pendingRow = j.row;
+      document.getElementById('pendingtext').textContent =
+        j.date + ' / ' + j.project + ' / ' + j.weather + '\n' + j.summary;
+      document.getElementById('approvebox').style.display = 'block';
+    }
+  }catch(e){}
+}
+
+async function approve(){
+  var r = await fetch(EXEC_URL, {method:'POST', body: JSON.stringify(
+    {secret:SECRET, action:'approve', row:window._pendingRow})});
+  var j = await r.json();
+  if (j.ok) document.getElementById('approvebox').style.display = 'none';
+}
+
+function fileToUpload(f, kind){
+  return new Promise(function(res){
+    var rd = new FileReader();
+    rd.onload = function(){ res({name:f.name, mime:f.type, kind:kind,
+      data_b64: rd.result.split(',')[1]}); };
+    rd.readAsDataURL(f);
+  });
+}
+
+async function submitEntry(){
+  var btn = document.getElementById('submitbtn');
+  var msg = document.getElementById('msg');
+  var body = document.getElementById('body').value.trim();
+  if (!body){ msg.className='bad'; msg.textContent='Write the update first.'; return; }
+  btn.disabled = true; msg.className=''; msg.textContent='Sending...';
+
+  var uploads = [];
+  for (var f of document.getElementById('photos').files) uploads.push(await fileToUpload(f,'photo'));
+  var v = document.getElementById('voice').files[0];
+  if (v) uploads.push(await fileToUpload(v,'voice'));
+
+  try{
+    var r = await fetch(EXEC_URL, {method:'POST', body: JSON.stringify({
+      secret: SECRET,
+      sender: USER.email,
+      project: document.getElementById('project').value,
+      date: document.getElementById('date').value,
+      weather: document.getElementById('weather').value,
+      body: body,
+      voice_note: !!v,
+      uploads: uploads
+    })});
+    var j = await r.json();
+    if (j.ok){ msg.className='ok'; msg.textContent='Logged. Thank you.' +
+      (j.dedupe ? ' (duplicate, already had it)' : '');
+      document.getElementById('body').value='';
+      document.getElementById('photos').value='';
+      document.getElementById('voice').value='';
+    } else { msg.className='bad'; msg.textContent='Failed: ' + j.error; }
+  }catch(e){ msg.className='bad'; msg.textContent='No connection. Try again.'; }
+  btn.disabled = false;
+}
+</script>
+</body>
+</html>

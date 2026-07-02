@@ -1,0 +1,113 @@
+{
+  "_comment": "Your Company — Active Houston Pipeline Seed Data (v3.2.0)",
+  "_updated": "2026-05-08",
+  "_source": "the Owner's locked priorities + project file references",
+  "active_priorities": [
+    {
+      "id": "PRI-001",
+      "name": "EMR Letter — Texas Mutual",
+      "status": "BLOCKED",
+      "tier": "CRITICAL",
+      "category": "compliance",
+      "carrier": "Texas Mutual",
+      "policy_number": "[POLICY NUMBER]",
+      "contact_phone": "1-800-859-5995",
+      "blocking": ["Marathon ISN", "ISN [ISN ID] verification"],
+      "days_open": 28,
+      "next_action": "Call Texas Mutual to request EMR letter",
+      "owner": "Amber (COO + Attorney)"
+    },
+    {
+      "id": "PRI-002",
+      "name": "ICD Church — Spring TX",
+      "status": "ACTIVE",
+      "tier": "CRITICAL",
+      "category": "active_project",
+      "tonnage": 1500,
+      "value_M": 7.2,
+      "issue": "AVL RFI unanswered 12+ months · 7 revision cycles uncompensated",
+      "uncompensated_value_M_low": 0.2,
+      "uncompensated_value_M_high": 0.4,
+      "qm_claim_value_M": 2.4,
+      "next_action": "No work without signed CO. Ivan validates hours weekly.",
+      "owner": "Owner + Ivan + Amber",
+      "rule": "Quantum meruit risk active — every hour logged"
+    },
+    {
+      "id": "PRI-003",
+      "name": "AFR — America First Refining (Port of Brownsville)",
+      "status": "SOQ_SUBMITTED",
+      "tier": "ACTIVE",
+      "category": "pipeline",
+      "soq_submitted": "2026-04-24",
+      "soq_number": "PRJ-2026-AFR-SOQ",
+      "project_value_total_B": 3.5,
+      "lane": "Balance-of-plant + ancillary structural steel",
+      "build_window": "2027+",
+      "next_action": "Awaiting selection. No further action until invitation to bid.",
+      "owner": "Owner"
+    },
+    {
+      "id": "PRI-004",
+      "name": "Auto Liability $2M CSL Upgrade",
+      "status": "PENDING",
+      "tier": "HIGH",
+      "category": "compliance",
+      "carrier": "Progressive",
+      "policy_number": "868818985",
+      "current_coverage": "$50K / $100K",
+      "target_coverage": "$2M CSL",
+      "next_action": "Amber leads Progressive carrier upgrade",
+      "owner": "Amber",
+      "blocking": ["Refinery work eligibility (some require $2M)"]
+    }
+  ],
+  "recommended_bids": [
+    {
+      "id": "BID-001",
+      "name": "Baytown Industrial — RFQ",
+      "status": "RFQ_RECEIVED",
+      "match_score": 94,
+      "tier": "HIGH",
+      "scope_summary": "Houston-area structural steel · Industrial lane",
+      "scope_match": true,
+      "houston_location": true,
+      "rfq_confirmed": true,
+      "owner_unknown": true,
+      "next_action": "PURSUE recommended — scope matches and Houston-local"
+    },
+    {
+      "id": "BID-002",
+      "name": "Northlake Distribution — Hillwood",
+      "status": "OUT_FOR_BID",
+      "match_score": 87,
+      "tier": "HIGH",
+      "tonnage_estimate": 1500,
+      "value_estimate_M": 7.6,
+      "gc": "Holder Construction",
+      "owner": "Hillwood Properties",
+      "scope_summary": "1,500 ton commercial distribution + 1.5B22 deck",
+      "due_date": "2026-08-01",
+      "next_action": "Awaiting drop of S-series sheets to run takeoff"
+    }
+  ],
+  "kpi_snapshot": {
+    "tons_active":    1500,
+    "tons_change":    "+12%",
+    "pipeline_M":     5.9,
+    "pipeline_change":"+8%",
+    "blockers":       4,
+    "active_jobs":    3,
+    "win_streak":     3,
+    "time_saved_h":   0
+  },
+  "team_routing": {
+    "The Owner":    "CEO — final authority on bids, all output signed",
+    "Amber":              "COO + Attorney — legal, contracts, claims, compliance",
+    "Ivan L. Martinez":   "Director of Engineering — AISC, Tekla, takeoffs (review)",
+    "Mario Gutierrez":    "Erection Lead — field, crew. (832) 951-5835",
+    "Paul Guerrero":      "Safety Director — NCCER #27160819 (NOT CWI)",
+    "John Gil":           "CWI/NDT-II — AWS Vice Chair S022 — jgil@whlabs.com",
+    "Joseph Hasse":       "Director of IT + EA — automation + outreach"
+  }
+}

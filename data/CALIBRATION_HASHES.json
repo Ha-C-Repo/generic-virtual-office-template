@@ -1,0 +1,16 @@
+{
+  "calibration_2026Q2.json": {
+    "sha256": "e52313e5e790e7986fd246c2ba3ea6c5e5b60f5c945469b6e6ad7d5ad5ab2043",
+    "size_bytes": 17650,
+    "sealed_on": "2026-05-08",
+    "version": "2026.Q2",
+    "sources": [
+      "SAM.gov WD-2026 Houston MSA",
+      "NCCI TX Base Rates Jan 2026",
+      "SteelBenchmarker / Argus / Nucor (90-day avg)",
+      "AWS D1.1:2025 Houston Vendor Pricing",
+      "City/County Fee Schedules May 2026",
+      "BLS / EIA / GHBA / Baker Hughes May 2026"
+    ]
+  }
+}

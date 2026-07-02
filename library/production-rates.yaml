@@ -1,0 +1,17 @@
+# Your Company - Production Rate Library
+# CEO-locked Q2 2026. Source of truth for spec-boq and reconciliation skills.
+# Last updated: 2026-05-23
+# Schema: data/schemas/production-rate-library.schema.json
+#
+# Hard rules:
+#  - Shop rate $145/hr. Engineering $175/hr. Overhead 1.15x.
+#  - Engineering folded into fab/erection rates. Never line-itemed.
+#  - AISC weights from Shapes Database v16.0 (bridge/aisc_validator.py).
+#  - Rate bands (p25, p75, floor, ceiling) drive rate-anomaly detection.
+#  - Bands are loose until 20+ closed projects populate statistics.
+
+rates:
+
+
+# TEMPLATE: the original locked rate values were removed.
+# Populate this library with your own production rates using the schema above.

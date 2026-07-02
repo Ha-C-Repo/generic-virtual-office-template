@@ -1,0 +1,234 @@
+[
+  {
+    "original": "[FORBIDDEN PROJECT]",
+    "correction": "[BLOCKED: not a Your Company project]",
+    "context": "Governance rule from project inception",
+    "rule_type": "fact",
+    "timestamp": "2026-05-11T02:04:59.603834",
+    "applied_count": 0
+  },
+  {
+    "original": "10+ years",
+    "correction": "9+ years (Est. 2017)",
+    "context": "Calculator tool stat correction, May 2026",
+    "rule_type": "fact",
+    "timestamp": "2026-05-11T02:04:59.603949",
+    "applied_count": 0
+  },
+  {
+    "original": "Red Dot Buildings",
+    "correction": "[BLOCKED: no PEMB language]",
+    "context": "Governance rule from bidding rules",
+    "rule_type": "fact",
+    "timestamp": "2026-05-11T02:04:59.603953",
+    "applied_count": 0
+  },
+  {
+    "original": "joseph@gmail.com",
+    "correction": "joseph@yourcompany.example.com",
+    "context": "Calculator tool email correction",
+    "rule_type": "data",
+    "timestamp": "2026-05-11T02:04:59.603956",
+    "applied_count": 0
+  },
+  {
+    "original": "10+ years",
+    "correction": "9+ years (Est. 2017)",
+    "context": "calculator tool",
+    "rule_type": "fact",
+    "timestamp": "2026-05-11T02:04:59.607202",
+    "applied_count": 0
+  },
+  {
+    "original": "se:* If a shape is invalid, the Auditor sends a \\\"Correction Request\\\" back to the Detective to re-e",
+    "correction": "[extracted from chat - review needed]",
+    "context": "2026-05-10-23-48-20-yourco-roadmap-gemini-sweep-session",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:27:47.858959",
+    "applied_count": 0
+  },
+  {
+    "original": "\"text\": \"More recommendations from Gemini and remember this software is to be Owner\\u2019s Dashboa",
+    "correction": "[extracted from chat - review needed]",
+    "context": "2026-05-10-23-48-20-yourco-roadmap-gemini-sweep-session",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:27:47.859186",
+    "applied_count": 0
+  },
+  {
+    "original": "ps\\nTo incorporate OpenHuman effectively, we must update the **POST PARITY ROADMAP.pdf**:\\n 1. **v4.",
+    "correction": "[extracted from chat - review needed]",
+    "context": "2026-05-10-23-48-20-yourco-roadmap-gemini-sweep-session",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:27:47.859353",
+    "applied_count": 0
+  },
+  {
+    "original": "e v3.5.6.\\n\\t\\u2022\\tP1: 34 user-facing em-dashes replaced across index.html (13) and app.js (21). Z",
+    "correction": "[extracted from chat - review needed]",
+    "context": "2026-05-11-00-04-09-yourco-v611-sweep-diagnostics-simulation",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:27:47.859469",
+    "applied_count": 0
+  },
+  {
+    "original": "\"text\",\n    \"text\": \"Please review this debugged update Good, I\\u2019ve reviewed both sim reports. T",
+    "correction": "[extracted from chat - review needed]",
+    "context": "2026-05-11-01-38-21-yourco-v612-simulation-debug-session",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:27:47.859608",
+    "applied_count": 0
+  },
+  {
+    "original": "se:* If a shape is invalid, the Auditor sends a \\\"Correction Request\\\" back to the Detective to re-e",
+    "correction": "[extracted from chat - review needed]",
+    "context": "2026-05-10-23-48-20-yourco-roadmap-gemini-sweep-session",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:35:02.924914",
+    "applied_count": 0
+  },
+  {
+    "original": "\"text\": \"More recommendations from Gemini and remember this software is to be Owner\\u2019s Dashboa",
+    "correction": "[extracted from chat - review needed]",
+    "context": "2026-05-10-23-48-20-yourco-roadmap-gemini-sweep-session",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:35:02.925203",
+    "applied_count": 0
+  },
+  {
+    "original": "ps\\nTo incorporate OpenHuman effectively, we must update the **POST PARITY ROADMAP.pdf**:\\n 1. **v4.",
+    "correction": "[extracted from chat - review needed]",
+    "context": "2026-05-10-23-48-20-yourco-roadmap-gemini-sweep-session",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:35:02.925343",
+    "applied_count": 0
+  },
+  {
+    "original": "e v3.5.6.\\n\\t\\u2022\\tP1: 34 user-facing em-dashes replaced across index.html (13) and app.js (21). Z",
+    "correction": "[extracted from chat - review needed]",
+    "context": "2026-05-11-00-04-09-yourco-v611-sweep-diagnostics-simulation",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:35:02.925487",
+    "applied_count": 0
+  },
+  {
+    "original": "\"text\",\n    \"text\": \"Please review this debugged update Good, I\\u2019ve reviewed both sim reports. T",
+    "correction": "[extracted from chat - review needed]",
+    "context": "2026-05-11-01-38-21-yourco-v612-simulation-debug-session",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:35:02.925619",
+    "applied_count": 0
+  },
+  {
+    "original": "create a markdown of everything he has requested, corrected, taught or asked the chat to memorize pe",
+    "correction": "[extracted from chat - review needed]",
+    "context": "owner_claude_data_your_company_directives",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:35:02.925772",
+    "applied_count": 0
+  },
+  {
+    "original": "se:* If a shape is invalid, the Auditor sends a \\\"Correction Request\\\" back to the Detective to re-e",
+    "correction": "[extracted from chat - review needed]",
+    "context": "2026-05-10-23-48-20-yourco-roadmap-gemini-sweep-session",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:42:14.656809",
+    "applied_count": 0
+  },
+  {
+    "original": "\"text\": \"More recommendations from Gemini and remember this software is to be Owner\\u2019s Dashboa",
+    "correction": "[extracted from chat - review needed]",
+    "context": "2026-05-10-23-48-20-yourco-roadmap-gemini-sweep-session",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:42:14.657087",
+    "applied_count": 0
+  },
+  {
+    "original": "ps\\nTo incorporate OpenHuman effectively, we must update the **POST PARITY ROADMAP.pdf**:\\n 1. **v4.",
+    "correction": "[extracted from chat - review needed]",
+    "context": "2026-05-10-23-48-20-yourco-roadmap-gemini-sweep-session",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:42:14.657329",
+    "applied_count": 0
+  },
+  {
+    "original": "e v3.5.6.\\n\\t\\u2022\\tP1: 34 user-facing em-dashes replaced across index.html (13) and app.js (21). Z",
+    "correction": "[extracted from chat - review needed]",
+    "context": "2026-05-11-00-04-09-yourco-v611-sweep-diagnostics-simulation",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:42:14.657541",
+    "applied_count": 0
+  },
+  {
+    "original": "\"text\",\n    \"text\": \"Please review this debugged update Good, I\\u2019ve reviewed both sim reports. T",
+    "correction": "[extracted from chat - review needed]",
+    "context": "2026-05-11-01-38-21-yourco-v612-simulation-debug-session",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:42:14.657761",
+    "applied_count": 0
+  },
+  {
+    "original": "create a markdown of everything he has requested, corrected, taught or asked the chat to memorize pe",
+    "correction": "[extracted from chat - review needed]",
+    "context": "owner_claude_data_your_company_directives",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:42:14.657949",
+    "applied_count": 0
+  },
+  {
+    "original": "se:* If a shape is invalid, the Auditor sends a \\\"Correction Request\\\" back to the Detective to re-e",
+    "correction": "[extracted from chat - review needed]",
+    "context": "2026-05-10-23-48-20-yourco-roadmap-gemini-sweep-session",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:47:39.033365",
+    "applied_count": 0
+  },
+  {
+    "original": "\"text\": \"More recommendations from Gemini and remember this software is to be Owner\\u2019s Dashboa",
+    "correction": "[extracted from chat - review needed]",
+    "context": "2026-05-10-23-48-20-yourco-roadmap-gemini-sweep-session",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:47:39.033781",
+    "applied_count": 0
+  },
+  {
+    "original": "ps\\nTo incorporate OpenHuman effectively, we must update the **POST PARITY ROADMAP.pdf**:\\n 1. **v4.",
+    "correction": "[extracted from chat - review needed]",
+    "context": "2026-05-10-23-48-20-yourco-roadmap-gemini-sweep-session",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:47:39.033993",
+    "applied_count": 0
+  },
+  {
+    "original": "e v3.5.6.\\n\\t\\u2022\\tP1: 34 user-facing em-dashes replaced across index.html (13) and app.js (21). Z",
+    "correction": "[extracted from chat - review needed]",
+    "context": "2026-05-11-00-04-09-yourco-v611-sweep-diagnostics-simulation",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:47:39.034220",
+    "applied_count": 0
+  },
+  {
+    "original": "\"text\",\n    \"text\": \"Please review this debugged update Good, I\\u2019ve reviewed both sim reports. T",
+    "correction": "[extracted from chat - review needed]",
+    "context": "2026-05-11-01-38-21-yourco-v612-simulation-debug-session",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:47:39.034409",
+    "applied_count": 0
+  },
+  {
+    "original": "create a markdown of everything he has requested, corrected, taught or asked the chat to memorize pe",
+    "correction": "[extracted from chat - review needed]",
+    "context": "owner_claude_data_your_company_directives",
+    "rule_type": "trained",
+    "timestamp": "2026-05-11T02:47:39.034593",
+    "applied_count": 0
+  },
+  {
+    "original": "Gemini is doing the same thing. Recommending features while 3D is broken.",
+    "correction": "Evaluate each AI contribution on merit when user shared it with project context.",
+    "context": "Joseph corrected Claude for dismissing Gemini strategic report",
+    "rule_type": "bias",
+    "timestamp": "2026-05-11T14:10:14.874702",
+    "applied_count": 0
+  }
+]

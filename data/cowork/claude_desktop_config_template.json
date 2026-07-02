@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "yourco-virtualoffice": {
+      "type": "streamable-http",
+      "url": "http://localhost:7777/mcp",
+      "headers": { "Authorization": "Bearer CyfUhquxrdBwPvA46voxabSfZ4MKOanobxpX7kvev_A" }
+    }
+  }
+}

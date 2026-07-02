@@ -1,0 +1,75 @@
+{
+  "schema": "ASSEMBLY_DEF_V2",
+  "assembly_id": "column_base",
+  "description": "Column base assembly. One erected column (COUNT EA) drives four anchor rods, one base plate, one leveling and grout set, setting labor hours, and crane minutes (P29). Anchor rods and base plates are measured classes (schema section 9): when measured ANCH or PLATE rows exist this assembly emits cross-check counts, never order lines.",
+  "provenance": "SEED 2026-06-12. Factors seeded pending PC7 shop actuals and Owner review. Changes are file diffs proposed to Owner, never chat-session overrides.",
+  "applies_to": {
+    "item_class": "COL",
+    "mode": "COUNT",
+    "designation_includes": [],
+    "designation_excludes": []
+  },
+  "openings": null,
+  "streams": {
+    "materials": [
+      {
+        "component_id": "anchor_rods",
+        "description": "anchor rods, four per column",
+        "designation": "ANCHOR ROD",
+        "designation_from_driver": false,
+        "unit": "EA",
+        "qty_per_unit": 4.0,
+        "waste_factor": 0.0,
+        "round": {"direction": "up", "increment": 1.0},
+        "cross_check_class": "ANCH",
+        "length_lf": null,
+        "aisc": false
+      },
+      {
+        "component_id": "base_plate",
+        "description": "column base plate, one per column",
+        "designation": "BASE PL",
+        "designation_from_driver": false,
+        "unit": "EA",
+        "qty_per_unit": 1.0,
+        "waste_factor": 0.0,
+        "round": {"direction": "up", "increment": 1.0},
+        "cross_check_class": "PLATE",
+        "length_lf": null,
+        "aisc": false
+      },
+      {
+        "component_id": "leveling_set",
+        "description": "leveling nuts, shims, and non-shrink grout set, one per column",
+        "designation": "LEVELING AND GROUT SET",
+        "designation_from_driver": false,
+        "unit": "EA",
+        "qty_per_unit": 1.0,
+        "waste_factor": 0.0,
+        "round": {"direction": "up", "increment": 1.0},
+        "cross_check_class": null,
+        "length_lf": null,
+        "aisc": false
+      }
+    ],
+    "labor_hours": [
+      {
+        "component_id": "setting_labor",
+        "description": "column setting, plumb, and level, hours per column",
+        "hours_per_unit": 1.25,
+        "round": {"direction": "up", "increment": 0.25}
+      }
+    ],
+    "equipment_time": [
+      {
+        "component_id": "crane_set",
+        "description": "crane minutes per column set",
+        "unit": "MIN",
+        "time_per_unit": 20.0,
+        "round": {"direction": "up", "increment": 5.0}
+      }
+    ],
+    "subcontract": null
+  },
+  "notes": "Column stick material is never emitted here. Per schema section 3.3 the COUNT assembly drives per-piece components and labor; the GROUP-linked LINEAR row drives material weight. A COL-class LINEAR row currently lands in the unassigned report (see README, known gap)."
+}

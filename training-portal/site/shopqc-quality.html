@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>M31 &middot; Shop QC Software | Your Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:#000;color:#e4e4e7;
+  font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(circle at 85% 8%,rgba(71,85,105,0.16),transparent 40%),
+    radial-gradient(circle at 15% 92%,rgba(71,85,105,0.10),transparent 40%);
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;padding:0;}
+p{margin:0;}h1,h2,h3,h4{margin:0;font-weight:normal;}
+.container{max-width:960px;margin:0 auto;padding:0 20px;}
+header.site{border-bottom:2px solid #27272a;background:rgba(0,0,0,.85);
+  position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);}
+.header-row{max-width:960px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;}
+.logo-tile{width:40px;height:40px;background:#475569;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:20px;}
+.header-meta .small{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#52525b;}
+.header-meta .big{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin-top:2px;}
+footer.site{max-width:960px;margin:0 auto;padding:28px 20px;border-top:1px solid #27272a;text-align:center;}
+footer.site p{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#3f3f46;}
+.lab-hero{position:relative;border:2px solid #3f3f46;background:#18181b;overflow:hidden;margin-bottom:28px;}
+.hero-grid{position:absolute;inset:0;opacity:.1;
+  background-image:linear-gradient(rgba(71,85,105,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(71,85,105,.3) 1px,transparent 1px);
+  background-size:24px 24px;}
+.hero-glow{position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:#475569;border-radius:50%;filter:blur(80px);opacity:.30;}
+.lab-hero-inner{position:relative;padding:28px 24px;}
+.lab-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#cbd5e1;margin-bottom:8px;}
+.lab-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,9vw,68px);color:#fff;line-height:.9;margin-bottom:14px;}
+.lab-blurb{color:#a1a1aa;max-width:620px;font-size:14px;line-height:1.7;}
+.sec{background:#18181b;border:2px solid #3f3f46;border-left:4px solid #475569;padding:20px 22px;margin-bottom:16px;}
+.sec h2{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff;letter-spacing:.02em;margin-bottom:8px;}
+.sec p{color:#d4d4d8;font-size:14px;line-height:1.65;margin-bottom:10px;}
+.sec p:last-child{margin-bottom:0;}
+.sec strong{color:#fff;}
+.gates{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px;}
+.gate-pill{border:1px solid #3f3f46;background:rgba(0,0,0,.4);padding:6px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#cbd5e1;letter-spacing:.05em;}
+.hard{border-left-color:#ea580c;}
+.hard h2{color:#fdba74;}
+.tag{display:inline-block;background:#2a1c12;border:1px solid #7c2d12;color:#fdba74;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;padding:2px 8px;margin-bottom:8px;}
+</style>
+</head>
+<body>
+<header class="site"><div class="header-row"><div class="logo-tile" id="logo-slot">QC</div><div class="header-meta"><p class="small">Your Company &middot; Module 31</p><p class="big">Shop QC Software</p></div></div></header>
+
+<main class="container" style="padding:28px 20px 40px;">
+  <div class="lab-hero"><div class="hero-grid"></div><div class="hero-glow"></div>
+    <div class="lab-hero-inner">
+      <p class="lab-eyebrow">Module 31 &middot; Quality Control</p>
+      <h1 class="lab-h1">Shop QC Software</h1>
+      <p class="lab-blurb">The Shop QC app is how Your Company proves a piece of steel was received, fabricated, inspected, and released the right way. It runs as five tabs left to right: Projects, Receiving (Gate 1), Fabrication (Gate 2), Release (Gate 3), and the NCR Log. The gates sign in order and the hard blocks below cannot be skipped.</p>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>The three gates, in order</h2>
+    <p>Every job moves through three sign-off gates from left to right. You cannot jump ahead.</p>
+    <div class="gates"><span class="gate-pill">Gate 1 &middot; Receiving</span><span class="gate-pill">Gate 2 &middot; Fabrication</span><span class="gate-pill">Gate 3 &middot; Release</span></div>
+    <p>Gate 1 logs incoming material. Gate 2 runs the in-process traveler on the shop floor. Gate 3 is final release and shipping. The NCR Log (Tab 5) tracks any nonconformance across the whole lifecycle.</p>
+  </div>
+
+  <div class="sec hard">
+    <p class="tag">Hard block</p>
+    <h2>Gate 2: the locked floor-step sequence</h2>
+    <p>On the Fabrication traveler the floor steps are signed in a locked sequence. The app only lets you sign <strong>the lowest-numbered unsigned floor step</strong>. You cannot sign out of order or sign several at once. Finish the current step before the next one opens.</p>
+  </div>
+
+  <div class="sec hard">
+    <p class="tag">Hard block</p>
+    <h2>Field 8: the CWI gate</h2>
+    <p>Field 8 is the pre-weld inspection step. The traveler will not advance past it until a <strong>Certified Welding Inspector (CWI) name</strong> is entered. No name, no signature, no advance. This protects the weld record.</p>
+  </div>
+
+  <div class="sec hard">
+    <p class="tag">Hard block</p>
+    <h2>Gate 3: the CEO co-sign</h2>
+    <p>Any project of <strong>50 tons or more, or any IAS job</strong>, requires the CEO co-sign at Release. The CEO name field must read <strong>exactly The Owner</strong>. Anything else is blocked. Initials, a different officer, or a misspelling will not pass.</p>
+  </div>
+
+  <div class="sec">
+    <h2>The NCR lifecycle</h2>
+    <p>When something is out of spec you raise a Nonconformance Report (NCR) against the job. The NCR is worked to resolution and then <strong>closed on the NCR Log tab</strong>. That is the one place an NCR is closed, so the record stays complete.</p>
+  </div>
+</main>
+
+<footer class="site"><p>Built by Joseph &middot; Your Company Virtual Office &middot; Internal Use Only</p></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="quiz-meta.js"></script>
+<script>window.NC_GATE = {"module_id": "shopqc-quality", "title": "Shop QC Software", "next": null, "questions": [{"q": "The five Shop QC tabs run left to right. In what order do the three sign-off gates come?", "options": ["Fabrication, Receiving, Release", "Receiving, Fabrication, Release", "Release, Fabrication, Receiving", "Receiving, Release, Fabrication"]}, {"q": "At Gate 2 (Fabrication) the floor steps are a locked sequence. Which step can you sign next?", "options": ["Any step the fabricator has finished", "The highest-numbered unsigned step", "Only the lowest-numbered unsigned floor step", "All remaining steps at once"]}, {"q": "Field 8 is the pre-weld inspection step. What does the app require before the traveler can advance past it?", "options": ["A photo of the weld", "A Certified Welding Inspector (CWI) name", "The fabricator's initials", "Nothing, field 8 is optional"]}, {"q": "A 60-ton project reaches the CEO co-sign at Gate 3 (Release). What must the CEO name field contain?", "options": ["Any company officer's name", "The initials MSC", "Exactly The Owner", "The shop foreman's name"]}, {"q": "You raised an NCR during fabrication and the issue is now resolved. Where do you close it?", "options": ["On the Fabrication (Gate 2) tab", "On the NCR Log tab", "On the Release (Gate 3) tab", "On the Projects tab"]}]};</script>
+<script src="portal.js"></script>
+<script>ncInitModulePage();</script>
+</body>
+</html>

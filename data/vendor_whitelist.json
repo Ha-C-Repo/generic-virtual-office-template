@@ -1,0 +1,68 @@
+[
+  {
+    "domain": "gerdau.com",
+    "vendor_name": "Gerdau",
+    "vendor_type": "mill",
+    "location": "Midlothian TX",
+    "known_contacts": [
+      "brayden.gray@gerdau.com",
+      "angela.mucobega@gerdau.com",
+      "heidi.ibrahim@gerdau.com"
+    ],
+    "quote_format": "inline body",
+    "payment_terms": "prepay",
+    "added_at": "2026-05-13"
+  },
+  {
+    "domain": "intselsteel.com",
+    "vendor_name": "Intsel Steel",
+    "vendor_type": "service_center",
+    "location": "Houston TX (11310 W Little York)",
+    "known_contacts": [
+      "guy.freund@intselsteel.com"
+    ],
+    "quote_format": "pdf attachment",
+    "pricing_unit": "CWT",
+    "payment_terms": "prepay",
+    "added_at": "2026-05-13"
+  },
+  {
+    "domain": "sss-steel.com",
+    "vendor_name": "SSS Steel (Intsel brand)",
+    "vendor_type": "service_center",
+    "location": "Houston TX",
+    "known_contacts": [
+      "guy.freund@intselsteel.com"
+    ],
+    "quote_format": "pdf attachment",
+    "pricing_unit": "CWT",
+    "payment_terms": "prepay",
+    "added_at": "2026-05-13"
+  },
+  {
+    "domain": "brownstrauss.com",
+    "vendor_name": "Brown Strauss",
+    "vendor_type": "service_center",
+    "location": "TX territory",
+    "known_contacts": [
+      "AParker@brownstrauss.com",
+      "MPluemer@brownstrauss.com"
+    ],
+    "quote_format": "pdf attachment",
+    "subject_pattern": "Quote of Materials for Your Company",
+    "added_at": "2026-05-13"
+  },
+  {
+    "domain": "nucor.com",
+    "vendor_name": "Nucor",
+    "vendor_type": "mill",
+    "location": "national",
+    "known_contacts": [
+      "Brandon.Strong@nucor.com",
+      "Timothy.Leach@nucor.com"
+    ],
+    "quote_format": "inline body",
+    "notes": "Direct mill currently declining; Centria panels active via Timothy Leach.",
+    "added_at": "2026-05-13"
+  }
+]

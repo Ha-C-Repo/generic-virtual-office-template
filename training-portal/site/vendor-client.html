@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vendor & Client Management | Your Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:#000;color:#e4e4e7;
+  font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(circle at 85% 8%,rgba(225,29,72,0.10),transparent 40%),
+    radial-gradient(circle at 15% 92%,rgba(136,19,55,0.07),transparent 40%);
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;padding:0;}
+input,textarea,select{font-family:inherit;}
+p{margin:0;}h1,h2,h3,h4{margin:0;font-weight:normal;}
+.container{max-width:960px;margin:0 auto;padding:0 20px;}
+
+header.site{border-bottom:2px solid #27272a;background:rgba(0,0,0,.85);
+  position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);}
+.header-row{max-width:960px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;}
+.logo-tile{width:40px;height:40px;background:#e11d48;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.header-meta .small{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#52525b;}
+.header-meta .big{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin-top:2px;}
+footer.site{max-width:960px;margin:0 auto;padding:28px 20px;border-top:1px solid #27272a;text-align:center;}
+footer.site p{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.3em;color:#3f3f46;}
+
+.lab-hero{position:relative;border:2px solid #3f3f46;background:#18181b;overflow:hidden;margin-bottom:28px;}
+.hero-grid{position:absolute;inset:0;opacity:.1;
+  background-image:linear-gradient(rgba(225,29,72,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(225,29,72,.3) 1px,transparent 1px);
+  background-size:24px 24px;}
+.hero-glow{position:absolute;top:-40px;right:-40px;width:220px;height:220px;
+  background:#e11d48;border-radius:50%;filter:blur(80px);opacity:.22;}
+.lab-hero-inner{position:relative;padding:28px 24px;}
+.lab-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#fda4af;margin-bottom:8px;}
+.lab-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,9vw,68px);color:#fff;line-height:.9;margin-bottom:14px;}
+.lab-h1 .accent{color:#fda4af;}
+.lab-blurb{color:#a1a1aa;max-width:540px;font-size:14px;line-height:1.7;margin-bottom:22px;}
+.lab-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:460px;}
+.lab-stat{border:1px solid #3f3f46;background:rgba(0,0,0,.4);padding:8px 10px;}
+.lab-stat-num{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fda4af;margin:0;}
+.lab-stat-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#52525b;margin:0;}
+
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.cat-card{text-align:left;background:#18181b;border:2px solid #3f3f46;padding:0;overflow:hidden;width:100%;}
+.cat-card.is-done{border-color:#10b981;}
+.cat-stripe{height:6px;}
+.cat-inner{padding:18px;}
+.cat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.cat-icon-tile{width:44px;height:44px;color:#fff;display:flex;align-items:center;justify-content:center;}
+.cat-card h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin:0 0 6px;line-height:1.05;}
+.cat-card-blurb{font-size:12px;color:#a1a1aa;margin:0 0 14px;line-height:1.5;}
+.cat-card-foot{display:flex;justify-content:space-between;align-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:9px;color:#71717a;text-transform:uppercase;letter-spacing:.2em;}
+.cat-progress-track{height:4px;background:#27272a;flex:1;margin-left:12px;max-width:80px;}
+.cat-progress-fill{height:100%;background:#10b981;}
+
+.cat-back-btn{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;
+  color:#71717a;display:flex;align-items:center;gap:6px;margin-bottom:20px;}
+.cat-header{background:#18181b;border:2px solid #3f3f46;padding:20px;margin-bottom:16px;}
+.cat-header-inner{display:flex;gap:16px;align-items:flex-start;}
+.cat-header-icon{width:56px;height:56px;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cat-header-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.3em;margin:0;}
+.cat-header-title{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;margin:4px 0;line-height:1;}
+.cat-header-blurb{color:#a1a1aa;font-size:13px;margin:0;line-height:1.5;}
+
+.lesson-list{display:flex;flex-direction:column;gap:8px;}
+.lesson-row{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#18181b;
+  border:2px solid #3f3f46;width:100%;text-align:left;}
+.lesson-row.is-done{border-color:#10b981;}
+.lesson-row.is-locked{opacity:.45;cursor:not-allowed;}
+.lesson-row:not(.is-locked){cursor:pointer;}
+.lesson-num-tile{width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:16px;}
+.lesson-num-tile.done   {background:#10b981;color:#000;}
+.lesson-num-tile.current{background:#fda4af;color:#000;}
+.lesson-num-tile.pending{background:#27272a;color:#71717a;}
+.lesson-row-meta{flex:1;min-width:0;}
+.lesson-row-title{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin:0;line-height:1.1;}
+.lesson-row-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;margin:4px 0 0;}
+
+.lesson-card{border:2px solid #3f3f46;background:#18181b;}
+.lesson-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.lesson-icon-tile{width:52px;height:52px;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.lesson-card-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;font-weight:700;opacity:.8;margin:0;}
+.lesson-card-title{font-family:'Bebas Neue',sans-serif;font-size:32px;margin:4px 0 0;line-height:1;color:#fff;}
+.lesson-card-body{padding:24px 22px;}
+.lesson-section{margin-bottom:22px;}
+.lesson-section h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fda4af;margin:0 0 8px;}
+.lesson-section p{color:#a1a1aa;line-height:1.65;margin:0;font-size:14px;}
+.tip-box{background:rgba(225,29,72,.08);border-left:4px solid #e11d48;padding:12px 16px;margin-top:20px;}
+.tip-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#fda4af;margin:0 0 6px;font-weight:700;}
+.tip-body{color:#fecdd3;font-size:13px;margin:0;line-height:1.55;font-style:italic;}
+
+.complete-btn{width:100%;margin-top:24px;padding:14px 0;
+  font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.2em;
+  background:#e11d48;color:#fff;border:2px solid #e11d48;
+  display:flex;align-items:center;justify-content:center;gap:10px;}
+
+/* Walk-to list visual */
+.walkto-list{display:flex;flex-direction:column;gap:6px;margin-top:6px;}
+.walkto-row{display:flex;gap:12px;background:#0c0c0c;border:1px solid #3f3f46;padding:10px 14px;align-items:center;}
+.walkto-icon{width:24px;height:24px;color:#fda4af;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.walkto-text{font-size:12px;color:#e4e4e7;line-height:1.4;}
+.walkto-text strong{color:#fda4af;}
+
+/* Interactive shared */
+.int-card{border:2px solid #3f3f46;background:#18181b;}
+.int-card-header{color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #3f3f46;}
+.int-card-body{padding:24px 22px;}
+
+/* COI Card visual */
+.coi-card{background:#fafaf9;color:#1c1917;border:2px solid #71717a;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.5;margin-bottom:14px;}
+.coi-card .coi-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #71717a;padding-bottom:6px;margin-bottom:8px;}
+.coi-card .coi-form{font-weight:700;font-size:10px;letter-spacing:.1em;}
+.coi-card .coi-title{font-weight:700;font-size:10px;}
+.coi-row{display:grid;grid-template-columns:120px 1fr;gap:8px;padding:3px 0;}
+.coi-row-key{color:#52525b;text-transform:uppercase;letter-spacing:.05em;font-size:10px;}
+.coi-row-val{color:#1c1917;}
+.coi-coverage{margin-top:8px;border-top:1px dashed #a8a29e;padding-top:6px;}
+.coi-coverage-title{font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;}
+.coi-cov-row{display:grid;grid-template-columns:1fr auto;gap:8px;padding:2px 0;font-size:11px;}
+.coi-cov-key{color:#1c1917;}
+.coi-cov-val{color:#1c1917;font-weight:600;}
+.coi-ai{margin-top:8px;border-top:1px dashed #a8a29e;padding-top:6px;}
+.coi-ai-tag{font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;}
+.coi-ai-val{color:#1c1917;font-style:italic;}
+.coi-ai-val.none{color:#dc2626;font-weight:600;font-style:normal;}
+
+.coi-question{font-family:'IBM Plex Sans',sans-serif;font-size:13px;color:#fbbf24;margin:6px 0 14px;font-style:italic;}
+.coi-buttons{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:6px;}
+.coi-btn{padding:10px 12px;background:#09090b;border:1px solid #3f3f46;
+  font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.05em;color:#a1a1aa;line-height:1.2;text-align:left;}
+.coi-btn:hover{border-color:#fda4af;}
+.coi-btn.picked-correct{background:rgba(16,185,129,.15);border-color:#10b981;color:#a7f3d0;}
+.coi-btn.picked-wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.coi-btn.correct-shown{background:rgba(16,185,129,.08);border-color:#10b981;color:#a7f3d0;}
+
+/* Call Sim */
+.call-stage{background:#0c0c0c;border:1px solid #3f3f46;padding:18px;margin-bottom:14px;}
+.call-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#fda4af;margin-bottom:8px;}
+.call-tag.vendor{color:#fbbf24;}
+.call-tag.client{color:#67e8f9;}
+.call-bubble{background:#1c1917;border-left:3px solid #e11d48;padding:12px 14px;margin-bottom:14px;}
+.call-from{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:#fda4af;margin-bottom:4px;display:flex;align-items:center;gap:6px;}
+.call-body{font-size:13px;color:#e4e4e7;line-height:1.55;font-style:italic;}
+.call-options{display:flex;flex-direction:column;gap:6px;}
+.call-opt{padding:12px 14px;background:#09090b;border:1px solid #3f3f46;text-align:left;font-size:13px;color:#a1a1aa;line-height:1.4;}
+.call-opt:hover{border-color:#fda4af;}
+.call-opt.picked-correct{background:rgba(16,185,129,.15);border-color:#10b981;color:#a7f3d0;}
+.call-opt.picked-wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.call-opt.correct-shown{background:rgba(16,185,129,.08);border-color:#10b981;color:#a7f3d0;}
+.call-feedback{margin-top:14px;padding:10px 14px;font-size:12px;line-height:1.55;}
+.call-feedback.ok{background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+.call-feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+
+/* Escalate or Handle */
+.eh-stage{background:#0c0c0c;border:1px solid #3f3f46;padding:18px;margin-bottom:14px;}
+.eh-tag{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#fda4af;margin-bottom:8px;}
+.eh-scenario{background:#1c1917;border-left:3px solid #e11d48;padding:12px 14px;margin-bottom:14px;font-size:13px;color:#e4e4e7;line-height:1.55;}
+.eh-buttons{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;}
+.eh-btn{padding:12px 8px;background:#09090b;border:1px solid #3f3f46;
+  font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.05em;color:#a1a1aa;line-height:1.2;
+  display:flex;flex-direction:column;align-items:center;gap:4px;}
+.eh-btn:hover{border-color:#fda4af;}
+.eh-btn small{font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.15em;color:#52525b;}
+.eh-btn.picked-correct{background:rgba(16,185,129,.15);border-color:#10b981;color:#a7f3d0;}
+.eh-btn.picked-correct small{color:#6ee7b7;}
+.eh-btn.picked-wrong{background:rgba(239,68,68,.1);border-color:#ef4444;color:#fca5a5;}
+.eh-btn.picked-wrong small{color:#f87171;}
+.eh-btn.correct-shown{background:rgba(16,185,129,.08);border-color:#10b981;color:#a7f3d0;}
+.eh-btn.correct-shown small{color:#6ee7b7;}
+.eh-feedback{margin-top:14px;padding:10px 14px;font-size:12px;line-height:1.55;}
+.eh-feedback.ok{background:rgba(16,185,129,.08);border:1px solid #10b981;color:#a7f3d0;}
+.eh-feedback.bad{background:rgba(239,68,68,.08);border:1px solid #ef4444;color:#fca5a5;}
+
+.next-btn{padding:10px 18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.2em;
+  background:#e11d48;color:#fff;border:2px solid #e11d48;}
+.score-line{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;
+  color:#a1a1aa;margin-top:16px;padding-top:14px;border-top:1px solid #27272a;}
+
+/* Completion celebration */
+.final-banner{background:linear-gradient(135deg,#e11d48,#881337);padding:20px;margin-top:20px;text-align:center;border:2px solid #fda4af;}
+.final-banner h3{font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;margin:0 0 6px;line-height:1;}
+.final-banner p{color:#fda4af;font-size:12px;font-family:'JetBrains Mono',monospace;letter-spacing:.15em;text-transform:uppercase;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-row">
+    <div class="logo-tile" id="logo-slot"></div>
+    <div class="header-meta">
+      <p class="small">Your Company &middot; Module 12</p>
+      <p class="big">Vendors & Clients</p>
+    </div>
+  </div>
+</header>
+
+<main class="container" style="padding:28px 20px 40px;">
+  <div id="app"></div>
+</main>
+
+<footer class="site">
+  <p>Built by Joseph &middot; Your Company Virtual Office &middot; Internal Use Only</p>
+</footer>
+
+<script>
+"use strict";
+
+const ICONS={
+  'arrow-right':  '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  'arrow-left':   '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  'check':        '<path d="M20 6 9 17l-5-5"/>',
+  'lock':         '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  'handshake':    '<path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/>',
+  'shield':       '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>',
+  'shield-check': '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
+  'message-circle':'<path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/>',
+  'phone':        '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>',
+  'phone-call':   '<path d="M13 2a9 9 0 0 1 9 9"/><path d="M13 6a5 5 0 0 1 5 5"/><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/>',
+  'triangle-alert':'<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/>',
+  'users':        '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  'eye':          '<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>',
+  'scroll-text':  '<path d="M15 12h-5"/><path d="M15 8h-5"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/>',
+  'shuffle':      '<path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.7-1.1 2-1.7 3.3-1.7H22"/><path d="m18 2 4 4-4 4"/><path d="M2 6h1.9c1.5 0 2.9.9 3.6 2.2"/><path d="M22 18h-5.9c-1.3 0-2.6-.7-3.3-1.8l-.5-.8"/><path d="m18 14 4 4-4 4"/>'
+};
+function icon(name,size,color){
+  size=size||16;color=color||'currentColor';
+  var p=ICONS[name]||'';
+  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">'+p+'</svg>';
+}
+
+// ============================================================================
+// DATA
+// ============================================================================
+const CATEGORIES=[
+  { id:'vendors', iconKey:'handshake', color:'#e11d48',
+    title:'Approved Vendors',
+    blurb:'The vendor list. Who Your Company buys from, how PO discipline works, why every purchase gets documented before money moves.',
+    lessons:[
+      { id:'vc-1', title:'The Approved Vendor List',       type:'reading', minutes:5 },
+      { id:'vc-2', title:'PO Discipline',                   type:'reading', minutes:4 },
+      { id:'vc-3', title:'Vendor Performance Tracking',     type:'reading', minutes:4 }
+    ] },
+  { id:'coi', iconKey:'shield-check', color:'#be123c',
+    title:'COI Discipline',
+    blurb:'Certificates of Insurance keep Your Company out of court. Validating them, tracking renewals, refusing site access when expired.',
+    lessons:[
+      { id:'vc-4', title:'What a Valid COI Looks Like',     type:'reading',     minutes:5 },
+      { id:'vc-5', title:'Tracking & Renewal Workflow',     type:'reading',     minutes:4 },
+      { id:'vc-6', title:'COI Review Quiz',                 type:'interactive', minutes:7, intKey:'coiQuiz' }
+    ] },
+  { id:'comms', iconKey:'message-circle', color:'#9f1239',
+    title:'Client Communication',
+    blurb:'Whose voice represents Your Company. What the assistant can say, what needs Owner, how to handle the call when a client is upset.',
+    lessons:[
+      { id:'vc-7', title:'Voice & Authority Boundaries',    type:'reading',     minutes:5 },
+      { id:'vc-8', title:'The Client-Facing Call Protocol', type:'reading',     minutes:5 },
+      { id:'vc-9', title:'Vendor & Client Call Sim',        type:'interactive', minutes:8, intKey:'callSim' }
+    ] },
+  { id:'disputes', iconKey:'triangle-alert', color:'#881337',
+    title:'Disputes & Escalations',
+    blurb:'Wrong deliveries, damaged steel, billing disputes, the "walk to Owner\'s office" list. Knowing when to handle it yourself vs. interrupt the CEO.',
+    lessons:[
+      { id:'vc-10', title:'Vendor Disputes',                type:'reading',     minutes:5 },
+      { id:'vc-11', title:'The Walk-to-Owner List',       type:'reading',     minutes:4 },
+      { id:'vc-12', title:'Escalate or Handle',             type:'interactive', minutes:8, intKey:'escalateOrHandle' }
+    ] }
+];
+
+const LESSON_CONTENT={
+  'vc-1':{ sections:[
+    { h:'What "approved" actually means', b:'A vendor on the approved list has been used before with success. Payment terms negotiated. Contact info verified. COI on file (if applicable to their service). W-9 on file. Quality acceptable on prior orders. The list is not a wish list of vendors we might use; it is the active roster of who Your Company actually buys from.' },
+    { h:'Where the list lives', b:'02_Vendors/Approved_Vendors.xlsx. Columns: vendor name, contact name, phone, email, what we buy from them, payment terms, COI status, COI expiration date, last PO date, performance notes. The assistant maintains this spreadsheet. Updated whenever a PO goes out, a delivery happens, or a vendor calls.' },
+    { h:'Who approves new vendors', b:'Only Owner approves a new vendor to the list. Mario can recommend one (often does when steel from a regular supplier is delayed). Amber clears the legal side (W-9, COI, payment terms reviewed). The assistant maintains the spreadsheet. The assistant does not add vendors. If a sales rep calls saying "we should be on your list," route to Owner via Teams chat and let him decide.' },
+    { h:'Delisted vendors', b:'A vendor we have stopped using. Recorded with the reason: late deliveries, quality issues, billing problems, business closed. Delisted vendors do not get re-engaged without Owner\'s explicit OK. A "delisted" status is sticky. The reason it was set is documented so a future assistant (or future Owner) can see why.' }
+  ], tip:'When a vendor calls saying "we are an approved Your Company vendor," your response is "Let me verify that on our records and call you back." Check the spreadsheet. Never confirm vendor status from memory or from the vendor\'s claim. The list is the truth, not the vendor.' },
+  'vc-2':{ sections:[
+    { h:'Every purchase goes on a PO', b:'No exceptions. Paper PO, electronic PO, whatever format works, but documented. "Send it and bill us" is the fastest path to disputed invoices, surprise charges, and arguments about what we actually ordered. Even a $50 box of grinding wheels gets a PO number.' },
+    { h:'What a PO contains', b:'Vendor name. Our PO number (sequential, starting with the year: 2026-001, 2026-002, etc.). Line items: description, quantity, unit price, total. Delivery date. Shipping address. Payment terms. Authorized signature. The PO is the contract. If the vendor delivers something different, the PO is what we point to.' },
+    { h:'Who can sign POs', b:'Owner on any amount. Mario on shop consumables under $5,000 (grinding wheels, welding wire, gas, small fittings). No one else. Amber signs only on legal, insurance, or professional services (like an attorney retainer or accountant fee). The assistant prepares POs and routes for signature but does not sign.' },
+    { h:'The matching trinity', b:'PO + Receiving (BOL or delivery confirmation) + Invoice. All three must match before payment goes out. Vendor invoices that do not match a PO go on hold. Quantity mismatches go on hold. Pricing mismatches go on hold. The assistant is often the one who notices the mismatch first because they are the one who files the BOL and then sees the invoice come in.' }
+  ], tip:'When a vendor calls or emails wanting to start a job, your response is "Send a written quote, we will generate a PO." Never authorize anything verbally. If the vendor pushes back saying "we have a long relationship, no need for paperwork," that is a vendor we probably should not be using.' },
+  'vc-3':{ sections:[
+    { h:'Delivery reliability', b:'Did the order arrive on the promised date? Late deliveries get logged in the vendor sheet with the date, PO number, and days late. A vendor with three late deliveries in 6 months gets a Owner review. Late deliveries are not always the vendor\'s fault (mill backlogs, freight company delays), but the pattern matters.' },
+    { h:'Quality', b:'Did the material match spec? Were dimensions correct? Was anything damaged or missing? Quality issues get logged with date, PO, problem description. Photos attached. Mario flags these on receipt. The assistant logs them in the vendor sheet performance column.' },
+    { h:'Pricing trends', b:'Prices reviewed quarterly. A vendor whose pricing has crept 15% above market while competitors held steady gets a competitive bid request. Owner owns this analysis. The assistant pulls the price history from past POs.' },
+    { h:'Annual vendor review', b:'Owner reviews each vendor once a year. Usually during Friday afternoon paperwork time. Some keep priority status (first call). Some get backup status (used when priority is unavailable). Some get delisted. The assistant prepares the data: last 12 months of POs, deliveries, quality notes, pricing trend.' }
+  ], tip:'The assistant\'s contribution to vendor reviews is the data, not the judgment. Keep the spreadsheet current. Add notes when things happen, good or bad. Owner makes the decisions, but he makes them based on what is documented. Sloppy data = bad decisions.' },
+  'vc-4':{ sections:[
+    { h:'What a COI is', b:'COI stands for Certificate of Insurance. A document showing that a vendor or subcontractor has active insurance coverage. The standardized form most carriers use is ACORD 25. Two-page document, identifies the insured, the carrier, the policy effective dates, the coverage limits, and any additional parties named.' },
+    { h:'Five things to check on every COI', b:'(1) Insurance carrier name: is it a real, rated carrier (Travelers, Liberty Mutual, Hartford, Zurich, etc.)? Suspicious names get verified. (2) Policy effective dates: active today, not expired. (3) Coverage limits: matches our requirement (typically $1M General Liability minimum, $1M auto, $1M workers comp). (4) Additional insured: Your Company, LLC named as additional insured for General Liability. (5) Producer/agent contact info: present so we can call to verify if anything looks off.' },
+    { h:'Common invalid COIs', b:'Expired dates. Wrong limits (sub sends a personal-auto policy instead of commercial). Your Company missing from the additional insured box. Fake or unrated carrier names. Photocopied stamps where the original would have a real seal. No agent contact provided. Any one of these is a reject.' },
+    { h:'How COI review flows', b:'Sub or vendor sends COI by email. The assistant downloads the PDF, names it correctly (e.g., "Acme-Welding_COI_2026.pdf"), files in 02_Vendors/COI/. Logs in the COI tracker with status "pending Amber review." Emails Amber the PDF for review. Amber confirms valid or flags issues within 1 business day. Once Amber approves, the assistant updates tracker to "approved" and notifies Mario that the sub is cleared for site access.' }
+  ], tip:'A common fraud pattern: a COI that looks real but with dates and limits that do not match the actual policy. Always verify the policy effective dates make sense for the work period. A sub doing 3 months of work on our site should show coverage for at least those 3 months, ideally a full year.' },
+  'vc-5':{ sections:[
+    { h:'The COI tracker', b:'02_Vendors/COI_Tracker.xlsx. Columns: vendor/sub name, COI on file (Y/N), policy effective date, policy expiration date, carrier, limits, additional insured (Y/N), Amber reviewed (Y/N), file location. One row per vendor or sub. Update it the same day every COI arrives.' },
+    { h:'The 30-day expiration warning', b:'Every Monday, sort the tracker by expiration date. Anything expiring within 30 days gets a renewal email to the sub or vendor: "Your Certificate of Insurance on file with Your Company expires [date]. Please have your insurance agent send the renewal certificate before that date. We cannot allow site access or process invoices without current insurance on file." Polite, specific, with the consequence stated.' },
+    { h:'When a renewal does not arrive', b:'If the expiration date passes without a renewal, the vendor or sub is suspended. No site access (Mario alerted same day). Invoices on hold (Amber alerted). The sub will be highly motivated to get the new COI to us fast. Most do, within 48 hours, once they realize work has stopped.' },
+    { h:'Reactivation', b:'Renewal COI arrives. Amber reviews. The assistant updates the tracker. Vendor returns to active status. Document the coverage gap in the notes column (e.g., "Lapsed 5/1-5/8, reactivated 5/9"). If any work was performed during the gap, flag it for Owner. There may be a liability exposure question.' }
+  ], tip:'The 30-day rule exists because 30 days is enough time for a sub to call their agent, get the new COI issued, and forward it before the old one expires. A 5-day warning gets ignored because subs assume "we will deal with it next week." Send the warning early. Repeat it 7 days out if no response.' },
+  'vc-7':{ sections:[
+    { h:'Whose voice represents Your Company', b:'Owner is Your Company\'s voice on every contractual, pricing, technical-strategy, and substantive client-relationship matter. The assistant speaks in Your Company\'s voice on administrative matters: scheduling, paperwork acknowledgments, vendor coordination on routine items, internal coordination across the team.' },
+    { h:'What the assistant can say without checking', b:'"I will route that to Owner and he will respond." "Let me check our records and get back to you within the hour." "We have that in our files; I will forward it to you today." Confirming receipt of an email. Confirming an appointment. Scheduling something within the standard rhythm. Forwarding documents from existing files.' },
+    { h:'What the assistant cannot say without checking', b:'Pricing of any kind. Scope changes. Commitments to delivery dates that are not already documented. Apologies on Owner\'s behalf for substantive issues. Acceptance or denial of change orders. Any agreement that has financial or contractual implications. Even informal "yeah I think we can do that" lands Your Company in trouble later.' },
+    { h:'The fallback phrase', b:'"Let me confirm with Owner and get back to you within [specific time]." Use it freely. It is the most professional response possible. Never feel pressured to commit just because a caller pushes. A caller who pushes harder when you say "let me confirm" is often the caller who most needs to wait for confirmation.' }
+  ], tip:'A pushy caller saying "well Owner told me [X]" is a red flag. Even if true, do not confirm or deny in the moment. Reply: "Let me check with Owner before I confirm anything on his behalf." Memory and "what was said on a phone call last week" are weak evidence. Documented commitments are strong. Always be the one who waits to confirm.' },
+  'vc-8':{ sections:[
+    { h:'Answering the call', b:'Pleasant greeting. Identify Your Company. Listen first. Take notes as the caller speaks. Do not interrupt. Let them finish before you respond. This sounds obvious, but most poor calls happen because the answerer started talking too fast.' },
+    { h:'If they want Owner', b:'Two paths. If Owner is available and the topic warrants it, transfer the call. If not, take a message with: caller name, company, callback number, brief subject (one phrase), urgency level (today / this week / whenever). File the call note in 04_Correspondence and ping Owner via Teams chat with the message.' },
+    { h:'If they want a status update', b:'You can share what is documented. "The last update we have on file is dated [date] indicating [status]." Read it back to them. Do not improvise. Do not guess. Do not commit to new dates or new milestones. If they want more, route to Owner.' },
+    { h:'If they are upset or concerned', b:'Acknowledge calmly. "I hear that this is important to you. Let me make sure Owner gets your call back today." Do not argue. Do not defend Your Company. Do not concede fault. Take detailed notes. Route to Owner with the call note clearly marked URGENT. Most upset clients want to feel heard before they want a solution.' }
+  ], tip:'Upset clients calm down significantly when three things happen: you use their name, you repeat the issue back in your own words, and you commit to a specific callback time. "Mr. Johnson, you are saying the delivery was 2 days late, and that has caused you a problem. Let me have Owner call you back by 3 PM today. Will that work?"' },
+  'vc-10':{ sections:[
+    { h:'Wrong delivery', b:'Vendor delivers wrong material: wrong grade, wrong length, wrong quantity. Mario verifies on receipt against the PO. The assistant logs the dispute in the vendor sheet with date, PO, vendor, problem. Photographs the material as evidence. Emails the vendor with photos and PO attached, requesting pickup or correction. Do not sign the BOL accepting the wrong material; sign noting the discrepancy.' },
+    { h:'Damaged delivery', b:'Material arrives damaged: rust, bent, dropped in transit. Photograph immediately, before unloading if possible. Reject the damaged portion at receipt. Vendor either replaces or credits us. Mario decides whether damaged portion is salvageable for our use (rare) or returns. Document everything.' },
+    { h:'Billing disputes', b:'Invoice does not match PO, double-billing, wrong quantity, math errors, surcharges not authorized. Amber handles the dispute. The assistant prepares the file: original PO, BOL showing what was delivered, invoice with the discrepancy highlighted. Amber negotiates with the vendor. Do not pay invoices that do not match POs.' },
+    { h:'Withholding payment', b:'Sometimes a vendor performs poorly and we want to withhold payment. Always a Owner + Amber decision together. Never the assistant alone. The reasons get documented. The vendor gets notified in writing of the withhold and the reason. Texas has prompt-pay laws and withholding without cause has consequences.' }
+  ], tip:'Document, document, document. Every dispute starts with our records. If our records are clean (PO, BOL, photos, dated emails), we win the dispute or settle on good terms. If our records are sloppy, we eat the cost. Make it your habit to file every BOL the day it arrives, photograph anything that looks wrong, and take notes on every phone call.' },
+  'vc-11':{ sections:[
+    { h:'Some things require walking to him', b:'Some items route via email or Teams chat. Some require walking to Owner\'s office and getting his attention immediately. The list of walk-to items is short but important. The pattern that makes this work: short list, real urgency only.' },
+    { h:'What goes on the walk-to list', b:'Injury or safety incident on any jobsite or in the shop. OSHA contact. Marathon Petroleum contact (priority client). General contractor threatening to cancel a contract. Vendor failure that stops production today. Bank or IRS contact. News media contact (per Phone Script 07). Anything involving Owner\'s family or personal life that comes through the office.' },
+    { h:'What does NOT go on the walk-to list', b:'Routine emails. Vendor sales pitches. Scheduling questions that can be answered from the calendar. Items Mario or Amber can handle. Status updates that are not urgent. These wait, or route to the appropriate person. A 30-minute Teams message to Owner is almost always better than an interruption.' },
+    { h:'How to interrupt well', b:'Walk to the office. If the door is closed, knock once. Say: "Sorry, [issue topic] needs your attention." Wait for him to wave you in. State the issue in one sentence. Have the file, phone, or email open and ready. Do not narrate; deliver the core fact. He will ask follow-up questions if he needs them.' }
+  ], tip:'Owner tolerates one or two genuinely urgent interruptions per day. He gets frustrated by five. Build your judgment for what genuinely needs his immediate attention vs. what can be a 30-minute Teams message. When in doubt, lean Teams chat. He answers fast (2-3 minutes typical) and that beats interrupting whatever he was deep in.' }
+};
+
+// ============================================================================
+// COI QUIZ DATA
+// ============================================================================
+const COI_ACTIONS=[
+  'Accept and file',
+  'Reject — expired',
+  'Reject — limits too low',
+  'Reject — Your Company not listed as additional insured',
+  'Hold for Amber to verify carrier'
+];
+const COI_SCENARIOS=[
+  { id:'coi1',
+    insured:'Apex Welding Services LLC',
+    producer:'Houston Insurance Group',
+    carrier:'Travelers Indemnity Co.',
+    effective:'01/15/2026 — 01/15/2027',
+    gl:'$1,000,000 per occurrence / $2,000,000 aggregate',
+    auto:'$1,000,000 combined single limit',
+    wc:'$1,000,000 each accident',
+    ai:'Your Company, LLC — Additional Insured for General Liability',
+    aiClass:'',
+    correct:'Accept and file',
+    why:'All five required checks pass. Real carrier (Travelers, A++ rated). Active dates (running through January 2027). Limits at our $1M minimum. Your Company named as Additional Insured. Producer contact present. File it in 02_Vendors/COI/, update the tracker, notify Mario the sub is cleared.' },
+  { id:'coi2',
+    insured:'Lone Star Iron Erectors',
+    producer:'Texas Mutual Insurance Agency',
+    carrier:'Liberty Mutual Insurance',
+    effective:'08/01/2023 — 08/01/2024',
+    gl:'$1,000,000 per occurrence / $2,000,000 aggregate',
+    auto:'$1,000,000 combined single limit',
+    wc:'$1,000,000 each accident',
+    ai:'Your Company, LLC — Additional Insured for General Liability',
+    aiClass:'',
+    correct:'Reject — expired',
+    why:'Policy expired August 2024, nearly two years ago. Limits and carrier and additional insured all look fine, but none of that matters when the policy is no longer active. Reject this COI. Email the sub: "The COI you sent expired August 2024. Please send your current active certificate." Do not allow site access until current COI received.' },
+  { id:'coi3',
+    insured:'Quick-Cut Steel Fabrication',
+    producer:'Houston Insurance Group',
+    carrier:'The Hartford',
+    effective:'03/01/2026 — 03/01/2027',
+    gl:'$500,000 per occurrence / $1,000,000 aggregate',
+    auto:'$300,000 combined single limit',
+    wc:'$500,000 each accident',
+    ai:'Your Company, LLC — Additional Insured for General Liability',
+    aiClass:'',
+    correct:'Reject — limits too low',
+    why:'Carrier and dates are fine. Your Company is listed as Additional Insured. But coverage limits are below our $1M minimum across the board (GL $500K vs. our $1M, auto $300K vs. our $1M, WC $500K vs. our $1M). Reject. Email the sub: "Our subcontractor requirements specify $1M minimum limits across General Liability, Auto, and Workers Compensation. Please have your agent increase coverage or provide an umbrella endorsement before site access."' },
+  { id:'coi4',
+    insured:'Reliable Coatings Inc.',
+    producer:'Houston Insurance Group',
+    carrier:'Zurich North America',
+    effective:'01/15/2026 — 01/15/2027',
+    gl:'$1,000,000 per occurrence / $2,000,000 aggregate',
+    auto:'$1,000,000 combined single limit',
+    wc:'$1,000,000 each accident',
+    ai:'(none listed)',
+    aiClass:'none',
+    correct:'Reject — Your Company not listed as additional insured',
+    why:'Carrier solid (Zurich). Dates active. Limits at our minimum. But the Additional Insured box is empty. Without Your Company named as Additional Insured on the General Liability policy, we are exposed if a claim arises from work the sub performs on our project. Reject. Email the sub: "Please have your agent add Your Company, LLC as Additional Insured for General Liability and re-issue the certificate."' },
+  { id:'coi5',
+    insured:'Premier Welding & Fabrication',
+    producer:'(not listed)',
+    carrier:'Worldwide Insurance Holdings Group LLC',
+    effective:'02/01/2026 — 02/01/2027',
+    gl:'$1,000,000 per occurrence / $2,000,000 aggregate',
+    auto:'$1,000,000 combined single limit',
+    wc:'$1,000,000 each accident',
+    ai:'Your Company, LLC — Additional Insured for General Liability',
+    aiClass:'',
+    correct:'Hold for Amber to verify carrier',
+    why:'Dates, limits, and Additional Insured all look right. But the carrier name "Worldwide Insurance Holdings Group LLC" is not a recognized name. No producer or agent listed for us to call. This could be a real but obscure carrier, or a fraudulent COI. Hold the COI, do not approve yet. Forward to Amber with a note flagging the carrier name and missing producer info. Amber verifies the carrier via the Texas Department of Insurance registry before approval.' },
+  { id:'coi6',
+    insured:'Gulf Coast Crane Services',
+    producer:'Houston Insurance Group',
+    carrier:'Travelers Indemnity Co.',
+    effective:'06/08/2025 — 06/08/2026',
+    gl:'$1,000,000 per occurrence / $2,000,000 aggregate',
+    auto:'$1,000,000 combined single limit',
+    wc:'$1,000,000 each accident',
+    ai:'Your Company, LLC — Additional Insured for General Liability',
+    aiClass:'',
+    correct:'Accept and file',
+    why:'All checks pass. Real carrier, active dates, correct limits, Your Company listed as Additional Insured, producer info present. The policy expires June 8, 2026 (about 25 days from today). Accept and file. Because the expiration is within 30 days, this COI immediately triggers the renewal warning workflow: send the sub the standard 30-day renewal email today, log "renewal requested" in the tracker. The COI is valid today, but the clock is ticking.' }
+];
+
+// ============================================================================
+// CALL SIM DATA
+// ============================================================================
+const CALL_SCENARIOS=[
+  { id:'cs1', kind:'vendor', from:'Vendor — outside steel supplier sales rep',
+    body:'"Hi, this is Mike from [Steel Supply Co]. I would love to drop by Thursday afternoon to show Owner our new pricing on W-shapes. We have been working hard on our numbers and I think you will be impressed."',
+    options:[
+      'Thursday afternoon works, come by anytime — Owner is usually around.',
+      'Let me check Owner\'s calendar and I will call you back.',
+      'Wednesday afternoon is our window for vendor visits. Would 2 PM Wednesday work?',
+      'Vendors do not get scheduled meetings with Owner. Sorry.'
+    ],
+    correct:'Wednesday afternoon is our window for vendor visits. Would 2 PM Wednesday work?',
+    why:'Vendor protocol: established vendors are welcomed Wednesday afternoon only. Thursday is site visit day. Counter-offer Wednesday with a specific time. Polite, professional, holds the line on the protocol.' },
+  { id:'cs2', kind:'vendor', from:'Vendor — accounts receivable rep',
+    body:'"Hello, calling about invoice INV-3450 we sent you 35 days ago. It is past due. Can you tell me when payment is going out?"',
+    options:[
+      'Let me pull the file and I will have payment cut today.',
+      'Amber handles AP. Let me forward your question to her and she will respond today.',
+      'I will have Owner call you back about that.',
+      'Our payment terms are NET 30, so if it is not paid you must be early on your end.'
+    ],
+    correct:'Amber handles AP. Let me forward your question to her and she will respond today.',
+    why:'Routing. Accounts payable disputes route to Amber. Do not commit to payment timing yourself (you do not know whether the invoice was held for a reason). Do not bring Owner in (AP is not his domain). Polite, specific, with a timeframe.' },
+  { id:'cs3', kind:'vendor', from:'Delivery driver on-site',
+    body:'"This is the driver for the Wholesale Steel load going to the Carvana site in Mobile, Alabama. I am at the gate and they say they do not have a contact name. Who do I give this to?"',
+    options:[
+      'Let me look it up real quick. Hold on.',
+      'Hold on, I will call Mario right now. He tracks every delivery contact. Stand by.',
+      'Just leave it with anyone wearing a hard hat at the site.',
+      'Tell them it is from Your Company and they should know what to do.'
+    ],
+    correct:'Hold on, I will call Mario right now. He tracks every delivery contact. Stand by.',
+    why:'Delivery coordination = Mario. He knows which GC superintendent is the receiver for that load on that day. The assistant does not have that contact in front of her. Mario does. Loop him in immediately and let him give the driver the name. Do not improvise; the wrong contact wastes the driver\'s day.' },
+  { id:'cs4', kind:'client', from:'Client — GC project manager',
+    body:'"Hey, just calling to find out when you guys are starting fabrication on our ICD Church Phase 2 project. We have crews lined up and need to know."',
+    options:[
+      'We are starting Monday.',
+      'Let me check our project tracking sheet and get back to you within 15 minutes with what we have on file.',
+      'I do not know. You will have to talk to Owner.',
+      'Fab starts when drawings are approved. Are your drawings approved on your end?'
+    ],
+    correct:'Let me check our project tracking sheet and get back to you within 15 minutes with what we have on file.',
+    why:'Share what is documented, never improvise. The right move is to check 04_Correspondence and the project tracking sheet for the most recent documented status, then share that. If the client wants more than what is documented, route the deeper question to Owner. Committing to a fabrication date on your own creates a date the company is now bound to without Owner having seen it.' },
+  { id:'cs5', kind:'client', from:'Client — upset GC owner',
+    body:'"Your team\'s delivery was 4 hours late yesterday. My crew sat around all afternoon. This is the second time. I want to talk to Owner, today."',
+    options:[
+      'I am sorry about that. We try our best.',
+      'Mr. Johnson, that is frustrating. Let me have Owner call you back by 3 PM today. Will that work?',
+      'Late deliveries happen sometimes. I will let Owner know you called.',
+      'Let me transfer you to Mario. He handles deliveries.'
+    ],
+    correct:'Mr. Johnson, that is frustrating. Let me have Owner call you back by 3 PM today. Will that work?',
+    why:'Use his name. Acknowledge the issue without conceding fault. Commit to a specific callback time. Route to Owner (he made the contractual commitment, he handles the client relationship at this level, not Mario). Take detailed notes on the call. Mark the message URGENT for Owner.' },
+  { id:'cs6', kind:'client', from:'Client — GC project coordinator',
+    body:'"We need to confirm: are we approved to be billed at $145 per hour for change-order extras on the Topgolf project? Our PO has us at $135 but Owner mentioned the higher rate."',
+    options:[
+      '$145 per hour is our standard rate, so yes.',
+      'Let me check the contract. Yes, that is in there.',
+      'Pricing for extras goes through Owner. Let me get him on the phone or have him call you within the hour.',
+      'We do not bill change-order extras.'
+    ],
+    correct:'Pricing for extras goes through Owner. Let me get him on the phone or have him call you within the hour.',
+    why:'Pricing is Owner\'s exclusive domain. The assistant never confirms or denies pricing, especially when the caller is asking about a rate discrepancy between conversation and PO. This is exactly the kind of confirmation a client will hold us to later. Route to Owner immediately. Document the question in the call note.' }
+];
+
+// ============================================================================
+// ESCALATE OR HANDLE DATA
+// ============================================================================
+const EH_ACTIONS=[
+  { id:'handle',     name:'Handle myself',         sub:'log & move on' },
+  { id:'amber',      name:'Route to Amber',        sub:'legal/finance' },
+  { id:'mario',      name:'Route to Mario',        sub:'shop/materials' },
+  { id:'walk',       name:'Walk to Owner',       sub:'urgent' },
+  { id:'teams',      name:'Teams Owner',         sub:'non-urgent FYI' }
+];
+const EH_SCENARIOS=[
+  { id:'eh1',
+    body:'Email arrives from Marathon Petroleum compliance contact: "We have an audit finding on your ISN profile that needs to be addressed in 72 hours or your status changes. Please call us today."',
+    correct:'walk',
+    why:'Marathon Petroleum is the top-priority client AND active compliance, with a hard 72-hour clock. This is exactly what the walk-to-Owner list is for. Print the email, walk to his office, deliver in one sentence: "Marathon has an audit finding requiring response in 72 hours. They want a call today." He decides next steps immediately.' },
+  { id:'eh2',
+    body:'A vendor invoice arrives for shop consumables: $340 for grinding wheels and welding wire. The invoice matches the PO (which Mario authorized two weeks ago) and the BOL was already filed showing delivery.',
+    correct:'handle',
+    why:'Routine. The matching trinity is complete: PO + BOL + invoice all match. File the invoice in 02_Vendors/[Vendor]/Invoices/, queue it for the next AP payment cycle (Amber processes payments on a schedule), update the vendor performance row. Two-minute task. No one else needs to be involved.' },
+  { id:'eh3',
+    body:'Weekly COI tracker review: a subcontractor (Apex Welding) has a COI on file that expires in 25 days. Otherwise fully valid.',
+    correct:'handle',
+    why:'30-day renewal warning workflow. Email Apex Welding\'s billing contact: "Your COI on file with Your Company expires [date]. Please have your insurance agent send the renewal certificate. We cannot allow site access or process invoices without current insurance." Log "renewal requested [today\'s date]" in the tracker. This is the routine the assistant handles. No escalation needed.' },
+  { id:'eh4',
+    body:'A letter arrives by mail from Wells Fargo: "Please update your business deposit account information. Sign and return the enclosed form."',
+    correct:'amber',
+    why:'Banking forms with legal and financial implications go to Amber. She verifies whether the request is legitimate (are we actually changing accounts?) or a fraud attempt (we are not, and someone is trying to redirect our deposits). Bank-impersonation fraud is common. Never sign and return a banking form without Amber\'s review.' },
+  { id:'eh5',
+    body:'A new general contractor we want to work with sends a 60-page subcontract agreement for signature. The terms look standard at first glance but the document is dense.',
+    correct:'amber',
+    why:'All contracts get Amber review. No exceptions, even for "standard" agreements. Amber\'s 2-business-day turnaround flags non-standard indemnification, problematic change-order clauses, broad termination-for-convenience, and pay-when-paid language. Forward the PDF to Amber, log it in the active reviews tracker, do not commit to a signing timeline with the GC until Amber clears.' },
+  { id:'eh6',
+    body:'Mario calls: "The Wholesale Steel delivery for ICD Church is 2 days late. They had a mill backlog. I have already pushed the fab schedule back a week to accommodate. ICD Church client does not know yet but it might shift their install date."',
+    correct:'teams',
+    why:'Not urgent enough to walk over (no immediate decision needed, Mario already handled production response). But Owner needs to know because the install date may slip, which affects the client relationship and possibly a change order conversation. Teams chat: "Wholesale Steel late 2 days, Mario rescheduled fab back 1 week. ICD install may shift, client not yet notified. Want me to draft an update email for your review?" He responds in 2-3 minutes.' },
+  { id:'eh7',
+    body:'Mario calls from the Topgolf jobsite: "One of the ironworkers caught his hand between a column and a beam during install. Minor laceration, but we are taking him to urgent care now. No major injury but he is bleeding and shaken."',
+    correct:'walk',
+    why:'Safety incident with an injured employee. Even a minor injury is a walk-to-Owner item. Three things he needs to do immediately: (1) get Paul on the line so a near-miss/injury report starts, (2) check whether worker\'s family needs to be notified, (3) decide whether to pause the install crew while a Safety Pause meeting happens. Walk to his office, deliver in one sentence: "Ironworker injured at Topgolf, going to urgent care, Mario on the line."' },
+  { id:'eh8',
+    body:'A Houston Business Journal reporter calls: "I am writing a feature on Houston-area structural steel fabricators and would love a 30-minute interview with Owner. We are flexible on timing."',
+    correct:'walk',
+    why:'Media contact is on the walk-to list (Phone Script 07 routes media calls to Owner directly). Even though the topic is benign and the timing is flexible, Owner owns every media decision. Walk to his office (or pull him out of a routine meeting if needed), deliver: "Houston Business Journal wants a 30-minute interview with you. They are flexible on timing. Caller name is [X], number is [Y]." He decides whether to accept and on what terms.' },
+  { id:'eh9',
+    body:'A vendor calls: "Hi, calling about your invoice INV-3450 from us — it is 35 days past due. Just wanted to check on status."',
+    correct:'amber',
+    why:'Accounts payable inquiry. Amber handles AP timing and disputes. The assistant forwards the call (or takes a message) to Amber with the invoice number and vendor name. Amber checks whether the invoice was held for a reason (mismatch, dispute, late receipt) or just missed the cycle, and responds to the vendor. Do not commit to a payment date yourself.' },
+  { id:'eh10',
+    body:'Field crew calls from the Carvana site in Mobile, Alabama: "Our anchor bolt count is short by 50 — the GC needs us to install today. Can you have 50 more shipped overnight to be here by 7 AM tomorrow?"',
+    correct:'mario',
+    why:'Material logistics = Mario. He has the supplier contacts, knows what overnight freight options exist, and can either ship from our shop stock or place an emergency order with a supplier who can deliver overnight. The assistant relays the field crew\'s request to Mario, then relays Mario\'s answer back to the field. Do not call the supplier yourself; Mario has the relationship and the context.' }
+];
+
+// ============================================================================
+// STATE
+// ============================================================================
+var state={
+  view:'home', completed:{},
+  coiIdx:0, coiPicked:{}, coiRevealed:{},
+  callIdx:0, callPicked:{}, callRevealed:{},
+  ehIdx:0, ehPicked:{}, ehRevealed:{}
+};
+
+function esc(s){ if(s==null)return''; return String(s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];}); }
+function getCat(id){ for(var i=0;i<CATEGORIES.length;i++) if(CATEGORIES[i].id===id) return CATEGORIES[i]; return null; }
+function getLesson(id){
+  for(var i=0;i<CATEGORIES.length;i++){
+    var c=CATEGORIES[i];
+    for(var j=0;j<c.lessons.length;j++) if(c.lessons[j].id===id) return{lesson:c.lessons[j],cat:c,idx:j};
+  }return null;
+}
+function totalLessons(){ return CATEGORIES.reduce(function(a,c){return a+c.lessons.length;},0); }
+function completedCount(){ return Object.keys(state.completed).length; }
+
+// ============================================================================
+// RENDER: HOME
+// ============================================================================
+function renderHome(){
+  var done=completedCount();
+  var allDone=done===totalLessons();
+  var html='';
+  html+='<div class="lab-hero"><div class="hero-grid"></div><div class="hero-glow"></div>';
+  html+='<div class="lab-hero-inner">';
+  html+='<p class="lab-eyebrow">Your Company &middot; Module 12</p>';
+  html+='<h1 class="lab-h1">Vendors & <span class="accent">Clients</span></h1>';
+  html+='<p class="lab-blurb">Every external relationship Your Company has flows through this desk. Vendors get POs and tracked performance. Subcontractors get COIs verified. Clients get the right voice at the right moment. Disputes get documented before they escalate.</p>';
+  html+='<div class="lab-stats">';
+  [['4','Categories'],[String(totalLessons()),'Lessons'],['3','Drills'],[String(done),'Done']].forEach(function(s){
+    html+='<div class="lab-stat"><p class="lab-stat-num">'+s[0]+'</p><p class="lab-stat-lbl">'+s[1]+'</p></div>';
+  });
+  html+='</div></div></div>';
+
+  html+='<div class="cat-grid">';
+  CATEGORIES.forEach(function(cat){
+    var doneN=cat.lessons.filter(function(l){return state.completed[l.id];}).length;
+    var tot=cat.lessons.length;
+    var catDone=doneN===tot;
+    var pct=tot?(doneN/tot)*100:0;
+    html+='<button class="cat-card'+(catDone?' is-done':'')+'" data-action="open-cat" data-cat-id="'+cat.id+'">';
+    html+='<div class="cat-stripe" style="background:'+cat.color+';"></div>';
+    html+='<div class="cat-inner">';
+    html+='<div class="cat-top"><div class="cat-icon-tile" style="background:'+cat.color+';">'+icon(cat.iconKey,22,'#fff')+'</div>';
+    if(catDone) html+=icon('check',18,'#10b981');
+    html+='</div>';
+    html+='<h3>'+esc(cat.title)+'</h3>';
+    html+='<p class="cat-card-blurb">'+esc(cat.blurb)+'</p>';
+    html+='<div class="cat-card-foot"><span>'+doneN+'/'+tot+' lessons</span>';
+    html+='<div class="cat-progress-track"><div class="cat-progress-fill" style="width:'+pct+'%;"></div></div>';
+    html+='</div></div></button>';
+  });
+  html+='</div>';
+
+  if(allDone){
+    html+='<div class="final-banner">';
+    html+='<h3>Module 12 complete</h3>';
+    html+='<p>Vendor &amp; client management &middot; done</p>';
+    html+='</div>';
+  }
+
+  return html;
+}
+
+// ============================================================================
+// RENDER: CATEGORY
+// ============================================================================
+function renderCategory(cat){
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-home">'+icon('arrow-left',13)+' Back to module home</button>';
+  html+='<div class="cat-header"><div class="cat-header-inner">';
+  html+='<div class="cat-header-icon" style="background:'+cat.color+';">'+icon(cat.iconKey,28,'#fff')+'</div>';
+  html+='<div><p class="cat-header-eyebrow" style="color:'+cat.color+';">Category</p>';
+  html+='<h2 class="cat-header-title">'+esc(cat.title)+'</h2>';
+  html+='<p class="cat-header-blurb">'+esc(cat.blurb)+'</p>';
+  html+='</div></div></div>';
+  html+='<div class="lesson-list">';
+  cat.lessons.forEach(function(l,i){
+    var isDone=!!state.completed[l.id];
+    var prevDone=i===0||!!state.completed[cat.lessons[i-1].id];
+    var locked=!isDone&&!prevDone;
+    var current=!isDone&&prevDone;
+    var tileCls=isDone?'done':current?'current':'pending';
+    var typeLabel=l.type==='reading'?'Reading':'Drill';
+    var typeColor=l.type==='reading'?'#71717a':'#fda4af';
+    html+='<button class="lesson-row'+(isDone?' is-done':'')+(locked?' is-locked':'')+'"';
+    html+=locked?' disabled':' data-action="open-lesson" data-lesson-id="'+l.id+'"';
+    html+='>';
+    html+='<div class="lesson-num-tile '+tileCls+'">'+(locked?icon('lock',14):isDone?icon('check',18):String(i+1))+'</div>';
+    html+='<div class="lesson-row-meta"><p class="lesson-row-title">'+esc(l.title)+'</p>';
+    html+='<p class="lesson-row-tag" style="color:'+typeColor+';">'+typeLabel+' &middot; ~'+l.minutes+' min</p></div>';
+    if(!locked) html+=icon('arrow-right',16,'#71717a');
+    html+='</button>';
+  });
+  html+='</div>';
+  return html;
+}
+
+// ============================================================================
+// READING LESSON
+// ============================================================================
+function renderReading(lesson,cat){
+  var c=LESSON_CONTENT[lesson.id]||{sections:[],tip:''};
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="lesson-card">';
+  html+='<div class="lesson-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon(cat.iconKey,26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="lesson-card-body">';
+  c.sections.forEach(function(s){
+    html+='<div class="lesson-section"><h3>'+esc(s.h)+'</h3><p>'+esc(s.b)+'</p></div>';
+  });
+  // Walk-to list visual for vc-11
+  if(lesson.id==='vc-11'){
+    html+='<div style="margin-top:8px;"><p style="font-family:\'JetBrains Mono\',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:#fda4af;margin-bottom:8px;">The walk-to-Owner list</p>';
+    html+='<div class="walkto-list">';
+    [
+      ['triangle-alert','<strong>Injury or safety incident</strong> on any jobsite or in the shop'],
+      ['triangle-alert','<strong>OSHA contact</strong> or correspondence'],
+      ['triangle-alert','<strong>Marathon Petroleum</strong> or other named-priority client urgent contact'],
+      ['triangle-alert','<strong>GC threatening to cancel</strong> a contract'],
+      ['triangle-alert','<strong>Vendor failure</strong> that stops production today'],
+      ['triangle-alert','<strong>Bank or IRS contact</strong> outside routine'],
+      ['triangle-alert','<strong>News media contact</strong> (per Phone Script 07)'],
+      ['triangle-alert','<strong>Anything involving Owner\'s family</strong> coming through the office']
+    ].forEach(function(r){
+      html+='<div class="walkto-row"><div class="walkto-icon">'+icon(r[0],16,'#dc2626')+'</div><div class="walkto-text">'+r[1]+'</div></div>';
+    });
+    html+='</div></div>';
+  }
+  if(c.tip){
+    html+='<div class="tip-box"><p class="tip-eyebrow">Joseph\'s tip</p><p class="tip-body">'+esc(c.tip)+'</p></div>';
+  }
+  html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// INTERACTIVE 1: COI REVIEW QUIZ (vc-6)
+// ============================================================================
+function renderCoiQuiz(lesson,cat){
+  var idx=state.coiIdx;
+  var s=COI_SCENARIOS[idx];
+  var picked=state.coiPicked[s.id];
+  var revealed=state.coiRevealed[s.id];
+  var total=COI_SCENARIOS.length;
+  var allDone=COI_SCENARIOS.every(function(sc){return state.coiRevealed[sc.id];});
+  var correctCount=COI_SCENARIOS.filter(function(sc){return state.coiPicked[sc.id]===sc.correct;}).length;
+
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon('shield-check',26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Six Certificates of Insurance land in your inbox. For each, decide what to do. Today\'s reference date: May 14, 2026. Required minimums: $1M General Liability, $1M Auto, $1M Workers Comp, Your Company LLC named as Additional Insured.</p>';
+
+  html+='<div style="margin-bottom:14px;font-family:\'JetBrains Mono\',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:#fda4af;">COI '+(idx+1)+' of '+total+'</div>';
+
+  // COI card mockup
+  html+='<div class="coi-card">';
+  html+='<div class="coi-head"><span class="coi-form">ACORD 25 (Simplified)</span><span class="coi-title">Certificate of Liability Insurance</span></div>';
+  html+='<div class="coi-row"><div class="coi-row-key">Insured</div><div class="coi-row-val">'+esc(s.insured)+'</div></div>';
+  html+='<div class="coi-row"><div class="coi-row-key">Producer</div><div class="coi-row-val">'+esc(s.producer)+'</div></div>';
+  html+='<div class="coi-row"><div class="coi-row-key">Carrier</div><div class="coi-row-val">'+esc(s.carrier)+'</div></div>';
+  html+='<div class="coi-row"><div class="coi-row-key">Policy Period</div><div class="coi-row-val">'+esc(s.effective)+'</div></div>';
+  html+='<div class="coi-coverage">';
+  html+='<div class="coi-coverage-title">Coverage Limits</div>';
+  html+='<div class="coi-cov-row"><div class="coi-cov-key">General Liability</div><div class="coi-cov-val">'+esc(s.gl)+'</div></div>';
+  html+='<div class="coi-cov-row"><div class="coi-cov-key">Automobile</div><div class="coi-cov-val">'+esc(s.auto)+'</div></div>';
+  html+='<div class="coi-cov-row"><div class="coi-cov-key">Workers Compensation</div><div class="coi-cov-val">'+esc(s.wc)+'</div></div>';
+  html+='</div>';
+  html+='<div class="coi-ai">';
+  html+='<div class="coi-ai-tag">Additional Insured / Description of Operations</div>';
+  html+='<div class="coi-ai-val'+(s.aiClass?' '+s.aiClass:'')+'">'+esc(s.ai)+'</div>';
+  html+='</div>';
+  html+='</div>';
+
+  html+='<p class="coi-question">'+icon('eye',12,'#fbbf24')+' Run the five checks. What is your action?</p>';
+
+  html+='<div class="coi-buttons">';
+  COI_ACTIONS.forEach(function(a){
+    var cls='coi-btn';
+    if(revealed){
+      if(a===s.correct) cls+=picked===a?' picked-correct':' correct-shown';
+      else if(a===picked) cls+=' picked-wrong';
+    }
+    html+='<button class="'+cls+'" data-action="coi-pick" data-act="'+esc(a)+'">'+esc(a)+'</button>';
+  });
+  html+='</div>';
+
+  if(revealed){
+    var ok=picked===s.correct;
+    html+='<div class="call-feedback '+(ok?'ok':'bad')+'" style="margin-top:14px;">'+(ok?'Correct. ':'Action: '+esc(s.correct)+'. ')+esc(s.why)+'</div>';
+    if(idx<total-1){
+      html+='<div style="text-align:right;margin-top:12px;"><button class="next-btn" data-action="coi-next">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+    }
+  }
+
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#fda4af')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// INTERACTIVE 2: CALL SIM (vc-9)
+// ============================================================================
+function renderCallSim(lesson,cat){
+  var idx=state.callIdx;
+  var s=CALL_SCENARIOS[idx];
+  var picked=state.callPicked[s.id];
+  var revealed=state.callRevealed[s.id];
+  var total=CALL_SCENARIOS.length;
+  var allDone=CALL_SCENARIOS.every(function(sc){return state.callRevealed[sc.id];});
+  var correctCount=CALL_SCENARIOS.filter(function(sc){return state.callPicked[sc.id]===sc.correct;}).length;
+
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon('phone-call',26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Six calls come in over the course of a week. Three vendor, three client. For each, pick the response that holds the line on voice, authority, and routing.</p>';
+
+  html+='<div class="call-stage">';
+  html+='<p class="call-tag '+esc(s.kind)+'">Call '+(idx+1)+' of '+total+' &middot; '+esc(s.kind.toUpperCase())+'</p>';
+  html+='<div class="call-bubble">';
+  html+='<div class="call-from">'+icon('phone',11,'#fda4af')+' '+esc(s.from)+'</div>';
+  html+='<div class="call-body">'+esc(s.body)+'</div>';
+  html+='</div>';
+  html+='<div class="call-options">';
+  s.options.forEach(function(o){
+    var cls='call-opt';
+    if(revealed){
+      if(o===s.correct) cls+=picked===o?' picked-correct':' correct-shown';
+      else if(o===picked) cls+=' picked-wrong';
+    }
+    html+='<button class="'+cls+'" data-action="call-pick" data-opt="'+esc(o)+'">'+esc(o)+'</button>';
+  });
+  html+='</div>';
+  if(revealed){
+    var ok=picked===s.correct;
+    html+='<div class="call-feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Best response: "'+esc(s.correct)+'" ')+esc(s.why)+'</div>';
+    if(idx<total-1){
+      html+='<div style="text-align:right;margin-top:12px;"><button class="next-btn" data-action="call-next">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+    }
+  }
+  html+='</div>';
+
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#fda4af')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// INTERACTIVE 3: ESCALATE OR HANDLE (vc-12)
+// ============================================================================
+function renderEscalateOrHandle(lesson,cat){
+  var idx=state.ehIdx;
+  var s=EH_SCENARIOS[idx];
+  var picked=state.ehPicked[s.id];
+  var revealed=state.ehRevealed[s.id];
+  var total=EH_SCENARIOS.length;
+  var allDone=EH_SCENARIOS.every(function(sc){return state.ehRevealed[sc.id];});
+  var correctCount=EH_SCENARIOS.filter(function(sc){return state.ehPicked[sc.id]===sc.correct;}).length;
+
+  var html='';
+  html+='<button class="cat-back-btn" data-action="back-cat" data-cat-id="'+cat.id+'">'+icon('arrow-left',13)+' Back to '+esc(cat.title)+'</button>';
+  html+='<div class="int-card">';
+  html+='<div class="int-card-header" style="background:'+cat.color+';">';
+  html+='<div class="lesson-icon-tile">'+icon('shuffle',26,'#fff')+'</div>';
+  html+='<div><p class="lesson-card-eyebrow">'+esc(cat.title)+' &middot; ~'+lesson.minutes+' min</p>';
+  html+='<h2 class="lesson-card-title">'+esc(lesson.title)+'</h2></div></div>';
+  html+='<div class="int-card-body">';
+  html+='<p style="font-size:13px;color:#a1a1aa;margin-bottom:16px;">Ten items land at your desk over a week. For each, decide: handle yourself, route to Amber, route to Mario, walk to Owner (urgent), or Teams Owner (non-urgent FYI).</p>';
+
+  html+='<div class="eh-stage">';
+  html+='<p class="eh-tag">Item '+(idx+1)+' of '+total+'</p>';
+  html+='<div class="eh-scenario">'+esc(s.body)+'</div>';
+  html+='<div class="eh-buttons">';
+  EH_ACTIONS.forEach(function(a){
+    var cls='eh-btn';
+    if(revealed){
+      if(a.id===s.correct) cls+=picked===a.id?' picked-correct':' correct-shown';
+      else if(a.id===picked) cls+=' picked-wrong';
+    }
+    html+='<button class="'+cls+'" data-action="eh-pick" data-act="'+a.id+'">';
+    html+='<span>'+esc(a.name)+'</span><small>'+esc(a.sub)+'</small>';
+    html+='</button>';
+  });
+  html+='</div>';
+  if(revealed){
+    var ok=picked===s.correct;
+    var correctAction=EH_ACTIONS.filter(function(a){return a.id===s.correct;})[0];
+    html+='<div class="eh-feedback '+(ok?'ok':'bad')+'">'+(ok?'Correct. ':'Best action: '+esc(correctAction.name)+'. ')+esc(s.why)+'</div>';
+    if(idx<total-1){
+      html+='<div style="text-align:right;margin-top:12px;"><button class="next-btn" data-action="eh-next">Next '+icon('arrow-right',14,'#fff')+'</button></div>';
+    }
+  }
+  html+='</div>';
+
+  if(allDone){
+    html+='<div class="score-line">'+icon('check',13,'#fda4af')+' Score: '+correctCount+'/'+total+'</div>';
+    html+='<button class="complete-btn" data-action="complete-lesson" data-lesson-id="'+lesson.id+'">Mark complete '+icon('arrow-right',16,'#fff')+'</button>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
+// ============================================================================
+// DISPATCH
+// ============================================================================
+function renderLesson(lesson,cat){
+  if(lesson.type==='reading') return renderReading(lesson,cat);
+  if(lesson.intKey==='coiQuiz')          return renderCoiQuiz(lesson,cat);
+  if(lesson.intKey==='callSim')          return renderCallSim(lesson,cat);
+  if(lesson.intKey==='escalateOrHandle') return renderEscalateOrHandle(lesson,cat);
+  return renderReading(lesson,cat);
+}
+
+function render(){
+  var app=document.getElementById('app');
+  var html='';
+  if(state.view==='home'){
+    html=renderHome();
+  } else if(state.view.indexOf('category:')===0){
+    var cat=getCat(state.view.slice(9));
+    html=cat?renderCategory(cat):renderHome();
+  } else if(state.view.indexOf('lesson:')===0){
+    var info=getLesson(state.view.slice(7));
+    html=info?renderLesson(info.lesson,info.cat):renderHome();
+  }
+  app.innerHTML=html;
+}
+
+// ============================================================================
+// EVENTS
+// ============================================================================
+document.body.addEventListener('click',function(ev){
+  var t=ev.target.closest('[data-action]');
+  if(!t) return;
+  var action=t.getAttribute('data-action');
+
+  if(action==='open-cat'){ state.view='category:'+t.getAttribute('data-cat-id'); render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else if(action==='back-home'){ state.view='home'; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else if(action==='back-cat'){ state.view='category:'+t.getAttribute('data-cat-id'); render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else if(action==='open-lesson'){
+    var lid=t.getAttribute('data-lesson-id');
+    var info=getLesson(lid);
+    if(info){
+      if(info.lesson.intKey==='coiQuiz'){          state.coiIdx=0;  state.coiPicked={};  state.coiRevealed={}; }
+      if(info.lesson.intKey==='callSim'){          state.callIdx=0; state.callPicked={}; state.callRevealed={}; }
+      if(info.lesson.intKey==='escalateOrHandle'){ state.ehIdx=0;   state.ehPicked={};   state.ehRevealed={}; }
+    }
+    state.view='lesson:'+lid; render(); window.scrollTo({top:0,behavior:'smooth'});
+  }
+  else if(action==='complete-lesson'){
+    var lid2=t.getAttribute('data-lesson-id');
+    state.completed[lid2]=true;
+    var info2=getLesson(lid2);
+    if(info2){
+      var next=null;
+      for(var i=0;i<info2.cat.lessons.length;i++){
+        if(info2.cat.lessons[i].id===lid2&&i+1<info2.cat.lessons.length){ next=info2.cat.lessons[i+1]; break; }
+      }
+      state.view=next?'lesson:'+next.id:'category:'+info2.cat.id;
+      render(); window.scrollTo({top:0,behavior:'smooth'});
+    }
+  }
+  // COI
+  else if(action==='coi-pick'){
+    var cs=COI_SCENARIOS[state.coiIdx];
+    if(state.coiRevealed[cs.id]) return;
+    var act=t.getAttribute('data-act');
+    state.coiPicked[cs.id]=act;
+    state.coiRevealed[cs.id]=true;
+    render();
+  }
+  else if(action==='coi-next'){
+    if(state.coiIdx<COI_SCENARIOS.length-1){ state.coiIdx++; render(); }
+  }
+  // Call sim
+  else if(action==='call-pick'){
+    var cas=CALL_SCENARIOS[state.callIdx];
+    if(state.callRevealed[cas.id]) return;
+    var opt=t.getAttribute('data-opt');
+    state.callPicked[cas.id]=opt;
+    state.callRevealed[cas.id]=true;
+    render();
+  }
+  else if(action==='call-next'){
+    if(state.callIdx<CALL_SCENARIOS.length-1){ state.callIdx++; render(); }
+  }
+  // Escalate or Handle
+  else if(action==='eh-pick'){
+    var es=EH_SCENARIOS[state.ehIdx];
+    if(state.ehRevealed[es.id]) return;
+    var actId=t.getAttribute('data-act');
+    state.ehPicked[es.id]=actId;
+    state.ehRevealed[es.id]=true;
+    render();
+  }
+  else if(action==='eh-next'){
+    if(state.ehIdx<EH_SCENARIOS.length-1){ state.ehIdx++; render(); }
+  }
+});
+
+document.getElementById('logo-slot').innerHTML=icon('handshake',22,'#fff');
+render();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="quiz-meta.js"></script>
+<script>window.NC_GATE = {"module_id": "vendor-client", "title": "Vendor & Client Management", "next": "outlook-depth.html", "questions": [{"q": "A caller says their company is an approved Your Company vendor. How do you respond?", "options": ["Confirm it, since they would know their own status", "Say you will verify it on our records and call them back; the list is the truth, not the vendor", "Ask Mario whether he recognizes the name", "Add them to the spreadsheet so the claim is on record"]}, {"q": "A sub's COI expiration date passes and no renewal has arrived. What happens?", "options": ["They get a 60-day grace period", "Nothing, as long as their work is already in progress", "The sub is suspended: no site access, Mario alerted, and invoices go on hold", "You backdate the renewal once it arrives"]}, {"q": "A client asks you to confirm the hourly rate for change-order extras on their project. What do you do?", "options": ["Confirm the standard shop rate", "Check the contract and answer from what you find", "Tell them rates are confidential", "Route the question to Owner immediately; pricing is his exclusive domain"]}]};</script>
+<script src="portal.js"></script>
+<script>ncInitModulePage();</script>
+</body>
+</html>
