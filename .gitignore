@@ -53,3 +53,6 @@ Bids To Estimate/
 # Takeoff exports: generated xlsx artifacts (stamped and unstamped),
 # never source of truth. The census db and ledger ARE committed.
 takeoff_pipeline/exports/
+# never commit real keys
+API Keys/
+.ghtok
